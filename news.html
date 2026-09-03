@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+
+<link rel="icon" type="image/x-icon" href="logonlu.png">
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NLU - Plantão NLU (Notícias)</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+
+<!-- =====================================================
+     CORREÇÃO DAS IMAGENS DAS NOTÍCIAS
+====================================================== -->
+
+<style>
+
+    /*
+     * Imagens dentro dos blocos de notícia
+     *
+     * width: 100%
+     *    Faz a imagem ocupar toda a largura do bloco.
+     *
+     * height: 280px
+     *    Impede que a imagem fique gigante.
+     *
+     * object-fit: cover
+     *    Preenche o espaço sem deformar a imagem.
+     */
+
+    .category-block > img {
+
+        display: block;
+
+        width: 100%;
+
+        height: 280px;
+
+        object-fit: cover;
+
+        object-position: center;
+
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+    }
+
+
+    /*
+     * Mantém as imagens corretas em telas pequenas.
+     */
+
+    @media (max-width: 700px) {
+
+        .category-block > img {
+
+            height: 220px;
+
+        }
+
+    }
+
+
+    /*
+     * Impede que qualquer imagem ultrapasse
+     * o tamanho do bloco.
+     */
+
+    .category-block {
+
+        overflow: hidden;
+
+    }
+
+</style>
+
+
+</head>
+
+<!-- =========================================================
+     CORPO DA PÁGINA
+========================================================= -->
+
+<body
+    style="
+        background:
+        linear-gradient(
+            rgba(26, 26, 26, 0.75),
+            rgba(26, 26, 26, 0.85)
+        ),
+        url('news/city.jpg')
+        no-repeat
+        center top;
+
+
+    background-size: cover;
+
+    background-attachment: fixed;
+"
+
+
+>
+
+<div class="site-container">
+
+
+<!-- =====================================================
+     CABEÇALHO PRINCIPAL
+====================================================== -->
+
+<header class="site-header">
+
+
+    <div class="logo-area">
+
+
+        <img
+            src="logo1.png"
+            alt="Logo NLU"
+            class="main-logo"
+        >
+
+
+        <div class="logo-text-box">
+
+
+            <h1>
+                Plantão NLU™
+            </h1>
+
+
+            <p>
+                As últimas atualizações da InterNerd™ direto para você.
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="header-right-box">
+
+
+        <a
+            href="https://youtube.com"
+            target="_blank"
+            class="youtube-btn"
+        >
+            ▶ YouTube Siga-nos!
+        </a>
+
+
+        <div class="counter-box">
+            Inscritos: 78
+        </div>
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     SUB-NAVEGAÇÃO
+====================================================== -->
+
+<div class="sub-nav-links">
+
+
+    <a href="index.html">
+        ← Voltar ao Início
+    </a>
+
+
+    |
+
+
+    <a href="qs.html">
+        Quem Somos
+    </a>
+
+
+    |
+
+
+    <a href="ajuda.html">
+        Suporte/FAQ
+    </a>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     ESTEIRA DE LETREIRO
+====================================================== -->
+
+<div class="marquee-zone">
+
+
+    <div class="marquee-content">
+
+
+        <span>
+
+            URGENTE: Nova página do Plantão NLU inaugurada com sucesso!
+            Notícias novas sempre que chegam a nossa base de dados ...
+            Fique por dentro de todas as notícias da Liga e região aqui!...
+
+            &nbsp;
+
+        </span>
+
+
+        <span>
+
+            URGENTE: Nova página do Plantão NLU inaugurada com sucesso!
+            Notícias novas sempre que chegam a nossa base de dados ...
+            Fique por dentro de todas as notícias da Liga e região aqui!...
+
+            &nbsp;
+
+        </span>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     GRADE PRINCIPAL
+====================================================== -->
+
+<div class="main-grid">
+
+
+
+    <!-- =================================================
+         COLUNA ESQUERDA
+    ================================================= -->
+
+    <div class="content-column">
+
+
+
+        <!-- =================================================
+             NOTÍCIA 1
+        ================================================= -->
+
+        <div class="category-block">
+
+
+            <h2>
+                [2026] O Estranho Caso do Dr. Pinturas
+            </h2>
+
+
+
+            <!--
+                IMAGEM DA NOTÍCIA
+
+                Para trocar a imagem, altere somente:
+
+                src="membros/samuel.jpeg"
+
+                Exemplo:
+
+                src="news/pinturas.jpg"
+            -->
+
+            <img
+                src="news/pinturas1.jpg"
+                alt="papelzinho dogarai"
+            >
+
+
+
+            <div
+                style="
+                    padding: 10px;
+                    font-size: 12px;
+                    line-height: 1.5;
+                    color: #ddd;
+                "
+            >
+
+
+                <p
+                    style="
+                        margin-bottom: 8px;
+                    "
+                >
+
+                    Na região sul do brasil vem sendo criado a história de um homem, um doutor, que utiliza de sangue de jovens, mulheres e crianças como receita de suas tintas.<br>
+
+                    O Estranho Caso do Dr. Pinturas, como foi chamado, é nada mais nada menos que uma lenda urbana, na verdade a loja vem sido investigada e descobriram compostos seminais e fecais nas tintas.
+
+                </p>
+
+                <p><strong>           ~ SAIBA MAIS ~      </strong></p>
+
+
+                
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             NOTÍCIA 2
+        ================================================= -->
+
+        <div class="category-block">
+
+
+            <h2>
+                [2026] Inauguração da Central InterNerd™
+            </h2>
+
+
+
+
+
+
+            <div
+                style="
+                    padding: 10px;
+                    font-size: 12px;
+                    line-height: 1.5;
+                    color: #ddd;
+                "
+            >
+
+
+                <p
+                    style="
+                        margin-bottom: 8px;
+                    "
+                >
+
+                    É com grande orgulho
+                    (e muito amadorismo)
+                    que a Nerd League United coloca no ar
+                    o seu QG Principal na web!
+
+                    A partir de agora, todas as nossas produções,
+                    coleções e segredos industriais estão centralizados
+                    em um só lugar.
+
+                </p>
+
+
+                <p>
+
+                    Nossos desenvolvedores trabalharam virando noites
+                    à base de café barato para entregar um layout
+                    puramente nostálgico.
+
+                    Fique atento a esta aba para anúncios de novos
+                    episódios e comunicados urgentes.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             NOTÍCIA 3
+        ================================================= -->
+
+        <div class="category-block">
+
+
+            <h2>
+                Bastidores: O Mistério do Console de Review própria
+            </h2>
+
+
+
+            <!--
+                IMAGEM VAZIA PARA VOCÊ COLOCAR DEPOIS
+            -->
+
+            
+
+
+
+            <div
+                style="
+                    padding: 10px;
+                    font-size: 12px;
+                    line-height: 1.5;
+                    color: #ddd;
+                "
+            >
+
+
+                <p
+                    style="
+                        margin-bottom: 8px;
+                    "
+                >
+
+                    No terceiro episódio da liga
+                    (*Super Contra*), Samuel deixou no ar
+                    o mistério sobre qual plataforma bizarra
+                    rodava o jogo.
+
+                    Os arquivos da **TGGA** confirmam os boatos
+                    de que o hardware receberá uma análise solo
+                    muito em breve.
+
+                </p>
+
+
+                <p>
+
+                    Fontes anônimas indicam que hitboxes estão sendo
+                    refeitas no laboratório da liga enquanto o
+                    computador corporativo Dell Vostro tenta sobreviver
+                    a novos testes de vírus virtuais.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COLUNA DIREITA
+    ====================================================== -->
+
+    <div class="sidebar-column">
+
+
+
+        <!-- =================================================
+             MENU LATERAL
+        ================================================= -->
+
+        <nav class="side-nav-menu">
+
+
+            <h3>
+                - NAVEGAÇÃO -
+            </h3>
+
+
+            <ul>
+
+
+                <li>
+
+                    <a href="index.html">
+                        ○ Início
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="series.html">
+                        ○ Séries
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="filmes.html">
+                        ○ Filmes
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="hqs.html">
+                        ○ HQs / Livros
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="games.html">
+                        ○ Games
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="out.html">
+                        ○ DevLogs & Bastidores
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="tgga.html">
+                        ○ TGGA (Archive)
+                    </a>
+
+                </li>
+
+
+              
+
+
+                <li>
+
+                    <a href="404.html">
+                        ○ Ajuda-nos
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             BOX INFORMATIVO
+        ================================================= -->
+
+        <div class="sidebar-box">
+
+
+            <h3>
+                📢 Plantão Info
+            </h3>
+
+
+            <p
+                style="
+                    font-size: 10px;
+                    color: #aaa;
+                    text-align: center;
+                    line-height: 1.4;
+                    padding: 4px;
+                "
+            >
+
+                Você está na central oficial de boletins urgentes
+                da NLU.
+
+                Novas postagens entram no ar junto com os vídeos
+                do YouTube.
+
+            </p>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<!-- =====================================================
+     RODAPÉ
+====================================================== -->
+
+<footer class="site-footer">
+
+
+    <p>
+
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+
+    </p>
+
+
+    <p>
+
+        Version Beta 1.7.9 02/09/2026.
+
+    </p>
+
+
+</footer>
+
+
+</div>
+
+</body>
+
+</html>

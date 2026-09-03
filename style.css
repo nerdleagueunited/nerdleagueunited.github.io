@@ -1,0 +1,438 @@
+/* ==========================================
+   RESET PADRÃO & CONFIGURAÇÕES GERAIS
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff; 
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.site-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: #111111; 
+    border: 2px solid #444444;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* ==========================================
+   HEADER - INDEX & PÁGINAS INTERNAS
+   ========================================== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.main-logo {
+    width: 70px;
+    height: auto;
+}
+
+.logo-text-box h1 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.logo-text-box p {
+    font-size: 11px;
+    color: #888888;
+}
+
+.header-right-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+    margin-left: auto;
+}
+
+.youtube-btn {
+    background-color: #cc0000;
+    color: #ffffff;
+    padding: 6px 12px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #ff3333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.youtube-btn:hover {
+    background-color: #e60000;
+}
+
+.counter-box {
+    background-color: #000000;
+    border: 1px solid #555555;
+    padding: 4px 8px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #00ff00;
+}
+
+/* Sub-cabeçalho de navegação textual logo abaixo da logo (como no rascunho) */
+.sub-nav-links {
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #888;
+}
+
+
+.sub-nav-links a {
+    color: #00ffff;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   ESTEIRA DE LETREIRO (MARQUEE)
+   ========================================== */
+.marquee-zone {
+    background-color: #000000;
+    border: 1px dashed #555555;
+    padding: 6px;
+    font-size: 12px;
+    color: #ffff00;
+    margin-bottom: 15px;
+    overflow: hidden; 
+    white-space: nowrap; 
+    display: flex;
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: esteiraInfinita 25s linear infinite; 
+}
+
+.marquee-content span {
+    padding-right: 50px; 
+}
+
+@keyframes esteiraInfinita {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ==========================================
+   LAYOUT PRINCIPAL (GRID DE 2 COLUNAS)
+   ========================================== */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 15px;
+}
+
+.content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ==========================================
+   BLOCOS DE CONTEÚDO E CARDS
+   ========================================== */
+.category-block {
+    border: 1px solid #333333;
+    background-color: #161616;
+    padding: 10px;
+}
+
+.category-block h2 {
+    font-size: 14px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.item-card {
+    background-color: #000000;
+    border: 1px solid #444444;
+    padding: 6px;
+}
+
+.thumb-box {
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    background-color: #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.item-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-card h3 {
+    font-size: 11px;
+    color: #ffffff;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+/* ==========================================
+   ELEMENTOS ESPECIAIS (DO RASCUNHO)
+   ========================================== */
+/* Bloco TGGA (The Great Game Archive) */
+.tgga-box {
+    background: linear-gradient(135deg, #2b093f, #0f0f0f);
+    border: 2px solid #8a2be2;
+    padding: 12px;
+    text-align: center;
+}
+
+.tgga-box h3 {
+    color: #d8b4fe;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.tgga-box p {
+    font-size: 11px;
+    color: #cccccc;
+    margin-bottom: 8px;
+}
+
+.retro-btn {
+    background-color: #8a2be2;
+    color: #ffffff;
+    border: 2px outset #ba55d3;
+    padding: 6px 14px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.retro-btn:hover {
+    background-color: #9370db;
+}
+
+/* Bloco Coleção em formato de Ficha Famicom */
+.collection-box {
+    background-color: #121212;
+    border: 3px ridge #555555;
+    padding: 10px;
+    text-align: center;
+}
+
+.collection-cartridge {
+    background-color: #dcdcdc;
+    color: #111111;
+    border: 2px solid #888888;
+    padding: 8px;
+    margin-top: 6px;
+}
+
+.collection-cartridge span {
+    font-size: 10px;
+    font-weight: bold;
+    display: block;
+    background-color: #b00;
+    color: #fff;
+    padding: 2px;
+    margin-bottom: 4px;
+}
+
+/* Menu Lateral Estilizado (Abas) */
+.side-nav-menu {
+    background-color: #161616;
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+.side-nav-menu h3 {
+    font-size: 12px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.side-nav-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.side-nav-menu a {
+    display: block;
+    background-color: #222;
+    color: #fff;
+    padding: 6px 8px;
+    text-decoration: none;
+    font-size: 12px;
+    border-left: 3px solid #ffcc00;
+}
+
+.side-nav-menu a:hover {
+    background-color: #333;
+    padding-left: 12px;
+}
+
+/* Botão Perigoso (Não Clique) */
+.danger-box {
+    text-align: center;
+    background-color: #111;
+    border: 2px dashed #444;
+    padding: 10px;
+}
+
+.danger-btn {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 3px dashed #ffff00;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 0 10px #ff0000;
+    text-decoration: none;
+}
+
+.danger-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Sidebar Comuns */
+.sidebar-box {
+    border: 1px solid #333333;
+    background-color: #161616;
+    padding: 10px;
+}
+
+.sidebar-box h3 {
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #444444;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+.sidebar-box ul {
+    list-style-type: square;
+    padding-left: 15px;
+}
+
+.sidebar-box li {
+    font-size: 11px;
+    color: #aaaaaa;
+    margin-bottom: 5px;
+}
+
+/* Rodapé */
+.site-footer {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #444444;
+    font-size: 11px;
+    color: #666666;
+    margin-top: 20px;
+}
+
+/* ==========================================
+   ESTILOS ESPECÍFICOS: QUEM SOMOS & AJUDA
+   ========================================== */
+.page-header-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.page-header-box img {
+    width: 60px;
+    height: auto;
+}
+
+.page-header-box h1 {
+    font-size: 24px;
+    color: #fff;
+}
+
+.member-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    background-color: #161616;
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+.visuals-col img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px inset #555;
+}
+
+.info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.block-title {
+    background-color: #000080;
+    color: #ffffff;
+    padding: 3px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.info-col p {
+    font-size: 12px;
+    color: #ddd;
+    line-height: 1.4;
+}
+

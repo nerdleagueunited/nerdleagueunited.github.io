@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TGGA - Página inicial</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================================
+           COLUNA DE CONTEÚDO
+        ========================================================= */
+
+        .content-column {
+
+            min-width: 0;
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        /* =========================================================
+           BLOCO DO CARROSSEL
+        ========================================================= */
+
+        .category-block-interactive {
+
+            position: relative;
+
+            width: 100%;
+
+        }
+
+
+        /* =========================================================
+           JANELA DO CARROSSEL
+        ========================================================= */
+
+        .carousel-view-window {
+
+            width: 100%;
+
+            overflow: hidden;
+
+            padding: 4px 0;
+
+        }
+
+
+        /* =========================================================
+           TRILHA HORIZONTAL
+        ========================================================= */
+
+        .carousel-horizontal-track {
+
+            display: flex;
+
+            transition:
+                transform 0.4s cubic-bezier(
+                    0.25,
+                    0.46,
+                    0.45,
+                    0.94
+                );
+
+            width: max-content;
+
+            will-change: transform;
+
+            transform: translate3d(0, 0, 0);
+
+        }
+
+
+        /* =========================================================
+           LINK DO CARD
+        ========================================================= */
+
+        .carousel-horizontal-track .card-link {
+
+            display: block;
+
+            width: 194px;
+
+            flex: 0 0 194px;
+
+            margin-right: 12px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card-placeholder {
+
+            width: 194px;
+
+            background-color: #0c0c0c;
+
+            border: 2px solid #000000;
+
+            padding: 8px;
+
+            margin-right: 0;
+
+            flex-shrink: 0;
+
+            text-align: center;
+
+            box-sizing: border-box;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+
+        }
+
+
+        /* =========================================================
+           EFEITO DO CARD AO PASSAR O MOUSE
+        ========================================================= */
+
+        .carousel-horizontal-track .card-link:hover
+        .item-card-placeholder {
+
+            transform: scale(1.02);
+
+            border-color: #ffcc00;
+
+        }
+
+
+        /* =========================================================
+           IMAGEM QUADRADA
+        ========================================================= */
+
+        .thumb-box-empty-square {
+
+            width: 100%;
+
+            aspect-ratio: 1 / 1;
+
+            background-color: #161616;
+
+            border: 1px dashed #333333;
+
+            margin-bottom: 8px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* =========================================================
+           IMAGEM DO CARD
+        ========================================================= */
+
+        .thumb-box-empty-square img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            image-rendering: -webkit-optimize-contrast;
+
+            image-rendering: crisp-edges;
+
+        }
+
+
+        /* =========================================================
+           NOME DO ITEM
+        ========================================================= */
+
+        .item-card-placeholder h3 {
+
+            font-size: 11px;
+
+            color: #ffffff;
+
+            font-weight: normal;
+
+            margin-top: 4px;
+
+        }
+
+
+        /* =========================================================
+           SETAS
+        ========================================================= */
+
+        .carousel-arrow-btn {
+
+            position: absolute;
+
+            top: 55%;
+
+            transform: translateY(-50%);
+
+            background-color: #ffcc00;
+
+            color: #000000;
+
+            border: 2px outset #ffee55;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+            width: 26px;
+
+            height: 26px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease-in-out;
+
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.8);
+
+        }
+
+
+        /* =========================================================
+           MOSTRA AS SETAS AO PASSAR O MOUSE
+        ========================================================= */
+
+        .category-block-interactive:hover
+        .carousel-arrow-btn {
+
+            opacity: 1;
+
+        }
+
+
+        /* =========================================================
+           SETA DESABILITADA
+        ========================================================= */
+
+        .carousel-arrow-btn:disabled {
+
+            opacity: 0 !important;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =========================================================
+           POSIÇÃO DAS SETAS
+        ========================================================= */
+
+        .arrow-left-position {
+
+            left: -10px;
+
+        }
+
+
+        .arrow-right-position {
+
+            right: -10px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+    <!-- =========================================================
+         CABEÇALHO PRINCIPAL
+    ========================================================= -->
+
+    <header class="site-header">
+
+
+        <div class="logo-area">
+
+
+            <img
+                src="logo1.png"
+                alt="Logo NLU"
+                class="main-logo"
+            >
+
+
+            <div class="logo-text-box">
+
+
+                <h1>
+                    The Great Game Archive™
+                </h1>
+
+
+                <p>
+                    Não o maior, mas o NOSSO aglomerado de informação.
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="header-right-box">
+
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnitedProductions"
+                target="_blank"
+                class="youtube-btn"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+
+            <div class="counter-box">
+                Consoles: 11
+            </div>
+
+
+            <div class="counter-box">
+                Jogos: 22
+            </div>
+
+
+            <div class="counter-box">
+                Periféricos: 7
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================================
+         SUB-NAVEGAÇÃO
+    ========================================================= -->
+
+    <div class="sub-nav-links">
+
+
+        <a href="index.html">
+            ← Voltar ao Início
+        </a>
+
+
+        |
+
+
+        <a href="ajuda.html">
+            Suporte/FAQ
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         ESTEIRA
+    ========================================================= -->
+
+    <div class="marquee-zone">
+
+
+        <div class="marquee-content">
+
+
+            <span>
+
+                Estamos sempre trabalhando para aumentar a quantidade
+                de artigos, se quiser auxiliar, envie-nos um E-Mail em
+                NLUMAILPLACEHOLDER@mail.com ... envie-nos fotos e dados
+                de seus itens! ...
+
+                &nbsp;
+
+            </span>
+
+
+            <span>
+
+                Estamos sempre trabalhando para aumentar a quantidade
+                de artigos, se quiser auxiliar, envie-nos um E-Mail em
+                NLUMAILPLACEHOLDER@mail.com ... envie-nos fotos e dados
+                de seus itens! ...
+
+                &nbsp;
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         GRADE PRINCIPAL
+    ========================================================= -->
+
+    <div class="main-grid">
+
+
+        <!-- =====================================================
+             COLUNA ESQUERDA
+        ===================================================== -->
+
+        <div class="content-column">
+
+
+            <!-- =================================================
+                 CONSOLES
+            ================================================= -->
+
+            <div
+                class="category-block
+                       category-block-interactive"
+            >
+
+
+                <h2>
+                    Consoles Catalogados — Seção Inicial
+                </h2>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-left-position"
+                    id="btn-t1-l"
+                    onclick="
+                        rolarTGGA(
+                            'track-t1',
+                            'btn-t1-l',
+                            'btn-t1-r',
+                            'esquerda'
+                        )
+                    "
+                    disabled
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-right-position"
+                    id="btn-t1-r"
+                    onclick="
+                        rolarTGGA(
+                            'track-t1',
+                            'btn-t1-l',
+                            'btn-t1-r',
+                            'direita'
+                        )
+                    "
+                >
+                    ▶
+                </button>
+
+
+                <div class="carousel-view-window">
+
+
+                    <div
+                        class="carousel-horizontal-track"
+                        id="track-t1"
+                    >
+
+
+                        <!-- CARD 1 -->
+
+                        <a
+                            href="2600.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/a264.jpg"
+                                        alt="Atari 2600"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Atari 2600
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 2 -->
+
+                        <a
+                            href="dynavision4.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/d47.jpeg"
+                                        alt="Dynavision 4"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Dynavision 4
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 3 -->
+
+                        <a
+                            href="xbox360.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/3602.jpeg"
+                                        alt="Xbox 360"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Xbox 360
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 4 -->
+
+                        <a
+                            href="ps2.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/p2.jpeg"
+                                        alt="PlayStation 2"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    PlayStation 2
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 5 -->
+
+                        <a
+                            href="wii.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/nw.jpeg"
+                                        alt="Nintendo Wii"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Nintendo Wii
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 6 -->
+
+                        <a
+                            href="gemini.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/gxg.jpeg"
+                                        alt="Gemini X Game"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Gemini X Game
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                         <!-- CARD 7 -->
+
+                        <a
+                            href="ds.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/nds2.jpeg"
+                                        alt="Nintendo DS"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Nintendo DS
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="ps5.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ps5.jpeg"
+                                        alt="PlayStation 5"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    PlayStation 5
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 9 -->
+
+                        <a
+                            href="xboxone.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/xone.jpeg"
+                                        alt="Xbox One"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Xbox One
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 9,5 -->
+
+                        <a
+                            href="ps3.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ps3.jpeg"
+                                        alt="Xbox One"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    PlayStation 3
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 10 -->
+
+                        <a
+                            href="switch.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/sw1.jpeg"
+                                        alt="Nintendo Switch"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Nintendo Switch
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 JOGOS
+            ================================================= -->
+
+            <div
+                class="category-block
+                       category-block-interactive"
+            >
+
+
+                <h2>
+                    Jogos Catalogados — Seção Intermediária
+                </h2>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-left-position"
+                    id="btn-t2-l"
+                    onclick="
+                        rolarTGGA(
+                            'track-t2',
+                            'btn-t2-l',
+                            'btn-t2-r',
+                            'esquerda'
+                        )
+                    "
+                    disabled
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-right-position"
+                    id="btn-t2-r"
+                    onclick="
+                        rolarTGGA(
+                            'track-t2',
+                            'btn-t2-l',
+                            'btn-t2-r',
+                            'direita'
+                        )
+                    "
+                >
+                    ▶
+                </button>
+
+
+                <div class="carousel-view-window">
+
+
+                    <div
+                        class="carousel-horizontal-track"
+                        id="track-t2"
+                    >
+
+
+                        <!-- CARD 7 -->
+
+                        <a
+                            href="skyrim.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/sky.jpeg"
+                                        alt="The Elder Scrolls V: Skyrim"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    The Elder Scrolls V: Skyrim (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="mario3.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/m31.jpeg"
+                                        alt="Super Mario Bros. 3"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Super Mario Bros. 3 (NES)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 12 -->
+
+                        <a
+                            href="gta4.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/gta4.jpeg"
+                                        alt="Grand Theft Auto 4 (PS3)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Grand Theft Auto IV (PS3)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="spyro.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/spyro.jpeg"
+                                        alt="Spyro Reignited Trilogy"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Spyro Reignited Trilogy (One)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="mariokartds.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/mkds.jpeg"
+                                        alt="Mario Kart DS (DS)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Mario Kart DS (DS)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 9 -->
+
+                        <a
+                            href="tetris.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/tt.jpeg"
+                                        alt="Tetris"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Tetris (FC)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <a
+                            href="smash.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/smash.jpeg"
+                                        alt="Super Smash Bros. Brawl (Wii)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Super Smash Bros. Brawl (Wii)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 10 -->
+
+                        <a
+                            href="ghostbusters.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/gb.jpeg"
+                                        alt="GhostBusters"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    GhostBusters (PhS)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="halo5.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/h5.jpeg"
+                                        alt="Halo 5: Guardians"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Halo 5: Guardians (One)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+
+                        <!-- CARD 11 -->
+
+                        <a
+                            href="minecraft.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/mc.jpeg"
+                                        alt="Minecraft"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Minecraft (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="bandhero.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/bh.jpeg"
+                                        alt="Band Hero (DS)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Band Hero (DS)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- CARD 12 -->
+
+                        <a
+                            href="assassinscreed2.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ac21.jpeg"
+                                        alt="Assassin's Creed 2"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Assassin's Creed 2 (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 12 -->
+
+                        <a
+                            href="mario.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/smb1.jpeg"
+                                        alt="Super Mario Bros (FC)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Super Mario Bros (FC)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 8 -->
+
+                        <a
+                            href="tombraider.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/tb.jpeg"
+                                        alt="Rise Of The Tomb Raider (One)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Rise Of The Tomb Raider (One)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 12 -->
+
+                        <a
+                            href="kinectsports.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ks21.jpeg"
+                                        alt="Kinect Sports: Season 2"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Kinect Sports: Season 2 (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                              <a
+                            href="quantumbreaker.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/qb.jpeg"
+                                        alt="Quantum Breaker (One)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Quantum Breaker (One)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                         <a
+                            href="wiiplay.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/wp.jpeg"
+                                        alt=" WiiPlay (Wii)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    WiiPlay (Wii)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+<a
+                            href="assassinscreed.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/as1.jpeg"
+                                        alt="Assassin's Creed"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                   Assassin's Creed (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                               <a
+                            href="lego.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/hp1.jpeg"
+                                        alt="Lego Harry Potter: Years 1-4 (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Lego Harry Potter: Years 1-4 (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                               <a
+                            href="terraria.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/t1.jpeg"
+                                        alt="Terraria (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Terraria (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                                <a
+                            href="assassinscreed3.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ac31.jpeg"
+                                        alt="Assassin's Creed 3 (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Assassin's Creed 3 (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                                 <a
+                            href="rise.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/rr.jpeg"
+                                        alt="Rise: Son Of Rome (One)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Rise: Son Of Rome (One)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                                                <a
+                            href="assassinscreedrevelations.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/acr1.jpeg"
+                                        alt="Assassin's Creed: Revelations (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Assassin's Creed: Revelations (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                               <a
+                            href="aliens.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/acm1.jpeg"
+                                        alt="Aliens: Colonial Marines (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Aliens: Colonial Marines (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                               <a
+                            href="chaves.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/ck1.jpeg"
+                                        alt="Chaves Kart (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Chaves Kart (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                         <!-- CARD 8 -->
+
+                        <a
+                            href="kinectadv.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/kadv.jpeg"
+                                        alt="Kinect Adventures (360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Kinect Adventures (360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PERIFÉRICOS
+            ================================================= -->
+
+            <div
+                class="category-block
+                       category-block-interactive"
+            >
+
+
+                <h2>
+                    Periféricos Catalogados — Seção Avançada
+                </h2>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-left-position"
+                    id="btn-t3-l"
+                    onclick="
+                        rolarTGGA(
+                            'track-t3',
+                            'btn-t3-l',
+                            'btn-t3-r',
+                            'esquerda'
+                        )
+                    "
+                    disabled
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="carousel-arrow-btn
+                           arrow-right-position"
+                    id="btn-t3-r"
+                    onclick="
+                        rolarTGGA(
+                            'track-t3',
+                            'btn-t3-l',
+                            'btn-t3-r',
+                            'direita'
+                        )
+                    "
+                >
+                    ▶
+                </button>
+
+
+                <div class="carousel-view-window">
+
+
+                    <div
+                        class="carousel-horizontal-track"
+                        id="track-t3"
+                    >
+
+
+                        <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/cone.jpeg"
+                                        alt="Controle Sem Fio Xbox One"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Controle Sem Fio Xbox One
+                                </h3>
+
+                            </div>
+
+                        </a>
+                      
+
+                         <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/8.jpg"
+                                        alt="GamePad Mobile (GameSir)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    GamePad Mobile (GameSir)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/fake.jpeg"
+                                        alt="Controle Clássico Pro para Wii (Paralelo)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Controle Clássico Pro para Wii (Paralelo)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                                <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/psvr2.jpeg"
+                                        alt="Controle Clássico Pro para Wii (Paralelo)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    PS VR2 (PS5)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                         <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/kinect.jpeg"
+                                        alt="Kinect Sensor (X360)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Kinect Sensor (X360)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                         <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/wiiremote.jpeg"
+                                        alt="Wii Remote"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Wii Remote
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                         <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/360c.jpeg"
+                                        alt="Controle Sem Fio Xbox 360"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Controle Sem Fio Xbox 360
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                        <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/360pec.jpeg"
+                                        alt="Cabo Play & Charge Xbox 360"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                   Cabo Play & Charge Xbox 360
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                   <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/dual.jpeg"
+                                        alt="DualSense (PS5)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    DualSense (PS5)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- CARD 13 -->
+                        <a
+                            href="404.html"
+                            class="card-link"
+                        >
+
+                            <div class="item-card-placeholder">
+
+                                <div
+                                    class="thumb-box-empty-square"
+                                >
+
+                                    <img
+                                        src="tgga/sense.jpeg"
+                                        alt="DualSense (PS5)"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                   PlayStation VR Sense (PS5)
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                       
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- Fim da content-column -->
+
+
+
+        <!-- =====================================================
+             COLUNA DIREITA
+        ===================================================== -->
+
+        <div class="sidebar-column">
+
+
+            <nav class="side-nav-menu">
+
+
+                <h3>
+                    - NAVEGAÇÃO -
+                </h3>
+
+
+                <ul>
+
+
+                    <li>
+                        <a href="tgga.html">
+                            ○ Início - TGGA
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="index.html">
+                            ○ Início - NLU
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="help.html">
+                            ○ Ajude com mais itens!
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g1.html">
+                            ○ 1ª — Primeira geração (1972 - 1978)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g2.html">
+                            ○ 2ª — Segunda geração (1976 - 1984)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g3.html">
+                            ○ 3ª — Terceira geração (1983 - 1990)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g4.html">
+                            ○ 4ª — Quarta geração (1987 - 1996)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g5.html">
+                            ○ 5ª — Quinta geração (1993 - 1999)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g6.html">
+                            ○ 6ª — Sexta geração (1998 - 2006)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g7.html">
+                            ○ 7ª — Sétima geração (2005 - 2013)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g8.html">
+                            ○ 8ª — Oitava geração (2012 - 2021)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g9.html">
+                            ○ 9ª — Nona geração (2020 - Presente)
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="g10.html">
+                            ○ 10ª — Décima geração (Em Breve...)
+                        </a>
+                    </li>
+
+
+                </ul>
+
+
+            </nav>
+
+
+
+            <!-- =================================================
+                 CURIOSIDADE
+            ================================================= -->
+
+            <div
+                class="category-block"
+                style="margin-top: 15px;"
+            >
+
+
+                <div
+                    class="block-title"
+                    style="
+                        background-color: #8a2be2;
+                        margin-bottom: 10px;
+                    "
+                >
+                    Curiosidade do Arquivo
+                </div>
+
+
+                <div
+                    style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 5px;
+                    "
+                >
+
+
+                    <div
+                        style="
+                            width: 150px;
+                            aspect-ratio: 1 / 1;
+                            border: 2px solid #000000;
+                            overflow: hidden;
+                            background-color: #161616;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "
+                    >
+
+
+                        <img
+                            src="tgga/wivision.jpeg"
+                            alt="Item CUrioso"
+                            style="
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                image-rendering:
+                                    -webkit-optimize-contrast;
+                            "
+                        >
+
+
+                    </div>
+
+
+                    <h3
+                        style="
+                            font-size: 13px;
+                            color: #ffcc00;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            text-align: center;
+                            margin: 4px 0 2px 0;
+                        "
+                    >
+                        O "Clone" do Wii
+                    </h3>
+
+
+                    <p
+                        style="
+                            font-size: 11px;
+                            color: #cccccc;
+                            line-height: 1.4;
+                            text-align: justify;
+                            padding: 0 8px;
+                            margin: 0;
+                        "
+                    >
+                        Por volta de 2007 a Dynacom descidiu tentar surfar
+                        na onda do Nintendo Wii e criou um console que imitava
+                        seu formato e estilo de controles, o resultado? O console
+                        mais estranho já feito da Dynacom e talvez do Brasil, o Wi-Vision.<br>
+                        Os jogos nele são 8-Bit e usam o "controle de movimento" para serem jogados, sendo todos cópias 
+                        com leves alterações de jogos já existentes... Sim, é horrível.
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <!-- Fim da sidebar-column -->
+
+
+    </div>
+    <!-- Fim da main-grid -->
+
+
+
+    <!-- =========================================================
+         RODAPÉ
+    ========================================================= -->
+
+    <footer class="site-footer">
+
+
+        <p>
+            &copy; 2026 Nerd League United.
+            Todos os direitos reservados.
+        </p>
+
+
+        <p>
+            Version Beta 1.7.9 02/09/2026.
+        </p>
+
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =============================================================
+     JAVASCRIPT DO CARROSSEL
+============================================================= -->
+
+<script>
+
+
+function rolarTGGA(
+    idTrilha,
+    idSetaEsquerda,
+    idSetaDireita,
+    direcao
+) {
+
+
+    const trilha =
+        document.getElementById(
+            idTrilha
+        );
+
+
+    const setaEsquerda =
+        document.getElementById(
+            idSetaEsquerda
+        );
+
+
+    const setaDireita =
+        document.getElementById(
+            idSetaDireita
+        );
+
+
+    let indexAtual =
+        parseInt(
+            trilha.getAttribute(
+                'data-index'
+            )
+        ) || 0;
+
+
+    const totalItens =
+        trilha.children.length;
+
+
+    /* ---------------------------------------------------------
+       MANTÉM 3 CARDS VISÍVEIS
+    --------------------------------------------------------- */
+
+    const visiveisNaTela = 3;
+
+
+    const fimDaLinha =
+        totalItens -
+        visiveisNaTela;
+
+
+    /* ---------------------------------------------------------
+       LARGURA DO CARD + ESPAÇO
+    --------------------------------------------------------- */
+
+    const deslocamentoUnidade =
+        194 + 12;
+
+
+    /* ---------------------------------------------------------
+       DIREITA
+    --------------------------------------------------------- */
+
+    if (
+        direcao === 'direita' &&
+        indexAtual < fimDaLinha
+    ) {
+
+        indexAtual++;
+
+    }
+
+
+    /* ---------------------------------------------------------
+       ESQUERDA
+    --------------------------------------------------------- */
+
+    else if (
+        direcao === 'esquerda' &&
+        indexAtual > 0
+    ) {
+
+        indexAtual--;
+
+    }
+
+
+    /* ---------------------------------------------------------
+       MOVE A TRILHA
+    --------------------------------------------------------- */
+
+    trilha.style.transform =
+        `translateX(-${
+            indexAtual *
+            deslocamentoUnidade
+        }px)`;
+
+
+    trilha.setAttribute(
+        'data-index',
+        indexAtual
+    );
+
+
+    /* ---------------------------------------------------------
+       ATUALIZA AS SETAS
+    --------------------------------------------------------- */
+
+    setaEsquerda.disabled =
+        indexAtual === 0;
+
+
+    setaDireita.disabled =
+        indexAtual >= fimDaLinha;
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

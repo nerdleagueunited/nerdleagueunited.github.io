@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Dynavision 4</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       INTELLIVISION + COLECOVISION
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       2 CONSOLES POR LINHA
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      /* Modelos ficam um abaixo do outro no celular */
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        /* Continua preenchendo o retângulo */
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+         ... O Dynavision 4 é de longe um dos melhores famiclones da época devido ao seu Dual Connector
+			System, capaz de rodar jogos de NES e Famicom! ...  
+          &nbsp;
+        </span>
+
+        <span>
+         ... O Dynavision 4 é de longe um dos melhores famiclones da época devido ao seu Dual Connector
+			System, capaz de rodar jogos de NES e Famicom! ...  
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+          <h2>
+            Dynavision 4 (Posse de Samuel Büron)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="tgga/d48.jpeg"
+              alt="Imagem do Dynavision 4"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Dynavision 4
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+           O Dynavision 4 da Dynacom foi lançado em 1995, ficou famoso por sua estilosa carcaça baseada no Megavision, clone
+			do Mega Drive da Sega feito pela Dynacom, mas principalmente pelo seu Dual Connector System que permite uso de
+			cartuchos de 72 pinos (Padrão NES) e 60 pinos (Padrão Famicom).<br>
+
+            
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Mercado Nacional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Devido as leis da Reserva de Mercado, várias empresas como CCE, Gradiente e nesse caso, a Dynacom, decidiram
+			lançar seus prórpios consoles, usando engenharia reversa e se aproveitando da ausência temporária de uma parceria da Nintendo
+			alguma empresa brasileira (futuramente se aliaram a PlayTronic) para lançar sua linha de consoles, sendo a partir do segundo até o 
+			quarto sendo Famiclones.<br>
+
+          
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="tgga/turbogame.jpeg"
+                alt="CCE TurboGame"
+              />
+
+              <img
+                src="tgga/phantomsystem.jpg"
+                alt="Gradiente Phatom System"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ CCE TurboGame (1992) e o Gradiente Phantom System (1988) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Entre o final dos anos 80 e início dos anos 90, a indústria brasileira estava dividida entre 3 grandes empresas: CCE, Gradiente
+			e Dynacom. Essas respectivas empresas criaram seus consoles Famiclones e lançavam seus jogos "Oficiais" devido a Nintendo
+			não estár no Brasil, a rivalidade foi acirrada, mas a conclusão deixou o Phantom System como o mais lembrado.
+			O Dynavision 4 é sucessor do Dynavision 3, que é sucessor do Dynavision 2, que é sucessor de Dynavision original que é uma cópia do 
+			Atari 2600.<br>
+
+            
+          </p>
+
+<h2></h2>
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="tgga/jogo1.webp"
+                alt="jogo 1"
+              />
+
+              <img
+                src="tgga/zapper.jpeg"
+                alt="zapper"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Cartucho Multi-Jogo e Light Gun do Dynavision 4 ~
+            </figcaption>
+
+          </figure>
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+           
+		   Assim como as outras empresas e consoles citados, a Dynacom fez cartuchos de jogos para seus consoles Famiclones e Atari, sendo 
+		   as mais comuns as Multi-Jogos, tendo jogos como Duck-Hunt e Challenger da Hudson.<br>
+
+            
+		Atualmente os cartuchos são de fácil acesso, não tendo valores elevados como jogos originais de NES e Famicom, mas depende do
+estado do cartucho.		<br>
+
+	O Dynavision e seus modelos tiveram acessórios, o mais famoso sendo a Light Gun/Light Phaser, a versão da Dynacom da Zapper.
+
+           
+          </p>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Modelos e variações
+          </h2>
+		  
+		  <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Durante sua época a Dynacom lançou diversos modelos e versões diferentes de seus consoles, indo de cópia de Atari 2600 para famiclone
+			até para consoles mais estranhos.<br>
+
+            
+          </p>
+
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dynavision1.jpeg"
+                  alt="Dynavision original"
+                />
+
+                <figcaption>
+                  Dynavision (O clone de Atari 2600)
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dynavision2.jpeg"
+                  alt="Dynavision 2"
+                />
+
+                <figcaption>
+                 Dynavision 2
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dynavision3.jpeg"
+                  alt="Dynavision 3"
+                />
+
+                <figcaption>
+                  Dynavision 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dynavision4.jpeg"
+                  alt="caixa dynavision 4 radical"
+                />
+
+                <figcaption>
+                  Caixa Dynavision 4 Radical
+                </figcaption>
+
+              </div>
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dynavisionxtreme.webp"
+                  alt="caixa dynavision 4 radical"
+                />
+
+                <figcaption>
+                  Dynavision Xtreme
+                </figcaption>
+
+              </div>
+
+                 <div class="model-item">
+
+                <img
+                  src="tgga/wivision.jpeg"
+                  alt="caixa dynavision 4 radical"
+                />
+
+                <figcaption>
+                  Wi-Vision 
+                </figcaption>
+
+              </div>
+
+
+             
+
+             
+
+
+            </div>
+
+          </figure>
+
+
+          
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Dynacom
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Dynacom
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+            <details class="component-item">
+              <summary>Carcaça do console</summary>
+              <div class="component-description">
+                <p>
+                  Carcaça plástica baseada no MegaVision de 1994.
+                </p>
+
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Botões frontais</summary>
+              <div class="component-description">
+                <p>
+                 <ul class="component-specs">
+                  <li>Eject: Alavanca que remove cartuchos</li>
+                  <li>Power: Possui LED vermelha para mostrar quando está ligado</li>
+                  <li>Reset: Reinicia o jogo/console</li>
+                  <li>Volume: Botão deslizante para volume do som em Fone De Ouvido</li>
+                </ul> 
+                </p>
+
+                
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Entrada de cartuchos</summary>
+              <div class="component-description">
+                
+
+                <ul class="component-specs">
+                  <li>Slot de 60 pinos (FC)</li>
+                  <li>Slot de 72 pinos (NES)</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Conectores de controles</summary>
+              <div class="component-description">
+               
+
+                <ul class="component-specs">
+                  <li>Entradas para dois gamepads</li>
+				  <li>Entrada para Light Gun</li>
+                 
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Saídas de vídeo e áudio</summary>
+              <div class="component-description">
+                <p>
+                  Cabos AV/RCA e RF.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Vermelho: Áudio direito </li>
+                  <li>Amarelo: Vídeo </li>
+                  <li>Branco: Áudio esquerdo </li>
+				  <li>Conector Radiofrequência para TVs antigas </li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Microprocessador 8 Bits</summary>
+              <div class="component-description">
+               <ul class="component-specs">
+                  <li>Geralmente compatível com o MOS Techbology 6502, similar ao NES.</li>
+                  <li>Responsável pela execução do código dos jogos e controle geral do console</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Circuito Integrado PPU (Picture Processing Unit)</summary>
+              <div class="component-description">
+                 <ul class="component-specs">
+                 <li> Chip responsável pela geração da imagem e manipulação dos sprites.
+<li>Equivalente ao Ricoh 2C02 do NES.</li></ul>
+                
+
+               
+                
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Memória RAM
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Memória temporária usada para armazenar dados em execução no jogo.
+                </p>
+				<p>
+                 Possui 2 KB de RAM e 2 KB da VRAM (memória de vídeo).
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Memória ROM (Cartuchos)
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Cartuchos de jogos com chips ROM que armazenam os softwares.
+                </p>
+				 <ul class="component-specs">
+                 <li> Podem ter desde 8 KB de ROM até 1028 KB de ROM.</li>
+				 <li> Alguns cartuchos tem SRAM (adicional) de até 8 KB.</li></ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Circuito de áudio
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Gerador de som mono ou estéreo básico, reproduz os efeitos e música dos jogos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Portas de controle (DB9 ou similares)
+
+.</summary>
+              <div class="component-description">
+                <p>
+                 Conexão para os controles (joystick TPC-1 Turbo Flash Control)
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Fonte de alimentação interna
+
+</summary>
+              <div class="component-description">
+                <p>
+                 Adaptada para entrada 110/220V com regulador interno.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Diodos e Resistores diversos
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Circuitos auxiliares para proteção e regulação.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cristal Oscilador de Frequência
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Frequência de clock para sincronização do sistema.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Placa de Circuito Impresso (PCB)
+
+</summary>
+              <div class="component-description">
+                <p>
+                  Placa que interliga eletricamente todos os componentes.
+                </p>
+              </div>
+            </details>
+
+
+           
+
+
+            <details class="component-item">
+              <summary>Controles Turbo Flash Control (TPC-1)
+
+</summary>
+              <div class="component-description">
+                <p>
+                 Joysticks com quatro direções e botão de ação.
+                </p>
+              </div>
+            </details>
+
+
+           
+
+
+            <details class="component-item">
+              <summary>O Cartucho de Jogo (Mídia)</summary>
+              <div class="component-description">
+                <p>
+                  O cartucho é a mídia física utilizada pelo Dynavision 4
+                  para armazenar o software dos jogos, podendo ser de 60 ou 72 pinos.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+      
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>
+
+<!--  -->

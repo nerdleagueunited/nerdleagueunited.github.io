@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NLU - Games</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           ÁREA DOS DOIS BLOCOS
+        ===================================================== */
+
+        .hqs-livros-container {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           BLOCO VERTICAL
+        ===================================================== */
+
+        .hqs-livros-card {
+
+            width: 100%;
+
+            height: 440px;
+
+            background-color: #0c0c0c;
+
+            border: 1px solid #333;
+
+            box-sizing: border-box;
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .hqs-livros-card .block-title {
+
+            flex-shrink: 0;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           CONTEÚDO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content {
+
+            padding: 12px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           ESPAÇO PARA IMAGEM
+        ===================================================== */
+
+        .hqs-livros-image {
+
+            width: 92%;
+
+            height: 285px;
+
+            background-color: #161616;
+
+            border: 1px dashed #444;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .hqs-livros-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+           TEXTO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content h3 {
+
+            margin: 0 0 6px 0;
+
+            color: #ffcc00;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+        }
+
+
+        .hqs-livros-content p {
+
+            margin: 0;
+
+            color: #ccc;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .hqs-livros-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .hqs-livros-card {
+
+                height: 420px;
+
+            }
+
+            .hqs-livros-image {
+
+                height: 270px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ===================================================== -->
+
+    <header class="page-header-box">
+
+        <img
+            src="logonlu.png"
+            alt="Logo NLU"
+        >
+
+
+        <div>
+
+            <p
+                style="
+                    font-size:11px;
+                    color:#888;
+                "
+            >
+                NERD LEAGUE UNITED
+            </p>
+
+
+            <h1>
+                Games
+            </h1>
+
+        </div>
+
+
+        <div class="header-right-box">
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnitedProductions"
+                target="_blank"
+                class="youtube-btn"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+
+            <div class="counter-box">
+                Inscritos: 78
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SUB-NAVEGAÇÃO
+    ===================================================== -->
+
+    <div class="sub-nav-links">
+
+        <a href="index.html">
+            ← Voltar ao Início
+        </a>
+
+        |
+
+        <a href="qs.html">
+            Quem Somos
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         ESTEIRA
+    ===================================================== -->
+ <!-- Esteira de Letreiro (Marquee) -->
+        <div class="marquee-zone">
+            <div class="marquee-content">
+                <span> Jogos de todos os tipos, para todos os gostos e desgostos, projetos básicos até projetos de vida ... cheque DevLogs e Bastidores para achar conteúdo extra sobre ... &nbsp;</span>
+                <span> Jogos de todos os tipos, para todos os gostos e desgostos, projetos básicos até projetos de vida ... cheque DevLogs e Bastidores para achar conteúdo extra sobre ... 
+                 &nbsp;</span>
+            </div>
+        </div>
+    
+
+ <!-- =====================================================
+         NOTA IMPORTANTE
+    ===================================================== -->
+
+    <div
+        class="category-block"
+        style="margin-top:15px;"
+    >
+
+        <div class="block-title">
+            Nota Importante Sobre HQs/Livros
+        </div>
+
+
+        <div
+            style="
+                padding:10px;
+                display:flex;
+                flex-direction:column;
+                gap:10px;
+            "
+        >
+
+            <p>
+                Sim, está vazio, realmente tem
+                pouca coisa/nada.
+            </p>
+
+
+            <ul
+                style="
+                    padding-left:20px;
+                    font-size:12px;
+                    color:#ccc;
+                    display:flex;
+                    flex-direction:column;
+                    gap:6px;
+                "
+            >
+
+                <li>
+
+                    <strong>
+                        Por que a página está vazia?
+                    </strong>
+
+                    Até o momento a Nerd League United
+                    não possui nenhuma Game oficial nem de Colaboradores,
+                    mas estamos trabalhando nisso.
+                    Logo, logo iremos ter vários jogos.
+
+                    <br>
+
+                    Se você tiver interesse em saber
+                    o que estamos fazendo
+                    , busque
+                    dar uma olhada em
+
+                    <a href="out.html">
+                        DevLogs e Bastidores
+                    </a>.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- =====================================================
+         DOIS BLOCOS PRINCIPAIS
+    ===================================================== -->
+
+    <div class="hqs-livros-container">
+
+
+        <!-- =================================================
+             Games
+        ================================================= -->
+
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+                Game 1
+            </div>
+
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+
+                    <!--
+                        Coloque aqui a imagem da HQ.
+                        Exemplo:
+                        hq1.jpg
+                    -->
+
+                    <span
+                        style="
+                            color:#555;
+                            font-size:12px;
+                        "
+                    >
+                        Imagem game
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Bosta Intalada: O Jogo <br>(Por Thomas Lothhammer Bohn)
+                </h3>
+
+
+                <p>
+                    Em breve teremos o jogo aqui.
+                    Jogos como esse, somente na NLU.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             fezes, digo, games
+        ================================================= -->
+
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+                Game 2
+            </div>
+
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+
+                    <!--
+                        Coloque aqui a imagem do livro.
+                        Exemplo:
+                        livro1.jpg
+                    -->
+
+                    <span
+                        style="
+                            color:#555;
+                            font-size:12px;
+                        "
+                    >
+                        Imagem do jogo
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Game
+                </h3>
+
+
+                <p>
+                    No momento não temos jogos
+                    disponíveis, mas novidades
+                    poderão aparecer futuramente.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+   
+    <!-- =====================================================
+         RODAPÉ
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 Nerd League United.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>
+

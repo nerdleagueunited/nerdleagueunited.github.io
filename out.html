@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NLU - DevLogs e Bastidores</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ÁREA DOS DOIS BLOCOS
+        ===================================================== */
+
+        .hqs-livros-container {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           BLOCO VERTICAL
+        ===================================================== */
+
+        .hqs-livros-card {
+
+            width: 100%;
+
+            height: 440px;
+
+            background-color: #0c0c0c;
+
+            border: 1px solid #333;
+
+            box-sizing: border-box;
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .hqs-livros-card .block-title {
+
+            flex-shrink: 0;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           CONTEÚDO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content {
+
+            padding: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: stretch;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           ESPAÇO PARA IMAGEM
+           
+           A imagem ocupa TODO o espaço deste retângulo.
+        ===================================================== */
+
+        .hqs-livros-image {
+
+            width: 100%;
+
+            height: 285px;
+
+            background-color: #161616;
+
+            border: 1px dashed #444;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           IMAGEM
+
+           A imagem preenche completamente o retângulo.
+        ===================================================== */
+
+        .hqs-livros-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+           TEXTO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content h3 {
+
+            margin: 0 12px 6px 12px;
+
+            color: #ffcc00;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+        }
+
+
+        .hqs-livros-content p {
+
+            margin: 0 12px;
+
+            color: #ccc;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .hqs-livros-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .hqs-livros-card {
+
+                height: 420px;
+
+            }
+
+
+            .hqs-livros-image {
+
+                height: 270px;
+
+            }
+
+        }
+
+
+
+        /* =========================================================
+           ESTRUTURA GERAL
+        ========================================================= */
+
+        .main-grid {
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================================================
+           PARTE SUPERIOR
+        ========================================================= */
+
+        .top-content-row {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                250px;
+
+            gap: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================================================
+           COLUNA DO N.A.D.A.
+        ========================================================= */
+
+        .nada-column {
+
+            width: 100%;
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================================
+           SÉRIES EM LARGURA COMPLETA
+        ========================================================= */
+
+        .full-width-series {
+
+            width: 100%;
+
+            min-width: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================================================
+           COLUNA DE CONTEÚDO
+        ========================================================= */
+
+        .content-column {
+
+            min-width: 0;
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        /* =========================================================
+           BLOCO DO CARROSSEL
+        ========================================================= */
+
+        .category-block-interactive {
+
+            position: relative;
+
+            width: 100%;
+
+            min-width: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================================================
+           JANELA DO CARROSSEL
+        ========================================================= */
+
+        .carousel-view-window {
+
+            width: 100%;
+
+            max-width: 100%;
+
+            overflow: hidden;
+
+            padding: 5px 0;
+
+            box-sizing: border-box;
+
+            position: relative;
+
+        }
+
+
+        /* =========================================================
+           TRILHA
+        ========================================================= */
+
+        .carousel-horizontal-track {
+
+            display: flex;
+
+            width: max-content;
+
+            transition:
+                transform 0.4s cubic-bezier(
+                    0.25,
+                    0.46,
+                    0.45,
+                    0.94
+                );
+
+            will-change: transform;
+
+        }
+
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card,
+        .carousel-horizontal-track .item-card-placeholder {
+
+            flex:
+                0 0
+                var(--carousel-card-width);
+
+            width:
+                var(--carousel-card-width);
+
+            margin-right:
+                var(--carousel-gap);
+
+            box-sizing: border-box;
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================================
+           LINK DO CARD
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card-link {
+
+            display: block;
+
+            flex:
+                0 0
+                var(--carousel-card-width);
+
+            width:
+                var(--carousel-card-width);
+
+            margin-right:
+                var(--carousel-gap);
+
+            box-sizing: border-box;
+
+            min-width: 0;
+
+            text-decoration: none;
+
+            color: inherit;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-link
+        .item-card,
+
+        .carousel-horizontal-track
+        .item-card-link
+        .item-card-placeholder {
+
+            width: 100%;
+
+            margin-right: 0;
+
+            box-sizing: border-box;
+
+            cursor: pointer;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-link:hover
+        .item-card {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-link:hover
+        .item-card-placeholder {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =========================================================
+           THUMBNAIL
+        ========================================================= */
+
+        .carousel-horizontal-track .thumb-box {
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            background-color: #111;
+
+            border: 1px solid #333;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .carousel-horizontal-track .thumb-box img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+
+        }
+
+
+        /* =========================================================
+           TÍTULO DO CARD
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card h3,
+        .carousel-horizontal-track .item-card-placeholder h3 {
+
+            margin: 6px 0 0 0;
+
+            font-size: 12px;
+
+            line-height: 1.25;
+
+            color: #fff;
+
+            font-weight: normal;
+
+            word-wrap: break-word;
+
+        }
+
+
+        /* =========================================================
+           PLACEHOLDER
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card-placeholder {
+
+            background-color: #0a0a0a;
+
+            border: 1px dashed #444;
+
+            padding: 6px;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-placeholder
+        .thumb-box {
+
+            border: 1px dashed #333;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-placeholder
+        h3 {
+
+            color: #555;
+
+            font-style: italic;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           SETAS
+        ========================================================= */
+
+        .carousel-arrow-btn {
+
+            position: absolute;
+
+            top: 55%;
+
+            transform: translateY(-50%);
+
+            width: 30px;
+
+            height: 30px;
+
+            background-color: #ffcc00;
+
+            color: #000;
+
+            border: 2px outset #ffee55;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            z-index: 20;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease,
+                background-color 0.2s;
+
+            box-shadow:
+                0 0 8px rgba(0,0,0,0.8);
+
+            box-sizing: border-box;
+
+        }
+
+
+        .category-block-interactive:hover
+        .carousel-arrow-btn {
+
+            opacity: 1;
+
+        }
+
+
+        .carousel-arrow-btn:hover {
+
+            background-color: #ffee55;
+
+        }
+
+
+        .carousel-arrow-btn:disabled {
+
+            opacity: 0 !important;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =========================================================
+           POSIÇÃO DAS SETAS
+        ========================================================= */
+
+        .arrow-left-position {
+
+            left: 5px;
+
+        }
+
+
+        .arrow-right-position {
+
+            right: 5px;
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar-column {
+
+            width: 100%;
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .top-content-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sidebar-column {
+
+                width: 100%;
+
+            }
+
+
+            .carousel-arrow-btn {
+
+                width: 26px;
+
+                height: 26px;
+
+                font-size: 12px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+    <!-- =========================================================
+         CABEÇALHO
+    ========================================================= -->
+
+    <header class="page-header-box">
+
+
+        <img
+            src="logonlu.png"
+            alt="Logo NLU"
+        >
+
+
+        <div>
+
+            <p
+                style="
+                    font-size:11px;
+                    color:#888;
+                "
+            >
+                NERD LEAGUE UNITED
+            </p>
+
+
+            <h1>
+                DevLogs e Bastidores
+            </h1>
+
+        </div>
+
+
+        <div class="header-right-box">
+
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnitedProductions"
+                target="_blank"
+                class="youtube-btn"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+
+            <div class="counter-box">
+                Inscritos: 78
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================================
+         SUB-NAVEGAÇÃO
+    ========================================================= -->
+
+    <div class="sub-nav-links">
+
+
+        <a href="index.html">
+            ← Voltar ao Início
+        </a>
+
+
+        |
+
+
+        <a href="series.html">
+            Voltar a Séries
+        </a>
+		
+		
+
+        |
+
+
+        <a href="qs.html">
+            Quem Somos
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         ESTEIRA
+    ========================================================= -->
+
+    <div class="marquee-zone">
+
+
+        <div class="marquee-content">
+
+
+            <span>
+
+                 ... Errar é humano e a Nerd League United é muito humana, não temos vergonha de nossos erros(alguns) nem de nosso passado, tanto que documentamos quase tudo no YouTube e aqui ... &nbsp;
+
+            </span>
+
+
+            <span>
+
+                ... Errar é humano e a Nerd League United é muito humana, não temos vergonha de nossos erros(alguns) nem de nosso passado, tanto que documentamos quase tudo no YouTube e aqui ... &nbsp;
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         GRID PRINCIPAL
+    ========================================================= -->
+
+    <div class="main-grid">
+
+
+
+        <!-- =====================================================
+             PARTE SUPERIOR
+             N.A.D.A. + MENU
+        ===================================================== -->
+
+        <div class="top-content-row">
+
+
+
+            <!-- =================================================
+                 N.A.D.A.
+                 2 CARDS VISÍVEIS
+            ================================================= -->
+
+            <div class="nada-column">
+
+
+                <div
+                    class="
+                        category-block
+                        category-block-interactive
+                    "
+                    data-visible="2"
+                >
+
+
+                    <h2>
+                        NLU Production - N.A.D.A. - Bloopers
+                    </h2>
+
+
+                    <button
+                        class="
+                            carousel-arrow-btn
+                            arrow-left-position
+                        "
+                        id="btn-nada-left"
+                        onclick="
+                            moverCarrossel(
+                                this,
+                                'esquerda'
+                            )
+                        "
+                        disabled
+                    >
+                        ◀
+                    </button>
+
+
+                    <button
+                        class="
+                            carousel-arrow-btn
+                            arrow-right-position
+                        "
+                        id="btn-nada-right"
+                        onclick="
+                            moverCarrossel(
+                                this,
+                                'direita'
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+
+
+                    <div
+                        class="carousel-view-window"
+                    >
+
+
+                        <div
+                            class="
+                                carousel-horizontal-track
+                            "
+                            id="track-nada"
+                        >
+
+
+                            <!-- EP 1 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b1.jpg"
+                                            alt="EP 1"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        Fantasmagorie | Bloopers |
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 2 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b2.jpg"
+                                            alt="EP 2"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 3 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b3.jpg"
+                                            alt="EP 3"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 4 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b4.jpg"
+                                            alt="EP 4"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 5 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b5.jpg"
+                                            alt="EP 5"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 6 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div class="item-card">
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b6.jpeg"
+                                            alt="EP 6"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 7 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div
+                                    class="
+                                        item-card-placeholder
+                                    "
+                                >
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b7.jpeg"
+                                            alt="EP 7"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        título
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 8 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div
+                                    class="
+                                        item-card-placeholder
+                                    "
+                                >
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b8.jpeg"
+                                            alt="EP 8"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        [Vazio - 8 em Breve]
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+
+                            <!-- EP 9 -->
+
+                            <a
+                                href=""
+                                class="item-card-link"
+                            >
+
+                                <div
+                                    class="
+                                        item-card-placeholder
+                                    "
+                                >
+
+                                    <div
+                                        class="thumb-box"
+                                    >
+
+                                        <img
+                                            src="thumbs/b9.jpeg"
+                                            alt="EP 9"
+                                        >
+
+                                    </div>
+
+
+                                    <h3>
+                                        [Vazio - 9 em Breve]
+                                    </h3>
+
+                                </div>
+
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MENU DE NAVEGAÇÃO
+            ================================================= -->
+
+            <div class="sidebar-column">
+
+
+                <nav class="side-nav-menu">
+
+
+                    <h3>
+                        - NAVEGAÇÃO -
+                    </h3>
+
+
+                    <ul>
+
+
+                        <li>
+
+                            <a href="index.html">
+                                ○ Início
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="series.html">
+                                ○ Séries
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="nada.html">
+                                ○ N.A.D.A. (Reviews)
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="404.html">
+                                ○ DynaBlocks
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="404.html">
+                                ○ O Homem-Homem
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="404.html">
+                                ○ VoltAir
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="404.html">
+                                ○ Piece Of Other Piece
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+
+                </nav>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             SÉRIES EM LARGURA COMPLETA
+        ===================================================== -->
+
+        <div class="full-width-series">
+
+
+
+            <!-- =================================================
+                 DEVLOGS
+                 4 CARDS VISÍVEIS
+            ================================================= -->
+
+            <div
+                class="
+                    category-block
+                    category-block-interactive
+                "
+                data-visible="4"
+            >
+
+
+                <h2>
+                    NLU Production - DevLogs
+                </h2>
+
+
+                <button
+                    class="
+                        carousel-arrow-btn
+                        arrow-left-position
+                    "
+                    onclick="
+                        moverCarrossel(
+                            this,
+                            'esquerda'
+                        )
+                    "
+                    disabled
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="
+                        carousel-arrow-btn
+                        arrow-right-position
+                    "
+                    onclick="
+                        moverCarrossel(
+                            this,
+                            'direita'
+                        )
+                    "
+                >
+                    ▶
+                </button>
+
+
+                <div
+                    class="carousel-view-window"
+                >
+
+
+                    <div
+                        class="
+                            carousel-horizontal-track
+                        "
+                    >
+
+
+                        <!-- EP 1 -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/placeholder.jpg"
+                                        alt="Vídeo"
+                                    >
+
+                                </div>
+
+
+                                <h3>
+                                    Episódio 1
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- EP 2 -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/placeholder.jpg"
+                                        alt="Vídeo"
+                                    >
+
+                                </div>
+
+
+                                <h3>
+                                    Episódio 2
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- EP 3 -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/placeholder.jpg"
+                                        alt="Vídeo"
+                                    >
+
+                                </div>
+
+
+                                <h3>
+                                    Episódio 3
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- EP 4 -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div
+                                class="
+                                    item-card-placeholder
+                                "
+                            >
+
+                                <div
+                                    class="thumb-box"
+                                ></div>
+
+
+                                <h3>
+                                    Episódio 4 em breve
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- EP 5 -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div
+                                class="
+                                    item-card-placeholder
+                                "
+                            >
+
+                                <div
+                                    class="thumb-box"
+                                ></div>
+
+
+                                <h3>
+                                    Episódio 5 em breve
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BLOOPERS
+        ================================================= -->
+
+        <div
+            class="
+                category-block
+                category-block-interactive
+            "
+            data-visible="4"
+        >
+
+
+            <h2>
+                NLU Production - Bloopers Gerais
+            </h2>
+
+
+            <button
+                class="
+                    carousel-arrow-btn
+                    arrow-left-position
+                "
+                onclick="
+                    moverCarrossel(
+                        this,
+                        'esquerda'
+                    )
+                "
+                disabled
+            >
+                ◀
+            </button>
+
+
+            <button
+                class="
+                    carousel-arrow-btn
+                    arrow-right-position
+                "
+                onclick="
+                    moverCarrossel(
+                        this,
+                        'direita'
+                    )
+                "
+            >
+                ▶
+            </button>
+
+
+            <div
+                class="carousel-view-window"
+            >
+
+
+                <div
+                    class="
+                        carousel-horizontal-track
+                    "
+                >
+
+
+                    <!-- EP 1 -->
+
+                    <a
+                        href=""
+                        class="item-card-link"
+                    >
+
+                        <div class="item-card">
+
+                            <div class="thumb-box">
+
+                                <img
+                                    src="thumbs/placeholder.jpg"
+                                    alt="Vídeo"
+                                >
+
+                            </div>
+
+
+                            <h3>
+                                Episódio 1
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- EP 2 -->
+
+                    <a
+                        href=""
+                        class="item-card-link"
+                    >
+
+                        <div class="item-card">
+
+                            <div class="thumb-box">
+
+                                <img
+                                    src="thumbs/placeholder.jpg"
+                                    alt="Vídeo"
+                                >
+
+                            </div>
+
+
+                            <h3>
+                                Episódio 2
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- EP 3 -->
+
+                    <a
+                        href=""
+                        class="item-card-link"
+                    >
+
+                        <div class="item-card">
+
+                            <div class="thumb-box">
+
+                                <img
+                                    src="thumbs/placeholder.jpg"
+                                    alt="Vídeo"
+                                >
+
+                            </div>
+
+
+                            <h3>
+                                Episódio 3
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- EP 4 -->
+
+                    <a
+                        href=""
+                        class="item-card-link"
+                    >
+
+                        <div
+                            class="
+                                item-card-placeholder
+                            "
+                        >
+
+                            <div
+                                class="thumb-box"
+                            ></div>
+
+
+                            <h3>
+                                Episódio 4 em breve
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- EP 5 -->
+
+                    <a
+                        href=""
+                        class="item-card-link"
+                    >
+
+                        <div
+                            class="
+                                item-card-placeholder
+                            "
+                        >
+
+                            <div
+                                class="thumb-box"
+                            ></div>
+
+
+                            <h3>
+                                Episódio 5 em breve
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DOIS BLOCOS PRINCIPAIS
+    ===================================================== -->
+
+    <div class="hqs-livros-container">
+
+
+        <!-- =================================================
+             BLOCO 1
+        ================================================= -->
+
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+                Imagem Antiga: Banner
+            </div>
+
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+
+                    
+
+                    <img
+                        src="DevLogs/oldb.png"
+                        alt="Antigo banner da NLU"
+                    >
+
+                </div>
+
+
+                <h3>
+                    Antigo banner da NLU
+                </h3>
+
+
+                <p>
+                    esse banner foi usado até meados de 2026 no YouTube.
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BLOCO 2
+        ================================================= -->
+
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+                Imagem Antiga: Logo
+            </div>
+
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+
+                    <!--
+                        COLOQUE AQUI A IMAGEM DO LOGOTIPO
+
+                        Exemplo:
+                        src="logo-antiga.jpg"
+                    -->
+
+                    <img
+                        src="DevLogs/oldl.png"
+                        alt="Logotipo antigo da NLU"
+                    >
+
+                </div>
+
+
+                <h3>
+                    Logotipo
+                </h3>
+
+
+                <p>
+                    Foi usada até meados de 2026, atualizada pois:<br>
+                    era assimétrica.
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         RODAPÉ
+    ========================================================= -->
+
+    <footer class="site-footer">
+
+
+        <p>
+
+            &copy; 2026 Nerd League United.
+
+            Todos os direitos reservados.
+
+        </p>
+
+
+    </footer>
+
+
+</div>
+
+
+
+
+
+<script>
+
+/* =============================================================
+   SISTEMA UNIVERSAL DE CARROSSÉIS
+============================================================= */
+
+
+function prepararCarrosseis() {
+
+    const blocos =
+        document.querySelectorAll(
+            '.category-block-interactive'
+        );
+
+
+    blocos.forEach(function(bloco) {
+
+
+        const janela =
+            bloco.querySelector(
+                '.carousel-view-window'
+            );
+
+
+        const trilha =
+            bloco.querySelector(
+                '.carousel-horizontal-track'
+            );
+
+
+        if (!janela || !trilha) {
+
+            return;
+
+        }
+
+
+        const quantidadeVisivel =
+            parseInt(
+                bloco.dataset.visible
+            ) || 3;
+
+
+        /* -----------------------------------------------------
+           ESPAÇO ENTRE OS CARDS
+        ----------------------------------------------------- */
+
+        const gap = 10;
+
+
+        /* -----------------------------------------------------
+           LARGURA REAL DISPONÍVEL
+        ----------------------------------------------------- */
+
+        const largura =
+            janela.clientWidth;
+
+
+        /* -----------------------------------------------------
+           CALCULA A LARGURA DOS CARDS
+        ----------------------------------------------------- */
+
+        const larguraCard =
+            (
+                largura -
+                gap *
+                (quantidadeVisivel - 1)
+            ) /
+            quantidadeVisivel;
+
+
+        /* -----------------------------------------------------
+           ENVIA PARA O CSS
+        ----------------------------------------------------- */
+
+        bloco.style.setProperty(
+            '--carousel-card-width',
+            larguraCard + 'px'
+        );
+
+
+        bloco.style.setProperty(
+            '--carousel-gap',
+            gap + 'px'
+        );
+
+
+        /* -----------------------------------------------------
+           CALCULA POSIÇÃO MÁXIMA
+        ----------------------------------------------------- */
+
+        const total =
+            trilha.children.length;
+
+
+        const maxIndex =
+            Math.max(
+                0,
+                total - quantidadeVisivel
+            );
+
+
+        let index =
+            parseInt(
+                trilha.dataset.index
+            ) || 0;
+
+
+        if (index > maxIndex) {
+
+            index = maxIndex;
+
+        }
+
+
+        trilha.dataset.index =
+            index;
+
+
+        /* -----------------------------------------------------
+           APLICA POSIÇÃO
+        ----------------------------------------------------- */
+
+        trilha.style.transform =
+            `translateX(-${
+                index *
+                (larguraCard + gap)
+            }px)`;
+
+
+        /* -----------------------------------------------------
+           ATUALIZA BOTÕES
+        ----------------------------------------------------- */
+
+        atualizarBotoes(
+            bloco,
+            index,
+            maxIndex
+        );
+
+
+    });
+
+}
+
+
+
+/* =============================================================
+   ATUALIZAÇÃO DAS SETAS
+============================================================= */
+
+
+function atualizarBotoes(
+    bloco,
+    index,
+    maxIndex
+) {
+
+
+    const esquerda =
+        bloco.querySelector(
+            '.arrow-left-position'
+        );
+
+
+    const direita =
+        bloco.querySelector(
+            '.arrow-right-position'
+        );
+
+
+    if (esquerda) {
+
+        esquerda.disabled =
+            index <= 0;
+
+    }
+
+
+    if (direita) {
+
+        direita.disabled =
+            index >= maxIndex;
+
+    }
+
+}
+
+
+
+/* =============================================================
+   MOVIMENTAÇÃO DO CARROSSEL
+============================================================= */
+
+
+function moverCarrossel(
+    botao,
+    direcao
+) {
+
+
+    const bloco =
+        botao.closest(
+            '.category-block-interactive'
+        );
+
+
+    const trilha =
+        bloco.querySelector(
+            '.carousel-horizontal-track'
+        );
+
+
+    const quantidadeVisivel =
+        parseInt(
+            bloco.dataset.visible
+        ) || 3;
+
+
+    const total =
+        trilha.children.length;
+
+
+    const maxIndex =
+        Math.max(
+            0,
+            total - quantidadeVisivel
+        );
+
+
+    let index =
+        parseInt(
+            trilha.dataset.index
+        ) || 0;
+
+
+    /* ---------------------------------------------------------
+       DIREITA
+    --------------------------------------------------------- */
+
+    if (direcao === 'direita') {
+
+        if (index < maxIndex) {
+
+            index++;
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       ESQUERDA
+    --------------------------------------------------------- */
+
+    else if (direcao === 'esquerda') {
+
+        if (index > 0) {
+
+            index--;
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       PEGA A LARGURA ATUAL
+    --------------------------------------------------------- */
+
+    const larguraCard =
+        parseFloat(
+            getComputedStyle(
+                bloco
+            ).getPropertyValue(
+                '--carousel-card-width'
+            )
+        );
+
+
+    const gap = 10;
+
+
+    /* ---------------------------------------------------------
+       MOVE A TRILHA
+    --------------------------------------------------------- */
+
+    trilha.style.transform =
+        `translateX(-${
+            index *
+            (larguraCard + gap)
+        }px)`;
+
+
+    trilha.dataset.index =
+        index;
+
+
+    /* ---------------------------------------------------------
+       ATUALIZA SETAS
+    --------------------------------------------------------- */
+
+    atualizarBotoes(
+        bloco,
+        index,
+        maxIndex
+    );
+
+}
+
+
+
+/* =============================================================
+   INICIALIZAÇÃO
+============================================================= */
+
+
+window.addEventListener(
+    'load',
+    prepararCarrosseis
+);
+
+
+
+/* =============================================================
+   REDIMENSIONAMENTO
+============================================================= */
+
+let timeoutResize;
+
+
+window.addEventListener(
+    'resize',
+    function() {
+
+
+        clearTimeout(
+            timeoutResize
+        );
+
+
+        timeoutResize =
+            setTimeout(
+                prepararCarrosseis,
+                100
+            );
+
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

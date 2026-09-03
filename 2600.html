@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Atari 2600</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       INTELLIVISION + COLECOVISION
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       2 CONSOLES POR LINHA
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      /* Modelos ficam um abaixo do outro no celular */
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        /* Continua preenchendo o retângulo */
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Atari 2600 é considerado o Avô dos consoles como os conhecemos,
+          seu clássico botão vermelho e joystick se tornaram símbolos da cultura
+          dos VideoGames, virando o Atari quase um sinônimo da palavra VideoGame ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Atari 2600 é considerado o Avô dos consoles como os conhecemos,
+          seu clássico botão vermelho e joystick se tornaram símbolos da cultura
+          dos VideoGames, virando o Atari quase um sinônimo da palavra VideoGame ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+          <h2>
+             Atari 2600 Polyvox "Darth Vader" (Posse de Vitória Maria)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="tgga/a264.jpg"
+              alt="Imagem do Atari 2600"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Atari 2600
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Atari 2600, originalmente lançado em 1977 pelo nome Atari VCS
+            (Video Computer System).<br>
+
+            O console foi concebido pelos engenheiros da Atari Inc.
+            (liderados por Jay Miner) para levar a experiência dos Arcades
+            diretamente para os televisores domésticos.<br>
+
+            Seu grande diferencial histórico foi a popularização do uso
+            de cartuchos ROM removíveis, substituindo o formato de jogo
+            fixo na memória utilizado em gerações anteriores como o
+            Tele-Jogo, RadioSchack TV ScoreBoard e o Pong.
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Mercado Nacional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Devido a lei da Reserva de Mercado (Política Nacional de
+            Informática) na década de 1980 que proibia a importação de
+            eletrônicos e computadores estrangeiros, vários consoles como
+            o NES (Nintendo Entertainment System) e o Master System da Sega
+            (que futuramente em parceria com a TecToy foi lançado no Brasil
+            até meados de 2020).<br>
+
+            Por outro lado, a Atari se aliou com a brasileira Polyvox em
+            Setembro de 1983 para produzir o Atari 2600 na Zona Franca de
+            Manaus (Amazônia).
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="tgga/intellivision.webp"
+                alt="Mattel Intellivision"
+              />
+
+              <img
+                src="tgga/coleco.png"
+                alt="Coleco ColecoVision"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Mattel Intellivision (1979) e o Coleco ColecoVision (1982) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            No final dos anos 70 e início dos anos 80 várias empresas,
+            motivadas pelo sucesso estrondoso da Atari com seu sistema,
+            decidiram criar seus consoles na época, surgindo rivais de
+            mercado, com os mais famosos sendo o Intellivision e o ColecoVision,
+            mas houve inúmeros consoles na época, vindos de todo tipo de empresa,
+            das mais famosas até as desconhecidas.<br>
+
+            Ambos os consoles eram infames por seus teclados numéricos,
+            considerados excessivos para a simplicidade dos jogos. Mesmo com
+            as críticas, a Atari decidiu que seu próximo console, o Atari 5200,
+            teria um controle com o mesmo tipo de teclado numérico, mas inovou
+            com botões de Pause, algo novo na época.<br>
+
+            Com todos esses consoles diferentes nas lojas sendo comercializados
+            simultaneamente, a indústria dos VideoGames de casa acabou ficando
+            com tantos produtos e opções que acabou desestimulando os clientes
+            e compradores, gerando um enorme prejuízo para várias empresas,
+            o que acabou causando o Crash dos Videogames de 1983 nos Estados Unidos.
+          </p>
+
+<h2></h2>
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="tgga/pacman.jpg"
+                alt="Pac-Man - Atari 2600"
+              />
+
+              <img
+                src="tgga/pitfall.webp"
+                alt="Pitfall! - Atari 2600"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Pac-Man e Pitfall! de Atari 2600 ~
+            </figcaption>
+
+          </figure>
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Um dos maiores diferenciais do Atari eram seus cartuchos, oque permitiam ser jogados centenas de jogos no mesmo console, durante sua vida vários jogos foram lançados, muitos bons como: Pitfall!, H.E.R.O., Missile Command, etc.<br>
+
+            Porém, é inevitável que haja jogos que geram desgosto e ficam infames pela sua ruindade, algumas como Pac-Man e seu terrível port para Atari 2600,  E.T. The Extra-Terrestrial, considerado o pior jogo do console ou até mesmo O Pior Jogo De Todos Os Tempos.<br>
+
+            Os jogos vinham em caixas com artes, manuais e outros documentos, adquirindo um enorme valor histórico, já que a maioria das pessoas eventualmente jogavam fora, perdiam ou destruiam esses itens.
+          </p>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Modelos e variações (Oficiais e Não-Oficiais)
+          </h2>
+		  
+		  <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Durante e até mesmo após a sua fabricação, o Atari 2600 teve
+            várias versões e modelos. Cópias também foram feitas; algumas
+            vieram e foram, mas certas cópias ficaram marcadas.<br>
+
+            Sua fabricação no Brasil pela Polyvox nos rendeu os modelos base
+            "Darth Vader", o primeiro modelo a ostentar o texto "Atari 2600"
+            na frente.<br>
+
+            A brasileira Dynacom fez o seu clone de Atari 2600 chamado
+            "Dynavision". Suas versões posteriores (2, 3 e 4) são clones do
+            NES/Famicom, sendo apelidadas de "Famiclones".
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/heavysixer.jpeg"
+                  alt="Atari VCS Heavy Sixer"
+                />
+
+                <figcaption>
+                  Atari VCS Heavy Sixer
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/lightsixer.webp"
+                  alt="Atari VCS Light Sixer"
+                />
+
+                <figcaption>
+                  Atari VCS Light Sixer
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/switch4.jpeg"
+                  alt="Atari VCS 4 Switch Woody"
+                />
+
+                <figcaption>
+                  Atari VCS 4 Switch Woody
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/darth.webp"
+                  alt="Atari 2600 Darth Vader"
+                />
+
+                <figcaption>
+                  Atari 2600 Darth Vader
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/sears.jpg"
+                  alt="Sears Video Arcade"
+                />
+
+                <figcaption>
+                  Sears Video Arcade
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/jr.jpeg"
+                  alt="Atari 2600 Jr."
+                />
+
+                <figcaption>
+                  Atari 2600 Jr.
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/dyna1.jpg"
+                  alt="Dynavision da Dynacom"
+                />
+
+                <figcaption>
+                  Dynavision — Dynacom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="tgga/atari2800.jpeg"
+                  alt="Atari 2800 — Sears Video Arcade"
+                />
+
+                <figcaption>
+                  Atari 2800 — Sears Video Arcade
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Atari 2600
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Atari 2600
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+            <details class="component-item">
+              <summary>MOS Technology 6507</summary>
+              <div class="component-description">
+                <p>
+                  Unidade Central de Processamento (CPU) do Atari 2600.
+                  É uma versão reduzida do MOS 6502, utilizando um
+                  encapsulamento de 28 pinos.
+                </p>
+
+                <p>
+                  O processador executa as instruções dos jogos e
+                  coordena as operações realizadas pelos demais
+                  componentes do sistema.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: CPU</li>
+                  <li>Fabricante: MOS Technology</li>
+                  <li>Família: MOS 6502</li>
+                  <li>Encapsulamento: 28 pinos</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>MOS Technology 6532 RIOT</summary>
+              <div class="component-description">
+                <p>
+                  O MOS Technology 6532 RIOT combina memória RAM,
+                  interfaces de entrada e saída e temporizadores
+                  em um único circuito integrado.
+                </p>
+
+                <p>
+                  É responsável por funções essenciais de comunicação
+                  entre o processador, os controles e outros circuitos
+                  do Atari 2600.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: RAM / I/O / Timer</li>
+                  <li>RAM integrada: 128 bytes</li>
+                  <li>Função: Memória e interfaces</li>
+                  <li>Fabricante: MOS Technology</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Atari TIA (Television Interface Adaptor)</summary>
+              <div class="component-description">
+                <p>
+                  O Television Interface Adaptor, conhecido como TIA,
+                  é um dos principais chips personalizados do Atari 2600.
+                </p>
+
+                <p>
+                  Ele é responsável pela geração do vídeo, incluindo
+                  objetos gráficos, cores e sincronização.
+                </p>
+
+                <p>
+                  O TIA também produz os dois canais de áudio do console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Nome: Television Interface Adaptor</li>
+                  <li>Função: Vídeo e áudio</li>
+                  <li>Fabricante: Atari</li>
+                  <li>Códigos: CO11903 / CO10444</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Modulador RF (Radiofrequência)</summary>
+              <div class="component-description">
+                <p>
+                  Caixa metálica blindada que contém o circuito
+                  responsável pela conversão dos sinais de áudio
+                  e vídeo em um sinal de radiofrequência.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Nome: Radio Frequency Modulator</li>
+                  <li>Função: Modulação do sinal</li>
+                  <li>Saída: RF</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cristal Oscilador de Quartzo</summary>
+              <div class="component-description">
+                <p>
+                  Componente responsável por fornecer uma referência
+                  de frequência estável para os circuitos do console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Oscilador de quartzo</li>
+                  <li>Função: Referência de frequência</li>
+                  <li>Aplicação: Clock e sincronismo</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Potenciômetro de Ajuste de Cor</summary>
+              <div class="component-description">
+                <p>
+                  Resistor variável utilizado em determinadas revisões
+                  da placa para realizar ajustes relacionados ao sinal
+                  de cor.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Regulador de Tensão 7805</summary>
+              <div class="component-description">
+                <p>
+                  Regulador linear responsável por fornecer uma tensão
+                  estabilizada de aproximadamente 5 volts.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Regulador linear</li>
+                  <li>Saída nominal: 5 V</li>
+                  <li>Função: Regulamentação da alimentação</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Dissipador de Calor</summary>
+              <div class="component-description">
+                <p>
+                  Peça metálica utilizada para dissipar o calor
+                  produzido pelo regulador de tensão.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Capacitor Eletrolítico Principal de Filtragem</summary>
+              <div class="component-description">
+                <p>
+                  Capacitor utilizado para filtrar a alimentação
+                  elétrica do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Diodo Retificador (1N4001 ou similar)</summary>
+              <div class="component-description">
+                <p>
+                  Diodo utilizado no circuito de alimentação do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Slot de Cartucho (Conector de Expansão)</summary>
+              <div class="component-description">
+                <p>
+                  Conector responsável pela comunicação elétrica entre
+                  o console e o cartucho de jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Portas de Controle DB9</summary>
+              <div class="component-description">
+                <p>
+                  Dois conectores do tipo D-sub de 9 pinos utilizados
+                  para conectar os controles e periféricos do Atari 2600.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Jack de Alimentação (Power Jack)</summary>
+              <div class="component-description">
+                <p>
+                  Conector responsável por receber a alimentação
+                  proveniente da fonte externa.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cabo / Conector de Saída RF</summary>
+              <div class="component-description">
+                <p>
+                  Cabo responsável por transportar o sinal de
+                  radiofrequência produzido pelo console até a televisão.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Power (Liga / Desliga)</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para ligar ou desligar
+                  o console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Color / B-W</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para selecionar entre os
+                  modos de exibição colorida e preto e branco.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chaves de Dificuldade (Left / Right Difficulty)</summary>
+              <div class="component-description">
+                <p>
+                  O Atari 2600 possui duas chaves de dificuldade.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Game Select</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para selecionar ou alternar
+                  entre as diferentes variações de jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Game Reset</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para reiniciar a partida atual.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Resistores Fixos de Filme de Carbono</summary>
+              <div class="component-description">
+                <p>
+                  Diversos resistores estão presentes na placa do Atari 2600.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Capacitores de Cerâmica (Disco)</summary>
+              <div class="component-description">
+                <p>
+                  Capacitores utilizados principalmente para
+                  desacoplamento e filtragem de ruídos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Diodos de Sinal (1N914 / 1N4148)</summary>
+              <div class="component-description">
+                <p>
+                  Pequenos diodos utilizados em circuitos de sinal
+                  e interfaces eletrônicas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Indutores / Bobinas de Choque</summary>
+              <div class="component-description">
+                <p>
+                  Pequenas bobinas utilizadas para filtragem de
+                  interferências eletromagnéticas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Placa de Circuito Impresso (PCB)</summary>
+              <div class="component-description">
+                <p>
+                  A PCB é a placa responsável por interligar
+                  eletricamente os componentes do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Blindagem de Metal Contra Interferência (RF Shielding)</summary>
+              <div class="component-description">
+                <p>
+                  Chapas metálicas utilizadas para reduzir
+                  interferências eletromagnéticas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Parafusos de Fixação</summary>
+              <div class="component-description">
+                <p>
+                  Elementos mecânicos utilizados para fixar
+                  as diferentes partes do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Carcaça Plástica Superior e Inferior (Case)</summary>
+              <div class="component-description">
+                <p>
+                  Corpo externo do Atari 2600 responsável por proteger
+                  os componentes internos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Painel de Acabamento Frontal</summary>
+              <div class="component-description">
+                <p>
+                  Parte frontal responsável pelo acabamento visual
+                  do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Pés de Borracha</summary>
+              <div class="component-description">
+                <p>
+                  Pequenos suportes instalados na parte inferior
+                  da carcaça.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Fonte de Alimentação Externa (AC/DC Adapter)</summary>
+              <div class="component-description">
+                <p>
+                  Adaptador externo responsável por fornecer
+                  alimentação ao console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Adaptador de Antena (TV/Game Switch Box)</summary>
+              <div class="component-description">
+                <p>
+                  Acessório externo utilizado para alternar o sinal
+                  entre a antena da televisão e o Atari.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Joystick CX40</summary>
+              <div class="component-description">
+                <p>
+                  O CX40 é o joystick clássico associado ao Atari 2600.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Modelo: CX40</li>
+                  <li>Tipo: Joystick</li>
+                  <li>Conexão: DB9</li>
+                  <li>Direções: 4</li>
+                  <li>Botão: Fire / Action</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Paddles CX30</summary>
+              <div class="component-description">
+                <p>
+                  Os CX30 são controles rotativos utilizados em jogos
+                  compatíveis com Paddle.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>O Cartucho de Jogo (Mídia)</summary>
+              <div class="component-description">
+                <p>
+                  O cartucho é a mídia física utilizada pelo Atari 2600
+                  para armazenar o software dos jogos.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+     
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>
+

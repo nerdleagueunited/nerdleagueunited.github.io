@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - TÍTULO DO ARTIGO</title>
+
+  <!-- CSS principal do site -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL DO ARTIGO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- TÍTULO DO ARTIGO -->
+
+          <h2>
+            TÍTULO DO ARTIGO
+          </h2>
+
+
+          <!-- IMAGEM PRINCIPAL -->
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <!--
+              Troque "imagem.jpg" pelo nome
+              da imagem do artigo.
+            -->
+
+            <img
+              src="imagem.jpg"
+              alt="Imagem do artigo"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <!-- ======================================
+               TEXTO DO ARTIGO
+               ====================================== -->
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Escreva aqui o primeiro parágrafo do artigo.
+          </p>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Escreva aqui o segundo parágrafo do artigo.
+          </p>
+
+
+          <!--
+            Você pode adicionar quantos parágrafos
+            quiser seguindo o mesmo padrão.
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Novo parágrafo...
+          </p>
+          -->
+
+
+          <!-- ======================================
+               SUBTÍTULO
+               ====================================== -->
+
+          <h3>
+            SUBTÍTULO DA SEÇÃO
+          </h3>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Conteúdo da seção.
+          </p>
+
+
+          <!-- ======================================
+               SEGUNDA IMAGEM (OPCIONAL)
+               ====================================== -->
+
+          <!--
+          <div
+            style="
+              text-align: center;
+              margin: 20px 0;
+            "
+          >
+
+            <img
+              src="imagem2.jpg"
+              alt="Segunda imagem"
+              style="
+                max-width: 80%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+          -->
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <!-- ======================================
+             MENU DE ARTIGOS
+             ====================================== -->
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Atari 2600
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Atari 2600
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ======================================
+             COMPONENTES DO ARTIGO
+             ====================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <!-- ==================================
+                 MODELO DE COMPONENTE 01
+                 ================================== -->
+
+            <details class="component-item">
+
+              <summary>
+                Nome do Componente
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Escreva aqui a descrição do componente.
+                </p>
+
+                <p>
+                  Você pode adicionar informações adicionais,
+                  curiosidades, especificações técnicas etc.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Tipo: Informação
+                  </li>
+
+                  <li>
+                    Fabricante: Informação
+                  </li>
+
+                  <li>
+                    Função: Informação
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <!-- ==================================
+                 MODELO DE COMPONENTE 02
+                 ================================== -->
+
+            <details class="component-item">
+
+              <summary>
+                Outro Componente
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Descrição do segundo componente.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Tipo: Informação
+                  </li>
+
+                  <li>
+                    Função: Informação
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <!-- ==================================
+                 COMO ADICIONAR NOVOS COMPONENTES
+                 ==================================
+
+            <details class="component-item">
+
+              <summary>
+                Nome do Componente
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Descrição do componente.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Tipo: ...
+                  </li>
+
+                  <li>
+                    Função: ...
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+            ====================================== -->
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+      <p>
+        Version Alpha 1.3.0 27/08/2026.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

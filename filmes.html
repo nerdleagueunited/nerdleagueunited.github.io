@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <title>NLU - Filmes</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        /* =========================================================
+           ESTRUTURA
+        ========================================================= */
+
+        .content-column {
+
+            min-width: 0;
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 22px;
+
+        }
+
+
+        /*
+            A página do N.A.D.A. não possui sidebar.
+            Portanto os carrosséis ocupam toda a largura.
+        */
+
+        .nada-page {
+
+            width: 100%;
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================================
+           CARROSSEL
+        ========================================================= */
+
+        .category-block-interactive {
+
+            position: relative;
+
+            width: 100%;
+
+            min-width: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .carousel-view-window {
+
+            width: 100%;
+
+            max-width: 100%;
+
+            overflow: hidden;
+
+            padding: 5px 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .carousel-horizontal-track {
+
+            display: flex;
+
+            width: max-content;
+
+            transition:
+                transform 0.4s cubic-bezier(
+                    0.25,
+                    0.46,
+                    0.45,
+                    0.94
+                );
+
+            will-change: transform;
+
+        }
+
+
+        /* =========================================================
+           CARDS
+           3 CARDS POR VEZ
+
+           O JS calcula automaticamente a largura.
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card,
+        .carousel-horizontal-track .item-card-placeholder {
+
+            flex: 0 0 var(--carousel-card-width);
+
+            width: var(--carousel-card-width);
+
+            margin-right: var(--carousel-gap);
+
+            box-sizing: border-box;
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================================
+           LINKS DOS CARDS
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card-link {
+
+            display: block;
+
+            flex: 0 0 var(--carousel-card-width);
+
+            width: var(--carousel-card-width);
+
+            margin-right: var(--carousel-gap);
+
+            box-sizing: border-box;
+
+            min-width: 0;
+
+            text-decoration: none;
+
+            color: inherit;
+
+        }
+
+
+        .carousel-horizontal-track .item-card-link .item-card {
+
+            width: 100%;
+
+            margin-right: 0;
+
+            cursor: pointer;
+
+        }
+
+
+        .carousel-horizontal-track .item-card-link:hover .item-card {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =========================================================
+           THUMBNAILS
+        ========================================================= */
+
+        .carousel-horizontal-track .thumb-box {
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            background-color: #111;
+
+            border: 1px solid #333;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .carousel-horizontal-track .thumb-box img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+
+        }
+
+
+        /* =========================================================
+           TÍTULOS
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card h3,
+        .carousel-horizontal-track .item-card-placeholder h3 {
+
+            margin: 6px 0 0 0;
+
+            font-size: 12px;
+
+            line-height: 1.25;
+
+            color: #fff;
+
+            font-weight: normal;
+
+            word-wrap: break-word;
+
+        }
+
+
+        /* =========================================================
+           PLACEHOLDERS
+        ========================================================= */
+
+        .carousel-horizontal-track .item-card-placeholder {
+
+            background-color: #0a0a0a;
+
+            border: 1px dashed #444;
+
+            padding: 6px;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-placeholder
+        .thumb-box {
+
+            border: 1px dashed #333;
+
+        }
+
+
+        .carousel-horizontal-track
+        .item-card-placeholder
+        h3 {
+
+            color: #555;
+
+            font-style: italic;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================================
+           SETAS
+        ========================================================= */
+
+        .carousel-arrow-btn {
+
+            position: absolute;
+
+            top: 55%;
+
+            transform: translateY(-50%);
+
+            width: 30px;
+
+            height: 30px;
+
+            background-color: #ffcc00;
+
+            color: #000;
+
+            border: 2px outset #ffee55;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            z-index: 20;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease,
+                background-color 0.2s;
+
+            box-shadow:
+                0 0 8px rgba(0,0,0,0.8);
+
+            box-sizing: border-box;
+
+        }
+
+
+        .category-block-interactive:hover
+        .carousel-arrow-btn {
+
+            opacity: 1;
+
+        }
+
+
+        .carousel-arrow-btn:hover {
+
+            background-color: #ffee55;
+
+        }
+
+
+        .carousel-arrow-btn:disabled {
+
+            opacity: 0 !important;
+
+            pointer-events: none;
+
+        }
+
+
+        /*
+            As setas ficam dentro do carrossel.
+        */
+
+        .arrow-left-position {
+
+            left: 5px;
+
+        }
+
+
+        .arrow-right-position {
+
+            right: 5px;
+
+        }
+
+
+        /* =========================================================
+           ESPAÇAMENTO ENTRE TÍTULO E CARROSSEL
+        ========================================================= */
+
+        .category-block-interactive h2 {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* =========================================================
+           EASTER EGG
+        ========================================================= */
+
+        .baby-egg-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100vw;
+
+            height: 100vh;
+
+            background-color: rgba(0, 0, 0, 0.85);
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.3s ease-in-out;
+
+        }
+
+
+        .baby-egg-overlay img {
+
+            max-width: 80%;
+
+            max-height: 80%;
+
+            border: 4px dashed #ffcc00;
+
+            box-shadow:
+                0 0 30px #ffcc00;
+
+        }
+
+
+        .baby-egg-active {
+
+            opacity: 1;
+
+            pointer-events: auto;
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .carousel-arrow-btn {
+
+                width: 26px;
+
+                height: 26px;
+
+                font-size: 12px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header class="page-header-box">
+
+        <img
+            src="logonlu.png"
+            alt="Logo NLU"
+        >
+
+
+        <div>
+
+            <p style="font-size:11px; color:#888;">
+                NERD LEAGUE UNITED
+            </p>
+
+            <h1>Filmes</h1>
+
+        </div>
+
+
+        <div class="header-right-box">
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnitedProductions"
+                target="_blank"
+                class="youtube-btn"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+
+            <div class="counter-box">
+
+                Inscritos: 78
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         SUB-NAVEGAÇÃO
+    ========================================================= -->
+
+    <div class="sub-nav-links">
+
+        <a href="index.html">
+
+            ← Voltar ao início
+
+        </a>
+
+        |
+
+        <a href="qs.html">
+
+            Quem Somos
+
+        </a>
+
+    </div>
+
+
+    <!-- Esteira de Letreiro -->
+
+    <div class="marquee-zone">
+
+        <div class="marquee-content">
+
+            <span>
+                ... A Nerd League United desde sua origem busca parodiar o cinema clássico e até se atrever a gravar uma atrocidade e chamar de Filme ... não espere nada sério vindo da NLU ... &nbsp;
+            </span>
+
+            <span>
+                ... A Nerd League United desde sua origem busca parodiar o cinema clássico e até se atrever a gravar uma atrocidade e chamar de Filme ... não espere nada sério vindo da NLU ... &nbsp;
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         CONTEÚDO
+    ========================================================= -->
+
+    <main class="nada-page">
+
+        <div class="content-column">
+
+
+            <!-- =================================================
+                 NOTA SOBRE FILMES
+            ================================================= -->
+
+            <div class="category-block">
+
+                <div class="block-title">
+                    Nota Importante Sobre Filmes
+                </div>
+
+                <div style="padding: 10px; display:flex; flex-direction:column; gap:10px;">
+
+                    <p>
+                        Sim, está vazio, realmente tem pouca coisa
+                    </p>
+
+                    <ul style="padding-left: 20px; font-size: 12px; color: #ccc; display:flex; flex-direction:column; gap:6px;">
+
+                        <li>
+
+                            <strong>
+                                Por que a página está vazia?
+                            </strong>
+
+                            Filmes são um estilo de gravação e edição diferente e mais complexa, por isso há poucas coisas por enquanto.
+
+                            <br>
+
+                            Se vocẽ tiver interesse em saber oque estámos fazendo, busque dar uma olhada em
+
+                            <a href="out.html">
+                                DevLogs e Bastidores
+                            </a>.
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CARROSSEL DOS FILMES
+            ================================================= -->
+
+            <div
+                class="category-block category-block-interactive"
+                data-visible="3"
+            >
+
+                <h2>
+                    NLU Production - A Noite Dos Tubos-Vivos
+                </h2>
+
+
+                <button
+                    class="carousel-arrow-btn arrow-left-position"
+                    onclick="moverCarrossel(this, 'esquerda')"
+                    disabled
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="carousel-arrow-btn arrow-right-position"
+                    onclick="moverCarrossel(this, 'direita')"
+                >
+                    ▶
+                </button>
+
+
+                <div class="carousel-view-window">
+
+                    <div class="carousel-horizontal-track">
+
+
+                        <!-- ================================================= -->
+                        <!-- FILME 1 -->
+                        <!-- URL VAZIA - COLOCAR QUANDO FOR PUBLICADO -->
+                        <!-- ================================================= -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/andtv.jpg"
+                                        alt="andtv"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    A Noite Dos Tubos-Vivos | Samuel A. Büron |
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- ================================================= -->
+                        <!-- DIRECTOR'S CUT -->
+                        <!-- URL VAZIA -->
+                        <!-- ================================================= -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/andtvdx.jpg"
+                                        alt="andtvdx"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    A Noite Dos Tubos-Vivos: Director's Cut
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- ================================================= -->
+                        <!-- TRAILER -->
+                        <!-- URL VAZIA -->
+                        <!-- ================================================= -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/andtvt.jpg"
+                                        alt="trailer andtv"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    Trailer : A Noite Dos Tubos-Vivos
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- ================================================= -->
+                        <!-- BLOOPERS -->
+                        <!-- URL VAZIA -->
+                        <!-- ================================================= -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/andtvb.jpg"
+                                        alt="andtvb"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    A Noite Dos Tubos-Vivos | Bloopers |
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- ================================================= -->
+                        <!-- OUTTAKES -->
+                        <!-- URL VAZIA -->
+                        <!-- ================================================= -->
+
+                        <a
+                            href=""
+                            class="item-card-link"
+                        >
+
+                            <div class="item-card">
+
+                                <div class="thumb-box">
+
+                                    <img
+                                        src="thumbs/andtvo.jpg"
+                                        alt="andtvo"
+                                    >
+
+                                </div>
+
+                                <h3>
+                                    A Noite Dos Tubos-Vivos | OutTakes |
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         RODAPÉ
+    ========================================================= -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 Nerd League United.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =============================================================
+     EASTER EGG
+============================================================= -->
+
+<div
+    id="baby-overlay"
+    class="baby-egg-overlay"
+    onclick="fecharBete()"
+>
+
+    <img
+        src="baby-dancing.gif"
+        alt="Bebê Dançando NLU"
+    >
+
+</div>
+
+
+
+<script>
+
+/* =============================================================
+   MOTOR UNIVERSAL DOS CARROSSÉIS
+============================================================= */
+
+
+function prepararCarrosseis() {
+
+    const blocos =
+        document.querySelectorAll(
+            '.category-block-interactive'
+        );
+
+
+    blocos.forEach(function(bloco) {
+
+        const janela =
+            bloco.querySelector(
+                '.carousel-view-window'
+            );
+
+
+        const trilha =
+            bloco.querySelector(
+                '.carousel-horizontal-track'
+            );
+
+
+        if (!janela || !trilha) {
+
+            return;
+
+        }
+
+
+        /*
+            Todos os carrosséis dessa página
+            mostram 3 cards.
+        */
+
+        const quantidadeVisivel =
+            parseInt(
+                bloco.dataset.visible
+            ) || 3;
+
+
+        const gap = 10;
+
+
+        /*
+            Largura real disponível.
+        */
+
+        const largura =
+            janela.clientWidth;
+
+
+        /*
+            Calcula a largura dos cards.
+        */
+
+        const larguraCard =
+            (
+                largura -
+                gap * (quantidadeVisivel - 1)
+            ) /
+            quantidadeVisivel;
+
+
+        /*
+            Envia para o CSS.
+        */
+
+        bloco.style.setProperty(
+            '--carousel-card-width',
+            larguraCard + 'px'
+        );
+
+
+        bloco.style.setProperty(
+            '--carousel-gap',
+            gap + 'px'
+        );
+
+
+        /*
+            Quantidade total.
+        */
+
+        const total =
+            trilha.children.length;
+
+
+        const maxIndex =
+            Math.max(
+                0,
+                total - quantidadeVisivel
+            );
+
+
+        /*
+            Recupera posição atual.
+        */
+
+        let index =
+            parseInt(
+                trilha.dataset.index
+            ) || 0;
+
+
+        /*
+            Evita posição inválida
+            depois de redimensionar.
+        */
+
+        if (index > maxIndex) {
+
+            index = maxIndex;
+
+        }
+
+
+        trilha.dataset.index = index;
+
+
+        /*
+            Aplica posição.
+        */
+
+        trilha.style.transform =
+            `translateX(-${
+                index *
+                (larguraCard + gap)
+            }px)`;
+
+
+        atualizarBotoes(
+            bloco,
+            index,
+            maxIndex
+        );
+
+    });
+
+}
+
+
+
+/* =============================================================
+   ATUALIZAR SETAS
+============================================================= */
+
+
+function atualizarBotoes(
+    bloco,
+    index,
+    maxIndex
+) {
+
+    const esquerda =
+        bloco.querySelector(
+            '.arrow-left-position'
+        );
+
+
+    const direita =
+        bloco.querySelector(
+            '.arrow-right-position'
+        );
+
+
+    if (esquerda) {
+
+        esquerda.disabled =
+            index <= 0;
+
+    }
+
+
+    if (direita) {
+
+        direita.disabled =
+            index >= maxIndex;
+
+    }
+
+}
+
+
+
+/* =============================================================
+   MOVER CARROSSEL
+============================================================= */
+
+
+function moverCarrossel(
+    botao,
+    direcao
+) {
+
+    const bloco =
+        botao.closest(
+            '.category-block-interactive'
+        );
+
+
+    const trilha =
+        bloco.querySelector(
+            '.carousel-horizontal-track'
+        );
+
+
+    const quantidadeVisivel =
+        parseInt(
+            bloco.dataset.visible
+        ) || 3;
+
+
+    const total =
+        trilha.children.length;
+
+
+    const maxIndex =
+        Math.max(
+            0,
+            total - quantidadeVisivel
+        );
+
+
+    let index =
+        parseInt(
+            trilha.dataset.index
+        ) || 0;
+
+
+    /*
+        Direita.
+    */
+
+    if (
+        direcao === 'direita' &&
+        index < maxIndex
+    ) {
+
+        index++;
+
+    }
+
+
+    /*
+        Esquerda.
+    */
+
+    else if (
+        direcao === 'esquerda' &&
+        index > 0
+    ) {
+
+        index--;
+
+    }
+
+
+    /*
+        Recupera largura atual.
+    */
+
+    const larguraCard =
+        parseFloat(
+            getComputedStyle(
+                bloco
+            ).getPropertyValue(
+                '--carousel-card-width'
+            )
+        );
+
+
+    const gap = 10;
+
+
+    /*
+        Move a trilha.
+    */
+
+    trilha.style.transform =
+        `translateX(-${
+            index *
+            (larguraCard + gap)
+        }px)`;
+
+
+    trilha.dataset.index =
+        index;
+
+
+    atualizarBotoes(
+        bloco,
+        index,
+        maxIndex
+    );
+
+}
+
+
+
+/* =============================================================
+   INICIALIZAÇÃO
+============================================================= */
+
+window.addEventListener(
+    'load',
+    prepararCarrosseis
+);
+
+
+
+/* =============================================================
+   RESPONSIVIDADE
+============================================================= */
+
+let timeoutResize;
+
+
+window.addEventListener(
+    'resize',
+    function() {
+
+        clearTimeout(timeoutResize);
+
+
+        timeoutResize =
+            setTimeout(
+                prepararCarrosseis,
+                100
+            );
+
+    }
+);
+
+
+
+/* =============================================================
+   KONAMI CODE
+============================================================= */
+
+
+const codigoSecreto = [
+
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+
+    'b',
+    'a',
+    'Enter'
+
+];
+
+
+let progressoCodigo = 0;
+
+
+document.addEventListener(
+    'keydown',
+    function(evento) {
+
+        const teclaPressionada =
+            (
+                evento.key.toLowerCase() === 'b' ||
+                evento.key.toLowerCase() === 'a'
+            )
+            ?
+            evento.key.toLowerCase()
+            :
+            evento.key;
+
+
+        if (
+            teclaPressionada ===
+            codigoSecreto[
+                progressoCodigo
+            ]
+        ) {
+
+            progressoCodigo++;
+
+
+            if (
+                progressoCodigo ===
+                codigoSecreto.length
+            ) {
+
+                ativarBebe();
+
+                progressoCodigo = 0;
+
+            }
+
+        }
+
+        else {
+
+            progressoCodigo = 0;
+
+        }
+
+    }
+);
+
+
+
+function ativarBebe() {
+
+    const overlay =
+        document.getElementById(
+            'baby-overlay'
+        );
+
+
+    overlay.classList.add(
+        'baby-egg-active'
+    );
+
+}
+
+
+
+function fecharBete() {
+
+    const overlay =
+        document.getElementById(
+            'baby-overlay'
+        );
+
+
+    overlay.classList.remove(
+        'baby-egg-active'
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
