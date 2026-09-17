@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Xbox 360</title>
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       INTELLIVISION + COLECOVISION
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       2 CONSOLES POR LINHA
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      /* Modelos ficam um abaixo do outro no celular */
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        /* Continua preenchendo o retângulo */
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Xbox 360 é um dos senão O maior sucesso da Xbox/MicroSoft no ramo dos consoles, sua capacidade Multimídia, design bonito,
+          vasta biblioteca e inovações como Streamings e navegadores fizeram desse console o Magnum Opus da marca na época ...
+          &nbsp;
+        </span>
+
+        <span>
+       ... O Xbox 360 é um dos senão O maior sucesso da Xbox/MicroSoft no ramo dos consoles, sua capacidade Multimídia, design bonito,
+          vasta biblioteca e inovações como Streamings e navegadores fizeram desse console o Magnum Opus da marca na época ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+          <h2>
+             Xbox 360 Slim (Posse da Samuel A. Büron)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/3602.jpeg"
+              alt="Imagem do Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Xbox 360 da MicroSoft, lançado em 22 de Novembro de 2005 nos Estados Unidos e 1 de Dezembro de 2006 no Brasil, foi o segundo console da linha Xbox e faz parte da Sétima geração de consoles, rivalizando com Nintendo Wii e Playstation 3.<br>
+
+            Texto.<br>
+
+            Texto.
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+           Mercado Nacional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Console começou a ser produzido no Brasil em 01/12/2006 na zona franca de Manaus, produção nacional essa que nos rendeu consoles 100% traduzidos, com suas caixa
+          , jogos, manuais e outros itens em Português, tendo sido produzido até 20 de abril de 2016.<br>
+
+            Devido a sua distribuição nacional, preço menor em comparação com rivais e outros fatores (Pirataria), o Xbox 360 dominou a sétima geração de consoles no Brasil,
+            tendo vendido cerca de 9,2 Milhões de unidades. Curiosamente, no globo todo o Xbox 360 foi o que menos vendeu da Sétima geração de consoles (Wii>PS3>360), mas no mercado
+            nacional a situação foi o inverso.
+          </p>
+
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiiwii.png"
+                alt="Mattel Intellivision"
+              />
+
+              <img
+                src="../tgga/play3.webp"
+                alt="Coleco ColecoVision"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Wii (2006) e PlayStation 3 (2006) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Texto.<br>
+
+            Texto.<br>
+
+            Texto.
+          </p>
+
+<h2></h2>
+          <h2 style="text-align: center;">
+            Texto
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/thelastofusinho.jpg"
+                alt="the last of usinho"
+              />
+
+              <img
+                src="../tgga/armona.webp"
+                alt="Pitfall! - Atari 2600"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ The Last Of Us (14/06/2013) e PlayStation 3 Move Sharp Shooter ~
+            </figcaption>
+
+          </figure>
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Texto.<br>
+
+            Texto.<br>
+
+            Texto.
+          </p>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+<h2></h2>
+
+          <h2 style="text-align: center;">
+            Texto
+          </h2>
+      
+      <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Texto.<br>
+
+            Texto.<br>
+
+            Texto.
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360fat.jpg"
+                  alt="Atari VCS Heavy Sixer"
+                />
+
+                <figcaption>
+                  Texto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360slim.webp"
+                  alt="Atari VCS Light Sixer"
+                />
+
+                <figcaption>
+                  Texto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360superslim.webp"
+                  alt="Atari VCS 4 Switch Woody"
+                />
+
+                <figcaption>
+                 Texto
+                </figcaption>
+
+              </div>
+
+
+              
+
+
+              
+
+
+            </div>
+
+          </figure>
+
+
+          
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Xbox 360
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+            <details class="component-item">
+              <summary>Unidade Central de Processamento (CPU "Xenon")</summary>
+              <div class="component-description">
+                <ul class="component-specs">
+                 <li>Processador customizado projetado pela IBM baseado na arquitetura PowerPC. Ele opera a uma frequência de 3,2 GHz.Arquitetura Interna: É composto por 3 núcleos físicos independentes e simétricos. Cada núcleo possui suporte a Simultaneous Multithreading (SMT), o que permite ao sistema processar 6 threads simultâneas (2 por núcleo).</li><li>Estrutura de Cache: Cada núcleo possui 32 KB de cache L1 de instruções e 32 KB de cache L1 de dados. Os três núcleos compartilham um cache L2 unificado de 1 MB, que roda à metade da velocidade do clock (1,6 GHz).</li><li>Capacidade de Cálculo: Inclui unidades vetoriais VMX128 customizadas em cada núcleo, capazes de realizar operações matemáticas complexas em paralelo, otimizadas para física de jogos e transformações geométricas.</li>
+               </ul>
+                
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Unidade de Processamento Gráfico (GPU "Xenos")</summary>
+              <div class="component-description">
+               
+
+               
+
+                <ul class="component-specs">
+                  <li>Chip gráfico projetado pela ATI (adquirida pela AMD), operando a 500 MHz. Foi a primeira GPU comercial a implementar a Arquitetura de Shaders Unificados.</li>
+                  <li>Funcionamento: Em vez de separar os processadores de vértices (Vertex Shaders) dos processadores de pixels (Pixel Shaders), o Xenos possui 48 pipelines de shader unificados. Eles alocam dinamicamente o poder de processamento para geometria ou pós-processamento de imagem, dependendo da demanda da cena do jogo.</li>
+                  <li>Memória eDRAM Integrada: A GPU é interligada diretamente a uma pastilha filha (daughter-die) de 10 MB de eDRAM (Embedded DRAM) fabricada pela NEC. Essa memória possui uma largura de banda interna massiva de 256 GB/s, permitindo que o console realize operações de Anti-Aliasing (FSAA) e Alpha Blending em resolução HD (720p) com perda quase zero de desempenho.</li>
+                
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Subsistema de Memória RAM Unificada</summary>
+              <div class="component-description">
+                
+                <ul class="component-specs">
+                  <li> O sistema conta com 512 MB de memória GDDR3 operando a 700 MHz (efetivos 1400 MHz devido à tecnologia DDR).</li>
+                  <li>Arquitetura de Memória Unificada (UMA): Ao contrário dos PCs da época e do PS3 (que dividiam a memória rigidamente entre sistema e vídeo), o Xbox 360 compartilha os 512 MB livremente entre a CPU e a GPU através de um barramento de 128 bits. A largura de banda total do sistema é de 22,4 GB/s.</li>
+                  
+                </ul>
+              </div>
+            </details>
+
+            <!--1.1. Unidade Central de Processamento (CPU "Xenon")Descrição Técnica: Processador customizado projetado pela IBM baseado na arquitetura PowerPC. Ele opera a uma frequência de 3,2 GHz.Arquitetura Interna: É composto por 3 núcleos físicos independentes e simétricos. Cada núcleo possui suporte a Simultaneous Multithreading (SMT), o que permite ao sistema processar 6 threads simultâneas (2 por núcleo).Estrutura de Cache: Cada núcleo possui 32 KB de cache L1 de instruções e 32 KB de cache L1 de dados. Os três núcleos compartilham um cache L2 unificado de 1 MB, que roda à metade da velocidade do clock (1,6 GHz).Capacidade de Cálculo: Inclui unidades vetoriais VMX128 customizadas em cada núcleo, capazes de realizar operações matemáticas complexas em paralelo, otimizadas para física de jogos e transformações geométricas.1.2. Unidade de Processamento Gráfico (GPU "Xenos")Descrição Técnica: Chip gráfico projetado pela ATI (adquirida pela AMD), operando a 500 MHz. Foi a primeira GPU comercial a implementar a Arquitetura de Shaders Unificados.Funcionamento: Em vez de separar os processadores de vértices (Vertex Shaders) dos processadores de pixels (Pixel Shaders), o Xenos possui 48 pipelines de shader unificados. Eles alocam dinamicamente o poder de processamento para geometria ou pós-processamento de imagem, dependendo da demanda da cena do jogo.Memória eDRAM Integrada: A GPU é interligada diretamente a uma pastilha filha (daughter-die) de 10 MB de eDRAM (Embedded DRAM) fabricada pela NEC. Essa memória possui uma largura de banda interna massiva de 256 GB/s, permitindo que o console realize operações de Anti-Aliasing (FSAA) e Alpha Blending em resolução HD (720p) com perda quase zero de desempenho.1.3. Subsistema de Memória RAM UnificadaDescrição Técnica: O sistema conta com 512 MB de memória GDDR3 operando a 700 MHz (efetivos 1400 MHz devido à tecnologia DDR).Arquitetura de Memória Unificada (UMA): Ao contrário dos PCs da época e do PS3 (que dividiam a memória rigidamente entre sistema e vídeo), o Xbox 360 compartilha os 512 MB livremente entre a CPU e a GPU através de um barramento de 128 bits. A largura de banda total do sistema é de 22,4 GB/s.1.4. Chip Southbridge (Controle de I/O)Descrição Técnica: O chip ponte sul (geralmente os modelos ANA ou HANA nas revisões de placa) atua como o hub de entrada e saída do console.Função: Gerencia a comunicação entre os componentes de baixa velocidade e o processador principal. Controla as interfaces SATA (do leitor e do HD), portas USB, rede Ethernet, decodificação de áudio, segurança criptográfica e a saída de vídeo (fazendo o upscaling de hardware para resoluções de até 1080p).1.5. Armazenamento do Sistema e Firmware (NAND Flash)Descrição Técnica: Um chip de memória flash não volátil soldada diretamente na placa-mãe.Função: Armazena o Hipervisor (Hypervisor) do console, o sistema operacional (Dashboard), chaves de segurança de criptografia do hardware (Keyvault) e dados de inicialização (Bootloaders). A capacidade varia de 16 MB (nos modelos básicos com HD) até 4 GB de memória eMMC interna (nos modelos Slim de entrada).1.6. Placa de Radiofrequência (Módulo RF)Descrição Técnica: Uma pequena placa secundária conectada perpendicularmente à parte frontal da placa-mãe.Função: Opera na frequência de 2,4 GHz utilizando um protocolo proprietário da Microsoft para comunicação sem fio com até 4 controles simultâneos. Ela também abriga o controlador dos LEDs indicadores e o receptor do controle remoto infravermelho (IR).1.7. Unidade de Leitura Óptica (Drive de DVD)Descrição Técnica: Leitor de discos proprietário com interface SATA, fabricado sob licença por marcas como Lite-On, BenQ, Hitachi/LG ou Toshiba/Samsung.Função: Realiza a leitura de mídias em formato DVD-DL (Dual Layer). Possui um firmware altamente criptografado que se comunica com a placa-mãe através de uma chave única de 128 bits gravada no chip do drive; se a chave do leitor não coincidir com a da placa-mãe, o console não executa jogos.1.8. Sistema de Arrefecimento Térmico e Placa-Mãe (Motherboard)Placa-mãe: O circuito impresso multicamadas que conecta todos os semicondutores. Passou por revisões históricas importantes (Xenon, Zephyr, Falcon, Jasper, Trinity, Corona, Winchester) para reduzir a litografia dos chips (de 90nm até 45nm) e mitigar o calor.Dissipadores (Heatsinks): Blocos condutores de calor feitos de alumínio com base ou tubos (heatpipes) de cobre assentados sobre a CPU e a GPU utilizando pasta térmica.Exaustores (Coolers): Ventoinhas de corrente contínua (DC). Nos modelos Fat, um par de ventoinhas de 60mm na traseira puxava o ar quente para fora. Nos modelos Slim/E, uma única ventoinha silenciosa de 92mm fica diretamente posicionada sobre a CGPU (chip unificado onde CPU e GPU foram fundidas em uma única pastilha de silício).2. Componentes Externos e Interfaces de Conectividade2.1. Gabinete / Carcaça EstruturalDescrição Técnica: Invólucro moldado em polímero termoplástico (ABS).Função: Proteção mecânica contra impactos, blindagem contra interferências eletromagnéticas (EMI) através de uma gaiola metálica interna de flandres, e direcionamento do fluxo de ar (túnel de vento) para otimização térmica.2.2. Botão Power e Painel de Estado (Ring of Light)Descrição: Interface frontal composta por um botão centralizado e um anel de 4 LEDs bi-colores (verdes e vermelhos).Função: Controla o estado de energia do sistema e indica o quadrante em que os controles sem fio estão conectados. Funciona como ferramenta de diagnóstico visual, emitindo códigos de erro de hardware por meio de padrões de luzes piscantes.2.3. Interface de Barramento para Disco Rígido (Slot de HDD)Descrição: Porta de conexão proprietária baseada no protocolo SATA.Função: Conecta a unidade de disco rígido magnético de 2,5 polegadas acondicionada em um cartucho de plástico rígido, permitindo expansão de armazenamento para saves, jogos instalados e retrocompatibilidade com o Xbox original.2.4. Portas de Entrada e Saída de Dados (I/O)Portas USB 2.0: Interfaces seriais universais que operam a 480 Mbps. Utilizadas para conexão de periféricos de armazenamento externos, adaptadores e carregadores.Porta Auxiliar / Kinect: Interface modificada que combina um barramento USB com linhas extras de alimentação de energia de alta corrente (12V) para fornecer energia e dados diretamente ao sensor de movimento Kinect sem a necessidade de fontes externas.Slots de Unidade de Memória (Memory Unit): Interfaces exclusivas da primeira geração (Fat), baseadas em barramento USB modificado para cartões de memória flash portáteis (removidos nas gerações posteriores).2.5. Interfaces de Saída de Áudio e Vídeo (A/V)Porta AV Multi Out: Conector analógico proprietário capaz de emitir sinais de vídeo Composto, S-Video, Scart, RGB, Vídeo Componente e VGA, além de áudio estéreo e digital óptico (via cabo acessório).Porta HDMI: Interface multimídia de alta definição (versão 1.2/1.4 dependendo do modelo). Transmite vídeo digital não compactado e áudio multicanal Dolby Digital 5.1/LPCM digitalmente para telas modernas.Porta de Áudio Óptico (S/PDIF): Saída de áudio digital por fibra óptica, que transmite fluxos de áudio comprimidos (como Dolby Digital e DTS) para receptores de áudio ou Home Theaters.2.6. Interfaces de Rede e ComunicaçãoPorta Ethernet (RJ-45): Interface de rede local cabeada padrão Fast Ethernet, que opera a taxas de transferência de 10/100 Mbps.Antena / Módulo Wi-Fi: Hardware para redes sem fio. Nos modelos Slim/E, trata-se de uma placa interna PCI-Express operando no padrão 802.11n (frequência de 2,4 GHz). No modelo Fat, o suporte dependia de um dongle USB externo (padrão 802.11a/b/g ou n).2.7. Porta de Alimentação Principal (DC Input)Descrição: Conector fêmea de pinos reforçados para receber corrente contínua da fonte de alimentação externa (transformador chaveado AC/DC).Particularidade de Engenharia: O formato físico deste conector variava entre as revisões de hardware do Xbox 360 (ex: 203W, 175W, 150W, 135W). O design mecânico foi projetado de forma excludente (poka-yoke): um console antigo com maior consumo de energia não aceita o encaixe físico de uma fonte mais nova e menos potente, prevenindo sobrecarga.Para enriquecer a fundamentação teórica ou o capítulo de metodologia do seu TCC, eu posso detalhar mais algum aspecto. O que você prefere?Explicar a fundo a causa física do erro das 3 luzes vermelhas (RROD) e as falhas nas esferas de solda BGADetalhar os mecanismos de segurança e criptografia do processador (fuses e hypervisor)Comparar a arquitetura de hardware do Xbox 360 com a do seu concorrente direto (PlayStation 3) -->
+
+
+            <details class="component-item">
+              <summary>Modulador RF (Radiofrequência)</summary>
+              <div class="component-description">
+                <p>
+                  Caixa metálica blindada que contém o circuito
+                  responsável pela conversão dos sinais de áudio
+                  e vídeo em um sinal de radiofrequência.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Nome: Radio Frequency Modulator</li>
+                  <li>Função: Modulação do sinal</li>
+                  <li>Saída: RF</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cristal Oscilador de Quartzo</summary>
+              <div class="component-description">
+                <p>
+                  Componente responsável por fornecer uma referência
+                  de frequência estável para os circuitos do console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Oscilador de quartzo</li>
+                  <li>Função: Referência de frequência</li>
+                  <li>Aplicação: Clock e sincronismo</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Potenciômetro de Ajuste de Cor</summary>
+              <div class="component-description">
+                <p>
+                  Resistor variável utilizado em determinadas revisões
+                  da placa para realizar ajustes relacionados ao sinal
+                  de cor.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Regulador de Tensão 7805</summary>
+              <div class="component-description">
+                <p>
+                  Regulador linear responsável por fornecer uma tensão
+                  estabilizada de aproximadamente 5 volts.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Regulador linear</li>
+                  <li>Saída nominal: 5 V</li>
+                  <li>Função: Regulamentação da alimentação</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Dissipador de Calor</summary>
+              <div class="component-description">
+                <p>
+                  Peça metálica utilizada para dissipar o calor
+                  produzido pelo regulador de tensão.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Capacitor Eletrolítico Principal de Filtragem</summary>
+              <div class="component-description">
+                <p>
+                  Capacitor utilizado para filtrar a alimentação
+                  elétrica do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Diodo Retificador (1N4001 ou similar)</summary>
+              <div class="component-description">
+                <p>
+                  Diodo utilizado no circuito de alimentação do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Slot de Cartucho (Conector de Expansão)</summary>
+              <div class="component-description">
+                <p>
+                  Conector responsável pela comunicação elétrica entre
+                  o console e o cartucho de jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Portas de Controle DB9</summary>
+              <div class="component-description">
+                <p>
+                  Dois conectores do tipo D-sub de 9 pinos utilizados
+                  para conectar os controles e periféricos do Atari 2600.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Jack de Alimentação (Power Jack)</summary>
+              <div class="component-description">
+                <p>
+                  Conector responsável por receber a alimentação
+                  proveniente da fonte externa.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cabo / Conector de Saída RF</summary>
+              <div class="component-description">
+                <p>
+                  Cabo responsável por transportar o sinal de
+                  radiofrequência produzido pelo console até a televisão.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Power (Liga / Desliga)</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para ligar ou desligar
+                  o console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Color / B-W</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para selecionar entre os
+                  modos de exibição colorida e preto e branco.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chaves de Dificuldade (Left / Right Difficulty)</summary>
+              <div class="component-description">
+                <p>
+                  O Atari 2600 possui duas chaves de dificuldade.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Game Select</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para selecionar ou alternar
+                  entre as diferentes variações de jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chave Game Reset</summary>
+              <div class="component-description">
+                <p>
+                  Interruptor utilizado para reiniciar a partida atual.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Resistores Fixos de Filme de Carbono</summary>
+              <div class="component-description">
+                <p>
+                  Diversos resistores estão presentes na placa do Atari 2600.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Capacitores de Cerâmica (Disco)</summary>
+              <div class="component-description">
+                <p>
+                  Capacitores utilizados principalmente para
+                  desacoplamento e filtragem de ruídos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Diodos de Sinal (1N914 / 1N4148)</summary>
+              <div class="component-description">
+                <p>
+                  Pequenos diodos utilizados em circuitos de sinal
+                  e interfaces eletrônicas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Indutores / Bobinas de Choque</summary>
+              <div class="component-description">
+                <p>
+                  Pequenas bobinas utilizadas para filtragem de
+                  interferências eletromagnéticas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Placa de Circuito Impresso (PCB)</summary>
+              <div class="component-description">
+                <p>
+                  A PCB é a placa responsável por interligar
+                  eletricamente os componentes do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Blindagem de Metal Contra Interferência (RF Shielding)</summary>
+              <div class="component-description">
+                <p>
+                  Chapas metálicas utilizadas para reduzir
+                  interferências eletromagnéticas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Parafusos de Fixação</summary>
+              <div class="component-description">
+                <p>
+                  Elementos mecânicos utilizados para fixar
+                  as diferentes partes do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Carcaça Plástica Superior e Inferior (Case)</summary>
+              <div class="component-description">
+                <p>
+                  Corpo externo do Atari 2600 responsável por proteger
+                  os componentes internos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Painel de Acabamento Frontal</summary>
+              <div class="component-description">
+                <p>
+                  Parte frontal responsável pelo acabamento visual
+                  do console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Pés de Borracha</summary>
+              <div class="component-description">
+                <p>
+                  Pequenos suportes instalados na parte inferior
+                  da carcaça.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Fonte de Alimentação Externa (AC/DC Adapter)</summary>
+              <div class="component-description">
+                <p>
+                  Adaptador externo responsável por fornecer
+                  alimentação ao console.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Adaptador de Antena (TV/Game Switch Box)</summary>
+              <div class="component-description">
+                <p>
+                  Acessório externo utilizado para alternar o sinal
+                  entre a antena da televisão e o Atari.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Joystick CX40</summary>
+              <div class="component-description">
+                <p>
+                  O CX40 é o joystick clássico associado ao Atari 2600.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Modelo: CX40</li>
+                  <li>Tipo: Joystick</li>
+                  <li>Conexão: DB9</li>
+                  <li>Direções: 4</li>
+                  <li>Botão: Fire / Action</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Paddles CX30</summary>
+              <div class="component-description">
+                <p>
+                  Os CX30 são controles rotativos utilizados em jogos
+                  compatíveis com Paddle.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>O Cartucho de Jogo (Mídia)</summary>
+              <div class="component-description">
+                <p>
+                  O cartucho é a mídia física utilizada pelo Atari 2600
+                  para armazenar o software dos jogos.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+     
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>
+

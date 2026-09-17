@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Nintendo DS</title>
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       2 CONSOLES POR LINHA
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Nintendo DS foi um dos consoles portáteis mais importantes
+          da história, popularizando duas telas, sendo uma delas sensível
+          ao toque, além de trazer uma série de recursos que transformaram
+          a maneira de jogar em um portátil ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Nintendo DS foi um dos consoles portáteis mais importantes
+          da história, popularizando duas telas, sendo uma delas sensível
+          ao toque, além de trazer uma série de recursos que transformaram
+          a maneira de jogar em um portátil ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Nintendo DS (Posse de Thomas Lothhammer Bohn)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/nds.jpg"
+              alt="Nintendo DS"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Nintendo DS
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Nintendo DS é um console portátil desenvolvido e fabricado
+            pela Nintendo. Seu lançamento ocorreu originalmente em 2004
+            no Japão e na América do Norte, chegando posteriormente a
+            outras regiões.<br>
+
+            Seu nome vem de "Dual Screen", fazendo referência às duas
+            telas presentes no aparelho. A tela inferior possui tecnologia
+            sensível ao toque e pode ser utilizada tanto com a caneta
+            Stylus quanto diretamente com os dedos em determinadas
+            aplicações.<br>
+
+            O sistema também possui microfone, conexão sem fio e
+            compatibilidade com jogos do Game Boy Advance, tornando o
+            aparelho uma plataforma bastante versátil.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            O conceito de duas telas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            A característica mais marcante do Nintendo DS é sua arquitetura
+            com duas telas. Enquanto uma tela normalmente apresenta a ação
+            principal do jogo, a outra pode exibir mapas, inventários,
+            informações adicionais ou servir como uma segunda área de jogo.<br>
+
+            A tela inferior possui uma camada resistiva sensível ao toque,
+            permitindo interações através da Stylus. Esse recurso abriu
+            espaço para jogos que utilizavam desenhos, escrita, seleção
+            de objetos e diferentes formas de interação que não dependiam
+            exclusivamente dos botões tradicionais.<br>
+
+            O conceito também permitiu que desenvolvedores experimentassem
+            novas interfaces e gêneros de jogos.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gameboyadvance.jpg"
+                alt="Nintendo Game Boy Advance"
+              />
+
+              <img
+                src="../tgga/psp.jpg"
+                alt="Sony PSP"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Game Boy Advance e Sony PlayStation Portable ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Nintendo DS chegou ao mercado durante uma geração em que
+            os consoles portáteis estavam passando por grandes mudanças.
+            O Game Boy Advance já havia estabelecido uma forte presença
+            para a Nintendo, enquanto novas empresas começavam a disputar
+            o mercado de portáteis.<br>
+
+            Um dos principais concorrentes do DS foi o PlayStation Portable
+            (PSP), lançado pela Sony em 2004. Enquanto o PSP apostava em
+            gráficos e mídia portátil de maior capacidade, o DS utilizava
+            como diferencial suas duas telas, o touchscreen e uma proposta
+            de interação diferente.<br>
+
+            A Nintendo também utilizou o DS para alcançar públicos que
+            normalmente não tinham contato com videogames tradicionais,
+            especialmente através de jogos de treinamento, quebra-cabeças,
+            educação e experiências baseadas na tela sensível ao toque.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Jogos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mariokartds.jpg"
+                alt="Mario Kart DS"
+              />
+
+              <img
+                src="../tgga/pokemonplatinum.jpg"
+                alt="Pokémon Platinum"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Mario Kart DS e Pokémon Platinum ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Nintendo DS recebeu uma enorme biblioteca de jogos durante
+            sua vida comercial. Entre os títulos mais conhecidos estão
+            Mario Kart DS, New Super Mario Bros., Pokémon Diamond,
+            Pokémon Pearl, Pokémon Platinum, The Legend of Zelda: Phantom
+            Hourglass e Animal Crossing: Wild World.<br>
+
+            A biblioteca também foi marcada por jogos que utilizavam
+            diretamente a tela sensível ao toque, como Nintendogs,
+            Brain Age e vários títulos da série Professor Layton.<br>
+
+            O formato dos cartuchos também permitiu que os jogos fossem
+            pequenos e facilmente transportados, mantendo a característica
+            de mídia física dos portáteis da Nintendo.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Recursos e funcionalidades
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Além das duas telas, o Nintendo DS possui diversos recursos
+            que ajudaram a diferenciá-lo de seus antecessores.<br>
+
+            O aparelho possui microfone integrado, permitindo que jogos
+            reconheçam sons e comandos de voz. Também conta com comunicação
+            sem fio, possibilitando partidas multiplayer e outras formas
+            de comunicação entre consoles próximos.<br>
+
+            Outro recurso importante é o suporte aos cartuchos do Game Boy
+            Advance. Essa compatibilidade permitiu que o DS funcionasse
+            também como uma plataforma para a biblioteca de jogos da geração
+            anterior, embora os jogos de Game Boy Advance não utilizassem
+            as funções de duas telas do DS.
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Durante sua existência, a família Nintendo DS recebeu diversas
+            revisões. Algumas alterações foram principalmente estéticas,
+            enquanto outras modificaram significativamente o formato,
+            tamanho e funcionalidades do aparelho.<br>
+
+            O modelo original é conhecido posteriormente como DS Fat ou
+            DS Phat. Em seguida surgiu o Nintendo DS Lite, menor, mais
+            leve e com telas mais brilhantes.<br>
+
+            Posteriormente a Nintendo lançou o DSi, que removeu o slot
+            para cartuchos de Game Boy Advance e adicionou câmeras,
+            armazenamento interno e novos recursos de software.<br>
+
+            O DSi XL, também conhecido em algumas regiões como DSi LL,
+            aumentou consideravelmente o tamanho das telas e do próprio
+            aparelho.
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dsfat.jpg"
+                  alt="Nintendo DS original"
+                />
+
+                <figcaption>
+                  Nintendo DS — DS Fat / DS Phat
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dslite.jpg"
+                  alt="Nintendo DS Lite"
+                />
+
+                <figcaption>
+                  Nintendo DS Lite
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dsi.jpg"
+                  alt="Nintendo DSi"
+                />
+
+                <figcaption>
+                  Nintendo DSi
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dsixl.jpg"
+                  alt="Nintendo DSi XL"
+                />
+
+                <figcaption>
+                  Nintendo DSi XL / DSi LL
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Nintendo DS
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Nintendo DS
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>CPU ARM946E-S</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos principais processadores do Nintendo DS,
+                  baseado na arquitetura ARM9.
+                </p>
+
+                <p>
+                  É responsável pela execução de grande parte do
+                  software e dos jogos do sistema.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Arquitetura: ARM</li>
+                  <li>Modelo: ARM946E-S</li>
+                  <li>Função: Processamento principal</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CPU ARM7TDMI</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo processador do Nintendo DS, baseado na
+                  arquitetura ARM7.
+                </p>
+
+                <p>
+                  É utilizado para diversas tarefas do sistema e
+                  também desempenha funções relacionadas à
+                  compatibilidade com jogos de Game Boy Advance.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Arquitetura: ARM7</li>
+                  <li>Modelo: ARM7TDMI</li>
+                  <li>Função: Processamento auxiliar</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memória RAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória utilizada pelo sistema para armazenar
+                  temporariamente dados necessários durante a execução
+                  dos jogos e aplicativos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: RAM</li>
+                  <li>Função: Armazenamento temporário</li>
+                  <li>Uso: Sistema e jogos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>VRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória utilizada pelos circuitos gráficos para
+                  armazenar dados relacionados à apresentação das imagens.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Video RAM</li>
+                  <li>Função: Dados gráficos</li>
+                  <li>Aplicação: Renderização</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Processador Gráfico 2D</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por diversos recursos gráficos
+                  bidimensionais utilizados pelos jogos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Gráficos 2D</li>
+                  <li>Uso: Sprites e backgrounds</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Processador Gráfico 3D</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O Nintendo DS possui hardware dedicado à geração
+                  de gráficos tridimensionais.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Gráficos 3D</li>
+                  <li>Uso: Polígonos e efeitos gráficos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tela LCD Superior</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tela utilizada principalmente para apresentar a
+                  imagem principal, informações do jogo e elementos
+                  gráficos adicionais.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LCD</li>
+                  <li>Posição: Superior</li>
+                  <li>Função: Exibição de imagem</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tela LCD Touchscreen</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tela inferior do Nintendo DS equipada com uma camada
+                  sensível ao toque.
+                </p>
+
+                <p>
+                  Pode ser utilizada com a Stylus para controlar jogos
+                  e aplicativos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LCD</li>
+                  <li>Posição: Inferior</li>
+                  <li>Função: Vídeo e touchscreen</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Digitizer / Camada Touch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Camada responsável pela detecção das interações
+                  realizadas na tela inferior.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Touch resistivo</li>
+                  <li>Função: Entrada por toque</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stylus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Caneta utilizada para interagir com a tela sensível
+                  ao toque do Nintendo DS.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Stylus</li>
+                  <li>Função: Controle touchscreen</li>
+                  <li>Uso: Jogos e aplicativos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microfone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Microfone integrado utilizado por determinados jogos
+                  e aplicativos para reconhecer sons e comandos de voz.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Microfone integrado</li>
+                  <li>Função: Entrada de áudio</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alto-falantes Estéreo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dois alto-falantes integrados responsáveis pela
+                  reprodução de áudio do console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Estéreo</li>
+                  <li>Função: Saída de áudio</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Entrada para Fones de Ouvido</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para conectar fones de ouvido
+                  compatíveis e reproduzir o áudio do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slot de Cartucho Nintendo DS</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para inserir os cartuchos
+                  próprios do Nintendo DS.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Slot de cartucho</li>
+                  <li>Função: Mídia dos jogos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slot Game Boy Advance</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Presente nos modelos originais e no DS Lite,
+                  permite utilizar cartuchos de Game Boy Advance.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Compatibilidade: Game Boy Advance</li>
+                  <li>Função: Leitura de cartuchos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botões A / B / X / Y</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto principal de botões de ação utilizados
+                  nos jogos do Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Direcional D-Pad</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Direcional digital utilizado para controlar
+                  personagens e navegar pelos menus.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botões Start e Select</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botões utilizados para pausar jogos, confirmar
+                  funções e navegar em diferentes aplicações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botões L e R</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botões localizados nas laterais superiores do
+                  aparelho e utilizados como controles adicionais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botão Power</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interruptor utilizado para ligar e desligar
+                  o Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Placa de Circuito Impresso (PCB)</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável por interligar eletricamente
+                  os diversos componentes
