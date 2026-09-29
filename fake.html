@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nerd League United!!! - HOME PAGE</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000080;
+            color: #ffffff;
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            font-size: 14px;
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #ff00ff;
+        }
+
+        .page {
+            width: 760px;
+            margin: 10px auto;
+
+            background: #000000;
+
+            border: 6px ridge #c0c0c0;
+
+            padding: 8px;
+        }
+
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        .header {
+            text-align: center;
+
+            border: 4px ridge #c0c0c0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #0000aa,
+                    #000055
+                );
+
+            padding: 15px 5px;
+        }
+
+        .header h1 {
+            margin: 0;
+
+            font-family:
+                Impact,
+                "Arial Black",
+                sans-serif;
+
+            font-size: 38px;
+
+            color: #ffff00;
+
+            text-shadow:
+                3px 3px #ff0000,
+                6px 6px #000000;
+
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: #00ff00;
+
+            font-weight: bold;
+
+            margin: 8px 0 0;
+        }
+
+        .blink {
+            color: #ff0000;
+
+            font-weight: bold;
+
+            animation:
+                pisca 0.7s steps(1) infinite;
+        }
+
+        @keyframes pisca {
+
+            50% {
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =========================
+           MARQUEE
+        ========================= */
+
+        .news {
+            margin: 8px 0;
+
+            border: 3px inset #c0c0c0;
+
+            background: #000000;
+
+            color: #ffff00;
+
+            padding: 5px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+        }
+
+        .news span {
+            display: inline-block;
+
+            animation:
+                correr 18s linear infinite;
+        }
+
+        @keyframes correr {
+
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .layout {
+            display: grid;
+
+            grid-template-columns:
+                170px 1fr;
+
+            gap: 8px;
+        }
+
+        .box {
+            border: 4px ridge #c0c0c0;
+
+            background: #000080;
+
+            padding: 8px;
+
+            margin-bottom: 8px;
+        }
+
+        .box-title {
+            background: #c0c0c0;
+
+            color: #000000;
+
+            font-weight: bold;
+
+            padding: 3px;
+
+            text-align: center;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu a {
+            display: block;
+
+            background: #0000aa;
+
+            color: #ffffff;
+
+            border: 2px outset #c0c0c0;
+
+            padding: 6px;
+
+            margin-bottom: 5px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 12px;
+        }
+
+        .menu a:hover {
+            background: #0000ff;
+
+            color: #ffff00;
+        }
+
+        .menu a:active {
+            border-style: inset;
+        }
+
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        .welcome {
+            text-align: center;
+
+            background: #000000;
+
+            border: 3px dashed #ff00ff;
+
+            padding: 12px;
+        }
+
+        .welcome h2 {
+            color: #00ff00;
+
+            font-size: 25px;
+
+            margin-top: 0;
+        }
+
+        .welcome p {
+            line-height: 1.5;
+        }
+
+        .rainbow {
+            height: 8px;
+
+            margin: 8px 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    red,
+                    orange,
+                    yellow,
+                    lime,
+                    cyan,
+                    blue,
+                    magenta,
+                    red
+                );
+        }
+
+
+        /* =========================
+           CARDS DE VÍDEO
+        ========================= */
+
+        .videos {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 8px;
+        }
+
+        .video-link {
+            display: block;
+
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+        .video {
+            background: #111111;
+
+            border: 3px ridge #c0c0c0;
+
+            padding: 6px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.1s,
+                background 0.1s;
+        }
+
+        .video:hover {
+            background: #181818;
+
+            transform: translateY(-2px);
+        }
+
+        .video:active {
+            transform: translateY(1px);
+
+            border-style: inset;
+        }
+
+        .video-screen {
+            height: 110px;
+
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    #111 0px,
+                    #111 2px,
+                    #181818 3px,
+                    #181818 4px
+                );
+
+            border: 3px inset #808080;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #00ff00;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        .video h3 {
+            color: #ffff00;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           UNDER CONSTRUCTION
+        ========================= */
+
+        .construction {
+            text-align: center;
+
+            background: #000000;
+
+            border: 4px ridge #ffff00;
+
+            padding: 10px;
+        }
+
+        .construction-big {
+            color: #ffff00;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+        .road {
+            color: #ff00ff;
+
+            font-size: 24px;
+
+            letter-spacing: 4px;
+        }
+
+
+        /* =========================
+           CONTADOR
+        ========================= */
+
+        .counter {
+            background: #000000;
+
+            border: 3px inset #c0c0c0;
+
+            padding: 5px;
+
+            text-align: center;
+
+            color: #00ff00;
+
+            font-family: monospace;
+        }
+
+        .counter-number {
+            display: inline-block;
+
+            background: #111111;
+
+            color: #00ff00;
+
+            padding: 3px 8px;
+
+            border: 1px solid #555;
+
+            letter-spacing: 3px;
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            border-top: 3px double #ffffff;
+
+            margin-top: 10px;
+
+            padding: 12px 5px;
+
+            color: #aaaaaa;
+
+            font-size: 11px;
+        }
+
+        .email-fake {
+            color: #00ffff;
+        }
+
+        .email-link {
+            color: #00ffff;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 780px) {
+
+            .page {
+                width: 98%;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .videos {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
+
+    <header class="header">
+
+        <div style="font-size:10px;">
+            *** WELCOME TO ***
+        </div>
+
+        <h1>
+            NERD LEAGUE UNITED
+        </h1>
+
+        <p>
+            ★ THE OFFICIAL HOME PAGE ★
+        </p>
+
+        <div class="blink">
+            !!! VOCÊ ENTROU NA INTERNET !!!
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         LETREIRO
+    ========================= -->
+
+    <div class="news">
+
+        <span>
+
+            ★★★ NOVIDADES!!! ★★★
+
+            SITE DA NLU ONLINE!!!
+
+            NOVOS EPISÓDIOS EM BREVE!!!
+
+            VOCÊ É O VISITANTE NÚMERO 000083!!!
+
+            ★★★
+
+        </span>
+
+    </div>
+
+
+    <!-- =========================
+         LAYOUT
+    ========================= -->
+
+    <div class="layout">
+
+
+        <!-- =========================
+             MENU LATERAL
+        ========================= -->
+
+        <aside>
+
+
+            <div class="box menu">
+
+                <div class="box-title">
+                    MENU
+                </div>
+
+
+                <a
+                    href="index.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ HOME ]
+                </a>
+
+
+                <a
+                    href="qs.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ QUEM SOMOS ]
+                </a>
+
+
+                <a
+                    href="series.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ SÉRIES ]
+                </a>
+
+
+                <a
+                    href="filmes.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ FILMES ]
+                </a>
+
+
+                <a
+                    href="games.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ GAMES ]
+                </a>
+
+
+                <a
+                    href="hqs.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ HQs / LIVROS ]
+                </a>
+
+
+                <a
+                    href="fotos.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ FOTOS ]
+                </a>
+
+
+                <a
+                    href="bazar.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ BAZAR ]
+                </a>
+
+
+                <a
+                    href="out.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ DEVLOGS ]
+                </a>
+
+
+                <a
+                    href="news.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ NLU NEWS ]
+                </a>
+
+
+                <a
+                    href="ajuda.html"
+                    onclick="notificarClique(event, this.href)"
+                >
+                    [ SUPORTE / FAQ ]
+                </a>
+
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="box">
+
+                <div class="box-title">
+                    STATUS
+                </div>
+
+
+                <div style="text-align:center;">
+
+                    <span style="color:#00ff00;">
+                        ● ONLINE
+                    </span>
+
+                    <br>
+                    <br>
+
+                    <span style="color:#ffff00;">
+                        56K MODEM
+                    </span>
+
+                    <br>
+
+                    <span style="color:#aaaaaa;">
+                        56.6 Kbps
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTADOR -->
+
+            <div class="counter">
+
+                VISITANTES
+
+                <br>
+                <br>
+
+                <span class="counter-number">
+                    000083
+                </span>
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- =========================
+             CONTEÚDO PRINCIPAL
+        ========================= -->
+
+        <main>
+
+
+            <!-- BOAS-VINDAS -->
+
+            <div class="welcome">
+
+                <h2>
+                    BEM-VINDO À NLU!!!
+                </h2>
+
+
+                <div class="rainbow"></div>
+
+
+                <p>
+
+                    Você acaba de acessar a página oficial
+                    da <b>Nerd League United™</b>.
+
+                </p>
+
+
+                <p>
+
+                    Um lugar completamente dedicado a
+
+                    <span style="color:#00ffff;">
+
+                        GAMES, FILMES, TV, HQs,
+                        TECNOLOGIA E COISAS NERDS!!!
+
+                    </span>
+
+                </p>
+
+
+                <p class="blink">
+
+                    ★ ATUALIZADO!!! ★
+
+                </p>
+
+            </div>
+
+
+            <br>
+
+
+            <!-- =========================
+                 PRODUÇÕES
+            ========================= -->
+
+            <div class="box">
+
+                <div class="box-title">
+                    NLU PRODUCTIONS
+                </div>
+
+
+                <div class="videos">
+
+
+                    <!-- EPISÓDIO 1 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=99nUM8-A7nk"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                TV SUNKYONG
+
+                            </div>
+
+
+                            <h3>
+                                TV Sunkyong - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #001
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 2 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=PFr1C8Hab5E"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                RÁDIO STUDI!
+
+                            </div>
+
+
+                            <h3>
+                                Rádio Studi! - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #002
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 3 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=UZ60brMRPWc"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                SUPER CONTRA
+
+                            </div>
+
+
+                            <h3>
+                                Super Contra - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #003
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 4 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=mNq6qmBYTAM"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                DELL VOSTRO
+
+                            </div>
+
+
+                            <h3>
+                                Dell Vostro 1320 - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #004
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 5 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=RSUBK7soI7Y"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                CRASH
+
+                            </div>
+
+
+                            <h3>
+                                Crash: The Wrath of Cortex
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #005
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 6 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=Uc8zmR7QkcU"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                MACROSS
+
+                            </div>
+
+
+                            <h3>
+                                Macross (FC) - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #006
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- EPISÓDIO 7 -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=2UuB1SgBoIw"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                FANTASMAGORIE
+
+                            </div>
+
+
+                            <h3>
+                                Fantasmagorie (1908) - Review
+                            </h3>
+
+
+                            <small>
+                                EPISÓDIO #007
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- BLOOPERS -->
+
+                    <a
+                        class="video-link"
+                        href="assistir.html?id=FqOgjxH5z7k"
+                        onclick="notificarClique(event, this.href)"
+                    >
+
+                        <div class="video">
+
+                            <div class="video-screen">
+
+                                [ VHS VIDEO ]
+
+                                <br>
+
+                                BLOOPERS
+
+                            </div>
+
+
+                            <h3>
+                                Fantasmagorie - Bloopers
+                            </h3>
+
+
+                            <small>
+                                EXTRA
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 UNDER CONSTRUCTION
+            ========================= -->
+
+            <div class="construction">
+
+                <div class="construction-big">
+
+                    ⚠ UNDER CONSTRUCTION ⚠
+
+                </div>
+
+
+                <div class="road">
+
+                    🚧🚧🚧🚧🚧
+
+                </div>
+
+
+                <p>
+
+                    Esta página está em construção!!!
+
+                </p>
+
+
+                <p style="color:#00ff00;">
+
+                    Volte amanhã para descobrir
+                    se alguma coisa mudou.
+
+                </p>
+
+            </div>
+
+
+            <br>
+
+
+            <!-- =========================
+                 NEWS
+            ========================= -->
+
+            <div class="box">
+
+                <div class="box-title">
+
+                    ★ NLU NEWS ★
+
+                </div>
+
+
+                <p>
+
+                    <span style="color:#ffff00;">
+                        24/09/2026
+                    </span>
+
+                    -
+
+                    O site da Nerd League United
+                    está finalmente no ar!!!
+
+                </p>
+
+
+                <p>
+
+                    <span style="color:#ffff00;">
+                        18/09/2026
+                    </span>
+
+                    -
+
+                    Novas reviews estão sendo
+                    preparadas.
+
+                </p>
+
+
+                <p>
+
+                    <span style="color:#ffff00;">
+                        12/09/2026
+                    </span>
+
+                    -
+
+                    Adicionamos esta incrível
+                    seção de notícias!!!
+
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 BOTÕES RETRÔ
+            ========================= -->
+
+            <div
+                style="
+                    text-align:center;
+                    background:#000;
+                    border:2px solid #555;
+                    padding:10px;
+                "
+            >
+
+                <div style="color:#ffff00;">
+
+                    RECOMENDADO PARA:
+
+                </div>
+
+
+                <br>
+
+
+                <span
+                    style="
+                        background:#000080;
+                        border:3px outset #c0c0c0;
+                        padding:5px;
+                        color:#fff;
+                    "
+                >
+                    NETSCAPE
+                </span>
+
+
+                &nbsp;
+
+
+                <span
+                    style="
+                        background:#000080;
+                        border:3px outset #c0c0c0;
+                        padding:5px;
+                        color:#fff;
+                    "
+                >
+                    IE 4.0
+                </span>
+
+
+                &nbsp;
+
+
+                <span
+                    style="
+                        background:#000080;
+                        border:3px outset #c0c0c0;
+                        padding:5px;
+                        color:#fff;
+                    "
+                >
+                    800x600
+                </span>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================= -->
+
+    <footer>
+
+        <div class="blink">
+
+            ★ THANKS FOR VISITING!!! ★
+
+        </div>
+
+
+        <br>
+
+
+        Nerd League United™ © 1987
+
+
+        <br>
+        <br>
+
+
+        Esta página foi feita no Notepad.
+
+
+        <br>
+
+
+        Última atualização:
+        24/09/1987
+
+
+        <br>
+        <br>
+
+
+        <a
+            class="email-link"
+            href="mailto:nerdleagueunited@gmail.com"
+            onclick="notificarClique(event, this.href)"
+        >
+            webmaster@nerdleagueunited.com
+        </a>
+
+
+        <br>
+        <br>
+
+
+        [ Este site é uma obra de ficção / mockup ]
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+const mensagemDownload =
+    "Download...\n" +
+    "instalando 4822 Petabytes via internet discada " +
+    "do Viola no ENIAC.\n" +
+    " 0 KB/ps ~ 0 KB Instalados";
+
+
+function mostrarNotificacao() {
+
+    if ("Notification" in window) {
+
+        if (Notification.permission === "granted") {
+
+            new Notification(
+                "Nerd League United™",
+                {
+                    body: mensagemDownload,
+                    icon: "logonlu.png"
+                }
+            );
+
+            return;
+        }
+
+
+        if (Notification.permission !== "denied") {
+
+            Notification.requestPermission()
+                .then(function(permissao) {
+
+                    if (permissao === "granted") {
+
+                        new Notification(
+                            "Nerd League United™",
+                            {
+                                body: mensagemDownload,
+                                icon: "logonlu.png"
+                            }
+                        );
+
+                    } else {
+
+                        alert(mensagemDownload);
+
+                    }
+
+                });
+
+            return;
+        }
+
+    }
+
+
+    /*
+       Caso o navegador não permita
+       notificações do sistema.
+    */
+
+    alert(mensagemDownload);
+
+}
+
+
+/* =====================================================
+   TRANSFORMA TODOS OS LINKS EM "BOTÕES FAKE"
+===================================================== */
+
+document.querySelectorAll("a").forEach(function(link) {
+
+    link.addEventListener(
+        "click",
+        function(evento) {
+
+            /*
+               CANCELA completamente a navegação.
+            */
+
+            evento.preventDefault();
+
+            evento.stopPropagation();
+
+
+            /*
+               Mostra a notificação.
+            */
+
+            mostrarNotificacao();
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   TAMBÉM FUNCIONA COM ENTER
+   QUANDO O LINK RECEBE FOCO PELO TECLADO
+===================================================== */
+
+document.querySelectorAll("a").forEach(function(link) {
+
+    link.addEventListener(
+        "keydown",
+        function(evento) {
+
+            if (
+                evento.key === "Enter" ||
+                evento.key === " "
+            ) {
+
+                evento.preventDefault();
+
+                mostrarNotificacao();
+
+            }
+
+        }
+    );
+
+});
+
+</script>
+
+
+
+</body>
+
+</html>

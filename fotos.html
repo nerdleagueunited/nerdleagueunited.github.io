@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NLU - Mural Das Memórias</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .content-column {
+            min-width: 0;
+            width: 100%;
+        }
+
+        /* Grid com 3 colunas para as fotos */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .gallery-card {
+            background-color: #161616;
+            border: 1px solid #333;
+            padding: 8px;
+            cursor: pointer;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-card:hover,
+        .gallery-card:focus {
+            box-shadow: 0 0 10px #ffcc00;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border-radius: 4px;
+        }
+
+        .gallery-card h3 {
+            margin-top: 8px;
+            color: #ffcc00;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Modal */
+
+        .modal-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 15000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-gallery[aria-hidden="false"] {
+            display: flex;
+        }
+
+        .modal-gallery-content {
+            background-color: #222;
+            border: 2px solid #ffcc00;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            padding: 20px;
+            color: #ddd;
+            box-shadow: 0 0 15px #ffcc00;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: #ffcc00;
+            font-size: 28px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-gallery-content img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .modal-text h2 {
+            margin: 0 0 8px 0;
+            color: #ffcc00;
+        }
+
+        .modal-text .modal-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        /* Responsividade */
+
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Remove sidebar completely */
+        .sidebar-column {
+            display: none !important;
+        }
+
+        /* Ajusta main-grid para apenas a coluna principal */
+        .main-grid {
+            grid-template-columns: 1fr !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="site-container">
+
+      <!-- Cabeçalho da Página -->
+        <header class="page-header-box">
+            <img src="logonlu.png" alt="Logo NLU">
+            <div>
+                <p style="font-size:11px; color:#888;">NERD LEAGUE UNITED</p>
+                <h1>Mural Das Memórias</h1>
+            </div>
+
+             <div class="header-right-box">
+                <a href="https://www.youtube.com/@NerdLeagueUnited" target="_blank" class="youtube-btn">▶ YouTube Siga-nos!</a>
+                <div class="counter-box">Imagens: 47</div>
+            </div>
+        </header>
+
+        <div class="sub-nav-links">
+            <a href="index.html">← Voltar ao Início</a> | 
+            <a href="ajuda.html">Suporte/FAQ</a>
+        </div>
+
+        <!-- Esteira -->
+        <div class="marquee-zone">
+            <div class="marquee-content">
+                <span> ... Aqui você vai achar fotos e imagens aleatórias que não se qualificam nos Bastidores e Devlogs, fotos dos membros, coisas engraçadas e imagens aleatórias ... &nbsp;</span>
+                <span> ... Aqui você vai achar fotos e imagens aleatórias que não se qualificam nos Bastidores e Devlogs, fotos dos membros, coisas engraçadas e imagens aleatórias ... &nbsp;</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             CONTEÚDO PRINCIPAL - APENAS FOTOS
+        ===================================================== -->
+
+        <div class="main-grid">
+            <div class="content-column">
+
+                <section class="gallery-section">
+
+                    <div class="gallery-grid">
+					
+					<!-- LINHA 1 -->
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Roberto Paralelepípedo Poroso Vestes Cúbicas, vive na Depressão Abissal do Traje de Banho de Duas Peças"
+                            data-date="20/09/2026"
+                            data-description="Foto tirada do quadro da sala 3C do IFC ... Se não me engano, é o Bob Esponja 'realista'."
+                            data-img="fotos/roberto.jpeg">
+                            <img src="fotos/roberto.jpeg" alt="Foto 1" />
+                            <h3>Roberto Paralelepípedo Poroso Vestes Cúbicas, vive na Depressão Abissal do Traje de Banho de Duas Peças</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="O Maravilhosão Xbox One de Rafael"
+                            data-date="18/09/2026"
+                            data-description="Quando pedi pro Coxinha umas fotos do Xbox One dele, eu não achava que ele tiraria uma foto tão bonita, tanto que nem usei no TGGA."
+                            data-img="fotos/asdf1.jpeg">
+                            <img src="fotos/asdf1.jpeg" alt="Foto 2" />
+                            <h3>O Maravilhosão Xbox One de Rafael</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="muralha.webp"
+                            data-date="mu/ra/lha.webp"
+                            data-description="muralha.webp"
+                            data-img="fotos/muralha.webp">
+                            <img src="fotos/muralha.webp" alt="Foto 3" />
+                            <h3>muralha.webp</h3>
+                        </div>
+						
+						<!-- LINHA 2 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Kaillan dormindo no ônibus na volta do IFC"
+                            data-date="27/09/2026"
+                            data-description="Se tem um cara que dorme no ônibus (e no ponto), esse cara é o Kaillan."
+                            data-img="fotos/kaillandormindo.jpeg">
+                            <img src="fotos/kaillandormindo.jpeg" alt="Foto 1" />
+                            <h3>Kaillan dormindo no ônibus na volta do IFC</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="O Quarteto Fantástico"
+                            data-date="31/03/2026"
+                            data-description="Foto tirada por Samuel no 'Cafofo' do IFC, nela estã Ramirez, Kaillan e Cadu, provavelmente estávamos almoçando juntos, apenas o Ramirez fez joínha."
+                            data-img="fotos/os4.jpeg">
+                            <img src="fotos/os4.jpeg" alt="Foto 2" />
+                            <h3>O Quarteto Fantástico</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Rabiscos #1"
+                            data-date="05/04/2026"
+                            data-description="Alguns desenhos que fiz no caderno de artes durante o ensino fundamental lá pelo sétimo e oitavo ano ... É, eu era (ainda é) bem retardado."
+                            data-img="fotos/doodles1.jpeg">
+                            <img src="fotos/doodles1.jpeg" alt="Foto 3" />
+                            <h3>Rabiscos #1</h3>
+                        </div>
+						
+						<!-- LINHA 3 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Interior do velho armário"
+                            data-date="07/11/2025"
+                            data-description="Foto de dentro do armário antigo de Samuel, visível em alguns vídeos, nele podemos ver o 'início' da coleção."
+                            data-img="fotos/armario.jpeg">
+                            <img src="fotos/armario.jpeg" alt="Foto 1" />
+                            <h3>Interior do velho armário</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Cabeçildo da Silva"
+                            data-date="13/11/2025"
+                            data-description="Cabeça desmontada de um torso animatrônico de Lego, estava bem básico, ainda quero fazer vídeos sobre Legos."
+                            data-img="fotos/lego1.jpeg">
+                            <img src="fotos/lego1.jpeg" alt="Foto 2" />
+                            <h3>Cabeçildo da Silva</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Nescau FDP kk"
+                            data-date="02/12/2025"
+                            data-description="E assim foi que a Nestle foi processada pela SDC, Sociedade Dos Cadeirantes."
+                            data-img="fotos/nescaufdp.jpeg">
+                            <img src="fotos/nescaufdp.jpeg" alt="Foto 3" />
+                            <h3>Nescau FDP kk</h3>
+                        </div>
+						
+						<!-- LINHA 4 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Samuelzinho"
+                            data-date="15/10/2015"
+                            data-description="Pequeno Samuelzinho no auge dos seus 5 anos de idade, apontando para a câmera, literalmente, a foto foi tirada por uma câmera."
+                            data-img="fotos/minieu.jpeg">
+                            <img src="fotos/minieu.jpeg" alt="Foto 1" />
+                            <h3>Samuelzinho</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Samuel e seu amigo, Lester Crest"
+                            data-date="14/10/2025"
+                            data-description="Foto tirada na academia que Samuel frequentava, lá ele viu um homem maromba parecido com o Lester de GTA V, ele decidiu falar com ele, mencionou a semelhança e teve sorte, pois o cara era Gamer e achou legal."
+                            data-img="fotos/lester.jpeg">
+                            <img src="fotos/lester.jpeg" alt="Foto 2" />
+                            <h3>Samuel e seu amigo, Lester Crest</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="O Lester marombeiro"
+                            data-date="14/10/2025"
+                            data-description="Uma foto só do cara, vai dizer que não é parecido!?."
+                            data-img="fotos/thelester.jpeg">
+                            <img src="fotos/thelester.jpeg" alt="Foto 3" />
+                            <h3>O Lester marombeiro</h3>
+                        </div>
+						
+						<!-- LINHA 5 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Bela foto de fundo"
+                            data-date="17/10/2015"
+                            data-description="A Imagem de fundo do PC do Samuel ... Sim, o Dell Vostro 1320 (John Cena entra pela porta), 'AWW NÃO' (Samuel sendo espancado enquanto digita isso pra terminar o artigo)."
+                            data-img="fotos/doom.jpeg">
+                            <img src="fotos/doom.jpeg" alt="Foto 1" />
+                            <h3>Bela foto de fundo</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Belas Artes vindas do Paint"
+                            data-date="17/10/2025"
+                            data-description="Primeiro desenho no Paint do Dell Vostro 13200000000000000000000000000000000000000000000000000000000000000000 (Samuel desmaiou devido ao espancamento de John Cena)."
+                            data-img="fotos/paint.jpeg">
+                            <img src="fotos/paint.jpeg" alt="Foto 2" />
+                            <h3>Belas Artes vindas do Paint</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="freddy_fazbear_invades_afghanistan.png"
+                            data-date="??/??/201?"
+                            data-description="Curiosamente, o Osama Bin Laden se assemelha muito ao seu modelo de Postal III ou o Demoman de TF2."
+                            data-img="fotos/freddy_fazbear_invades_afghanistan.jpeg">
+                            <img src="fotos/freddy_fazbear_invades_afghanistan.jpeg" alt="Foto 3" />
+                            <h3>freddy_fazbear_invades_afghanistan.png</h3>
+                        </div>
+						
+						<!-- LINHA 6 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Pequeno Gamer"
+                            data-date="??/??/201? (provavelmente entre 2013 e 2015)"
+                            data-description="Foto de Samuel (eu) e meu tio Michael (que narrou no episódio de Spectreman) 'jogando' PS3, 'jogando' pois meu controle estava desligado e meu tio estava jogando The Last Of Us. (NOTA: tem uma marca d'água safada ali)"
+                            data-img="fotos/pequeno.jpeg">
+                            <img src="fotos/pequeno.jpeg" alt="Foto 1" />
+                            <h3>Pequeno Gamer</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Samuel conhece Coringa Fumante"
+                            data-date="31/12/2024 ~ 01/01/2025"
+                            data-description="Foto da virada de ano, estava com meu pai e mais algumas pessoas, até que um cheiro forte de cigarro (Talvez de Maria Joana) me levou ao homem e então interceptei o indivíduo. Dá para notar uma caixa de caneta Laser no bolso de Samuel, naquele dia ele foi preso por cegar 40 pessoas com o Laser"
+                            data-img="fotos/coringa.jpeg">
+                            <img src="fotos/coringa.jpeg" alt="Foto 2" />
+                            <h3>Samuel conhece Coringa Fumante</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Foguete de LEGO de Natal"
+                            data-date="14/12/2025"
+                            data-description="Foto de um foguete que Samuel ganhou de seu tio Michael antecipadamente, o motivo? Ao saber que era um Lego ele começou a gritar e não dormiu por 3 dias pois estava gritando tão alto que ele não conseguia dormir, apenas parando ao por as mãos no foguete."
+                            data-img="fotos/foguete.jpeg">
+                            <img src="fotos/foguete.jpeg" alt="Foto 3" />
+                            <h3>Foguete de LEGO de Natal</h3>
+                        </div>
+						
+						<!-- LINHA 7 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="3 Amigos, 3 Dedos ... Esse título não ficou legal ..."
+                            data-date="19/12/2025"
+                            data-description="Foto de amigos na formatura do fundamental, Nicolas, Samuel e Gabriel, sendo esse último o ser vivo mais alegre da galáxia."
+                            data-img="fotos/dedos.jpeg">
+                            <img src="fotos/dedos.jpeg" alt="Foto 1" />
+                            <h3>3 Amigos, 3 Dedos ... Esse título não ficou legal ...</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="MOC Mal-Feito do Sweet Tooth"
+                            data-date="29/12/2025"
+                            data-description="Lego que fiz em poucos minutos, não gostei tanto do resultado do carro de Twisted Metal, na época tava com hiperfoco no game e até tnetei fazer review, mas também não gostei do resultado, então o Lego foi desmontado e o vídeo não foi terminado e o descartei."
+                            data-img="fotos/st.jpeg">
+                            <img src="fotos/st.jpeg" alt="Foto 2" />
+                            <h3>MOC Mal-Feito do Sweet Tooth</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="A imagem de seus pesadelos"
+                            data-date="??/??/201?"
+                            data-description="Crazetopher David Blazing III sem sua barba ... Sim, arquivos de PVZ 2."
+                            data-img="fotos/pesadelo.jpeg">
+                            <img src="fotos/pesadelo.jpeg" alt="Foto 3" />
+                            <h3>A imagem de seus pesadelos</h3>
+                        </div>
+						
+						<!-- LINHA 8 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="O Decapitado Alemãotron"
+                            data-date="08/01/2026"
+                            data-description="A recriação que fiz de um animatrônico que, creio eu, não tenho fotos, ainda vou refazer todo ele e quero muito fazer vídeos de Legos."
+                            data-img="fotos/tron.jpeg">
+                            <img src="fotos/tron.jpeg" alt="Foto 1" />
+                            <h3>O Decapitado Alemãotron</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Samuka Noel"
+                            data-date="??/??/2024"
+                            data-description="Foto de Samuel com barba e chapéu, o contexto é que Samuel, Gabriel, Ana Beatriz e Ana Isabelly (Não aparece na NLU) estavam se preparando para atividade teatral de português."
+                            data-img="fotos/samunoel.jpeg">
+                            <img src="fotos/samunoel.jpeg" alt="Foto 2" />
+                            <h3>Samuka Noel</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Imagem original Rádio Studi"
+                            data-date="07/02/2026"
+                            data-description="Imagem desenhada por Laís, irmã de Ana Beatriz, ela dez de vários vídeos tanbém, apenas não sendo usados os desenhos dela pois ela demora para fazer."
+                            data-img="fotos/oriradio.jpeg">
+                            <img src="fotos/oriradio.jpeg" alt="Foto 3" />
+                            <h3>Imagem original Rádio Studi</h3>
+                        </div>
+						
+						<!-- LINHA 9 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Foto da capa Super Contra"
+                            data-date="14/02/2026"
+                            data-description="Autoexplicativo, devido a ausência de desenho da Laís eu tive que improvisar, essa foto não foi tirada para a capa, só queria ter foto do quão ridículo ficaram os músculos de Papelão."
+                            data-img="fotos/orisc.jpeg">
+                            <img src="fotos/orisc.jpeg" alt="Foto 1" />
+                            <h3>Foto da capa Super Contra</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Coisas en Place"
+                            data-date="15/02/2026"
+                            data-description="Samuel gosta de arrumar sei quarto com esse método, pois dá para ver todos os itens e pensar onde os por."
+                            data-img="fotos/quarto.jpeg">
+                            <img src="fotos/quarto.jpeg" alt="Foto 2" />
+                            <h3>Coisas en Place</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="95 Na cabeça do Gringo"
+                            data-date="28/02/2026"
+                            data-description="Um amigo nosso do Segundo ano (Samuel era do primeiro ano) tem um 95 formado na cabeça pelo cabelo, na hora que notámos, rachamos o bico."
+                            data-img="fotos/95.jpeg">
+                            <img src="fotos/95.jpeg" alt="Foto 3" />
+                            <h3>95 Na cabeça do Gringo</h3>
+                        </div>
+						
+						<!-- LINHA 10 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Imagem original EU ODEIO CLICKERS!!!"
+                            data-date="19/03/2026"
+                            data-description="Autoexplicativo 2."
+                            data-img="fotos/orieu.jpeg">
+                            <img src="fotos/orieu.jpeg" alt="Foto 1" />
+                            <h3>Imagem original EU ODEIO CLICKERS!!!</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Bili"
+                            data-date="22/03/2026"
+                            data-description="Bili."
+                            data-img="fotos/bili.jpeg">
+                            <img src="fotos/bili.jpeg" alt="Foto 2" />
+                            <h3>Bili</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Gey Gelado/Symon"
+                            data-date="27/03/2026"
+                            data-description="Foto de amigo Thiago fazendo Cosplay, muito bom aliás."
+                            data-img="fotos/gey.jpeg">
+                            <img src="fotos/gey.jpeg" alt="Foto 3" />
+                            <h3>Gey Gelado/Symon</h3>
+                        </div>
+						
+						<!-- LINHA 11 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Guérui"
+                            data-date="27/03/2026"
+                            data-description="O primeiro furry de caracol do mundo."
+                            data-img="fotos/gary.jpeg">
+                            <img src="fotos/gary.jpeg" alt="Foto 1" />
+                            <h3>Guérui</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Seu Caranri"
+                            data-date="27/03/2026"
+                            data-description="Após o Siri Crackudo ser fechado pela Vigilância Sanitária, Seu Caranri decidiu abraçar a vida de estudos."
+                            data-img="fotos/siri.jpeg">
+                            <img src="fotos/siri.jpeg" alt="Foto 2" />
+                            <h3>Seu Caranri</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Rob Esbonga Olhos de Drogado"
+                            data-date="27/03/2026"
+                            data-description="Com olhos do tamanho de laranjas, Rob se prepara para assassinar qualquer um que o questionar sobre seu uso de LSD usando sua espátula."
+                            data-img="fotos/bob.jpeg">
+                            <img src="fotos/bob.jpeg" alt="Foto 3" />
+                            <h3>Rob Esbonga Olhos de Drogado</h3>
+                        </div>
+						
+						<!-- LINHA 12 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Mula Lolusco"
+                            data-date="27/03/2026"
+                            data-description="Mula Lolusco foi dispensado do Siri Crackudo após um acidente testicular."
+                            data-img="fotos/lula.jpeg">
+                            <img src="fotos/lula.jpeg" alt="Foto 1" />
+                            <h3>Mula Lolusco</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Jurégui"
+                            data-date="27/03/2026"
+                            data-description="O QUE ESTÃO FAZENDO NO MEU PÂNTANO!!?? (Olha! O Woody alí atrás!)."
+                            data-img="fotos/ogro.jpeg">
+                            <img src="fotos/ogro.jpeg" alt="Foto 2" />
+                            <h3>Jurégui</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Desenho do Postal Dude"
+                            data-date="??/??/2025"
+                            data-description="Rabiscaralhos que viraram um desenho legalzinho (eu acho ... ), não me arrependo de nada ... I regret nothing."
+                            data-img="fotos/dude.jpeg">
+                            <img src="fotos/dude.jpeg" alt="Foto 3" />
+                            <h3>Desenho do Postal Dude</h3>
+                        </div>
+						
+							<!-- LINHA 13 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Rabiscos #2"
+                            data-date="??/??/2025"
+                            data-description="Eu não sei como descrever isso ..."
+                            data-img="fotos/flacidez.jpeg">
+                            <img src="fotos/flacidez.jpeg" alt="Foto 3" />
+                            <h3>Rabiscos #2</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Rabiscos #3"
+                            data-date="??/??/2025"
+                            data-description="Alguns desenhos com elementos de Games que eu amo (Crash e Katamari são maravilhosos)."
+                            data-img="fotos/rabiscos3.jpeg">
+                            <img src="fotos/rabiscos3.jpeg" alt="Foto 3" />
+                            <h3>Rabiscos #3</h3>
+                        </div>
+
+                       <div class="gallery-card" tabindex="0"
+                            data-title="Rabiscos #4"
+                            data-date="??/??/2025"
+                            data-description="Esses sim são rabiscos."
+                            data-img="fotos/rabiscos4.jpeg">
+                            <img src="fotos/rabiscos4.jpeg" alt="Foto 3" />
+                            <h3>Rabiscos #4</h3>
+                        </div>
+						
+						<!-- LINHA 14 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Personagens"
+                            data-date="??/??/2025"
+                            data-description="Desenho que fiz de algumas ideias de personagens, quem sabe eles não aparecem futuramente? Talvez nas HQs do Homem-Galinha?."
+                            data-img="fotos/caras.jpeg">
+                            <img src="fotos/caras.jpeg" alt="Foto 3" />
+                            <h3>Personagens</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Bátimã, O Cavaleiro Das Pregas"
+                            data-date="??/??/20??"
+                            data-description="Usado no vídeo/trabalho 'Atividade de Inglês - IFC Trim. 1'."
+                            data-img="fotos/pregas.jpeg">
+                            <img src="fotos/pregas.jpeg" alt="Foto 3" />
+                            <h3>Bátimã, O Cavaleiro Das Pregas</h3>
+                        </div>
+
+                       <div class="gallery-card" tabindex="0"
+                            data-title="A ótima postura de Carlos Eduardo"
+                            data-date="29/04/2026"
+                            data-description="Dizem que um dia Cadu ira se tornar um 'C' ou uma roda humana, se a postura dele continuar assim, síndrome de Gamer."
+                            data-img="fotos/coluna.jpeg">
+                            <img src="fotos/coluna.jpeg" alt="Foto 3" />
+                            <h3>A ótima postura de Carlos Eduardo</h3>
+                        </div>
+						
+						<!-- LINHA 15 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="O Monstro Do PNG Falso"
+                            data-date="09/05/2026"
+                            data-description="Figura de uma criatura mística da Interwebs que atormenta a todos que buscam imagens de fundo transparente. Ele aparece nos seus sonhos para atacar, é primo do Freddy Krueger."
+                            data-img="fotos/png.jpeg">
+                            <img src="fotos/png.jpeg" alt="Foto 3" />
+                            <h3>O Monstro Do PNG Falso</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Imagem original Dell Vostro 1320"
+                            data-date="15/05/2026"
+                            data-description="Usado no vídeo do Dell Vostro 1320 ..... De novo não! (John Cena retorna pela porta, aponta dois dedos para os olhos e depois para Samuel)."
+                            data-img="fotos/oridell.jpeg">
+                            <img src="fotos/oridell.jpeg" alt="Foto 3" />
+                            <h3>Imagem original Dell Vostro 1320</h3>
+                        </div>
+
+                       <div class="gallery-card" tabindex="0"
+                            data-title="Super Mario Bros. no Dynavision 4 na TV CCE"
+                            data-date="16/05/2026"
+                            data-description="Eu trouxe essa TV lá de Sombrio até Torres, agora imagina, você está voltando pra casa no ônibus após um dia cansativo do IFC, daí surge um retardado com uma TV Tubão."
+                            data-img="fotos/sdc.jpeg">
+                            <img src="fotos/sdc.jpeg" alt="Foto 3" />
+                            <h3>Super Mario Bros. no Dynavision 4 na TV CCE</h3>
+                        </div>
+						
+						<!-- LINHA 16 -->	
+						
+						  <div class="gallery-card" tabindex="0"
+                            data-title="Jichael Mackson"
+                            data-date="??/??/20??"
+                            data-description=" É impossível não cantarolar suas musicas, 'You know i'm good, i'm Good', 'I've been struck by a lousy police officer'."
+                            data-img="fotos/jichael.jpeg">
+                            <img src="fotos/jichael.jpeg" alt="Foto 3" />
+                            <h3>Jichael Mackson</h3>
+                        </div>
+
+                        <div class="gallery-card" tabindex="0"
+                            data-title="Tortuguita Flippin' the bird"
+                            data-date="??/??/20??"
+                            data-description="Vamos falar de tartarugas e pássaros (quem manja de inglês manjou essa)."
+                            data-img="fotos/bird.jpeg">
+                            <img src="fotos/bird.jpeg" alt="Foto 3" />
+                            <h3>Tortuguita Flippin' the bird</h3>
+                        </div>
+
+                      
+
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+        <!-- =====================================================
+             RODAPÉ
+        ===================================================== -->
+
+        <footer class="site-footer">
+
+            <p>
+                &copy; 2026 Nerd League United.
+                Todos os direitos reservados.
+            </p>
+
+        </footer>
+
+    </div>
+
+    <!-- Modal da galeria -->
+    <div id="modal-gallery" class="modal-gallery" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-gallery-content" role="document">
+            <button id="modal-close" class="modal-close" aria-label="Fechar">&times;</button>
+            <img id="modal-image" src="" alt="" />
+            <div class="modal-text">
+                <h2 id="modal-title"></h2>
+                <p class="modal-date" id="modal-date"></p>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal-gallery');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const modalClose = document.getElementById('modal-close');
+
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', () => {
+                modalImage.src = card.dataset.img;
+                modalImage.alt = card.dataset.title;
+                modalTitle.textContent = card.dataset.title;
+                modalDate.textContent = card.dataset.date;
+                modalDescription.textContent = card.dataset.description;
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                modalClose.focus();
+            });
+
+            card.addEventListener('keydown', e => {
+                if(e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', e => {
+            if(e.target === modal) {
+                modalClose.click();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+                modalClose.click();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

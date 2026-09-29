@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NLU - Bazar Da Liga</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           ÁREA DOS DOIS BLOCOS
+        ===================================================== */
+
+        .hqs-livros-container {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           BLOCO VERTICAL
+        ===================================================== */
+
+        .hqs-livros-card {
+
+            width: 100%;
+
+            height: 440px;
+
+            background-color: #0c0c0c;
+
+            border: 1px solid #333;
+
+            box-sizing: border-box;
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .hqs-livros-card .block-title {
+
+            flex-shrink: 0;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           CONTEÚDO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content {
+
+            padding: 12px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =====================================================
+           ESPAÇO PARA IMAGEM
+        ===================================================== */
+
+        .hqs-livros-image {
+
+            width: 92%;
+
+            height: 285px;
+
+            background-color: #161616;
+
+            border: 1px dashed #444;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .hqs-livros-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+           TEXTO DO BLOCO
+        ===================================================== */
+
+        .hqs-livros-content h3 {
+
+            margin: 0 0 6px 0;
+
+            color: #ffcc00;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+        }
+
+
+        .hqs-livros-content p {
+
+            margin: 0;
+
+            color: #ccc;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .hqs-livros-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .hqs-livros-card {
+
+                height: 420px;
+
+            }
+
+            .hqs-livros-image {
+
+                height: 270px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ===================================================== -->
+
+    <header class="page-header-box">
+
+        <img
+            src="logonlu.png"
+            alt="Logo NLU"
+        >
+
+
+        <div>
+
+            <p
+                style="
+                    font-size:11px;
+                    color:#888;
+                "
+            >
+                NERD LEAGUE UNITED
+            </p>
+
+
+            <h1>
+               Bazar Da Liga
+            </h1>
+
+        </div>
+
+
+        <div class="header-right-box">
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnited"
+                target="_blank"
+                class="youtube-btn"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+
+            <div class="counter-box">
+                Inscritos: 84
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SUB-NAVEGAÇÃO
+    ===================================================== -->
+
+    <div class="sub-nav-links">
+
+        <a href="index.html">
+            ← Voltar ao Início
+        </a>
+
+        |
+
+        <a href="qs.html">
+            Quem Somos
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         ESTEIRA
+    ===================================================== -->
+ <!-- Esteira de Letreiro (Marquee) -->
+        <div class="marquee-zone">
+            <div class="marquee-content">
+                <span> ... Aqui você pode adquirir produtos oficias da Nerd League United, ao comprar algo você está ajudando nós a continuar nossos projetos e receberá um agradecimento em ... Algum Lugar ... &nbsp;</span>
+                <span> ... Aqui você pode adquirir produtos oficias da Nerd League United, ao comprar algo você está ajudando nós a continuar nossos projetos e receberá um agradecimento em ... Algum Lugar ...
+                 &nbsp;</span>
+            </div>
+        </div>
+    
+    <!-- =====================================================
+         DOIS BLOCOS PRINCIPAIS
+    ===================================================== -->
+
+    <div class="hqs-livros-container">
+
+
+        <!-- =================================================
+             Games
+        ================================================= -->
+
+      <div class="hqs-livros-card">
+
+    <div class="block-title">
+        NLU - Bazar Da Liga: Item 1
+    </div>
+
+    <div class="hqs-livros-content">
+
+        <a href="bazar.html" style="width: 92%; display: flex; justify-content: center;">
+            <div class="hqs-livros-image">
+                <img
+                    src="asdf/galinha.jpeg"
+                    alt="A Terrível História do Homem-Galinha"
+                >
+            </div>
+        </a>
+
+        <h3>
+            <big> A Terrível História Do Homem-Galinha</big> <br> <strong>~~ R$ 00.00 ~~</strong>
+        </h3>
+
+        <p>
+            A primeira edição das HQs feitas por Samuel Büron e Lucas Freitas. <br> Acompanhe as desaventuras desta criatura e apoie a NLU!
+        </p>
+
+    </div>
+
+</div>
+
+
+
+        <!-- =================================================
+             fezes, digo, games
+        ================================================= -->
+
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+               NLU - Bazar Da Liga: Item 2
+            </div>
+
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+
+                    <!--
+                        Coloque aqui a imagem do livro.
+                        Exemplo:
+                        livro1.jpg
+                    -->
+
+                    <span
+                        style="
+                            color:#555;
+                            font-size:12px;
+                        "
+                    >
+                        Imagem do jogo
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    <big>PsEyechatron (Atari 2600)</big>  <br> <strong>~~ R$ 00.00 ~~</strong>
+                </h3>
+
+
+                <p>
+                    Se quiser saber mais sobre oque é PsEyechatron<br> cheque os <a href="out.html">DevLogs e Bastidores</a>
+                </p>
+
+            </div>
+
+        </div>
+		
+		<!-- =================================================
+             Games
+        ================================================= -->
+<!--
+        <div class="hqs-livros-card">
+
+            <div class="block-title">
+                NLU - Bazar Da Liga: Item 3
+            </div>
+															<a href="bazar.html">
+
+            <div class="hqs-livros-content">
+
+
+                <div class="hqs-livros-image">
+				 <img
+        src=""
+        alt="A Terrível História do Homem-Galinha"
+    >
+
+                  
+
+                </div>
+
+															</a>
+
+                <h3>
+                   <big> N.A.D.A. Temporada 1 (VHS)</big> <br> <strong>~~ R$ 00.00 ~~</strong>
+                </h3>
+
+
+                <p>
+                  A primeira temporada da primeira série da NLU em fita cassete! Prepare os cabeçotes e robobine de volta as origens!
+                </p>
+
+            </div>
+
+        </div> -->
+		
+</div>
+
+    <!-- =====================================================
+         RODAPÉ
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 Nerd League United.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>
