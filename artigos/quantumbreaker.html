@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Quantum Break</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Quantum Break foi lançado originalmente para Xbox One
+          em 2016 e combina jogo de ação em terceira pessoa,
+          manipulação do tempo e episódios de uma série live-action ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Quantum Break foi lançado originalmente para Xbox One
+          em 2016 e combina jogo de ação em terceira pessoa,
+          manipulação do tempo e episódios de uma série live-action ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Quantum Break — Xbox One
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/quantumbreak_xboxone.jpg"
+              alt="Quantum Break para Xbox One"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Quantum Break
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break é um jogo eletrônico de ação e aventura
+            desenvolvido pela Remedy Entertainment e publicado
+            pela Microsoft Studios.<br>
+
+            O jogo foi lançado originalmente para Xbox One em
+            5 de abril de 2016.<br>
+
+            A história acompanha Jack Joyce, que adquire
+            habilidades relacionadas à manipulação do tempo
+            após um experimento de viagem temporal sofrer uma
+            grande falha.<br>
+
+            A aventura combina combate em terceira pessoa,
+            poderes temporais, exploração e uma narrativa
+            cinematográfica integrada a episódios de uma
+            série live-action.<br>
+
+            As escolhas realizadas durante determinados momentos
+            da campanha influenciam os acontecimentos apresentados
+            nos episódios da série.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Remedy Entertainment
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Microsoft Studios
+              </li>
+
+              <li>
+                <strong>Direção criativa:</strong>
+                Sam Lake
+              </li>
+
+              <li>
+                <strong>Plataforma original:</strong>
+                Xbox One
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                5 de abril de 2016
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura / Tiro em terceira pessoa
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador
+              </li>
+
+              <li>
+                <strong>Engine:</strong>
+                Northlight Engine
+              </li>
+
+              <li>
+                <strong>Classificação:</strong>
+                16 anos no Brasil
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break foi desenvolvido pela Remedy Entertainment,
+            estúdio finlandês conhecido por trabalhos como Max Payne
+            e Alan Wake.<br>
+
+            O projeto foi concebido como uma experiência de ação
+            fortemente baseada em narrativa, utilizando a manipulação
+            do tempo como elemento central da jogabilidade.<br>
+
+            Durante o desenvolvimento, a equipe criou um sistema
+            no qual os poderes temporais de Jack poderiam ser
+            utilizados tanto durante os combates quanto na
+            exploração dos ambientes.<br>
+
+            A produção também incorporou uma série de televisão
+            live-action diretamente à estrutura do jogo, fazendo
+            com que determinadas escolhas do jogador alterassem
+            os episódios apresentados entre os capítulos.<br>
+
+            O jogo utiliza a Northlight Engine, tecnologia desenvolvida
+            pela própria Remedy para seus projetos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xboxone.jpg"
+                alt="Xbox One"
+              />
+
+              <img
+                src="../tgga/remedy.jpg"
+                alt="Remedy Entertainment"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox One e Remedy Entertainment — contexto de Quantum Break ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break surgiu durante a geração do Xbox One,
+            período em que a Microsoft buscava ampliar sua produção
+            de jogos exclusivos e experiências narrativas.<br>
+
+            A Remedy já possuía experiência com jogos de ação
+            cinematográficos e narrativas complexas, especialmente
+            através de Max Payne e Alan Wake.<br>
+
+            Quantum Break levou essas características para uma
+            proposta baseada em viagem temporal, poderes especiais
+            e uma apresentação que misturava videogame e televisão.<br>
+
+            O título foi anunciado para Xbox One e posteriormente
+            teve seu lançamento confirmado para 5 de abril de 2016,
+            chegando também ao Windows 10 no mesmo período.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Xbox One
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break foi lançado para Xbox One em
+            5 de abril de 2016.<br>
+
+            A publicação ficou a cargo da Microsoft Studios,
+            enquanto o desenvolvimento foi realizado pela
+            Remedy Entertainment.<br>
+
+            O jogo também foi lançado para Windows 10,
+            fazendo parte da estratégia da Microsoft de
+            disponibilizar determinados títulos em mais de
+            uma plataforma dentro de seu ecossistema.<br>
+
+            A versão de Xbox One recebeu posteriormente
+            melhorias específicas para o Xbox One X.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/jack_joyce.jpg"
+                alt="Jack Joyce"
+              />
+
+              <img
+                src="../tgga/paul_serene.jpg"
+                alt="Paul Serene"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Jack Joyce e Paul Serene ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história começa quando Jack Joyce retorna à
+            universidade de Riverport a convite de seu antigo
+            amigo Paul Serene.<br>
+
+            Paul e o irmão de Jack, William Joyce, estão envolvidos
+            em um experimento relacionado à viagem no tempo.<br>
+
+            O experimento sofre uma falha catastrófica e provoca
+            uma ruptura na própria estrutura temporal.<br>
+
+            Como consequência do acidente, Jack e Paul passam a
+            possuir habilidades relacionadas ao tempo, mas seguem
+            caminhos diferentes diante da ameaça de um evento
+            conhecido como o fim do tempo.<br>
+
+            Jack tenta impedir a destruição da realidade enquanto
+            Paul procura controlar os acontecimentos através da
+            Monarch Solutions.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Jack Joyce:</strong>
+                protagonista e personagem controlado pelo jogador.
+              </li>
+
+              <li>
+                <strong>Paul Serene:</strong>
+                antigo amigo de Jack e líder da Monarch Solutions.
+              </li>
+
+              <li>
+                <strong>William Joyce:</strong>
+                irmão de Jack e um dos responsáveis pela pesquisa
+                envolvendo viagem temporal.
+              </li>
+
+              <li>
+                <strong>Beth Wilder:</strong>
+                personagem importante na resistência contra
+                a Monarch Solutions.
+              </li>
+
+              <li>
+                <strong>Martin Hatch:</strong>
+                importante executivo associado à Monarch Solutions.
+              </li>
+
+              <li>
+                <strong>Amy Ferraro:</strong>
+                personagem ligada aos acontecimentos envolvendo
+                a Monarch e a resistência.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PODERES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Poderes Temporais
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/qb_time_stop.jpg"
+                  alt="Time Stop"
+                />
+
+                <figcaption>
+                  Time Stop
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/qb_time_dash.jpg"
+                  alt="Time Dash"
+                />
+
+                <figcaption>
+                  Time Dash
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/qb_time_blast.jpg"
+                  alt="Time Blast"
+                />
+
+                <figcaption>
+                  Time Blast
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/qb_time_vision.jpg"
+                  alt="Time Vision"
+                />
+
+                <figcaption>
+                  Time Vision
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os poderes temporais são o principal elemento da
+            jogabilidade de Quantum Break.<br>
+
+            Jack consegue manipular o tempo de diferentes maneiras,
+            utilizando suas habilidades para atacar inimigos,
+            atravessar áreas perigosas e sobreviver a situações
+            de combate.<br>
+
+            Entre as habilidades estão movimentos rápidos,
+            criação de campos temporais e manipulação de áreas
+            afetadas pela ruptura temporal.<br>
+
+            A combinação dos poderes com armas de fogo permite
+            criar diferentes estratégias durante os confrontos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMBATE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Combate
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break apresenta combate em terceira pessoa
+            baseado principalmente em armas de fogo e poderes
+            temporais.<br>
+
+            Jack pode utilizar pistolas, submetralhadoras,
+            espingardas e rifles para enfrentar os soldados
+            da Monarch Solutions.<br>
+
+            Os poderes temporais complementam o arsenal tradicional,
+            permitindo que o jogador altere o posicionamento
+            durante o combate ou crie oportunidades para atacar
+            inimigos protegidos.<br>
+
+            A movimentação rápida e a utilização estratégica dos
+            poderes são fundamentais para sobreviver aos confrontos
+            mais intensos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MONARCH
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Monarch Solutions
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/monarch_solutions.jpg"
+                alt="Monarch Solutions"
+              />
+
+              <img
+                src="../tgga/monarch_soldier.jpg"
+                alt="Soldado da Monarch Solutions"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Monarch Solutions e suas forças de segurança ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A Monarch Solutions é uma organização central na
+            história de Quantum Break.<br>
+
+            Liderada por Paul Serene, a empresa possui tecnologia
+            avançada relacionada à manipulação temporal e participa
+            diretamente dos acontecimentos provocados pelo
+            experimento.<br>
+
+            A Monarch utiliza forças de segurança equipadas com
+            tecnologia especializada para enfrentar Jack e seus
+            aliados.<br>
+
+            Alguns soldados possuem equipamentos capazes de
+            interagir com as anomalias temporais e oferecer
+            resistência aos poderes de Jack.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FRATURA TEMPORAL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Fratura no Tempo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O experimento de William Joyce e Paul Serene tinha
+            como objetivo pesquisar a possibilidade de manipular
+            o tempo.<br>
+
+            Entretanto, a experiência provoca uma ruptura que
+            afeta o fluxo temporal.<br>
+
+            O mundo começa a apresentar fenômenos conhecidos
+            como Stutters, nos quais objetos, pessoas e ambientes
+            ficam temporariamente presos ou distorcidos no tempo.<br>
+
+            Esses eventos também influenciam diretamente a
+            jogabilidade, criando situações em que o cenário
+            parece congelado enquanto Jack consegue continuar
+            se movimentando.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               STUTTERS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Stutters
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Stutters são manifestações da instabilidade temporal
+            causada pela ruptura.<br>
+
+            Durante esses acontecimentos, partes do mundo podem
+            ficar congeladas em determinados momentos do tempo.<br>
+
+            Jack consegue atravessar essas áreas utilizando suas
+            habilidades temporais e observar acontecimentos que
+            normalmente estariam paralisados.<br>
+
+            Alguns momentos de exploração e combate utilizam
+            diretamente esses fenômenos para criar obstáculos
+            e situações de ação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SÉRIE LIVE ACTION
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Série Live-Action
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/quantumbreak_tv.jpg"
+                alt="Série live-action de Quantum Break"
+              />
+
+              <img
+                src="../tgga/quantumbreak_cast.jpg"
+                alt="Elenco de Quantum Break"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ A série live-action integrada à experiência de Quantum Break ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais características de Quantum Break
+            é a integração de episódios live-action à campanha.<br>
+
+            A estrutura do jogo possui cinco atos principais,
+            com episódios da série apresentados entre partes
+            da campanha.<br>
+
+            Os episódios acompanham principalmente personagens
+            ligados à Monarch Solutions e complementam os
+            acontecimentos apresentados durante o jogo.<br>
+
+            As escolhas realizadas pelo jogador nos chamados
+            Junctions determinam diferentes acontecimentos
+            nos episódios seguintes.<br>
+
+            Dessa maneira, a série não funciona apenas como
+            uma sequência de vídeos independentes, mas como
+            parte integrada da estrutura narrativa do jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JUNCTIONS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Junctions e Escolhas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Junctions são momentos da campanha em que o jogador
+            assume o controle de Paul Serene e precisa escolher
+            entre diferentes possibilidades para o desenvolvimento
+            da história.<br>
+
+            Essas decisões podem alterar acontecimentos posteriores,
+            diálogos e determinados elementos dos episódios
+            live-action.<br>
+
+            A estrutura permite que diferentes jogadores encontrem
+            algumas variações narrativas durante suas campanhas,
+            mesmo que a história principal mantenha uma estrutura
+            geral compartilhada.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ATOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estrutura da Campanha
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha de Quantum Break é organizada em atos,
+            alternando segmentos jogáveis com episódios da
+            produção live-action.<br>
+
+            Essa estrutura permite que os acontecimentos sejam
+            apresentados de diferentes pontos de vista e que
+            personagens secundários recebam maior desenvolvimento.<br>
+
+            As decisões de Paul nos Junctions influenciam o
+            episódio correspondente e podem alterar o modo como
+            determinados eventos são apresentados.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Ato</th>
+                <th>Estrutura</th>
+                <th>Elemento principal</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Ato 1</td>
+                <td>Jogo + Junction</td>
+                <td>Início da ruptura temporal</td>
+              </tr>
+
+              <tr>
+                <td>Ato 2</td>
+                <td>Jogo + Junction</td>
+                <td>Conflito com a Monarch</td>
+              </tr>
+
+              <tr>
+                <td>Ato 3</td>
+                <td>Jogo + Junction</td>
+                <td>Expansão da ameaça temporal</td>
+              </tr>
+
+              <tr>
+                <td>Ato 4</td>
+                <td>Jogo + Junction</td>
+                <td>Confronto e decisões</td>
+              </tr>
+
+              <tr>
+                <td>Ato 5</td>
+                <td>Jogo + conclusão</td>
+                <td>Desfecho da história</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               AMBIENTES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ambientes e Exploração
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break apresenta diferentes ambientes urbanos
+            e industriais na cidade fictícia de Riverport.<br>
+
+            A campanha inclui universidades, instalações da
+            Monarch Solutions, áreas industriais, ruas,
+            laboratórios e estruturas afetadas pela ruptura
+            temporal.<br>
+
+            A exploração também permite encontrar objetos,
+            documentos, e-mails e outros elementos que expandem
+            o universo da história.<br>
+
+            Alguns ambientes possuem eventos temporais que
+            modificam temporariamente sua aparência e
+            funcionamento.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLETÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Coletáveis
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ELEMENTOS ENCONTRADOS NO CENÁRIO -
+            </h3>
+
+            <ul>
+
+              <li>
+                Documentos
+              </li>
+
+              <li>
+                E-mails
+              </li>
+
+              <li>
+                Registros
+              </li>
+
+              <li>
+                Fotografias
+              </li>
+
+              <li>
+                Televisores e transmissões
+              </li>
+
+              <li>
+                Fontes de informação sobre a Monarch
+              </li>
+
+              <li>
+                Elementos relacionados à pesquisa temporal
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILHA SONORA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Áudio
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/quantumbreak_music.jpg"
+                alt="Trilha sonora de Quantum Break"
+              />
+
+              <img
+                src="../tgga/petri_alanko.jpg"
+                alt="Petri Alanko"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Música e identidade sonora de Quantum Break ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora de Quantum Break contribui para a
+            atmosfera cinematográfica da aventura.<br>
+
+            A música acompanha os momentos de ação, tensão e
+            desenvolvimento narrativo, enquanto efeitos sonoros
+            específicos ajudam a representar os fenômenos
+            relacionados à manipulação temporal.<br>
+
+            A apresentação audiovisual foi planejada para aproximar
+            a experiência do jogo de uma produção cinematográfica
+            de ficção científica.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Northlight Engine
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break utiliza a Northlight Engine, tecnologia
+            desenvolvida pela Remedy Entertainment.<br>
+
+            O motor foi utilizado para produzir ambientes
+            detalhados, iluminação, efeitos visuais e
+            personagens digitais necessários para a experiência
+            cinematográfica do jogo.<br>
+
+            A tecnologia também foi utilizada para representar
+            os efeitos associados à ruptura temporal e aos
+            momentos em que partes do cenário ficam congeladas
+            ou distorcidas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ELENCO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Elenco
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ATORES PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Shawn Ashmore:</strong>
+                Jack Joyce
+              </li>
+
+              <li>
+                <strong>Aidan Gillen:</strong>
+                Paul Serene
+              </li>
+
+              <li>
+                <strong>Dominic Monaghan:</strong>
+                William Joyce
+              </li>
+
+              <li>
+                <strong>Lance Reddick:</strong>
+                Martin Hatch
+              </li>
+
+              <li>
+                <strong>Courtney Hope:</strong>
+                Beth Wilder
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX ONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Quantum Break no Xbox One
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No Xbox One, Quantum Break foi apresentado como uma
+            experiência single-player desenvolvida especificamente
+            para o console da Microsoft.<br>
+
+            O jogo combina tiro em terceira pessoa, poderes
+            temporais, exploração e uma narrativa dividida em
+            capítulos.<br>
+
+            A experiência também foi posteriormente disponibilizada
+            para Xbox Series X|S através da compatibilidade da
+            plataforma.<br>
+
+            A página oficial da Xbox atualmente identifica
+            Quantum Break como jogável em Xbox One, Xbox Series X|S
+            e Xbox Cloud Gaming.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break permanece como um dos projetos mais
+            particulares da Remedy Entertainment por combinar
+            videogame e produção live-action em uma mesma
+            experiência narrativa.<br>
+
+            A utilização de poderes relacionados ao tempo também
+            tornou-se uma das principais características de sua
+            jogabilidade.<br>
+
+            O título ajudou a estabelecer elementos tecnológicos
+            e narrativos que posteriormente seriam associados
+            aos trabalhos da Remedy em projetos posteriores.<br>
+
+            A combinação de ação, ficção científica, viagem no
+            tempo e narrativa cinematográfica tornou Quantum Break
+            uma produção marcante da geração do Xbox One.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Quantum Break foi lançado originalmente para
+                Xbox One em 5 de abril de 2016.
+              </li>
+
+              <li>
+                O jogo foi desenvolvido pela Remedy Entertainment.
+              </li>
+
+              <li>
+                A história gira em torno de uma experiência
+                de viagem no tempo que sofre uma falha.
+              </li>
+
+              <li>
+                Jack Joyce é interpretado por Shawn Ashmore.
+              </li>
+
+              <li>
+                Paul Serene é interpretado por Aidan Gillen.
+              </li>
+
+              <li>
+                William Joyce é interpretado por Dominic Monaghan.
+              </li>
+
+              <li>
+                O jogo possui episódios de uma série
+                live-action integrados à campanha.
+              </li>
+
+              <li>
+                As escolhas realizadas nos Junctions influenciam
+                acontecimentos posteriores da narrativa.
+              </li>
+
+              <li>
+                A Monarch Solutions é uma das principais
+                organizações da história.
+              </li>
+
+              <li>
+                O jogo utiliza a Northlight Engine,
+                desenvolvida pela Remedy.
+              </li>
+
+              <li>
+                A campanha é estruturada em cinco atos.
+              </li>
+
+              <li>
+                Quantum Break também foi lançado para Windows 10
+                no mesmo período do lançamento do Xbox One.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES E MATERIAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quantum Break recebeu diferentes apresentações físicas
+            e digitais durante seu lançamento.<br>
+
+            A edição física para Xbox One apresenta caixa,
+            disco e materiais relacionados ao jogo.<br>
+
+            Também foi produzida uma edição especial do Xbox One
+            associada ao lançamento de Quantum Break, com console
+            de acabamento branco e elementos visuais relacionados
+            ao título.<br>
+
+            Materiais promocionais, edições físicas e itens
+            relacionados ao lançamento podem possuir interesse
+            para colecionadores da geração Xbox One.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/quantumbreak_box.jpg"
+                  alt="Caixa de Quantum Break"
+                />
+
+                <figcaption>
+                  Caixa — Quantum Break
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/quantumbreak_disc.jpg"
+                  alt="Disco de Quantum Break"
+                />
+
+                <figcaption>
+                  Disco — Xbox One
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/quantumbreak_xbox_bundle.jpg"
+                  alt="Xbox One Quantum Break Edition"
+                />
+
+                <figcaption>
+                  Xbox One — Quantum Break Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/quantumbreak_collectors.jpg"
+                  alt="Edição especial de Quantum Break"
+                />
+
+                <figcaption>
+                  Edição especial — Quantum Break
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="quantumbreak.html">
+                ○ Games - Quantum Break
+              </a>
+            </li>
+
+            <li>
+              <a href="xboxone.html">
+                ○ Consoles - Xbox One
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Jack Joyce</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de Quantum Break e personagem
+                  controlado pelo jogador.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Ator: Shawn Ashmore</li>
+                  <li>Poderes temporais: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Paul Serene</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Antigo amigo de Jack e líder da Monarch Solutions.
+                  Também possui habilidades relacionadas ao tempo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>William Joyce</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Jack e pesquisador envolvido
+                  no experimento temporal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Beth Wilder</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Aliada de Jack e integrante da resistência
+                  contra a Monarch Solutions.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Martin Hatch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Executivo da Monarch Solutions e uma das
+                  figuras importantes da narrativa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Monarch Solutions</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Organização criada por Paul Serene e envolvida
+                  diretamente nos acontecimentos temporais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Vision</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Habilidade que permite a Jack perceber
+                  informações e elementos relacionados ao tempo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Stop</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Poder que permite criar uma área de
+                  manipulação temporal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Dash</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento rápido que permite a Jack
+                  atravessar pequenas distâncias rapidamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Blast</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Habilidade ofensiva que utiliza energia
+                  temporal contra inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Rush</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Habilidade que aumenta a velocidade de
+                  movimento de Jack durante o combate.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Dodge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento evasivo baseado na manipulação
+                  da velocidade temporal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stutter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fenômeno causado pela ruptura temporal,
+                  deixando partes do ambiente presas
+                  em determinados momentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Junction</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Momento em que o jogador controla Paul Serene
+                  e toma uma decisão que influencia a narrativa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Live-Action Episodes</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Episódios de uma série live-action integrados
+                  à campanha do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Monarch Soldier</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Soldado da Monarch Solutions equipado
+                  para enfrentar Jack.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Monarch Heavy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade pesada da Monarch equipada com
+                  armamento e proteção superiores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Monarch Juggernaut</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade fortemente equipada utilizada
+                  pela Monarch durante determinados combates.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Riverport University</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Local onde ocorre o experimento que desencadeia
+                  a ruptura temporal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Machine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Máquina utilizada nos experimentos de viagem
+                  e manipulação do tempo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>End of Time</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Evento relacionado ao colapso progressivo
+                  da estrutura temporal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Quantum Break</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Experiência de ação e aventura baseada
+                  em manipulação temporal e narrativa
+                  cinematográfica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox One</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma original de Quantum Break,
+                  lançada em 2016.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Northlight Engine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia gráfica desenvolvida pela
+                  Remedy Entertainment e utilizada no jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Remedy Entertainment</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio finlandês responsável pelo
+                  desenvolvimento de Quantum Break.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microsoft Studios</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Publicadora responsável pelo lançamento
+                  original de Quantum Break.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sam Lake</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor criativo associado ao desenvolvimento
+                  de Quantum Break.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shawn Ashmore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ator responsável pela interpretação de
+                  Jack Joyce.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Aidan Gillen</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ator responsável pela interpretação de
+                  Paul Serene.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dominic Monaghan</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ator responsável pela interpretação de
+                  William Joyce.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lance Reddick</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ator responsável pela interpretação de
+                  Martin Hatch.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox One X</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Versão do Xbox One que recebeu melhorias
+                  específicas para Quantum Break.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

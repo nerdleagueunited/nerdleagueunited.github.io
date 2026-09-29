@@ -1,0 +1,2867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Controle Sem Fio Xbox One</title>
+
+  <link
+    rel="stylesheet"
+    href="../style.css"
+  >
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+
+      margin-top: 25px;
+
+      padding: 10px;
+
+      background: #222;
+
+      border: 1px solid #444;
+
+    }
+
+
+    .components-block h3 {
+
+      font-size: 14px;
+
+      color: #fff;
+
+      margin-bottom: 10px;
+
+      text-align: center;
+
+      border-bottom: 1px dashed #555;
+
+      padding-bottom: 5px;
+
+    }
+
+
+    .component-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 5px;
+
+    }
+
+
+    .component-item {
+
+      border: 1px solid #3d3d3d;
+
+      background: #181818;
+
+    }
+
+
+    .component-item summary {
+
+      cursor: pointer;
+
+      padding: 9px 10px;
+
+      color: #ddd;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      list-style: none;
+
+      transition: all 0.2s ease;
+
+    }
+
+
+    .component-item summary::-webkit-details-marker {
+
+      display: none;
+
+    }
+
+
+    .component-item summary::before {
+
+      content: "▶";
+
+      display: inline-block;
+
+      margin-right: 8px;
+
+      color: #888;
+
+      font-size: 9px;
+
+      transition: transform 0.2s ease;
+
+    }
+
+
+    .component-item summary:hover {
+
+      background: #2a2a2a;
+
+      color: #fff;
+
+    }
+
+
+    .component-item[open] summary {
+
+      color: #fff;
+
+      background: #2b2b2b;
+
+      border-bottom: 1px dashed #555;
+
+    }
+
+
+    .component-item[open] summary::before {
+
+      transform: rotate(90deg);
+
+      color: #fff;
+
+    }
+
+
+    .component-description {
+
+      padding: 12px;
+
+      background: #111;
+
+      color: #bbb;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+    }
+
+
+    .component-description p {
+
+      margin: 0 0 10px 0;
+
+    }
+
+
+    .component-description p:last-child {
+
+      margin-bottom: 0;
+
+    }
+
+
+    .component-specs {
+
+      margin: 10px 0 0 18px;
+
+      padding: 0;
+
+      color: #aaa;
+
+    }
+
+
+    .component-specs li {
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .component-description strong {
+
+      color: #ddd;
+
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+
+      margin: 20px 0;
+
+      text-align: center;
+
+    }
+
+
+    .console-images {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 15px;
+
+      width: 100%;
+
+    }
+
+
+    .console-images img {
+
+      width: 45%;
+
+      max-width: 300px;
+
+      height: auto;
+
+      border: 1px solid #444;
+
+      padding: 4px;
+
+      box-sizing: border-box;
+
+    }
+
+
+    .historical-consoles figcaption {
+
+      margin-top: 10px;
+
+      color: #aaa;
+
+      font-size: 13px;
+
+      text-align: center;
+
+    }
+
+
+    /* ==========================================
+       MODELOS
+       ========================================== */
+
+    .models-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 25px 15px;
+
+      width: 100%;
+
+      margin-top: 20px;
+
+    }
+
+
+    .model-item {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      text-align: center;
+
+      width: 100%;
+
+    }
+
+
+    .model-item img {
+
+      width: 100%;
+
+      max-width: 300px;
+
+      height: auto;
+
+      object-fit: contain;
+
+      border: 1px solid #444;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      background: #111;
+
+      display: block;
+
+    }
+
+
+    .model-item figcaption {
+
+      margin-top: 8px;
+
+      color: #aaa;
+
+      font-size: 13px;
+
+      line-height: 1.4;
+
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+      }
+
+
+      .console-images img {
+
+        width: 80%;
+
+        max-width: 300px;
+
+      }
+
+
+      .models-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+      }
+
+
+      .model-item img {
+
+        width: 100%;
+
+        max-width: 300px;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        object-position: center;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+  <!-- ==========================================
+       CABEÇALHO
+       ========================================== -->
+
+  <header class="site-header">
+
+
+    <div class="logo-area">
+
+
+      <img
+        src="../logo1.png"
+        alt="Logo NLU"
+        class="main-logo"
+      />
+
+
+      <div class="logo-text-box">
+
+
+        <h1>
+          The Great Game Archive™
+        </h1>
+
+
+        <p>
+          Não o maior, mas o NOSSO aglomerado de informação.
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div class="header-right-box">
+
+
+      <a
+        href="#"
+        class="youtube-btn"
+        target="_blank"
+      >
+        ▶ YouTube Siga-nos!
+      </a>
+
+
+    </div>
+
+
+  </header>
+
+
+  <!-- ==========================================
+       SUB-NAVEGAÇÃO
+       ========================================== -->
+
+  <div class="sub-nav-links">
+
+
+    <a href="../tgga.html">
+      ← Voltar ao TGGA
+    </a>
+
+
+    |
+
+
+    <a href="../index.html">
+      Início
+    </a>
+
+
+  </div>
+
+
+  <!-- ==========================================
+       LETREIRO
+       ========================================== -->
+
+  <div class="marquee-zone">
+
+
+    <div class="marquee-content">
+
+
+      <span>
+
+        ... O controle sem fio do Xbox One é um dos principais
+        representantes da geração Xbox One, mantendo a identidade
+        dos controles Xbox e introduzindo alterações mecânicas,
+        eletrônicas e ergonômicas importantes ...
+
+        &nbsp;
+
+      </span>
+
+
+      <span>
+
+        ... O controle sem fio do Xbox One é um dos principais
+        representantes da geração Xbox One, mantendo a identidade
+        dos controles Xbox e introduzindo alterações mecânicas,
+        eletrônicas e ergonômicas importantes ...
+
+        &nbsp;
+
+      </span>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       CONTEÚDO PRINCIPAL
+       ========================================== -->
+
+  <div class="main-grid">
+
+
+    <!-- ========================================
+         COLUNA PRINCIPAL
+         ======================================== -->
+
+    <div class="content-column">
+
+
+      <div class="category-block">
+
+
+        <h2>
+
+          Controle Sem Fio Xbox One
+          (Posse de Rafael Lovizetto)
+
+        </h2>
+
+
+        <div
+          style="
+            text-align: center;
+            margin-bottom: 15px;
+          "
+        >
+
+
+          <img
+            src="../tgga/cone.jpeg"
+            alt="Controle sem fio Xbox One"
+            style="
+              max-width: 60%;
+              height: auto;
+              border: 1px solid #444;
+              padding: 4px;
+            "
+          />
+
+
+        </div>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             INTRODUÇÃO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Controle Sem Fio Xbox One
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O Controle Sem Fio Xbox One é o controle desenvolvido
+          pela Microsoft para a família Xbox One, lançada em
+          2013. Ele representa uma evolução direta do controle
+          utilizado no Xbox 360, mantendo a disposição geral
+          dos comandos, mas recebendo alterações na ergonomia,
+          nos gatilhos, no sistema de vibração, na conectividade
+          e na construção interna.<br><br>
+
+          O controle possui dois analógicos, um direcional
+          digital, quatro botões frontais, dois bumpers,
+          dois gatilhos analógicos, botões View, Menu e Xbox,
+          além de motores de vibração e comunicação sem fio.<br><br>
+
+          Ao longo da geração Xbox One foram produzidas várias
+          revisões do controle. Algumas modificaram a carcaça,
+          outras introduziram entrada de headset de 3,5 mm,
+          alterações na textura e mudanças internas.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             HISTÓRIA
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Contexto Histórico
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/360c.jpeg"
+              alt="Controle Xbox 360"
+            />
+
+
+            <img
+              src="../tgga/cone.jpeg"
+              alt="Controle Xbox One"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Controle Xbox 360 e Controle Xbox One ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O controle do Xbox One possui uma relação direta
+          com o controle do Xbox 360. A Microsoft preservou
+          a posição dos principais comandos, facilitando a
+          transição entre as duas gerações.<br><br>
+
+          Entretanto, praticamente toda a estrutura foi
+          revisada. Os gatilhos receberam sistemas próprios
+          de vibração, os analógicos foram modificados,
+          o direcional foi redesenhado e a carcaça recebeu
+          uma nova ergonomia.<br><br>
+
+          O resultado foi um controle que visualmente lembra
+          seu antecessor, mas apresenta diversas diferenças
+          internas.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             ALIMENTAÇÃO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Alimentação
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/xboxbattery.webp"
+              alt="Compartimento de pilhas do controle Xbox One"
+            />
+
+
+            <img
+              src="../tgga/xboxbatterycover.webp"
+              alt="Tampa das pilhas do controle Xbox One"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Compartimento de alimentação do controle Xbox One ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O controle utiliza tradicionalmente duas pilhas AA,
+          instaladas em um compartimento localizado na parte
+          traseira.<br><br>
+
+          A alimentação das pilhas é encaminhada através de
+          contatos metálicos para o circuito eletrônico,
+          onde é utilizada para alimentar o microcontrolador,
+          comunicação sem fio, sensores, LEDs e motores.<br><br>
+
+          Também existem acessórios de bateria recarregável
+          produzidos para o controle, permitindo substituir
+          as pilhas descartáveis por uma bateria compatível.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             CONECTIVIDADE
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Conectividade
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/xboxwireless.jpg"
+              alt="Controle Xbox One sem fio"
+            />
+
+
+            <img
+              src="../tgga/xboxusb.jpg"
+              alt="Controle Xbox One conectado por USB"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Comunicação sem fio e conexão USB ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          A comunicação sem fio é uma das principais características
+          do controle. O sistema permite que os comandos sejam
+          enviados ao console sem a necessidade de um cabo entre
+          os dois dispositivos.<br><br>
+
+          O controle também possui conexão USB em suas revisões,
+          permitindo comunicação por cabo com equipamentos
+          compatíveis.<br><br>
+
+          Algumas revisões posteriores passaram a possuir uma
+          entrada de áudio de 3,5 mm diretamente no controle,
+          eliminando a necessidade de determinados adaptadores
+          utilizados nas primeiras versões.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             BOTÕES
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Sistema de Controles
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/xboxbuttons.jpg"
+              alt="Botões do controle Xbox One"
+            />
+
+
+            <img
+              src="../tgga/xboxsticks.webp"
+              alt="Analógicos do controle Xbox One"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Conjunto de comandos do controle ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O controle possui dois sticks analógicos,
+          um direcional digital, quatro botões frontais,
+          dois bumpers e dois gatilhos.<br><br>
+
+          O conjunto também inclui os botões View, Menu
+          e Xbox. Os analógicos podem ser pressionados,
+          fornecendo entradas adicionais chamadas de
+          L3 e R3 em determinadas nomenclaturas utilizadas
+          pelos jogos.<br><br>
+
+          A combinação desses comandos permite que o controle
+          seja utilizado para jogos de diversos gêneros.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             VIBRAÇÃO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Sistema de Vibração
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O controle possui motores responsáveis pelo feedback
+          vibratório. Além dos motores localizados no corpo
+          principal, existem motores associados aos gatilhos
+          nas implementações que utilizam o sistema conhecido
+          como Impulse Triggers.<br><br>
+
+          Isso permite que o jogo produza diferentes tipos
+          de resposta física, como vibração geral do controle
+          ou vibração localizada nos gatilhos.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             MODELOS
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Modelos e Variações
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Durante a geração Xbox One, o controle recebeu
+          diversas revisões. Além das alterações técnicas,
+          a Microsoft lançou versões em várias cores e
+          edições especiais associadas a diferentes jogos
+          e produtos Xbox.<br><br>
+
+          A estrutura básica permaneceu semelhante, porém
+          existem diferenças entre as revisões, principalmente
+          relacionadas à textura da carcaça, conectividade,
+          entrada para headset e componentes internos.
+
+        </p>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="models-grid">
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/xboxblack.avif"
+                alt="Controle Xbox One preto"
+              />
+
+              <figcaption>
+                Controle Xbox One — Preto
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/xboxwhite.webp"
+                alt="Controle Xbox One branco"
+              />
+
+              <figcaption>
+                Controle Xbox One — Branco
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/xboxones.webp"
+                alt="Controle Xbox One S"
+              />
+
+              <figcaption>
+                Controle Xbox One S
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/xboxelite.jpg"
+                alt="Xbox Elite Wireless Controller"
+              />
+
+              <figcaption>
+                Xbox Elite Wireless Controller
+              </figcaption>
+
+            </div>
+
+
+          </div>
+
+
+        </figure>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================
+         SIDEBAR
+         ======================================== -->
+
+    <div class="sidebar-column">
+
+
+      <nav class="side-nav-menu">
+
+
+        <h3>
+          - MENU DE ARTIGOS -
+        </h3>
+
+
+        <ul>
+
+
+          <li>
+
+            <a href="../tgga.html">
+              ○ Início - TGGA
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="../index.html">
+              ○ Início - NLU
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="tgga.html">
+              ○ Games - Xbox One
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="tgga.html">
+              ○ Periféricos - Xbox One
+            </a>
+
+          </li>
+
+
+        </ul>
+
+
+      </nav>
+
+
+      <!-- ==========================================
+           COMPONENTES
+           ========================================== -->
+
+      <div class="components-block">
+
+
+        <h3>
+          - COMPONENTES DO ITEM -
+        </h3>
+
+
+        <div class="component-list">
+
+
+          <!-- =====================================
+               ESTRUTURA PRINCIPAL
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Placa de Circuito Principal (PCB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                A placa de circuito impresso é a estrutura
+                responsável por interligar eletricamente
+                os componentes do controle.
+              </p>
+
+              <p>
+                Nela estão instalados circuitos integrados,
+                componentes passivos, conectores e diversos
+                elementos responsáveis pelo funcionamento
+                do controle.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>Tipo: PCB</li>
+
+                <li>
+                  Função: Interligação elétrica
+                </li>
+
+                <li>
+                  Aplicação: Controle Xbox One
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Microcontrolador Principal
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuito integrado responsável pelo processamento
+                dos comandos recebidos dos diversos dispositivos
+                de entrada do controle.
+              </p>
+
+              <p>
+                Ele participa da leitura dos botões, analógicos,
+                gatilhos e demais sensores, além de coordenar
+                a comunicação do dispositivo.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>Tipo: Microcontrolador</li>
+
+                <li>
+                  Função: Processamento
+                </li>
+
+                <li>
+                  Instalação: PCB principal
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Circuito de Comunicação Sem Fio
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuito responsável pela comunicação sem fio
+                entre o controle e equipamentos compatíveis.
+              </p>
+
+              <p>
+                Ele recebe os comandos processados e participa
+                da transmissão dos dados para o dispositivo
+                conectado.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Antena de Radiofrequência
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elemento responsável pela transmissão e recepção
+                dos sinais utilizados na comunicação sem fio.
+              </p>
+
+              <p>
+                Dependendo da revisão do controle, a antena
+                pode assumir diferentes formas construtivas
+                e estar integrada ou conectada à placa.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ANALÓGICOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Módulo do Analógico Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conjunto mecânico e eletrônico responsável
+                por detectar os movimentos do analógico esquerdo.
+              </p>
+
+              <p>
+                O módulo possui mecanismos internos responsáveis
+                pela leitura dos dois eixos e pelo pressionamento
+                do stick.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>Tipo: Módulo analógico</li>
+
+                <li>
+                  Eixos: X / Y
+                </li>
+
+                <li>
+                  Botão: Pressionamento do stick
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Módulo do Analógico Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Segundo módulo analógico do controle.
+              </p>
+
+              <p>
+                Assim como o analógico esquerdo, possui
+                leitura dos dois eixos e mecanismo para
+                detectar o pressionamento do stick.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Eixo X do Analógico
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Mecanismo responsável pela leitura do movimento
+                horizontal do stick analógico.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Eixo Y do Analógico
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Mecanismo responsável pela leitura do movimento
+                vertical do stick analógico.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Potenciômetros dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos responsáveis pela conversão da posição
+                mecânica dos sticks em sinais elétricos.
+              </p>
+
+              <p>
+                Cada módulo utiliza elementos de leitura para
+                seus dois eixos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botões de Pressionamento dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Interruptores internos acionados quando o jogador
+                pressiona o stick analógico para baixo.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>Função: L3 / R3</li>
+
+                <li>
+                  Tipo: Interruptor tátil/mecânico
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Hastes dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças mecânicas que conectam os módulos internos
+                aos thumbsticks utilizados pelo jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Thumbsticks / Capas dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças plásticas ou emborrachadas tocadas diretamente
+                pelo jogador.
+              </p>
+
+              <p>
+                Possuem superfície texturizada para melhorar
+                a aderência dos dedos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               DIRECIONAL
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Direcional Digital (D-Pad)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Direcional utilizado para comandos digitais
+                direcionais.
+              </p>
+
+              <p>
+                O conjunto possui estrutura mecânica responsável
+                por transmitir o pressionamento para os contatos
+                elétricos localizados na placa.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Cruzeta do D-Pad
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peça plástica superior do direcional utilizada
+                diretamente pelo jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Membrana / Contatos do D-Pad
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos responsáveis por transmitir os
+                pressionamentos do direcional para a placa
+                eletrônica.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BOTÕES FRONTAIS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão A
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal identificado pela letra A.
+              </p>
+
+              <p>
+                É utilizado como comando de ação em diversos
+                jogos e também pode assumir outras funções
+                dependendo do software.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão B
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal identificado pela letra B.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão X
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal identificado pela letra X.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão Y
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal identificado pela letra Y.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Membranas dos Botões A/B/X/Y
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos internos utilizados para registrar
+                o pressionamento dos botões frontais.
+              </p>
+
+              <p>
+                A pressão exercida sobre o botão é transferida
+                mecanicamente até o elemento de contato.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BOTÃO XBOX
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão Xbox
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão central do controle utilizado para
+                acessar funções relacionadas ao sistema Xbox.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              LED / Iluminação do Botão Xbox
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sistema luminoso associado ao botão Xbox.
+              </p>
+
+              <p>
+                O indicador luminoso também auxilia na
+                identificação do estado do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Difusor de Luz do Botão Xbox
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peça plástica responsável por distribuir
+                a luz produzida pelo elemento luminoso.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               VIEW E MENU
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão View
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão localizado à esquerda do botão Xbox.
+              </p>
+
+              <p>
+                Sua função depende do jogo ou aplicativo
+                utilizado.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão Menu
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão localizado à direita do botão Xbox.
+              </p>
+
+              <p>
+                É utilizado para menus e comandos adicionais.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BUMPERS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Bumper Esquerdo (LB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão superior esquerdo acionado pelo dedo
+                indicador do jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Bumper Direito (RB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão superior direito acionado pelo dedo
+                indicador do jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Mecanismo Mecânico dos Bumpers
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estrutura plástica responsável por transmitir
+                a pressão dos bumpers para os interruptores
+                internos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               GATILHOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Gatilho Esquerdo (LT)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Gatilho analógico localizado no lado esquerdo.
+              </p>
+
+              <p>
+                Sua posição pode ser interpretada de forma
+                gradual, permitindo diferentes níveis de pressão.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Gatilho Direito (RT)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Gatilho analógico localizado no lado direito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Sensores dos Gatilhos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Componentes responsáveis por detectar a posição
+                dos gatilhos e transformá-la em sinais elétricos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Molas dos Gatilhos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Molas responsáveis pelo retorno dos gatilhos
+                à posição original depois que o jogador
+                deixa de pressioná-los.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               VIBRAÇÃO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor de Vibração Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Motor elétrico utilizado para gerar feedback
+                vibratório no controle.
+              </p>
+
+              <p>
+                Normalmente utiliza um peso excêntrico que
+                produz vibração quando o motor gira.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor de Vibração Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Segundo motor utilizado para produzir feedback
+                vibratório no corpo do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor do Gatilho Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Motor responsável pelo feedback localizado
+                no gatilho esquerdo em sistemas compatíveis.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor do Gatilho Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Motor responsável pelo feedback localizado
+                no gatilho direito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pesos Excêntricos dos Motores
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Pequenos pesos instalados nos eixos dos motores.
+              </p>
+
+              <p>
+                Como o peso não está centralizado no eixo,
+                sua rotação produz vibração.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ÁUDIO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Conector de Headset 3,5 mm
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Entrada de áudio presente nas revisões que
+                possuem conector de 3,5 mm.
+              </p>
+
+              <p>
+                Permite conectar headsets compatíveis
+                diretamente ao controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Circuito de Áudio
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuito responsável pelo processamento das
+                funções de áudio relacionadas à conexão
+                de headset.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               USB
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Conector Micro USB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conector utilizado nas revisões correspondentes
+                para conexão por cabo.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>Tipo: Micro USB</li>
+
+                <li>
+                  Função: Comunicação e alimentação
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça do Conector USB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estrutura metálica do conector responsável
+                por fornecer suporte mecânico e contatos
+                elétricos para o cabo.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ALIMENTAÇÃO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Compartimento de Pilhas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Espaço localizado na parte traseira do controle
+                destinado às pilhas de alimentação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pilha AA Esquerda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Uma das duas células utilizadas na alimentação
+                convencional do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pilha AA Direita
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Segunda célula utilizada na alimentação
+                convencional do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Contatos Positivos das Pilhas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Contatos metálicos utilizados para conduzir
+                a corrente elétrica dos terminais positivos
+                das pilhas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Contatos Negativos das Pilhas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Contatos metálicos responsáveis pela conexão
+                dos terminais negativos das pilhas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Molas dos Contatos das Pilhas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos metálicos elásticos utilizados para
+                manter pressão mecânica contra as pilhas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Tampa do Compartimento de Pilhas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Tampa removível que fecha e protege o
+                compartimento das pilhas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               COMPONENTES PASSIVOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Resistores
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Diversos resistores estão presentes nos
+                circuitos eletrônicos do controle.
+              </p>
+
+              <p>
+                Eles são utilizados para limitar corrente,
+                formar divisores de tensão, polarizar circuitos
+                e realizar outras funções elétricas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Capacitores Cerâmicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Capacitores utilizados principalmente para
+                desacoplamento da alimentação e filtragem
+                de ruídos elétricos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Capacitores Eletrolíticos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Capacitores utilizados em determinadas partes
+                do circuito para filtragem e armazenamento
+                momentâneo de energia.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Indutores e Bobinas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Componentes utilizados em circuitos de filtragem
+                e comunicação, dependendo da revisão da placa.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Diodos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Componentes semicondutores utilizados para
+                proteção, retificação, sinalização e outras
+                funções dentro dos circuitos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Transistores
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Semicondutores utilizados em circuitos de
+                chaveamento, amplificação e controle de sinais.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               MEMÓRIA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Memória Não Volátil
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuitos de memória podem estar presentes
+                para armazenar informações necessárias ao
+                funcionamento do dispositivo.
+              </p>
+
+              <p>
+                A implementação exata pode variar conforme
+                a revisão do hardware.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ESTRUTURA MECÂNICA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Superior
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte superior da carcaça plástica do controle.
+              </p>
+
+              <p>
+                Possui aberturas e suportes para os botões,
+                analógicos, direcionais e demais controles.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Inferior
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte inferior da estrutura plástica.
+              </p>
+
+              <p>
+                É responsável por proteger a placa e outros
+                componentes internos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pegador Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região da carcaça utilizada para apoiar
+                a mão esquerda do jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pegador Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região da carcaça utilizada para apoiar
+                a mão direita do jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Painel Frontal
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região externa responsável pela aparência
+                frontal e pelo suporte dos principais comandos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Painel Traseiro
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região posterior da carcaça, onde está localizado
+                o compartimento de alimentação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Suportes Internos da Carcaça
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estruturas moldadas no plástico utilizadas
+                para posicionar e fixar os componentes internos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               PARAFUSOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Parafusos de Fixação
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parafusos utilizados para unir as partes
+                da carcaça e manter os componentes internos
+                corretamente posicionados.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Postes de Fixação
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estruturas plásticas internas utilizadas
+                como pontos de fixação para parafusos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               MOLAS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Molas dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos responsáveis pelo retorno mecânico
+                dos mecanismos dos sticks à posição central.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Molas dos Gatilhos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Molas utilizadas para retornar os gatilhos
+                à posição de repouso.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BORRACHAS E MEMBRANAS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Membranas de Borracha dos Botões
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos flexíveis responsáveis pela transmissão
+                do pressionamento dos botões para os contatos
+                eletrônicos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Borrachas de Apoio Internas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Pequenos elementos utilizados para apoio,
+                amortecimento e posicionamento de determinados
+                componentes.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BLINDAGEM
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Blindagem Eletromagnética
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos metálicos utilizados em determinadas
+                regiões do circuito para reduzir interferências
+                eletromagnéticas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               CONECTORES
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Conectores Internos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conectores utilizados para interligar diferentes
+                partes eletrônicas e módulos do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Cabos e Fios Internos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Condutores utilizados para transportar alimentação
+                e sinais elétricos entre determinados componentes.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ACABAMENTO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Anéis dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estruturas plásticas localizadas ao redor dos
+                analógicos que ajudam a formar a abertura
+                e o acabamento da carcaça.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botões Plásticos Frontais
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças físicas correspondentes aos comandos
+                A, B, X e Y.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Acabamento do Botão Xbox
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte plástica externa que forma o botão central
+                e permite a passagem da iluminação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Etiquetas e Identificações
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Etiquetas e marcações utilizadas para identificação
+                do modelo, informações regulamentares e números
+                relacionados ao dispositivo.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ACESSÓRIOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Cabo USB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Cabo utilizado para conectar o controle
+                por USB a equipamentos compatíveis.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Adaptador Xbox Wireless para PC
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Adaptador externo utilizado em computadores
+                compatíveis para comunicação sem fio com
+                determinados controles Xbox.
+              </p>
+
+              <p>
+                Trata-se de um acessório externo e não de
+                um componente interno do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Kit de Bateria Recarregável
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Acessório que substitui as pilhas AA por
+                uma bateria recarregável compatível.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               CONJUNTO COMPLETO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Controle Sem Fio Xbox One — Conjunto Completo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conjunto formado pela carcaça, placas,
+                controles, sensores, motores, sistema de
+                alimentação, comunicação e demais componentes.
+              </p>
+
+              <p>
+                Todos esses elementos trabalham em conjunto
+                para transformar os comandos físicos realizados
+                pelo jogador em dados eletrônicos enviados
+                ao dispositivo conectado.
+              </p>
+
+            </div>
+
+          </details>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- ==========================================
+       RODAPÉ
+       ========================================== -->
+
+  <footer class="site-footer">
+
+    <p>
+
+      &copy; 2026 Nerd League United.
+      Todos os direitos reservados.
+
+    </p>
+
+  </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

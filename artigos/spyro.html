@@ -1,0 +1,2357 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>TGGA - Spyro Reignited Trilogy</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES / ELEMENTOS CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   IMAGENS HISTÓRICAS
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   GRID DE ELEMENTOS
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* ==========================================
+   IMAGENS
+   ========================================== */
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   CAIXA DE INFORMAÇÕES
+   ========================================== */
+
+.info-box {
+  margin: 20px 0;
+  padding: 12px;
+  background: #181818;
+  border: 1px solid #444;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 6px;
+}
+
+.info-box ul {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   TABELA
+   ========================================== */
+
+.world-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 13px;
+  color: #ccc;
+  background: #151515;
+}
+
+.world-table th,
+.world-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: center;
+}
+
+.world-table th {
+  background: #292929;
+  color: #fff;
+}
+
+.world-table tr:nth-child(even) {
+  background: #1c1c1c;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .world-table {
+    font-size: 11px;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container">
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="site-header">
+
+  <div class="logo-area">
+
+    <img
+      src="../logo1.png"
+      alt="Logo NLU"
+      class="main-logo"
+    />
+
+    <div class="logo-text-box">
+
+      <h1>
+        The Great Game Archive™
+      </h1>
+
+      <p>
+        Não o maior, mas o NOSSO aglomerado de informação.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="header-right-box">
+
+    <a
+      href="#"
+      class="youtube-btn"
+      target="_blank"
+    >
+      ▶ YouTube Siga-nos!
+    </a>
+
+  </div>
+
+</header>
+
+<!-- ==========================================
+     SUB-NAVEGAÇÃO
+     ========================================== -->
+
+<div class="sub-nav-links">
+
+  <a href="../tgga.html">
+    ← Voltar ao TGGA
+  </a>
+
+  |
+
+  <a href="../index.html">
+    Início
+  </a>
+
+</div>
+
+<!-- ==========================================
+     LETREIRO
+     ========================================== -->
+
+<div class="marquee-zone">
+
+  <div class="marquee-content">
+
+    <span>
+      ... Spyro Reignited Trilogy reúne versões refeitas de
+      Spyro the Dragon, Spyro 2: Ripto's Rage! e Spyro: Year of
+      the Dragon em uma coleção totalmente reconstruída ...
+      &nbsp;
+    </span>
+
+    <span>
+      ... Spyro Reignited Trilogy reúne versões refeitas de
+      Spyro the Dragon, Spyro 2: Ripto's Rage! e Spyro: Year of
+      the Dragon em uma coleção totalmente reconstruída ...
+      &nbsp;
+    </span>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+     ========================================== -->
+
+<div class="main-grid">
+
+  <!-- ========================================
+       COLUNA PRINCIPAL
+       ======================================== -->
+
+  <div class="content-column">
+
+    <div class="category-block">
+
+      <!-- ==========================================
+           TÍTULO
+           ========================================== -->
+
+      <h2>
+        Spyro Reignited Trilogy — Xbox One
+      </h2>
+
+      <div
+        style="
+          text-align: center;
+          margin-bottom: 15px;
+        "
+      >
+
+        <img
+          src="../tgga/spyro_reignited_trilogy_xboxone.jpg"
+          alt="Spyro Reignited Trilogy para Xbox One"
+          style="
+            max-width: 60%;
+            height: auto;
+            border: 1px solid #444;
+            padding: 4px;
+          "
+        />
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           IDENTIFICAÇÃO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Spyro Reignited Trilogy
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro Reignited Trilogy é uma coleção de jogos de
+        plataforma desenvolvida pela Toys for Bob e publicada
+        pela Activision.<br>
+
+        O pacote reúne versões completamente refeitas de
+        três jogos originalmente lançados para o primeiro
+        PlayStation: Spyro the Dragon, Spyro 2: Ripto's Rage!
+        e Spyro: Year of the Dragon.<br>
+
+        A trilogia apresenta gráficos reconstruídos em 3D,
+        animações atualizadas, iluminação reformulada,
+        controles adaptados e novas interpretações visuais
+        dos personagens e ambientes originais.<br>
+
+        No Xbox One, a coleção permite jogar os três títulos
+        através de uma única experiência, mantendo a estrutura
+        fundamental das aventuras originais enquanto moderniza
+        sua apresentação.
+
+      </p>
+
+      <!-- ==========================================
+           FICHA TÉCNICA
+           ========================================== -->
+
+      <div class="info-box">
+
+        <h3>
+          - FICHA TÉCNICA -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Desenvolvedora:</strong>
+            Toys for Bob
+          </li>
+
+          <li>
+            <strong>Publicadora:</strong>
+            Activision
+          </li>
+
+          <li>
+            <strong>Direção:</strong>
+            Paul Yan e outros membros da equipe da Toys for Bob
+          </li>
+
+          <li>
+            <strong>Plataforma desta página:</strong>
+            Xbox One
+          </li>
+
+          <li>
+            <strong>Gênero:</strong>
+            Plataforma / Ação e aventura
+          </li>
+
+          <li>
+            <strong>Jogador:</strong>
+            1 jogador
+          </li>
+
+          <li>
+            <strong>Lançamento original:</strong>
+            13 de novembro de 2018
+          </li>
+
+          <li>
+            <strong>Jogos incluídos:</strong>
+            3
+          </li>
+
+          <li>
+            <strong>Jogos originais:</strong>
+            Spyro the Dragon, Spyro 2: Ripto's Rage! e
+            Spyro: Year of the Dragon
+          </li>
+
+          <li>
+            <strong>Motor:</strong>
+            Unreal Engine 4
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DESENVOLVIMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Desenvolvimento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro Reignited Trilogy foi desenvolvido pela Toys for
+        Bob como um projeto de reconstrução dos três primeiros
+        jogos principais da série Spyro.<br>
+
+        Em vez de simplesmente transportar os jogos originais
+        para uma plataforma moderna, a equipe refez os modelos,
+        ambientes, animações, efeitos visuais e diversos
+        elementos de apresentação.<br>
+
+        A proposta era preservar a estrutura e a identidade
+        dos jogos originais enquanto apresentava os mundos
+        com uma qualidade visual adequada aos consoles modernos.<br>
+
+        Os cenários foram reconstruídos em três dimensões,
+        recebendo novos efeitos de iluminação, texturas,
+        animações e detalhes ambientais.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CONTEXTO HISTÓRICO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Contexto Histórico
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/spyro_ps1.jpg"
+            alt="Spyro no PlayStation original"
+          />
+
+          <img
+            src="../tgga/spyro_reignited.jpg"
+            alt="Spyro Reignited Trilogy"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Spyro original e Spyro Reignited Trilogy ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro surgiu originalmente no PlayStation durante a
+        segunda metade da década de 1990.<br>
+
+        O primeiro jogo, Spyro the Dragon, foi desenvolvido pela
+        Insomniac Games e lançado em 1998, apresentando um
+        dragão jovem como protagonista de uma aventura de
+        exploração e plataforma em ambientes tridimensionais.<br>
+
+        O sucesso do personagem levou ao desenvolvimento de
+        Spyro 2: Ripto's Rage! e Spyro: Year of the Dragon,
+        formando uma das trilogias mais conhecidas da primeira
+        fase da série.<br>
+
+        Décadas depois, a Activision e a Toys for Bob decidiram
+        reconstruir os três jogos para uma nova geração de
+        jogadores.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LANÇAMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Lançamento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro Reignited Trilogy foi lançado originalmente em
+        novembro de 2018 para PlayStation 4 e Xbox One.<br>
+
+        Posteriormente, a coleção recebeu versões para
+        Nintendo Switch e PC.<br>
+
+        A edição de Xbox One permite acessar os três jogos
+        refeitos a partir da mesma coleção, com apresentação
+        visual atualizada e suporte ao hardware moderno.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           OS TRÊS JOGOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Os Três Jogos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro1_reignited.jpg"
+              alt="Spyro the Dragon Reignited"
+            />
+
+            <figcaption>
+              Spyro the Dragon
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro2_reignited.jpg"
+              alt="Spyro 2 Ripto's Rage Reignited"
+            />
+
+            <figcaption>
+              Spyro 2: Ripto's Rage!
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro3_reignited.jpg"
+              alt="Spyro Year of the Dragon Reignited"
+            />
+
+            <figcaption>
+              Spyro: Year of the Dragon
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O primeiro jogo, Spyro the Dragon, apresenta Spyro
+        explorando os Reinos dos Dragões depois que os dragões
+        são transformados em estátuas de cristal.<br>
+
+        Em Spyro 2: Ripto's Rage!, Spyro viaja para Avalar,
+        onde precisa enfrentar Ripto e seus aliados enquanto
+        explora novos mundos e aprende habilidades adicionais.<br>
+
+        Spyro: Year of the Dragon apresenta uma aventura maior,
+        novos personagens jogáveis, diferentes tipos de
+        atividades e uma estrutura baseada em vários mundos
+        e áreas de exploração.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           HISTÓRIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        História
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/spyro.jpg"
+            alt="Spyro"
+          />
+
+          <img
+            src="../tgga/ripto.jpg"
+            alt="Ripto"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Spyro e Ripto ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Cada um dos três jogos possui uma aventura independente,
+        embora todos compartilhem Spyro como protagonista.<br>
+
+        No primeiro jogo, os dragões dos Reinos dos Dragões
+        são transformados em estátuas de cristal por meio de
+        uma magia provocada por Gnasty Gnorc.<br>
+
+        No segundo jogo, Spyro chega a Avalar e acaba envolvido
+        no conflito contra Ripto, que pretende dominar o reino.<br>
+
+        No terceiro jogo, Spyro precisa enfrentar uma nova
+        ameaça enquanto explora os Reinos Esquecidos e procura
+        ovos de dragão roubados.<br>
+
+        A trilogia combina a progressão narrativa com exploração,
+        coleta de objetos e desafios opcionais.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MECÂNICAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Mecânicas de Jogo
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A jogabilidade de Spyro Reignited Trilogy combina
+        plataformas, exploração, combate e coleta de objetos.<br>
+
+        Spyro pode correr, saltar, planar e utilizar sua
+        investida para atravessar os ambientes rapidamente.<br>
+
+        Seu ataque de fogo é utilizado contra diversos
+        inimigos, enquanto a investida pode ser usada para
+        atingir adversários específicos e atravessar áreas.<br>
+
+        A exploração é uma das características principais,
+        já que os mundos possuem áreas escondidas, caminhos
+        alternativos e objetos colecionáveis.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           HABILIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Habilidades de Spyro
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_fire.jpg"
+              alt="Spyro usando fogo"
+            />
+
+            <figcaption>
+              Sopro de Fogo
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_charge.jpg"
+              alt="Spyro correndo"
+            />
+
+            <figcaption>
+              Investida
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_glide.jpg"
+              alt="Spyro planando"
+            />
+
+            <figcaption>
+              Planar
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_headbash.jpg"
+              alt="Spyro Headbash"
+            />
+
+            <figcaption>
+              Headbash
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O fogo é uma das principais formas de ataque de Spyro
+        e pode ser utilizado contra inimigos vulneráveis a ele.<br>
+
+        A investida permite deslocamento rápido e pode ser
+        utilizada para atacar determinados adversários.<br>
+
+        Durante um salto, Spyro pode planar para alcançar
+        plataformas mais distantes.<br>
+
+        Em determinadas situações e jogos da trilogia,
+        novas habilidades são desbloqueadas e ampliam as
+        possibilidades de exploração.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           COLECIONÁVEIS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Colecionáveis
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - PRINCIPAIS COLECIONÁVEIS -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Gemas:</strong>
+            encontradas espalhadas pelos mundos.
+          </li>
+
+          <li>
+            <strong>Dragões:</strong>
+            encontrados e libertados em Spyro the Dragon.
+          </li>
+
+          <li>
+            <strong>Ovos:</strong>
+            objetivos importantes em Spyro the Dragon
+            e especialmente em Year of the Dragon.
+          </li>
+
+          <li>
+            <strong>Orbs:</strong>
+            coletados em Spyro 2 e utilizados para
+            determinados conteúdos.
+          </li>
+
+          <li>
+            <strong>Tesouros:</strong>
+            objetos e recompensas escondidos nos cenários.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           PERSONAGENS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Personagens
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - PERSONAGENS PRINCIPAIS -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Spyro:</strong>
+            protagonista da trilogia.
+          </li>
+
+          <li>
+            <strong>Sparx:</strong>
+            pequeno dragão-libélula que acompanha Spyro
+            e auxilia na indicação de sua resistência.
+          </li>
+
+          <li>
+            <strong>Gnasty Gnorc:</strong>
+            principal antagonista de Spyro the Dragon.
+          </li>
+
+          <li>
+            <strong>Ripto:</strong>
+            antagonista principal de Spyro 2: Ripto's Rage!.
+          </li>
+
+          <li>
+            <strong>Elora:</strong>
+            personagem importante da aventura de Avalar.
+          </li>
+
+          <li>
+            <strong>Hunter:</strong>
+            personagem recorrente que ajuda Spyro em
+            diferentes desafios.
+          </li>
+
+          <li>
+            <strong>Bianca:</strong>
+            personagem importante de Year of the Dragon.
+          </li>
+
+          <li>
+            <strong>Sheila:</strong>
+            personagem jogável em Year of the Dragon.
+          </li>
+
+          <li>
+            <strong>Agent 9:</strong>
+            personagem jogável em Year of the Dragon.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           INIMIGOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Inimigos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/spyro_enemies.jpg"
+            alt="Inimigos de Spyro"
+          />
+
+          <img
+            src="../tgga/gnasty_gnorc.jpg"
+            alt="Gnasty Gnorc"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Inimigos e Gnasty Gnorc ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Os três jogos apresentam uma grande variedade de
+        inimigos e criaturas.<br>
+
+        Alguns podem ser derrotados com o sopro de fogo,
+        enquanto outros precisam ser atingidos através da
+        investida ou de outras habilidades.<br>
+
+        Certos adversários possuem comportamentos específicos
+        e exigem que o jogador observe seus movimentos antes
+        de atacar.<br>
+
+        Além dos inimigos comuns, cada jogo possui diferentes
+        chefes e confrontos relacionados à história.
+
+      </p>
+
+      <div class="info-box">
+
+        <h3>
+          - ALGUNS INIMIGOS E CHEFES -
+        </h3>
+
+        <ul>
+
+          <li>Gnorc</li>
+          <li>Sheep</li>
+          <li>Ripto</li>
+          <li>Gnasty Gnorc</li>
+          <li>Gulp</li>
+          <li>Gulp's Minions</li>
+          <li>Scorch</li>
+          <li>Buzz</li>
+          <li>Spike</li>
+          <li>Scorch</li>
+          <li>Sorceress</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MUNDOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Mundos e Reinos
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A trilogia apresenta dezenas de áreas diferentes,
+        distribuídas pelos três jogos.<br>
+
+        Cada título possui sua própria estrutura de mundos,
+        fases, áreas secretas e desafios.<br>
+
+        Os ambientes variam entre vales, castelos, florestas,
+        desertos, cavernas, áreas congeladas e regiões
+        inspiradas em diferentes temas.<br>
+
+        A exploração normalmente envolve encontrar caminhos
+        escondidos e coletar todos os objetos de uma área.
+
+      </p>
+
+      <table class="world-table">
+
+        <thead>
+
+          <tr>
+            <th>Jogo</th>
+            <th>Estrutura</th>
+            <th>Características</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Spyro the Dragon</td>
+            <td>Reinos e mundos</td>
+            <td>Dragões / Gemas / Ovos</td>
+          </tr>
+
+          <tr>
+            <td>Spyro 2</td>
+            <td>Avalar</td>
+            <td>Orbs / Talismãs / Habilidades</td>
+          </tr>
+
+          <tr>
+            <td>Year of the Dragon</td>
+            <td>Reinos Esquecidos</td>
+            <td>Ovos / Minijogos / Personagens</td>
+          </tr>
+
+          <tr>
+            <td>Homeworlds</td>
+            <td>Áreas centrais</td>
+            <td>Portais / Exploração</td>
+          </tr>
+
+          <tr>
+            <td>Speedways</td>
+            <td>Fases especiais</td>
+            <td>Corridas / Tempo</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MINIJOGOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Minijogos e Atividades
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A trilogia não se limita às fases tradicionais de
+        plataforma.<br>
+
+        Diversos mundos apresentam atividades especiais,
+        desafios temporizados, corridas e minijogos.<br>
+
+        Spyro 2 introduz atividades relacionadas às novas
+        habilidades e aos desafios de Avalar.<br>
+
+        Year of the Dragon amplia ainda mais essa estrutura
+        através de personagens adicionais, cada um com
+        habilidades e atividades próprias.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DRAGÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Os Dragões
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/spyro_dragons.jpg"
+            alt="Dragões de Spyro"
+          />
+
+          <img
+            src="../tgga/spyro_dragon_realms.jpg"
+            alt="Reinos dos Dragões"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Os Dragões e os Reinos de Spyro ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Os dragões possuem papel central no primeiro jogo
+        da trilogia.<br>
+
+        Depois de serem transformados em estátuas, eles precisam
+        ser libertados por Spyro durante sua jornada.<br>
+
+        Cada dragão libertado apresenta uma personalidade,
+        aparência e diálogo próprios, contribuindo para a
+        identidade dos diferentes reinos.<br>
+
+        A coleta dos dragões também funciona como uma das
+        principais formas de progressão de Spyro the Dragon.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           SPARX
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Sparx
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Sparx é o pequeno companheiro de Spyro e está presente
+        ao longo da trilogia.<br>
+
+        Além de acompanhar Spyro visualmente, Sparx funciona
+        como indicador de resistência: sua cor muda conforme
+        Spyro sofre danos.<br>
+
+        Pequenos animais podem ser derrotados para recuperar
+        a condição de Sparx.<br>
+
+        Em determinadas situações, Sparx também participa
+        diretamente de mecânicas e conteúdos relacionados
+        à exploração.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           TRILHA SONORA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Música e Efeitos Sonoros
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/stewart_copeland.jpg"
+            alt="Stewart Copeland"
+          />
+
+          <img
+            src="../tgga/spyro_music.jpg"
+            alt="Trilha sonora de Spyro"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Stewart Copeland e a música de Spyro ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A música dos jogos originais de Spyro foi composta por
+        Stewart Copeland, baterista da banda The Police.<br>
+
+        Para Reignited Trilogy, as músicas receberam uma nova
+        apresentação sonora mantendo suas composições
+        associadas aos jogos originais.<br>
+
+        A trilha possui diferentes temas para os mundos,
+        batalhas, menus, áreas especiais e atividades.<br>
+
+        A música desempenha um papel importante na identidade
+        de cada reino e acompanha a exploração dos ambientes.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           TECNOLOGIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Tecnologia e Gráficos
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Uma das maiores diferenças entre os jogos originais
+        e Reignited Trilogy está na apresentação visual.<br>
+
+        Os personagens foram remodelados em três dimensões,
+        enquanto os ambientes receberam novos modelos,
+        texturas, iluminação e efeitos visuais.<br>
+
+        A coleção foi construída utilizando a Unreal Engine 4,
+        permitindo apresentar os mundos originais com uma
+        quantidade muito maior de detalhes.<br>
+
+        As animações também foram refeitas para acompanhar
+        a nova representação dos personagens.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           XBOX ONE
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Spyro no Xbox One
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/spyro_xboxone.jpg"
+            alt="Spyro Reignited Trilogy no Xbox One"
+          />
+
+          <img
+            src="../tgga/spyro_xbox_controller.jpg"
+            alt="Controle Xbox One"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Spyro Reignited Trilogy e Xbox One ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão de Xbox One foi uma das plataformas de
+        lançamento de Spyro Reignited Trilogy em 2018.<br>
+
+        O controle foi adaptado ao gamepad do Xbox, mantendo
+        os comandos fundamentais de movimentação, salto,
+        planar, investida e ataque.<br>
+
+        A edição permite acessar os três jogos da coleção
+        através de uma apresentação unificada.<br>
+
+        O hardware do Xbox One também possibilita que a
+        reconstrução visual dos mundos seja apresentada com
+        maior nível de detalhe em comparação aos jogos
+        originais de PlayStation.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           VERSÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Versões e Plataformas
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_ps4.jpg"
+              alt="Spyro Reignited Trilogy PlayStation 4"
+            />
+
+            <figcaption>
+              PlayStation 4
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_xbox.jpg"
+              alt="Spyro Reignited Trilogy Xbox One"
+            />
+
+            <figcaption>
+              Xbox One
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_switch.jpg"
+              alt="Spyro Reignited Trilogy Nintendo Switch"
+            />
+
+            <figcaption>
+              Nintendo Switch
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_pc.jpg"
+              alt="Spyro Reignited Trilogy PC"
+            />
+
+            <figcaption>
+              PC
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro Reignited Trilogy foi lançado inicialmente para
+        PlayStation 4 e Xbox One.<br>
+
+        Posteriormente, a coleção chegou ao Nintendo Switch
+        e aos computadores pessoais.<br>
+
+        Apesar das diferentes plataformas, a coleção mantém
+        como característica central a reconstrução dos três
+        primeiros jogos da série.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LEGADO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Legado
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Spyro Reignited Trilogy tornou-se uma das principais
+        formas modernas de acesso aos três primeiros jogos
+        da série Spyro.<br>
+
+        A coleção preservou personagens, mundos, mecânicas e
+        estrutura dos títulos originais enquanto apresentou
+        seus elementos através de uma nova direção artística.<br>
+
+        O projeto também faz parte de uma tendência de
+        reconstrução de jogos clássicos para plataformas
+        modernas, permitindo que títulos originalmente
+        associados ao PlayStation fossem apresentados a
+        novas gerações de jogadores.<br>
+
+        Spyro continua sendo um dos personagens mais
+        reconhecíveis dos jogos de plataforma tridimensionais
+        da era do PlayStation.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CURIOSIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Curiosidades
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - VOCÊ SABIA? -
+        </h3>
+
+        <ul>
+
+          <li>
+            Reignited Trilogy reúne três jogos originalmente
+            lançados para o primeiro PlayStation.
+          </li>
+
+          <li>
+            O primeiro Spyro foi desenvolvido pela Insomniac Games.
+          </li>
+
+          <li>
+            A trilogia foi reconstruída visualmente pela
+            Toys for Bob.
+          </li>
+
+          <li>
+            O projeto utiliza a Unreal Engine 4.
+          </li>
+
+          <li>
+            Stewart Copeland, baterista do The Police,
+            compôs a trilha dos jogos originais.
+          </li>
+
+          <li>
+            Sparx acompanha Spyro durante suas aventuras.
+          </li>
+
+          <li>
+            Spyro pode utilizar fogo, investida, salto e
+            planar como parte de suas habilidades básicas.
+          </li>
+
+          <li>
+            Year of the Dragon possui diversos personagens
+            jogáveis além de Spyro.
+          </li>
+
+          <li>
+            Os três jogos possuem diferentes tipos de
+            colecionáveis e desafios.
+          </li>
+
+          <li>
+            A versão de Xbox One foi lançada junto com a
+            versão de PlayStation 4 em 2018.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           EDIÇÃO FÍSICA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Edições e Materiais Colecionáveis
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A edição física de Spyro Reignited Trilogy para Xbox One
+        faz parte dos materiais associados ao relançamento
+        moderno da trilogia.<br>
+
+        Capas, discos, encartes, caixas e diferentes versões
+        regionais podem apresentar pequenas diferenças de
+        apresentação.<br>
+
+        Para colecionadores, esses materiais também documentam
+        a transição da série dos jogos originais de PlayStation
+        para uma coleção reconstruída para consoles modernos.
+
+      </p>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_xbox_box.jpg"
+              alt="Caixa de Spyro Reignited Trilogy Xbox One"
+            />
+
+            <figcaption>
+              Caixa — Xbox One
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_xbox_disc.jpg"
+              alt="Disco de Spyro Reignited Trilogy Xbox One"
+            />
+
+            <figcaption>
+              Disco — Xbox One
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_cover.jpg"
+              alt="Capa de Spyro Reignited Trilogy"
+            />
+
+            <figcaption>
+              Capa — Reignited Trilogy
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/spyro_reignited_package.jpg"
+              alt="Edição física de Spyro Reignited Trilogy"
+            />
+
+            <figcaption>
+              Edição física
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="spyro-reignited-trilogy.html">
+            ○ Games - Spyro Reignited Trilogy
+          </a>
+        </li>
+
+        <li>
+          <a href="xboxone.html">
+            ○ Consoles - Xbox One
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- ==========================================
+         ELEMENTOS DO JOGO
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - ELEMENTOS DO JOGO -
+      </h3>
+
+      <div class="component-list">
+
+        <details class="component-item">
+
+          <summary>Spyro</summary>
+
+          <div class="component-description">
+
+            <p>
+              Dragão protagonista da trilogia e personagem
+              controlado pelo jogador.
+            </p>
+
+            <ul class="component-specs">
+              <li>Função: Protagonista</li>
+              <li>Habilidades: Fogo, investida e planar</li>
+              <li>Jogável: Sim</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Sparx</summary>
+
+          <div class="component-description">
+
+            <p>
+              Companheiro de Spyro que também funciona como
+              indicador de sua resistência.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Gnasty Gnorc</summary>
+
+          <div class="component-description">
+
+            <p>
+              Principal antagonista do primeiro jogo da
+              trilogia.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Ripto</summary>
+
+          <div class="component-description">
+
+            <p>
+              Principal antagonista de Spyro 2: Ripto's Rage!.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Hunter</summary>
+
+          <div class="component-description">
+
+            <p>
+              Personagem recorrente que auxilia Spyro em
+              diferentes aventuras e desafios.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Elora</summary>
+
+          <div class="component-description">
+
+            <p>
+              Personagem importante de Spyro 2 e habitante
+              de Avalar.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Bianca</summary>
+
+          <div class="component-description">
+
+            <p>
+              Personagem importante de Spyro: Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Sheila</summary>
+
+          <div class="component-description">
+
+            <p>
+              Canguru jogável introduzido em Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Agent 9</summary>
+
+          <div class="component-description">
+
+            <p>
+              Personagem jogável de Year of the Dragon
+              especializado em armas.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Flame</summary>
+
+          <div class="component-description">
+
+            <p>
+              Ataque de fogo utilizado por Spyro contra
+              determinados inimigos e objetos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Charge</summary>
+
+          <div class="component-description">
+
+            <p>
+              Investida utilizada para movimentação rápida
+              e combate.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Glide</summary>
+
+          <div class="component-description">
+
+            <p>
+              Habilidade que permite a Spyro planar depois
+              de saltar.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Gem</summary>
+
+          <div class="component-description">
+
+            <p>
+              Principal tipo de objeto colecionável presente
+              nos mundos da trilogia.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Dragon</summary>
+
+          <div class="component-description">
+
+            <p>
+              Dragões encontrados e libertados durante
+              Spyro the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Dragon Egg</summary>
+
+          <div class="component-description">
+
+            <p>
+              Ovos de dragão que aparecem como objetivos
+              importantes em diferentes partes da série.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Orb</summary>
+
+          <div class="component-description">
+
+            <p>
+              Colecionável importante de Spyro 2:
+              Ripto's Rage!.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Homeworld</summary>
+
+          <div class="component-description">
+
+            <p>
+              Mundo central utilizado para acessar
+              diferentes áreas da aventura.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Portal</summary>
+
+          <div class="component-description">
+
+            <p>
+              Estrutura utilizada para transportar Spyro
+              entre diferentes áreas e mundos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Speedway</summary>
+
+          <div class="component-description">
+
+            <p>
+              Fase especial baseada em velocidade,
+              voo e desafios contra o relógio.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Gnorc</summary>
+
+          <div class="component-description">
+
+            <p>
+              Um dos tipos de inimigos encontrados no
+              universo de Spyro.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Ripto's Minions</summary>
+
+          <div class="component-description">
+
+            <p>
+              Criaturas e soldados associados às forças
+              de Ripto.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Gulp</summary>
+
+          <div class="component-description">
+
+            <p>
+              Um dos principais confrontos de Spyro 2.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Scorch</summary>
+
+          <div class="component-description">
+
+            <p>
+              Chefe encontrado durante a aventura de
+              Spyro 2.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Buzz</summary>
+
+          <div class="component-description">
+
+            <p>
+              Chefe associado à aventura de
+              Spyro: Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Spike</summary>
+
+          <div class="component-description">
+
+            <p>
+              Um dos chefes encontrados em Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Sorceress</summary>
+
+          <div class="component-description">
+
+            <p>
+              Principal antagonista de Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Sheep</summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequenos animais encontrados em diversos
+              mundos e utilizados em algumas mecânicas.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Spyro the Dragon</summary>
+
+          <div class="component-description">
+
+            <p>
+              Primeiro jogo incluído na Reignited Trilogy.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Spyro 2: Ripto's Rage!</summary>
+
+          <div class="component-description">
+
+            <p>
+              Segundo jogo da coleção, ambientado
+              principalmente em Avalar.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Year of the Dragon</summary>
+
+          <div class="component-description">
+
+            <p>
+              Terceiro jogo da coleção, com novos
+              personagens jogáveis e atividades.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Avalar</summary>
+
+          <div class="component-description">
+
+            <p>
+              Região onde se passa a aventura principal
+              de Spyro 2.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Forgotten Realms</summary>
+
+          <div class="component-description">
+
+            <p>
+              Região explorada durante Year of the Dragon.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Unreal Engine 4</summary>
+
+          <div class="component-description">
+
+            <p>
+              Tecnologia utilizada para reconstruir
+              visualmente os três jogos da coleção.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Stewart Copeland</summary>
+
+          <div class="component-description">
+
+            <p>
+              Compositor das trilhas sonoras dos jogos
+              originais de Spyro.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Toys for Bob</summary>
+
+          <div class="component-description">
+
+            <p>
+              Estúdio responsável pelo desenvolvimento
+              de Spyro Reignited Trilogy.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Xbox One</summary>
+
+          <div class="component-description">
+
+            <p>
+              Console da Microsoft que recebeu Spyro
+              Reignited Trilogy em seu lançamento de 2018.
+            </p>
+
+          </div>
+
+        </details>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html>

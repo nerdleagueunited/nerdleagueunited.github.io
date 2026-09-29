@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>TGGA - Ryse: Son of Rome</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        >
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Ryse: Son of Rome foi lançado originalmente para
+          Xbox One em 2013, apresentando uma aventura de ação
+          ambientada em uma versão dramatizada do Império Romano ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Ryse: Son of Rome foi lançado originalmente para
+          Xbox One em 2013, apresentando uma aventura de ação
+          ambientada em uma versão dramatizada do Império Romano ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Ryse: Son of Rome — Xbox One
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/ryse_son_of_rome.jpg"
+              alt="Ryse: Son of Rome para Xbox One"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            >
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Ryse: Son of Rome
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ryse: Son of Rome é um jogo eletrônico de ação
+            desenvolvido pela Crytek e lançado originalmente
+            para Xbox One em 2013.<br>
+
+            O jogador controla Marius Titus, um soldado romano
+            que participa de uma jornada marcada por batalhas,
+            vingança, conflitos militares e acontecimentos
+            políticos dentro de uma versão dramatizada da
+            Roma Antiga.<br>
+
+            O jogo utiliza combate corpo a corpo em terceira pessoa,
+            execução de inimigos, defesa com escudo, espada,
+            arremesso de projéteis e comandos contextuais.<br>
+
+            Um dos principais destaques do título é sua apresentação
+            visual, criada com o motor gráfico CryEngine.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Crytek
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Microsoft Studios
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Cevat Yerli
+              </li>
+
+              <li>
+                <strong>Motor:</strong>
+                CryEngine
+              </li>
+
+              <li>
+                <strong>Plataforma original:</strong>
+                Xbox One
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                22 de novembro de 2013
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação / Aventura
+              </li>
+
+              <li>
+                <strong>Perspectiva:</strong>
+                Terceira pessoa
+              </li>
+
+              <li>
+                <strong>Modo principal:</strong>
+                Um jogador
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ryse: Son of Rome foi desenvolvido pela Crytek,
+            estúdio conhecido principalmente por sua tecnologia
+            gráfica e pela série Crysis.<br>
+
+            O projeto foi concebido inicialmente como uma
+            experiência relacionada ao Kinect e posteriormente
+            evoluiu para um jogo de ação tradicional desenvolvido
+            para a nova geração de consoles.<br>
+
+            A equipe utilizou o CryEngine para produzir ambientes
+            detalhados, personagens, iluminação e grandes cenas
+            de batalha.<br>
+
+            O objetivo visual era apresentar uma representação
+            cinematográfica de conflitos militares em uma versão
+            estilizada da Roma Antiga.<br>
+
+            O jogo acabou sendo escolhido como um dos títulos
+            de lançamento do Xbox One.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_rome.jpg"
+                alt="Representação de Roma em Ryse"
+              >
+
+              <img
+                src="../tgga/ryse_soldier.jpg"
+                alt="Soldado romano em Ryse: Son of Rome"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Roma Antiga e os soldados romanos apresentados em Ryse: Son of Rome ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A narrativa de Ryse: Son of Rome utiliza elementos
+            históricos do Império Romano, mas não pretende
+            reproduzir os acontecimentos históricos de maneira
+            documental.<br>
+
+            Personagens, conflitos e acontecimentos históricos
+            são combinados com elementos fictícios para criar
+            uma aventura de ação cinematográfica.<br>
+
+            O jogador participa de campanhas militares, combate
+            inimigos em diferentes ambientes e acompanha a
+            trajetória de Marius Titus.<br>
+
+            A representação inclui legiões romanas, armas,
+            formações militares, arquitetura inspirada na
+            Antiguidade e conflitos com povos adversários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_marius.jpg"
+                alt="Marius Titus"
+              >
+
+              <img
+                src="../tgga/ryse_boudica.jpg"
+                alt="Boudica em Ryse: Son of Rome"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Marius Titus e personagens da campanha ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história acompanha Marius Titus, um soldado romano
+            cuja vida é marcada por conflitos militares e tragédias
+            familiares.<br>
+
+            Durante sua trajetória, Marius participa de batalhas
+            em diferentes regiões e passa a buscar vingança contra
+            aqueles que destruíram sua família.<br>
+
+            A campanha apresenta acontecimentos relacionados ao
+            Império Romano, à política de Roma e aos conflitos
+            envolvendo forças estrangeiras.<br>
+
+            Entre os personagens históricos utilizados de forma
+            dramatizada está Boudica, líder associada à revolta
+            dos Icenos contra o domínio romano na Britânia.<br>
+
+            A narrativa mistura personagens fictícios e figuras
+            históricas dentro de uma estrutura cinematográfica.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MARIUS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Marius Titus
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Marius Titus é o protagonista controlado pelo jogador
+            durante a maior parte da campanha.<br>
+
+            Ele é apresentado como um soldado romano que progride
+            dentro das forças militares de Roma.<br>
+
+            Sua trajetória é marcada por acontecimentos pessoais,
+            batalhas e uma busca por vingança que se transforma
+            progressivamente em uma missão maior.<br>
+
+            Durante a campanha, Marius utiliza espada e escudo
+            como suas principais armas de combate.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O sistema de combate de Ryse: Son of Rome é baseado
+            principalmente em ataques corpo a corpo, defesa,
+            esquivas e contra-ataques.<br>
+
+            Marius utiliza sua espada para realizar ataques rápidos
+            e seu escudo para bloquear golpes e atingir inimigos.<br>
+
+            O jogador precisa observar os ataques adversários
+            para realizar bloqueios e contra-ataques no momento
+            apropriado.<br>
+
+            Durante determinados confrontos, inimigos podem ficar
+            vulneráveis a execuções cinematográficas.<br>
+
+            As execuções permitem eliminar adversários utilizando
+            sequências contextuais e também podem fornecer
+            benefícios relacionados às habilidades do personagem.
+
+          </p>
+
+
+          <!-- ==========================================
+               COMBATE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sistema de Combate
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ELEMENTOS DO COMBATE -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Espada:</strong>
+                principal arma utilizada por Marius.
+              </li>
+
+              <li>
+                <strong>Escudo:</strong>
+                utilizado para defesa e ataques.
+              </li>
+
+              <li>
+                <strong>Bloqueio:</strong>
+                permite defender-se de ataques inimigos.
+              </li>
+
+              <li>
+                <strong>Execuções:</strong>
+                sequências contextuais utilizadas contra inimigos
+                enfraquecidos.
+              </li>
+
+              <li>
+                <strong>Armas de longo alcance:</strong>
+                determinados segmentos permitem utilizar
+                projéteis e equipamentos militares.
+              </li>
+
+              <li>
+                <strong>Formações:</strong>
+                algumas batalhas utilizam grupos de soldados
+                e comandos militares.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EXECUÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Execuções
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As execuções são uma das características mais
+            marcantes do sistema de combate.<br>
+
+            Quando um inimigo é colocado em determinado estado,
+            o jogador pode iniciar uma sequência de golpes
+            contextualizados.<br>
+
+            Durante essas sequências, o jogo apresenta diferentes
+            animações de acordo com o posicionamento do inimigo
+            e o ambiente da batalha.<br>
+
+            Além do aspecto visual, as execuções estão integradas
+            ao sistema de progressão e podem contribuir para
+            recuperação de saúde, experiência ou outros benefícios
+            dependendo da configuração escolhida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PROGRESSÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Progressão do Personagem
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ao longo da campanha, Marius pode adquirir melhorias
+            que modificam diferentes aspectos de sua experiência
+            de combate.<br>
+
+            A progressão está relacionada à experiência obtida
+            durante as batalhas e às execuções realizadas contra
+            os inimigos.<br>
+
+            O jogador pode escolher melhorias relacionadas ao
+            combate, à saúde, ao foco e a outros recursos
+            disponíveis durante a campanha.<br>
+
+            Dessa maneira, o sistema de progressão complementa
+            o combate direto e incentiva o uso frequente das
+            execuções.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Marius Titus:</strong>
+                protagonista e soldado romano.
+              </li>
+
+              <li>
+                <strong>Commodus:</strong>
+                personagem associado à liderança romana
+                e aos acontecimentos políticos da campanha.
+              </li>
+
+              <li>
+                <strong>Vitallion:</strong>
+                general romano e personagem importante
+                na trajetória de Marius.
+              </li>
+
+              <li>
+                <strong>Nero:</strong>
+                imperador romano apresentado na narrativa.
+              </li>
+
+              <li>
+                <strong>Boudica:</strong>
+                líder dos Icenos e uma das figuras centrais
+                do conflito apresentado no jogo.
+              </li>
+
+              <li>
+                <strong>Oswald:</strong>
+                personagem associado aos acontecimentos
+                envolvendo a Britânia.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_legion.jpg"
+                alt="Soldados em Ryse"
+              >
+
+              <img
+                src="../tgga/ryse_enemy.jpg"
+                alt="Inimigo de Ryse: Son of Rome"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Soldados e adversários encontrados durante a campanha ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Marius enfrenta diversos tipos de combatentes durante
+            a campanha.<br>
+
+            Os inimigos apresentam diferentes armas, padrões de
+            ataque e comportamentos, exigindo que o jogador alterne
+            entre ataques, bloqueios e contra-ataques.<br>
+
+            Alguns adversários utilizam espadas, enquanto outros
+            utilizam armas mais pesadas, escudos ou ataques
+            diferentes.<br>
+
+            O jogo também apresenta confrontos contra inimigos
+            de maior porte e batalhas contra chefes.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS ADVERSÁRIOS -
+            </h3>
+
+            <ul>
+
+              <li>Soldados bárbaros</li>
+              <li>Guerreiros com espada</li>
+              <li>Guerreiros com escudo</li>
+              <li>Inimigos com armas pesadas</li>
+              <li>Arqueiros</li>
+              <li>Comandantes inimigos</li>
+              <li>Chefes de batalha</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CAMPANHA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Campanha
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha principal acompanha Marius durante uma
+            série de conflitos militares.<br>
+
+            As missões alternam entre batalhas em campo aberto,
+            invasões, defesa de posições, confrontos urbanos,
+            batalhas navais e outros cenários inspirados
+            na Antiguidade.<br>
+
+            A progressão é estruturada de maneira cinematográfica,
+            com grandes grupos de soldados e cenas de batalha
+            intercaladas aos confrontos individuais.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Elemento</th>
+                <th>Descrição</th>
+                <th>Local / Contexto</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Exército Romano</td>
+                <td>Forças militares de Roma</td>
+                <td>Império Romano</td>
+              </tr>
+
+              <tr>
+                <td>Britânia</td>
+                <td>Região importante da campanha</td>
+                <td>Britânia Romana</td>
+              </tr>
+
+              <tr>
+                <td>Roma</td>
+                <td>Centro político do Império</td>
+                <td>Roma</td>
+              </tr>
+
+              <tr>
+                <td>Batalhas Navais</td>
+                <td>Confrontos envolvendo embarcações</td>
+                <td>Mar / Costa</td>
+              </tr>
+
+              <tr>
+                <td>Arenas</td>
+                <td>Combates contra ondas de inimigos</td>
+                <td>Modo Gladiador</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GLADIADOR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modo Gladiador
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_gladiator.jpg"
+                alt="Modo Gladiador de Ryse"
+              >
+
+              <img
+                src="../tgga/ryse_arena.jpg"
+                alt="Arena de Ryse: Son of Rome"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Combates nas arenas do modo Gladiador ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além da campanha principal, Ryse: Son of Rome possui
+            o modo Gladiador, desenvolvido para partidas de combate
+            em arenas.<br>
+
+            Nesse modo, o jogador enfrenta grupos de inimigos
+            enquanto procura sobreviver e completar os objetivos
+            apresentados pelo jogo.<br>
+
+            O modo também possui elementos de progressão e
+            personalização do gladiador.<br>
+
+            O Gladiador pode ser jogado individualmente ou em
+            determinadas configurações cooperativas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O modo Gladiador também oferece partidas cooperativas
+            para dois jogadores em arenas específicas.<br>
+
+            Os jogadores precisam enfrentar grupos de inimigos
+            e completar os objetivos enquanto trabalham em conjunto.<br>
+
+            A cooperação permite combinar ataques e estratégias
+            para sobreviver às diferentes ondas de adversários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e CryEngine
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_cryengine.jpg"
+                alt="CryEngine em Ryse"
+              >
+
+              <img
+                src="../tgga/xbox_one_ryse.jpg"
+                alt="Ryse no Xbox One"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Tecnologia gráfica de Ryse: Son of Rome no Xbox One ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ryse: Son of Rome foi desenvolvido utilizando o
+            CryEngine, tecnologia criada pela própria Crytek.<br>
+
+            O jogo foi concebido para demonstrar as capacidades
+            gráficas do Xbox One durante o lançamento do console.<br>
+
+            Os ambientes apresentam grande quantidade de detalhes,
+            iluminação dinâmica, efeitos visuais e personagens
+            com elevado nível de detalhamento para a época.<br>
+
+            As batalhas também utilizam grandes grupos de personagens
+            e cenários construídos para transmitir uma sensação
+            cinematográfica.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX ONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ryse e o Xbox One
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ryse: Son of Rome foi lançado no mesmo dia do Xbox One,
+            em 22 de novembro de 2013.<br>
+
+            O jogo fez parte da primeira geração de títulos
+            desenvolvidos especificamente para o novo console
+            da Microsoft.<br>
+
+            Sua apresentação visual foi utilizada como uma das
+            demonstrações das capacidades gráficas do sistema
+            durante o período de lançamento.<br>
+
+            O título também incorporou recursos relacionados
+            ao ecossistema do Xbox One e ao controle do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÃO PARA PC
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versão para PC
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_xbox_one.jpg"
+                  alt="Ryse: Son of Rome no Xbox One"
+                >
+
+                <figcaption>
+                  Ryse: Son of Rome — Xbox One
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_pc.jpg"
+                  alt="Ryse: Son of Rome no PC"
+                >
+
+                <figcaption>
+                  Ryse: Son of Rome — PC
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Em 2014, Ryse: Son of Rome recebeu uma versão para
+            computadores pessoais.<br>
+
+            A edição para PC foi disponibilizada através de
+            distribuição digital e permitiu utilizar configurações
+            gráficas superiores dependendo do hardware utilizado.<br>
+
+            A versão para PC também recebeu suporte a resoluções
+            mais elevadas e outras opções gráficas voltadas
+            para computadores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DLC
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conteúdo Adicional
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - CONTEÚDOS RELACIONADOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Coliseum Pack:</strong>
+                conteúdo relacionado ao modo Gladiador.
+              </li>
+
+              <li>
+                <strong>Ruins Pack:</strong>
+                novas arenas para o modo Gladiador.
+              </li>
+
+              <li>
+                <strong>Duelo of Fates:</strong>
+                conteúdo adicional relacionado às arenas.
+              </li>
+
+              <li>
+                <strong>Survivor Mode:</strong>
+                conteúdo voltado para sobrevivência em arenas.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Áudio
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ryse_music.jpg"
+                alt="Trilha sonora de Ryse"
+              >
+
+              <img
+                src="../tgga/ryse_battle.jpg"
+                alt="Batalha em Ryse"
+              >
+
+            </div>
+
+            <figcaption>
+              ~ Música e ambientação sonora das batalhas ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora acompanha o tom cinematográfico
+            da campanha e utiliza música orquestral para
+            acompanhar batalhas e momentos narrativos.<br>
+
+            Os efeitos sonoros possuem destaque durante os
+            combates, incluindo golpes de espada, impactos
+            de escudos, gritos de soldados e sons relacionados
+            às grandes batalhas.<br>
+
+            O áudio também contribui para diferenciar os
+            ambientes militares, urbanos e naturais apresentados
+            durante a aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA E ROMA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Roma Antiga no Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A representação de Roma em Ryse: Son of Rome combina
+            referências históricas com elementos de ficção.<br>
+
+            O jogo apresenta legiões, gladiadores, generais,
+            imperadores e povos estrangeiros em uma narrativa
+            criada especificamente para o título.<br>
+
+            Diversos acontecimentos são inspirados em episódios
+            históricos, mas personagens e situações são modificados
+            para atender à estrutura da campanha.<br>
+
+            Por isso, o jogo deve ser entendido como uma obra de
+            ficção histórica e não como uma representação documental
+            do Império Romano.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a campanha existem itens colecionáveis
+            espalhados pelos cenários.<br>
+
+            Entre eles estão pergaminhos, crônicas e outros
+            elementos utilizados para apresentar informações
+            adicionais sobre o universo do jogo.<br>
+
+            A exploração dos cenários permite encontrar esses
+            objetos enquanto o jogador avança pelas missões.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_box.jpg"
+                  alt="Caixa de Ryse: Son of Rome"
+                >
+
+                <figcaption>
+                  Caixa — Ryse: Son of Rome
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_disc.jpg"
+                  alt="Disco de Ryse: Son of Rome"
+                >
+
+                <figcaption>
+                  Mídia — Xbox One
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_manual.jpg"
+                  alt="Material de Ryse: Son of Rome"
+                >
+
+                <figcaption>
+                  Material promocional
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ryse_collectors.jpg"
+                  alt="Edição especial de Ryse"
+                >
+
+                <figcaption>
+                  Edição especial / colecionável
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ryse: Son of Rome permaneceu associado à primeira
+            geração de jogos do Xbox One e à demonstração das
+            capacidades gráficas do console em seu lançamento.<br>
+
+            O título também se tornou conhecido por sua
+            representação cinematográfica de batalhas e pelo
+            sistema de execuções contextualizadas.<br>
+
+            A versão para PC posteriormente ampliou o alcance
+            do jogo e permitiu que jogadores utilizassem
+            configurações gráficas mais elevadas.<br>
+
+            Embora não tenha recebido uma continuação direta,
+            Ryse permanece como um dos títulos associados ao
+            lançamento do Xbox One.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Ryse: Son of Rome foi um dos jogos de lançamento
+                do Xbox One.
+              </li>
+
+              <li>
+                O jogo foi desenvolvido pela Crytek,
+                responsável pela série Crysis.
+              </li>
+
+              <li>
+                O título utiliza o CryEngine.
+              </li>
+
+              <li>
+                O protagonista da campanha é Marius Titus.
+              </li>
+
+              <li>
+                A história mistura personagens fictícios
+                com figuras históricas.
+              </li>
+
+              <li>
+                Boudica aparece como uma das personagens
+                importantes da narrativa.
+              </li>
+
+              <li>
+                O sistema de combate possui execuções
+                cinematográficas.
+              </li>
+
+              <li>
+                O jogo possui um modo Gladiador baseado
+                em combates realizados em arenas.
+              </li>
+
+              <li>
+                Ryse também recebeu uma versão para PC
+                em 2014.
+              </li>
+
+              <li>
+                A ambientação do jogo é inspirada no
+                Império Romano e na Britânia.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="ryse.html">
+                ○ Games - Ryse: Son of Rome
+              </a>
+            </li>
+
+            <li>
+              <a href="xboxone.html">
+                ○ Consoles - Xbox One
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Marius Titus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de Ryse: Son of Rome e soldado
+                  romano controlado pelo jogador.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Arma principal: Espada</li>
+                  <li>Equipamento: Escudo</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boudica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Líder dos Icenos e uma das figuras centrais
+                  do conflito apresentado na campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Commodus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem ligado à política e à liderança
+                  romana durante a história.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nero</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Imperador romano apresentado na narrativa
+                  dramatizada do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Vitallion</summary>
+
+              <div class="component-description">
+
+                <p>
+                  General romano associado à trajetória
+                  militar de Marius.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Espada</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal arma de Marius durante os combates
+                  corpo a corpo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Escudo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento utilizado para bloquear ataques
+                  e realizar golpes contra adversários.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Execução</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sequência contextualizada utilizada contra
+                  inimigos enfraquecidos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bloqueio</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecânica defensiva utilizada para impedir
+                  ou reduzir ataques inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Contra-ataque</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ataque realizado após defender-se
+                  de determinados golpes inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Legião Romana</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade militar romana presente em diversas
+                  batalhas da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Gladiador</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo baseado em combates realizados
+                  em arenas contra grupos de inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Arena</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cenário utilizado principalmente no
+                  modo Gladiador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Roma</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Centro político do Império Romano e um
+                  dos ambientes relacionados à campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Britânia</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região importante para os acontecimentos
+                  apresentados na narrativa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Exército Bárbaro</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de forças adversárias enfrentadas
+                  por Marius durante a campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Arqueiro</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que utiliza ataques à distância
+                  durante determinados confrontos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chefes</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Adversários especiais encontrados durante
+                  determinadas partes da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coliseu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tipo de cenário associado aos combates
+                  de gladiadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Roma Antiga</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Período histórico utilizado como inspiração
+                  para a ambientação do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CryEngine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Motor gráfico utilizado no desenvolvimento
+                  de Ryse: Son of Rome.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox One</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma original de Ryse: Son of Rome,
+                  lançado junto ao console em 2013.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PC</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma que recebeu uma versão do jogo
+                  em 2014.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coliseum Pack</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conteúdo adicional relacionado ao modo
+                  Gladiador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ruins Pack</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conteúdo adicional com novas arenas
+                  para o modo Gladiador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Modo Cooperativo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O modo Gladiador permite partidas cooperativas
+                  para dois jogadores em determinadas arenas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Marius Titus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem central da campanha e principal
+                  guerreiro controlado pelo jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Mario Kart DS</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Mario Kart DS foi lançado originalmente para o
+          Nintendo DS em 2005, combinando corridas tradicionais
+          da série Mario Kart com recursos específicos do portátil ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Mario Kart DS foi lançado originalmente para o
+          Nintendo DS em 2005, combinando corridas tradicionais
+          da série Mario Kart com recursos específicos do portátil ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Mario Kart DS — Nintendo DS
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/mariokartds.jpg"
+              alt="Mario Kart DS"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mario Kart DS
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS é um jogo eletrônico de corrida
+            desenvolvido pela Nintendo EAD e lançado para
+            o Nintendo DS em 2005.<br>
+
+            O jogo é o quinto título principal da série Mario Kart
+            e combina personagens, pistas, itens e veículos
+            tradicionais da franquia com recursos próprios
+            do Nintendo DS.<br>
+
+            Além das corridas tradicionais, Mario Kart DS apresenta
+            o modo Mission Mode, diferentes classes de cilindrada,
+            desbloqueáveis e suporte para partidas multiplayer.<br>
+
+            O título também foi um dos primeiros jogos da série
+            a utilizar recursos de conexão online da Nintendo
+            para partidas entre jogadores.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo EAD
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Nintendo EAD
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo DS
+              </li>
+
+              <li>
+                <strong>Lançamento japonês:</strong>
+                8 de dezembro de 2005
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Corrida / Kart
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1 jogador / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Nintendo DS Game Card
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS foi desenvolvido pela Nintendo EAD
+            durante a primeira metade dos anos 2000, período em
+            que a Nintendo trabalhava na expansão das principais
+            séries da empresa para o Nintendo DS.<br>
+
+            A equipe precisava adaptar a fórmula de Mario Kart
+            para um portátil com duas telas, controles direcionais
+            e recursos de conectividade sem fio.<br>
+
+            O projeto procurou preservar a estrutura tradicional
+            da série, baseada em corridas com personagens da
+            franquia Mario, itens ofensivos e defensivos,
+            pistas com obstáculos e diferentes classes de
+            velocidade.<br>
+
+            Ao mesmo tempo, foram introduzidos recursos específicos
+            como o Mission Mode e a utilização da tela inferior
+            para apresentar informações durante as corridas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/nintendo_ds.jpg"
+                alt="Nintendo DS"
+              />
+
+              <img
+                src="../tgga/mariokart_supercircuit.jpg"
+                alt="Mario Kart Super Circuit"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo DS e Mario Kart Super Circuit — antecedentes de Mario Kart DS ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo DS foi lançado no Japão em 2004 e apresentou
+            duas telas, sendo uma delas sensível ao toque,
+            além de recursos de comunicação sem fio.<br>
+
+            Antes de Mario Kart DS, a série já havia passado por
+            diferentes plataformas, incluindo Super Nintendo,
+            Nintendo 64, Game Boy Advance e GameCube.<br>
+
+            Mario Kart DS levou a série para um novo público
+            portátil e aproveitou o hardware do DS para criar
+            uma experiência que combinava partidas individuais
+            e multiplayer local.<br>
+
+            O jogo também marcou a estreia de determinados
+            recursos que posteriormente seriam associados
+            à série em consoles e portáteis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS foi lançado originalmente no Japão
+            em 8 de dezembro de 2005.<br>
+
+            O jogo chegou posteriormente à América do Norte,
+            Europa e outras regiões durante o final de 2005
+            e ao longo de 2006.<br>
+
+            O lançamento colocou uma nova versão da série Mario
+            Kart nas mãos dos proprietários do Nintendo DS,
+            aproveitando a popularidade crescente do portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGABILIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS utiliza uma estrutura de corrida baseada
+            em voltas, posições e utilização estratégica de itens.<br>
+
+            O jogador escolhe um personagem e um kart antes da
+            corrida e precisa completar a pista enquanto tenta
+            superar os adversários controlados pelo computador
+            ou por outros jogadores.<br>
+
+            O controle utiliza principalmente o direcional,
+            enquanto os botões do Nintendo DS são utilizados
+            para acelerar, frear, utilizar itens e realizar
+            outras ações.<br>
+
+            O jogo também apresenta técnicas de derrapagem,
+            mini-turbos, atalhos e diferentes características
+            de controle entre os karts.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_mario.jpg"
+                  alt="Mario em Mario Kart DS"
+                />
+
+                <figcaption>
+                  Mario
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_luigi.jpg"
+                  alt="Luigi em Mario Kart DS"
+                />
+
+                <figcaption>
+                  Luigi
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_peach.jpg"
+                  alt="Peach em Mario Kart DS"
+                />
+
+                <figcaption>
+                  Peach
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_bowser.jpg"
+                  alt="Bowser em Mario Kart DS"
+                />
+
+                <figcaption>
+                  Bowser
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS apresenta personagens conhecidos da
+            série Mario e também inclui personagens desbloqueáveis.<br>
+
+            Entre os personagens jogáveis estão Mario, Luigi,
+            Peach, Yoshi, Toad, Donkey Kong, Wario e Bowser.<br>
+
+            O jogo também apresenta Dry Bones e Rob como
+            personagens desbloqueáveis, ampliando a variedade
+            disponível para o jogador.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS -
+            </h3>
+
+            <ul>
+
+              <li>Mario</li>
+              <li>Luigi</li>
+              <li>Peach</li>
+              <li>Yoshi</li>
+              <li>Toad</li>
+              <li>Donkey Kong</li>
+              <li>Wario</li>
+              <li>Bowser</li>
+              <li>Dry Bones</li>
+              <li>R.O.B.</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               KARTS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Karts
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Cada personagem possui diferentes karts disponíveis,
+            com características próprias de velocidade, aceleração,
+            peso, dirigibilidade e capacidade de derrapagem.<br>
+
+            O jogador pode escolher o kart de acordo com seu
+            estilo de jogo ou com as características da pista.<br>
+
+            Os karts também apresentam diferentes atributos,
+            fazendo com que determinadas combinações de personagem
+            e veículo ofereçam experiências de controle distintas.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ATRIBUTOS DOS KARTS -
+            </h3>
+
+            <ul>
+
+              <li>Velocidade</li>
+              <li>Aceleração</li>
+              <li>Peso</li>
+              <li>Manuseio</li>
+              <li>Derrapagem</li>
+              <li>Itens</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ITENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Itens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_mushroom.jpg"
+                  alt="Mushroom"
+                />
+
+                <figcaption>
+                  Mushroom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_shell.jpg"
+                  alt="Shell"
+                />
+
+                <figcaption>
+                  Green Shell
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_banana.jpg"
+                  alt="Banana"
+                />
+
+                <figcaption>
+                  Banana
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_bobomb.jpg"
+                  alt="Bob-omb"
+                />
+
+                <figcaption>
+                  Bob-omb
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os itens são uma das principais características da
+            série Mario Kart.<br>
+
+            Eles podem ser obtidos através das Item Boxes
+            espalhadas pelas pistas e podem alterar rapidamente
+            a situação de uma corrida.<br>
+
+            Alguns itens servem para atacar adversários,
+            enquanto outros aumentam a velocidade, protegem
+            o jogador ou criam obstáculos na pista.<br>
+
+            Mario Kart DS possui itens tradicionais da franquia
+            e também utiliza o sistema de itens para equilibrar
+            parcialmente as diferenças entre as posições
+            durante uma corrida.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS ITENS -
+            </h3>
+
+            <ul>
+
+              <li>Banana</li>
+              <li>Green Shell</li>
+              <li>Red Shell</li>
+              <li>Triple Shells</li>
+              <li>Mushroom</li>
+              <li>Triple Mushrooms</li>
+              <li>Bob-omb</li>
+              <li>Star</li>
+              <li>Bullet Bill</li>
+              <li>Lightning</li>
+              <li>Blooper</li>
+              <li>Fake Item Box</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COPAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Copas e Pistas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O modo Grand Prix é dividido em diferentes copas,
+            cada uma contendo quatro pistas.<br>
+
+            Mario Kart DS possui pistas novas criadas
+            especificamente para o jogo e também circuitos
+            que retornam de jogos anteriores da série através
+            das chamadas Retro Courses.<br>
+
+            A combinação entre pistas novas e clássicas ajudou
+            a conectar Mario Kart DS com a história da franquia.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Copa</th>
+                <th>Tipo</th>
+                <th>Pistas</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Mushroom Cup</td>
+                <td>Nitro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Flower Cup</td>
+                <td>Nitro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Star Cup</td>
+                <td>Nitro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Special Cup</td>
+                <td>Nitro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Shell Cup</td>
+                <td>Retro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Banana Cup</td>
+                <td>Retro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Leaf Cup</td>
+                <td>Retro</td>
+                <td>8 pistas</td>
+              </tr>
+
+              <tr>
+                <td>Lightning Cup</td>
+                <td>Retro</td>
+                <td>8 pistas</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PISTAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Pistas de Mario Kart DS
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PISTAS NITRO -
+            </h3>
+
+            <ul>
+
+              <li>Figure-8 Circuit</li>
+              <li>Yoshi Falls</li>
+              <li>Cheep Cheep Beach</li>
+              <li>Luigi's Mansion</li>
+              <li>Desert Hills</li>
+              <li>Delfino Square</li>
+              <li>Waluigi Pinball</li>
+              <li>Shroom Ridge</li>
+              <li>DK Pass</li>
+              <li>Tick-Tock Clock</li>
+              <li>Mario Circuit</li>
+              <li>Airship Fortress</li>
+              <li>Wario Stadium</li>
+              <li>Peach Gardens</li>
+              <li>Bowser Castle</li>
+              <li>Rainbow Road</li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PISTAS RETRO -
+            </h3>
+
+            <ul>
+
+              <li>SNES Mario Circuit 1</li>
+              <li>SNES Donut Plains 1</li>
+              <li>SNES Koopa Beach 2</li>
+              <li>SNES Choco Island 2</li>
+              <li>N64 Moo Moo Farm</li>
+              <li>N64 Frappe Snowland</li>
+              <li>N64 Choco Mountain</li>
+              <li>N64 Banshee Boardwalk</li>
+              <li>GBA Peach Circuit</li>
+              <li>GBA Luigi Circuit</li>
+              <li>GBA Sky Garden</li>
+              <li>GBA Yoshi Desert</li>
+              <li>GCN Luigi Circuit</li>
+              <li>GCN Baby Park</li>
+              <li>GCN Mushroom Bridge</li>
+              <li>GCN Yoshi Circuit</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modos de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS possui diversos modos de jogo,
+            permitindo que o jogador participe de corridas,
+            campeonatos e desafios individuais.<br>
+
+            O Grand Prix coloca o jogador em uma sequência de
+            corridas dentro das diferentes copas.<br>
+
+            Time Trial permite competir contra o relógio,
+            enquanto o modo VS permite disputar corridas
+            escolhendo diferentes configurações.<br>
+
+            Battle Mode possui arenas específicas e utiliza
+            mecânicas diferentes das corridas tradicionais.<br>
+
+            O jogo também apresenta o Mission Mode, composto
+            por desafios que exigem objetivos específicos.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - MODOS -
+            </h3>
+
+            <ul>
+
+              <li>Grand Prix</li>
+              <li>Time Trial</li>
+              <li>VS</li>
+              <li>Battle</li>
+              <li>Mission Mode</li>
+              <li>Multiplayer</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSION MODE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mission Mode
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Mission Mode é um dos elementos particulares
+            de Mario Kart DS.<br>
+
+            Em vez de simplesmente completar uma corrida,
+            o jogador precisa cumprir objetivos específicos
+            determinados por cada missão.<br>
+
+            Os desafios podem envolver passar por checkpoints,
+            coletar moedas, derrotar inimigos, executar
+            determinadas ações ou completar circuitos sob
+            condições específicas.<br>
+
+            As missões são organizadas em níveis e oferecem
+            uma forma diferente de utilizar as mecânicas
+            tradicionais do jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mkds_multiplayer.jpg"
+                alt="Multiplayer de Mario Kart DS"
+              />
+
+              <img
+                src="../tgga/nintendo_ds_wifi.jpg"
+                alt="Nintendo DS Wi-Fi"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Multiplayer e conectividade sem fio do Nintendo DS ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS possui suporte para multiplayer local
+            utilizando a comunicação sem fio do Nintendo DS.<br>
+
+            Dependendo da configuração, jogadores podem disputar
+            corridas utilizando múltiplos consoles e cópias
+            do jogo, além de recursos de Download Play
+            compatíveis com determinados modos.<br>
+
+            O jogo também ficou conhecido pelo suporte ao
+            Nintendo Wi-Fi Connection, permitindo partidas
+            online durante o período em que o serviço esteve
+            oficialmente disponível.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BATTLE MODE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Battle Mode
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Battle Mode apresenta partidas realizadas em
+            arenas em vez das pistas tradicionais.<br>
+
+            O jogador pode utilizar itens para atacar outros
+            participantes e tentar cumprir os objetivos
+            específicos de cada batalha.<br>
+
+            Mario Kart DS possui dois tipos principais de batalha:
+            Balloon Battle e Shine Runners.<br>
+
+            No Balloon Battle, os jogadores precisam proteger
+            seus balões e tentar estourar os balões dos adversários.<br>
+
+            Shine Runners utiliza o objetivo de manter o controle
+            de um Shine Sprite enquanto os outros jogadores
+            tentam roubá-lo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DRIFT
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Derrapagem e Mini-Turbo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A derrapagem é uma das técnicas mais importantes
+            para controlar os karts nas curvas.<br>
+
+            Durante uma derrapagem, o jogador pode realizar
+            movimentos com o controle direcional para acumular
+            energia e obter um Mini-Turbo.<br>
+
+            O impulso resultante permite acelerar durante a
+            saída da curva e pode ser utilizado para melhorar
+            os tempos nas corridas.<br>
+
+            O domínio dessa técnica também possui importância
+            no Time Trial e em partidas competitivas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESBLOQUEÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desbloqueáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O progresso no jogo permite desbloquear novos
+            personagens, karts e conteúdos adicionais.<br>
+
+            Algumas recompensas são obtidas ao completar
+            determinadas copas e classes de cilindrada,
+            enquanto outras dependem de condições específicas
+            de progresso.<br>
+
+            O sistema de desbloqueáveis aumenta a quantidade
+            de conteúdo disponível depois das primeiras horas
+            de jogo.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS DESBLOQUEÁVEIS -
+            </h3>
+
+            <ul>
+
+              <li>Dry Bones</li>
+              <li>R.O.B.</li>
+              <li>Novos karts</li>
+              <li>Classes adicionais</li>
+              <li>Mirror Mode</li>
+              <li>Conteúdos especiais</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TELA DUPLA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Uso das Duas Telas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS utiliza as duas telas do Nintendo DS
+            para apresentar diferentes informações durante
+            a partida.<br>
+
+            A tela superior concentra a ação principal da corrida,
+            enquanto a tela inferior pode apresentar o mapa,
+            posição dos competidores, itens e outras informações.<br>
+
+            O mapa permite observar a posição dos participantes
+            e determinados elementos presentes na pista,
+            ajudando o jogador a acompanhar a corrida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GRÁFICOS E ÁUDIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Gráficos e Música
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mkds_gameplay.jpg"
+                alt="Gameplay de Mario Kart DS"
+              />
+
+              <img
+                src="../tgga/mkds_sound.jpg"
+                alt="Mario Kart DS"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Gráficos e apresentação audiovisual de Mario Kart DS ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS utiliza gráficos tridimensionais
+            adaptados às capacidades do Nintendo DS.<br>
+
+            Os personagens, karts e pistas são apresentados
+            em 3D, enquanto determinados elementos utilizam
+            técnicas bidimensionais para economizar recursos.<br>
+
+            A trilha sonora utiliza músicas novas e também
+            elementos relacionados a jogos anteriores da série.<br>
+
+            Os efeitos sonoros incluem motores, derrapagens,
+            colisões, utilização de itens e vozes dos personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HARDWARE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do Nintendo DS
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS foi desenvolvido para aproveitar
+            as características específicas do Nintendo DS.<br>
+
+            O portátil possui duas telas, processamento capaz
+            de executar gráficos tridimensionais e comunicação
+            sem fio integrada.<br>
+
+            Essas características permitiram que Mario Kart DS
+            apresentasse corridas em 3D, mapas na tela inferior
+            e partidas multiplayer sem a necessidade de cabos.<br>
+
+            O uso do Game Card também permitiu armazenar o jogo
+            e os recursos necessários para suas diferentes
+            pistas, personagens, músicas e modos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BRASIL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mario Kart DS no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS também fez parte da biblioteca do
+            Nintendo DS disponível para jogadores brasileiros
+            durante a geração do portátil.<br>
+
+            A série Mario Kart já possuía reconhecimento entre
+            jogadores brasileiros graças aos títulos lançados
+            anteriormente para consoles da Nintendo.<br>
+
+            Com o crescimento do Nintendo DS, Mario Kart DS
+            tornou-se uma das experiências de corrida associadas
+            ao portátil e ao multiplayer local.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES E REEDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Reedições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_japan.jpg"
+                  alt="Mario Kart DS japonês"
+                />
+
+                <figcaption>
+                  Edição japonesa
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_usa.jpg"
+                  alt="Mario Kart DS americano"
+                />
+
+                <figcaption>
+                  Edição norte-americana
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_europe.jpg"
+                  alt="Mario Kart DS europeu"
+                />
+
+                <figcaption>
+                  Edição europeia
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_cart.jpg"
+                  alt="Cartucho de Mario Kart DS"
+                />
+
+                <figcaption>
+                  Game Card — Nintendo DS
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS foi distribuído em diferentes regiões
+            do mundo, com versões físicas destinadas aos mercados
+            japonês, norte-americano e europeu, entre outros.<br>
+
+            As diferentes edições podem apresentar alterações
+            relacionadas à embalagem, classificação etária,
+            idiomas e materiais impressos.<br>
+
+            O jogo também foi disponibilizado posteriormente
+            através de diferentes formas de distribuição
+            relacionadas ao ecossistema do Nintendo DS.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS consolidou a série Mario Kart no mercado
+            portátil e introduziu elementos que continuariam
+            presentes em títulos posteriores.<br>
+
+            A combinação de pistas novas e retro, multiplayer
+            sem fio, personagens desbloqueáveis, Mission Mode
+            e diferentes configurações de karts ampliou
+            consideravelmente a estrutura tradicional da série.<br>
+
+            O jogo também ajudou a estabelecer Mario Kart como
+            uma experiência multiplayer importante dentro
+            da biblioteca do Nintendo DS.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Mario Kart DS foi lançado originalmente
+                em 2005.
+              </li>
+
+              <li>
+                O jogo utiliza duas telas para apresentar
+                informações diferentes durante a corrida.
+              </li>
+
+              <li>
+                O título possui pistas novas e pistas
+                retornadas de jogos anteriores da série.
+              </li>
+
+              <li>
+                O Mission Mode apresenta desafios diferentes
+                das corridas tradicionais.
+              </li>
+
+              <li>
+                R.O.B. aparece como personagem jogável
+                desbloqueável.
+              </li>
+
+              <li>
+                O jogo possui suporte a multiplayer sem fio.
+              </li>
+
+              <li>
+                O Nintendo Wi-Fi Connection permitia partidas
+                online durante o período em que o serviço
+                esteve ativo.
+              </li>
+
+              <li>
+                Mario Kart DS foi um dos primeiros jogos da
+                série a utilizar uma grande quantidade de
+                conteúdo retro em um único título.
+              </li>
+
+              <li>
+                A Rainbow Road aparece como a pista final
+                da Special Cup.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Mario Kart DS foi distribuído em embalagens próprias
+            para o Nintendo DS, acompanhadas pelo Game Card,
+            manual e materiais impressos.<br>
+
+            Para colecionadores, diferentes versões regionais,
+            capas, manuais, cartuchos e edições promocionais
+            podem apresentar características distintas.<br>
+
+            Exemplares completos e preservados podem possuir
+            interesse histórico por fazerem parte da geração
+            original do Nintendo DS.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_box.jpg"
+                  alt="Caixa de Mario Kart DS"
+                />
+
+                <figcaption>
+                  Caixa — Mario Kart DS
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_manual.jpg"
+                  alt="Manual de Mario Kart DS"
+                />
+
+                <figcaption>
+                  Manual — Mario Kart DS
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_cart.jpg"
+                  alt="Game Card de Mario Kart DS"
+                />
+
+                <figcaption>
+                  Game Card — Mario Kart DS
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mkds_package.jpg"
+                  alt="Pacote de Mario Kart DS"
+                />
+
+                <figcaption>
+                  Edição original — Nintendo DS
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="mariokartds.html">
+                ○ Games - Mario Kart DS
+              </a>
+            </li>
+
+            <li>
+              <a href="nintendods.html">
+                ○ Consoles - Nintendo DS
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Mario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem principal da série Mario e um dos
+                  pilotos disponíveis em Mario Kart DS.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Categoria: Personagem</li>
+                  <li>Peso: Médio</li>
+                  <li>Tipo: Piloto</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Luigi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Mario e personagem jogável
+                  em Mario Kart DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peach</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Princesa do Reino dos Cogumelos e uma das
+                  personagens jogáveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Yoshi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem conhecido por sua participação
+                  em diversos jogos da Nintendo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Toad</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem leve e veloz da série Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Donkey Kong</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem pesado e integrante tradicional
+                  da série Mario Kart.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem pesado disponível como piloto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bowser</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos personagens mais pesados do elenco.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dry Bones</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem desbloqueável baseado no inimigo
+                  esquelético da série Super Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>R.O.B.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem desbloqueável associado ao
+                  histórico de hardware da Nintendo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Go-Kart</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo utilizado pelos personagens
+                  durante as corridas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que fornece um impulso temporário
+                  de velocidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Triple Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de três Mushrooms que podem ser
+                  utilizados individualmente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Green Shell</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Casco que pode ser lançado contra
+                  outros pilotos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Red Shell</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Casco teleguiado utilizado para atingir
+                  adversários.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Banana</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que pode ser colocado na pista
+                  para fazer outros pilotos derraparem.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bob-omb</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item explosivo que pode atingir pilotos
+                  próximos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Star</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Concede invencibilidade temporária e
+                  aumenta a velocidade do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bullet Bill</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que transforma temporariamente o jogador
+                  em um Bullet Bill e o conduz pela pista.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lightning</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que reduz temporariamente os outros
+                  pilotos e altera suas velocidades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blooper</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que lança tinta na tela dos adversários.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Figure-8 Circuit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primeira pista da Mushroom Cup e uma das
+                  pistas introdutórias do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Yoshi Falls</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pista localizada em um ambiente com
+                  cachoeiras e caminhos alternativos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Waluigi Pinball</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pista temática construída ao redor de
+                  elementos semelhantes a uma máquina de pinball.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Airship Fortress</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pista com dirigíveis, plataformas móveis
+                  e obstáculos mecânicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rainbow Road</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das pistas mais conhecidas da série
+                  e circuito final da Special Cup.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mission Mode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo baseado em objetivos específicos,
+                  oferecendo desafios diferentes das corridas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Grand Prix</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo de campeonato composto por diferentes
+                  copas e corridas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Time Trial</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo focado em completar uma pista no
+                  menor tempo possível.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Battle Mode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo de batalha realizado em arenas
+                  específicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Balloon Battle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Batalha em que os jogadores utilizam
+                  itens para atacar os balões dos adversários.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shine Runners</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo de batalha baseado na posse de
+                  Shine Sprites.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nitro Courses</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pistas criadas especificamente para
+                  Mario Kart DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Retro Courses</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pistas retornadas de jogos anteriores
+                  da série Mario Kart.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mini-Turbo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Impulso obtido ao realizar corretamente
+                  uma derrapagem.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Item Box</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Caixa encontrada nas pistas que fornece
+                  um item aleatório ao jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo DS</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma original de Mario Kart DS,
+                  equipada com duas telas e comunicação
+                  sem fio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Card</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para distribuir
+                  Mario Kart DS no Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Permite disputar partidas contra outros
+                  jogadores utilizando os recursos sem fio
+                  do Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

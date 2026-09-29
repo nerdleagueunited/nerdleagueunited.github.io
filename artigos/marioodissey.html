@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>TGGA - Super Mario Odyssey</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #444;
+      box-sizing: border-box;
+      background: #111;
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        >
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Super Mario Odyssey foi lançado para Nintendo Switch
+          em 2017 e apresenta Mario viajando por diversos reinos
+          em uma aventura tridimensional baseada em exploração,
+          captura de inimigos e coleta de luas ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Super Mario Odyssey foi lançado para Nintendo Switch
+          em 2017 e apresenta Mario viajando por diversos reinos
+          em uma aventura tridimensional baseada em exploração,
+          captura de inimigos e coleta de luas ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Super Mario Odyssey — Nintendo Switch
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/supermarioodyssey_switch.jpg"
+              alt="Super Mario Odyssey para Nintendo Switch"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            >
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Odyssey
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey é um jogo eletrônico de plataforma
+            desenvolvido pela Nintendo e lançado para o Nintendo
+            Switch em 2017.<br>
+
+            O jogo foi desenvolvido pela equipe da Nintendo EPD
+            e apresenta uma aventura tridimensional de Mario
+            através de diferentes reinos.<br>
+
+            Durante a aventura, Mario utiliza seu novo companheiro,
+            Cappy, um chapéu capaz de capturar determinados
+            inimigos, objetos e criaturas do cenário.<br>
+
+            O objetivo principal é impedir Bowser de se casar com
+            a Princesa Peach e recuperar as Power Moons necessárias
+            para abastecer a nave Odyssey.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo EPD
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Kenta Motokura
+              </li>
+
+              <li>
+                <strong>Produção:</strong>
+                Yoshiaki Koizumi
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo Switch
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                27 de outubro de 2017
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Plataforma / Aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1–2 jogadores
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Cartucho Nintendo Switch / Distribuição digital
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Super Mario Odyssey ocorreu
+            dentro da Nintendo para o Nintendo Switch.<br>
+
+            O projeto foi criado para aproveitar a capacidade
+            técnica do novo console e retomar uma estrutura de
+            exploração mais aberta dentro de uma aventura 3D
+            de Mario.<br>
+
+            A equipe trabalhou na criação de grandes ambientes
+            interconectados, nos quais o jogador poderia procurar
+            Power Moons, descobrir caminhos secretos e interagir
+            com diferentes elementos do cenário.<br>
+
+            Uma das principais novidades foi Cappy, que permite
+            a Mario capturar determinados inimigos e objetos,
+            modificando temporariamente suas habilidades.<br>
+
+            O jogo também foi projetado para aproveitar diferentes
+            formas de controle do Nintendo Switch, incluindo os
+            Joy-Con.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/nintendo_switch.jpg"
+                alt="Nintendo Switch"
+              >
+
+              <img
+                src="../tgga/supermario3dworld.jpg"
+                alt="Super Mario 3D World"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Switch e um dos antecedentes modernos de Mario em 3D ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch foi lançado mundialmente em março
+            de 2017 como um console híbrido capaz de funcionar
+            conectado à televisão ou como dispositivo portátil.<br>
+
+            Super Mario Odyssey foi desenvolvido como um dos
+            principais jogos da plataforma durante seu primeiro
+            ano de mercado.<br>
+
+            O título também representa uma continuação da tradição
+            dos jogos tridimensionais de Mario iniciada por
+            Super Mario 64 e continuada por diferentes títulos
+            ao longo das gerações seguintes.<br>
+
+            Ao mesmo tempo, Odyssey apresenta uma estrutura própria,
+            baseada em reinos amplos, exploração livre e grande
+            quantidade de objetivos opcionais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Nintendo Switch
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey foi lançado para Nintendo Switch
+            em 27 de outubro de 2017.<br>
+
+            O jogo chegou ao mercado alguns meses depois do
+            lançamento do console e foi apresentado como uma
+            nova aventura principal de Mario em 3D.<br>
+
+            O lançamento utilizou tanto cartuchos físicos quanto
+            distribuição digital através da Nintendo eShop.<br>
+
+            O título também recebeu atualizações posteriores,
+            incluindo conteúdos adicionais e recursos relacionados
+            ao modo Balloon World.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mario_odyssey.jpg"
+                alt="Mario em Super Mario Odyssey"
+              >
+
+              <img
+                src="../tgga/peach_odyssey.jpg"
+                alt="Princesa Peach em Super Mario Odyssey"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Mario e Princesa Peach em Super Mario Odyssey ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história começa quando Bowser enfrenta Mario e
+            anuncia seus planos de se casar com a Princesa Peach.<br>
+
+            Depois de derrotar Mario e escapar com Peach,
+            Bowser começa a preparar uma grande cerimônia de
+            casamento utilizando objetos e recursos obtidos
+            em diferentes reinos.<br>
+
+            Mario encontra Cappy, um habitante do Reino dos Chapéus
+            que se junta à aventura para ajudar a salvar sua irmã,
+            Tiara, que também foi capturada por Bowser.<br>
+
+            Os dois utilizam a Odyssey, uma nave em forma de
+            cartola, para viajar entre os reinos e reunir
+            Power Moons suficientes para continuar a perseguição.<br>
+
+            A aventura passa por diferentes regiões até chegar
+            ao confronto final com Bowser.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey utiliza uma estrutura de plataforma
+            tridimensional baseada em exploração.<br>
+
+            Mario pode correr, saltar, realizar movimentos acrobáticos
+            e utilizar Cappy para interagir com o ambiente.<br>
+
+            O lançamento do chapéu permite atingir inimigos,
+            coletar objetos e ativar determinados mecanismos.<br>
+
+            Ao capturar uma criatura ou objeto compatível,
+            Mario assume temporariamente suas habilidades.<br>
+
+            O jogador também pode utilizar paredes, plataformas,
+            postes, canos, veículos e outros elementos para
+            alcançar áreas diferentes dos reinos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CAPPY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Cappy e as Capturas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/cappy.jpg"
+                  alt="Cappy"
+                >
+
+                <figcaption>
+                  Cappy
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mario_trex.jpg"
+                  alt="Mario capturando um T-Rex"
+                >
+
+                <figcaption>
+                  Captura de criaturas
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mario_goomba_odyssey.jpg"
+                  alt="Mario capturando Goomba"
+                >
+
+                <figcaption>
+                  Goomba capturado
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mario_cheepcheep.jpg"
+                  alt="Mario capturando Cheep Cheep"
+                >
+
+                <figcaption>
+                  Cheep Cheep capturado
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Cappy é uma das principais novidades de Super Mario
+            Odyssey.<br>
+
+            O personagem pode ser lançado como um chapéu e
+            utilizado para atingir inimigos, coletar moedas,
+            ativar mecanismos e interagir com objetos.<br>
+
+            Em determinados casos, Cappy permite que Mario
+            capture criaturas e objetos específicos.<br>
+
+            Cada captura possui habilidades próprias. Mario pode,
+            por exemplo, controlar um Goomba, nadar como Cheep Cheep,
+            utilizar um T-Rex ou assumir outras formas necessárias
+            para solucionar desafios.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER-UPS E ITENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Itens e Recursos
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS ITENS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Power Moon:</strong>
+                principal item de progressão e exploração.
+              </li>
+
+              <li>
+                <strong>Coin:</strong>
+                moeda utilizada para diferentes funções.
+              </li>
+
+              <li>
+                <strong>Regional Coin:</strong>
+                moedas especiais associadas a cada reino.
+              </li>
+
+              <li>
+                <strong>Life-Up Heart:</strong>
+                item que aumenta temporariamente a quantidade
+                máxima de energia.
+              </li>
+
+              <li>
+                <strong>Life-Up Mushroom:</strong>
+                item que aumenta a energia máxima de Mario.
+              </li>
+
+              <li>
+                <strong>Crazy Cap:</strong>
+                loja presente nos diferentes reinos.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER MOONS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Power Moons
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As Power Moons são os principais objetos de progressão
+            encontrados durante a aventura.<br>
+
+            Elas podem ser obtidas através de missões, desafios,
+            exploração, quebra-cabeças, inimigos, corridas e
+            diferentes interações com o cenário.<br>
+
+            A quantidade de luas necessária para avançar varia
+            conforme a progressão da aventura.<br>
+
+            Depois de determinadas etapas da história, novas
+            Power Moons e desafios são disponibilizados nos
+            reinos já visitados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               REINOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Reinos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A aventura é dividida em diversos reinos, cada um
+            apresentando identidade visual, personagens,
+            inimigos e mecânicas próprias.<br>
+
+            O jogador viaja entre esses locais utilizando a
+            Odyssey e coleta Power Moons para aumentar a energia
+            da nave.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Reino</th>
+                <th>Características</th>
+                <th>Elementos marcantes</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Reino do Chapéu</td>
+                <td>Região inicial</td>
+                <td>Cappy / Odyssey</td>
+              </tr>
+
+              <tr>
+                <td>Reino da Cascata</td>
+                <td>Ambiente pré-histórico</td>
+                <td>T-Rex / Fossas</td>
+              </tr>
+
+              <tr>
+                <td>Reino da Areia</td>
+                <td>Deserto</td>
+                <td>Pokio / Moe-Eye</td>
+              </tr>
+
+              <tr>
+                <td>Reino do Lago</td>
+                <td>Ambiente aquático</td>
+                <td>Exploração submarina</td>
+              </tr>
+
+              <tr>
+                <td>Reino Arborizado</td>
+                <td>Floresta</td>
+                <td>Steam Gardens</td>
+              </tr>
+
+              <tr>
+                <td>Reino Perdido</td>
+                <td>Ilha tropical</td>
+                <td>Glydon / Klepto</td>
+              </tr>
+
+              <tr>
+                <td>Reino Metropolitano</td>
+                <td>Cidade</td>
+                <td>New Donk City</td>
+              </tr>
+
+              <tr>
+                <td>Reino Nevado</td>
+                <td>Região congelada</td>
+                <td>Corridas / Shiveria</td>
+              </tr>
+
+              <tr>
+                <td>Reino do Mar</td>
+                <td>Região costeira</td>
+                <td>Água / Bubblain</td>
+              </tr>
+
+              <tr>
+                <td>Reino dos Alimentos</td>
+                <td>Ambiente culinário</td>
+                <td>Meat Plateau / Lava</td>
+              </tr>
+
+              <tr>
+                <td>Reino Arruinado</td>
+                <td>Ruínas</td>
+                <td>Dragão</td>
+              </tr>
+
+              <tr>
+                <td>Reino de Bowser</td>
+                <td>Fortaleza</td>
+                <td>Koopas / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>Reino da Lua</td>
+                <td>Ambiente lunar</td>
+                <td>Wedding Hall</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Mario:</strong>
+                protagonista da aventura.
+              </li>
+
+              <li>
+                <strong>Cappy:</strong>
+                companheiro de Mario e habitante do Reino dos Chapéus.
+              </li>
+
+              <li>
+                <strong>Princesa Peach:</strong>
+                alvo do plano de casamento de Bowser.
+              </li>
+
+              <li>
+                <strong>Bowser:</strong>
+                antagonista principal.
+              </li>
+
+              <li>
+                <strong>Tiara:</strong>
+                irmã de Cappy, capturada por Bowser.
+              </li>
+
+              <li>
+                <strong>Pauline:</strong>
+                prefeita de New Donk City.
+              </li>
+
+              <li>
+                <strong>Broodals:</strong>
+                grupo contratado por Bowser para organizar o casamento.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BROODALS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Broodals
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/broodals.jpg"
+                alt="Broodals"
+              >
+
+              <img
+                src="../tgga/bowser_odyssey.jpg"
+                alt="Bowser em Super Mario Odyssey"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Os Broodals e Bowser ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Broodals são um grupo de coelhos contratado por
+            Bowser para organizar sua cerimônia de casamento.<br>
+
+            O grupo é formado por Topper, Harriet, Rango e Spewart,
+            além de Madame Broode, sua líder.<br>
+
+            Mario encontra os integrantes do grupo em diferentes
+            momentos da aventura e precisa enfrentá-los para
+            avançar na perseguição de Bowser.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos e Criaturas
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS E CRIATURAS -
+            </h3>
+
+            <ul>
+
+              <li>Goomba</li>
+              <li>Koopa Troopa</li>
+              <li>Paragoomba</li>
+              <li>Hammer Bro.</li>
+              <li>Pokio</li>
+              <li>Moe-Eye</li>
+              <li>Bullet Bill</li>
+              <li>Cheep Cheep</li>
+              <li>Glydon</li>
+              <li>Klepto</li>
+              <li>Chain Chomp</li>
+              <li>Shiverian</li>
+              <li>Uproot</li>
+              <li>Mechawiggler</li>
+              <li>Dragon</li>
+              <li>Broodals</li>
+              <li>Bowser</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SEGREDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Segredos e Áreas Especiais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey possui uma grande quantidade
+            de áreas secretas e objetivos opcionais.<br>
+
+            Os reinos escondem passagens, salas bônus,
+            desafios de plataforma, corridas, quebra-cabeças
+            e luas que podem ser encontradas através da exploração.<br>
+
+            Algumas áreas podem ser acessadas utilizando
+            capturas específicas ou determinadas habilidades
+            de Mario e Cappy.<br>
+
+            O jogo também apresenta regiões especiais que
+            podem ser exploradas depois da conclusão de partes
+            importantes da história.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NEW DONK CITY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            New Donk City
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/newdonkcity.jpg"
+                alt="New Donk City"
+              >
+
+              <img
+                src="../tgga/pauline.jpg"
+                alt="Pauline"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ New Donk City e Pauline ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            New Donk City é uma das regiões mais marcantes de
+            Super Mario Odyssey.<br>
+
+            A cidade possui prédios, ruas, parques e diferentes
+            áreas exploráveis, apresentando uma estética urbana
+            inspirada em grandes cidades modernas.<br>
+
+            A região é comandada por Pauline, personagem que
+            possui ligação histórica com Mario desde os primeiros
+            jogos da série Donkey Kong.<br>
+
+            Durante a aventura, Mario participa de uma sequência
+            musical envolvendo Pauline e os habitantes da cidade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CAPTURAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Principais Capturas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/capture_goomba.jpg"
+                  alt="Goomba"
+                >
+
+                <figcaption>
+                  Goomba
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/capture_trex.jpg"
+                  alt="T-Rex"
+                >
+
+                <figcaption>
+                  T-Rex
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/capture_cheepcheep.jpg"
+                  alt="Cheep Cheep"
+                >
+
+                <figcaption>
+                  Cheep Cheep
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/capture_chainchomp.jpg"
+                  alt="Chain Chomp"
+                >
+
+                <figcaption>
+                  Chain Chomp
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As capturas são utilizadas para solucionar diferentes
+            desafios encontrados nos reinos.<br>
+
+            Algumas criaturas possuem habilidades de movimentação,
+            outras permitem atravessar determinados ambientes,
+            destruir obstáculos ou alcançar áreas inacessíveis
+            para Mario normalmente.<br>
+
+            A variedade de capturas também permite que o jogador
+            experimente diferentes formas de atravessar os
+            ambientes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODO 2 JOGADORES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modo para Dois Jogadores
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey possui um modo cooperativo local
+            para dois jogadores.<br>
+
+            Um jogador controla Mario enquanto o segundo jogador
+            assume o controle de Cappy.<br>
+
+            O jogador que controla Cappy pode atacar inimigos,
+            coletar moedas e interagir com diferentes elementos
+            do cenário.<br>
+
+            Essa configuração permite que duas pessoas participem
+            simultaneamente da exploração dos reinos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILHA SONORA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Efeitos Sonoros
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/naoto_kubo.jpg"
+                alt="Naoto Kubo"
+              >
+
+              <img
+                src="../tgga/odyssey_music.jpg"
+                alt="Música de Super Mario Odyssey"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Música de Super Mario Odyssey ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A música de Super Mario Odyssey utiliza uma grande
+            variedade de estilos para representar os diferentes
+            reinos e situações da aventura.<br>
+
+            A trilha inclui composições instrumentais, músicas
+            orquestradas e faixas com diferentes influências
+            musicais.<br>
+
+            A música "Jump Up, Super Star!" tornou-se uma das
+            faixas mais associadas ao jogo e é interpretada por
+            Pauline durante a sequência musical de New Donk City.<br>
+
+            Os efeitos sonoros também foram desenvolvidos para
+            acompanhar os movimentos de Mario, Cappy, capturas,
+            inimigos e objetos do cenário.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do Nintendo Switch
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey foi desenvolvido para aproveitar
+            os recursos gráficos e computacionais do Nintendo Switch.<br>
+
+            O jogo apresenta ambientes tridimensionais de grande
+            escala, iluminação dinâmica, efeitos visuais e uma
+            grande quantidade de personagens e objetos na tela.<br>
+
+            O Nintendo Switch utiliza um sistema baseado em
+            tecnologia NVIDIA Tegra, permitindo que o jogo
+            funcione tanto no modo televisionado quanto no
+            modo portátil.<br>
+
+            Os Joy-Con também podem ser utilizados para realizar
+            diferentes movimentos de Mario e Cappy.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               AMIIBO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            amiibo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey possui suporte a amiibo,
+            permitindo utilizar determinadas figuras compatíveis
+            para obter recursos e informações dentro do jogo.<br>
+
+            Foram lançados amiibo específicos relacionados ao
+            jogo, incluindo versões de Mario, Peach e Bowser
+            utilizando roupas de casamento.<br>
+
+            O recurso faz parte da integração entre os jogos
+            do Nintendo Switch e a linha de figuras NFC da Nintendo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEÚDOS ADICIONAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conteúdos Adicionais
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ATUALIZAÇÕES -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Luigi's Balloon World:</strong>
+                modo adicional baseado em esconder e encontrar
+                balões nos reinos.
+              </li>
+
+              <li>
+                <strong>Novas roupas:</strong>
+                diferentes trajes foram adicionados através
+                de atualizações.
+              </li>
+
+              <li>
+                <strong>Novos filtros:</strong>
+                recursos adicionais para o modo de fotografia.
+              </li>
+
+              <li>
+                <strong>Novas Power Moons:</strong>
+                conteúdos adicionais foram disponibilizados
+                após o lançamento.
+
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versão e Edição Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_odyssey_cart.jpg"
+                  alt="Cartucho de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Cartucho — Nintendo Switch
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_odyssey_case.jpg"
+                  alt="Caixa de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Caixa — Super Mario Odyssey
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/mario_odyssey_amiibo.jpg"
+                  alt="amiibo de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  amiibo — Super Mario Odyssey
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_odyssey.jpg"
+                  alt="Nintendo Switch com Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Nintendo Switch — Super Mario Odyssey
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey tornou-se um dos principais títulos
+            da biblioteca do Nintendo Switch e continuou a tradição
+            dos grandes jogos tridimensionais de Mario.<br>
+
+            O sistema de captura com Cappy trouxe uma nova forma
+            de interação com inimigos e objetos, enquanto a
+            estrutura de reinos incentivou a exploração e a
+            descoberta de conteúdos opcionais.<br>
+
+            O jogo também recuperou elementos de diferentes
+            períodos da história de Mario, incluindo referências
+            visuais, personagens, músicas e mecânicas de jogos
+            anteriores.<br>
+
+            A aventura ainda é lembrada por sua variedade de
+            ambientes, grande quantidade de Power Moons e
+            liberdade de exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Super Mario Odyssey foi lançado em 2017 para
+                Nintendo Switch.
+              </li>
+
+              <li>
+                Cappy pode capturar diferentes inimigos e objetos.
+              </li>
+
+              <li>
+                A Odyssey é uma nave em formato de cartola.
+              </li>
+
+              <li>
+                New Donk City possui referências aos primeiros
+                jogos de Mario e Donkey Kong.
+              </li>
+
+              <li>
+                Pauline aparece como prefeita de New Donk City.
+              </li>
+
+              <li>
+                O jogo possui um modo cooperativo local para
+                dois jogadores.
+              </li>
+
+              <li>
+                Power Moons são utilizadas para abastecer a Odyssey.
+              </li>
+
+              <li>
+                Existem moedas regionais diferentes em cada reino.
+              </li>
+
+              <li>
+                Mario pode utilizar diferentes roupas durante
+                a aventura.
+              </li>
+
+              <li>
+                Depois da conclusão da história principal,
+                novos desafios e Power Moons ficam disponíveis.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MATERIAIS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Odyssey possui diferentes materiais físicos
+            associados ao lançamento para Nintendo Switch.<br>
+
+            Além do cartucho e da embalagem tradicional, o jogo
+            recebeu acessórios, amiibo e diferentes produtos
+            promocionais relacionados aos personagens e à
+            temática da aventura.<br>
+
+            Para colecionadores, versões físicas preservadas,
+            edições promocionais e figuras amiibo podem fazer
+            parte do material associado ao lançamento.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/odyssey_box.jpg"
+                  alt="Caixa de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Caixa — Super Mario Odyssey
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/odyssey_manual.jpg"
+                  alt="Material de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Material promocional
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/odyssey_cart.jpg"
+                  alt="Cartucho de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Cartucho — Nintendo Switch
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/odyssey_package.jpg"
+                  alt="Edição física de Super Mario Odyssey"
+                >
+
+                <figcaption>
+                  Edição física — Nintendo Switch
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supermarioodyssey.html">
+                ○ Games - Super Mario Odyssey
+              </a>
+            </li>
+
+            <li>
+              <a href="switch.html">
+                ○ Consoles - Nintendo Switch
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+              <summary>Mario</summary>
+              <div class="component-description">
+                <p>
+                  Protagonista da aventura e personagem controlado
+                  pelo jogador.
+                </p>
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Habilidade: Plataforma e exploração</li>
+                  <li>Companheiro: Cappy</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cappy</summary>
+              <div class="component-description">
+                <p>
+                  Companheiro de Mario e habitante do Reino dos
+                  Chapéus. Pode ser lançado e utilizado para
+                  capturar criaturas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Princesa Peach</summary>
+              <div class="component-description">
+                <p>
+                  Princesa envolvida no plano de casamento de Bowser.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Bowser</summary>
+              <div class="component-description">
+                <p>
+                  Principal antagonista que pretende se casar
+                  com Peach.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Tiara</summary>
+              <div class="component-description">
+                <p>
+                  Irmã de Cappy que também é capturada por Bowser.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Pauline</summary>
+              <div class="component-description">
+                <p>
+                  Prefeita de New Donk City e personagem relacionada
+                  aos primeiros jogos de Mario.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Topper</summary>
+              <div class="component-description">
+                <p>
+                  Um dos membros dos Broodals.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Harriet</summary>
+              <div class="component-description">
+                <p>
+                  Integrante dos Broodals e adversária de Mario.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Rango</summary>
+              <div class="component-description">
+                <p>
+                  Um dos integrantes dos Broodals.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Spewart</summary>
+              <div class="component-description">
+                <p>
+                  Integrante dos Broodals enfrentado durante a aventura.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Madame Broode</summary>
+              <div class="component-description">
+                <p>
+                  Líder dos Broodals e uma das adversárias de Mario.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Goomba</summary>
+              <div class="component-description">
+                <p>
+                  Inimigo tradicional que também pode ser capturado
+                  por Cappy.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Koopa Troopa</summary>
+              <div class="component-description">
+                <p>
+                  Inimigo clássico que aparece em diferentes
+                  desafios.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Chain Chomp</summary>
+              <div class="component-description">
+                <p>
+                  Criatura acorrentada que pode ser utilizada
+                  para destruir obstáculos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>T-Rex</summary>
+              <div class="component-description">
+                <p>
+                  Grande criatura que pode ser capturada no
+                  Reino da Cascata.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Cheep Cheep</summary>
+              <div class="component-description">
+                <p>
+                  Criatura aquática que pode ser capturada para
+                  exploração submarina.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Pokio</summary>
+              <div class="component-description">
+                <p>
+                  Criatura encontrada principalmente no
+                  Reino de Bowser.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Moe-Eye</summary>
+              <div class="component-description">
+                <p>
+                  Criatura do Reino da Areia utilizada para
+                  revelar elementos escondidos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Glydon</summary>
+              <div class="component-description">
+                <p>
+                  Criatura que permite planar e alcançar
+                  regiões distantes.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Power Moon</summary>
+              <div class="component-description">
+                <p>
+                  Principal item utilizado para abastecer
+                  a Odyssey.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Coin</summary>
+              <div class="component-description">
+                <p>
+                  Moeda comum encontrada nos diferentes reinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Regional Coin</summary>
+              <div class="component-description">
+                <p>
+                  Moeda especial exclusiva de cada reino.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Life-Up Heart</summary>
+              <div class="component-description">
+                <p>
+                  Item que aumenta temporariamente a quantidade
+                  máxima de energia de Mario.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Crazy Cap</summary>
+              <div class="component-description">
+                <p>
+                  Loja encontrada nos reinos, oferecendo roupas
+                  e itens para Mario.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Odyssey</summary>
+              <div class="component-description">
+                <p>
+                  Nave utilizada por Mario e Cappy para viajar
+                  entre os reinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>New Donk City</summary>
+              <div class="component-description">
+                <p>
+                  Grande cidade localizada no Reino Metropolitano.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Reino da Cascata</summary>
+              <div class="component-description">
+                <p>
+                  Reino pré-histórico visitado durante o início
+                  da aventura.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Reino da Areia</summary>
+              <div class="component-description">
+                <p>
+                  Grande região desértica com ruínas e cidades.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Reino Metropolitano</summary>
+              <div class="component-description">
+                <p>
+                  Reino urbano que contém New Donk City.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Reino de Bowser</summary>
+              <div class="component-description">
+                <p>
+                  Região fortificada associada diretamente
+                  ao antagonista.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Reino da Lua</summary>
+              <div class="component-description">
+                <p>
+                  Região lunar que abriga o local da cerimônia
+                  de casamento.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Luigi's Balloon World</summary>
+              <div class="component-description">
+                <p>
+                  Modo adicional baseado em esconder e encontrar
+                  balões nos reinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>amiibo</summary>
+              <div class="component-description">
+                <p>
+                  Figuras NFC da Nintendo que possuem integração
+                  com o jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>New Donk City Festival</summary>
+              <div class="component-description">
+                <p>
+                  Sequência musical especial envolvendo Pauline
+                  e os habitantes de New Donk City.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Jump Up, Super Star!</summary>
+              <div class="component-description">
+                <p>
+                  Música associada à sequência musical de
+                  New Donk City.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Kenta Motokura</summary>
+              <div class="component-description">
+                <p>
+                  Diretor de Super Mario Odyssey.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Yoshiaki Koizumi</summary>
+              <div class="component-description">
+                <p>
+                  Produtor associado ao desenvolvimento do jogo.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Ghostbusters</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Ghostbusters chegou aos consoles domésticos durante
+          a década de 1980 e ganhou versões para diferentes sistemas,
+          incluindo o Nintendo Entertainment System e consoles
+          compatíveis encontrados no mercado brasileiro ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Ghostbusters chegou aos consoles domésticos durante
+          a década de 1980 e ganhou versões para diferentes sistemas,
+          incluindo o Nintendo Entertainment System e consoles
+          compatíveis encontrados no mercado brasileiro ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Ghostbusters — Phantom System
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/ghostbusters_phantom.jpg"
+              alt="Ghostbusters para Phantom System"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ghostbusters
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ghostbusters é um jogo eletrônico baseado na franquia
+            de mesmo nome criada a partir do filme lançado em 1984.<br>
+
+            O jogo original foi desenvolvido pela Activision e
+            lançado para diferentes computadores e consoles
+            domésticos durante a década de 1980.<br>
+
+            A adaptação para sistemas Nintendo também chegou ao
+            mercado brasileiro através de consoles compatíveis com
+            o NES, incluindo aparelhos como o Phantom System.<br>
+
+            O jogador assume o controle de uma equipe de
+            caça-fantasmas e precisa capturar entidades sobrenaturais
+            enquanto administra recursos e percorre a cidade.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Franquia:</strong>
+                Ghostbusters
+              </li>
+
+              <li>
+                <strong>Desenvolvedora do jogo original:</strong>
+                Activision
+              </li>
+
+              <li>
+                <strong>Ano do filme:</strong>
+                1984
+              </li>
+
+              <li>
+                <strong>Lançamento do jogo:</strong>
+                1984
+              </li>
+
+              <li>
+                <strong>Plataforma abordada:</strong>
+                Phantom System
+              </li>
+
+              <li>
+                <strong>Hardware compatível:</strong>
+                NES / Famicom
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação / Estratégia
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1 jogador
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Cartucho
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               O FILME
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Origem: Ghostbusters
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ghostbusters_movie.jpg"
+                alt="Filme Ghostbusters"
+              />
+
+              <img
+                src="../tgga/ghostbusters_logo.jpg"
+                alt="Logo Ghostbusters"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Ghostbusters — filme de 1984 e identidade visual da franquia ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ghostbusters surgiu no cinema em 1984, apresentando
+            Peter Venkman, Ray Stantz e Egon Spengler como
+            pesquisadores que passam a trabalhar profissionalmente
+            como caçadores de fantasmas.<br>
+
+            A história combina comédia, ficção científica e
+            elementos sobrenaturais, apresentando uma Nova York
+            tomada por atividades paranormais.<br>
+
+            O sucesso do filme rapidamente transformou a marca
+            em uma franquia multimídia, incluindo jogos eletrônicos,
+            desenhos animados, brinquedos e outros produtos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento do Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo de Ghostbusters foi produzido durante o período
+            de expansão dos videogames domésticos e foi desenvolvido
+            originalmente pela Activision.<br>
+
+            A proposta procurava transformar elementos do filme
+            em mecânicas de jogo, combinando deslocamento pela
+            cidade, compra de equipamentos e captura de fantasmas.<br>
+
+            A versão original utilizava uma estrutura bastante
+            diferente de um jogo de plataforma tradicional.<br>
+
+            Em vez de simplesmente atravessar fases lineares,
+            o jogador precisava administrar dinheiro, escolher
+            equipamentos e decidir quais áreas da cidade deveria
+            visitar.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PHANTOM SYSTEM
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ghostbusters no Phantom System
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/phantom_system.jpg"
+                alt="Phantom System"
+              />
+
+              <img
+                src="../tgga/ghostbusters_cart.jpg"
+                alt="Cartucho de Ghostbusters"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Phantom System e cartucho de Ghostbusters ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Phantom System foi um dos consoles compatíveis com
+            o padrão do Nintendo Entertainment System encontrados
+            no mercado brasileiro durante a década de 1980.<br>
+
+            Fabricado pela Gradiente, o aparelho utilizava
+            compatibilidade de hardware com jogos desenvolvidos
+            para o ecossistema NES/Famicom.<br>
+
+            Isso permitiu que diversos jogos conhecidos
+            internacionalmente fossem encontrados no Brasil
+            através do mercado de consoles compatíveis.<br>
+
+            Ghostbusters faz parte desse contexto de circulação
+            de jogos em plataformas compatíveis com o NES.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PHANTOM SYSTEM -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Fabricante:</strong>
+                Gradiente
+              </li>
+
+              <li>
+                <strong>Mercado:</strong>
+                Brasil
+              </li>
+
+              <li>
+                <strong>Compatibilidade:</strong>
+                NES / Famicom
+              </li>
+
+              <li>
+                <strong>Período:</strong>
+                Década de 1980
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Cartuchos
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGABILIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ghostbusters combina diferentes tipos de jogabilidade
+            durante a aventura.<br>
+
+            O jogador precisa controlar os recursos da equipe,
+            comprar equipamentos e se deslocar pela cidade em
+            busca de ocorrências sobrenaturais.<br>
+
+            Quando uma atividade paranormal é encontrada,
+            a equipe pode entrar em uma sequência de captura
+            de fantasmas.<br>
+
+            O objetivo é posicionar corretamente os equipamentos
+            para prender o fantasma sem permitir que ele escape.<br>
+
+            A administração de dinheiro e equipamentos faz parte
+            importante da progressão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EQUIPAMENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Equipamentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_proton.jpg"
+                  alt="Arma de prótons"
+                />
+
+                <figcaption>
+                  Arma de Prótons
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_trap.jpg"
+                  alt="Armadilha de fantasmas"
+                />
+
+                <figcaption>
+                  Armadilha
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_car.jpg"
+                  alt="Ecto-1"
+                />
+
+                <figcaption>
+                  Ecto-1
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_equipment.jpg"
+                  alt="Equipamentos dos Ghostbusters"
+                />
+
+                <figcaption>
+                  Equipamentos
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os equipamentos são fundamentais para enfrentar
+            os fantasmas e avançar na aventura.<br>
+
+            A equipe utiliza armas de prótons para enfraquecer
+            entidades sobrenaturais e armadilhas para capturá-las.<br>
+
+            O jogador também precisa utilizar o Ecto-1 para
+            percorrer determinadas áreas da cidade.<br>
+
+            A escolha e a administração dos equipamentos adicionam
+            um elemento de gerenciamento à experiência.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS DA FRANQUIA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Peter Venkman:</strong>
+                um dos fundadores dos Ghostbusters.
+              </li>
+
+              <li>
+                <strong>Ray Stantz:</strong>
+                membro da equipe e especialista em
+                equipamentos e fenômenos sobrenaturais.
+              </li>
+
+              <li>
+                <strong>Egon Spengler:</strong>
+                cientista e um dos principais pesquisadores
+                da equipe.
+              </li>
+
+              <li>
+                <strong>Winston Zeddemore:</strong>
+                integrante da equipe Ghostbusters.
+              </li>
+
+              <li>
+                <strong>Janine Melnitz:</strong>
+                secretária da empresa.
+              </li>
+
+              <li>
+                <strong>Gozer:</strong>
+                entidade sobrenatural associada ao conflito
+                central do filme original.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FANTASMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Fantasmas e Ameaças
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ghostbusters_ghost.jpg"
+                alt="Fantasma de Ghostbusters"
+              />
+
+              <img
+                src="../tgga/slimer.jpg"
+                alt="Slimer"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Fantasmas e Slimer — elementos associados à franquia ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A principal ameaça enfrentada pelos Ghostbusters são
+            as entidades sobrenaturais que aparecem pela cidade.<br>
+
+            Os fantasmas apresentam diferentes comportamentos
+            e precisam ser capturados utilizando os equipamentos
+            apropriados.<br>
+
+            Slimer, um dos personagens mais conhecidos da franquia,
+            também se tornou um dos símbolos de Ghostbusters.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - AMEAÇAS -
+            </h3>
+
+            <ul>
+
+              <li>Fantasmas</li>
+              <li>Entidades sobrenaturais</li>
+              <li>Slimer</li>
+              <li>Atividades paranormais</li>
+              <li>Gozer</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Cidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma característica importante da versão de Ghostbusters
+            é a utilização de um mapa da cidade como parte da
+            estrutura de jogo.<br>
+
+            O jogador observa diferentes ocorrências e precisa
+            decidir como utilizar os recursos disponíveis para
+            responder às atividades sobrenaturais.<br>
+
+            O deslocamento pelas ruas é representado de maneira
+            simplificada, funcionando como uma camada estratégica
+            entre as sequências de ação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ECTO-1
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ecto-1
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ecto1.jpg"
+                alt="Ecto-1"
+              />
+
+              <img
+                src="../tgga/ghostbusters_city.jpg"
+                alt="Cidade de Ghostbusters"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Ecto-1 e a cidade de Nova York na franquia Ghostbusters ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Ecto-1 é o veículo utilizado pelos Ghostbusters
+            para transportar a equipe e seus equipamentos.<br>
+
+            No contexto do jogo, o veículo está relacionado ao
+            deslocamento da equipe pelas áreas da cidade.<br>
+
+            O automóvel tornou-se um dos elementos visuais mais
+            reconhecíveis da franquia e aparece associado à equipe
+            desde o filme original.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESTRUTURA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estrutura da Aventura
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Etapa</th>
+                <th>Objetivo</th>
+                <th>Elemento principal</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Preparação</td>
+                <td>Organizar a equipe</td>
+                <td>Equipamentos</td>
+              </tr>
+
+              <tr>
+                <td>Compra</td>
+                <td>Adquirir recursos</td>
+                <td>Dinheiro</td>
+              </tr>
+
+              <tr>
+                <td>Deslocamento</td>
+                <td>Localizar ocorrências</td>
+                <td>Ecto-1</td>
+              </tr>
+
+              <tr>
+                <td>Captura</td>
+                <td>Prender fantasmas</td>
+                <td>Armadilha</td>
+              </tr>
+
+              <tr>
+                <td>Progressão</td>
+                <td>Avançar na campanha</td>
+                <td>Recursos</td>
+              </tr>
+
+              <tr>
+                <td>Final</td>
+                <td>Enfrentar a ameaça principal</td>
+                <td>Gozer / Zuul</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FILME X JOGO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Filme x Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A adaptação não reproduz de maneira totalmente
+            linear todos os acontecimentos do filme de 1984.<br>
+
+            Em vez disso, utiliza personagens, equipamentos,
+            fantasmas e situações da franquia como base para
+            construir uma experiência interativa.<br>
+
+            Essa abordagem era comum nas adaptações de filmes
+            para videogames durante a década de 1980, quando
+            diferentes limitações técnicas impediam que a
+            narrativa cinematográfica fosse reproduzida
+            integralmente nos consoles.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ghostbusters no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No Brasil, Ghostbusters pertence a um período em que
+            jogos para NES e Famicom circulavam através de um
+            mercado formado tanto por produtos oficiais quanto
+            por consoles compatíveis.<br>
+
+            O Phantom System, produzido pela Gradiente, tornou-se
+            um dos aparelhos mais conhecidos desse mercado.<br>
+
+            A compatibilidade com o ecossistema do NES permitiu
+            que jogadores brasileiros tivessem contato com uma
+            grande variedade de jogos internacionais.<br>
+
+            Para muitos jogadores da época, jogos licenciados
+            baseados em filmes também representavam uma forma
+            de experimentar no console personagens conhecidos
+            do cinema.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PHANTOM SYSTEM NO BRASIL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Phantom System
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/phantom_system_console.jpg"
+                  alt="Console Phantom System"
+                />
+
+                <figcaption>
+                  Phantom System
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/phantom_controller.jpg"
+                  alt="Controle do Phantom System"
+                />
+
+                <figcaption>
+                  Controle
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/phantom_cartridge.jpg"
+                  alt="Cartucho para Phantom System"
+                />
+
+                <figcaption>
+                  Cartucho
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/phantom_box.jpg"
+                  alt="Embalagem Phantom System"
+                />
+
+                <figcaption>
+                  Embalagem
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Phantom System ocupou uma posição particular na
+            história dos videogames no Brasil.<br>
+
+            O console foi lançado em um momento em que o mercado
+            brasileiro possuía dificuldades de acesso oficial a
+            determinados consoles e jogos estrangeiros.<br>
+
+            A existência de aparelhos compatíveis ajudou a formar
+            uma comunidade de jogadores familiarizada com títulos
+            originalmente produzidos para o NES e Famicom.<br>
+
+            Décadas depois, esses aparelhos e seus cartuchos
+            passaram a fazer parte da memória e do interesse
+            histórico de colecionadores brasileiros.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Portes
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_computer.jpg"
+                  alt="Ghostbusters em computador"
+                />
+
+                <figcaption>
+                  Versão para computadores
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_nes.jpg"
+                  alt="Ghostbusters NES"
+                />
+
+                <figcaption>
+                  Versão NES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_atari.jpg"
+                  alt="Ghostbusters Atari"
+                />
+
+                <figcaption>
+                  Versão Atari
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_c64.jpg"
+                  alt="Ghostbusters Commodore"
+                />
+
+                <figcaption>
+                  Versão Commodore
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ghostbusters recebeu versões para diferentes
+            computadores e consoles domésticos durante a década
+            de 1980.<br>
+
+            Entre as plataformas que receberam adaptações estavam
+            sistemas como Atari 2600, Commodore 64 e Nintendo
+            Entertainment System.<br>
+
+            As diferentes versões apresentam alterações gráficas,
+            sonoras e de jogabilidade relacionadas às capacidades
+            de cada plataforma.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ghostbusters tornou-se um exemplo representativo da
+            primeira geração de jogos baseados em grandes
+            franquias cinematográficas.<br>
+
+            O título ajudou a demonstrar como personagens,
+            veículos, equipamentos e conceitos de um filme poderiam
+            ser transformados em mecânicas interativas.<br>
+
+            A franquia continuaria recebendo jogos em diferentes
+            gerações de consoles, enquanto Ghostbusters permaneceria
+            como uma das marcas mais reconhecíveis da cultura pop
+            dos anos 1980.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Ghostbusters foi lançado como jogo no mesmo
+                período de grande popularidade do filme original.
+              </li>
+
+              <li>
+                A primeira versão do jogo foi desenvolvida
+                pela Activision.
+              </li>
+
+              <li>
+                O jogo recebeu versões para diferentes
+                computadores e consoles.
+              </li>
+
+              <li>
+                O Phantom System foi produzido pela Gradiente
+                para o mercado brasileiro.
+              </li>
+
+              <li>
+                O Ecto-1 tornou-se um dos veículos mais
+                reconhecíveis da história do cinema.
+              </li>
+
+              <li>
+                O gerenciamento de dinheiro e equipamentos
+                é uma parte importante da estrutura do jogo.
+              </li>
+
+              <li>
+                A captura de fantasmas utiliza mecânicas
+                diferentes das sequências de deslocamento
+                pela cidade.
+              </li>
+
+              <li>
+                Ghostbusters ajudou a estabelecer a presença
+                de franquias cinematográficas nos videogames.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MATERIAIS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Para colecionadores, materiais relacionados a
+            Ghostbusters podem incluir cartuchos, caixas,
+            manuais, etiquetas e diferentes versões regionais.<br>
+
+            No caso do mercado brasileiro, materiais associados
+            a consoles compatíveis como o Phantom System possuem
+            interesse adicional por fazerem parte da história
+            particular dos videogames no país.<br>
+
+            Estado de conservação, completude e procedência podem
+            fazer diferença na identificação histórica de cada
+            exemplar.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_box.jpg"
+                  alt="Caixa de Ghostbusters"
+                />
+
+                <figcaption>
+                  Caixa — Ghostbusters
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_manual.jpg"
+                  alt="Manual de Ghostbusters"
+                />
+
+                <figcaption>
+                  Manual — Ghostbusters
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_cart.jpg"
+                  alt="Cartucho de Ghostbusters"
+                />
+
+                <figcaption>
+                  Cartucho — Ghostbusters
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ghostbusters_phantom_package.jpg"
+                  alt="Ghostbusters para Phantom System"
+                />
+
+                <figcaption>
+                  Edição / Compatibilidade — Phantom System
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="ghostbusters.html">
+                ○ Games - Ghostbusters
+              </a>
+            </li>
+
+            <li>
+              <a href="phantomsystem.html">
+                ○ Consoles - Phantom System
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Peter Venkman</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos fundadores da equipe Ghostbusters
+                  e personagem central da franquia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ray Stantz</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cientista e integrante da equipe Ghostbusters.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Egon Spengler</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cientista especializado em fenômenos
+                  sobrenaturais e tecnologia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Winston Zeddemore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Integrante da equipe Ghostbusters.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Janine Melnitz</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Secretária da empresa Ghostbusters.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Gozer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Entidade sobrenatural relacionada ao
+                  conflito principal do filme original.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slimer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fantasma que se tornou um dos personagens
+                  mais conhecidos da franquia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghost</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Entidade sobrenatural que deve ser
+                  localizada e capturada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Proton Pack</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento utilizado pelos Ghostbusters
+                  para enfrentar entidades sobrenaturais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghost Trap</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Armadilha utilizada para capturar fantasmas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ecto-1</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo utilizado pela equipe para
+                  deslocamento e transporte de equipamentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghostbusters HQ</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Quartel-general utilizado pela equipe
+                  Ghostbusters.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>City Map</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mapa utilizado para representar o
+                  deslocamento pela cidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Equipment</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de equipamentos necessários
+                  para enfrentar os fantasmas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Money</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso utilizado para comprar
+                  equipamentos e administrar a equipe.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghost Capture</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sequência de captura na qual o jogador
+                  utiliza os equipamentos para prender
+                  a entidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>New York</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cidade onde a história da franquia
+                  original é ambientada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Phantom System</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console brasileiro compatível com o
+                  padrão NES, produzido pela Gradiente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>NES</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Nintendo Entertainment System,
+                  plataforma para a qual o jogo recebeu
+                  uma versão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Famicom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema japonês da família de hardware
+                  relacionada ao NES.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Activision</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Empresa responsável pelo desenvolvimento
+                  do jogo original de Ghostbusters.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghostbusters 1984</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Filme que deu origem à franquia e serviu
+                  como base para o jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Phantom Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle utilizado com o Phantom System
+                  para jogar títulos compatíveis com NES.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cartridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para distribuir
+                  o jogo nos consoles da época.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghost Alarm</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Representação das ocorrências sobrenaturais
+                  que exigem a atenção da equipe.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghostbusters Logo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Identidade visual da equipe e da franquia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

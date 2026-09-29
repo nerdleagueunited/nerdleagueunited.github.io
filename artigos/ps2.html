@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - PlayStation 2</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O PlayStation 2 é um dos consoles mais vendidos da história,
+          marcou uma geração inteira e ajudou a consolidar os videogames
+          como uma das principais formas de entretenimento eletrônico ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O PlayStation 2 é um dos consoles mais vendidos da história,
+          marcou uma geração inteira e ajudou a consolidar os videogames
+          como uma das principais formas de entretenimento eletrônico ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Sony PlayStation 2 (Posse de Gabriel Pires)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/p2.jpeg"
+              alt="Sony PlayStation 2"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PLAYSTATION 2
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            PlayStation 2
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 2, também conhecido simplesmente como PS2,
+            é um console doméstico desenvolvido e fabricado pela Sony
+            Computer Entertainment.<br>
+
+            Lançado originalmente no Japão em 4 de março de 2000,
+            o console posteriormente chegou à América do Norte,
+            Europa e outras regiões.<br>
+
+            O PS2 pertence à sexta geração dos videogames e sucedeu
+            o primeiro PlayStation, trazendo uma evolução significativa
+            em processamento gráfico, capacidade de armazenamento e
+            reprodução de mídia.<br>
+
+            Uma de suas principais características foi a utilização
+            de discos DVD como mídia para seus jogos. Além de executar
+            jogos, o console também podia reproduzir filmes em DVD,
+            tornando-se um aparelho de entretenimento doméstico bastante
+            versátil para sua época.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado e Popularização
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 2 chegou ao mercado em um período de grande
+            expansão da indústria dos videogames.<br>
+
+            A Sony já havia estabelecido uma forte presença no mercado
+            com o PlayStation original, e o PS2 aproveitou essa base
+            para continuar a expansão da marca.<br>
+
+            O uso do DVD foi um dos grandes diferenciais comerciais
+            do console. Na época, aparelhos dedicados para reprodução
+            de DVD ainda possuíam preços relativamente elevados em
+            determinados mercados, fazendo com que o PS2 fosse visto
+            também como uma alternativa para reprodução de filmes.<br>
+
+            O console também recebeu uma enorme quantidade de jogos
+            de diferentes gêneros e desenvolvedoras, criando uma das
+            maiores bibliotecas de software da história dos videogames.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dreamcast.jpg"
+                alt="Sega Dreamcast"
+              />
+
+              <img
+                src="../tgga/gamecube.webp"
+                alt="Nintendo GameCube"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Sega Dreamcast (1998) e Nintendo GameCube (2001) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 2 surgiu durante a transição entre a quinta
+            e a sexta geração dos videogames.<br>
+
+            Entre seus concorrentes estavam consoles como o Sega
+            Dreamcast, lançado antes do PS2, o Nintendo GameCube e
+            posteriormente o Xbox original da Microsoft.<br>
+
+            A sexta geração trouxe grandes avanços gráficos em relação
+            aos consoles anteriores, permitindo mundos tridimensionais
+            maiores, personagens mais detalhados e sistemas de física
+            e inteligência artificial mais elaborados.<br>
+
+            O PS2 acabou se tornando uma das plataformas mais importantes
+            desse período, recebendo jogos de grandes franquias e também
+            estabelecendo novas séries que posteriormente continuariam
+            em outras plataformas.<br>
+
+            Essa geração também marcou uma expansão significativa dos
+            jogos tridimensionais e da utilização de mídias ópticas
+            com maior capacidade de armazenamento.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS E ACESSÓRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta2.webp"
+                alt="Grand Theft Auto San Andreas - PlayStation 2"
+              />
+
+              <img
+                src="../tgga/colossus.webp"
+                alt="Shadow of the Colossus - PlayStation 2"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Grand Theft Auto: San Andreas e Shadow of the Colossus ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 2 recebeu uma enorme quantidade de jogos
+            durante sua vida comercial, abrangendo praticamente todos
+            os gêneros disponíveis na época.<br>
+
+            Entre os títulos mais conhecidos estão Grand Theft Auto III,
+            Grand Theft Auto: Vice City, Grand Theft Auto: San Andreas,
+            God of War, Metal Gear Solid 2, Metal Gear Solid 3,
+            Gran Turismo 3, Gran Turismo 4, Final Fantasy X,
+            Kingdom Hearts, Resident Evil 4, Shadow of the Colossus,
+            Devil May Cry, Tekken 5 e muitos outros.<br>
+
+            O console também recebeu diversos acessórios, incluindo
+            cartões de memória, controles DualShock 2, multitap,
+            câmeras EyeToy, guitarra para jogos musicais, microfones,
+            volantes e outros periféricos.<br>
+
+            O cartão de memória era utilizado para armazenar o progresso
+            dos jogos, enquanto o DualShock 2 se tornou o principal
+            controle associado ao sistema.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante sua longa vida comercial, o PlayStation 2 recebeu
+            diversas revisões de hardware.<br>
+
+            O modelo original ficou conhecido popularmente como
+            "Fat" devido ao seu formato maior e mais robusto.<br>
+
+            Posteriormente, a Sony lançou o PlayStation 2 Slim,
+            que apresentou uma redução significativa no tamanho
+            e no peso do console.<br>
+
+            Também existiram diversas revisões internas desses modelos,
+            identificadas principalmente pelos números de modelo
+            SCPH utilizados pela Sony.<br>
+
+            Além dos modelos oficiais, o PlayStation 2 também recebeu
+            diferentes versões de acabamento e edições especiais
+            produzidas para determinados mercados.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps2gordo.webp"
+                  alt="PlayStation 2 Fat"
+                />
+
+                <figcaption>
+                  PlayStation 2 Fat
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps2magro.webp"
+                  alt="PlayStation 2 Slim"
+                />
+
+                <figcaption>
+                  PlayStation 2 Slim
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps2silver.webp"
+                  alt="PlayStation 2 Silver"
+                />
+
+                <figcaption>
+                  PlayStation 2 Silver
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aqua.webp"
+                  alt="PlayStation 2 Aqua Blue"
+                />
+
+                <figcaption>
+                  PlayStation 2 Aqua Blue
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/white.webp"
+                  alt="PlayStation 2 White"
+                />
+
+                <figcaption>
+                  PlayStation 2 White
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ouro.webp"
+                  alt="PlayStation 2 Gold"
+                />
+
+                <figcaption>
+                  PlayStation 2 Gold
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/psx.webp"
+                  alt="Sony PSX"
+                />
+
+                <figcaption>
+                  PSX — PlayStation 2 / DVR
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps2devkit.webp"
+                  alt="PlayStation 2 Development Kit"
+                />
+
+                <figcaption>
+                  PlayStation 2 Development Kit
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="ps2.html">
+                ○ Games - PlayStation 2
+              </a>
+            </li>
+
+            <li>
+              <a href="ps2.html">
+                ○ Periféricos - PlayStation 2
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Emotion Engine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processador principal utilizado pelo PlayStation 2.
+                  O Emotion Engine foi desenvolvido pela Sony em
+                  parceria com a Toshiba.
+                </p>
+
+                <p>
+                  O processador executa os programas dos jogos e
+                  realiza operações matemáticas utilizadas pelo sistema.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: CPU</li>
+                  <li>Arquitetura: MIPS</li>
+                  <li>Fabricante: Sony / Toshiba</li>
+                  <li>Função: Processamento geral</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Graphics Synthesizer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade gráfica responsável pelo processamento
+                  e geração das imagens exibidas pelo PlayStation 2.
+                </p>
+
+                <p>
+                  É um dos principais componentes responsáveis
+                  pela renderização dos gráficos tridimensionais
+                  dos jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GPU</li>
+                  <li>Nome: Graphics Synthesizer</li>
+                  <li>Função: Processamento gráfico</li>
+                  <li>Fabricante: Sony</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>RAMBUS RDRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória principal utilizada pelo sistema.
+                  O PlayStation 2 utiliza 32 MB de memória
+                  RDRAM para suas operações.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: RDRAM</li>
+                  <li>Capacidade: 32 MB</li>
+                  <li>Função: Memória principal</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>eDRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória incorporada ao sistema gráfico utilizada
+                  principalmente para operações relacionadas à
+                  renderização de imagens.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Embedded DRAM</li>
+                  <li>Função: Memória gráfica</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DVD-ROM Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade óptica responsável pela leitura dos discos
+                  utilizados pelo PlayStation 2.
+                </p>
+
+                <p>
+                  Além dos jogos, o aparelho também pode reproduzir
+                  filmes em DVD.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Unidade óptica</li>
+                  <li>Mídia: DVD / CD</li>
+                  <li>Função: Leitura de discos</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laser Óptico</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema óptico utilizado para realizar a leitura
+                  das informações armazenadas nos discos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Laser óptico</li>
+                  <li>Função: Leitura de mídia</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>BIOS</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Firmware responsável pela inicialização do hardware
+                  e pelo carregamento das funções básicas do sistema.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Firmware</li>
+                  <li>Função: Inicialização do sistema</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memory Card Slot</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para cartões de memória
+                  responsáveis pelo armazenamento dos dados dos jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Função: Salvamento de jogos</li>
+                  <li>Mídia: Memory Card</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Portas de Controle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O PlayStation 2 possui duas portas frontais para
+                  conexão de controles e acessórios compatíveis.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Quantidade: 2</li>
+                  <li>Função: Controles e periféricos</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Expansion Bay</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Compartimento presente principalmente nos modelos
+                  Fat, utilizado para acessórios de expansão.
+                </p>
+
+                <p>
+                  Um dos acessórios mais conhecidos compatíveis
+                  com esse compartimento era o adaptador de rede.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Network Adapter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Adaptador utilizado para conectar determinados
+                  jogos do PlayStation 2 à internet ou a redes locais.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Adaptador de rede</li>
+                  <li>Função: Conectividade</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDD — Hard Disk Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Alguns modelos Fat podiam utilizar um disco rígido
+                  através do adaptador de rede.
+                </p>
+
+                <p>
+                  O HDD foi utilizado por determinados jogos e
+                  aplicações compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O PlayStation 2 possui portas USB utilizadas por
+                  diversos acessórios compatíveis.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: USB</li>
+                  <li>Função: Periféricos</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Saída A/V Multi Out</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector proprietário utilizado para transmitir
+                  áudio e vídeo para a televisão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Saída Digital Optical</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Saída de áudio digital óptica presente em diversos
+                  modelos do PlayStation 2.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Áudio digital</li>
+                  <li>Conector: TOSLINK</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte de Alimentação</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por fornecer as diferentes
+                  tensões necessárias para o funcionamento do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte Externa — PS2 Slim</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Nos modelos Slim, a fonte de alimentação fica
+                  externamente ao console em um adaptador próprio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ventoinha</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado para auxiliar na dissipação
+                  do calor produzido pelos componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dissipador de Calor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura metálica utilizada para transferir
+                  e dissipar o calor produzido pelos circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Clock Generator</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pela geração e distribuição
+                  dos sinais de clock utilizados pelo hardware.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Placa de Circuito Impresso — PCB</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável por interligar eletricamente
+                  os principais componentes do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blindagem Eletromagnética</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes metálicos utilizados em determinadas
+                  partes do aparelho para auxiliar na redução
+                  de interferências eletromagnéticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chave / Botão Power</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle utilizado para ligar e desligar
+                  o console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botão Reset / Eject</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Nos modelos compatíveis, os controles frontais
+                  permitem reiniciar o sistema e controlar
+                  a unidade óptica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DualShock 2</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle oficial utilizado pelo PlayStation 2.
+                  É uma evolução do DualShock utilizado no
+                  PlayStation original.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Gamepad</li>
+                  <li>Conexão: Porta proprietária</li>
+                  <li>Analógico: Sim</li>
+                  <li>Vibração: Sim</li>
+                  <li>Botões: Sensíveis à pressão</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memory Card 8 MB</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cartão de memória utilizado para armazenar
+                  partidas salvas e outros dados dos jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Capacidade oficial comum: 8 MB</li>
+                  <li>Função: Salvamento</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>EyeToy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Câmera USB desenvolvida para jogos que utilizavam
+                  reconhecimento dos movimentos do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multitap</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acessório que permite conectar controles adicionais
+                  para determinados jogos multiplayer.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Controle de DVD</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle remoto utilizado para controlar a reprodução
+                  de filmes em DVD no PlayStation 2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Disco DVD do Jogo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia óptica utilizada para armazenar os jogos
+                  do PlayStation 2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Manual e Embalagem</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Materiais físicos que acompanhavam o console
+                  e seus jogos, incluindo manuais, encartes
+                  e documentação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Plástica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura externa responsável por proteger
+                  os componentes internos do PlayStation 2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pés de Borracha</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenos suportes instalados na parte inferior
+                  do console para melhorar sua estabilidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Tetris</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Tetris é um dos jogos eletrônicos mais conhecidos
+          de todos os tempos. Criado por Alexey Pajitnov em 1984,
+          o conceito dos blocos que caem atravessou diferentes
+          computadores, consoles e gerações de jogadores ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Tetris é um dos jogos eletrônicos mais conhecidos
+          de todos os tempos. Criado por Alexey Pajitnov em 1984,
+          o conceito dos blocos que caem atravessou diferentes
+          computadores, consoles e gerações de jogadores ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Tetris — Famicom
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/tetris_famicom.jpg"
+              alt="Tetris para Famicom"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tetris
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tetris é um jogo eletrônico de quebra-cabeça criado
+            pelo programador soviético Alexey Pajitnov em 1984.<br>
+
+            O conceito original foi desenvolvido no computador
+            Elektronika 60 e posteriormente recebeu versões para
+            diferentes computadores e consoles.<br>
+
+            No Famicom, Tetris foi lançado em diferentes versões
+            durante a segunda metade da década de 1980, em um
+            período marcado por disputas de direitos sobre a
+            distribuição do jogo.<br>
+
+            A mecânica fundamental consiste em posicionar peças
+            formadas por quatro blocos, conhecidas como tetrominós,
+            formando linhas horizontais completas para eliminá-las.<br>
+
+            A simplicidade das regras permite que o jogo seja
+            compreendido rapidamente, enquanto a velocidade
+            crescente e a necessidade de organizar o espaço
+            criam um desafio progressivo.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Criador:</strong>
+                Alexey Pajitnov
+              </li>
+
+              <li>
+                <strong>Desenvolvimento original:</strong>
+                Academia de Ciências da União Soviética
+              </li>
+
+              <li>
+                <strong>Ano de criação:</strong>
+                1984
+              </li>
+
+              <li>
+                <strong>Plataforma original:</strong>
+                Elektronika 60
+              </li>
+
+              <li>
+                <strong>Versão:</strong>
+                Famicom
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Quebra-cabeça
+              </li>
+
+              <li>
+                <strong>Jogadores:</strong>
+                1–2 jogadores, dependendo da versão
+              </li>
+
+              <li>
+                <strong>Mecânica principal:</strong>
+                Organização de tetrominós
+              </li>
+
+              <li>
+                <strong>Objetivo:</strong>
+                Completar linhas horizontais
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                Cartucho
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CRIAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Criação e Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tetris foi criado em 1984 por Alexey Pajitnov enquanto
+            trabalhava no Centro de Computação da Academia de
+            Ciências da União Soviética, em Moscou.<br>
+
+            Pajitnov utilizou como inspiração um quebra-cabeça
+            tradicional chamado pentominó, adaptando a ideia para
+            peças formadas por quatro quadrados.<br>
+
+            As peças receberam o nome de tetrominós e podiam
+            ser movimentadas e giradas dentro de um campo de jogo.<br>
+
+            A primeira versão foi desenvolvida para o computador
+            Elektronika 60, utilizando uma representação baseada
+            em caracteres.<br>
+
+            O conceito rapidamente chamou atenção de outros
+            programadores e começou a ser adaptado para diferentes
+            sistemas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/elektronika60.jpg"
+                alt="Elektronika 60"
+              />
+
+              <img
+                src="../tgga/tetris_original.jpg"
+                alt="Versão original de Tetris"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Elektronika 60 e a versão original de Tetris ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A origem de Tetris é diferente da maioria dos grandes
+            jogos de consoles japoneses da década de 1980.<br>
+
+            O jogo nasceu dentro da União Soviética e começou
+            como um projeto experimental para computador.<br>
+
+            Conforme o jogo foi adaptado para outras plataformas,
+            diferentes empresas passaram a participar de sua
+            distribuição internacional.<br>
+
+            O processo de licenciamento tornou-se particularmente
+            complexo porque envolvia diferentes versões para
+            computadores e consoles e empresas atuando em
+            diferentes mercados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TETRIS NO FAMICOM
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tetris no Famicom
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/tetris_famicom_cart.jpg"
+                alt="Cartucho de Tetris para Famicom"
+              />
+
+              <img
+                src="../tgga/tetris_famicom_box.jpg"
+                alt="Caixa de Tetris para Famicom"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Tetris para Family Computer ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Famicom recebeu diferentes versões de Tetris durante
+            a década de 1980.<br>
+
+            Essas versões surgiram em um período no qual os direitos
+            de distribuição de Tetris estavam envolvidos em uma
+            complexa disputa internacional.<br>
+
+            Uma versão foi publicada pela Bullet-Proof Software
+            no Japão em 1988, enquanto outra versão para Famicom
+            foi produzida pela Tengen para o mercado norte-americano
+            sob licença da Atari Games.<br>
+
+            A versão da Tengen acabou sendo retirada do mercado
+            após uma disputa judicial relacionada aos direitos
+            de publicação de Tetris.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A mecânica central de Tetris consiste em posicionar
+            peças que caem automaticamente dentro de um campo
+            vertical.<br>
+
+            Cada peça é formada por quatro blocos e pode ser
+            movimentada horizontalmente e, dependendo da versão,
+            girada antes de atingir a parte inferior do campo.<br>
+
+            Quando uma linha horizontal é completamente preenchida,
+            ela desaparece e os blocos acima descem para ocupar
+            o espaço vazio.<br>
+
+            O jogador precisa organizar as peças de maneira
+            eficiente para evitar que os blocos alcancem o topo
+            do campo.<br>
+
+            Conforme a partida avança, a velocidade de queda
+            normalmente aumenta, tornando a tomada de decisões
+            cada vez mais rápida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TETROMINÓS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Os Tetrominós
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_i.jpg"
+                  alt="Tetrominó I"
+                />
+
+                <figcaption>
+                  I — Linha
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_o.jpg"
+                  alt="Tetrominó O"
+                />
+
+                <figcaption>
+                  O — Quadrado
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_t.jpg"
+                  alt="Tetrominó T"
+                />
+
+                <figcaption>
+                  T — Forma T
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_s.jpg"
+                  alt="Tetrominó S"
+                />
+
+                <figcaption>
+                  S — Forma S
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_z.jpg"
+                  alt="Tetrominó Z"
+                />
+
+                <figcaption>
+                  Z — Forma Z
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_j.jpg"
+                  alt="Tetrominó J"
+                />
+
+                <figcaption>
+                  J — Forma J
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_l.jpg"
+                  alt="Tetrominó L"
+                />
+
+                <figcaption>
+                  L — Forma L
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os sete formatos fundamentais utilizados por Tetris
+            são conhecidos como tetrominós.<br>
+
+            Cada peça é formada por quatro quadrados conectados
+            ortogonalmente.<br>
+
+            Os sete formatos são tradicionalmente identificados
+            pelas letras I, O, T, S, Z, J e L.<br>
+
+            A variedade dessas peças permite criar diferentes
+            combinações e exige que o jogador mantenha espaço
+            suficiente para acomodar as próximas formas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LINHAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Limpeza de Linhas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O principal objetivo de Tetris é completar linhas
+            horizontais sem deixar espaços vazios entre os blocos.<br>
+
+            Quando uma linha é preenchida completamente, ela
+            desaparece do campo de jogo.<br>
+
+            É possível eliminar uma, duas, três ou quatro linhas
+            de uma só vez, dependendo da configuração dos blocos.<br>
+
+            A eliminação de quatro linhas simultaneamente é
+            tradicionalmente associada ao uso do tetrominó I
+            e é conhecida em muitas versões como um Tetris.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - LIMPEZA DE LINHAS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Single:</strong>
+                uma linha eliminada.
+              </li>
+
+              <li>
+                <strong>Double:</strong>
+                duas linhas eliminadas.
+              </li>
+
+              <li>
+                <strong>Triple:</strong>
+                três linhas eliminadas.
+              </li>
+
+              <li>
+                <strong>Tetris:</strong>
+                quatro linhas eliminadas simultaneamente.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NÍVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Níveis e Velocidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As versões de Tetris para Famicom possuem sistemas
+            de níveis que alteram a velocidade das peças.<br>
+
+            Conforme o jogador elimina linhas, a partida pode
+            avançar para níveis superiores, fazendo com que
+            as peças caiam mais rapidamente.<br>
+
+            O aumento da velocidade reduz o tempo disponível
+            para analisar o campo e posicionar cada tetrominó,
+            tornando a partida progressivamente mais difícil.<br>
+
+            Dependendo da versão, também podem existir diferentes
+            opções iniciais de dificuldade e velocidade.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Elemento</th>
+                <th>Função</th>
+                <th>Efeito</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Nível</td>
+                <td>Controla a dificuldade</td>
+                <td>Aumenta a velocidade</td>
+              </tr>
+
+              <tr>
+                <td>Linhas</td>
+                <td>Controlam o progresso</td>
+                <td>Podem elevar o nível</td>
+              </tr>
+
+              <tr>
+                <td>Tetrominó</td>
+                <td>Peça principal</td>
+                <td>Preenche o campo</td>
+              </tr>
+
+              <tr>
+                <td>Campo</td>
+                <td>Área de jogo</td>
+                <td>Recebe as peças</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GAME OVER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Game Over
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A partida termina quando os blocos acumulados ocupam
+            uma área do campo que impede a entrada das próximas
+            peças.<br>
+
+            O jogador precisa equilibrar a velocidade de eliminação
+            das linhas com a necessidade de manter espaço livre
+            para os próximos tetrominós.<br>
+
+            A partir desse princípio simples surge uma das principais
+            características de Tetris: cada decisão influencia
+            a configuração futura do campo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES FAMICOM
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões para Famicom
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_bps.jpg"
+                  alt="Tetris Bullet-Proof Software"
+                />
+
+                <figcaption>
+                  Tetris — Bullet-Proof Software
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_tengen.jpg"
+                  alt="Tetris Tengen"
+                />
+
+                <figcaption>
+                  Tetris — Tengen
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_nes.jpg"
+                  alt="Tetris para NES"
+                />
+
+                <figcaption>
+                  Tetris — NES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_gameboy.jpg"
+                  alt="Tetris para Game Boy"
+                />
+
+                <figcaption>
+                  Tetris — Game Boy
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história de Tetris nos consoles é marcada por
+            diferentes versões e distribuidores.<br>
+
+            No Japão, a Bullet-Proof Software publicou uma versão
+            para Famicom em 1988.<br>
+
+            A Tengen, subsidiária da Atari Games, também lançou
+            uma versão de Tetris para NES na América do Norte,
+            baseada em direitos obtidos da Atari Games.<br>
+
+            Posteriormente, a Nintendo lançou sua própria versão
+            de Tetris para NES e uma versão extremamente conhecida
+            para Game Boy.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DISPUTA DOS DIREITOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Disputa pelos Direitos de Tetris
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A expansão internacional de Tetris esteve relacionada
+            a uma complexa disputa envolvendo os direitos de
+            publicação e licenciamento do jogo.<br>
+
+            Como o jogo havia sido criado na União Soviética,
+            empresas ocidentais precisavam negociar os direitos
+            de distribuição através das instituições soviéticas
+            responsáveis pelo software.<br>
+
+            Diferentes empresas obtiveram direitos para diferentes
+            plataformas e regiões, o que provocou conflitos entre
+            contratos e interpretações dos direitos concedidos.<br>
+
+            O caso envolvendo a Nintendo, a Atari Games e outras
+            empresas tornou-se um dos episódios mais conhecidos
+            da história comercial de Tetris.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TETRIS E GAME BOY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tetris e o Game Boy
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gameboy.jpg"
+                alt="Nintendo Game Boy"
+              />
+
+              <img
+                src="../tgga/tetris_gameboy.jpg"
+                alt="Tetris para Game Boy"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Game Boy e Tetris ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Embora esta página seja dedicada à versão Famicom,
+            a história de Tetris está profundamente ligada ao
+            Game Boy.<br>
+
+            A versão de Tetris lançada junto ao portátil da
+            Nintendo em 1989 tornou-se uma das versões mais
+            reconhecidas do jogo.<br>
+
+            O modo para dois jogadores utilizando o cabo Link
+            também ajudou a estabelecer Tetris como uma das
+            principais experiências multiplayer do portátil.<br>
+
+            A popularidade dessa versão contribuiu para consolidar
+            Tetris como uma franquia mundialmente conhecida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Efeitos Sonoros
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/tetris_music.jpg"
+                alt="Música de Tetris"
+              />
+
+              <img
+                src="../tgga/famicom_sound.jpg"
+                alt="Sistema de áudio do Famicom"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Música e sistema de áudio do Famicom ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Diferentes versões de Tetris utilizam trilhas sonoras
+            distintas.<br>
+
+            Algumas versões para consoles da Nintendo ficaram
+            associadas a melodias tradicionais ou composições
+            específicas para o jogo.<br>
+
+            Entre as músicas mais conhecidas relacionadas à
+            franquia está uma adaptação de Korobeiniki, uma
+            tradicional canção russa que ficou fortemente
+            associada a Tetris através de versões posteriores.<br>
+
+            Os efeitos sonoros também desempenham um papel
+            importante ao informar movimentos, rotações,
+            encaixes e eliminação de linhas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do Famicom
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As versões de Tetris para Famicom foram desenvolvidas
+            para funcionar dentro das limitações técnicas do
+            console de 8 bits da Nintendo.<br>
+
+            O jogo utiliza uma área relativamente simples de
+            elementos gráficos, permitindo concentrar os recursos
+            do sistema na movimentação das peças, atualização do
+            campo e efeitos sonoros.<br>
+
+            A simplicidade visual é parte importante do conceito
+            de Tetris, pois o jogador precisa identificar rapidamente
+            o formato das peças e os espaços disponíveis.<br>
+
+            Diferentes versões também apresentam diferenças
+            técnicas relacionadas à programação, velocidade,
+            geração de peças e modos disponíveis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tetris no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tetris também se tornou conhecido entre jogadores
+            brasileiros através de diferentes computadores,
+            consoles e versões portáteis.<br>
+
+            Durante as décadas de 1980 e 1990, versões do jogo
+            circularam em diferentes plataformas e aparelhos
+            compatíveis.<br>
+
+            A simplicidade da mecânica facilitou a adaptação
+            de Tetris para numerosos sistemas, contribuindo
+            para sua presença em diferentes mercados.<br>
+
+            Com a popularização do Game Boy e de outros sistemas,
+            o nome Tetris passou a fazer parte do repertório
+            de jogos eletrônicos conhecido por várias gerações
+            de jogadores brasileiros.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               OUTRAS PLATAFORMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tetris em Outras Plataformas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_electronika.jpg"
+                  alt="Tetris Elektronika"
+                />
+
+                <figcaption>
+                  Tetris — Elektronika 60
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_gameboy.jpg"
+                  alt="Tetris Game Boy"
+                />
+
+                <figcaption>
+                  Tetris — Game Boy
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_nes.jpg"
+                  alt="Tetris NES"
+                />
+
+                <figcaption>
+                  Tetris — NES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_arcade.jpg"
+                  alt="Tetris Arcade"
+                />
+
+                <figcaption>
+                  Tetris — Arcade
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Desde sua criação, Tetris foi adaptado para uma enorme
+            quantidade de computadores, consoles, portáteis e
+            plataformas digitais.<br>
+
+            Entre as versões historicamente importantes estão
+            adaptações para computadores pessoais, arcade,
+            NES, Famicom, Game Boy e posteriormente diversas
+            outras plataformas.<br>
+
+            Cada versão pode apresentar diferenças na interface,
+            sistema de pontuação, velocidade, geração de peças,
+            música e modos de jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tetris tornou-se uma das obras mais reconhecidas
+            da história dos videogames.<br>
+
+            Sua mecânica extremamente simples permitiu que o
+            conceito fosse adaptado para uma grande quantidade
+            de sistemas diferentes.<br>
+
+            O jogo também ajudou a estabelecer o gênero de
+            quebra-cabeças eletrônicos como uma categoria
+            importante da indústria.<br>
+
+            Os tetrominós, a eliminação de linhas e a ideia de
+            organizar peças sob pressão de tempo tornaram-se
+            elementos imediatamente associados ao nome Tetris.<br>
+
+            Décadas após sua criação, o jogo continua recebendo
+            novas versões, competições, adaptações e modos
+            multiplayer.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Tetris foi criado por Alexey Pajitnov em 1984.
+              </li>
+
+              <li>
+                A primeira versão foi desenvolvida no
+                Elektronika 60.
+              </li>
+
+              <li>
+                O nome Tetris combina a ideia de quatro blocos
+                com o nome do esporte tênis.
+              </li>
+
+              <li>
+                As peças do jogo são chamadas de tetrominós.
+              </li>
+
+              <li>
+                Existem sete formatos fundamentais de tetrominós:
+                I, O, T, S, Z, J e L.
+              </li>
+
+              <li>
+                A eliminação de quatro linhas simultaneamente
+                é tradicionalmente chamada de Tetris.
+              </li>
+
+              <li>
+                O Famicom recebeu diferentes versões do jogo
+                durante a década de 1980.
+              </li>
+
+              <li>
+                A versão Tengen para NES tornou-se conhecida
+                também pela disputa envolvendo seus direitos
+                de publicação.
+              </li>
+
+              <li>
+                A versão de Tetris para Game Boy tornou-se
+                uma das edições mais conhecidas do jogo.
+              </li>
+
+              <li>
+                A música Korobeiniki passou a ser fortemente
+                associada à franquia Tetris.
+              </li>
+
+              <li>
+                Tetris foi adaptado para uma enorme quantidade
+                de plataformas ao longo de sua história.
+              </li>
+
+              <li>
+                O jogo possui uma das estruturas de regras mais
+                simples e reconhecíveis da história dos videogames.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As diferentes versões de Tetris para Famicom possuem
+            materiais físicos próprios, incluindo cartuchos,
+            caixas, manuais e etiquetas.<br>
+
+            Para colecionadores, a identificação da versão é
+            particularmente importante devido à existência de
+            diferentes publicadores e regiões.<br>
+
+            Versões japonesas, norte-americanas e europeias podem
+            apresentar diferenças consideráveis na embalagem,
+            no cartucho e nos materiais incluídos.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_box.jpg"
+                  alt="Caixa de Tetris"
+                />
+
+                <figcaption>
+                  Caixa — Tetris
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_manual.jpg"
+                  alt="Manual de Tetris"
+                />
+
+                <figcaption>
+                  Manual — Tetris
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_cart.jpg"
+                  alt="Cartucho de Tetris"
+                />
+
+                <figcaption>
+                  Cartucho — Tetris
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/tetris_famicom_package.jpg"
+                  alt="Pacote japonês de Tetris"
+                />
+
+                <figcaption>
+                  Edição japonesa — Famicom
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros.html">
+                ○ Games - Super Mario Bros.
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros3.html">
+                ○ Games - Super Mario Bros. 3
+              </a>
+            </li>
+
+            <li>
+              <a href="tetris.html">
+                ○ Games - Tetris
+              </a>
+            </li>
+
+            <li>
+              <a href="famicom.html">
+                ○ Consoles - Famicom
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Tetris</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Jogo de quebra-cabeça criado por
+                  Alexey Pajitnov em 1984.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Gênero: Quebra-cabeça</li>
+                  <li>Criador: Alexey Pajitnov</li>
+                  <li>Ano: 1984</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alexey Pajitnov</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Programador soviético responsável pela
+                  criação original de Tetris.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tetrominó</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peça formada por quatro blocos quadrados
+                  conectados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça I</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó formado por quatro blocos em linha.
+                  É tradicionalmente associado à eliminação
+                  de quatro linhas simultaneamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça O</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó quadrado formado por quatro blocos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça T</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó com formato semelhante à letra T.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça S</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó com formato semelhante à letra S.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça Z</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó com formato semelhante à letra Z.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça J</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó com formato semelhante à letra J.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peça L</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tetrominó com formato semelhante à letra L.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Campo de Jogo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área vertical onde os tetrominós são
+                  posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Single</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Eliminação de uma linha completa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Double</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Eliminação de duas linhas simultaneamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Triple</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Eliminação de três linhas simultaneamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tetris</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Eliminação de quatro linhas simultaneamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Level</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Nível de dificuldade que pode alterar a
+                  velocidade de queda das peças.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Over</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Situação em que os blocos ocupam o campo
+                  de maneira que novas peças não podem entrar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rotation</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento utilizado para alterar a orientação
+                  de um tetrominó.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Line Clear</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processo de remoção de uma linha completamente
+                  preenchida.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Famicom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Nintendo para o qual diferentes
+                  versões de Tetris foram lançadas no Japão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Elektronika 60</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Computador no qual a versão original de
+                  Tetris foi desenvolvida.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bullet-Proof Software</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Empresa responsável pela publicação de uma
+                  versão japonesa de Tetris para Famicom.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tengen</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Marca da Atari Games responsável por uma
+                  versão de Tetris para NES.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Boy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console portátil da Nintendo que recebeu
+                  uma das versões mais conhecidas de Tetris.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Korobeiniki</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Melodia tradicional russa que ficou associada
+                  a diversas versões de Tetris.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Famicom Cartridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cartucho utilizado para distribuir versões
+                  de Tetris no Family Computer.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>NES</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Versão ocidental do Family Computer,
+                  também recebeu diferentes versões de Tetris.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Boy Link</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso utilizado pela versão de Tetris
+                  para Game Boy para partidas entre dois jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>High Score</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Registro de pontuação utilizado para acompanhar
+                  o desempenho do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

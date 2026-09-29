@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Controle Sem Fio Xbox 360</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       ESPECIFICAÇÕES TÉCNICAS
+       ========================================== */
+
+    .technical-specs {
+      margin: 20px 0;
+      padding: 12px;
+      background: #151515;
+      border: 1px solid #444;
+    }
+
+    .technical-specs table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #ccc;
+      font-size: 13px;
+    }
+
+    .technical-specs th,
+    .technical-specs td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .technical-specs th {
+      color: #fff;
+      background: #242424;
+    }
+
+    .technical-specs td {
+      background: #111;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .technical-specs {
+        overflow-x: auto;
+      }
+
+      .technical-specs table {
+        min-width: 500px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... O controle sem fio do Xbox 360 foi um dos principais
+          responsáveis por popularizar o controle sem fio como padrão
+          nos consoles modernos, utilizando comunicação proprietária
+          de 2,4 GHz, vibração, dois analógicos, gatilhos analógicos
+          e o característico botão Xbox Guide cercado pelo Ring of Light ...
+
+          &nbsp;
+
+        </span>
+
+        <span>
+
+          ... O controle sem fio do Xbox 360 foi um dos principais
+          responsáveis por popularizar o controle sem fio como padrão
+          nos consoles modernos, utilizando comunicação proprietária
+          de 2,4 GHz, vibração, dois analógicos, gatilhos analógicos
+          e o característico botão Xbox Guide cercado pelo Ring of Light ...
+
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Controle Sem Fio Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/xbox360controle.jpg"
+              alt="Controle sem fio original do Xbox 360"
+              style="
+                max-width: 70%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Xbox 360 Wireless Controller
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Controle Sem Fio do Xbox 360 é o controle oficial
+            desenvolvido pela Microsoft para o Xbox 360 e lançado
+            junto da geração do console em 2005.
+
+            <br><br>
+
+            Diferentemente de controles sem fio que utilizavam
+            tecnologias genéricas de rádio, o Xbox 360 utiliza uma
+            plataforma proprietária de comunicação sem fio na faixa
+            de 2,4 GHz.
+
+            <br><br>
+
+            O sistema permite que o controle se comunique diretamente
+            com o console sem a necessidade de um cabo durante a
+            utilização normal. A documentação da Microsoft especifica
+            um alcance típico de aproximadamente 9 metros, embora
+            obstáculos, objetos metálicos e interferências possam
+            reduzir esse alcance.
+
+            <br><br>
+
+            O controle também trouxe um conjunto extremamente completo
+            de entradas para sua época: dois sticks analógicos,
+            D-Pad, quatro botões frontais, dois bumpers, dois gatilhos
+            analógicos, botões Start e Back e o novo Xbox Guide.
+
+            <br><br>
+
+            Além disso, possui dois motores internos de vibração,
+            responsáveis pelo feedback háptico tradicional conhecido
+            como "rumble".
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESPECIFICAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Especificações Técnicas
+          </h2>
+
+
+          <div class="technical-specs">
+
+            <table>
+
+              <tr>
+                <th>Característica</th>
+                <th>Informação</th>
+              </tr>
+
+              <tr>
+                <td>Fabricante</td>
+                <td>Microsoft</td>
+              </tr>
+
+              <tr>
+                <td>Plataforma principal</td>
+                <td>Xbox 360</td>
+              </tr>
+
+              <tr>
+                <td>Comunicação</td>
+                <td>Wireless proprietário de 2,4 GHz</td>
+              </tr>
+
+              <tr>
+                <td>Alcance típico</td>
+                <td>Aproximadamente 9 metros</td>
+              </tr>
+
+              <tr>
+                <td>Alimentação</td>
+                <td>2 pilhas AA ou Xbox 360 Rechargeable Battery Pack</td>
+              </tr>
+
+              <tr>
+                <td>Sticks analógicos</td>
+                <td>2</td>
+              </tr>
+
+              <tr>
+                <td>Gatilhos analógicos</td>
+                <td>2</td>
+              </tr>
+
+              <tr>
+                <td>Botões frontais</td>
+                <td>A, B, X e Y</td>
+              </tr>
+
+              <tr>
+                <td>Direcional</td>
+                <td>D-Pad de 8 direções</td>
+              </tr>
+
+              <tr>
+                <td>Feedback</td>
+                <td>2 motores de vibração</td>
+              </tr>
+
+              <tr>
+                <td>Áudio</td>
+                <td>Entrada de headset de 2,5 mm</td>
+              </tr>
+
+              <tr>
+                <td>Indicador</td>
+                <td>Xbox Guide / Ring of Light</td>
+              </tr>
+
+              <tr>
+                <td>Jogadores</td>
+                <td>Até 4 controles conectados simultaneamente ao console</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <p
+            style="
+              font-size: 12px;
+              color: #888;
+              line-height: 1.5;
+              text-align: center;
+            "
+          >
+
+            As especificações podem variar em detalhes entre revisões
+            de hardware e acessórios. Os dados acima se referem ao
+            controle sem fio oficial do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               O DESIGN
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Design e Ergonomia
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360frente.jpg"
+                alt="Vista frontal do controle Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360tras.jpg"
+                alt="Vista traseira do controle Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Vista frontal e traseira do Controle Sem Fio Xbox 360 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O projeto do controle do Xbox 360 foi construído ao redor
+            de duas áreas laterais destinadas às mãos do jogador,
+            criando o formato que posteriormente se tornaria uma das
+            principais referências da ergonomia dos controles Xbox.
+
+            <br><br>
+
+            A disposição dos comandos foi organizada de maneira que
+            os polegares pudessem permanecer sobre os sticks analógicos
+            enquanto os dedos indicadores alcançam os bumpers e os
+            gatilhos.
+
+            <br><br>
+
+            O D-Pad fica localizado na região inferior esquerda,
+            enquanto os quatro botões de ação ficam no lado direito.
+
+            <br><br>
+
+            No centro encontra-se o botão Xbox Guide, responsável por
+            abrir o Xbox Guide e também por realizar funções de
+            alimentação e gerenciamento do controle.
+
+            <br><br>
+
+            Ao redor dele existe o Ring of Light, dividido em quatro
+            segmentos. Quando o controle é conectado ao console,
+            um dos segmentos é utilizado para indicar qual posição
+            ou jogador foi atribuído ao controle.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sistema de Controles
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360buttons.jpg"
+                alt="Botões do controle Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360analog.jpg"
+                alt="Sticks analógicos do controle Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Conjunto de comandos, botões e sticks analógicos ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle possui dois sticks analógicos independentes.
+            Cada stick pode detectar movimento em diferentes direções
+            e também possui um botão interno acionado quando o próprio
+            stick é pressionado.
+
+            <br><br>
+
+            Os quatro botões frontais são identificados pelas letras
+            A, B, X e Y. Cada botão possui uma posição e uma função
+            definida pelo jogo ou pelo sistema operacional.
+
+            <br><br>
+
+            O D-Pad fornece oito possibilidades direcionais, incluindo
+            as quatro direções principais e as quatro diagonais.
+
+            <br><br>
+
+            Na parte superior existem os botões LB e RB, conhecidos
+            como Left Bumper e Right Bumper.
+
+            <br><br>
+
+            Abaixo deles ficam LT e RT, os gatilhos analógicos.
+            Diferentemente de simples botões liga/desliga, os gatilhos
+            conseguem registrar diferentes níveis de pressão.
+
+            <br><br>
+
+            Essa característica permitiu que jogos utilizassem os
+            gatilhos para funções como acelerar gradualmente um carro,
+            controlar a intensidade de uma ação ou mirar com maior
+            precisão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMUNICAÇÃO SEM FIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Comunicação Sem Fio
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360wireless.jpg"
+                alt="Sistema sem fio do Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360receiver.jpg"
+                alt="Receptor Xbox 360 Wireless para PC"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Comunicação sem fio do Xbox 360 e receptor para computadores ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais importantes do controle é
+            seu sistema de comunicação sem fio proprietário.
+
+            <br><br>
+
+            O controle utiliza a faixa de 2,4 GHz para estabelecer
+            comunicação com o console. A Microsoft especificava um
+            alcance típico de aproximadamente 30 pés, ou cerca de
+            9 metros.
+
+            <br><br>
+
+            O sistema também permite que até quatro controles estejam
+            conectados simultaneamente ao Xbox 360.
+
+            <br><br>
+
+            Para realizar a conexão, o usuário pressiona o botão
+            Connect no console e depois o botão Connect localizado
+            no controle. Os indicadores luminosos giram durante o
+            processo e, após a sincronização, um dos quadrantes
+            permanece iluminado.
+
+            <br><br>
+
+            Esse sistema foi importante porque eliminava o cabo entre
+            o jogador e o console sem exigir Bluetooth convencional.
+            O Xbox 360 utilizava sua própria plataforma de comunicação
+            sem fio.
+
+            <br><br>
+
+            Para computadores, a Microsoft também comercializou um
+            receptor USB específico para permitir que controles sem fio
+            do Xbox 360 fossem utilizados no Windows.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ALIMENTAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Alimentação e Bateria
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle sem fio utiliza um compartimento removível
+            localizado na parte traseira.
+
+            <br><br>
+
+            O sistema padrão utiliza duas pilhas AA. Também era possível
+            utilizar o Xbox 360 Rechargeable Battery Pack, vendido
+            separadamente.
+
+            <br><br>
+
+            A documentação da Microsoft especificava aproximadamente
+            40 horas de uso contínuo como referência para duas pilhas
+            alcalinas AA, embora a duração real possa variar conforme
+            as condições de utilização.
+
+            <br><br>
+
+            Os contatos metálicos do compartimento fazem a ligação
+            elétrica entre as pilhas e a placa principal do controle.
+
+            <br><br>
+
+            Na frente existe ainda uma porta utilizada pelo Xbox 360
+            Play & Charge Kit. Esse sistema permitia utilizar uma bateria
+            recarregável específica e carregar o conjunto por cabo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VIBRAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sistema de Vibração
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360motor.jpg"
+                alt="Motor de vibração do controle Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360interno.jpg"
+                alt="Interior do controle Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Motores de vibração e estrutura interna do controle ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle possui dois motores de vibração localizados nas
+            regiões laterais da carcaça.
+
+            <br><br>
+
+            Cada motor utiliza uma massa excêntrica. Quando o motor gira,
+            essa massa cria uma força variável que faz o controle vibrar.
+
+            <br><br>
+
+            Os dois motores possuem massas de características diferentes,
+            permitindo produzir diferentes sensações de vibração entre
+            os lados esquerdo e direito.
+
+            <br><br>
+
+            Isso possibilita que o jogo utilize o feedback de maneira
+            mais complexa do que simplesmente ligar e desligar uma única
+            vibração.
+
+            <br><br>
+
+            Por exemplo, determinados jogos podem produzir uma vibração
+            mais intensa em uma das mãos quando o jogador recebe dano,
+            dispara uma arma ou passa sobre determinada superfície.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ÁUDIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Entrada de Headset
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Na parte inferior do controle existe uma porta de expansão
+            destinada principalmente aos acessórios de áudio do Xbox 360.
+
+            <br><br>
+
+            O conector possui 2,5 mm e permite conectar headsets
+            compatíveis diretamente ao controle.
+
+            <br><br>
+
+            Isso possibilitou que o jogador utilizasse comunicação por
+            voz sem precisar de um cabo separado conectado diretamente
+            ao console.
+
+            <br><br>
+
+            A porta também faz parte da arquitetura de acessórios do
+            controle, funcionando como uma interface de expansão para
+            determinados dispositivos compatíveis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox.jpg"
+                alt="Xbox original"
+              />
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Xbox original e Xbox 360 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox 360 foi lançado em 2005 como sucessor do Xbox
+            original e representou uma mudança importante na abordagem
+            da Microsoft em relação aos controles.
+
+            <br><br>
+
+            O primeiro Xbox utilizava principalmente controles com fio
+            e passou por diferentes revisões de seu controle, incluindo
+            o grande Duke e posteriormente o Controller S.
+
+            <br><br>
+
+            Com o Xbox 360, a Microsoft colocou o controle sem fio como
+            uma das principais formas de interação com o console.
+
+            <br><br>
+
+            O cabo deixou de ser necessário para a utilização normal,
+            permitindo que o jogador permanecesse distante do console.
+
+            <br><br>
+
+            O projeto também consolidou vários elementos que seriam
+            mantidos nas gerações posteriores de controles Xbox, como
+            os sticks assimétricos, os gatilhos superiores, os botões
+            ABXY e o botão central Xbox.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EVOLUÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Evolução dos Controles Xbox
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xboxduke.jpg"
+                  alt="Xbox Duke Controller"
+                />
+
+                <figcaption>
+                  Xbox Controller — Duke
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xboxcontrollerS.jpg"
+                  alt="Xbox Controller S"
+                />
+
+                <figcaption>
+                  Xbox Controller S
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360wired.jpg"
+                  alt="Controle Xbox 360 com fio"
+                />
+
+                <figcaption>
+                  Xbox 360 Controller — Com Fio
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360wireless.jpg"
+                  alt="Controle Xbox 360 sem fio"
+                />
+
+                <figcaption>
+                  Xbox 360 Wireless Controller
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle sem fio do Xbox 360 não surgiu isoladamente.
+            Ele é resultado de uma evolução iniciada ainda no Xbox
+            original.
+
+            <br><br>
+
+            O enorme controle Duke possuía uma disposição de componentes
+            semelhante à filosofia que posteriormente seria refinada
+            no Controller S.
+
+            <br><br>
+
+            O Controller S reduziu significativamente o tamanho do
+            controle e reorganizou seus botões, aproximando o projeto
+            da ergonomia que seria utilizada na geração seguinte.
+
+            <br><br>
+
+            No Xbox 360, essa linguagem visual foi novamente modificada,
+            dando origem ao controle que se tornaria uma das referências
+            do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a vida comercial do Xbox 360 foram produzidas
+            diversas versões do controle.
+
+            <br><br>
+
+            Além do modelo sem fio tradicional, existiram controles
+            com fio, edições especiais, versões coloridas e controles
+            associados a diferentes bundles e edições especiais do
+            console.
+
+            <br><br>
+
+            A estrutura básica permaneceu bastante semelhante, mas
+            revisões internas da placa e alterações de fabricação
+            podem ser encontradas entre diferentes unidades.
+
+            <br><br>
+
+            Algumas diferenças externas também podem aparecer entre
+            revisões, principalmente em acabamento, cor dos botões,
+            tonalidade da carcaça e identificação do produto.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360black.jpg"
+                  alt="Xbox 360 Wireless Controller preto"
+                />
+
+                <figcaption>
+                  Xbox 360 Wireless Controller — Preto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360white.jpg"
+                  alt="Xbox 360 Wireless Controller branco"
+                />
+
+                <figcaption>
+                  Xbox 360 Wireless Controller — Branco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360chrome.jpg"
+                  alt="Xbox 360 Wireless Controller edição especial"
+                />
+
+                <figcaption>
+                  Xbox 360 Wireless Controller — Edição Especial
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xbox360wired.jpg"
+                  alt="Xbox 360 Controller com fio"
+                />
+
+                <figcaption>
+                  Xbox 360 Controller — Com Fio
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLE NO PC
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Xbox 360 no Computador
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle sem fio do Xbox 360 também ganhou uma enorme
+            importância fora do próprio console.
+
+            <br><br>
+
+            A Microsoft disponibilizou um receptor USB específico para
+            computadores, permitindo que o controle sem fio fosse
+            reconhecido pelo Windows através desse adaptador.
+
+            <br><br>
+
+            Isso tornou o controle uma opção popular para jogos de PC,
+            principalmente em uma época em que muitos jogos ainda
+            possuíam suporte limitado a controles.
+
+            <br><br>
+
+            É importante destacar que o controle sem fio do Xbox 360
+            não utiliza Bluetooth convencional. Para utilizar o modelo
+            sem fio em computadores era necessário um receptor compatível
+            com a tecnologia sem fio do Xbox 360.
+
+            <br><br>
+
+            Já os modelos com fio podiam ser conectados diretamente
+            por USB.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IMPORTÂNCIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Importância Histórica
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle do Xbox 360 acabou se tornando um dos acessórios
+            mais reconhecíveis da sétima geração de consoles.
+
+            <br><br>
+
+            Sua importância não está apenas no formato externo, mas na
+            quantidade de tecnologias reunidas em um único dispositivo:
+            comunicação sem fio, dois sticks analógicos, gatilhos
+            analógicos, vibração independente, sistema de identificação
+            por luz, entrada para headset e suporte a acessórios.
+
+            <br><br>
+
+            O modelo também ajudou a estabelecer uma linguagem de
+            controles que continuaria sendo utilizada pela Microsoft
+            nas gerações posteriores.
+
+            <br><br>
+
+            Elementos como os sticks assimétricos, a posição dos gatilhos,
+            a organização ABXY e o botão Xbox central continuaram presentes
+            em diferentes gerações de hardware.
+
+            <br><br>
+
+            Por isso, além de ser simplesmente um acessório do Xbox 360,
+            o controle representa uma etapa importante na evolução dos
+            gamepads modernos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELO INTERNO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estrutura Interna
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360pcb.jpg"
+                alt="Placa de circuito do controle Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360interno.jpg"
+                alt="Componentes internos do controle Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Placa lógica e componentes internos do controle ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Internamente, o controle é dividido entre a carcaça,
+            mecanismos dos botões, placa de circuito, sistema de
+            comunicação sem fio, motores de vibração e sistema de
+            alimentação.
+
+            <br><br>
+
+            A placa principal reúne a eletrônica responsável por
+            interpretar os comandos do usuário, controlar os motores,
+            processar os sinais dos sticks e gatilhos e realizar a
+            comunicação com o console.
+
+            <br><br>
+
+            O sistema sem fio possui sua própria seção de rádio e
+            antena. Dependendo da revisão da placa, a disposição física
+            e os componentes utilizados podem variar.
+
+            <br><br>
+
+            Algumas funções eletrônicas são implementadas por circuitos
+            integrados cuja identificação completa não é simples de
+            determinar externamente, e diferentes revisões de hardware
+            podem utilizar componentes distintos.
+
+            <br><br>
+
+            Por esse motivo, a lista abaixo descreve as funções dos
+            componentes e conjuntos presentes no controle, evitando
+            atribuir números de peça específicos quando eles podem
+            variar entre revisões.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Xbox 360
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES
+             ========================================== -->
+
+        <div class="components-block">
+
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Microcontrolador / Processador Principal
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por executar a lógica interna
+                  do controle, interpretar os comandos dos diversos
+                  sensores e botões e organizar as informações que
+                  serão transmitidas ao console.
+                </p>
+
+                <p>
+                  A identificação exata do circuito pode variar de acordo
+                  com a revisão da placa e nem todos os componentes
+                  principais são facilmente identificáveis externamente.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Circuito integrado de controle</li>
+                  <li>Função: Processamento dos comandos</li>
+                  <li>Função adicional: Comunicação com periféricos internos</li>
+                  <li>Localização: Placa principal</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Comunicação Sem Fio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto eletrônico responsável pela comunicação
+                  proprietária entre o controle e o Xbox 360.
+                </p>
+
+                <p>
+                  O sistema utiliza a faixa de 2,4 GHz e não deve ser
+                  confundido com Bluetooth convencional.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Rádio proprietário</li>
+                  <li>Frequência: 2,4 GHz</li>
+                  <li>Função: Comunicação com o console</li>
+                  <li>Interface: RF</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Antena RF Integrada
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Antena utilizada para transmitir e receber os sinais
+                  de rádio entre o controle e o receptor do Xbox 360.
+                </p>
+
+                <p>
+                  Ela fica integrada à estrutura eletrônica do controle
+                  e trabalha em conjunto com o circuito de rádio.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Antena integrada</li>
+                  <li>Função: Transmissão e recepção RF</li>
+                  <li>Faixa: 2,4 GHz</li>
+                  <li>Comunicação: Proprietária</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Dois Sticks Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Os dois sticks analógicos são utilizados para detectar
+                  movimentos direcionais graduais.
+                </p>
+
+                <p>
+                  Diferentemente de um botão convencional, o mecanismo
+                  permite registrar diferentes posições dentro do curso
+                  do stick.
+                </p>
+
+                <p>
+                  Os próprios sticks também podem ser pressionados,
+                  funcionando como botões adicionais.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Quantidade: 2</li>
+                  <li>Tipo: Controle analógico</li>
+                  <li>Movimento: Dois eixos</li>
+                  <li>Função adicional: Clique dos sticks</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Potenciômetros dos Sticks
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Os mecanismos analógicos utilizam elementos resistivos
+                  para transformar a posição física do stick em sinais
+                  elétricos interpretáveis pela eletrônica.
+                </p>
+
+                <p>
+                  Existem elementos separados para os diferentes eixos
+                  de movimento.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Potenciômetros / sensores resistivos</li>
+                  <li>Função: Detecção de posição</li>
+                  <li>Quantidade: Associada aos dois sticks</li>
+                  <li>Saída: Sinal elétrico variável</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões A, B, X e Y
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Os quatro botões principais de ação estão localizados
+                  na parte frontal direita do controle.
+                </p>
+
+                <p>
+                  Cada botão possui uma pequena membrana condutiva que
+                  fecha o contato correspondente na placa quando pressionado.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Quantidade: 4</li>
+                  <li>Identificação: A / B / X / Y</li>
+                  <li>Tipo: Botões digitais</li>
+                  <li>Função: Comandos de ação</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas Condutivas dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenas membranas de borracha ficam posicionadas
+                  entre os botões plásticos e os contatos da placa.
+                </p>
+
+                <p>
+                  Quando pressionadas, as partes condutivas da membrana
+                  fecham o circuito elétrico.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Membrana de contato</li>
+                  <li>Material: Borracha elastomérica</li>
+                  <li>Função: Acionamento dos contatos</li>
+                  <li>Aplicação: Botões digitais</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                D-Pad / Direcional
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O direcional digital permite controlar quatro direções
+                  principais e quatro diagonais.
+                </p>
+
+                <p>
+                  Seu mecanismo trabalha em conjunto com uma membrana
+                  de contato localizada abaixo da peça plástica.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Direcional digital</li>
+                  <li>Direções principais: 4</li>
+                  <li>Direções diagonais: 4</li>
+                  <li>Total: 8 direções</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões LB e RB
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Os bumpers esquerdo e direito ficam na parte superior
+                  do controle e são acionados pelos dedos indicadores.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Quantidade: 2</li>
+                  <li>Esquerdo: LB</li>
+                  <li>Direito: RB</li>
+                  <li>Tipo: Entrada digital</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho LT
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O gatilho esquerdo é um comando analógico utilizado
+                  em diversos jogos para representar pressão progressiva.
+                </p>
+
+                <p>
+                  Seu mecanismo transforma o deslocamento do gatilho
+                  em uma variação elétrica interpretada pelo circuito.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Identificação: LT</li>
+                  <li>Tipo: Gatilho analógico</li>
+                  <li>Função: Entrada variável</li>
+                  <li>Posição: Superior esquerda</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho RT
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O gatilho direito possui funcionamento semelhante ao
+                  LT e permite detectar diferentes níveis de acionamento.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Identificação: RT</li>
+                  <li>Tipo: Gatilho analógico</li>
+                  <li>Função: Entrada variável</li>
+                  <li>Posição: Superior direita</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Xbox Guide
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão central utilizado para acessar o Xbox Guide
+                  e realizar funções relacionadas ao console e ao
+                  próprio controle.
+                </p>
+
+                <p>
+                  O botão é cercado pelo sistema luminoso conhecido
+                  como Ring of Light.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Botão central</li>
+                  <li>Função: Xbox Guide</li>
+                  <li>Também utilizado para: Alimentação</li>
+                  <li>Iluminação: Ring of Light</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Ring of Light
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de iluminação localizado ao redor do botão
+                  Xbox Guide.
+                </p>
+
+                <p>
+                  O sistema é dividido em quatro quadrantes e permite
+                  identificar o número ou posição atribuída ao controle
+                  quando conectado ao console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Formato: 4 quadrantes</li>
+                  <li>Cor principal: Verde</li>
+                  <li>Função: Indicação de jogador / conexão</li>
+                  <li>Controle: Circuito eletrônico</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LEDs do Ring of Light
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  LEDs montados na placa produzem a iluminação dos
+                  quadrantes ao redor do Xbox Guide.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LED</li>
+                  <li>Função: Indicação visual</li>
+                  <li>Quantidade: Vários emissores</li>
+                  <li>Área: Botão Guide</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Motor de Vibração Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Motor elétrico responsável por produzir parte do
+                  feedback vibratório do controle.
+                </p>
+
+                <p>
+                  Possui uma massa excêntrica que gera vibração quando
+                  o motor gira.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Motor DC</li>
+                  <li>Função: Feedback háptico</li>
+                  <li>Quantidade: 1</li>
+                  <li>Localização: Lado esquerdo</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Motor de Vibração Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo motor de vibração responsável pelo feedback
+                  do lado direito do controle.
+                </p>
+
+                <p>
+                  Os dois motores podem ser controlados de maneira
+                  independente para produzir diferentes intensidades
+                  de vibração.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Motor DC</li>
+                  <li>Função: Feedback háptico</li>
+                  <li>Quantidade: 1</li>
+                  <li>Localização: Lado direito</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Massas Excêntricas dos Motores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças metálicas ou massas desequilibradas acopladas
+                  aos eixos dos motores.
+                </p>
+
+                <p>
+                  Quando giram, o desequilíbrio cria a vibração
+                  característica do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso (PCB)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal estrutura eletrônica do controle.
+                </p>
+
+                <p>
+                  A PCB interliga os circuitos de processamento,
+                  comunicação, alimentação, comandos, LEDs e motores.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: PCB</li>
+                  <li>Função: Interconexão elétrica</li>
+                  <li>Material: Fibra e cobre</li>
+                  <li>Localização: Interior do controle</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contatos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Áreas condutoras presentes na placa recebem a pressão
+                  das membranas de borracha.
+                </p>
+
+                <p>
+                  Quando uma membrana toca o contato, o circuito
+                  correspondente é fechado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Mecanismo dos Sticks Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura mecânica que mantém os sticks centralizados
+                  e permite seu deslocamento nos eixos horizontal e
+                  vertical.
+                </p>
+
+                <p>
+                  Molas internas ajudam a retornar o stick à posição
+                  central quando ele é liberado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas de Centralização dos Sticks
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenas molas fazem parte do mecanismo dos analógicos
+                  e ajudam o stick a retornar ao centro.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sensores dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos eletrônicos associados aos mecanismos LT
+                  e RT detectam a posição dos gatilhos.
+                </p>
+
+                <p>
+                  Essa leitura permite que o controle envie valores
+                  graduais em vez de apenas um estado ligado ou desligado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Molas responsáveis pelo retorno dos gatilhos à
+                  posição inicial depois que o jogador deixa de pressioná-los.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Compartimento de Pilhas
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura traseira destinada ao encaixe do suporte
+                  de alimentação do controle.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Localização: Parte traseira</li>
+                  <li>Tipo: Compartimento removível</li>
+                  <li>Alimentação: 2 AA</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Suporte de Pilhas AA
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Módulo removível que acomoda duas pilhas AA.
+                </p>
+
+                <p>
+                  Pode ser substituído pelo Xbox 360 Rechargeable
+                  Battery Pack compatível.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contatos Metálicos das Pilhas
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Molas e contatos metálicos estabelecem a ligação
+                  elétrica entre as pilhas e o circuito do controle.
+                </p>
+
+                <p>
+                  Oxidação, sujeira ou deformação desses contatos pode
+                  causar falhas de alimentação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Tampa do Compartimento de Pilhas
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tampa plástica responsável por manter o conjunto de
+                  pilhas preso à parte traseira do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Porta de Expansão de 2,5 mm
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector localizado na parte inferior do controle.
+                </p>
+
+                <p>
+                  É utilizado para conectar headsets e determinados
+                  acessórios compatíveis com o Xbox 360.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Conector de expansão</li>
+                  <li>Diâmetro: 2,5 mm</li>
+                  <li>Função: Áudio / acessórios</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Áudio do Headset
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto eletrônico responsável pela comunicação entre
+                  a porta de headset e a lógica do controle.
+                </p>
+
+                <p>
+                  Permite a utilização de acessórios de áudio compatíveis
+                  com a plataforma Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Porta de Carregamento / Play & Charge
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface frontal utilizada pelo Xbox 360 Play & Charge
+                  Kit.
+                </p>
+
+                <p>
+                  O sistema permite utilizar uma bateria recarregável
+                  compatível e realizar sua recarga através do cabo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Gerenciamento de Energia
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de componentes responsáveis por distribuir
+                  e controlar a alimentação elétrica recebida das pilhas
+                  ou bateria compatível.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores de Filtragem
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Capacitores presentes na placa ajudam a estabilizar
+                  a alimentação e reduzir ruídos elétricos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Capacitores eletrônicos</li>
+                  <li>Função: Filtragem</li>
+                  <li>Aplicação: Alimentação e circuitos internos</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diversos resistores são utilizados para controlar
+                  correntes e estabelecer níveis de tensão dentro
+                  dos circuitos eletrônicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Diodos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes semicondutores utilizados em diferentes
+                  partes dos circuitos para direcionamento e proteção
+                  de sinais elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Transistores de Acionamento dos Motores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes eletrônicos utilizados para controlar
+                  a corrente enviada aos motores de vibração.
+                </p>
+
+                <p>
+                  Como os motores exigem mais corrente do que uma
+                  saída lógica normalmente fornece diretamente,
+                  utiliza-se um estágio eletrônico de acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cristal / Oscilador de Referência
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da revisão do hardware, circuitos de
+                  temporização e comunicação utilizam referências
+                  de frequência estáveis para sincronização.
+                </p>
+
+                <p>
+                  A implementação exata pode variar entre revisões
+                  internas do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Blindagem e Isolamento de RF
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Determinadas áreas do circuito podem utilizar
+                  técnicas de layout e blindagem para reduzir
+                  interferências eletromagnéticas.
+                </p>
+
+                <p>
+                  O projeto da seção de rádio precisa lidar com
+                  interferências internas e externas para manter
+                  uma comunicação confiável.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Plástica Frontal
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte frontal da estrutura externa do controle.
+                </p>
+
+                <p>
+                  Mantém os botões, sticks, gatilhos e demais
+                  componentes mecânicos em suas posições.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Plástica Traseira
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte traseira da carcaça responsável por proteger
+                  a placa e acomodar o compartimento de alimentação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Estrutura Interna de Suporte
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças plásticas internas ajudam a manter a PCB,
+                  botões, motores, mecanismos e outros componentes
+                  corretamente posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Start e Back
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dois botões localizados próximos ao centro do
+                  controle e utilizados para funções de navegação
+                  e comandos específicos dos jogos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Quantidade: 2</li>
+                  <li>Tipo: Digital</li>
+                  <li>Identificação: Start / Back</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Connect
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequeno botão utilizado para iniciar o processo
+                  de sincronização sem fio entre o controle e o
+                  console Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para prender as
+                  partes da carcaça e manter a estrutura interna
+                  montada.
+                </p>
+
+                <p>
+                  O controle utiliza vários parafusos internos,
+                  incluindo um localizado sob a etiqueta traseira
+                  em determinadas unidades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas e Grampos Mecânicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenos elementos metálicos utilizados para
+                  manter componentes móveis sob pressão e auxiliar
+                  o retorno de determinados comandos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Borrachas e Apoios Antiderrapantes
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Materiais utilizados em pontos específicos para
+                  evitar deslocamentos, ruídos e contato excessivo
+                  entre peças internas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Xbox 360 Wireless Receiver para PC
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Não faz parte fisicamente do controle, mas é um
+                  acessório importante para a utilização do modelo
+                  sem fio em computadores compatíveis.
+                </p>
+
+                <p>
+                  O receptor USB realiza a comunicação sem fio com
+                  o controle através da tecnologia proprietária
+                  utilizada pelo Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Xbox 360 Play & Charge Kit
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acessório formado por uma bateria recarregável e
+                  cabo destinado à alimentação e recarga do controle.
+                </p>
+
+                <p>
+                  Substitui o uso convencional das duas pilhas AA
+                  quando instalado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Super Mario Maker 2</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELAS
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Super Mario Maker 2 permite criar, jogar e compartilhar
+          fases de Mario no Nintendo Switch, reunindo diferentes
+          estilos, temas, inimigos, itens e ferramentas de criação ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Super Mario Maker 2 permite criar, jogar e compartilhar
+          fases de Mario no Nintendo Switch, reunindo diferentes
+          estilos, temas, inimigos, itens e ferramentas de criação ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Super Mario Maker 2 — Nintendo Switch
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/supermariomaker2_switch.jpg"
+              alt="Super Mario Maker 2 para Nintendo Switch"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Maker 2
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 é um jogo de criação e plataforma
+            desenvolvido pela Nintendo para o Nintendo Switch e
+            lançado em 28 de junho de 2019.<br>
+
+            O título permite que os jogadores criem suas próprias
+            fases utilizando elementos da série Super Mario,
+            além de jogar fases criadas por outros usuários.<br>
+
+            O jogo apresenta ferramentas de construção, diferentes
+            estilos gráficos, temas de fases, inimigos, blocos,
+            itens, mecanismos e diversas opções de configuração.<br>
+
+            Além do modo de criação, Super Mario Maker 2 possui
+            uma campanha chamada Story Mode, modos multiplayer
+            e o Course World, onde os jogadores podem publicar
+            e encontrar fases criadas pela comunidade.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Takashi Tezuka
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo Switch
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                28 de junho de 2019
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Plataforma / Criação
+              </li>
+
+              <li>
+                <strong>Modos:</strong>
+                Single-player e multiplayer
+              </li>
+
+              <li>
+                <strong>Recursos principais:</strong>
+                Criar, jogar e compartilhar fases
+              </li>
+
+              <li>
+                <strong>Sucessor de:</strong>
+                Super Mario Maker
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 foi desenvolvido como uma evolução
+            do conceito apresentado pelo primeiro Super Mario Maker.<br>
+
+            A equipe ampliou significativamente as ferramentas
+            disponíveis para criação de fases e introduziu novos
+            elementos de construção, inimigos, objetos e estilos.<br>
+
+            Uma das principais novidades foi a inclusão do estilo
+            Super Mario 3D World, que possui elementos próprios
+            e uma estrutura diferente dos demais estilos disponíveis.<br>
+
+            O jogo também foi desenvolvido pensando nas
+            características do Nintendo Switch, permitindo jogar
+            tanto no modo portátil quanto conectado à televisão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/supermariomaker.jpg"
+                alt="Super Mario Maker"
+              />
+
+              <img
+                src="../tgga/nintendo_switch.jpg"
+                alt="Nintendo Switch"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Super Mario Maker e Nintendo Switch ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O primeiro Super Mario Maker foi lançado originalmente
+            para Wii U em 2015 e posteriormente recebeu uma versão
+            para Nintendo 3DS.<br>
+
+            O conceito permitia que jogadores construíssem fases
+            utilizando elementos de diferentes jogos clássicos
+            de Mario.<br>
+
+            Com Super Mario Maker 2, a Nintendo expandiu essa ideia
+            para o Nintendo Switch, aumentando a quantidade de
+            ferramentas e oferecendo uma estrutura mais completa
+            para criação e compartilhamento.<br>
+
+            A chegada ao Switch também ampliou o alcance da série,
+            já que o console podia ser utilizado tanto de forma
+            portátil quanto como console doméstico.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               STORY MODE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Story Mode
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smm2_story.jpg"
+                alt="Story Mode de Super Mario Maker 2"
+              />
+
+              <img
+                src="../tgga/smm2_castle.jpg"
+                alt="Construção do castelo em Super Mario Maker 2"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Story Mode e reconstrução do castelo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 possui um modo história próprio,
+            conhecido como Story Mode.<br>
+
+            No início da aventura, o castelo da Princesa Peach
+            é acidentalmente destruído e Mario precisa ajudar
+            a reconstruí-lo.<br>
+
+            Para conseguir moedas, o jogador completa diferentes
+            fases criadas especificamente para o modo história.<br>
+
+            Conforme a construção avança, novos personagens,
+            áreas e missões ficam disponíveis.<br>
+
+            O Story Mode também funciona como uma forma de
+            apresentar ao jogador diferentes possibilidades
+            de design encontradas no jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CRIAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Course Maker
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Course Maker é o principal sistema de criação
+            de Super Mario Maker 2.<br>
+
+            Nele, o jogador pode posicionar blocos, inimigos,
+            itens, plataformas, canos, mecanismos e outros
+            elementos diretamente no cenário.<br>
+
+            Também é possível modificar características de
+            determinados objetos, alterando seu comportamento
+            e criando situações específicas para o jogador.<br>
+
+            A ferramenta permite construir fases tradicionais,
+            desafios extremamente difíceis, quebra-cabeças,
+            autoscrollers, fases automáticas e diversos outros
+            formatos.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS FERRAMENTAS -
+            </h3>
+
+            <ul>
+
+              <li>Blocos</li>
+              <li>Canos</li>
+              <li>Inimigos</li>
+              <li>Power-ups</li>
+              <li>Plataformas</li>
+              <li>Moedas</li>
+              <li>Portas</li>
+              <li>Trilhos</li>
+              <li>Interruptores</li>
+              <li>Itens carregáveis</li>
+              <li>Condições de vitória</li>
+              <li>Objetivos especiais</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESTILOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estilos de Mario
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_smb.jpg"
+                  alt="Super Mario Bros. Style"
+                />
+
+                <figcaption>
+                  Super Mario Bros.
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_smb3.jpg"
+                  alt="Super Mario Bros. 3 Style"
+                />
+
+                <figcaption>
+                  Super Mario Bros. 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_smw.jpg"
+                  alt="Super Mario World Style"
+                />
+
+                <figcaption>
+                  Super Mario World
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_nsmbu.jpg"
+                  alt="New Super Mario Bros. U Style"
+                />
+
+                <figcaption>
+                  New Super Mario Bros. U
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_3dworld.jpg"
+                  alt="Super Mario 3D World Style"
+                />
+
+                <figcaption>
+                  Super Mario 3D World
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 possui cinco estilos principais
+            utilizados na criação das fases.<br>
+
+            O estilo Super Mario Bros. reproduz a aparência
+            e diversas mecânicas do jogo original de NES/Famicom.<br>
+
+            Super Mario Bros. 3 apresenta elementos do clássico
+            de NES, enquanto Super Mario World utiliza características
+            do jogo de Super Nintendo.<br>
+
+            New Super Mario Bros. U utiliza a apresentação dos
+            jogos modernos de plataforma 2D.<br>
+
+            O estilo Super Mario 3D World possui mecânicas
+            específicas, incluindo elementos tridimensionais
+            adaptados para as fases criadas no jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TABELA DE ESTILOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estilos e Características
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Estilo</th>
+                <th>Origem</th>
+                <th>Características</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Super Mario Bros.</td>
+                <td>NES / Famicom</td>
+                <td>Visual clássico e mecânicas tradicionais</td>
+              </tr>
+
+              <tr>
+                <td>Super Mario Bros. 3</td>
+                <td>NES / Famicom</td>
+                <td>Power-ups e elementos de SMB3</td>
+              </tr>
+
+              <tr>
+                <td>Super Mario World</td>
+                <td>SNES</td>
+                <td>Yoshi, capas e mecânicas de SMW</td>
+              </tr>
+
+              <tr>
+                <td>New Super Mario Bros. U</td>
+                <td>Wii U</td>
+                <td>Movimentos e visual moderno</td>
+              </tr>
+
+              <tr>
+                <td>Super Mario 3D World</td>
+                <td>Wii U</td>
+                <td>Mecânicas próprias e elementos 3D</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TEMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Temas das Fases
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os criadores podem escolher diferentes temas para
+            determinar a aparência e parte das características
+            de suas fases.<br>
+
+            Entre os temas disponíveis estão ambientes de campo,
+            subterrâneo, água, deserto, neve, céu, floresta,
+            casas-fantasma, navios e castelos.<br>
+
+            Muitos temas também possuem versões noturnas,
+            que modificam determinadas propriedades da fase
+            e podem alterar a forma como alguns elementos funcionam.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS TEMAS -
+            </h3>
+
+            <ul>
+
+              <li>Ground</li>
+              <li>Underground</li>
+              <li>Underwater</li>
+              <li>Desert</li>
+              <li>Snow</li>
+              <li>Sky</li>
+              <li>Forest</li>
+              <li>Ghost House</li>
+              <li>Airship</li>
+              <li>Castle</li>
+              <li>Night Themes</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER UPS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Power-Ups e Itens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_mushroom.jpg"
+                  alt="Super Mushroom"
+                />
+
+                <figcaption>
+                  Super Mushroom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_fireflower.jpg"
+                  alt="Fire Flower"
+                />
+
+                <figcaption>
+                  Fire Flower
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_star.jpg"
+                  alt="Super Star"
+                />
+
+                <figcaption>
+                  Super Star
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_propeller.jpg"
+                  alt="Propeller Mushroom"
+                />
+
+                <figcaption>
+                  Propeller Mushroom
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 possui diversos itens e power-ups
+            que podem ser utilizados tanto nas fases oficiais
+            quanto nas criações dos jogadores.<br>
+
+            Dependendo do estilo escolhido, diferentes itens
+            podem estar disponíveis.<br>
+
+            Cogumelos, Flores de Fogo, Super Stars e diversos
+            outros power-ups podem ser utilizados para criar
+            desafios, recompensas e caminhos alternativos.<br>
+
+            Alguns itens possuem comportamentos diferentes
+            dependendo do estilo de Mario utilizado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smm2_goomba.jpg"
+                alt="Goomba em Super Mario Maker 2"
+              />
+
+              <img
+                src="../tgga/smm2_bowser.jpg"
+                alt="Bowser em Super Mario Maker 2"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Goomba e Bowser ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os inimigos são alguns dos principais componentes
+            utilizados na criação das fases.<br>
+
+            O jogador pode posicioná-los em diferentes partes
+            do cenário e, em determinados casos, alterar
+            propriedades e combinações para criar desafios.<br>
+
+            Goombas, Koopas, Piranha Plants, Boos, Lakitus,
+            Hammer Bros., Bowser e muitos outros inimigos
+            podem aparecer nas criações.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS -
+            </h3>
+
+            <ul>
+
+              <li>Goomba</li>
+              <li>Koopa Troopa</li>
+              <li>Paratroopa</li>
+              <li>Piranha Plant</li>
+              <li>Boo</li>
+              <li>Lakitu</li>
+              <li>Hammer Bro.</li>
+              <li>Dry Bones</li>
+              <li>Thwomp</li>
+              <li>Chain Chomp</li>
+              <li>Bob-omb</li>
+              <li>Magikoopa</li>
+              <li>Bowser</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS ESPECIAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas Especiais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A grande variedade de objetos permite combinar
+            elementos para criar mecanismos complexos.<br>
+
+            Trilhos podem movimentar plataformas e objetos,
+            enquanto blocos, portas e canos podem formar
+            caminhos alternativos.<br>
+
+            Interruptores ON/OFF podem alterar o estado de
+            determinados elementos da fase.<br>
+
+            Também é possível utilizar esteiras, plataformas,
+            molas, blocos especiais, canhões e outros componentes
+            para criar desafios personalizados.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ELEMENTOS DE MECÂNICA -
+            </h3>
+
+            <ul>
+
+              <li>ON/OFF Switch</li>
+              <li>Tracks</li>
+              <li>Moving Platforms</li>
+              <li>Conveyor Belts</li>
+              <li>Springs</li>
+              <li>Cannons</li>
+              <li>Pipes</li>
+              <li>Doors</li>
+              <li>Blocks</li>
+              <li>Semisolid Platforms</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONDIÇÕES DE VITÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Condições de Vitória
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 permite definir diferentes
+            condições que o jogador precisa cumprir para
+            concluir determinadas fases.<br>
+
+            Essas condições podem transformar completamente
+            a estrutura tradicional de uma fase de Mario.<br>
+
+            O criador pode exigir que o jogador alcance um
+            determinado objetivo, utilize uma transformação,
+            carregue um objeto ou cumpra uma condição específica
+            antes de alcançar a área final.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smm2_multiplayer.jpg"
+                alt="Multiplayer de Super Mario Maker 2"
+              />
+
+              <img
+                src="../tgga/smm2_switch.jpg"
+                alt="Super Mario Maker 2 no Nintendo Switch"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Multiplayer de Super Mario Maker 2 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 possui modos multiplayer que
+            permitem jogar fases criadas pela comunidade com
+            outros jogadores.<br>
+
+            Dependendo do modo, os jogadores podem cooperar
+            para completar uma fase ou competir para chegar
+            primeiro ao objetivo.<br>
+
+            A interação entre vários personagens pode gerar
+            situações diferentes das encontradas no modo
+            para um único jogador.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COURSE WORLD
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Course World
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Course World é a área online destinada às fases
+            publicadas pelos jogadores.<br>
+
+            Através dele é possível pesquisar e jogar cursos
+            criados por outras pessoas, além de acompanhar
+            diferentes categorias e rankings relacionados
+            às fases disponíveis.<br>
+
+            Os jogadores também podem publicar suas próprias
+            criações para que outras pessoas tenham acesso
+            a elas.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - RECURSOS DO COURSE WORLD -
+            </h3>
+
+            <ul>
+
+              <li>Pesquisar fases</li>
+              <li>Jogar cursos da comunidade</li>
+              <li>Publicar criações</li>
+              <li>Seguir criadores</li>
+              <li>Registrar favoritos</li>
+              <li>Consultar rankings</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NINJI SPEEDRUNS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ninji Speedruns
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O modo Ninji Speedruns apresenta fases especiais
+            disponibilizadas pela Nintendo para desafios de
+            velocidade.<br>
+
+            O objetivo é completar a fase no menor tempo possível,
+            permitindo comparar o desempenho do jogador com
+            outros participantes através dos resultados registrados.<br>
+
+            O modo também utiliza os personagens Ninji como
+            elementos visuais durante determinadas atividades.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESIGN DE FASES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Design de Fases
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais importantes de Super
+            Mario Maker 2 é a liberdade para criar diferentes
+            tipos de fases.<br>
+
+            O criador pode reproduzir uma fase tradicional
+            de Mario, construir desafios baseados em precisão,
+            criar quebra-cabeças ou desenvolver experiências
+            baseadas em mecanismos específicos.<br>
+
+            Também existem fases criadas especificamente para
+            speedrun, fases automáticas e níveis que utilizam
+            combinações extremamente complexas de objetos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÃO FÍSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição para Nintendo Switch
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_box.jpg"
+                  alt="Caixa de Super Mario Maker 2"
+                />
+
+                <figcaption>
+                  Caixa — Super Mario Maker 2
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_cart.jpg"
+                  alt="Cartucho de Super Mario Maker 2"
+                />
+
+                <figcaption>
+                  Cartucho — Nintendo Switch
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_switch_game.jpg"
+                  alt="Super Mario Maker 2 no Switch"
+                />
+
+                <figcaption>
+                  Super Mario Maker 2 — Switch
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smm2_art.jpg"
+                  alt="Arte de Super Mario Maker 2"
+                />
+
+                <figcaption>
+                  Arte promocional
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 foi lançado fisicamente e
+            digitalmente para Nintendo Switch.<br>
+
+            A edição física utiliza um cartucho próprio da
+            plataforma e acompanha a embalagem característica
+            dos jogos do Switch.<br>
+
+            O título também recebeu diferentes formas de
+            distribuição digital através da Nintendo eShop.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ATUALIZAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Atualizações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Após o lançamento, Super Mario Maker 2 recebeu
+            atualizações que adicionaram novos elementos,
+            personagens e possibilidades de criação.<br>
+
+            Entre as atualizações mais importantes esteve a
+            introdução de novos itens e recursos relacionados
+            aos diferentes estilos de Mario.<br>
+
+            Essas atualizações aumentaram a variedade de
+            ferramentas disponíveis para os criadores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 expandiu o conceito de criação
+            de fases apresentado pelo jogo anterior e consolidou
+            a proposta no Nintendo Switch.<br>
+
+            A combinação entre criação, publicação e acesso
+            a uma grande quantidade de fases produzidas por
+            jogadores transformou o jogo em uma plataforma
+            de experiências diferentes dentro do universo Mario.<br>
+
+            O título também se tornou conhecido pela enorme
+            variedade de níveis disponíveis, desde reproduções
+            de fases tradicionais até desafios extremamente
+            complexos e experimentais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Super Mario Maker 2 foi lançado para Nintendo
+                Switch em 28 de junho de 2019.
+              </li>
+
+              <li>
+                O jogo permite criar fases utilizando cinco
+                estilos diferentes de Mario.
+              </li>
+
+              <li>
+                O estilo Super Mario 3D World possui elementos
+                e mecânicas próprias.
+              </li>
+
+              <li>
+                O jogo possui um Story Mode próprio.
+              </li>
+
+              <li>
+                Os jogadores podem publicar suas fases
+                através do Course World.
+              </li>
+
+              <li>
+                É possível criar fases tradicionais ou
+                experiências completamente diferentes do
+                formato clássico de Mario.
+              </li>
+
+              <li>
+                O jogo possui recursos para multiplayer.
+              </li>
+
+              <li>
+                O sistema de criação permite combinar
+                diferentes objetos e inimigos para produzir
+                mecanismos complexos.
+              </li>
+
+              <li>
+                As fases podem utilizar diferentes temas,
+                incluindo versões noturnas.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IMPORTÂNCIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Maker 2 na História da Série
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Maker 2 representa uma abordagem diferente
+            dentro da série Super Mario ao colocar o jogador
+            não apenas como jogador, mas também como criador
+            de fases.<br>
+
+            A ferramenta reúne elementos de diferentes gerações
+            de Mario em um único título e permite experimentar
+            com conceitos de design de fases que normalmente
+            seriam encontrados apenas nos jogos desenvolvidos
+            pela própria Nintendo.<br>
+
+            Dessa forma, cada fase criada pela comunidade pode
+            apresentar uma combinação diferente de obstáculos,
+            inimigos, itens, mecanismos e objetivos.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariomaker2.html">
+                ○ Games - Super Mario Maker 2
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros.html">
+                ○ Games - Super Mario Bros.
+              </a>
+            </li>
+
+            <li>
+              <a href="nintendoswitch.html">
+                ○ Consoles - Nintendo Switch
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Mario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem principal utilizado nas fases
+                  criadas e jogadas pelo usuário.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Jogabilidade: Plataforma</li>
+                  <li>Power-ups: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Luigi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Mario e personagem presente em
+                  diferentes modos e situações do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Toad</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem relacionado ao universo Mario
+                  e presente em diferentes conteúdos do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Toadette</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem jogável presente em determinados
+                  modos de Super Mario Maker 2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ninji</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequeno personagem utilizado principalmente
+                  em conteúdos relacionados aos Ninji Speedruns.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goomba</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos inimigos clássicos que pode ser
+                  colocado pelo criador de fases.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koopa Troopa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo clássico da série Mario utilizado
+                  em diversas criações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Piranha Plant</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Planta inimiga que pode ser utilizada para
+                  criar obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bowser</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos inimigos de maior porte disponíveis
+                  para determinadas criações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fantasma da série Mario utilizado em
+                  diferentes tipos de desafios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lakitu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo voador que pode ser utilizado
+                  para lançar outros inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Thwomp</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Obstáculo que cai sobre o jogador quando
+                  determinadas condições são ativadas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chain Chomp</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo acorrentado utilizado como obstáculo
+                  em determinadas criações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hammer Bro.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que utiliza martelos como ataque.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Power-up tradicional que transforma Mario
+                  em Super Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fire Flower</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que concede a habilidade de lançar
+                  bolas de fogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Star</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que concede invencibilidade temporária.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Propeller Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Power-up associado ao estilo New Super
+                  Mario Bros. U.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Moeda coletável utilizada frequentemente
+                  como recompensa ou elemento de desafio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Question Block</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco tradicional que pode conter itens
+                  ou moedas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Brick Block</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco utilizado em diferentes estilos
+                  de Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pipe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cano que pode servir como obstáculo,
+                  passagem ou conexão entre áreas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Door</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Porta utilizada para transportar o jogador
+                  para outra área da fase.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>ON/OFF Switch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interruptor que alterna o estado de
+                  determinados blocos e mecanismos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Track</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Trilho utilizado para movimentar objetos
+                  e plataformas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Moving Platform</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma móvel utilizada para criar
+                  desafios de movimentação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Conveyor Belt</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Esteira que altera o movimento do personagem
+                  e de determinados objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cannon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Canhão utilizado para lançar projéteis
+                  ou movimentar o jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Flagpole</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mastro tradicional utilizado como objetivo
+                  final em determinados estilos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Castle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema tradicional utilizado para criar
+                  fases de castelo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ground Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema tradicional de fases externas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Underground Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema subterrâneo baseado em diferentes
+                  jogos da série Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Underwater Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema aquático com alterações na movimentação
+                  e nos elementos disponíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desert Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema desértico utilizado para criar
+                  fases com aparência de deserto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Snow Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema de neve utilizado em fases com
+                  ambientação congelada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sky Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema de céu utilizado para criar fases
+                  suspensas e ambientes elevados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Forest Theme</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema de floresta com elementos naturais
+                  e áreas aquáticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ghost House</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema baseado nas casas-fantasma da série.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Airship</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tema baseado nos navios aéreos presentes
+                  em diversos jogos Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Story Mode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Campanha individual em que Mario ajuda
+                  a reconstruir o castelo da Princesa Peach.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Course Maker</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ferramenta principal utilizada para criar
+                  e editar fases.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Course World</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área online destinada às fases criadas
+                  e compartilhadas pelos jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ninji Speedruns</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo baseado em desafios de velocidade
+                  e comparação de tempos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mario Bros. Style</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estilo baseado no Super Mario Bros. original
+                  de NES e Famicom.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mario Bros. 3 Style</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estilo baseado em Super Mario Bros. 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mario World Style</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estilo baseado no clássico de Super Nintendo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>New Super Mario Bros. U Style</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estilo baseado na série New Super Mario Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mario 3D World Style</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estilo baseado em Super Mario 3D World,
+                  com elementos e mecânicas próprias.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo Switch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma para a qual Super Mario Maker 2
+                  foi desenvolvido e lançado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Takashi Tezuka</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Desenvolvedor da Nintendo associado à direção
+                  e produção da série Mario Maker.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

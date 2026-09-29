@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Kinect Sports: Season Two</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA DE ESPORTES
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Kinect Sports: Season Two foi desenvolvido para
+          Xbox 360 utilizando o Kinect como principal forma de
+          interação, permitindo jogar diversos esportes através
+          dos movimentos do próprio jogador ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Kinect Sports: Season Two foi desenvolvido para
+          Xbox 360 utilizando o Kinect como principal forma de
+          interação, permitindo jogar diversos esportes através
+          dos movimentos do próprio jogador ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Kinect Sports: Season Two — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/kinectsportsseason2.jpg"
+              alt="Kinect Sports: Season Two para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Kinect Sports: Season Two
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two é um jogo esportivo
+            desenvolvido para o Xbox 360 e projetado para
+            utilizar o sensor Kinect como principal método
+            de interação.<br>
+
+            O jogo foi desenvolvido pela Rare em colaboração
+            com a BigPark e publicado pela Microsoft Studios.<br>
+
+            Lançado em 2011, o título funciona como continuação
+            de Kinect Sports e apresenta seis modalidades
+            esportivas diferentes.<br>
+
+            Entre os esportes disponíveis estão futebol americano,
+            beisebol, golfe, esqui, tênis e dardos.<br>
+
+            Diferentemente de jogos esportivos tradicionais,
+            Kinect Sports: Season Two utiliza o rastreamento
+            corporal do Kinect para transformar os movimentos
+            do jogador em ações dentro do jogo.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Rare / BigPark
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Microsoft Studios
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Acessório principal:</strong>
+                Kinect
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2011
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Esportes / Minijogos
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Single-player / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                DVD
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two foi criado a partir da
+            experiência adquirida com o primeiro Kinect Sports,
+            lançado em 2010.<br>
+
+            A equipe procurou ampliar a variedade de esportes
+            disponíveis e utilizar novas possibilidades de
+            reconhecimento de movimentos oferecidas pelo Kinect.<br>
+
+            O objetivo era criar partidas acessíveis, nas quais
+            o jogador pudesse executar ações físicas diante do
+            sensor sem precisar utilizar um controle tradicional.<br>
+
+            Cada modalidade possui controles adaptados aos
+            movimentos correspondentes ao esporte, permitindo
+            que ações como arremessar, chutar, rebater,
+            lançar e esquiar sejam reproduzidas virtualmente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+              <img
+                src="../tgga/kinect.jpg"
+                alt="Sensor Kinect"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox 360 e sensor Kinect ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox 360 recebeu o Kinect em 2010 como um
+            periférico capaz de detectar os movimentos do
+            corpo do jogador sem a necessidade de um controle
+            tradicional.<br>
+
+            O lançamento do primeiro Kinect Sports fez parte
+            desse período de expansão dos jogos baseados em
+            movimento.<br>
+
+            Kinect Sports: Season Two surgiu como uma continuação
+            dessa proposta, trazendo modalidades esportivas
+            diferentes e novos tipos de interação.<br>
+
+            O título representa uma fase em que a Microsoft
+            buscava utilizar o Kinect não apenas como uma
+            tecnologia experimental, mas também como uma forma
+            alternativa de jogar diferentes gêneros.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               KINECT
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Kinect
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_sensor.jpg"
+                alt="Sensor Kinect do Xbox 360"
+              />
+
+              <img
+                src="../tgga/kinect_player.jpg"
+                alt="Jogador utilizando Kinect"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Sensor Kinect e utilização por um jogador ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Kinect é um sensor capaz de identificar movimentos
+            do jogador e utilizá-los como comandos dentro dos
+            jogos compatíveis.<br>
+
+            Em Kinect Sports: Season Two, o jogador normalmente
+            permanece em frente ao sensor enquanto realiza os
+            movimentos necessários para cada esporte.<br>
+
+            O sistema pode detectar diferentes posições do corpo,
+            permitindo que braços, pernas e movimentos gerais
+            sejam utilizados durante as partidas.<br>
+
+            Essa característica elimina a necessidade de segurar
+            um controle convencional durante a maior parte da
+            experiência.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESPORTES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Esportes
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two apresenta seis modalidades
+            esportivas principais.<br>
+
+            Cada esporte possui controles próprios e utiliza o
+            Kinect de maneira diferente.<br>
+
+            Algumas modalidades procuram reproduzir movimentos
+            esportivos de maneira relativamente direta, enquanto
+            outras utilizam controles simplificados para tornar
+            a experiência acessível.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Esporte</th>
+                <th>Tipo de interação</th>
+                <th>Característica</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Futebol Americano</td>
+                <td>Movimento / Arremesso</td>
+                <td>Jogadas e passes</td>
+              </tr>
+
+              <tr>
+                <td>Beisebol</td>
+                <td>Rebatida / Arremesso</td>
+                <td>Bater e lançar a bola</td>
+              </tr>
+
+              <tr>
+                <td>Golfe</td>
+                <td>Movimento de tacada</td>
+                <td>Tacadas e precisão</td>
+              </tr>
+
+              <tr>
+                <td>Esqui</td>
+                <td>Movimento corporal</td>
+                <td>Controle de descida</td>
+              </tr>
+
+              <tr>
+                <td>Tênis</td>
+                <td>Movimento de braço</td>
+                <td>Rebatidas e posicionamento</td>
+              </tr>
+
+              <tr>
+                <td>Dardos</td>
+                <td>Mira / Lançamento</td>
+                <td>Precisão e pontuação</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FUTEBOL AMERICANO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Futebol Americano
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O futebol americano permite que o jogador participe
+            de jogadas ofensivas utilizando movimentos físicos.<br>
+
+            O Kinect reconhece ações como lançamento da bola,
+            permitindo realizar passes através de movimentos
+            do braço.<br>
+
+            O esporte combina momentos de posicionamento,
+            escolha de jogadas e execução física diante do sensor.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BEISEBOL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Beisebol
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No beisebol, o Kinect é utilizado principalmente
+            para detectar movimentos relacionados a rebatidas
+            e arremessos.<br>
+
+            O jogador pode realizar o movimento de uma tacada
+            utilizando o próprio braço, enquanto determinadas
+            ações defensivas também são reproduzidas através
+            de movimentos corporais.<br>
+
+            A precisão e o momento em que o movimento é realizado
+            são importantes para obter bons resultados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GOLFE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Golfe
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_golf.jpg"
+                  alt="Golfe em Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Golfe
+                </figcaption>
+
+              </div>
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_ski.jpg"
+                  alt="Esqui em Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Esqui
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A modalidade de golfe utiliza movimentos semelhantes
+            aos de uma tacada para controlar o personagem.<br>
+
+            O jogador precisa controlar direção e força do
+            movimento para tentar alcançar o buraco com o
+            menor número possível de tacadas.<br>
+
+            O esporte utiliza uma abordagem simplificada,
+            mantendo o foco na interação corporal proporcionada
+            pelo Kinect.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESQUI
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Esqui
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No esqui, o jogador utiliza movimentos corporais
+            para controlar a direção e o comportamento do
+            personagem durante a descida.<br>
+
+            O esporte exige mudanças de posição e movimentos
+            laterais para controlar o percurso.<br>
+
+            O Kinect permite que essas ações sejam realizadas
+            sem a utilização de um controle tradicional.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TÊNIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tênis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O tênis utiliza os movimentos dos braços para
+            simular as rebatidas da bola.<br>
+
+            O jogador pode realizar movimentos semelhantes
+            a golpes de forehand e backhand para devolver
+            a bola ao adversário.<br>
+
+            A posição do jogador e o momento da rebatida
+            também influenciam o resultado da jogada.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DARDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Dardos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A modalidade de dardos utiliza movimentos de mira
+            e lançamento diante do sensor Kinect.<br>
+
+            O jogador posiciona o braço, ajusta a direção
+            e realiza o movimento para lançar o dardo virtual.<br>
+
+            A modalidade é baseada principalmente em precisão
+            e pontuação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODOS DE JOGO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modos de Jogo
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - MODOS E RECURSOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Single Player:</strong>
+                partidas individuais.
+              </li>
+
+              <li>
+                <strong>Multiplayer:</strong>
+                modalidades para jogar com outras pessoas.
+              </li>
+
+              <li>
+                <strong>Party Play:</strong>
+                partidas voltadas para grupos de jogadores.
+              </li>
+
+              <li>
+                <strong>Xbox LIVE:</strong>
+                recursos online disponíveis durante o período
+                de suporte ao serviço.
+              </li>
+
+              <li>
+                <strong>Desafios:</strong>
+                atividades curtas voltadas para testar
+                diferentes habilidades.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               AVATARES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Xbox Avatars
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox_avatar.jpg"
+                alt="Xbox Avatar"
+              />
+
+              <img
+                src="../tgga/kinect_avatar.jpg"
+                alt="Avatar em Kinect Sports"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox Avatar e representação no Kinect Sports ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two utiliza os Xbox Avatars
+            como representação dos jogadores dentro das
+            modalidades esportivas.<br>
+
+            Os movimentos detectados pelo Kinect são refletidos
+            pelo avatar na tela, criando uma ligação visual
+            entre o jogador real e o personagem virtual.<br>
+
+            Essa integração fazia parte da estratégia da
+            Microsoft de utilizar os Avatars como identidade
+            visual dentro de diferentes experiências do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESAFIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desafios e Minijogos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além das partidas esportivas tradicionais,
+            Kinect Sports: Season Two possui atividades
+            menores destinadas a testar habilidades específicas.<br>
+
+            Esses desafios podem enfatizar precisão, tempo,
+            velocidade ou coordenação dos movimentos.<br>
+
+            A estrutura de minijogos também facilita partidas
+            rápidas entre amigos e familiares.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLE POR MOVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controle por Movimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A principal característica de Kinect Sports:
+            Season Two é a utilização do corpo como controle.<br>
+
+            Em vez de pressionar botões para executar todas
+            as ações, o jogador realiza movimentos que são
+            interpretados pelo sensor Kinect.<br>
+
+            Isso permite que uma partida de tênis, por exemplo,
+            seja jogada através de movimentos do braço,
+            enquanto o golfe utiliza movimentos semelhantes
+            aos de uma tacada.<br>
+
+            A proposta torna a experiência mais física e
+            acessível para jogadores que não estão acostumados
+            com controles tradicionais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia do Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo foi desenvolvido para o Xbox 360 e aproveita
+            seus recursos gráficos para apresentar ambientes
+            esportivos tridimensionais e personagens animados.<br>
+
+            O Kinect adiciona uma camada adicional de interação,
+            utilizando câmeras e sensores para acompanhar
+            os movimentos do jogador.<br>
+
+            A combinação entre console, software e sensor
+            permitiu que Kinect Sports: Season Two oferecesse
+            uma experiência diferente daquela encontrada
+            em jogos esportivos controlados por gamepad.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two foi lançado para Xbox 360
+            em outubro de 2011.<br>
+
+            O jogo chegou ao mercado como uma continuação direta
+            de Kinect Sports, ampliando a quantidade de esportes
+            e experiências disponíveis para usuários do Kinect.<br>
+
+            Seu lançamento ocorreu durante um período em que
+            jogos controlados por movimento ainda eram uma parte
+            importante do mercado de consoles.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES E CONTEÚDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conteúdos e Expansões
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_season2.jpg"
+                  alt="Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Kinect Sports: Season Two
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_season2_case.jpg"
+                  alt="Caixa de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Edição física — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_season2_disc.jpg"
+                  alt="Disco de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_season2_back.jpg"
+                  alt="Parte traseira da caixa de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Embalagem — Xbox 360
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two recebeu conteúdos adicionais
+            durante seu período de suporte, incluindo novas
+            possibilidades relacionadas às modalidades esportivas.<br>
+
+            A distribuição principal ocorreu através da mídia
+            física para Xbox 360 e de recursos digitais associados
+            ao ecossistema Xbox da época.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RECEPÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Recepção e Características
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo foi apresentado como uma experiência esportiva
+            voltada especialmente para utilização do Kinect.<br>
+
+            A variedade de modalidades permitia alternar entre
+            esportes com estilos de controle bastante diferentes,
+            enquanto os desafios menores incentivavam sessões
+            rápidas de jogo.<br>
+
+            A experiência também foi direcionada para partidas
+            sociais, aproveitando a possibilidade de várias
+            pessoas participarem das atividades.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NO BRASIL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Kinect Sports: Season Two no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two esteve disponível no
+            mercado brasileiro para Xbox 360 durante o período
+            de popularidade do Kinect.<br>
+
+            O acessório teve presença significativa no mercado
+            nacional e foi comercializado juntamente com diversos
+            jogos desenvolvidos especificamente para controle
+            por movimento.<br>
+
+            O título também podia ser encontrado em versões
+            físicas importadas ou distribuídas no mercado
+            brasileiro de jogos usados e colecionáveis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Sports: Season Two representa uma das
+            experiências esportivas desenvolvidas especificamente
+            em torno do Kinect no Xbox 360.<br>
+
+            O jogo ajudou a ampliar a biblioteca de títulos
+            que utilizavam o sensor para substituir o controle
+            tradicional por movimentos corporais.<br>
+
+            Sua coleção de esportes também demonstra diferentes
+            formas de utilizar o rastreamento corporal em jogos,
+            desde movimentos de braços até ações envolvendo
+            o corpo inteiro.<br>
+
+            Atualmente, o título também pode ser visto como
+            parte do período histórico do Xbox 360 em que
+            interfaces por movimento receberam grande atenção
+            da indústria.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Kinect Sports: Season Two foi lançado para
+                Xbox 360 em 2011.
+              </li>
+
+              <li>
+                O jogo utiliza o Kinect como principal método
+                de interação.
+              </li>
+
+              <li>
+                São seis esportes principais disponíveis
+                no jogo.
+              </li>
+
+              <li>
+                Entre eles estão futebol americano, beisebol,
+                golfe, esqui, tênis e dardos.
+              </li>
+
+              <li>
+                Os jogadores são representados por Xbox Avatars
+                durante as atividades.
+              </li>
+
+              <li>
+                O título foi desenvolvido como continuação
+                de Kinect Sports.
+              </li>
+
+              <li>
+                Diferentes esportes utilizam movimentos
+                corporais distintos para controlar a ação.
+              </li>
+
+              <li>
+                O jogo foi desenvolvido pensando também
+                em partidas sociais entre amigos e familiares.
+              </li>
+
+              <li>
+                O Kinect permitia jogar sem segurar um controle
+                tradicional durante as atividades.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão física de Kinect Sports: Season Two para
+            Xbox 360 possui materiais como caixa, disco,
+            encarte e manual ou documentação relacionada à
+            distribuição do produto.<br>
+
+            Para colecionadores, diferentes condições de
+            conservação podem ser encontradas no mercado
+            de jogos usados.<br>
+
+            O conjunto completo pode incluir caixa original,
+            mídia e materiais impressos associados à edição.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_box.jpg"
+                  alt="Caixa de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Caixa — Kinect Sports: Season Two
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_manual.jpg"
+                  alt="Manual de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Manual / Encarte
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_disc.jpg"
+                  alt="Disco de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_sports_package.jpg"
+                  alt="Edição física de Kinect Sports Season Two"
+                />
+
+                <figcaption>
+                  Edição física — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="kinectsportsseason2.html">
+                ○ Games - Kinect Sports: Season Two
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Kinect</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor responsável por detectar os movimentos
+                  do jogador e transformá-los em comandos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Controle por movimento</li>
+                  <li>Plataforma: Xbox 360</li>
+                  <li>Controle tradicional: Não necessário</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console para o qual Kinect Sports:
+                  Season Two foi desenvolvido.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox Avatar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem virtual utilizado para representar
+                  o jogador dentro das atividades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Futebol Americano</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modalidade que utiliza movimentos de
+                  lançamento e execução de jogadas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Beisebol</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Esporte que utiliza movimentos de rebatida
+                  e arremesso.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Golfe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modalidade que reproduz movimentos
+                  semelhantes aos de uma tacada de golfe.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Esqui</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Esporte baseado em movimentos corporais
+                  para controlar a descida.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tênis</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modalidade que utiliza os movimentos dos
+                  braços para realizar as rebatidas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dardos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modalidade baseada em mira, precisão
+                  e lançamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Arremesso</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento utilizado em diferentes esportes
+                  para lançar objetos virtuais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rebatida</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento utilizado principalmente no
+                  beisebol e no tênis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tacada</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento utilizado para controlar
+                  as jogadas de golfe.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Precisão</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elemento importante em modalidades como
+                  golfe e dardos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Movimento Corporal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Base do sistema de controle utilizado
+                  pelo Kinect Sports: Season Two.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Single Player</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo destinado a partidas individuais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Permite que diferentes jogadores participem
+                  das atividades esportivas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Party Play</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura de partidas voltada para grupos
+                  de jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox LIVE</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Serviço online utilizado pelo Xbox 360
+                  durante o período de suporte do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desafios</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividades menores destinadas a testar
+                  habilidades específicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Treinamento</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividades utilizadas para familiarizar
+                  o jogador com os movimentos dos esportes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360 Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle tradicional do Xbox 360, que não
+                  é o principal método de interação durante
+                  as partidas com Kinect.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rare</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio britânico da Microsoft associado
+                  ao desenvolvimento da série Kinect Sports.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>BigPark</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio envolvido no desenvolvimento
+                  de Kinect Sports: Season Two.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microsoft Studios</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Divisão responsável pela publicação
+                  do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Sports</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primeiro jogo da série e antecessor direto
+                  de Kinect Sports: Season Two.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Sports: Season Two</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo título principal da série,
+                  lançado para Xbox 360 em 2011.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma original de Kinect Sports:
+                  Season Two.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DVD</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para a distribuição
+                  do jogo no Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

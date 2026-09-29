@@ -1,0 +1,3553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - GameSir X5s</title>
+
+  <link
+    rel="stylesheet"
+    href="../style.css"
+  >
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+
+    }
+
+
+    .components-block h3 {
+
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+
+    }
+
+
+    .component-list {
+
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+    }
+
+
+    .component-item {
+
+      border: 1px solid #3d3d3d;
+      background: #181818;
+
+    }
+
+
+    .component-item summary {
+
+      cursor: pointer;
+
+      padding: 9px 10px;
+
+      color: #ddd;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      list-style: none;
+
+      transition: all 0.2s ease;
+
+    }
+
+
+    .component-item summary::-webkit-details-marker {
+
+      display: none;
+
+    }
+
+
+    .component-item summary::before {
+
+      content: "▶";
+
+      display: inline-block;
+
+      margin-right: 8px;
+
+      color: #888;
+
+      font-size: 9px;
+
+      transition: transform 0.2s ease;
+
+    }
+
+
+    .component-item summary:hover {
+
+      background: #2a2a2a;
+      color: #fff;
+
+    }
+
+
+    .component-item[open] summary {
+
+      color: #fff;
+
+      background: #2b2b2b;
+
+      border-bottom: 1px dashed #555;
+
+    }
+
+
+    .component-item[open] summary::before {
+
+      transform: rotate(90deg);
+
+      color: #fff;
+
+    }
+
+
+    .component-description {
+
+      padding: 12px;
+
+      background: #111;
+
+      color: #bbb;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+    }
+
+
+    .component-description p {
+
+      margin: 0 0 10px 0;
+
+    }
+
+
+    .component-description p:last-child {
+
+      margin-bottom: 0;
+
+    }
+
+
+    .component-specs {
+
+      margin: 10px 0 0 18px;
+
+      padding: 0;
+
+      color: #aaa;
+
+    }
+
+
+    .component-specs li {
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .component-description strong {
+
+      color: #ddd;
+
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+
+      margin: 20px 0;
+      text-align: center;
+
+    }
+
+
+    .console-images {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 15px;
+
+      width: 100%;
+
+    }
+
+
+    .console-images img {
+
+      width: 45%;
+
+      max-width: 300px;
+
+      height: auto;
+
+      border: 1px solid #444;
+
+      padding: 4px;
+
+      box-sizing: border-box;
+
+    }
+
+
+    .historical-consoles figcaption {
+
+      margin-top: 10px;
+
+      color: #aaa;
+
+      font-size: 13px;
+
+      text-align: center;
+
+    }
+
+
+    /* ==========================================
+       MODELOS / VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 25px 15px;
+
+      width: 100%;
+
+      margin-top: 20px;
+
+    }
+
+
+    .model-item {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      text-align: center;
+
+      width: 100%;
+
+    }
+
+
+    .model-item img {
+
+      width: 100%;
+
+      max-width: 300px;
+
+      height: auto;
+
+      object-fit: contain;
+
+      border: 1px solid #444;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      background: #111;
+
+      display: block;
+
+    }
+
+
+    .model-item figcaption {
+
+      margin-top: 8px;
+
+      color: #aaa;
+
+      font-size: 13px;
+
+      line-height: 1.4;
+
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+      }
+
+
+      .console-images img {
+
+        width: 80%;
+
+        max-width: 300px;
+
+      }
+
+
+      .models-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+      }
+
+
+      .model-item img {
+
+        width: 100%;
+
+        max-width: 300px;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        object-position: center;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="site-container">
+
+
+  <!-- ==========================================
+       CABEÇALHO
+       ========================================== -->
+
+  <header class="site-header">
+
+
+    <div class="logo-area">
+
+
+      <img
+        src="../logo1.png"
+        alt="Logo NLU"
+        class="main-logo"
+      />
+
+
+      <div class="logo-text-box">
+
+
+        <h1>
+          The Great Game Archive™
+        </h1>
+
+
+        <p>
+          Não o maior, mas o NOSSO aglomerado de informação.
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div class="header-right-box">
+
+
+      <a
+        href="#"
+        class="youtube-btn"
+        target="_blank"
+      >
+
+        ▶ YouTube Siga-nos!
+
+      </a>
+
+
+    </div>
+
+
+  </header>
+
+
+  <!-- ==========================================
+       SUB-NAVEGAÇÃO
+       ========================================== -->
+
+  <div class="sub-nav-links">
+
+
+    <a href="../tgga.html">
+      ← Voltar ao TGGA
+    </a>
+
+
+    |
+
+
+    <a href="../index.html">
+      Início
+    </a>
+
+
+  </div>
+
+
+  <!-- ==========================================
+       LETREIRO
+       ========================================== -->
+
+  <div class="marquee-zone">
+
+
+    <div class="marquee-content">
+
+
+      <span>
+
+        ... O GameSir X5s é um gamepad telescópico desenvolvido
+        para transformar celulares e outros dispositivos compatíveis
+        em uma experiência semelhante à de um console portátil,
+        combinando sticks Hall Effect, gatilhos Hall Effect,
+        giroscópio de 6 eixos, vibração HD e conectividade em
+        três modos ...
+
+        &nbsp;
+
+      </span>
+
+
+      <span>
+
+        ... O GameSir X5s é um gamepad telescópico desenvolvido
+        para transformar celulares e outros dispositivos compatíveis
+        em uma experiência semelhante à de um console portátil,
+        combinando sticks Hall Effect, gatilhos Hall Effect,
+        giroscópio de 6 eixos, vibração HD e conectividade em
+        três modos ...
+
+        &nbsp;
+
+      </span>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       CONTEÚDO PRINCIPAL
+       ========================================== -->
+
+  <div class="main-grid">
+
+
+    <!-- ========================================
+         COLUNA PRINCIPAL
+         ======================================== -->
+
+    <div class="content-column">
+
+
+      <div class="category-block">
+
+
+        <!-- =====================================
+             TÍTULO
+             ===================================== -->
+
+        <h2>
+
+          GameSir X5s (Posse de Théo Oliveira)
+
+        </h2>
+
+
+        <div
+          style="
+            text-align: center;
+            margin-bottom: 15px;
+          "
+        >
+
+
+          <img
+            src="../tgga/sir1.jpg"
+            alt="GameSir X5s"
+            style="
+              max-width: 60%;
+              height: auto;
+              border: 1px solid #444;
+              padding: 4px;
+            "
+          />
+
+
+        </div>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             VISÃO GERAL
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          GameSir X5s
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O GameSir X5s é um gamepad telescópico voltado
+          principalmente para dispositivos móveis, mas também
+          compatível com Nintendo Switch, Switch 2 e PC,
+          dependendo do modo de conexão utilizado.<br><br>
+
+          Diferentemente de um controle convencional, o X5s
+          possui uma estrutura expansível que segura o dispositivo
+          no centro, transformando o conjunto em algo semelhante
+          a um console portátil.<br><br>
+
+          O controle possui conectividade em três modos:
+          Bluetooth, USB-C com fio e conexão sem fio de 2,4 GHz.
+          A GameSir informa ainda suporte a sticks Hall Effect,
+          gatilhos analógicos Hall Effect, vibração HD, giroscópio
+          de 6 eixos e bateria interna de 840 mAh.<br><br>
+
+          O X5s pesa aproximadamente 174,1 gramas e aceita
+          dispositivos com comprimento entre 105 e 213 mm.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             ESPECIFICAÇÕES
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Especificações Técnicas
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s possui aproximadamente 196,7 × 88 × 46 mm
+          quando considerado o corpo do controle. Seu peso
+          informado pela GameSir é de aproximadamente 174,1 g.<br><br>
+
+          O sistema telescópico permite acomodar dispositivos
+          com comprimento de 105 a 213 mm. A alimentação interna
+          é composta por duas células de 420 mAh, totalizando
+          840 mAh.<br><br>
+
+          Os sticks utilizam tecnologia Hall Effect e os
+          gatilhos também utilizam sensores Hall Effect.
+          Os botões ABXY e o D-pad utilizam construção
+          por membrana.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             CONTROLE TELESCÓPICO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Estrutura Telescópica
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/sir4.jpg"
+              alt="GameSir X5s aberto"
+            />
+
+
+            <img
+              src="../tgga/8.jpg"
+              alt="GameSir X5s com celular"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Estrutura telescópica e instalação do dispositivo ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Uma das principais características do X5s é sua
+          estrutura telescópica. As duas metades do controle
+          ficam separadas por um mecanismo deslizante, permitindo
+          que o espaço central seja ajustado de acordo com o
+          tamanho do dispositivo utilizado.<br><br>
+
+          A faixa oficialmente especificada pela GameSir é
+          de 105 a 213 mm de comprimento compatível.<br><br>
+
+          A estrutura possui elementos de pressão e apoio
+          responsáveis por manter o telefone ou dispositivo
+          firmemente posicionado durante a utilização.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             CELULAR
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Suporte ao Smartphone
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s foi desenvolvido principalmente para utilização
+          com dispositivos móveis. Em vez de apoiar o celular
+          sobre uma mesa ou suporte separado, o próprio gamepad
+          funciona como estrutura de sustentação.<br><br>
+
+          O dispositivo é colocado entre as duas extremidades
+          telescópicas. Almofadas e superfícies de contato
+          ajudam a proteger o aparelho e manter sua posição.<br><br>
+
+          A GameSir fornece também pads de borracha de ajuste
+          que podem ser utilizados conforme a espessura ou
+          configuração do dispositivo.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             HALL EFFECT
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Sticks Hall Effect
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/gamesirhallstick.jpg"
+              alt="Stick Hall Effect GameSir X5s"
+            />
+
+
+            <img
+              src="../tgga/7.jpg"
+              alt="Analógico GameSir X5s"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Sistema Hall Effect dos analógicos ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Os dois analógicos do X5s utilizam tecnologia
+          Hall Effect. Diferentemente de mecanismos baseados
+          exclusivamente em contato resistivo, sensores Hall
+          detectam alterações no campo magnético associadas
+          ao movimento do stick.<br><br>
+
+          A GameSir especifica os sticks como componentes
+          Hall Effect e anuncia resistência ao problema
+          tradicional de drift associado ao desgaste de
+          potenciômetros convencionais.<br><br>
+
+          O mecanismo também possui botão de pressionamento
+          integrado aos sticks.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             GATILHOS
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Gatilhos Hall Effect
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          LT e RT utilizam sensores Hall Effect e funcionam
+          como entradas analógicas.<br><br>
+
+          Isso permite que o controle identifique diferentes
+          níveis de pressão dos gatilhos, característica útil
+          em jogos de corrida, simuladores e outros títulos
+          que utilizam aceleração ou frenagem progressiva.<br><br>
+
+          O X5s também possui um modo de gatilho rápido,
+          conhecido pela GameSir como Hair Trigger Mode,
+          que altera o comportamento dos gatilhos para
+          respostas mais rápidas.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             BOTÕES
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Botões ABXY
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Os quatro botões frontais A, B, X e Y utilizam
+          construção por membrana.<br><br>
+
+          Um dos diferenciais do X5s é que o conjunto ABXY
+          pode ser fisicamente reorganizado. Isso permite
+          alternar a disposição dos botões para diferentes
+          padrões de controle, incluindo layouts associados
+          a diferentes plataformas.<br><br>
+
+          A GameSir informa ainda uma durabilidade anunciada
+          de até 2 milhões de acionamentos para os botões
+          de membrana.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             D-PAD
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Direcional D-Pad
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O direcional digital utiliza construção por
+          membrana. Sua função é registrar os comandos
+          direcionais digitais para cima, baixo, esquerda
+          e direita.<br><br>
+
+          A estrutura mecânica do D-pad transmite a pressão
+          aplicada pelo jogador para os elementos de contato
+          localizados internamente.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             BUMPERS
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          LB e RB
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Os botões superiores LB e RB ficam posicionados
+          acima dos gatilhos LT e RT.<br><br>
+
+          Diferentemente dos ABXY e do D-pad, as especificações
+          disponíveis para o X5s identificam os shoulder buttons
+          como micro switches.<br><br>
+
+          Esses componentes fornecem uma resposta mecânica
+          diferente dos botões de membrana.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             GIROSCÓPIO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Giroscópio de 6 Eixos
+
+        </h2>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="console-images">
+
+
+            <img
+              src="../tgga/gamesirgyro.jpg"
+              alt="Giroscópio GameSir X5s"
+            />
+
+
+          </div>
+
+
+          <figcaption>
+
+            ~ Sensor de movimento de 6 eixos ~
+
+          </figcaption>
+
+
+        </figure>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s possui um sistema de controle de movimento
+          baseado em um sensor de 6 eixos.<br><br>
+
+          Esse conjunto combina informações de movimento
+          angular e aceleração para permitir que o sistema
+          interprete a movimentação física do controle.<br><br>
+
+          A GameSir especifica o suporte ao controle de movimento
+          nativo especialmente para Nintendo Switch e Switch 2.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             VIBRAÇÃO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Vibração HD
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s possui dois motores de vibração HD, posicionados
+          nas regiões das empunhaduras.<br><br>
+
+          Os motores produzem o feedback físico percebido
+          pelo jogador através das mãos. A intensidade da
+          vibração pode ser ajustada por software, e a GameSir
+          informa cinco níveis de ajuste para o sistema.<br><br>
+
+          Os motores são componentes eletromecânicos e possuem
+          um conjunto rotativo interno responsável pela produção
+          da vibração.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             BATERIA
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Sistema de Alimentação
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s utiliza bateria interna recarregável.
+          A especificação oficial informa capacidade total
+          de 840 mAh, formada por duas células de 420 mAh,
+          uma em cada lado do controle.<br><br>
+
+          A utilização de duas células acompanha a construção
+          dividida do gamepad e permite distribuir a massa
+          pelas duas empunhaduras.<br><br>
+
+          A alimentação é recarregada através da porta USB-C.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             USB-C
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          USB Type-C
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          A porta USB Type-C possui dupla importância:
+          alimentação/recarregamento da bateria e comunicação
+          com dispositivos compatíveis no modo com fio.<br><br>
+
+          O conector é montado mecanicamente no conjunto
+          eletrônico e possui contatos metálicos para
+          transferência de energia e dados.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             CONECTIVIDADE
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Conectividade em Três Modos
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          Uma das características centrais do X5s é a
+          conectividade em três modos.<br><br>
+
+          O primeiro é Bluetooth. O segundo é a conexão
+          USB-C com fio. O terceiro é a comunicação sem fio
+          de 2,4 GHz.<br><br>
+
+          A GameSir informa que o dongle de 2,4 GHz não vem
+          incluído no produto padrão. Portanto, o sistema
+          eletrônico do controle possui suporte à modalidade,
+          mas o receptor externo é um acessório separado.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             GAME SIR APP
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Software GameSir App
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s pode ser configurado através do aplicativo
+          GameSir.<br><br>
+
+          O software permite modificar parâmetros como
+          zonas mortas, mapeamento dos controles, intensidade
+          da vibração, comportamento do turbo e sensibilidade
+          do giroscópio, além de possibilitar atualizações
+          de firmware.<br><br>
+
+          Dessa maneira, parte das características do controle
+          não está definida apenas pelo hardware, mas também
+          pelo firmware executado pelo dispositivo.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             TURBO
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Função Turbo
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s possui função Turbo.<br><br>
+
+          De acordo com as especificações da GameSir,
+          a função pode ser utilizada com A, B, X, Y,
+          LB, RB, LT e RT.<br><br>
+
+          O Turbo é uma função implementada através da
+          eletrônica e do firmware do controle, permitindo
+          que determinados comandos sejam registrados
+          repetidamente enquanto o botão correspondente
+          permanece acionado.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             PEGADORES
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Empunhaduras
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          As duas empunhaduras formam as regiões laterais
+          seguradas pelas mãos do jogador.<br><br>
+
+          A GameSir utiliza textura gravada a laser nas
+          empunhaduras, criando uma superfície com maior
+          aderência.<br><br>
+
+          Internamente, as empunhaduras também servem como
+          regiões de acomodação para componentes como
+          bateria, motores de vibração e partes da eletrônica.
+
+        </p>
+
+
+        <h2></h2>
+
+
+        <!-- =====================================
+             MODELOS / VARIAÇÕES
+             ===================================== -->
+
+        <h2 style="text-align: center;">
+
+          Variações e Ecossistema X5
+
+        </h2>
+
+
+        <p
+          style="
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.5;
+          "
+        >
+
+          O X5s pertence à família X5 de controles telescópicos
+          da GameSir.<br><br>
+
+          A família inclui outros produtos relacionados,
+          como o X5 Lite e acessórios de refrigeração destinados
+          à linha, incluindo o FX5 e FX5 Lite.<br><br>
+
+          O X5s, entretanto, possui características próprias,
+          especialmente sua conectividade em três modos,
+          bateria interna, giroscópio e controles Hall Effect.
+
+        </p>
+
+
+        <figure class="historical-consoles">
+
+
+          <div class="models-grid">
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/gamesirx5s.webp"
+                alt="GameSir X5s"
+              />
+
+              <figcaption>
+                GameSir X5s
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/gamesirx5lite.webp"
+                alt="GameSir X5 Lite"
+              />
+
+              <figcaption>
+                GameSir X5 Lite
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/gamesirfx5.jpg"
+                alt="GameSir FX5"
+              />
+
+              <figcaption>
+                GameSir FX5 — Cooler compatível
+              </figcaption>
+
+            </div>
+
+
+            <div class="model-item">
+
+              <img
+                src="../tgga/gamesirfx5lite.webp"
+                alt="GameSir FX5 Lite"
+              />
+
+              <figcaption>
+                GameSir FX5 Lite — Cooler compatível
+              </figcaption>
+
+            </div>
+
+
+          </div>
+
+
+        </figure>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ========================================
+         SIDEBAR
+         ======================================== -->
+
+    <div class="sidebar-column">
+
+
+      <nav class="side-nav-menu">
+
+
+        <h3>
+          - MENU DE ARTIGOS -
+        </h3>
+
+
+        <ul>
+
+
+          <li>
+
+            <a href="../tgga.html">
+              ○ Início - TGGA
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="../index.html">
+              ○ Início - NLU
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="tgga.html">
+              ○ Games - Mobile
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a href="tgga.html">
+              ○ Periféricos - GameSir
+            </a>
+
+          </li>
+
+
+        </ul>
+
+
+      </nav>
+
+
+      <!-- ==========================================
+           COMPONENTES DO ITEM
+           ========================================== -->
+
+      <div class="components-block">
+
+
+        <h3>
+          - COMPONENTES DO ITEM -
+        </h3>
+
+
+        <div class="component-list">
+
+
+          <!-- =====================================
+               ESTRUTURA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Placa de Circuito Principal (PCB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                A placa de circuito impresso é a base elétrica
+                do X5s. Ela interliga os circuitos responsáveis
+                pela leitura dos comandos, comunicação, alimentação,
+                sensores e demais funções eletrônicas.
+              </p>
+
+              <p>
+                A composição exata da placa pode variar conforme
+                revisão de fabricação. Por isso, sem uma inspeção
+                física da unidade, este artigo não atribui números
+                específicos aos circuitos integrados.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Tipo: PCB
+                </li>
+
+                <li>
+                  Função: Interligação elétrica
+                </li>
+
+                <li>
+                  Aplicação: GameSir X5s
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Microcontrolador Principal
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuito responsável pelo processamento dos
+                comandos provenientes dos botões, sticks,
+                gatilhos e sensores.
+              </p>
+
+              <p>
+                Também participa da coordenação da comunicação,
+                gerenciamento das funções do controle e execução
+                do firmware.
+              </p>
+
+              <p>
+                O modelo exato do microcontrolador não é
+                especificado na página oficial do produto.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Memória do Sistema
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuitos de memória utilizados pelo sistema
+                eletrônico para armazenamento de dados de
+                operação e/ou firmware.
+              </p>
+
+              <p>
+                O tipo e capacidade exatos dependem da arquitetura
+                interna da unidade e não são especificados
+                publicamente pela GameSir na ficha técnica.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ANALÓGICOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Analógico Hall Effect Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Módulo responsável pela leitura do movimento
+                do stick esquerdo.
+              </p>
+
+              <p>
+                Utiliza tecnologia Hall Effect para detectar
+                a posição através de alterações no campo
+                magnético.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Tipo: Hall Effect
+                </li>
+
+                <li>
+                  Eixos: X / Y
+                </li>
+
+                <li>
+                  Função: Entrada analógica
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Analógico Hall Effect Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Segundo módulo de stick Hall Effect.
+              </p>
+
+              <p>
+                Realiza a leitura dos movimentos do jogador
+                no eixo horizontal e vertical.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Sensores Magnéticos dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos utilizados pelos módulos Hall Effect
+                para detectar a alteração do campo magnético
+                causada pelo movimento dos sticks.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Ímãs dos Analógicos Hall Effect
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Pequenos elementos magnéticos utilizados em
+                conjunto com os sensores Hall Effect.
+              </p>
+
+              <p>
+                O movimento físico do stick altera a relação
+                entre o campo magnético e o sensor, permitindo
+                determinar sua posição.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Eixo X dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Mecanismo responsável pela movimentação horizontal
+                de cada stick.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Eixo Y dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Mecanismo responsável pela movimentação vertical
+                de cada stick.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botões de Pressionamento dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Cada stick possui um mecanismo de pressionamento
+                que permite utilizar o analógico também como botão.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Analógico esquerdo: clique
+                </li>
+
+                <li>
+                  Analógico direito: clique
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Hastes dos Analógicos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças mecânicas que conectam os módulos internos
+                Hall Effect às capas externas dos sticks.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Capas dos Analógicos (Thumbsticks)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças tocadas diretamente pelos polegares.
+              </p>
+
+              <p>
+                Possuem superfície desenvolvida para proporcionar
+                aderência durante movimentos rápidos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ABXY
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão A
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Um dos quatro botões principais da face do
+                controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão B
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal de ação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão X
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal de ação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão Y
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão frontal de ação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Membranas dos Botões ABXY
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos flexíveis responsáveis por registrar
+                o pressionamento dos quatro botões principais.
+              </p>
+
+              <p>
+                A GameSir classifica os ABXY do X5s como botões
+                de membrana.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Estrutura Removível ABXY
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sistema mecânico que permite remover e reorganizar
+                fisicamente as posições dos botões A, B, X e Y.
+              </p>
+
+              <p>
+                Esse sistema permite adaptar o layout à preferência
+                do usuário e a diferentes padrões de controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               D-PAD
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              D-Pad
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Direcional digital utilizado para quatro direções
+                principais.
+              </p>
+
+              <p>
+                A GameSir especifica o D-pad do X5s como sendo
+                de membrana.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Cruzeta do D-Pad
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peça externa pressionada pelo polegar do jogador.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Membrana do D-Pad
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elemento flexível responsável por transmitir
+                as quatro direções para os contatos eletrônicos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BUMPERS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Bumper Esquerdo (LB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão superior esquerdo.
+              </p>
+
+              <p>
+                É uma das entradas que podem ser utilizadas
+                pela função Turbo.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Bumper Direito (RB)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão superior direito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Micro Switch do LB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Interruptor mecânico utilizado para registrar
+                o pressionamento do bumper esquerdo.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Micro Switch do RB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Interruptor mecânico utilizado para registrar
+                o pressionamento do bumper direito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               GATILHOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Gatilho Hall Effect Esquerdo (LT)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Gatilho analógico esquerdo.
+              </p>
+
+              <p>
+                Utiliza tecnologia Hall Effect para detectar
+                sua posição.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Gatilho Hall Effect Direito (RT)
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Gatilho analógico direito com leitura Hall Effect.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Sensor Hall do LT
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sensor utilizado para transformar a posição
+                do gatilho esquerdo em informação elétrica.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Sensor Hall do RT
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sensor utilizado para medir a posição
+                do gatilho direito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Ímãs dos Gatilhos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos magnéticos utilizados pelo sistema
+                Hall Effect dos gatilhos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Molas dos Gatilhos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Molas responsáveis pelo retorno mecânico dos
+                gatilhos à posição inicial.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Mecanismo Hair Trigger
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sistema de configuração que altera o curso
+                e/ou comportamento da leitura dos gatilhos
+                para permitir respostas mais rápidas.
+              </p>
+
+              <p>
+                A GameSir informa a possibilidade de ativação
+                do modo através da combinação correspondente
+                de comandos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BOTÕES DE FUNÇÃO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão M
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão multifuncional utilizado para acessar
+                determinadas configurações e combinações
+                do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão Menu
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão de função localizado no painel central
+                do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Botão View
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Botão auxiliar utilizado pelos jogos e
+                sistemas compatíveis.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               TURBO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Circuito de Controle Turbo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Função lógica implementada pelo sistema eletrônico
+                e firmware para produzir acionamentos repetidos
+                quando o Turbo está ativo.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  A
+                </li>
+
+                <li>
+                  B
+                </li>
+
+                <li>
+                  X
+                </li>
+
+                <li>
+                  Y
+                </li>
+
+                <li>
+                  LB
+                </li>
+
+                <li>
+                  RB
+                </li>
+
+                <li>
+                  LT
+                </li>
+
+                <li>
+                  RT
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               GIROSCÓPIO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Sensor Giroscópico de 6 Eixos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sensor de movimento responsável por detectar
+                aceleração e rotação do controle.
+              </p>
+
+              <p>
+                É utilizado principalmente nas plataformas
+                que suportam o sistema de controle de movimento
+                do X5s.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Acelerômetro
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte do sistema de sensores de movimento
+                responsável pela medição de aceleração.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Giroscópio
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte do sistema de seis eixos responsável
+                pela medição do movimento angular.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               VIBRAÇÃO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor HD Rumble Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Motor elétrico localizado na empunhadura
+                esquerda para produzir feedback vibratório.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Motor HD Rumble Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Motor elétrico localizado na empunhadura
+                direita.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Peso Excêntrico dos Motores
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elemento rotativo cuja massa é deslocada
+                em relação ao centro do eixo.
+              </p>
+
+              <p>
+                A rotação desse peso gera a vibração percebida
+                nas empunhaduras.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BATERIA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Bateria de Lítio Esquerda — 420 mAh
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Uma das células internas responsáveis pela
+                alimentação do controle.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Capacidade: 420 mAh
+                </li>
+
+                <li>
+                  Tipo: Bateria recarregável
+                </li>
+
+                <li>
+                  Localização: Empunhadura esquerda
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Bateria de Lítio Direita — 420 mAh
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Segunda célula de alimentação.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Capacidade: 420 mAh
+                </li>
+
+                <li>
+                  Localização: Empunhadura direita
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Sistema de Gerenciamento da Bateria
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuitos responsáveis pelo gerenciamento
+                da alimentação e do processo de carregamento
+                das células internas.
+              </p>
+
+              <p>
+                O componente exato utilizado não é identificado
+                publicamente na ficha técnica oficial.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Proteção da Bateria
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuitos de proteção associados ao sistema
+                de alimentação.
+              </p>
+
+              <p>
+                São utilizados para auxiliar no controle das
+                condições elétricas da bateria e do circuito.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Fios / Terminais das Baterias
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Condutores utilizados para conectar as células
+                de bateria ao circuito eletrônico.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               USB
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Porta USB Type-C
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conector utilizado para carregamento e
+                comunicação por cabo.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Tipo: USB Type-C
+                </li>
+
+                <li>
+                  Função: Alimentação
+                </li>
+
+                <li>
+                  Função: Dados
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Contatos Metálicos da Porta USB-C
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conjunto de contatos elétricos utilizados
+                para transmitir alimentação e dados entre
+                o cabo e o controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Blindagem Metálica do USB-C
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estrutura metálica externa do conector.
+              </p>
+
+              <p>
+                Além da função mecânica, contribui para
+                proteção contra interferências eletromagnéticas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               BLUETOOTH
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Circuito Bluetooth
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Circuito responsável pela comunicação sem fio
+                Bluetooth.
+              </p>
+
+              <p>
+                O X5s utiliza Bluetooth como uma das formas
+                de conexão disponíveis.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Antena Bluetooth / RF
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elemento responsável pela transmissão e
+                recepção dos sinais de radiofrequência.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               2.4 GHZ
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Circuito de Comunicação 2,4 GHz
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Sistema eletrônico destinado à modalidade
+                de comunicação sem fio de 2,4 GHz.
+              </p>
+
+              <p>
+                O receptor externo necessário para essa
+                modalidade não acompanha o X5s padrão.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Receptor USB 2,4 GHz — Acessório
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Receptor externo utilizado quando a modalidade
+                de comunicação de 2,4 GHz é empregada.
+              </p>
+
+              <p>
+                É um acessório externo e não faz parte da
+                estrutura interna do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               COMPONENTES PASSIVOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Resistores SMD
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Resistores montados diretamente na placa.
+              </p>
+
+              <p>
+                Podem ser utilizados em redes de sinal,
+                alimentação, polarização e controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Capacitores Cerâmicos SMD
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Capacitores utilizados para filtragem,
+                desacoplamento e estabilização dos circuitos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Capacitores de Filtragem
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Componentes utilizados para reduzir variações
+                e ruídos presentes nas linhas de alimentação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Indutores / Bobinas
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Componentes utilizados em filtragem e,
+                dependendo do circuito, em etapas de
+                radiofrequência.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Diodos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Semicondutores utilizados em circuitos
+                eletrônicos para funções de proteção,
+                sinal e alimentação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Transistores / MOSFETs
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Semicondutores utilizados como elementos
+                de chaveamento e controle eletrônico.
+              </p>
+
+              <p>
+                Podem ser utilizados, por exemplo, para
+                controlar cargas como motores e circuitos
+                de alimentação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               PLACA / SOLDAS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Trilhas de Cobre da PCB
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Condutores metálicos formados sobre a placa
+                de circuito impresso.
+              </p>
+
+              <p>
+                Interligam eletricamente os diversos componentes.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pontos de Solda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conexões metálicas utilizadas para prender
+                eletricamente os componentes à placa.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Máscara de Solda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Camada protetora presente sobre partes da
+                placa de circuito impresso.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ESTRUTURA TELESCÓPICA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Trilho Telescópico Esquerdo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte do mecanismo que permite a expansão
+                e retração do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Trilho Telescópico Direito
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte correspondente do sistema telescópico.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Mola do Mecanismo Telescópico
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elemento elástico responsável por auxiliar
+                o mecanismo de expansão e manter tensão
+                entre as partes móveis.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Limitadores de Curso Telescópico
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos mecânicos responsáveis por limitar
+                a abertura e o fechamento do controle dentro
+                da faixa projetada.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Estrutura de Apoio do Smartphone
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Superfícies internas responsáveis por apoiar
+                o dispositivo instalado entre as duas metades
+                do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Almofadas de Silicone
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças macias utilizadas para criar pontos de
+                contato entre o controle e o dispositivo.
+              </p>
+
+              <p>
+                A embalagem do produto inclui pads de borracha
+                de ajuste.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               CARCAÇA
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Superior Esquerda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte externa superior da metade esquerda
+                do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Inferior Esquerda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte inferior da empunhadura esquerda.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Superior Direita
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte superior externa da metade direita
+                do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Carcaça Inferior Direita
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Parte inferior da empunhadura direita.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Empunhadura Esquerda
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região segurada pela mão esquerda.
+              </p>
+
+              <p>
+                Também abriga componentes internos como
+                bateria e motor de vibração.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Empunhadura Direita
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Região segurada pela mão direita.
+              </p>
+
+              <p>
+                Também serve como alojamento de componentes
+                internos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Textura Gravada a Laser
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Textura aplicada às empunhaduras para aumentar
+                a aderência e reduzir o deslizamento das mãos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               PARAFUSOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Parafusos de Fixação da Carcaça
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Elementos utilizados para unir as partes
+                externas do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Postes de Fixação Internos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estruturas plásticas moldadas na carcaça
+                utilizadas como pontos de fixação dos parafusos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               CONECTORES INTERNOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Conectores Internos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Conectores utilizados para interligar placas,
+                módulos e demais partes eletrônicas.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Fios Internos
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Condutores responsáveis pelo transporte
+                de energia e sinais entre determinados
+                subconjuntos.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Cabos Flexíveis / FPC
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Dependendo da revisão interna, conexões
+                entre placas e módulos podem utilizar
+                cabos flexíveis.
+              </p>
+
+              <p>
+                A disposição exata depende da revisão
+                da unidade.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               ACESSÓRIOS
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              Cabo USB Type-C
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Cabo fornecido com o produto para conexão
+                e carregamento.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Estojo de Transporte
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Estojo destinado ao armazenamento e transporte
+                do X5s e seus acessórios.
+              </p>
+
+              <p>
+                É um acessório externo e não faz parte
+                da eletrônica do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Clipe / Ferramenta de Remoção dos Botões
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Acessório fornecido para auxiliar na remoção
+                e troca da disposição dos botões ABXY.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Pads de Silicone de Ajuste
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Peças de silicone fornecidas para adaptar
+                o apoio do dispositivo e melhorar sua fixação.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Manual de Instruções
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Documentação fornecida com o produto contendo
+                instruções de utilização, conexão e configuração.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <details class="component-item">
+
+            <summary>
+              Adesivo GameSir
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                Adesivo incluído na embalagem original.
+              </p>
+
+              <p>
+                Não possui função eletrônica ou mecânica
+                no funcionamento do controle.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               COOLER
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              GameSir FX5 / FX5 Lite — Acessório de Refrigeração
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                A GameSir comercializa acessórios de refrigeração
+                projetados para a família X5.
+              </p>
+
+              <p>
+                Esses acessórios não são componentes internos
+                do X5s e são vendidos separadamente.
+              </p>
+
+            </div>
+
+          </details>
+
+
+          <!-- =====================================
+               CONJUNTO
+               ===================================== -->
+
+
+          <details class="component-item">
+
+            <summary>
+              GameSir X5s — Conjunto Completo
+            </summary>
+
+            <div class="component-description">
+
+              <p>
+                O GameSir X5s completo reúne a estrutura
+                telescópica, placas eletrônicas, sensores
+                Hall Effect, botões de membrana, micro switches,
+                motores de vibração, giroscópio, sistema de
+                comunicação, baterias e elementos mecânicos.
+              </p>
+
+              <p>
+                O conjunto transforma os comandos físicos
+                realizados pelo jogador em sinais digitais
+                processados pelo firmware e enviados ao
+                dispositivo conectado.
+              </p>
+
+              <ul class="component-specs">
+
+                <li>
+                  Peso: aproximadamente 174,1 g
+                </li>
+
+                <li>
+                  Dimensões: aproximadamente 196,7 × 88 × 46 mm
+                </li>
+
+                <li>
+                  Bateria: 840 mAh
+                </li>
+
+                <li>
+                  Sticks: Hall Effect
+                </li>
+
+                <li>
+                  Gatilhos: Hall Effect
+                </li>
+
+                <li>
+                  ABXY: Membrana
+                </li>
+
+                <li>
+                  D-pad: Membrana
+                </li>
+
+                <li>
+                  Vibração: Dual HD Rumble
+                </li>
+
+                <li>
+                  Movimento: Giroscópio de 6 eixos
+                </li>
+
+                <li>
+                  Conexões: Bluetooth / USB-C / 2,4 GHz
+                </li>
+
+              </ul>
+
+            </div>
+
+          </details>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- ==========================================
+       RODAPÉ
+       ========================================== -->
+
+  <footer class="site-footer">
+
+
+    <p>
+
+      &copy; 2026 Nerd League United.
+      Todos os direitos reservados.
+
+    </p>
+
+
+  </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

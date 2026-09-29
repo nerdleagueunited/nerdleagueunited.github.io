@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Nintendo Wii</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Nintendo Wii popularizou os controles por movimento,
+          levando uma nova forma de interação aos videogames e
+          conquistando jogadores além do público tradicional ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Nintendo Wii popularizou os controles por movimento,
+          levando uma nova forma de interação aos videogames e
+          conquistando jogadores além do público tradicional ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Nintendo Wii (Posse de Pedro Ramos)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/nw.jpeg"
+              alt="Nintendo Wii"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NINTENDO WII
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Nintendo Wii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii é um console doméstico desenvolvido e
+            produzido pela Nintendo. Foi lançado originalmente em
+            novembro de 2006 e pertence à sétima geração dos
+            videogames.<br>
+
+            O aparelho sucedeu o Nintendo GameCube e apresentou uma
+            proposta diferente da disputa tradicional por gráficos
+            e poder de processamento.<br>
+
+            Seu principal diferencial foi o Wii Remote, controle que
+            utiliza sensores de movimento para detectar a orientação
+            e os movimentos realizados pelo jogador.<br>
+
+            A proposta permitiu que diversos jogos fossem controlados
+            através de movimentos físicos, tornando o sistema acessível
+            também para pessoas que não tinham o hábito de jogar
+            videogames.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado e Popularização
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a década de 2000, a indústria dos videogames
+            começou a buscar novos públicos além dos jogadores
+            tradicionais.<br>
+
+            A Nintendo adotou uma estratégia diferente com o Wii,
+            concentrando parte importante de sua campanha na facilidade
+            de utilização e na interação por movimento.<br>
+
+            O console rapidamente ganhou espaço entre famílias,
+            jogadores casuais e pessoas que anteriormente não tinham
+            contato frequente com videogames.<br>
+
+            Jogos como Wii Sports, Wii Play, Wii Fit e Mario Kart Wii
+            ajudaram a apresentar o sistema para um público muito
+            amplo.<br>
+
+            O Wii também foi utilizado em ambientes que iam além
+            do entretenimento doméstico, aparecendo em determinadas
+            aplicações educacionais, demonstrações e experiências
+            interativas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado Brasileiro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii também ganhou bastante popularidade no
+            mercado brasileiro durante a década de 2000.<br>
+
+            A combinação entre o console, Wii Remote e jogos
+            baseados em movimento ajudou a criar uma forte presença
+            do aparelho no país.<br>
+
+            O mercado brasileiro também recebeu uma grande variedade
+            de acessórios e controles compatíveis, tanto oficiais
+            quanto produzidos por outras empresas.<br>
+
+            Assim como ocorreu com outros consoles da Nintendo,
+            existiram diferentes formas de comercialização do Wii
+            no Brasil ao longo de sua vida útil, incluindo produtos
+            importados e posteriormente iniciativas de distribuição
+            oficial.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/3602.jpeg"
+                alt="Microsoft Xbox 360"
+              />
+
+              <img
+                src="../tgga/ps3.jpeg"
+                alt="Sony PlayStation 3"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Microsoft Xbox 360 (2005) e Sony PlayStation 3 (2006) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii fez parte da sétima geração dos videogames,
+            período em que também foram lançados o Xbox 360 da Microsoft
+            e o PlayStation 3 da Sony.<br>
+
+            Enquanto Xbox 360 e PlayStation 3 buscavam principalmente
+            maior capacidade gráfica e processamento em comparação
+            com a geração anterior, a Nintendo adotou uma abordagem
+            diferente com o Wii.<br>
+
+            O sistema utilizava hardware baseado em uma evolução da
+            arquitetura do GameCube, mas acrescentava sensores de
+            movimento e uma interface de controle completamente
+            diferente da utilizada pelos consoles tradicionais.<br>
+
+            Essa estratégia fez com que o Wii ocupasse uma posição
+            particular dentro da geração e ajudou a popularizar os
+            controles por movimento em uma escala muito maior.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS E ACESSÓRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiisports.jfif"
+                alt="Wii Sports"
+              />
+
+              <img
+                src="../tgga/mariokartwii.jfif"
+                alt="Mario Kart Wii"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Wii Sports e Mario Kart Wii ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Wii recebeu uma grande biblioteca de jogos durante sua
+            vida comercial.<br>
+
+            Entre os títulos mais conhecidos estão Wii Sports,
+            Wii Sports Resort, Super Mario Galaxy, Super Mario Galaxy 2,
+            Mario Kart Wii, The Legend of Zelda: Twilight Princess,
+            The Legend of Zelda: Skyward Sword, New Super Mario Bros. Wii,
+            Donkey Kong Country Returns, Metroid Prime 3 e muitos outros.<br>
+
+            O console também recebeu jogos de empresas externas,
+            incluindo séries como Resident Evil, Sonic, Rayman,
+            Guitar Hero e Just Dance.<br>
+
+            Além do Wii Remote e do Nunchuk, diversos acessórios foram
+            produzidos para o console, incluindo o Wii Balance Board,
+            Wii MotionPlus, Classic Controller, Wii Zapper,
+            controles para jogos musicais e diferentes instrumentos
+            utilizados em jogos específicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii recebeu diferentes revisões e versões
+            durante sua existência.<br>
+
+            O modelo original possui o conhecido formato vertical
+            e uma unidade de disco frontal capaz de utilizar discos
+            ópticos próprios do Wii e discos de GameCube.<br>
+
+            Posteriormente, a Nintendo lançou o Wii Family Edition,
+            que retirava alguns recursos presentes no modelo original,
+            incluindo a compatibilidade com jogos e acessórios
+            do GameCube.<br>
+
+            Também foi lançado o Wii Mini, uma versão ainda menor
+            e simplificada do console, com diversas funções removidas
+            em relação ao Wii original.<br>
+
+            Além das revisões físicas, o Wii recebeu diferentes cores
+            e edições especiais ao longo dos anos.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiwii.png"
+                  alt="Nintendo Wii Branco"
+                />
+
+                <figcaption>
+                  Nintendo Wii Branco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiipreto.webp"
+                  alt="Nintendo Wii Preto"
+                />
+
+                <figcaption>
+                  Nintendo Wii Preto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiivermelho.webp"
+                  alt="Nintendo Wii Vermelho"
+                />
+
+                <figcaption>
+                  Nintendo Wii Vermelho
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiifamily.jpg"
+                  alt="Nintendo Wii Family Edition"
+                />
+
+                <figcaption>
+                  Nintendo Wii Family Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiimini.avif"
+                  alt="Nintendo Wii Mini"
+                />
+
+                <figcaption>
+                  Nintendo Wii Mini
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiisportspack.jpg"
+                  alt="Nintendo Wii Sports Edition"
+                />
+
+                <figcaption>
+                  Nintendo Wii Sports Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiespecial.jpg"
+                  alt="Nintendo Wii Edição Especial"
+                />
+
+                <figcaption>
+                  Nintendo Wii — Edição Especial
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiidevkit.jpg"
+                  alt="Nintendo Wii Development Kit"
+                />
+
+                <figcaption>
+                  Nintendo Wii Development Kit
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="wii.html">
+                ○ Games - Nintendo Wii
+              </a>
+            </li>
+
+            <li>
+              <a href="wii.html">
+                ○ Periféricos - Nintendo Wii
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>IBM PowerPC Broadway</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processador principal do Nintendo Wii.
+                  O Broadway é baseado na arquitetura PowerPC
+                  e foi desenvolvido para a Nintendo em parceria
+                  com a IBM.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: CPU</li>
+                  <li>Arquitetura: PowerPC</li>
+                  <li>Fabricante: IBM</li>
+                  <li>Função: Processamento geral</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>ATI Hollywood</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chip responsável por diversas funções relacionadas
+                  ao processamento gráfico e à comunicação entre
+                  os diferentes componentes do sistema.
+                </p>
+
+                <p>
+                  O Hollywood integra funções que anteriormente
+                  eram distribuídas entre diferentes componentes.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GPU / chipset</li>
+                  <li>Fabricante: ATI</li>
+                  <li>Função: Gráficos e I/O</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>MEM1 — 24 MB 1T-SRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória rápida utilizada pelo sistema para
+                  armazenamento temporário de dados.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: 1T-SRAM</li>
+                  <li>Capacidade: 24 MB</li>
+                  <li>Função: Memória principal</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>MEM2 — 64 MB GDDR3</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória adicional utilizada pelo sistema,
+                  totalizando 88 MB de memória principal
+                  entre as duas tecnologias.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GDDR3</li>
+                  <li>Capacidade: 64 MB</li>
+                  <li>Função: Memória do sistema</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>NAND Flash</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória flash interna utilizada para armazenar
+                  dados do sistema, configurações e outros arquivos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: NAND Flash</li>
+                  <li>Função: Armazenamento interno</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Unidade Óptica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade responsável pela leitura dos discos
+                  utilizados pelo Nintendo Wii.
+                </p>
+
+                <p>
+                  O modelo original também possui compatibilidade
+                  com discos de jogos do Nintendo GameCube.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Drive óptico</li>
+                  <li>Mídia: Wii Optical Disc</li>
+                  <li>Compatibilidade: GameCube em modelos específicos</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laser Óptico</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componente responsável pela leitura das informações
+                  armazenadas nos discos ópticos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bluetooth</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de comunicação sem fio utilizado principalmente
+                  para conectar os Wii Remotes ao console.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Função: Comunicação sem fio</li>
+                  <li>Uso principal: Wii Remote</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de comunicação sem fio integrado utilizado
+                  para conexão do console à internet e redes compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>SD Card Slot</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Entrada utilizada para cartões SD compatíveis,
+                  permitindo armazenar e transferir determinados
+                  dados do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sensor Bar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Barra posicionada próxima à televisão que contém
+                  LEDs infravermelhos utilizados pelo sistema de
+                  apontamento do Wii Remote.
+                </p>
+
+                <p>
+                  Apesar do nome, a Sensor Bar não é responsável
+                  por detectar diretamente o movimento do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Remote</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal controle do Nintendo Wii e um dos
+                  elementos mais importantes do projeto do console.
+                </p>
+
+                <p>
+                  Possui acelerômetros, sistema de apontamento
+                  infravermelho e comunicação Bluetooth.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Controle de movimento</li>
+                  <li>Comunicação: Bluetooth</li>
+                  <li>Sensor: Acelerômetro</li>
+                  <li>Apontamento: Infravermelho</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii MotionPlus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acessório desenvolvido para aumentar a precisão
+                  da detecção de movimentos do Wii Remote.
+                </p>
+
+                <p>
+                  Posteriormente, a tecnologia também foi incorporada
+                  diretamente ao Wii Remote Plus.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nunchuk</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle complementar conectado ao Wii Remote
+                  através de um cabo.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Analógico: Sim</li>
+                  <li>Botões: Z e C</li>
+                  <li>Sensor de movimento: Sim</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Classic Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle desenvolvido para jogos que utilizavam
+                  uma configuração mais tradicional de botões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Classic Controller Pro</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Versão revisada do Classic Controller com
+                  empunhaduras maiores e mudanças no formato.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Balance Board</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma equipada com sensores de pressão,
+                  utilizada principalmente pelo Wii Fit e jogos
+                  compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Zapper</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acessório em formato de arma utilizado como suporte
+                  para o Wii Remote e Nunchuk em determinados jogos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>GameCube Controller Ports</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Quatro portas presentes no modelo original do Wii
+                  para utilização de controles do GameCube.
+                </p>
+
+                <p>
+                  Também podiam ser utilizadas por determinados
+                  acessórios compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>GameCube Memory Card Slots</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Entradas presentes nos modelos compatíveis
+                  com GameCube para utilização de cartões de memória
+                  do console anterior.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>AV Multi Out</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector proprietário utilizado para transmitir
+                  áudio e vídeo do console para a televisão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sensor Bar Connector</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector localizado no console responsável por
+                  fornecer energia para a Sensor Bar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Portas utilizadas para determinados acessórios,
+                  dispositivos de armazenamento e periféricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ventoinha</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema responsável por movimentar o ar dentro
+                  do console e auxiliar na dissipação do calor.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dissipador de Calor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura metálica utilizada para dissipar o calor
+                  produzido pelos principais chips do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Reguladores de Tensão</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis por converter e estabilizar
+                  as tensões utilizadas pelos componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte de Alimentação</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade responsável por fornecer energia elétrica
+                  adequada para o funcionamento do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Clock Generator</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pela geração dos sinais
+                  de clock utilizados pelos diferentes componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>BIOS / System Software</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Software de sistema responsável pela inicialização
+                  do hardware e pelas funções básicas do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Placa de Circuito Impresso — PCB</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável pela interligação elétrica
+                  dos componentes internos do Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blindagem Eletromagnética</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes metálicos utilizados em determinadas
+                  áreas internas para auxiliar na redução de
+                  interferências eletromagnéticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botão Power</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para ligar e desligar o Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botão Reset</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para reiniciar o console ou
+                  determinadas operações do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Botão Eject</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para ejetar o disco da unidade óptica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slot de Disco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Abertura frontal utilizada para inserir os discos
+                  ópticos no Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Plástica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura externa responsável por proteger os
+                  componentes internos e dar forma ao console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>LEDs de Iluminação</summary>
+
+              <div class="component-description">
+
+                <p>
+                  LEDs utilizados para indicar diferentes estados
+                  de funcionamento do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Disco Óptico do Wii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para armazenar os jogos
+                  do Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

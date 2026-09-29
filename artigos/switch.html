@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Nintendo Switch</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Nintendo Switch trouxe uma proposta híbrida para os
+          videogames, funcionando tanto como console de mesa quanto
+          como aparelho portátil, combinando os dois mercados em
+          uma única plataforma ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Nintendo Switch trouxe uma proposta híbrida para os
+          videogames, funcionando tanto como console de mesa quanto
+          como aparelho portátil, combinando os dois mercados em
+          uma única plataforma ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Nintendo Switch (Posse de Thomas Lothhammer Bohn)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/sw1.jpeg"
+              alt="Nintendo Switch"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NINTENDO SWITCH
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Nintendo Switch
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch é um console desenvolvido pela Nintendo
+            e lançado mundialmente em março de 2017.<br>
+
+            O aparelho foi projetado para funcionar em diferentes
+            formas de utilização, podendo ser conectado à televisão
+            através de uma dock ou utilizado como um console portátil
+            através de sua própria tela.<br>
+
+            Essa característica fez do Switch uma plataforma híbrida,
+            combinando características tradicionalmente associadas
+            aos consoles domésticos e aos portáteis da Nintendo.<br>
+
+            O sistema utiliza controles removíveis chamados Joy-Con,
+            que podem ser utilizados presos ao console, separados
+            ou acoplados a um suporte.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História e Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch foi desenvolvido durante um período
+            de mudanças importantes para a Nintendo.<br>
+
+            Após o desempenho comercial abaixo das expectativas do
+            Wii U, a empresa procurou desenvolver uma plataforma
+            que pudesse reunir suas operações de consoles domésticos
+            e portáteis em um único ecossistema.<br>
+
+            O projeto foi apresentado oficialmente em 2016 sob o
+            nome Nintendo Switch e chegou às lojas em 3 de março
+            de 2017.<br>
+
+            O conceito central era permitir que o jogador pudesse
+            continuar sua partida ao retirar o console da dock,
+            transformando-o rapidamente de um aparelho ligado à
+            televisão em um portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado Brasileiro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch conquistou presença significativa
+            no mercado brasileiro desde seu lançamento.<br>
+
+            Durante os primeiros anos, grande parte das unidades
+            encontradas no país era importada por lojas e
+            distribuidores independentes.<br>
+
+            Posteriormente, a Nintendo ampliou sua atuação oficial
+            no Brasil, disponibilizando produtos, jogos, acessórios
+            e serviços para o mercado nacional.<br>
+
+            O crescimento da distribuição oficial também contribuiu
+            para tornar mais acessíveis os jogos digitais, acessórios
+            e diferentes modelos do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiiu.webp"
+                alt="Nintendo Wii U"
+              />
+
+              <img
+                src="../tgga/nds1.jpeg"
+                alt="Nintendo 3DS"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Wii U e Nintendo 3DS — geração anterior da Nintendo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Antes do Switch, a Nintendo mantinha duas linhas
+            principais de hardware: os consoles domésticos,
+            como Wii e Wii U, e os consoles portáteis,
+            como Nintendo DS e Nintendo 3DS.<br>
+
+            O Switch representou uma mudança importante nessa
+            estratégia, pois passou a ocupar simultaneamente
+            os espaços de console doméstico e portátil.<br>
+
+            Na mesma geração, o Switch competiu principalmente
+            com o PlayStation 4 e o Xbox One e, posteriormente,
+            com o PlayStation 5 e Xbox Series X|S.<br>
+
+            A Nintendo utilizou uma estratégia diferente das
+            concorrentes, concentrando-se em uma experiência
+            híbrida e em seus próprios personagens e franquias.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/zelda_botw.jpg"
+                alt="The Legend of Zelda Breath of the Wild"
+              />
+
+              <img
+                src="../tgga/marioodissey.jpeg"
+                alt="Super Mario Odyssey"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ The Legend of Zelda: Breath of the Wild e Super Mario Odyssey ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch recebeu uma grande quantidade de jogos
+            durante sua vida comercial, incluindo títulos desenvolvidos
+            pela própria Nintendo e jogos de outras empresas.<br>
+
+            Entre os principais títulos da plataforma estão
+            The Legend of Zelda: Breath of the Wild,
+            Super Mario Odyssey, Mario Kart 8 Deluxe,
+            Super Smash Bros. Ultimate, Animal Crossing:
+            New Horizons, Splatoon 2, Splatoon 3,
+            Metroid Dread e Pokémon Scarlet e Violet.<br>
+
+            O console também recebeu versões de jogos originalmente
+            lançados em outras plataformas, além de diversos jogos
+            independentes e produções japonesas.<br>
+
+            Os acessórios incluem Joy-Con, Pro Controller,
+            Nintendo Switch Dock, volante para Joy-Con,
+            Ring-Con e diferentes acessórios oficiais e licenciados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CARTUCHOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Cartuchos e Mídia Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/switch_gamecard.webp"
+                alt="Cartucho de Nintendo Switch"
+              />
+
+              <img
+                src="../tgga/switch_cartucho.jpg"
+                alt="Game Card do Nintendo Switch"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Game Cards utilizados pelo Nintendo Switch ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Diferentemente dos principais consoles domésticos da
+            geração anterior, o Nintendo Switch utiliza pequenos
+            cartões de jogo, conhecidos como Game Cards.<br>
+
+            Esses cartões permitem distribuir jogos fisicamente
+            em um formato compacto, adequado à proposta portátil
+            do sistema.<br>
+
+            Os jogos também podem ser adquiridos digitalmente
+            através da Nintendo eShop e armazenados na memória
+            interna ou em cartões microSD compatíveis.<br>
+
+            Alguns títulos físicos, dependendo do jogo e da edição,
+            podem exigir downloads adicionais para completar
+            determinados conteúdos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOY-CON
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Joy-Con
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Joy-Con são os controles destacáveis do Nintendo
+            Switch e representam uma das principais características
+            físicas do console.<br>
+
+            Existem Joy-Con esquerdo e direito, cada um contendo
+            diferentes botões e sensores.<br>
+
+            Os controles podem ser conectados às laterais do console,
+            utilizados separadamente por dois jogadores ou presos
+            ao Joy-Con Grip para formar um controle tradicional.<br>
+
+            Alguns modelos também possuem recursos como giroscópio,
+            acelerômetro, HD Rumble e, no Joy-Con direito,
+            leitor NFC.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DOCK
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Nintendo Switch Dock
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A Nintendo Switch Dock é a estação utilizada para
+            conectar o console à televisão e fornecer alimentação
+            elétrica enquanto o aparelho está encaixado.<br>
+
+            O console é conectado à dock através de seu conector
+            USB-C inferior.<br>
+
+            A dock possui conexões para HDMI, alimentação e USB,
+            permitindo também conectar determinados acessórios
+            e periféricos.<br>
+
+            Quando retirado da dock, o Switch passa automaticamente
+            para o modo portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch recebeu diferentes modelos durante
+            sua vida comercial.<br>
+
+            O modelo original foi lançado em 2017 e possuía uma
+            tela LCD de 6,2 polegadas.<br>
+
+            Em 2019, a Nintendo lançou o Switch Lite, uma versão
+            exclusivamente portátil com controles integrados
+            e tamanho reduzido.<br>
+
+            Em 2021, chegou o Nintendo Switch OLED Model,
+            equipado com uma tela OLED maior, suporte ajustável,
+            dock revisada e outras melhorias físicas.<br>
+
+            Também foram lançadas diversas edições especiais
+            relacionadas a jogos e franquias da Nintendo.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/sw1.jpeg"
+                  alt="Nintendo Switch modelo original"
+                />
+
+                <figcaption>
+                  Nintendo Switch — Modelo Original
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_v2.jpg"
+                  alt="Nintendo Switch revisão 2019"
+                />
+
+                <figcaption>
+                  Nintendo Switch — Revisão 2019
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_lite.jpg"
+                  alt="Nintendo Switch Lite"
+                />
+
+                <figcaption>
+                  Nintendo Switch Lite
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_lite_blue.jpg"
+                  alt="Nintendo Switch Lite Azul"
+                />
+
+                <figcaption>
+                  Nintendo Switch Lite — Blue
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_oled_white.jpg"
+                  alt="Nintendo Switch OLED"
+                />
+
+                <figcaption>
+                  Nintendo Switch OLED Model
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_oled.avif"
+                  alt="Nintendo Switch OLED Branco"
+                />
+
+                <figcaption>
+                  Nintendo Switch OLED — White
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_oled_zelda.jpg"
+                  alt="Nintendo Switch OLED Zelda"
+                />
+
+                <figcaption>
+                  Nintendo Switch OLED — Zelda Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/switch_splatoon].webp"
+                  alt="Nintendo Switch OLED Splatoon"
+                />
+
+                <figcaption>
+                  Nintendo Switch OLED — Splatoon Edition
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="switch.html">
+                ○ Games - Nintendo Switch
+              </a>
+            </li>
+
+            <li>
+              <a href="switch.html">
+                ○ Periféricos - Nintendo Switch
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>NVIDIA Tegra X1</summary>
+
+              <div class="component-description">
+
+                <p>
+                  SoC utilizado pelo Nintendo Switch.
+                  O chip combina CPU e GPU em um único
+                  sistema integrado.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: SoC</li>
+                  <li>Fabricante: NVIDIA</li>
+                  <li>Família: Tegra</li>
+                  <li>Arquitetura: ARM</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CPU ARM Cortex-A57</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Núcleos de processamento utilizados pelo
+                  SoC Tegra do Nintendo Switch.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Arquitetura: ARM</li>
+                  <li>Tipo: CPU</li>
+                  <li>Função: Processamento geral</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>GPU NVIDIA Maxwell</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade gráfica integrada ao Tegra X1,
+                  responsável pelo processamento de gráficos
+                  e imagens dos jogos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Arquitetura: Maxwell</li>
+                  <li>Fabricante: NVIDIA</li>
+                  <li>Tipo: GPU integrada</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memória LPDDR4</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória RAM principal utilizada pelo sistema.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LPDDR4</li>
+                  <li>Capacidade: 4 GB</li>
+                  <li>Função: Memória do sistema</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memória Flash Interna</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Armazenamento interno utilizado para o sistema,
+                  dados salvos e jogos digitais.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Flash</li>
+                  <li>Capacidade: varia conforme o modelo</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slot microSD</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para cartões microSD,
+                  permitindo ampliar o armazenamento do console.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: microSD</li>
+                  <li>Função: Expansão de armazenamento</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Card Slot</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para os cartões físicos
+                  de jogos do Nintendo Switch.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tela LCD</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tela utilizada nos modelos padrão do Nintendo
+                  Switch e Switch Lite.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LCD</li>
+                  <li>Função: Exibição de imagem</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tela OLED</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tela utilizada pelo Nintendo Switch OLED Model,
+                  oferecendo maior contraste e cores características
+                  da tecnologia OLED.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB-C Port</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para alimentação,
+                  carregamento e comunicação com a dock.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de comunicação sem fio utilizado
+                  para conexão à internet e recursos online.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bluetooth</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado para comunicação sem fio
+                  com controles e acessórios compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Joy-Con Esquerdo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle removível utilizado no lado esquerdo
+                  do Nintendo Switch.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Direcional: Joy-Con Stick</li>
+                  <li>Botões: SL / SR / L / ZL</li>
+                  <li>Conexão: Wireless / Rail</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Joy-Con Direito</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle removível utilizado no lado direito
+                  do Nintendo Switch.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Botões: A / B / X / Y</li>
+                  <li>Botão Home</li>
+                  <li>Leitor NFC</li>
+                  <li>Conexão: Wireless / Rail</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Joy-Con Motion Sensors</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensores de movimento utilizados pelos Joy-Con
+                  para detectar orientação e movimentação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HD Rumble</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de vibração avançado presente nos Joy-Con,
+                  capaz de produzir diferentes padrões de resposta
+                  tátil.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Leitor NFC</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Leitor presente no Joy-Con direito utilizado
+                  com acessórios e figuras compatíveis com NFC.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Joy-Con Rail</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Trilhos laterais utilizados para conectar
+                  fisicamente os Joy-Con ao console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Switch Dock</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estação utilizada para conectar o console
+                  à televisão e fornecer alimentação.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Entrada: USB-C</li>
+                  <li>Saída: HDMI</li>
+                  <li>Função: TV Mode</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDMI Port</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Saída de vídeo utilizada pela dock para
+                  transmitir imagem e áudio para a televisão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB Ports da Dock</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Portas utilizadas para conectar determinados
+                  acessórios e periféricos à dock.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pro Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle tradicional desenvolvido pela Nintendo
+                  para utilização com o Switch.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Gamepad</li>
+                  <li>Conexão: Bluetooth / USB-C</li>
+                  <li>Vibração: HD Rumble</li>
+                  <li>Sensores: Movimento</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bateria Interna</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bateria recarregável responsável por fornecer
+                  energia ao console quando utilizado no modo
+                  portátil.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Battery Management System</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pelo gerenciamento,
+                  carregamento e proteção da bateria interna.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Management IC</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito integrado responsável pela distribuição
+                  e gerenciamento das diferentes tensões elétricas
+                  do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ventoinha</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado para auxiliar na refrigeração
+                  do processador e demais componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dissipador de Calor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componente metálico utilizado para transferir
+                  calor do SoC para o sistema de refrigeração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Heat Pipe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tubo térmico utilizado para transportar calor
+                  entre diferentes partes do sistema de refrigeração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motherboard</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa principal responsável por conectar
+                  eletricamente os componentes do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alto-falantes</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Alto-falantes internos utilizados para reprodução
+                  de áudio no modo portátil.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microfone / Entrada de Áudio</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O sistema pode utilizar diferentes acessórios
+                  e soluções externas para comunicação de áudio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Plástica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura externa que protege os componentes
+                  internos do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kickstand</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Suporte traseiro utilizado para manter o console
+                  apoiado durante o modo de mesa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Card</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cartão físico utilizado como mídia de distribuição
+                  para jogos do Nintendo Switch.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

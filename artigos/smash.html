@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Super Smash Bros. Brawl</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Super Smash Bros. Brawl foi lançado para o
+          Nintendo Wii em 2008 e reuniu personagens de diversas
+          franquias da Nintendo e de outras séries convidadas ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Super Smash Bros. Brawl foi lançado para o
+          Nintendo Wii em 2008 e reuniu personagens de diversas
+          franquias da Nintendo e de outras séries convidadas ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Super Smash Bros. Brawl — Wii
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/supersmashbrosbrawl_wii.jpg"
+              alt="Super Smash Bros. Brawl para Wii"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Smash Bros. Brawl
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Smash Bros. Brawl é um jogo eletrônico de luta
+            desenvolvido pela Sora Ltd. e publicado pela Nintendo
+            para o Wii.<br>
+
+            O jogo foi lançado originalmente no Japão em 31 de
+            janeiro de 2008 e posteriormente chegou à América do
+            Norte, Europa e outras regiões.<br>
+
+            Brawl reúne personagens, cenários, músicas e elementos
+            de diversas franquias da Nintendo, além de personagens
+            convidados de outras empresas.<br>
+
+            Diferentemente de jogos de luta tradicionais, a série
+            Super Smash Bros. utiliza arenas abertas, porcentagem
+            de dano e lançamentos para fora do cenário como
+            principais elementos de combate.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Sora Ltd.
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Masahiro Sakurai
+              </li>
+
+              <li>
+                <strong>Compositor / Supervisão musical:</strong>
+                Diversos compositores
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo Wii
+              </li>
+
+              <li>
+                <strong>Lançamento japonês:</strong>
+                31 de janeiro de 2008
+              </li>
+
+              <li>
+                <strong>Lançamento na América do Norte:</strong>
+                9 de março de 2008
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Luta
+              </li>
+
+              <li>
+                <strong>Modos:</strong>
+                1–4 jogadores e modos adicionais
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Wii Optical Disc
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Super Smash Bros. Brawl foi
+            liderado por Masahiro Sakurai, criador da série
+            Super Smash Bros.<br>
+
+            O projeto começou com o objetivo de ampliar
+            significativamente a quantidade de conteúdo presente
+            nos jogos anteriores da série.<br>
+
+            Além de novos personagens e cenários, a equipe
+            trabalhou em novos modos de jogo, itens, músicas,
+            troféus, desafios e recursos de personalização.<br>
+
+            Uma das principais novidades foi o The Subspace
+            Emissary, uma campanha de aventura que combina
+            plataformas, exploração e combates utilizando
+            personagens do elenco de Smash.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wii.jpg"
+                alt="Nintendo Wii"
+              />
+
+              <img
+                src="../tgga/supersmashbros_melee.jpg"
+                alt="Super Smash Bros. Melee"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Wii e Super Smash Bros. Melee — antecedentes de Brawl ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Antes de Brawl, a série havia recebido Super Smash Bros.
+            para Nintendo 64 e Super Smash Bros. Melee para
+            Nintendo GameCube.<br>
+
+            Melee havia ampliado consideravelmente a quantidade
+            de personagens e mecânicas da série, além de se tornar
+            um título importante para competições e jogadores
+            dedicados.<br>
+
+            Com a chegada do Wii, a Nintendo utilizou Brawl para
+            expandir ainda mais o conceito de crossover entre
+            franquias.<br>
+
+            O jogo também marcou a estreia de personagens externos
+            à Nintendo na série, como Solid Snake e Sonic the
+            Hedgehog.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Wii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Smash Bros. Brawl foi lançado no Japão em
+            janeiro de 2008 e posteriormente em outros mercados
+            durante o mesmo ano.<br>
+
+            O jogo utilizava um disco óptico do Wii e era
+            compatível com diferentes configurações de controle,
+            incluindo o Wii Remote, Wii Remote com Nunchuk,
+            Classic Controller e controle do GameCube.<br>
+
+            A variedade de controles permitia que diferentes
+            jogadores escolhessem o esquema de controle com
+            o qual estavam mais familiarizados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controles
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_remote.jpg"
+                  alt="Wii Remote"
+                />
+
+                <figcaption>
+                  Wii Remote
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_nunchuk.jpg"
+                  alt="Wii Remote e Nunchuk"
+                />
+
+                <figcaption>
+                  Wii Remote + Nunchuk
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_controller.jpg"
+                  alt="Classic Controller"
+                />
+
+                <figcaption>
+                  Classic Controller
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gamecube_controller.jpg"
+                  alt="Controle de GameCube"
+                />
+
+                <figcaption>
+                  Controle de GameCube
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl oferece quatro métodos principais de controle.<br>
+
+            O jogador pode utilizar apenas o Wii Remote,
+            Wii Remote combinado ao Nunchuk, Classic Controller
+            ou o tradicional controle do GameCube.<br>
+
+            Essa variedade é especialmente importante porque
+            diferentes jogadores possuem preferências distintas
+            para jogos de luta.<br>
+
+            O controle do GameCube também permite utilizar um
+            esquema familiar para jogadores que já haviam jogado
+            Super Smash Bros. Melee.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Smash Bros. Brawl possui um sistema de combate
+            baseado principalmente em porcentagem de dano.<br>
+
+            Quanto maior a porcentagem de dano de um personagem,
+            maior tende a ser a distância que ele percorre ao
+            receber determinados ataques.<br>
+
+            O objetivo de cada jogador é utilizar golpes,
+            itens e elementos do cenário para lançar os adversários
+            para fora da área de combate.<br>
+
+            Cada personagem possui movimentos, ataques especiais,
+            velocidade, peso e características próprias.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smb_brawl_mario.jpg"
+                alt="Mario em Super Smash Bros. Brawl"
+              />
+
+              <img
+                src="../tgga/smb_brawl_link.jpg"
+                alt="Link em Super Smash Bros. Brawl"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Mario e Link em Super Smash Bros. Brawl ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl possui um elenco muito amplo de personagens
+            provenientes de diferentes franquias da Nintendo.<br>
+
+            Entre eles estão Mario, Luigi, Peach, Bowser, Link,
+            Zelda, Samus, Kirby, Donkey Kong, Pikachu e diversos
+            outros personagens conhecidos.<br>
+
+            O jogo também apresenta personagens convidados que
+            não pertencem originalmente à Nintendo, incluindo
+            Solid Snake, da série Metal Gear, e Sonic the Hedgehog,
+            da Sega.<br>
+
+            Alguns personagens possuem formas alternativas ou
+            transformações que fazem parte de seus respectivos
+            conjuntos de movimentos.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS PERSONAGENS -
+            </h3>
+
+            <ul>
+
+              <li>Mario</li>
+              <li>Luigi</li>
+              <li>Peach</li>
+              <li>Bowser</li>
+              <li>Link</li>
+              <li>Zelda</li>
+              <li>Sheik</li>
+              <li>Samus</li>
+              <li>Kirby</li>
+              <li>Donkey Kong</li>
+              <li>Pikachu</li>
+              <li>Fox</li>
+              <li>Falco</li>
+              <li>Captain Falcon</li>
+              <li>Ness</li>
+              <li>Lucas</li>
+              <li>Meta Knight</li>
+              <li>King Dedede</li>
+              <li>Olimar</li>
+              <li>Snake</li>
+              <li>Sonic</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FINAL SMASH
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Final Smash
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais novidades de Brawl foi a introdução
+            dos Final Smashes.<br>
+
+            Durante uma partida, os jogadores podem encontrar
+            uma Smash Ball, um item especial que flutua pela arena.<br>
+
+            Ao destruir a Smash Ball e carregar seu poder, o
+            personagem pode utilizar seu Final Smash, um ataque
+            especial extremamente poderoso e diferente para
+            cada lutador.<br>
+
+            Os Final Smashes ajudaram a diferenciar ainda mais
+            os personagens e acrescentaram uma nova possibilidade
+            estratégica às partidas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ITENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Itens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_smash_ball.jpg"
+                  alt="Smash Ball"
+                />
+
+                <figcaption>
+                  Smash Ball
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_pokeball.jpg"
+                  alt="Poké Ball"
+                />
+
+                <figcaption>
+                  Poké Ball
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_super_mushroom.jpg"
+                  alt="Super Mushroom"
+                />
+
+                <figcaption>
+                  Super Mushroom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_motion_sensor_bomb.jpg"
+                  alt="Motion-Sensor Bomb"
+                />
+
+                <figcaption>
+                  Motion-Sensor Bomb
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os itens são elementos que podem aparecer durante
+            as partidas e alterar temporariamente as condições
+            do combate.<br>
+
+            Entre eles estão armas, explosivos, itens de cura,
+            objetos que modificam o tamanho dos personagens e
+            itens associados a outras franquias da Nintendo.<br>
+
+            As Poké Balls, por exemplo, podem liberar Pokémon
+            que executam diferentes efeitos durante a batalha.<br>
+
+            A variedade de itens contribui para tornar cada
+            partida diferente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CENÁRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Cenários
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl possui uma grande quantidade de cenários
+            baseados em diferentes franquias.<br>
+
+            Alguns cenários permanecem relativamente estáveis,
+            enquanto outros possuem plataformas móveis,
+            obstáculos, inimigos e mudanças constantes no
+            ambiente.<br>
+
+            Os cenários também podem possuir diferentes
+            características de tamanho e formato, influenciando
+            a forma como cada personagem pode se movimentar.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Cenário</th>
+                <th>Franquia</th>
+                <th>Característica</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Final Destination</td>
+                <td>Super Smash Bros.</td>
+                <td>Arena plana</td>
+              </tr>
+
+              <tr>
+                <td>Battlefield</td>
+                <td>Super Smash Bros.</td>
+                <td>Plataformas</td>
+              </tr>
+
+              <tr>
+                <td>Temple</td>
+                <td>The Legend of Zelda</td>
+                <td>Grande e vertical</td>
+              </tr>
+
+              <tr>
+                <td>Pokémon Stadium 2</td>
+                <td>Pokémon</td>
+                <td>Transformações</td>
+              </tr>
+
+              <tr>
+                <td>Green Hill Zone</td>
+                <td>Sonic the Hedgehog</td>
+                <td>Cenário convidado</td>
+              </tr>
+
+              <tr>
+                <td>Shadow Moses Island</td>
+                <td>Metal Gear</td>
+                <td>Elementos interativos</td>
+              </tr>
+
+              <tr>
+                <td>New Pork City</td>
+                <td>Mother</td>
+                <td>Grande área de combate</td>
+              </tr>
+
+              <tr>
+                <td>Mario Circuit</td>
+                <td>Mario Kart</td>
+                <td>Veículos e movimento</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SUBSPACE EMISSARY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            The Subspace Emissary
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/brawl_subspace.jpg"
+                alt="The Subspace Emissary"
+              />
+
+              <img
+                src="../tgga/brawl_tabuu.jpg"
+                alt="Tabuu"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ The Subspace Emissary e Tabuu ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            The Subspace Emissary é o principal modo de aventura
+            de Super Smash Bros. Brawl.<br>
+
+            O modo combina combates tradicionais de Smash com
+            elementos de jogos de plataforma e exploração.<br>
+
+            A campanha reúne personagens de diferentes franquias
+            em uma história envolvendo o exército Subspace e
+            seu líder, Tabuu.<br>
+
+            Durante a aventura, diferentes personagens se encontram,
+            formam grupos e enfrentam inimigos e chefes especiais.<br>
+
+            O modo também apresenta cutscenes que desenvolvem
+            a narrativa sem utilizar diálogos tradicionais entre
+            todos os personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CHEFES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Chefes
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS CHEFES E ADVERSÁRIOS -
+            </h3>
+
+            <ul>
+
+              <li>Petey Piranha</li>
+              <li>Rayquaza</li>
+              <li>Meta Ridley</li>
+              <li>Galleom</li>
+              <li>Duon</li>
+              <li>Ridley</li>
+              <li>Master Hand</li>
+              <li>Crazy Hand</li>
+              <li>Tabuu</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODOS DE JOGO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modos de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl possui diversos modos de jogo além das partidas
+            tradicionais.<br>
+
+            O modo Classic permite enfrentar uma sequência de
+            adversários controlados pelo computador.<br>
+
+            All-Star coloca o jogador contra diferentes personagens
+            do elenco, enquanto Event Matches apresentam desafios
+            com condições específicas.<br>
+
+            O jogo também possui modos multiplayer, treinamento,
+            partidas especiais e o The Subspace Emissary.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS MODOS -
+            </h3>
+
+            <ul>
+
+              <li>Classic</li>
+              <li>All-Star</li>
+              <li>Versus</li>
+              <li>Team Battle</li>
+              <li>Special Brawl</li>
+              <li>Event Matches</li>
+              <li>Training</li>
+              <li>The Subspace Emissary</li>
+              <li>Home-Run Contest</li>
+              <li>Target Smash</li>
+              <li>Multi-Man Brawl</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Trilha Sonora
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/brawl_soundtrack.jpg"
+                alt="Trilha sonora de Super Smash Bros. Brawl"
+              />
+
+              <img
+                src="../tgga/brawl_koji_kondo.jpg"
+                alt="Koji Kondo"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Trilha sonora de Brawl e Koji Kondo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora de Brawl é uma das maiores da série
+            e reúne músicas provenientes de diversas franquias.<br>
+
+            O projeto contou com a participação de numerosos
+            compositores e arranjadores da indústria japonesa
+            de jogos eletrônicos.<br>
+
+            As músicas incluem arranjos de temas clássicos,
+            composições novas e versões especialmente produzidas
+            para o jogo.<br>
+
+            A seleção musical também está diretamente relacionada
+            aos diferentes cenários e franquias representadas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TROFÉUS E COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Troféus, Adesivos e Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl possui uma grande quantidade de conteúdo
+            colecionável relacionado às franquias representadas
+            no jogo.<br>
+
+            Os troféus apresentam personagens, objetos e elementos
+            de diferentes jogos, acompanhados de informações
+            explicativas.<br>
+
+            Os adesivos podem ser utilizados no The Subspace
+            Emissary para modificar atributos de determinados
+            personagens.<br>
+
+            O jogo também possui desafios, CDs de música,
+            troféus especiais e outros conteúdos desbloqueáveis.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - COLECIONÁVEIS -
+            </h3>
+
+            <ul>
+
+              <li>Troféus</li>
+              <li>Adesivos</li>
+              <li>CDs de música</li>
+              <li>Stickers</li>
+              <li>Challenges</li>
+              <li>Assist Trophies</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ASSIST TROPHIES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assist Trophies
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Assist Trophies são itens especiais que permitem
+            chamar temporariamente personagens que não fazem
+            parte do elenco jogável principal.<br>
+
+            Ao serem utilizados, esses personagens aparecem
+            na arena e executam ações automaticamente para
+            auxiliar o jogador que os invocou.<br>
+
+            Entre os personagens representados estão figuras
+            provenientes de diversas franquias da Nintendo
+            e de outras séries.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do Wii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Smash Bros. Brawl foi desenvolvido para o
+            hardware do Nintendo Wii e utiliza seus recursos
+            para apresentar arenas tridimensionais, efeitos
+            especiais, personagens detalhados e grandes
+            quantidades de elementos simultâneos na tela.<br>
+
+            O jogo também utiliza armazenamento em disco óptico
+            para acomodar uma quantidade muito grande de músicas,
+            modelos, animações, cenários e outros conteúdos.<br>
+
+            A compatibilidade com diferentes controles foi uma
+            característica importante do projeto, permitindo
+            que o jogo pudesse ser utilizado tanto por jogadores
+            casuais quanto por jogadores acostumados aos controles
+            tradicionais de Smash.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O multiplayer é uma das principais características
+            de Super Smash Bros. Brawl.<br>
+
+            Até quatro jogadores podem participar simultaneamente
+            das partidas locais, utilizando diferentes combinações
+            de personagens e equipes.<br>
+
+            As partidas podem ser configuradas com diferentes
+            regras, incluindo limite de tempo, número de vidas,
+            itens e condições especiais.<br>
+
+            Brawl também foi um dos primeiros jogos da série a
+            oferecer partidas online através do serviço
+            Nintendo Wi-Fi Connection.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ONLINE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogo Online
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Brawl oferecia partidas online através da Nintendo
+            Wi-Fi Connection, permitindo que jogadores
+            enfrentassem outras pessoas pela internet.<br>
+
+            O sistema incluía partidas com amigos e diferentes
+            opções de jogo online.<br>
+
+            O serviço Nintendo Wi-Fi Connection foi posteriormente
+            encerrado, fazendo com que as funções oficiais de
+            conexão online de Brawl deixassem de operar.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES / MÍDIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_wii_disc.jpg"
+                  alt="Disco de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Disco — Super Smash Bros. Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_wii_box.jpg"
+                  alt="Caixa de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Caixa — Super Smash Bros. Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_manual.jpg"
+                  alt="Manual de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Manual — Super Smash Bros. Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_console.jpg"
+                  alt="Nintendo Wii"
+                />
+
+                <figcaption>
+                  Nintendo Wii
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Brawl foi distribuída em um
+            disco óptico específico para o Wii, acompanhado
+            por caixa e manual.<br>
+
+            A embalagem apresenta a identidade visual da série
+            e destaca o grande elenco de personagens presentes
+            no jogo.<br>
+
+            Para colecionadores, diferentes versões regionais,
+            condições de conservação, manuais e materiais
+            promocionais podem possuir interesse histórico.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Smash Bros. Brawl ampliou significativamente
+            a fórmula estabelecida pelos jogos anteriores da
+            série.<br>
+
+            A inclusão de personagens convidados, Final Smashes,
+            The Subspace Emissary, grande quantidade de músicas
+            e uma enorme coleção de troféus e itens fez do jogo
+            um dos títulos mais abrangentes da série.<br>
+
+            Brawl também marcou a estreia de Sonic the Hedgehog
+            e Solid Snake como personagens jogáveis em
+            Super Smash Bros.<br>
+
+            O jogo continuou sendo lembrado por seu conteúdo
+            multiplayer, pelo modo de aventura e pela grande
+            quantidade de personagens e franquias representadas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Brawl foi lançado originalmente para Wii em 2008.
+              </li>
+
+              <li>
+                Masahiro Sakurai dirigiu o projeto.
+              </li>
+
+              <li>
+                Sonic the Hedgehog e Solid Snake fizeram sua
+                estreia na série como personagens convidados jogáveis.
+              </li>
+
+              <li>
+                O jogo possui o modo de aventura The Subspace Emissary.
+              </li>
+
+              <li>
+                Os Final Smashes foram introduzidos na série em Brawl.
+              </li>
+
+              <li>
+                Brawl possui suporte a quatro jogadores locais.
+              </li>
+
+              <li>
+                O jogo oferece quatro métodos principais de controle.
+              </li>
+
+              <li>
+                A trilha sonora reúne centenas de músicas e arranjos
+                relacionados às franquias representadas.
+              </li>
+
+              <li>
+                O jogo possui troféus, adesivos, CDs de música
+                e diversos outros itens colecionáveis.
+              </li>
+
+              <li>
+                Brawl inclui personagens de franquias externas
+                à Nintendo, como Sonic e Metal Gear.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES E MATERIAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Como outros grandes lançamentos do Wii, Super Smash
+            Bros. Brawl possui diferentes materiais físicos
+            associados à sua distribuição.<br>
+
+            Caixas, discos, manuais, encartes promocionais e
+            diferentes versões regionais podem apresentar
+            pequenas diferenças de embalagem e identificação.<br>
+
+            O jogo também recebeu materiais promocionais e
+            produtos relacionados ao universo de Super Smash Bros.,
+            tornando sua edição física um item relevante para
+            colecionadores da biblioteca do Wii.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_box.jpg"
+                  alt="Caixa de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Caixa — Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_disc.jpg"
+                  alt="Disco de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Disco — Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_manual_full.jpg"
+                  alt="Manual de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Manual — Brawl
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/brawl_poster.jpg"
+                  alt="Material promocional de Super Smash Bros. Brawl"
+                />
+
+                <figcaption>
+                  Material promocional — Brawl
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supersmashbrosbrawl.html">
+                ○ Games - Super Smash Bros. Brawl
+              </a>
+            </li>
+
+            <li>
+              <a href="wii.html">
+                ○ Consoles - Wii
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Mario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos personagens principais de Super Smash Bros.
+                  e representante da série Super Mario.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Franquia: Super Mario</li>
+                  <li>Função: Lutador</li>
+                  <li>Final Smash: Mario Finale</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Luigi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Mario e personagem jogável no elenco
+                  de Brawl.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Peach</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Princesa do Reino dos Cogumelos e personagem
+                  jogável.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bowser</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal antagonista da série Super Mario
+                  e lutador pesado em Brawl.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Link</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Herói da série The Legend of Zelda.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Zelda</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Princesa de Hyrule e personagem jogável.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sheik</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Forma alternativa de Zelda utilizada
+                  durante o combate.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Samus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Caçadora de recompensas protagonista da série
+                  Metroid.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kirby</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem da série Kirby e lutador capaz
+                  de copiar habilidades de outros personagens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Donkey Kong</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem da franquia Donkey Kong e um dos
+                  lutadores mais fortes fisicamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pikachu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pokémon elétrico e representante da série Pokémon.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fox</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista da série Star Fox.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Falco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Piloto da equipe Star Fox e personagem jogável.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Captain Falcon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem da série F-Zero conhecido por
+                  seus ataques físicos rápidos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ness</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de EarthBound.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lucas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de Mother 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Meta Knight</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Guerreiro mascarado da série Kirby.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>King Dedede</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Rei de Dream Land e personagem da série Kirby.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Olimar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista da série Pikmin.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Snake</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Solid Snake, protagonista da série Metal Gear
+                  e personagem convidado de Brawl.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sonic</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sonic the Hedgehog, personagem da Sega e
+                  convidado especial de Brawl.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Smash Ball</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item especial que permite ao lutador utilizar
+                  seu Final Smash.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Poké Ball</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que libera Pokémon para auxiliar durante
+                  a batalha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Assist Trophy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que invoca personagens não jogáveis
+                  para auxiliar temporariamente o jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Final Destination</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arena plana e tradicional da série Super Smash Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Battlefield</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cenário com uma plataforma principal e
+                  três plataformas menores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Temple</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande cenário baseado na série The Legend
+                  of Zelda.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Green Hill Zone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cenário baseado na série Sonic the Hedgehog.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shadow Moses Island</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cenário inspirado na série Metal Gear.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>The Subspace Emissary</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal modo de aventura de Brawl, combinando
+                  plataformas e combates.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tabuu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal antagonista do The Subspace Emissary.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Master Hand</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chefe recorrente da série Super Smash Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Crazy Hand</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chefe associado à Master Hand.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Home-Run Contest</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minigame no qual o jogador tenta lançar
+                  um saco de areia o mais longe possível.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Target Smash</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Desafio baseado em destruir alvos dentro
+                  de um determinado percurso.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>All-Star</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo no qual o jogador enfrenta diversos
+                  personagens do elenco em sequência.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Classic Mode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo tradicional de progressão através
+                  de várias batalhas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Event Matches</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Desafios especiais com regras e condições
+                  específicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Trophies</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Objetos colecionáveis que representam
+                  personagens, objetos e elementos de diferentes
+                  franquias.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stickers</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Adesivos colecionáveis utilizados para
+                  modificar atributos no The Subspace Emissary.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CDs</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Itens colecionáveis utilizados para
+                  desbloquear músicas adicionais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Masahiro Sakurai</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor de Super Smash Bros. Brawl e
+                  criador da série Super Smash Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

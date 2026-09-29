@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Controle Gemini X Game</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+
+    /* ==========================================
+       IMAGEM PRINCIPAL
+       ========================================== */
+
+    .main-item-image {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+    .main-item-image img {
+      width: 90%;
+      max-width: 650px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+
+    .main-item-image figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+
+
+    /* ==========================================
+       CAIXAS DE INFORMAÇÃO
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+    }
+
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #ddd;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+
+    .info-box p {
+      margin-bottom: 8px;
+    }
+
+
+
+    /* ==========================================
+       TABELA DE ESPECIFICAÇÕES
+       ========================================== */
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+
+    .spec-table th,
+    .spec-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+
+
+    .spec-table th {
+      width: 35%;
+      color: #ddd;
+      background: #252525;
+    }
+
+
+    .spec-table td {
+      color: #bbb;
+      background: #151515;
+    }
+
+
+
+    /* ==========================================
+       DIAGRAMA DOS BOTÕES
+       ========================================== */
+
+    .controller-layout {
+      margin: 25px auto;
+      padding: 20px;
+      max-width: 650px;
+      background: #151515;
+      border: 1px solid #444;
+    }
+
+
+    .controller-layout-title {
+      text-align: center;
+      color: #ddd;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+
+    .controller-diagram {
+      display: grid;
+      grid-template-columns: 1fr 0.7fr 1fr;
+      gap: 15px;
+      align-items: center;
+    }
+
+
+    .diagram-left,
+    .diagram-right,
+    .diagram-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+
+    .diagram-button {
+      min-width: 65px;
+      padding: 7px 8px;
+      text-align: center;
+      border: 1px solid #555;
+      background: #252525;
+      color: #ddd;
+      font-size: 11px;
+      box-sizing: border-box;
+    }
+
+
+    .diagram-button.red {
+      border-color: #8b3030;
+      color: #ff7777;
+    }
+
+
+    .diagram-button.yellow {
+      border-color: #9a8b27;
+      color: #eee56a;
+    }
+
+
+    .diagram-button.blue {
+      border-color: #315d9b;
+      color: #75a9ff;
+    }
+
+
+    .diagram-button.gray {
+      border-color: #666;
+      color: #ccc;
+    }
+
+
+    .diagram-button.green {
+      border-color: #28734a;
+      color: #68d89a;
+    }
+
+
+
+    /* ==========================================
+       HISTÓRIA / CONTEXTO
+       ========================================== */
+
+    .historical-block {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+
+    .historical-block img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      background: #111;
+      box-sizing: border-box;
+    }
+
+
+    .historical-block figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+
+
+    /* ==========================================
+       LISTAS
+       ========================================== */
+
+    .article-list {
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+
+    .article-list li {
+      margin-bottom: 7px;
+    }
+
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .main-item-image img {
+        width: 100%;
+      }
+
+
+      .controller-diagram {
+        grid-template-columns: 1fr;
+      }
+
+
+      .historical-block img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+
+      .spec-table {
+        font-size: 12px;
+      }
+
+
+      .spec-table th,
+      .spec-table td {
+        padding: 6px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... Um controle tão estranho quanto o próprio Gemini X Game:
+          seis botões, formato prateado e angular, D-pad vermelho e
+          um desenho que parece ter saído diretamente da era dos
+          famiclones brasileiros ...
+
+          &nbsp;
+
+        </span>
+
+
+        <span>
+
+          ... Um controle tão estranho quanto o próprio Gemini X Game:
+          seis botões, formato prateado e angular, D-pad vermelho e
+          um desenho que parece ter saído diretamente da era dos
+          famiclones brasileiros ...
+
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ======================================
+               TÍTULO
+               ====================================== -->
+
+          <h2>
+            Controle do Gemini X Game
+          </h2>
+
+
+
+          <!-- ======================================
+               IMAGEM PRINCIPAL
+               ====================================== -->
+
+          <figure class="main-item-image">
+
+            <img
+              src="../tgga/gemini-controle.jpg"
+              alt="Controle do Gemini X Game"
+            />
+
+            <figcaption>
+              ~ Controle Gemini X Game — modelo prateado com
+              D-pad vermelho, quatro botões de ação e dois
+              botões centrais verdes. ~
+            </figcaption>
+
+          </figure>
+
+
+
+          <!-- ======================================
+               INTRODUÇÃO
+               ====================================== -->
+
+          <h2 style="text-align: center;">
+            O Controle
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Entre os inúmeros controles produzidos para os famiclones
+            brasileiros, o controle que acompanha o Gemini X Game
+            certamente chama atenção pelo seu formato incomum.
+
+            <br><br>
+
+            Em vez de simplesmente copiar o formato retangular e
+            minimalista do controle original do Nintendo Entertainment
+            System, a Gemini utilizou uma carcaça larga, prateada e
+            bastante angular, com duas áreas laterais destinadas às
+            mãos do jogador.
+
+            <br><br>
+
+            O resultado é um controle visualmente muito característico:
+            de um lado está o direcional digital vermelho, enquanto do
+            outro ficam os quatro botões de ação coloridos.
+
+            <br><br>
+
+            No centro existe ainda um pequeno conjunto de dois botões
+            verdes, completando o conjunto de seis botões presentes
+            na parte frontal do controle.
+
+          </p>
+
+
+
+          <!-- ======================================
+               ORIGEM
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            O Controle e o Gemini X Game
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game é um console clone do NES/Nintendinho
+            comercializado no Brasil pela Gemini sem licença da
+            Nintendo.
+
+            <br><br>
+
+            Segundo o VGDB, o aparelho possui jogos armazenados
+            internamente, é compatível com cartuchos de 60 pinos e
+            originalmente era acompanhado por dois controles e uma
+            pistola.
+
+            <br><br>
+
+            Isso é importante porque o controle não deve ser analisado
+            como um periférico genérico separado de sua máquina:
+            ele faz parte de um conjunto bastante específico da história
+            dos famiclones brasileiros.
+
+          </p>
+
+
+
+          <!-- ======================================
+               DESIGN
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Design
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A primeira coisa que chama atenção é a carcaça.
+
+            <br><br>
+
+            O controle possui uma aparência prateada e uma construção
+            visualmente dividida em três áreas principais: o conjunto
+            esquerdo, onde está o D-pad; a região central, onde ficam
+            os botões menores; e o conjunto direito, onde estão os
+            botões de ação.
+
+            <br><br>
+
+            As laterais são relativamente largas, funcionando como
+            áreas de apoio para as mãos.
+
+            <br><br>
+
+            A parte central possui uma região triangular onde aparece
+            a identificação da Gemini. Essa área também abriga os
+            dois pequenos botões verdes.
+
+            <br><br>
+
+            O desenho é bastante diferente do controle tradicional
+            do NES e é justamente essa aparência que torna o periférico
+            facilmente reconhecível entre os controles de famiclones.
+
+          </p>
+
+
+
+          <!-- ======================================
+               DISPOSIÇÃO
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Disposição dos Controles
+          </h2>
+
+
+          <div class="controller-layout">
+
+            <div class="controller-layout-title">
+              Representação simplificada da disposição frontal
+            </div>
+
+
+            <div class="controller-diagram">
+
+
+              <div class="diagram-left">
+
+                <div class="diagram-button red">
+                  D-PAD
+                </div>
+
+                <div class="diagram-button">
+                  ↑ ↓ ← →
+                </div>
+
+              </div>
+
+
+
+              <div class="diagram-center">
+
+                <div class="diagram-button green">
+                  FUNÇÃO
+                </div>
+
+                <div class="diagram-button green">
+                  FUNÇÃO
+                </div>
+
+              </div>
+
+
+
+              <div class="diagram-right">
+
+                <div class="diagram-button gray">
+                  BOTÃO
+                </div>
+
+                <div class="diagram-button yellow">
+                  BOTÃO
+                </div>
+
+                <div class="diagram-button blue">
+                  BOTÃO
+                </div>
+
+                <div class="diagram-button red">
+                  BOTÃO
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ======================================
+               D-PAD
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Direcional Digital
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O lado esquerdo do controle é ocupado por um direcional
+            digital em formato de cruz.
+
+            <br><br>
+
+            Diferentemente do corpo prateado do controle, o D-pad
+            utiliza uma coloração vermelha bastante chamativa.
+
+            <br><br>
+
+            Sua função é fornecer as quatro direções básicas:
+
+            <strong>cima, baixo, esquerda e direita.</strong>
+
+            <br><br>
+
+            Como acontece com outros controles digitais destinados a
+            consoles baseados na arquitetura do NES, o direcional é
+            fundamental para jogos de plataforma, ação, quebra-cabeças,
+            esportes e praticamente qualquer título que dependa de
+            movimentação bidimensional.
+
+          </p>
+
+
+
+          <!-- ======================================
+               BOTÕES DE AÇÃO
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Os Quatro Botões de Ação
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No lado direito encontram-se quatro botões de ação.
+
+            <br><br>
+
+            Eles são dispostos em uma formação semelhante a um pequeno
+            agrupamento circular/diagonal e apresentam diferentes
+            cores.
+
+            <br><br>
+
+            A utilização exata de cada botão depende do jogo e da
+            implementação do hardware do famiclone. Por isso, não é
+            correto assumir que as cores possuem necessariamente uma
+            correspondência universal com funções específicas.
+
+            <br><br>
+
+            O que permanece claro visualmente é a separação entre
+            esses quatro botões principais e os dois botões menores
+            localizados no centro.
+
+          </p>
+
+
+
+          <!-- ======================================
+               DOIS BOTÕES CENTRAIS
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Os Dois Botões Centrais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais curiosas do controle são os
+            dois pequenos botões verdes localizados na região central.
+
+            <br><br>
+
+            Eles ficam abaixo da área onde aparece o logotipo da
+            Gemini e completam o conjunto de seis botões frontais.
+
+            <br><br>
+
+            A documentação pública localizada sobre o Gemini X Game
+            não fornece uma tabela confiável indicando uma função
+            individual e universal para cada um desses dois botões.
+            Portanto, neste arquivo eles são tratados como
+            <strong>botões de função</strong>, sem atribuir funções
+            específicas que não estejam documentadas.
+
+          </p>
+
+
+
+          <!-- ======================================
+               OS SEIS BOTÕES
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Por que Seis Botões?
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            É justamente aqui que o controle se diferencia da imagem
+            que normalmente temos de um controle de NES.
+
+            <br><br>
+
+            O conjunto visual apresenta quatro botões de ação na área
+            direita e dois botões menores na região central.
+
+            <br><br>
+
+            Dessa forma, olhando apenas para a parte frontal, temos:
+
+          </p>
+
+
+          <ul class="article-list">
+
+            <li>
+              1 direcional digital;
+            </li>
+
+            <li>
+              4 botões de ação coloridos;
+            </li>
+
+            <li>
+              2 botões centrais verdes;
+            </li>
+
+            <li>
+              1 conjunto de conexão por cabo;
+            </li>
+
+          </ul>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ou seja, embora a plataforma de origem seja o NES/Famicom,
+            o periférico recebeu uma apresentação própria da Gemini.
+
+          </p>
+
+
+
+          <!-- ======================================
+               CABO
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Cabo e Conexão
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle é um periférico com fio.
+
+            <br><br>
+
+            Fotografias do conjunto mostram o cabo saindo do próprio
+            controle e formando uma conexão física permanente com o
+            periférico.
+
+            <br><br>
+
+            Isso significa que, ao contrário de controles modernos,
+            não existe bateria, carregamento ou comunicação sem fio
+            envolvida.
+
+            <br><br>
+
+            O cabo também faz parte importante da identidade desses
+            controles antigos: era através dele que todos os comandos
+            realizados pelo jogador chegavam ao console.
+
+          </p>
+
+
+
+          <!-- ======================================
+               CONSTRUÇÃO
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Construção Física
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A carcaça externa funciona como a estrutura mecânica do
+            controle.
+
+            <br><br>
+
+            Dentro dela ficam os mecanismos responsáveis pelo
+            acionamento do D-pad e dos botões, além da placa de
+            circuito responsável por interpretar os comandos.
+
+            <br><br>
+
+            O formato externo possui uma grande quantidade de
+            superfícies inclinadas e áreas triangulares, característica
+            que ajuda a diferenciar o controle de um gamepad tradicional
+            do NES.
+
+            <br><br>
+
+            A combinação do plástico prateado com os botões coloridos
+            também produz uma estética bastante característica dos
+            periféricos brasileiros de sua época.
+
+          </p>
+
+
+
+          <!-- ======================================
+               ERGONOMIA
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Ergonomia
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle utiliza duas áreas laterais relativamente
+            largas para acomodar as mãos.
+
+            <br><br>
+
+            Isso cria uma experiência visual e física bastante
+            diferente do controle retangular clássico do NES.
+
+            <br><br>
+
+            O D-pad fica isolado na mão esquerda, enquanto a mão
+            direita naturalmente alcança os quatro botões coloridos.
+
+            <br><br>
+
+            Os dois botões centrais ficam próximos ao polegar,
+            formando uma terceira região de interação.
+
+          </p>
+
+
+
+          <!-- ======================================
+               RELAÇÃO COM FAMICLONES
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Dentro da História dos Famiclones
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game pertence a uma enorme família de consoles
+            brasileiros e internacionais que reproduziam a arquitetura
+            do NES/Famicom sem serem produtos oficiais da Nintendo.
+
+            <br><br>
+
+            O NES foi um dos consoles mais clonados da história,
+            principalmente devido à enorme popularidade de sua
+            biblioteca e à simplicidade relativa de sua arquitetura.
+
+            <br><br>
+
+            No Brasil, esse fenômeno ganhou proporções particularmente
+            interessantes, com diversas empresas produzindo aparelhos
+            compatíveis com jogos do Nintendo/Famicom.
+
+            <br><br>
+
+            O Gemini X Game é um exemplo particularmente curioso dessa
+            história porque não se limita a copiar a aparência externa
+            do console original.
+
+            <br><br>
+
+            Seu conjunto de periféricos também recebeu designs próprios,
+            incluindo este controle de formato incomum.
+
+          </p>
+
+
+
+          <!-- ======================================
+               CONJUNTO ORIGINAL
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            O Conjunto do Gemini X Game
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            De acordo com o registro do VGDB, o Gemini X Game era
+            comercializado com um conjunto composto pelo console,
+            dois controles e uma pistola.
+
+            <br><br>
+
+            O aparelho também possui jogos na memória e aceita
+            cartuchos de 60 pinos.
+
+            <br><br>
+
+            Isso faz com que o controle seja apenas uma parte de um
+            conjunto maior de acessórios que acompanhavam o sistema.
+
+          </p>
+
+
+
+          <!-- ======================================
+               TABELA
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Especificações do Controle
+          </h2>
+
+
+          <table class="spec-table">
+
+            <tr>
+              <th>Tipo</th>
+              <td>Controle com fio</td>
+            </tr>
+
+            <tr>
+              <th>Sistema</th>
+              <td>Gemini X Game</td>
+            </tr>
+
+            <tr>
+              <th>Plataforma compatível</th>
+              <td>Famiclone baseado no NES</td>
+            </tr>
+
+            <tr>
+              <th>Fabricante / Marca</th>
+              <td>Gemini</td>
+            </tr>
+
+            <tr>
+              <th>Direcional</th>
+              <td>D-pad digital de quatro direções</td>
+            </tr>
+
+            <tr>
+              <th>Botões de ação</th>
+              <td>4 botões coloridos</td>
+            </tr>
+
+            <tr>
+              <th>Botões centrais</th>
+              <td>2 botões verdes</td>
+            </tr>
+
+            <tr>
+              <th>Total frontal</th>
+              <td>6 botões + D-pad</td>
+            </tr>
+
+            <tr>
+              <th>Conexão</th>
+              <td>Por cabo</td>
+            </tr>
+
+            <tr>
+              <th>Comunicação</th>
+              <td>Com fio</td>
+            </tr>
+
+            <tr>
+              <th>Cor predominante</th>
+              <td>Prata / cinza</td>
+            </tr>
+
+            <tr>
+              <th>D-pad</th>
+              <td>Vermelho</td>
+            </tr>
+
+            <tr>
+              <th>Botões centrais</th>
+              <td>Verdes</td>
+            </tr>
+
+          </table>
+
+
+
+          <!-- ======================================
+               CURIOSIDADES
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <ul class="article-list">
+
+            <li>
+              O Gemini X Game é registrado como um clone do NES /
+              Nintendinho.
+            </li>
+
+            <li>
+              O console foi comercializado no Brasil pela Gemini.
+            </li>
+
+            <li>
+              O sistema é compatível com cartuchos de 60 pinos.
+            </li>
+
+            <li>
+              O aparelho possui jogos armazenados internamente.
+            </li>
+
+            <li>
+              O conjunto original incluía dois controles.
+            </li>
+
+            <li>
+              O pacote também incluía uma pistola.
+            </li>
+
+            <li>
+              O controle possui uma aparência bastante diferente
+              do gamepad retangular tradicional do NES.
+            </li>
+
+            <li>
+              A combinação de D-pad vermelho, corpo prateado e
+              botões coloridos é uma das características mais
+              facilmente reconhecíveis do periférico.
+            </li>
+
+          </ul>
+
+
+
+          <!-- ======================================
+               COMPONENTES
+               ====================================== -->
+
+          <h2></h2>
+
+          <h2 style="text-align: center;">
+            Componentes do Controle
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como no artigo do Atari 2600, esta seção foi criada
+            para separar visualmente os principais elementos físicos
+            que formam o controle.
+
+            <br><br>
+
+            Algumas especificações internas detalhadas não possuem
+            documentação pública facilmente verificável para esta
+            variante específica do Gemini X Game. Por isso, quando
+            uma informação exata não está documentada, a descrição
+            permanece em nível funcional.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+
+            <li>
+              <a href="gemini-x-game.html">
+                ○ Games - Gemini X Game
+              </a>
+            </li>
+
+
+            <li>
+              <a href="gemini-x-game-controle.html">
+                ○ Controle - Gemini X Game
+              </a>
+            </li>
+
+
+            <li>
+              <a href="gemini-x-game-pistola.html">
+                ○ Pistola - Gemini X Game
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+
+        <!-- ======================================
+             COMPONENTES
+             ====================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior da estrutura plástica do controle.
+                  É responsável por formar a superfície externa
+                  observada pelo jogador.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Material: plástico moldado
+                  </li>
+
+                  <li>
+                    Função: estrutura externa
+                  </li>
+
+                  <li>
+                    Acabamento: prateado / cinza
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior da carcaça que fecha o conjunto
+                  mecânico e protege a placa de circuito e os
+                  componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Direcional D-Pad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Direcional digital utilizado para controlar os
+                  movimentos do personagem ou cursor nos jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Tipo: digital
+                  </li>
+
+                  <li>
+                    Direções: 4
+                  </li>
+
+                  <li>
+                    Cor observada: vermelho
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Direcional Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área do D-pad correspondente ao comando para cima.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Direcional Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área do D-pad correspondente ao comando para baixo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Direcional Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área do D-pad correspondente ao comando para
+                  esquerda.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Direcional Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área do D-pad correspondente ao comando para
+                  direita.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Primeiro Botão de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos quatro botões principais localizados no
+                  lado direito do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Segundo Botão de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos quatro botões principais coloridos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Terceiro Botão de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos quatro botões principais utilizados
+                  pelos jogos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Quarto Botão de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Quarto botão da área de ação do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Central Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos dois pequenos botões verdes localizados
+                  na região central da carcaça.
+                </p>
+
+                <p>
+                  A função específica deste botão não é
+                  suficientemente documentada nas fontes públicas
+                  consultadas para esta variante.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Central Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo botão verde localizado na região central
+                  do controle.
+                </p>
+
+                <p>
+                  Sua função pode depender da implementação do
+                  console e do jogo utilizado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Logotipo Gemini
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Identificação visual da fabricante presente na
+                  região central do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas / Contatos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecanismos internos responsáveis por detectar
+                  fisicamente o pressionamento dos comandos.
+                </p>
+
+                <p>
+                  A construção exata pode variar conforme a revisão
+                  do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa eletrônica responsável por receber os
+                  comandos dos botões e encaminhar os sinais
+                  através do cabo até o console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Trilhas Condutoras
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Caminhos condutores presentes na placa que
+                  interligam os diferentes contatos elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo de Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável pela comunicação entre o
+                  controle e o console.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>
+                    Tipo: cabo físico
+                  </li>
+
+                  <li>
+                    Comunicação: com fio
+                  </li>
+
+                  <li>
+                    Função: transporte dos comandos
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Alívio de Tensão do Cabo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região onde o cabo deixa a carcaça do controle.
+                  Sua função é reduzir o esforço mecânico exercido
+                  sobre os fios internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Extremidade do cabo responsável pela conexão
+                  elétrica com o console Gemini X Game.
+                </p>
+
+                <p>
+                  O formato exato do conector pode variar entre
+                  revisões e lotes do equipamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para unir as
+                  partes da carcaça.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Espaçadores Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos internos responsáveis por manter
+                  componentes e placa na posição correta dentro
+                  da carcaça.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+            <details class="component-item">
+
+              <summary>
+                Apoios Internos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estruturas moldadas no interior da carcaça que
+                  ajudam a manter os botões alinhados com seus
+                  respectivos contatos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

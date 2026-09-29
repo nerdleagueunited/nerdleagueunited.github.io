@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Grand Theft Auto IV</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Grand Theft Auto IV foi lançado originalmente para
+          PlayStation 3 e Xbox 360 em 2008, apresentando Liberty City
+          como uma recriação ficcional de Nova York e acompanhando
+          a história de Niko Bellic ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Grand Theft Auto IV foi lançado originalmente para
+          PlayStation 3 e Xbox 360 em 2008, apresentando Liberty City
+          como uma recriação ficcional de Nova York e acompanhando
+          a história de Niko Bellic ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Grand Theft Auto IV — PlayStation 3
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/gta4_ps3.jpg"
+              alt="Grand Theft Auto IV para PlayStation 3"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Grand Theft Auto IV
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV é um jogo eletrônico de ação e
+            aventura desenvolvido pela Rockstar North e publicado
+            pela Rockstar Games.<br>
+
+            O jogo foi lançado originalmente para PlayStation 3 e
+            Xbox 360 em 2008, chegando posteriormente ao Windows.<br>
+
+            O jogador controla Niko Bellic, um imigrante do Leste
+            Europeu que chega a Liberty City em busca de uma nova
+            vida e acaba envolvido com criminosos, antigos conhecidos
+            e diferentes organizações criminosas.<br>
+
+            O título utiliza um mundo aberto baseado em uma versão
+            fictícia de Nova York, combinando exploração, combate,
+            direção, missões, atividades paralelas e uma narrativa
+            centrada nos personagens.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Rockstar North
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Rockstar Games
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Aaron Garbut
+              </li>
+
+              <li>
+                <strong>Produção:</strong>
+                Leslie Benzies
+              </li>
+
+              <li>
+                <strong>Roteiro:</strong>
+                Dan Houser, Rupert Humphries e outros
+              </li>
+
+              <li>
+                <strong>Música:</strong>
+                Michael Hunter
+              </li>
+
+              <li>
+                <strong>Plataforma desta página:</strong>
+                PlayStation 3
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                29 de abril de 2008
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura / Mundo aberto
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1 jogador / Multiplayer online
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                Blu-ray Disc
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Grand Theft Auto IV foi realizado
+            principalmente pela Rockstar North, utilizando o hardware
+            da geração PlayStation 3 e Xbox 360 para criar uma cidade
+            muito mais detalhada que as apresentadas nos jogos
+            anteriores da série.<br>
+
+            A equipe criou Liberty City como uma cidade viva,
+            procurando representar diferentes bairros, veículos,
+            pedestres, atividades e sistemas de interação.<br>
+
+            O jogo utiliza o motor RAGE, desenvolvido pela Rockstar,
+            além de tecnologias relacionadas a física, animação,
+            iluminação e inteligência artificial.<br>
+
+            Um dos objetivos do projeto era apresentar uma experiência
+            de mundo aberto mais detalhada e uma narrativa com maior
+            foco no protagonista e em seus relacionamentos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ps3.jpg"
+                alt="PlayStation 3"
+              />
+
+              <img
+                src="../tgga/gta_sanandreas.jpg"
+                alt="Grand Theft Auto San Andreas"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ PlayStation 3 e Grand Theft Auto: San Andreas —
+              antecedentes de GTA IV ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV marcou a entrada principal da série
+            Grand Theft Auto na geração de PlayStation 3 e Xbox 360.<br>
+
+            O título sucedeu Grand Theft Auto: San Andreas e
+            apresentou uma mudança significativa de ambientação,
+            escala visual e abordagem narrativa.<br>
+
+            Em vez de utilizar uma versão fictícia de várias regiões
+            da Califórnia e Nevada, como em San Andreas, o novo jogo
+            concentrou sua ambientação em Liberty City, inspirada
+            principalmente em Nova York.<br>
+
+            A mudança de geração permitiu à Rockstar aumentar
+            consideravelmente a quantidade de detalhes presentes
+            na cidade e nos personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no PlayStation 3
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV foi lançado mundialmente em
+            29 de abril de 2008 para PlayStation 3 e Xbox 360.<br>
+
+            A versão para PlayStation 3 foi distribuída em
+            Blu-ray Disc e foi desenvolvida especificamente para
+            o hardware da geração.<br>
+
+            O lançamento foi acompanhado por uma ampla campanha
+            de divulgação e recebeu posteriormente conteúdos
+            adicionais relacionados ao universo de GTA IV.<br>
+
+            A versão para Windows foi lançada posteriormente,
+            com características próprias relacionadas à plataforma.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PS3
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            GTA IV no PlayStation 3
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta4_ps3_disc.jpg"
+                alt="Disco de GTA IV para PlayStation 3"
+              />
+
+              <img
+                src="../tgga/gta4_ps3_box.jpg"
+                alt="Caixa de GTA IV para PlayStation 3"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Grand Theft Auto IV — mídia física para PlayStation 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de PlayStation 3 utiliza o Blu-ray Disc como
+            mídia física e aproveita o hardware do console para
+            apresentar Liberty City em grande escala.<br>
+
+            O jogo utiliza o armazenamento do console para manter
+            dados relacionados ao mundo aberto, personagens,
+            veículos, áudio e outros elementos da experiência.<br>
+
+            O controle DualShock 3 permite controlar Niko,
+            dirigir veículos, utilizar armas e interagir com
+            diferentes elementos do ambiente.<br>
+
+            A versão também possui suporte ao modo multiplayer
+            online através da infraestrutura de rede do PlayStation 3.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta4_niko.jpg"
+                alt="Niko Bellic"
+              />
+
+              <img
+                src="../tgga/gta4_libertycity.jpg"
+                alt="Liberty City em GTA IV"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Niko Bellic e Liberty City ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história acompanha Niko Bellic, um imigrante que
+            chega a Liberty City após receber notícias de que seu
+            primo Roman está vivendo uma vida de sucesso na cidade.<br>
+
+            Ao descobrir que a realidade de Roman é bastante
+            diferente do que havia sido apresentada, Niko passa
+            a realizar trabalhos para diferentes personagens.<br>
+
+            A busca por uma pessoa relacionada ao passado de Niko
+            também se torna um dos elementos centrais da narrativa.<br>
+
+            Ao longo da história, Niko conhece criminosos,
+            empresários, policiais, traficantes e outros moradores
+            de Liberty City, formando alianças e tomando decisões
+            que influenciam determinados acontecimentos da campanha.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NIKO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Niko Bellic
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Niko Bellic é o protagonista de Grand Theft Auto IV.<br>
+
+            Ele possui experiência militar e chega aos Estados Unidos
+            procurando uma oportunidade para começar uma nova vida,
+            além de lidar com acontecimentos relacionados ao seu
+            passado.<br>
+
+            Durante a campanha, Niko trabalha para diferentes
+            personagens e participa de atividades criminosas,
+            enquanto tenta equilibrar seus objetivos pessoais
+            com os interesses das pessoas ao seu redor.<br>
+
+            O personagem também é utilizado como ponto de vista
+            para apresentar a cidade e os diversos grupos que
+            compõem a narrativa.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LIBERTY CITY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Liberty City
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_broker.jpg"
+                  alt="Broker"
+                />
+
+                <figcaption>
+                  Broker
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_dukes.jpg"
+                  alt="Dukes"
+                />
+
+                <figcaption>
+                  Dukes
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_bohan.jpg"
+                  alt="Bohan"
+                />
+
+                <figcaption>
+                  Bohan
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_algonquin.jpg"
+                  alt="Algonquin"
+                />
+
+                <figcaption>
+                  Algonquin
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Liberty City é o principal cenário de Grand Theft Auto IV
+            e é composta por quatro grandes distritos principais,
+            além de áreas complementares.<br>
+
+            Broker e Dukes representam a região inspirada no
+            Brooklyn e no Queens, enquanto Bohan apresenta elementos
+            inspirados no Bronx.<br>
+
+            Algonquin é a região central da cidade e possui forte
+            inspiração em Manhattan.<br>
+
+            A cidade também inclui Alderney, uma área inspirada
+            principalmente em Nova Jersey.<br>
+
+            O jogador pode atravessar a cidade utilizando carros,
+            motocicletas, táxis, barcos e outros meios de transporte.
+
+          </p>
+
+
+          <!-- ==========================================
+               DISTRITOS
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - REGIÕES DE LIBERTY CITY -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Broker:</strong>
+                região inicial e área inspirada no Brooklyn.
+              </li>
+
+              <li>
+                <strong>Dukes:</strong>
+                região inspirada no Queens.
+              </li>
+
+              <li>
+                <strong>Bohan:</strong>
+                área inspirada no Bronx.
+              </li>
+
+              <li>
+                <strong>Algonquin:</strong>
+                região central inspirada em Manhattan.
+              </li>
+
+              <li>
+                <strong>Alderney:</strong>
+                território inspirado em partes de New Jersey.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV combina exploração em mundo aberto
+            com missões de história e atividades secundárias.<br>
+
+            Niko pode caminhar, correr, nadar, utilizar veículos,
+            utilizar armas e interagir com diferentes personagens
+            espalhados pela cidade.<br>
+
+            O sistema de combate utiliza cobertura, mira manual
+            e diferentes tipos de armas.<br>
+
+            O jogador também pode utilizar táxis, celulares,
+            computadores e diversos estabelecimentos durante
+            a campanha.<br>
+
+            O sistema de física do jogo utiliza o motor Euphoria
+            em conjunto com outras tecnologias para produzir
+            animações e reações dos personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas e Equipamentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_pistol.jpg"
+                  alt="Pistola de GTA IV"
+                />
+
+                <figcaption>
+                  Pistol
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_shotgun.jpg"
+                  alt="Shotgun de GTA IV"
+                />
+
+                <figcaption>
+                  Shotgun
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_smg.jpg"
+                  alt="SMG de GTA IV"
+                />
+
+                <figcaption>
+                  SMG
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_ak47.jpg"
+                  alt="AK-47 de GTA IV"
+                />
+
+                <figcaption>
+                  Assault Rifle
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O arsenal de GTA IV inclui pistolas, submetralhadoras,
+            espingardas, rifles, explosivos e outras armas.<br>
+
+            O jogador pode comprar armas de determinados
+            estabelecimentos ou obtê-las durante as missões.<br>
+
+            A mira e o sistema de cobertura permitem que Niko
+            enfrente grupos de inimigos utilizando diferentes
+            estratégias de combate.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VEÍCULOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Veículos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta4_car.jpg"
+                alt="Carro de GTA IV"
+              />
+
+              <img
+                src="../tgga/gta4_taxi.jpg"
+                alt="Táxi de Liberty City"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Veículos e táxis de Liberty City ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Liberty City possui uma grande variedade de veículos,
+            incluindo carros, motocicletas, barcos e helicópteros.<br>
+
+            Os automóveis possuem características diferentes de
+            velocidade, aceleração, peso e dirigibilidade.<br>
+
+            Os táxis podem ser utilizados pelo jogador para viajar
+            rapidamente entre diferentes pontos da cidade.<br>
+
+            A física dos veículos também foi reformulada em relação
+            aos jogos anteriores da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CELULAR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Celular
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O celular é um dos principais elementos de interação
+            de GTA IV.<br>
+
+            Niko utiliza o aparelho para receber ligações e
+            mensagens, iniciar determinadas atividades e entrar
+            em contato com personagens.<br>
+
+            Posteriormente, o aparelho também pode ser utilizado
+            para determinadas funções relacionadas ao multiplayer
+            e a outras atividades do jogo.<br>
+
+            O celular contribui para integrar a narrativa com
+            o funcionamento do mundo aberto.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RELACIONAMENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Amizades e Relacionamentos
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS IMPORTANTES -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Roman Bellic:</strong>
+                primo de Niko e proprietário de uma empresa
+                de táxis.
+              </li>
+
+              <li>
+                <strong>Little Jacob:</strong>
+                traficante de armas e amigo de Niko.
+              </li>
+
+              <li>
+                <strong>Brucie Kibbutz:</strong>
+                empresário e entusiasta de carros e atividades
+                esportivas.
+              </li>
+
+              <li>
+                <strong>Packie McReary:</strong>
+                integrante da família McReary e associado
+                ao crime organizado.
+              </li>
+
+              <li>
+                <strong>Kate McReary:</strong>
+                integrante da família McReary e personagem
+                importante para Niko.
+              </li>
+
+              <li>
+                <strong>Dwayne Forge:</strong>
+                personagem associado a uma das missões
+                secundárias e escolhas do protagonista.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Missões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha principal é composta por uma grande
+            quantidade de missões distribuídas entre os diversos
+            personagens da história.<br>
+
+            As missões envolvem perseguições, combates, roubos,
+            transporte de personagens, assassinatos, fugas e
+            outras atividades criminosas.<br>
+
+            Algumas missões apresentam escolhas que podem alterar
+            acontecimentos posteriores da narrativa.<br>
+
+            A estrutura permite que o jogador explore Liberty City
+            entre as missões e realize atividades paralelas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESCOLHAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Escolhas e Consequências
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Em determinados momentos da campanha, Niko precisa
+            tomar decisões que podem modificar o desenvolvimento
+            da história.<br>
+
+            Algumas escolhas determinam quais personagens
+            permanecem envolvidos na narrativa e quais missões
+            ficam disponíveis posteriormente.<br>
+
+            O final da campanha também apresenta uma decisão
+            importante que resulta em diferentes acontecimentos
+            para os personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta4_multiplayer.jpg"
+                alt="Multiplayer de GTA IV"
+              />
+
+              <img
+                src="../tgga/gta4_psn.jpg"
+                alt="GTA IV no PlayStation Network"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Multiplayer de Grand Theft Auto IV no PlayStation 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV possui modos multiplayer que
+            permitem que vários jogadores participem de partidas
+            utilizando uma versão compartilhada de Liberty City.<br>
+
+            Os modos incluem partidas competitivas e atividades
+            baseadas em equipes, com diferentes objetivos e regras.<br>
+
+            A versão de PlayStation 3 utilizava a PlayStation Network
+            para conectar os jogadores.<br>
+
+            O multiplayer expandiu o uso do mundo aberto para além
+            da campanha individual.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RÁDIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Rádio e Trilha Sonora
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gta4_radio.jpg"
+                alt="Rádio de GTA IV"
+              />
+
+              <img
+                src="../tgga/gta4_music.jpg"
+                alt="Trilha sonora de GTA IV"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Estações de rádio de Liberty City ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os veículos de GTA IV possuem diversas estações de
+            rádio com diferentes gêneros musicais e programas.<br>
+
+            A trilha sonora combina músicas licenciadas com
+            programas de rádio fictícios apresentados por
+            personagens criados especificamente para o jogo.<br>
+
+            Entre as estações existem canais dedicados a rock,
+            hip-hop, música eletrônica, pop, reggae e outros
+            estilos.<br>
+
+            O rádio também funciona como elemento de ambientação
+            e contribui para caracterizar diferentes partes
+            da cidade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do PlayStation 3
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV foi desenvolvido para aproveitar
+            os recursos da geração de PlayStation 3 e Xbox 360.<br>
+
+            No PlayStation 3, o jogo utiliza o processador Cell
+            Broadband Engine e o processador gráfico RSX para
+            executar seus sistemas de jogo e apresentação visual.<br>
+
+            A Rockstar também utilizou seu motor RAGE para criar
+            o mundo aberto, enquanto tecnologias como Euphoria
+            contribuíram para os movimentos e reações dos
+            personagens.<br>
+
+            O resultado foi uma cidade com maior densidade de
+            detalhes, física, animações e interações em comparação
+            com os títulos anteriores da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÃO FÍSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_ps3_box.jpg"
+                  alt="Caixa de GTA IV para PS3"
+                />
+
+                <figcaption>
+                  Caixa — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_ps3_manual.jpg"
+                  alt="Manual de GTA IV para PS3"
+                />
+
+                <figcaption>
+                  Manual — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_ps3_disc.jpg"
+                  alt="Disco de GTA IV para PS3"
+                />
+
+                <figcaption>
+                  Blu-ray — Grand Theft Auto IV
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/gta4_map.jpg"
+                  alt="Mapa de Liberty City"
+                />
+
+                <figcaption>
+                  Mapa — Liberty City
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Grand Theft Auto IV para
+            PlayStation 3 inclui o Blu-ray do jogo e materiais
+            impressos relacionados à edição.<br>
+
+            Dependendo da edição e da região, materiais como
+            manual, mapa de Liberty City e outros encartes podem
+            acompanhar o produto.<br>
+
+            Para colecionadores, diferentes versões regionais,
+            estado de conservação da caixa, disco e materiais
+            impressos podem apresentar diferenças.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EXPANSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Expansões
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - GRAND THEFT AUTO IV: EPISODES FROM LIBERTY CITY -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>The Lost and Damned:</strong>
+                campanha centrada em Johnny Klebitz e na
+                gangue The Lost.
+              </li>
+
+              <li>
+                <strong>The Ballad of Gay Tony:</strong>
+                campanha protagonizada por Luis Lopez,
+                associado à vida noturna de Liberty City.
+              </li>
+
+              <li>
+                As duas expansões apresentam histórias
+                independentes que se conectam aos acontecimentos
+                de GTA IV.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                GTA IV foi lançado para PlayStation 3 e Xbox 360
+                em 2008.
+              </li>
+
+              <li>
+                Niko Bellic é o protagonista principal do jogo.
+              </li>
+
+              <li>
+                Liberty City é uma versão fictícia de Nova York.
+              </li>
+
+              <li>
+                O jogo utiliza o motor RAGE da Rockstar.
+              </li>
+
+              <li>
+                O sistema Euphoria foi utilizado para animações
+                e reações físicas dos personagens.
+              </li>
+
+              <li>
+                Roman Bellic é primo de Niko e possui uma empresa
+                de táxis.
+              </li>
+
+              <li>
+                O celular de Niko possui papel importante na
+                narrativa e nas atividades do jogo.
+              </li>
+
+              <li>
+                O jogo possui diferentes finais relacionados
+                a decisões tomadas durante a campanha.
+              </li>
+
+              <li>
+                Grand Theft Auto IV recebeu duas grandes expansões:
+                The Lost and Damned e The Ballad of Gay Tony.
+              </li>
+
+              <li>
+                A versão de PlayStation 3 utiliza Blu-ray Disc
+                como mídia física.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Grand Theft Auto IV tornou-se um dos principais títulos
+            da série Grand Theft Auto e estabeleceu características
+            que seriam utilizadas e ampliadas em jogos posteriores.<br>
+
+            A representação detalhada de Liberty City, o sistema
+            de física, a estrutura narrativa e os relacionamentos
+            entre Niko e outros personagens passaram a fazer parte
+            da identidade do título.<br>
+
+            O jogo também serviu como base para duas expansões
+            independentes que exploraram outros personagens e
+            acontecimentos da mesma cidade.<br>
+
+            GTA IV permanece como uma das principais produções da
+            era de PlayStation 3 e Xbox 360 e como um capítulo
+            importante da história da franquia Grand Theft Auto.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="gta4.html">
+                ○ Games - Grand Theft Auto IV
+              </a>
+            </li>
+
+            <li>
+              <a href="ps3.html">
+                ○ Consoles - PlayStation 3
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Niko Bellic</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista principal de Grand Theft Auto IV.
+                  Imigrante do Leste Europeu que chega a Liberty City.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Origem: Europa Oriental</li>
+                  <li>Armas: Sim</li>
+                  <li>Veículos: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Roman Bellic</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primo de Niko e um dos primeiros personagens
+                  encontrados na campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Little Jacob</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Amigo de Niko e traficante de armas associado
+                  à comunidade jamaicana de Liberty City.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Brucie Kibbutz</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Empresário de Liberty City conhecido por seu
+                  interesse em carros, exercícios e atividades
+                  esportivas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Packie McReary</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Integrante da família McReary e personagem
+                  importante durante determinadas missões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kate McReary</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Integrante da família McReary e personagem
+                  relacionada à vida pessoal de Niko.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dwayne Forge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem envolvido em uma cadeia de missões
+                  que apresenta uma escolha importante.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Liberty City</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cidade fictícia onde ocorre a maior parte
+                  da história de GTA IV.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Broker</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Distrito de Liberty City inspirado principalmente
+                  no Brooklyn.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dukes</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região inspirada principalmente no Queens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bohan</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região de Liberty City inspirada no Bronx.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Algonquin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região central inspirada em Manhattan.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alderney</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área inspirada principalmente no estado
+                  de New Jersey.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Taxi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo utilizado para transporte rápido
+                  entre diferentes pontos de Liberty City.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Car</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal meio de transporte utilizado
+                  pelo jogador durante a exploração da cidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motorcycle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo de duas rodas disponível em
+                  diferentes regiões da cidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Helicopter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo aéreo utilizado em determinadas
+                  missões e atividades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boat</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo aquático utilizado para navegar
+                  pelos rios e áreas costeiras.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pistol</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de fogo básica disponível para Niko.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shotgun</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de curto alcance disponível em
+                  diferentes situações de combate.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>SMG</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Submetralhadora utilizada em diferentes
+                  confrontos durante o jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Assault Rifle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Rifle automático utilizado principalmente
+                  em situações de combate mais intensas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cell Phone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Telefone utilizado por Niko para chamadas,
+                  mensagens e atividades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Internet</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de computadores e sites fictícios
+                  acessíveis dentro de Liberty City.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pay 'n' Spray</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estabelecimento utilizado para modificar
+                  a aparência dos veículos e reduzir o nível
+                  de perseguição policial.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Police</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Forças policiais que perseguem Niko quando
+                  determinados crimes são cometidos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wanted Level</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema que representa a intensidade da
+                  perseguição policial contra o jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Safehouse</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Local utilizado como ponto de descanso,
+                  armazenamento de veículos e salvamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mission</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividade principal ou secundária que
+                  apresenta objetivos específicos ao jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo online que permite partidas com
+                  múltiplos jogadores em Liberty City.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>The Lost and Damned</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Expansão de GTA IV centrada em Johnny Klebitz
+                  e na gangue The Lost.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>The Ballad of Gay Tony</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Expansão protagonizada por Luis Lopez e
+                  ambientada na vida noturna de Liberty City.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PlayStation 3</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Sony para o qual Grand Theft Auto IV
+                  foi lançado originalmente em 2008.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blu-ray Disc</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Formato de mídia utilizado pela versão física
+                  de GTA IV para PlayStation 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>RAGE</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Motor gráfico e tecnológico desenvolvido pela
+                  Rockstar e utilizado em Grand Theft Auto IV.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Euphoria</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia utilizada para produzir animações
+                  e reações físicas dos personagens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rockstar North</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  principal de Grand Theft Auto IV.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rockstar Games</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Publicadora responsável por Grand Theft Auto IV
+                  e pela franquia Grand Theft Auto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

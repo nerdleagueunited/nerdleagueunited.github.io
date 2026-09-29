@@ -1,0 +1,2048 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>TGGA - Wii Remote</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   CONTEXTO HISTÓRICO
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   MODELOS E VARIAÇÕES
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container"> <!-- ========================================== CABEÇALHO ========================================== --> <header class="site-header">
+<div class="logo-area">
+
+  <img
+    src="../logo1.png"
+    alt="Logo NLU"
+    class="main-logo"
+  />
+
+  <div class="logo-text-box">
+
+    <h1>
+      The Great Game Archive™
+    </h1>
+
+    <p>
+      Não o maior, mas o NOSSO aglomerado de informação.
+    </p>
+
+  </div>
+
+</div>
+
+<div class="header-right-box">
+
+  <a
+    href="#"
+    class="youtube-btn"
+    target="_blank"
+  >
+    ▶ YouTube Siga-nos!
+  </a>
+
+</div>
+
+</header> <!-- ========================================== SUB-NAVEGAÇÃO ========================================== --> <div class="sub-nav-links">
+<a href="../tgga.html">
+  ← Voltar ao TGGA
+</a>
+
+|
+
+<a href="../index.html">
+  Início
+</a>
+
+</div> <!-- ========================================== ESTEIRA DE LETREIRO ========================================== --> <div class="marquee-zone">
+<div class="marquee-content">
+
+  <span>
+
+    ... O Wii Remote mudou a maneira como os videogames eram
+    controlados, transformando movimentos físicos em comandos
+    digitais e tornando-se um dos controles mais reconhecíveis
+    da história dos videogames ...
+
+    &nbsp;
+
+  </span>
+
+  <span>
+
+    ... O Wii Remote mudou a maneira como os videogames eram
+    controlados, transformando movimentos físicos em comandos
+    digitais e tornando-se um dos controles mais reconhecíveis
+    da história dos videogames ...
+
+    &nbsp;
+
+  </span>
+
+</div>
+
+</div> <!-- ========================================== CONTEÚDO PRINCIPAL ========================================== --> <div class="main-grid">
+<!-- ========================================
+     COLUNA DE CONTEÚDO
+     ======================================== -->
+
+<div class="content-column">
+
+  <div class="category-block">
+
+    <h2>
+      Wii Remote Clássico
+    </h2>
+
+    <div
+      style="
+        text-align: center;
+        margin-bottom: 15px;
+      "
+    >
+
+      <img
+        src="../tgga/wiimote.jpg"
+        alt="Nintendo Wii Remote"
+        style="
+          max-width: 60%;
+          height: auto;
+          border: 1px solid #444;
+          padding: 4px;
+        "
+      />
+
+    </div>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Wii Remote
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii Remote, também conhecido popularmente como Wiimote,
+      é o controle principal do Nintendo Wii. O acessório foi
+      desenvolvido para substituir a ideia tradicional de que
+      um controle deveria ser segurado apenas como um gamepad
+      convencional.<br>
+
+      Seu formato vertical permite que o jogador o segure com
+      apenas uma mão, enquanto sensores internos conseguem
+      detectar movimentos realizados pelo controle.<br>
+
+      O Wii Remote também funciona como um dispositivo apontador.
+      Dessa maneira, além de apertar botões, o jogador pode
+      literalmente apontar o controle para a televisão e
+      movimentar um cursor na tela.<br>
+
+      Essa combinação de botões, sensores de movimento,
+      apontamento infravermelho, vibração e áudio tornou o Wii
+      Remote uma peça central da proposta do Nintendo Wii.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      O Controle que Acompanhou o Nintendo Wii
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Nintendo Wii foi lançado no final de 2006 e trouxe uma
+      proposta diferente daquela apresentada pelos consoles
+      contemporâneos. Em vez de competir somente através de
+      gráficos e potência, a Nintendo colocou grande parte da
+      experiência do sistema na maneira como o jogador interagia
+      com os jogos.<br>
+
+      O Wii Remote era o principal responsável por isso. Seu
+      design permitia que diferentes tipos de jogadores,
+      inclusive pessoas pouco acostumadas com videogames,
+      utilizassem o controle de maneira relativamente direta.<br>
+
+      O controle podia ser segurado verticalmente, horizontalmente
+      ou conectado a acessórios que modificavam completamente
+      sua forma de utilização.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Movimento e Apontamento
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/wiimote.jpg"
+          alt="Wii Remote"
+        />
+
+        <img
+          src="../tgga/wii_sensorbar.jpg"
+          alt="Sensor Bar do Nintendo Wii"
+        />
+
+      </div>
+
+      <figcaption>
+        ~ Wii Remote e Sensor Bar ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O sistema de controle do Wii Remote combina diferentes
+      tecnologias. O acelerômetro interno detecta mudanças de
+      aceleração e permite reconhecer diversos movimentos feitos
+      pelo jogador.<br>
+
+      O sistema de apontamento utiliza luz infravermelha.
+      Na configuração tradicional, a Sensor Bar fica próxima
+      da televisão e fornece referências infravermelhas para
+      os sensores presentes na parte frontal do Wii Remote.<br>
+
+      É importante destacar que a Sensor Bar não é simplesmente
+      uma câmera. O Wii Remote possui os sensores responsáveis
+      por observar as fontes infravermelhas presentes na barra
+      e utilizar essas informações para determinar a direção
+      do apontamento.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Comunicação Sem Fio
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii Remote não precisa permanecer fisicamente conectado
+      ao console. A comunicação com o Nintendo Wii é realizada
+      sem fio através de Bluetooth.<br>
+
+      Isso permitiu que o controle fosse utilizado livremente
+      pela sala, algo especialmente importante para jogos que
+      dependiam de movimentos físicos.<br>
+
+      O controle também possui sistemas internos responsáveis
+      por administrar a comunicação, receber comandos dos botões,
+      processar informações dos sensores e transmitir esses dados
+      ao console.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Botões
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/wiimote_buttons.jpg"
+          alt="Botões do Wii Remote"
+        />
+
+        <img
+          src="../tgga/wiimote_back.jpg"
+          alt="Parte traseira do Wii Remote"
+        />
+
+      </div>
+
+      <figcaption>
+        ~ Controles e botões do Wii Remote ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Apesar do foco nos sensores de movimento, o Wii Remote
+      continua sendo um controle digital tradicional em vários
+      aspectos.<br>
+
+      Ele possui um direcional digital, botões A, B, +, -, HOME,
+      1, 2 e POWER. Cada um deles possui funções diferentes
+      dependendo do jogo e do sistema operacional do Wii.<br>
+
+      O botão B, localizado na parte traseira, é acionado com
+      o dedo indicador. Já os botões 1 e 2 ficam na parte
+      inferior frontal e são especialmente importantes quando
+      o controle é segurado horizontalmente.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Vibração e Alto-falante
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii Remote também possui elementos destinados ao
+      feedback do jogador.<br>
+
+      Um pequeno motor elétrico produz a vibração do controle,
+      permitindo que determinadas ações dos jogos sejam sentidas
+      fisicamente pelo jogador.<br>
+
+      Outro elemento importante é o pequeno alto-falante
+      localizado no interior do controle. Ele permite que
+      determinados efeitos sonoros sejam reproduzidos
+      diretamente no Wii Remote, criando uma diferença entre
+      o áudio produzido pelo console e o áudio vindo do controle.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Alimentação
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii Remote utiliza duas pilhas AA instaladas em um
+      compartimento localizado na parte traseira do controle.<br>
+
+      A alimentação elétrica é distribuída internamente para
+      os circuitos digitais, sensores, sistema Bluetooth,
+      LEDs, motor de vibração e alto-falante.<br>
+
+      O controle também possui circuitos responsáveis por
+      regular e distribuir adequadamente a energia proveniente
+      das pilhas para seus diferentes componentes.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Porta de Expansão
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Na parte inferior do Wii Remote existe uma porta de
+      expansão proprietária da Nintendo.<br>
+
+      Ela permite conectar acessórios que acrescentam novos
+      controles ou sensores ao Wii Remote.<br>
+
+      Entre os principais acessórios estão o Nunchuk,
+      o Classic Controller e o Wii MotionPlus.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Nunchuk
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/nunchuk.jpg"
+          alt="Nintendo Wii Nunchuk"
+        />
+
+        <img
+          src="../tgga/wiimote_nunchuk.jpg"
+          alt="Wii Remote conectado ao Nunchuk"
+        />
+
+      </div>
+
+      <figcaption>
+        ~ Wii Remote conectado ao Nunchuk ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Nunchuk é um dos principais acessórios do Wii Remote.
+      Ele possui uma alavanca analógica, os botões C e Z e
+      também sensores de movimento.<br>
+
+      Quando conectado ao Wii Remote, os dois controles formam
+      um sistema semelhante a um controle convencional dividido
+      em duas partes.<br>
+
+      Essa configuração foi utilizada em jogos como The Legend
+      of Zelda: Twilight Princess e muitos outros títulos do
+      Nintendo Wii.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Wii MotionPlus
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii MotionPlus foi desenvolvido para aumentar a precisão
+      da detecção da orientação e dos movimentos do Wii Remote.<br>
+
+      O acessório era conectado à porta de expansão localizada
+      na parte inferior do controle e acrescentava sensores
+      capazes de fornecer informações mais detalhadas sobre
+      a rotação do controle.<br>
+
+      Posteriormente, a Nintendo lançou o Wii Remote Plus,
+      que incorporava essa tecnologia diretamente no próprio
+      controle.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Jogos
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Wii Remote foi utilizado de maneiras extremamente
+      diferentes ao longo da biblioteca do Nintendo Wii.<br>
+
+      Em Wii Sports, por exemplo, seus movimentos são utilizados
+      para representar ações esportivas. Em The Legend of Zelda:
+      Twilight Princess, o controle pode ser utilizado para
+      realizar ataques e mirar objetos.<br>
+
+      Jogos como Wii Play, WarioWare: Smooth Moves, Metroid Prime 3,
+      Mario Kart Wii e diversos outros exploraram diferentes
+      características do controle.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Modelos e Variações
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Durante a vida do Nintendo Wii, o Wii Remote apareceu
+      em diferentes cores, revisões e edições especiais.<br>
+
+      Também existiram versões com Wii MotionPlus integrado,
+      conhecidas como Wii Remote Plus.<br>
+
+      Algumas edições foram produzidas para acompanhar jogos
+      específicos ou comemorações da Nintendo, apresentando
+      cores e acabamentos diferentes.
+
+    </p>
+
+    <figure class="historical-consoles">
+
+      <div class="models-grid">
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_white.jpg"
+            alt="Wii Remote branco"
+          />
+
+          <figcaption>
+            Wii Remote Branco
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_black.jpg"
+            alt="Wii Remote preto"
+          />
+
+          <figcaption>
+            Wii Remote Preto
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_red.jpg"
+            alt="Wii Remote vermelho"
+          />
+
+          <figcaption>
+            Wii Remote Vermelho
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_blue.jpg"
+            alt="Wii Remote azul"
+          />
+
+          <figcaption>
+            Wii Remote Azul
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_plus.jpg"
+            alt="Wii Remote Plus"
+          />
+
+          <figcaption>
+            Wii Remote Plus
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/wiimote_gold.jpg"
+            alt="Wii Remote dourado"
+          />
+
+          <figcaption>
+            Wii Remote Dourado
+          </figcaption>
+
+        </div>
+
+      </div>
+
+    </figure>
+
+  </div>
+
+</div>
+
+<!-- ========================================
+     COLUNA LATERAL
+     ======================================== -->
+
+<div class="sidebar-column">
+
+  <nav class="side-nav-menu">
+
+    <h3>
+      - MENU DE ARTIGOS -
+    </h3>
+
+    <ul>
+
+      <li>
+        <a href="../tgga.html">
+          ○ Início - TGGA
+        </a>
+      </li>
+
+      <li>
+        <a href="../index.html">
+          ○ Início - NLU
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Games - Nintendo Wii
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Periféricos - Wii
+        </a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <!-- ==========================================
+       COMPONENTES DO WIIMOTE
+       ========================================== -->
+
+  <div class="components-block">
+
+    <h3>
+      - COMPONENTES DO ITEM -
+    </h3>
+
+    <div class="component-list">
+
+      <!-- PROCESSAMENTO -->
+
+      <details class="component-item">
+
+        <summary>
+          Microcontrolador Principal
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuito integrado responsável pelo processamento
+            das informações recebidas dos botões, sensores,
+            comunicação sem fio e demais circuitos internos.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Microcontrolador</li>
+            <li>Função: Processamento e controle</li>
+            <li>Aplicação: Controle geral do Wii Remote</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Processador de Comunicação Bluetooth
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuito responsável pela comunicação sem fio entre
+            o Wii Remote e o console.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tecnologia: Bluetooth</li>
+            <li>Tipo: Comunicação sem fio</li>
+            <li>Função: Transmissão e recepção de dados</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <!-- SENSORES -->
+
+      <details class="component-item">
+
+        <summary>
+          Acelerômetro
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor utilizado para detectar aceleração e movimentos
+            realizados pelo jogador.
+          </p>
+
+          <p>
+            É um dos componentes fundamentais para transformar
+            movimentos físicos do controle em comandos digitais.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Acelerômetro MEMS</li>
+            <li>Eixos: 3</li>
+            <li>Função: Detecção de movimento</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sensores Infravermelhos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de sensores localizados na parte frontal
+            do Wii Remote.
+          </p>
+
+          <p>
+            Eles detectam as fontes infravermelhas utilizadas
+            pelo sistema de apontamento.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Sensor óptico</li>
+            <li>Tecnologia: Infravermelho</li>
+            <li>Função: Apontamento</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Lente / Janela Infravermelha
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Região frontal do controle através da qual os
+            sensores infravermelhos observam a Sensor Bar.
+          </p>
+
+          <p>
+            A peça também funciona como proteção física
+            para os elementos ópticos internos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- BOTÕES -->
+
+      <details class="component-item">
+
+        <summary>
+          Direcional Digital D-Pad
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Direcional digital de quatro direções utilizado
+            para controlar personagens, menus e diferentes
+            funções dos jogos.
+          </p>
+
+          <ul class="component-specs">
+            <li>Direções: 4</li>
+            <li>Tipo: Digital</li>
+            <li>Função: Direção</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão A
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Principal botão de ação localizado na parte frontal
+            do Wii Remote.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão B / Trigger
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão traseiro utilizado principalmente pelo dedo
+            indicador.
+          </p>
+
+          <ul class="component-specs">
+            <li>Localização: Parte traseira</li>
+            <li>Tipo: Trigger</li>
+            <li>Função: Ação secundária</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão +
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão utilizado em menus, pausas e diferentes
+            funções dependendo do jogo.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão -
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão utilizado para diferentes comandos dentro
+            dos jogos e menus.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão HOME
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão utilizado para abrir o menu HOME do Nintendo Wii.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botões 1 e 2
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Dois pequenos botões localizados na parte inferior
+            frontal do controle.
+          </p>
+
+          <p>
+            São especialmente utilizados quando o Wii Remote
+            é segurado horizontalmente.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botão POWER
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão localizado na parte superior do Wii Remote
+            utilizado para controlar a alimentação do sistema
+            de acordo com o estado do console.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- INDICADORES -->
+
+      <details class="component-item">
+
+        <summary>
+          LEDs Indicadores de Jogador
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O Wii Remote possui quatro LEDs localizados na
+            parte inferior do controle.
+          </p>
+
+          <p>
+            Eles são utilizados para indicar a identificação
+            do jogador e determinadas condições do controle.
+          </p>
+
+          <ul class="component-specs">
+            <li>Quantidade: 4</li>
+            <li>Tipo: LED</li>
+            <li>Função: Indicação de estado</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          LED de Sincronização
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Elemento luminoso relacionado ao processo de
+            sincronização e estado do controle.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- ÁUDIO -->
+
+      <details class="component-item">
+
+        <summary>
+          Alto-falante Interno
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno alto-falante localizado dentro do Wii Remote.
+          </p>
+
+          <p>
+            Permite reproduzir efeitos sonoros diretamente
+            no controle.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Alto-falante eletrodinâmico</li>
+            <li>Função: Reprodução de áudio</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Câmara Acústica do Alto-falante
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Espaço interno utilizado para melhorar a propagação
+            do som produzido pelo pequeno alto-falante.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- VIBRAÇÃO -->
+
+      <details class="component-item">
+
+        <summary>
+          Motor de Vibração
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno motor elétrico responsável pelo feedback
+            tátil do Wii Remote.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Motor elétrico</li>
+            <li>Função: Vibração</li>
+            <li>Feedback: Tátil</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Peso Excêntrico do Motor
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno peso instalado fora do centro do eixo
+            do motor de vibração.
+          </p>
+
+          <p>
+            Quando o motor gira, o peso produz a vibração
+            característica do controle.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- ALIMENTAÇÃO -->
+
+      <details class="component-item">
+
+        <summary>
+          Compartimento de Pilhas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Compartimento localizado na parte traseira
+            do Wii Remote.
+          </p>
+
+          <ul class="component-specs">
+            <li>Capacidade: 2 pilhas</li>
+            <li>Tipo: AA</li>
+            <li>Função: Alimentação</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Terminais Positivos das Pilhas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Contatos metálicos responsáveis por estabelecer
+            conexão elétrica com os polos positivos das pilhas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Terminais Negativos das Pilhas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Contatos metálicos responsáveis pela conexão
+            com os polos negativos das pilhas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Molas dos Contatos das Pilhas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos metálicos elásticos responsáveis por
+            manter pressão contra os terminais das pilhas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Circuito de Gerenciamento de Energia
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos responsáveis por distribuir e controlar
+            a energia fornecida pelas pilhas aos diferentes
+            componentes do controle.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Capacitores de Filtragem
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Capacitores utilizados para estabilização,
+            desacoplamento e filtragem da alimentação elétrica.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Reguladores de Tensão
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos utilizados para fornecer tensões adequadas
+            aos diferentes componentes eletrônicos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- PCB -->
+
+      <details class="component-item">
+
+        <summary>
+          Placa de Circuito Impresso (PCB)
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            A placa de circuito impresso é a estrutura responsável
+            por interligar eletricamente praticamente todos os
+            componentes eletrônicos do Wii Remote.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: PCB</li>
+            <li>Função: Interconexão elétrica</li>
+            <li>Material: Fibra de vidro e cobre</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Trilhas de Cobre
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Condutores presentes na placa de circuito impresso.
+            Funcionam como caminhos elétricos entre os componentes.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Ilhas de Solda
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Áreas metálicas da PCB utilizadas para soldar
+            componentes eletrônicos e estabelecer conexões.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Soldas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Material metálico utilizado para fixar eletricamente
+            os componentes à placa de circuito impresso.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- COMPONENTES PASSIVOS -->
+
+      <details class="component-item">
+
+        <summary>
+          Resistores
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Diversos resistores são utilizados nos circuitos
+            internos para limitar corrente, estabelecer níveis
+            de tensão e realizar diferentes funções eletrônicas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Capacitores Cerâmicos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequenos capacitores utilizados principalmente
+            para desacoplamento e filtragem de ruídos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Capacitores Eletrolíticos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Capacitores de maior capacidade utilizados em
+            determinadas partes do circuito de alimentação.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Diodos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes semicondutores utilizados em circuitos
+            de proteção, alimentação e processamento de sinais.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Transistores
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes semicondutores utilizados em diferentes
+            circuitos internos, incluindo controle de sinais,
+            alimentação e acionamento.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- BOTÕES MECÂNICOS -->
+
+      <details class="component-item">
+
+        <summary>
+          Membranas de Borracha dos Botões
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Membranas flexíveis localizadas sob diversos botões.
+          </p>
+
+          <p>
+            Elas transmitem a pressão exercida pelo usuário
+            até os contatos elétricos da placa.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Contatos dos Botões
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Contatos elétricos responsáveis por detectar
+            o pressionamento dos botões.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Estrutura Mecânica do D-Pad
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto plástico responsável por transmitir
+            os movimentos realizados no direcional até
+            os respectivos contatos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Botões Plásticos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Peças plásticas externas pressionadas pelo jogador.
+            Incluem os botões A, B, +, -, HOME, 1, 2 e POWER.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- CONECTOR -->
+
+      <details class="component-item">
+
+        <summary>
+          Porta de Expansão
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conector proprietário localizado na parte inferior
+            do Wii Remote.
+          </p>
+
+          <p>
+            Permite a comunicação com acessórios como Nunchuk,
+            Classic Controller e Wii MotionPlus.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Contatos da Porta de Expansão
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de contatos elétricos utilizados para
+            transmitir alimentação, comandos e dados entre
+            o Wii Remote e os acessórios.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- CARCAÇA -->
+
+      <details class="component-item">
+
+        <summary>
+          Carcaça Plástica Superior
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Parte superior da estrutura externa do Wii Remote.
+            Abriga e protege os componentes internos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Carcaça Plástica Inferior
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Parte inferior da carcaça responsável por fechar
+            e proteger o conjunto interno.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Tampa do Compartimento de Pilhas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Tampa removível localizada na parte traseira
+            do controle para permitir acesso às pilhas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Janela dos LEDs
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Região translúcida da carcaça que permite que
+            a luz dos LEDs indicadores seja visualizada.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Lente / Janela do Sensor Infravermelho
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Parte frontal translúcida que protege e permite
+            o funcionamento do sistema óptico de apontamento.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Parafusos de Fixação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Parafusos utilizados para unir as partes da
+            carcaça e manter os componentes internos
+            devidamente posicionados.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Suportes Internos da Carcaça
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Estruturas plásticas internas utilizadas para
+            posicionar e sustentar a placa, botões,
+            sensores e demais componentes.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Guias Plásticas dos Botões
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Estruturas internas que mantêm os botões
+            alinhados e limitam seus movimentos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- CORREIA -->
+
+      <details class="component-item">
+
+        <summary>
+          Suporte da Correia
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura localizada na parte inferior do
+            controle destinada à fixação da correia
+            de segurança.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Correia de Segurança
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Correia utilizada no pulso do jogador para
+            reduzir o risco de o controle ser arremessado
+            durante movimentos bruscos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Trava da Correia
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno mecanismo plástico utilizado para
+            ajustar a posição da correia no pulso.
+          </p>
+
+        </div>
+
+      </details>
+
+      <!-- ACESSÓRIOS -->
+
+      <details class="component-item">
+
+        <summary>
+          Wii Nunchuk
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Controle complementar conectado à porta de
+            expansão do Wii Remote.
+          </p>
+
+          <ul class="component-specs">
+            <li>Alavanca analógica</li>
+            <li>Botão C</li>
+            <li>Botão Z</li>
+            <li>Sensor de movimento</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Classic Controller
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Controle complementar desenvolvido para oferecer
+            uma disposição de comandos mais tradicional.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Wii Classic Controller Pro
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Versão modificada do Classic Controller com
+            formato mais próximo dos controles tradicionais.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Wii MotionPlus
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Acessório conectado à porta de expansão que
+            acrescenta sensores destinados a melhorar a
+            detecção da orientação e rotação do controle.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Wii Remote Jacket
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Capa protetora de silicone distribuída para o
+            Wii Remote, especialmente associada ao uso
+            do controle durante jogos com movimentos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sensor Bar
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Barra posicionada próxima à televisão que contém
+            emissores infravermelhos utilizados pelo sistema
+            de apontamento do Wii Remote.
+          </p>
+
+          <ul class="component-specs">
+            <li>Função: Referência infravermelha</li>
+            <li>Uso: Apontamento</li>
+            <li>Conexão: Wii</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Suporte da Sensor Bar
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Base utilizada para posicionar a Sensor Bar
+            sobre ou abaixo da televisão.
+          </p>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div> <!-- ========================================== RODAPÉ ========================================== --> <footer class="site-footer">
+<p>
+  &copy; 2026 Nerd League United.
+  Todos os direitos reservados.
+</p>
+
+</footer> </div> </body> </html>

@@ -1,0 +1,1627 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>TGGA - PlayStation VR2</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   IMAGENS HISTÓRICAS
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   MODELOS / HARDWARE
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   ESPECIFICAÇÕES
+   ========================================== */
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.spec-table th,
+.spec-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+}
+
+.spec-table th {
+  background: #292929;
+  color: #fff;
+}
+
+.spec-table td {
+  background: #151515;
+  color: #bbb;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .spec-table {
+    font-size: 12px;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container"> <!-- ========================================== CABEÇALHO ========================================== --> <header class="site-header">
+<div class="logo-area">
+
+  <img
+    src="../logo1.png"
+    alt="Logo NLU"
+    class="main-logo"
+  >
+
+  <div class="logo-text-box">
+
+    <h1>
+      The Great Game Archive™
+    </h1>
+
+    <p>
+      Não o maior, mas o NOSSO aglomerado de informação.
+    </p>
+
+  </div>
+
+</div>
+
+<div class="header-right-box">
+
+  <a
+    href="#"
+    class="youtube-btn"
+    target="_blank"
+  >
+    ▶ YouTube Siga-nos!
+  </a>
+
+</div>
+
+</header> <!-- ========================================== SUB-NAVEGAÇÃO ========================================== --> <div class="sub-nav-links">
+<a href="../tgga.html">
+  ← Voltar ao TGGA
+</a>
+
+|
+
+<a href="../index.html">
+  Início
+</a>
+
+</div> <!-- ========================================== LETREIRO ========================================== --> <div class="marquee-zone">
+<div class="marquee-content">
+
+  <span>
+    ... O PlayStation VR2 é o sistema de realidade virtual da Sony
+    desenvolvido para o PlayStation 5, utilizando rastreamento inside-out,
+    displays OLED HDR, rastreamento ocular, feedback no headset e
+    controladores PlayStation VR2 Sense ...
+    &nbsp;
+  </span>
+
+  <span>
+    ... O PlayStation VR2 é o sistema de realidade virtual da Sony
+    desenvolvido para o PlayStation 5, utilizando rastreamento inside-out,
+    displays OLED HDR, rastreamento ocular, feedback no headset e
+    controladores PlayStation VR2 Sense ...
+    &nbsp;
+  </span>
+
+</div>
+
+</div> <!-- ========================================== CONTEÚDO PRINCIPAL ========================================== --> <div class="main-grid">
+<!-- ========================================
+     COLUNA PRINCIPAL
+     ======================================== -->
+
+<div class="content-column">
+
+  <div class="category-block">
+
+    <h2>
+      PlayStation VR2 (Posse de Vitória Maria)
+    </h2>
+
+    <div
+      style="
+        text-align: center;
+        margin-bottom: 15px;
+      "
+    >
+
+      <img
+        src="../tgga/psvr2.jpg"
+        alt="PlayStation VR2"
+        style="
+          max-width: 75%;
+          height: auto;
+          border: 1px solid #444;
+          padding: 4px;
+        "
+      >
+
+    </div>
+
+    <h2 style="text-align: center;">
+      PlayStation VR2
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O PlayStation VR2, normalmente chamado de PS VR2, é o sistema
+      de realidade virtual desenvolvido pela Sony Interactive
+      Entertainment para o PlayStation 5.
+
+      <br><br>
+
+      O dispositivo representa a segunda geração do sistema de realidade
+      virtual produzido para a família PlayStation, sucedendo o
+      PlayStation VR lançado originalmente para o PlayStation 4.
+
+      <br><br>
+
+      Diferentemente do primeiro PlayStation VR, que utilizava a câmera
+      PlayStation Camera para realizar o rastreamento externo do usuário,
+      o PS VR2 utiliza quatro câmeras integradas no próprio headset para
+      realizar rastreamento do ambiente e dos movimentos.
+
+      <br><br>
+
+      O sistema também introduziu recursos como displays OLED HDR,
+      rastreamento ocular, renderização foveada, vibração integrada ao
+      headset e os controladores PlayStation VR2 Sense.
+
+    </p>
+
+    <h2></h2>
+
+    <!-- ==========================================
+         ESPECIFICAÇÕES
+         ========================================== -->
+
+    <h2 style="text-align: center;">
+      Especificações Técnicas
+    </h2>
+
+    <table class="spec-table">
+
+      <tr>
+        <th>Fabricante</th>
+        <td>Sony Interactive Entertainment</td>
+      </tr>
+
+      <tr>
+        <th>Plataforma</th>
+        <td>PlayStation 5</td>
+      </tr>
+
+      <tr>
+        <th>Tipo</th>
+        <td>Headset de realidade virtual</td>
+      </tr>
+
+      <tr>
+        <th>Display</th>
+        <td>OLED</td>
+      </tr>
+
+      <tr>
+        <th>Resolução</th>
+        <td>2000 × 2040 pixels por olho</td>
+      </tr>
+
+      <tr>
+        <th>HDR</th>
+        <td>Sim</td>
+      </tr>
+
+      <tr>
+        <th>Campo de visão</th>
+        <td>Aproximadamente 110°</td>
+      </tr>
+
+      <tr>
+        <th>Taxa de atualização</th>
+        <td>90 Hz / 120 Hz</td>
+      </tr>
+
+      <tr>
+        <th>Rastreamento</th>
+        <td>Inside-out</td>
+      </tr>
+
+      <tr>
+        <th>Câmeras</th>
+        <td>4 câmeras integradas no headset</td>
+      </tr>
+
+      <tr>
+        <th>Rastreamento ocular</th>
+        <td>Sim</td>
+      </tr>
+
+      <tr>
+        <th>Conexão</th>
+        <td>USB Type-C</td>
+      </tr>
+
+      <tr>
+        <th>Áudio</th>
+        <td>Áudio 3D / saída para fones</td>
+      </tr>
+
+      <tr>
+        <th>Controladores</th>
+        <td>PlayStation VR2 Sense</td>
+      </tr>
+
+    </table>
+
+    <h2></h2>
+
+    <!-- ==========================================
+         HISTÓRIA
+         ========================================== -->
+
+    <h2 style="text-align: center;">
+      Contexto Histórico
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/psvr.jpg"
+          alt="PlayStation VR"
+        >
+
+        <img
+          src="../tgga/ps5.jpg"
+          alt="PlayStation 5"
+        >
+
+      </div>
+
+      <figcaption>
+        ~ PlayStation VR e PlayStation 5, plataformas relacionadas
+        à evolução do PS VR2 ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      A realidade virtual passou a fazer parte da estratégia de
+      hardware da PlayStation com o lançamento do PlayStation VR
+      para o PlayStation 4.
+
+      <br><br>
+
+      O primeiro sistema utilizava uma câmera externa para acompanhar
+      a posição do headset e dos controles. Esse sistema fazia parte
+      de uma arquitetura composta pelo headset, PlayStation Camera
+      e, em determinados jogos, PlayStation Move.
+
+      <br><br>
+
+      Com a chegada do PlayStation 5, a Sony desenvolveu uma nova
+      geração de realidade virtual com uma arquitetura muito mais
+      integrada.
+
+      <br><br>
+
+      O resultado foi apresentado como PlayStation VR2. O novo headset
+      passou a incorporar câmeras para rastreamento espacial, além de
+      sensores adicionais destinados ao acompanhamento da posição,
+      orientação e interação do usuário.
+
+      <br><br>
+
+      O PS VR2 também passou a utilizar uma única conexão USB-C com
+      o PlayStation 5, reduzindo consideravelmente a quantidade de
+      cabos e equipamentos externos necessários em comparação com
+      a primeira geração.
+
+    </p>
+
+    <h2></h2>
+
+    <!-- ==========================================
+         TECNOLOGIA
+         ========================================== -->
+
+    <h2 style="text-align: center;">
+      Tecnologia e Funcionamento
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O funcionamento do PS VR2 depende da integração de diversos
+      subsistemas ópticos, eletrônicos e mecânicos.
+
+      <br><br>
+
+      As imagens são produzidas pelo PlayStation 5 e enviadas ao
+      headset através da conexão USB-C. O PS VR2 possui dois painéis
+      OLED, um para cada olho, permitindo a criação de uma imagem
+      estereoscópica.
+
+      <br><br>
+
+      O headset possui quatro câmeras voltadas para o ambiente.
+      Elas permitem que o sistema determine a posição do dispositivo
+      no espaço sem depender de uma câmera externa.
+
+      <br><br>
+
+      O rastreamento ocular utiliza sensores voltados para os olhos
+      do usuário. Essas informações podem ser utilizadas por jogos
+      compatíveis para interações e técnicas de renderização.
+
+      <br><br>
+
+      O headset também possui motores de vibração. Esse sistema pode
+      produzir feedback físico diretamente na cabeça do usuário,
+      complementando o feedback fornecido pelos controladores.
+
+      <br><br>
+
+      Os controladores PS VR2 Sense possuem sensores de movimento,
+      gatilhos adaptáveis e feedback háptico, permitindo que objetos
+      virtuais tenham diferentes sensações durante a interação.
+
+    </p>
+
+    <h2></h2>
+
+    <!-- ==========================================
+         CONTROLADORES
+         ========================================== -->
+
+    <h2 style="text-align: center;">
+      PlayStation VR2 Sense
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/psvr2sense.jpg"
+          alt="Controle PlayStation VR2 Sense"
+        >
+
+        <img
+          src="../tgga/psvr2sense2.jpg"
+          alt="Par de controles PlayStation VR2 Sense"
+        >
+
+      </div>
+
+      <figcaption>
+        ~ Controladores PlayStation VR2 Sense ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Os PlayStation VR2 Sense são os controladores desenvolvidos
+      especificamente para acompanhar o PS VR2.
+
+      <br><br>
+
+      Diferentemente de um controle tradicional, cada unidade possui
+      sensores capazes de acompanhar posição e orientação no espaço.
+
+      <br><br>
+
+      Os controles também possuem gatilhos adaptáveis, capazes de
+      oferecer resistência variável dependendo da ação realizada
+      pelo jogador.
+
+      <br><br>
+
+      O feedback háptico permite reproduzir diferentes padrões de
+      vibração, enquanto os sensores capacitivos ajudam o sistema a
+      detectar a presença dos dedos em determinadas regiões do controle.
+
+    </p>
+
+    <h2></h2>
+
+    <!-- ==========================================
+         MODELOS
+         ========================================== -->
+
+    <h2 style="text-align: center;">
+      Modelos e Variações
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O PS VR2 possui poucas variações de hardware quando comparado
+      a consoles tradicionais.
+
+      <br><br>
+
+      A principal distinção está entre o headset PS VR2 e os acessórios
+      que compõem o ecossistema, especialmente os controladores
+      PlayStation VR2 Sense e os fones de ouvido.
+
+      <br><br>
+
+      Também existem diferenças de embalagem e de disponibilidade
+      entre regiões e diferentes bundles comerciais.
+
+    </p>
+
+    <figure class="historical-consoles">
+
+      <div class="models-grid">
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/psvr2.jpg"
+            alt="PlayStation VR2"
+          >
+
+          <figcaption>
+            PlayStation VR2
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/psvr2sense.jpg"
+            alt="PlayStation VR2 Sense"
+          >
+
+          <figcaption>
+            PlayStation VR2 Sense
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/psvr2cable.jpg"
+            alt="Cabo USB-C do PlayStation VR2"
+          >
+
+          <figcaption>
+            Cabo USB-C
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/psvr2earbuds.jpg"
+            alt="Fones de ouvido do PlayStation VR2"
+          >
+
+          <figcaption>
+            Fones de ouvido estéreo
+          </figcaption>
+
+        </div>
+
+      </div>
+
+    </figure>
+
+  </div>
+
+</div>
+
+<!-- ========================================
+     COLUNA LATERAL
+     ======================================== -->
+
+<div class="sidebar-column">
+
+  <nav class="side-nav-menu">
+
+    <h3>
+      - MENU DE ARTIGOS -
+    </h3>
+
+    <ul>
+
+      <li>
+        <a href="../tgga.html">
+          ○ Início - TGGA
+        </a>
+      </li>
+
+      <li>
+        <a href="../index.html">
+          ○ Início - NLU
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Games - PlayStation VR2
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Periféricos - PlayStation VR2
+        </a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <!-- ==========================================
+       COMPONENTES
+       ========================================== -->
+
+  <div class="components-block">
+
+    <h3>
+      - COMPONENTES DO ITEM -
+    </h3>
+
+    <div class="component-list">
+
+      <details class="component-item">
+
+        <summary>Painéis OLED HDR</summary>
+
+        <div class="component-description">
+
+          <p>
+            O PS VR2 utiliza dois painéis OLED, permitindo que cada
+            olho receba uma imagem independente.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: OLED</li>
+            <li>Resolução: 2000 × 2040 por olho</li>
+            <li>HDR: Sim</li>
+            <li>Taxa de atualização: 90 / 120 Hz</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Lentes Fresnel</summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos ópticos posicionados entre os olhos do usuário
+            e os displays OLED.
+          </p>
+
+          <p>
+            As lentes permitem que uma tela pequena seja visualizada
+            através de um campo de visão amplo.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Lente Fresnel</li>
+            <li>Função: Ampliação e focalização</li>
+            <li>Quantidade: 2</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Sistema de Ajuste de Lentes</summary>
+
+        <div class="component-description">
+
+          <p>
+            Mecanismo mecânico que permite ajustar a distância entre
+            as lentes de acordo com a posição dos olhos do usuário.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Quatro Câmeras de Rastreamento</summary>
+
+        <div class="component-description">
+
+          <p>
+            Quatro câmeras estão instaladas na parte frontal do
+            headset para observar o ambiente e acompanhar o movimento
+            do dispositivo.
+          </p>
+
+          <ul class="component-specs">
+            <li>Quantidade: 4</li>
+            <li>Função: Inside-out tracking</li>
+            <li>Posicionamento: Frente do headset</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Câmeras de Rastreamento Ocular</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensores ópticos internos acompanham os movimentos dos
+            olhos do usuário.
+          </p>
+
+          <p>
+            O sistema pode utilizar essas informações para interação
+            e renderização foveada em jogos compatíveis.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Sensor de Proximidade</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor localizado na região interna do headset responsável
+            por detectar a presença do usuário próximo às lentes.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Unidade de Medição Inercial — IMU</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de sensores utilizado para medir movimento e
+            orientação do headset.
+          </p>
+
+          <ul class="component-specs">
+            <li>Acelerômetro</li>
+            <li>Giroscópio</li>
+            <li>Detecção de movimento</li>
+            <li>Orientação espacial</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Acelerômetro</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor utilizado para detectar aceleração e mudanças
+            de movimento do headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Giroscópio</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor responsável por medir alterações na orientação
+            angular do headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Processamento de Rastreamento</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos eletrônicos responsáveis pelo processamento
+            das informações provenientes das câmeras e sensores.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Placa Principal — Main PCB</summary>
+
+        <div class="component-description">
+
+          <p>
+            Placa de circuito impresso que interliga os principais
+            subsistemas eletrônicos do headset.
+          </p>
+
+          <ul class="component-specs">
+            <li>Processamento</li>
+            <li>Comunicação</li>
+            <li>Alimentação</li>
+            <li>Controle dos sensores</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Controlador USB Type-C</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuito responsável pela comunicação entre o headset
+            e o PlayStation 5 através da conexão USB Type-C.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Conector USB Type-C</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conector utilizado para ligação física do headset ao
+            PlayStation 5.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Cabo USB-C</summary>
+
+        <div class="component-description">
+
+          <p>
+            Cabo que transporta energia, dados e sinais necessários
+            para a comunicação entre o PS5 e o headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Motor de Feedback do Headset</summary>
+
+        <div class="component-description">
+
+          <p>
+            Atuador instalado no headset capaz de produzir vibração
+            diretamente na estrutura utilizada pelo jogador.
+          </p>
+
+          <p>
+            Jogos compatíveis podem utilizar esse recurso para
+            transmitir impactos ou eventos específicos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Almofada Facial</summary>
+
+        <div class="component-description">
+
+          <p>
+            Superfície acolchoada que entra em contato com o rosto
+            do usuário e ajuda a bloquear a luz externa.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Vedação de Luz</summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura responsável por reduzir a entrada de luz
+            ambiente na região das lentes.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Faixa de Cabeça — Headband</summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura mecânica responsável por manter o headset
+            apoiado na cabeça.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Ajuste Traseiro da Faixa</summary>
+
+        <div class="component-description">
+
+          <p>
+            Mecanismo utilizado para apertar ou liberar a faixa
+            traseira que mantém o headset posicionado.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Botão de Ajuste da Faixa</summary>
+
+        <div class="component-description">
+
+          <p>
+            Botão mecânico utilizado para liberar o mecanismo de
+            ajuste da faixa de cabeça.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Botão de Função</summary>
+
+        <div class="component-description">
+
+          <p>
+            Controle físico localizado no headset utilizado para
+            funções do sistema, incluindo o controle de visualização
+            do ambiente.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Botão de Energia</summary>
+
+        <div class="component-description">
+
+          <p>
+            Interruptor utilizado para ligar ou desligar o headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Microfone Integrado</summary>
+
+        <div class="component-description">
+
+          <p>
+            Microfone integrado ao headset utilizado para comunicação
+            por voz em aplicações compatíveis.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Saída de Áudio</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conector utilizado para fornecer áudio aos fones de
+            ouvido compatíveis.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Fones de Ouvido Estéreo</summary>
+
+        <div class="component-description">
+
+          <p>
+            Fones fornecidos com o sistema para reprodução de áudio.
+          </p>
+
+          <ul class="component-specs">
+            <li>Tipo: Estéreo</li>
+            <li>Conexão: Headset</li>
+            <li>Função: Áudio do jogo</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Alto-falante / Sistema de Áudio</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sistema relacionado à reprodução e encaminhamento do
+            áudio utilizado durante a experiência de realidade virtual.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Processadores de Imagem</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos dedicados ao recebimento, tratamento e
+            encaminhamento dos sinais de imagem provenientes do
+            PlayStation 5 para os displays.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Controladores dos Displays OLED</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos responsáveis pela comunicação e controle dos
+            painéis OLED esquerdo e direito.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Reguladores de Tensão</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos responsáveis por converter e estabilizar as
+            tensões necessárias para os diferentes componentes
+            eletrônicos do headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Capacitores de Filtragem</summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes utilizados para estabilização da alimentação,
+            desacoplamento e redução de ruídos elétricos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Resistores</summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes passivos presentes em diversos circuitos
+            de controle, sensores e alimentação.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Indutores e Filtros EMI</summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes empregados no condicionamento da alimentação
+            e redução de interferências eletromagnéticas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Blindagem Eletromagnética</summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos metálicos utilizados em determinadas regiões
+            internas para reduzir interferências eletromagnéticas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Estrutura Plástica do Headset</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de peças plásticas que forma a carcaça externa
+            do PS VR2 e protege os componentes internos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Estrutura Interna de Suporte</summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura mecânica responsável pela sustentação dos
+            módulos ópticos, eletrônicos e mecânicos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Parafusos de Fixação</summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos mecânicos utilizados para unir e fixar as
+            diferentes partes do headset.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Anel de Rastreamento</summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura circular localizada na extremidade dos
+            controladores utilizada pelo sistema de rastreamento
+            óptico.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — IMU</summary>
+
+        <div class="component-description">
+
+          <p>
+            Unidade de sensores responsável por acompanhar o
+            movimento e a orientação do controlador.
+          </p>
+
+          <ul class="component-specs">
+            <li>Acelerômetro</li>
+            <li>Giroscópio</li>
+            <li>Orientação espacial</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Gatilho Adaptável</summary>
+
+        <div class="component-description">
+
+          <p>
+            Gatilho equipado com resistência variável controlada
+            eletronicamente.
+          </p>
+
+          <p>
+            O sistema permite reproduzir diferentes níveis de
+            resistência durante ações virtuais.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Feedback Háptico</summary>
+
+        <div class="component-description">
+
+          <p>
+            Atuadores responsáveis pela vibração do controlador.
+          </p>
+
+          <p>
+            O feedback pode variar conforme a ação realizada no jogo.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Sensor Capacitivo</summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensores utilizados para detectar o contato ou presença
+            dos dedos em determinadas superfícies do controlador.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Botões</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de controles físicos utilizados para interação
+            com jogos e menus.
+          </p>
+
+          <ul class="component-specs">
+            <li>Botões de ação</li>
+            <li>Botões de sistema</li>
+            <li>Analógico</li>
+            <li>Gatilhos</li>
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Joystick Analógico</summary>
+
+        <div class="component-description">
+
+          <p>
+            Controle analógico utilizado para movimentação e outras
+            funções dentro dos jogos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Bateria Recarregável</summary>
+
+        <div class="component-description">
+
+          <p>
+            Bateria interna responsável pela alimentação sem fio
+            dos controladores.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Porta USB-C</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conector utilizado para carregar e conectar os
+            controladores.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>PlayStation VR2 Sense — Placa de Circuito</summary>
+
+        <div class="component-description">
+
+          <p>
+            Placa eletrônica que integra sensores, botões,
+            comunicação sem fio, gerenciamento de energia e
+            atuadores do controlador.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Controlador de Comunicação Sem Fio</summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuito responsável pela comunicação dos controladores
+            com o sistema PlayStation.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Antenas dos Controladores</summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos responsáveis pela transmissão e recepção
+            dos sinais de comunicação sem fio.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>Conectores e Cabos Internos</summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto de conectores, cabos flexíveis e interligações
+            utilizado para conectar os módulos internos.
+          </p>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div> <!-- ========================================== RODAPÉ ========================================== --> <footer class="site-footer">
+<p>
+  &copy; 2026 Nerd League United.
+  Todos os direitos reservados.
+</p>
+
+</footer> </div> </body> </html>
+
+

@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Kinect Adventures!</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA DE ATIVIDADES
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Kinect Adventures! foi desenvolvido para apresentar
+          experiências interativas utilizando o sensor Kinect no
+          Xbox 360, colocando o movimento corporal no centro da
+          jogabilidade ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Kinect Adventures! foi desenvolvido para apresentar
+          experiências interativas utilizando o sensor Kinect no
+          Xbox 360, colocando o movimento corporal no centro da
+          jogabilidade ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Kinect Adventures! — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/kinect_adventures.jpg"
+              alt="Kinect Adventures para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Kinect Adventures!
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! é um jogo de experiências e
+            minijogos desenvolvido pela Good Science Studio
+            e publicado pela Microsoft Game Studios para
+            Xbox 360.<br>
+
+            O título foi lançado em 2010 juntamente com o
+            sensor Kinect e foi projetado especificamente
+            para utilizar o reconhecimento de movimentos
+            do acessório.<br>
+
+            Em vez de utilizar o controle tradicional do Xbox 360,
+            o jogador utiliza seu próprio corpo para realizar
+            movimentos, desviar de obstáculos, rebater objetos
+            e interagir com os ambientes virtuais.<br>
+
+            O jogo apresenta cinco atividades principais,
+            cada uma utilizando o Kinect de uma maneira diferente.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Good Science Studio
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Microsoft Game Studios
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Acessório:</strong>
+                Kinect
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2010
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Esporte / Festa / Minijogos
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1–2 jogadores
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                DVD
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! foi desenvolvido durante a criação
+            da primeira geração do Kinect, quando a Microsoft
+            buscava demonstrar as possibilidades de uma interface
+            baseada no reconhecimento corporal.<br>
+
+            A equipe da Good Science Studio desenvolveu diferentes
+            atividades que pudessem ser compreendidas rapidamente
+            e que utilizassem movimentos naturais do jogador.<br>
+
+            Em vez de reproduzir simplesmente controles tradicionais
+            sem um gamepad, os desenvolvedores criaram atividades
+            nas quais o corpo do jogador funciona como principal
+            forma de interação.<br>
+
+            O resultado foi um conjunto de experiências voltadas
+            principalmente para partidas rápidas e para o uso
+            compartilhado do Kinect.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360_kinect.jpg"
+                alt="Xbox 360 com Kinect"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox 360 e o sensor Kinect ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox 360 foi lançado pela Microsoft em 2005 e
+            posteriormente recebeu o Kinect como novo sistema
+            de interação.<br>
+
+            O Kinect foi apresentado como uma tecnologia capaz
+            de reconhecer movimentos do corpo e comandos de voz
+            sem a necessidade de um controle tradicional para
+            determinadas experiências.<br>
+
+            Kinect Adventures! foi desenvolvido especificamente
+            para acompanhar essa nova forma de interação e
+            serviu como uma das principais demonstrações das
+            possibilidades do acessório.<br>
+
+            A experiência foi particularmente direcionada para
+            partidas em grupo, permitindo que jogadores observassem
+            uns aos outros enquanto participavam das atividades.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               KINECT
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Kinect
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_sensor.jpg"
+                alt="Sensor Kinect"
+              />
+
+              <img
+                src="../tgga/kinect_player.jpg"
+                alt="Jogador utilizando Kinect"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Sensor Kinect e interação corporal ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Kinect utiliza câmeras e sensores para acompanhar
+            a posição e os movimentos do jogador diante do
+            aparelho.<br>
+
+            Em Kinect Adventures!, essa tecnologia é utilizada
+            para detectar movimentos dos braços, pernas e corpo
+            durante as atividades.<br>
+
+            O jogador não precisa segurar um controle para executar
+            as ações principais. Saltar, inclinar-se, movimentar
+            os braços e deslocar o corpo podem ser transformados
+            em comandos dentro dos minijogos.<br>
+
+            A posição do jogador em relação ao sensor também é
+            importante para que os movimentos sejam identificados
+            corretamente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ATIVIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            As Cinco Atividades
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! é organizado em cinco experiências
+            principais.<br>
+
+            Cada atividade apresenta uma mecânica diferente,
+            mas todas utilizam o Kinect como principal método
+            de controle.<br>
+
+            As atividades incluem esportes, deslocamento,
+            reflexos e movimentos corporais.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Atividade</th>
+                <th>Tipo</th>
+                <th>Principal interação</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>20,000 Leaks</td>
+                <td>Aventura</td>
+                <td>Movimento corporal / braços</td>
+              </tr>
+
+              <tr>
+                <td>River Rush</td>
+                <td>Corrida / aventura</td>
+                <td>Inclinação e movimento</td>
+              </tr>
+
+              <tr>
+                <td>Rally Ball</td>
+                <td>Esporte</td>
+                <td>Chutes e movimentos corporais</td>
+              </tr>
+
+              <tr>
+                <td>Reflex Ridge</td>
+                <td>Obstáculos</td>
+                <td>Desvio e movimento</td>
+              </tr>
+
+              <tr>
+                <td>Space Pop</td>
+                <td>Arcade</td>
+                <td>Movimentação no espaço</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               20,000 LEAKS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            20,000 Leaks
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_20000_leaks.jpg"
+                alt="20,000 Leaks"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ 20,000 Leaks ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Em 20,000 Leaks, o jogador encontra-se dentro de
+            uma estrutura submersa que começa a sofrer danos.<br>
+
+            A atividade utiliza movimentos dos braços e do corpo
+            para que o jogador possa reparar os pontos danificados
+            e impedir que a água avance pelo ambiente.<br>
+
+            A atividade exige que o jogador observe diferentes
+            partes da tela e se movimente rapidamente para
+            responder aos problemas apresentados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RIVER RUSH
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            River Rush
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_river_rush.jpg"
+                alt="River Rush"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ River Rush ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            River Rush coloca o jogador em uma espécie de bote
+            descendo um rio repleto de obstáculos e rampas.<br>
+
+            Para controlar o veículo, o jogador movimenta o
+            próprio corpo para alterar sua direção.<br>
+
+            Saltos também podem ser realizados fisicamente,
+            fazendo com que o bote salte dentro do cenário
+            virtual.<br>
+
+            A atividade foi criada para aproveitar o reconhecimento
+            corporal do Kinect de maneira bastante direta.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RALLY BALL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Rally Ball
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_rally_ball.jpg"
+                alt="Rally Ball"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Rally Ball ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Rally Ball transforma o jogador em um participante
+            de uma atividade semelhante a uma mistura de tênis,
+            futebol e quebra de blocos.<br>
+
+            Bolas são lançadas contra uma parede de objetos,
+            e o jogador precisa utilizar braços, pernas e
+            movimentos laterais para devolvê-las.<br>
+
+            A atividade também permite atingir vários alvos
+            e obter pontuações maiores através de sequências
+            de acertos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               REFLEX RIDGE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Reflex Ridge
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_reflex_ridge.jpg"
+                alt="Reflex Ridge"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Reflex Ridge ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Reflex Ridge coloca o jogador em um percurso cheio
+            de obstáculos.<br>
+
+            O personagem se desloca automaticamente enquanto
+            o jogador precisa se abaixar, saltar e mover-se
+            lateralmente para evitar os obstáculos.<br>
+
+            A atividade utiliza principalmente reflexos,
+            coordenação corporal e tempo de reação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SPACE POP
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Space Pop
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_space_pop.jpg"
+                alt="Space Pop"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Space Pop ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Space Pop coloca o jogador em um ambiente espacial
+            no qual deve movimentar o corpo para alcançar
+            diferentes objetos.<br>
+
+            A atividade utiliza o posicionamento do jogador
+            diante do Kinect para criar a sensação de flutuar
+            no espaço.<br>
+
+            O objetivo é atingir os elementos apresentados
+            enquanto o jogador controla seus movimentos
+            corporais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               AVATARES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Avatares
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinect_avatar.jpg"
+                alt="Avatar do Xbox 360"
+              />
+
+              <img
+                src="../tgga/kinect_adventures_avatar.jpg"
+                alt="Avatar em Kinect Adventures"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Avatares e personagens de Kinect Adventures! ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo utiliza os Avatares do Xbox 360 como
+            representação virtual dos jogadores.<br>
+
+            Esses personagens podem aparecer nas diferentes
+            atividades e reproduzir os movimentos realizados
+            pelo jogador diante do Kinect.<br>
+
+            A integração com o sistema de Avatars ajudou a
+            aproximar Kinect Adventures! da interface geral
+            do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! pode ser jogado por duas pessoas,
+            permitindo que os participantes compartilhem o espaço
+            diante do sensor.<br>
+
+            As atividades foram projetadas para permitir
+            competições e colaboração entre jogadores,
+            dependendo da experiência selecionada.<br>
+
+            A possibilidade de observar os movimentos dos
+            participantes também faz parte da apresentação
+            do jogo, já que o jogador precisa permanecer em
+            frente ao sensor para ser identificado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               KINECT HUB
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Interação sem Controle
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características centrais de Kinect Adventures!
+            é a ausência do controle tradicional durante as
+            atividades principais.<br>
+
+            O jogador utiliza o próprio corpo como interface,
+            permitindo que ações físicas sejam traduzidas
+            diretamente para o jogo.<br>
+
+            Essa abordagem diferencia Kinect Adventures! de
+            jogos tradicionais do Xbox 360, nos quais os comandos
+            normalmente dependem do Xbox 360 Controller.<br>
+
+            O resultado é uma experiência particularmente
+            relacionada à tecnologia de detecção de movimento
+            introduzida pelo Kinect.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FOTOGRAFIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Fotografias do Jogador
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! possui um sistema que pode registrar
+            imagens dos jogadores durante determinados momentos
+            das atividades.<br>
+
+            Essas fotografias podem ser utilizadas para mostrar
+            o jogador dentro das situações apresentadas pelo
+            jogo e funcionam como uma lembrança das partidas.<br>
+
+            O recurso também demonstra uma das características
+            técnicas do Kinect: a utilização de câmeras para
+            acompanhar o jogador.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PONTUAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Pontuação e Desempenho
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ELEMENTOS DE PONTUAÇÃO -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Pontos:</strong>
+                obtidos através da realização das atividades.
+              </li>
+
+              <li>
+                <strong>Precisão:</strong>
+                determinadas atividades recompensam movimentos
+                mais precisos.
+              </li>
+
+              <li>
+                <strong>Tempo:</strong>
+                algumas experiências utilizam o tempo como
+                parte do desafio.
+              </li>
+
+              <li>
+                <strong>Acertos:</strong>
+                sequências de ações corretas podem aumentar
+                o desempenho do jogador.
+              </li>
+
+              <li>
+                <strong>Cooperação:</strong>
+                determinadas atividades permitem participação
+                simultânea de dois jogadores.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia do Kinect
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Kinect foi desenvolvido para reconhecer diferentes
+            informações sobre o jogador sem exigir que ele
+            segurasse um dispositivo de controle.<br>
+
+            O sistema utiliza câmeras e sensores para detectar
+            profundidade e movimento, permitindo identificar
+            a posição corporal do jogador.<br>
+
+            Kinect Adventures! foi construído para transformar
+            essas informações em ações dentro dos minijogos,
+            tornando o funcionamento da tecnologia parte
+            fundamental da experiência.<br>
+
+            O jogo também demonstra as limitações naturais desse
+            tipo de sistema, já que iluminação, distância,
+            posicionamento e espaço disponível podem influenciar
+            a detecção dos movimentos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RECEPÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Recepção e Importância
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! tornou-se um dos títulos mais
+            associados ao lançamento do Kinect para Xbox 360.<br>
+
+            Por utilizar diretamente as funções do sensor,
+            o jogo serviu como demonstração das possibilidades
+            da nova tecnologia para jogadores que estavam
+            experimentando o Kinect pela primeira vez.<br>
+
+            Sua estrutura baseada em atividades curtas também
+            tornou o título adequado para partidas casuais,
+            especialmente em situações nas quais várias pessoas
+            compartilhavam o mesmo console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÃO FÍSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_adventures_box.jpg"
+                  alt="Caixa de Kinect Adventures"
+                />
+
+                <figcaption>
+                  Caixa — Kinect Adventures!
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_adventures_disc.jpg"
+                  alt="Disco de Kinect Adventures"
+                />
+
+                <figcaption>
+                  Disco — Kinect Adventures!
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_manual.jpg"
+                  alt="Manual de Kinect Adventures"
+                />
+
+                <figcaption>
+                  Manual — Kinect Adventures!
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/kinect_bundle.jpg"
+                  alt="Xbox 360 Kinect com Kinect Adventures"
+                />
+
+                <figcaption>
+                  Pacote — Xbox 360 + Kinect
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! teve forte associação comercial
+            com o lançamento do Kinect, aparecendo em pacotes
+            que incluíam o sensor e o jogo.<br>
+
+            Para colecionadores, podem ser encontrados exemplares
+            do disco, caixas, manuais e diferentes conjuntos
+            comerciais relacionados ao Xbox 360 e ao Kinect.<br>
+
+            A embalagem também é um registro do período em que
+            a Microsoft promovia a tecnologia de controle por
+            movimento como uma nova forma de interação com o
+            console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Kinect Adventures! permanece associado à primeira
+            geração do Kinect e à tentativa da Microsoft de
+            ampliar as formas de interação com o Xbox 360.<br>
+
+            O título demonstrou como uma coleção de minijogos
+            poderia utilizar reconhecimento corporal para criar
+            experiências diferentes das encontradas nos jogos
+            tradicionais baseados em controles.<br>
+
+            A importância do jogo está diretamente relacionada
+            ao período de lançamento do Kinect e à popularização
+            do sensor entre proprietários do Xbox 360.<br>
+
+            Para muitos jogadores, Kinect Adventures! tornou-se
+            uma das primeiras experiências com jogos controlados
+            exclusivamente por movimentos corporais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Kinect Adventures! foi lançado para Xbox 360
+                em 2010.
+              </li>
+
+              <li>
+                O jogo foi desenvolvido especificamente
+                para o sensor Kinect.
+              </li>
+
+              <li>
+                As cinco atividades principais possuem
+                estilos de jogabilidade diferentes.
+              </li>
+
+              <li>
+                River Rush utiliza movimentos corporais
+                para controlar um bote.
+              </li>
+
+              <li>
+                Reflex Ridge exige que o jogador desvie
+                fisicamente de obstáculos.
+              </li>
+
+              <li>
+                Rally Ball utiliza movimentos de braços,
+                pernas e corpo para rebater bolas.
+              </li>
+
+              <li>
+                20,000 Leaks utiliza movimentos dos braços
+                para reparar partes de uma estrutura submersa.
+              </li>
+
+              <li>
+                Space Pop utiliza o posicionamento corporal
+                para representar movimentos em um ambiente espacial.
+              </li>
+
+              <li>
+                O jogo pode registrar fotografias dos jogadores
+                durante determinadas atividades.
+              </li>
+
+              <li>
+                Kinect Adventures! foi associado a pacotes
+                comerciais do Xbox 360 Kinect.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="kinectadventures.html">
+                ○ Games - Kinect Adventures!
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Kinect</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor responsável por detectar os movimentos
+                  do jogador durante as atividades.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Captura de movimento</li>
+                  <li>Plataforma: Xbox 360</li>
+                  <li>Controle tradicional: Não necessário</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Avatar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Representação virtual do jogador utilizada
+                  durante as atividades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>20,000 Leaks</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividade subaquática na qual o jogador
+                  precisa reparar vazamentos utilizando
+                  movimentos corporais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>River Rush</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividade na qual o jogador controla um
+                  bote descendo um rio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rally Ball</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividade baseada em rebater bolas contra
+                  alvos utilizando o corpo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Reflex Ridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Percurso de obstáculos que exige que o
+                  jogador se movimente para evitá-los.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Space Pop</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atividade espacial baseada na movimentação
+                  do corpo para atingir objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>River</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ambiente utilizado em River Rush,
+                  com obstáculos, rampas e caminhos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rally Ball</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de bolas e alvos utilizado na
+                  atividade esportiva.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Obstacles</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Obstáculos utilizados para testar os
+                  reflexos do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Space</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ambiente utilizado na atividade Space Pop.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motion Tracking</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado pelo Kinect para
+                  acompanhar os movimentos do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Body Movement</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal forma de interação utilizada
+                  pelo jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jump</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento corporal utilizado principalmente
+                  em River Rush e Reflex Ridge.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dodge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Movimento lateral ou corporal utilizado
+                  para evitar obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Score</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado para registrar o
+                  desempenho dos jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Photography</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso que registra imagens do jogador
+                  durante determinadas atividades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Microsoft para o qual
+                  Kinect Adventures! foi desenvolvido.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Good Science Studio</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  de Kinect Adventures!.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microsoft Game Studios</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Publicadora responsável pelo lançamento
+                  do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Sensor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dispositivo responsável pela captura de
+                  movimentos e profundidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360 Avatar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem virtual associado ao jogador
+                  dentro do ecossistema Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Adventures Disc</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Disco físico utilizado para executar
+                  o jogo no Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Bundle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pacote comercial que podia incluir o
+                  sensor Kinect e Kinect Adventures!.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

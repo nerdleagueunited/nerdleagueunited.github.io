@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>TGGA - Terraria</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        >
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Terraria combina exploração, construção, combate,
+          mineração e criação em um mundo 2D gerado proceduralmente ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Terraria combina exploração, construção, combate,
+          mineração e criação em um mundo 2D gerado proceduralmente ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Terraria — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/terraria_xbox360.jpg"
+              alt="Terraria para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            >
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Terraria
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria é um jogo eletrônico de ação, aventura,
+            exploração e construção desenvolvido pela Re-Logic.<br>
+
+            O jogo foi lançado originalmente para computadores
+            em 2011 e posteriormente recebeu versões para
+            diferentes consoles e plataformas.<br>
+
+            No Xbox 360, Terraria foi lançado em 2013 e adaptado
+            para os controles e recursos do console da Microsoft.<br>
+
+            O jogador explora um mundo bidimensional gerado
+            proceduralmente, coleta recursos, constrói estruturas,
+            fabrica equipamentos e enfrenta diversos inimigos
+            e chefes.<br>
+
+            Diferentemente de jogos com progressão linear,
+            Terraria permite que o jogador determine grande parte
+            do ritmo e da direção de sua aventura.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Re-Logic
+              </li>
+
+              <li>
+                <strong>Publicadora original:</strong>
+                Re-Logic
+              </li>
+
+              <li>
+                <strong>Plataforma desta edição:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento no Xbox 360:</strong>
+                2013
+              </li>
+
+              <li>
+                <strong>Gêneros:</strong>
+                Ação / Aventura / Sandbox
+              </li>
+
+              <li>
+                <strong>Perspectiva:</strong>
+                2D
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Single-player / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Xbox 360
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria foi criado por uma equipe liderada por
+            Andrew Spinks, inicialmente com uma proposta de
+            combinar exploração, construção e combate em um
+            ambiente bidimensional.<br>
+
+            O desenvolvimento utilizou uma estrutura baseada
+            na geração procedural do mundo, permitindo criar
+            mapas diferentes para cada partida.<br>
+
+            O jogo recebeu atualizações durante vários anos,
+            adicionando novos itens, inimigos, biomas,
+            personagens, sistemas de criação e chefes.<br>
+
+            A versão para Xbox 360 foi desenvolvida pela
+            equipe responsável pela adaptação para consoles
+            e trouxe uma interface adequada ao controle.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/terraria_pc.jpg"
+                alt="Terraria no computador"
+              >
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Terraria e Xbox 360 — versões para computador e console ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a década de 2010, jogos independentes passaram
+            a conquistar espaço significativo entre os jogadores
+            de consoles e computadores.<br>
+
+            Terraria surgiu nesse contexto combinando elementos
+            associados a jogos de exploração, construção,
+            sobrevivência e RPG.<br>
+
+            Sua estrutura aberta permitia que jogadores
+            construíssem suas próprias bases e explorassem
+            diferentes regiões do mundo sem seguir uma campanha
+            linear tradicional.<br>
+
+            A chegada aos consoles ampliou o público do jogo
+            e levou sua experiência para plataformas como
+            Xbox 360 e PlayStation 3.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria foi lançado digitalmente para Xbox 360
+            em 2013 através da Xbox Live Arcade.<br>
+
+            A adaptação permitiu jogar utilizando o controle
+            do Xbox 360 e apresentou menus e sistemas
+            reorganizados para a plataforma.<br>
+
+            A versão também oferecia multiplayer, permitindo
+            que jogadores explorassem e construíssem juntos
+            no mesmo mundo.<br>
+
+            Como outras versões do jogo, a edição de Xbox 360
+            recebeu atualizações que acrescentaram conteúdo
+            durante seu ciclo de vida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GAMEPLAY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogabilidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A jogabilidade de Terraria gira em torno de
+            exploração, coleta de recursos, construção,
+            criação de equipamentos e combate.<br>
+
+            O jogador começa com equipamentos simples e
+            precisa explorar o mundo para encontrar madeira,
+            pedra, minérios e outros materiais.<br>
+
+            Os recursos coletados podem ser transformados
+            em ferramentas, armas, armaduras, móveis e
+            estruturas.<br>
+
+            Conforme o jogador evolui, novos equipamentos
+            permitem acessar regiões anteriormente perigosas
+            ou difíceis de explorar.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MUNDO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Mundo de Terraria
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/terraria_world.jpg"
+                alt="Mundo de Terraria"
+              >
+
+              <img
+                src="../tgga/terraria_cave.jpg"
+                alt="Caverna de Terraria"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Superfície e cavernas do mundo de Terraria ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Cada mundo de Terraria é criado através de geração
+            procedural.<br>
+
+            O mapa possui uma superfície e grandes áreas
+            subterrâneas que podem ser exploradas em busca
+            de recursos e tesouros.<br>
+
+            O tamanho e a distribuição dos elementos variam
+            de acordo com a geração do mundo.<br>
+
+            A exploração vertical é uma das características
+            centrais do jogo, permitindo que o jogador percorra
+            desde o céu até regiões subterrâneas profundas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BIOMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Biomas
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS BIOMAS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Forest:</strong>
+                região comum encontrada na superfície.
+              </li>
+
+              <li>
+                <strong>Desert:</strong>
+                região arenosa com inimigos e recursos próprios.
+              </li>
+
+              <li>
+                <strong>Jungle:</strong>
+                bioma com vegetação densa, cavernas e criaturas perigosas.
+              </li>
+
+              <li>
+                <strong>Snow:</strong>
+                região congelada com neve e gelo.
+              </li>
+
+              <li>
+                <strong>Ocean:</strong>
+                áreas aquáticas localizadas nas extremidades do mundo.
+              </li>
+
+              <li>
+                <strong>Underground:</strong>
+                grandes áreas subterrâneas com minérios e cavernas.
+              </li>
+
+              <li>
+                <strong>Corruption:</strong>
+                bioma contaminado com inimigos e estruturas próprias.
+              </li>
+
+              <li>
+                <strong>Crimson:</strong>
+                bioma alternativo à Corrupção em determinados mundos.
+              </li>
+
+              <li>
+                <strong>Underworld:</strong>
+                região localizada nas profundezas do mundo.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MINERAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mineração e Recursos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A mineração é uma das principais atividades de
+            Terraria.<br>
+
+            O jogador utiliza picaretas e outras ferramentas
+            para remover blocos e encontrar minérios no
+            subterrâneo.<br>
+
+            Diferentes materiais são utilizados para criar
+            armas, armaduras, ferramentas e outros objetos.<br>
+
+            Conforme o jogador avança, torna-se possível
+            encontrar minérios mais raros e fabricar
+            equipamentos mais poderosos.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Recurso</th>
+                <th>Utilização</th>
+                <th>Localização</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Wood</td>
+                <td>Construção / Criação</td>
+                <td>Superfície</td>
+              </tr>
+
+              <tr>
+                <td>Stone</td>
+                <td>Construção</td>
+                <td>Subterrâneo</td>
+              </tr>
+
+              <tr>
+                <td>Copper</td>
+                <td>Ferramentas / Equipamentos</td>
+                <td>Subterrâneo</td>
+              </tr>
+
+              <tr>
+                <td>Iron</td>
+                <td>Ferramentas / Armaduras</td>
+                <td>Subterrâneo</td>
+              </tr>
+
+              <tr>
+                <td>Silver</td>
+                <td>Equipamentos</td>
+                <td>Subterrâneo</td>
+              </tr>
+
+              <tr>
+                <td>Gold</td>
+                <td>Equipamentos</td>
+                <td>Subterrâneo</td>
+              </tr>
+
+              <tr>
+                <td>Hellstone</td>
+                <td>Equipamentos avançados</td>
+                <td>Underworld</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CRAFTING
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Criação de Itens
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O sistema de crafting permite transformar recursos
+            encontrados durante a exploração em novos objetos.<br>
+
+            Para criar determinados itens, o jogador precisa
+            utilizar estações específicas, como Work Benches,
+            Furnaces e Anvils.<br>
+
+            O sistema inclui receitas para ferramentas,
+            armas, armaduras, móveis, blocos, poções e
+            diversos objetos utilizados na construção.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ESTAÇÕES DE CRIAÇÃO -
+            </h3>
+
+            <ul>
+
+              <li>Work Bench</li>
+              <li>Furnace</li>
+              <li>Anvil</li>
+              <li>Alchemy Station</li>
+              <li>Hellforge</li>
+              <li>Chest</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas e Equipamentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_sword.jpg"
+                  alt="Espada de Terraria"
+                >
+
+                <figcaption>
+                  Espadas
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_bow.jpg"
+                  alt="Arco de Terraria"
+                >
+
+                <figcaption>
+                  Arcos
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_magic.jpg"
+                  alt="Arma mágica de Terraria"
+                >
+
+                <figcaption>
+                  Armas mágicas
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_armor.jpg"
+                  alt="Armadura de Terraria"
+                >
+
+                <figcaption>
+                  Armaduras
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria possui diferentes categorias de armas,
+            permitindo que o jogador desenvolva estilos de
+            combate distintos.<br>
+
+            Espadas e outras armas de contato são úteis em
+            combates próximos, enquanto arcos e outras armas
+            permitem atacar à distância.<br>
+
+            Também existem armas mágicas e equipamentos com
+            efeitos especiais.<br>
+
+            A escolha dos equipamentos pode alterar
+            significativamente a forma como o jogador
+            enfrenta inimigos e chefes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NPCS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            NPCs
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/terraria_guide.jpg"
+                alt="Guide de Terraria"
+              >
+
+              <img
+                src="../tgga/terraria_merchant.jpg"
+                alt="Merchant de Terraria"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Guide e Merchant — NPCs de Terraria ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Diversos NPCs podem aparecer durante a aventura.
+            Muitos deles podem ser alojados em casas construídas
+            pelo jogador.<br>
+
+            Esses personagens oferecem serviços, vendem itens,
+            fornecem informações ou participam de sistemas
+            específicos do jogo.<br>
+
+            O número de NPCs disponíveis aumenta conforme o
+            jogador cumpre determinadas condições.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS NPCs -
+            </h3>
+
+            <ul>
+
+              <li>Guide</li>
+              <li>Merchant</li>
+              <li>Nurse</li>
+              <li>Arms Dealer</li>
+              <li>Dryad</li>
+              <li>Demolitionist</li>
+              <li>Goblin Tinkerer</li>
+              <li>Witch Doctor</li>
+              <li>Clothier</li>
+              <li>Mechanic</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CHEFES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Chefes
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os chefes são inimigos especiais que apresentam
+            batalhas significativamente mais complexas do que
+            os inimigos comuns.<br>
+
+            Derrotá-los pode liberar novos itens, eventos,
+            recursos ou mudanças no mundo.<br>
+
+            Alguns chefes podem ser encontrados através da
+            exploração, enquanto outros precisam ser invocados
+            utilizando itens ou cumprindo determinadas condições.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS CHEFES -
+            </h3>
+
+            <ul>
+
+              <li>King Slime</li>
+              <li>Eye of Cthulhu</li>
+              <li>Eater of Worlds</li>
+              <li>Brain of Cthulhu</li>
+              <li>Queen Bee</li>
+              <li>Skeletron</li>
+              <li>Wall of Flesh</li>
+              <li>Destroyer</li>
+              <li>Skeletron Prime</li>
+              <li>The Twins</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EVENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Eventos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria também possui eventos especiais que
+            alteram temporariamente as condições do mundo.<br>
+
+            Durante determinados eventos, grupos de inimigos
+            podem aparecer em grande quantidade ou novos
+            adversários podem ser encontrados.<br>
+
+            Alguns eventos estão relacionados a determinadas
+            épocas, condições do mundo ou itens utilizados
+            pelo jogador.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - EVENTOS CONHECIDOS -
+            </h3>
+
+            <ul>
+
+              <li>Blood Moon</li>
+              <li>Goblin Army</li>
+              <li>Slime Rain</li>
+              <li>Pirate Invasion</li>
+              <li>Solar Eclipse</li>
+              <li>Pumpkin Moon</li>
+              <li>Frost Moon</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer no Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 permite que jogadores
+            compartilhem a experiência de Terraria através
+            dos recursos multiplayer do console.<br>
+
+            Jogadores podem explorar o mesmo mundo, construir
+            estruturas, coletar recursos e enfrentar inimigos
+            juntos.<br>
+
+            O multiplayer também possibilita dividir funções,
+            com jogadores especializados em exploração,
+            construção ou combate.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controles e Interface
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360_controller.jpg"
+                alt="Controle do Xbox 360"
+              >
+
+              <img
+                src="../tgga/terraria_inventory.jpg"
+                alt="Inventário de Terraria"
+              >
+
+            </div>
+
+
+            <figcaption>
+              ~ Controle do Xbox 360 e interface de Terraria ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição para Xbox 360 foi adaptada para utilização
+            com o controle do console.<br>
+
+            O jogador pode movimentar o personagem, selecionar
+            itens da barra de acesso rápido e utilizar ferramentas
+            diretamente através dos comandos do controle.<br>
+
+            O inventário permite organizar armas, ferramentas,
+            materiais e outros objetos encontrados durante
+            a aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONSTRUÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Construção
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A construção é uma das características mais
+            importantes de Terraria.<br>
+
+            O jogador pode utilizar blocos, paredes, móveis,
+            portas, plataformas e diversos objetos para
+            criar casas, fortalezas, arenas e outras estruturas.<br>
+
+            As construções também possuem uma função prática,
+            pois casas adequadas permitem que determinados NPCs
+            passem a viver no mundo.<br>
+
+            Jogadores podem construir desde pequenas casas
+            até grandes complexos subterrâneos e estruturas
+            elaboradas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PROGRESSÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Progressão
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Etapa</th>
+                <th>Atividades</th>
+                <th>Exemplos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Início</td>
+                <td>Exploração / Coleta</td>
+                <td>Madeira / Pedra</td>
+              </tr>
+
+              <tr>
+                <td>Primeiros equipamentos</td>
+                <td>Mineração / Crafting</td>
+                <td>Ferro / Prata / Ouro</td>
+              </tr>
+
+              <tr>
+                <td>Exploração avançada</td>
+                <td>Cavernas / Biomas</td>
+                <td>Jungle / Dungeon</td>
+              </tr>
+
+              <tr>
+                <td>Chefes</td>
+                <td>Combate</td>
+                <td>Eye of Cthulhu / Skeletron</td>
+              </tr>
+
+              <tr>
+                <td>Underworld</td>
+                <td>Exploração profunda</td>
+                <td>Hellstone</td>
+              </tr>
+
+              <tr>
+                <td>Hardmode</td>
+                <td>Novos inimigos e recursos</td>
+                <td>Novos minérios / Chefes</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HARDMODE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Hardmode
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Hardmode representa uma grande mudança na progressão
+            do mundo de Terraria.<br>
+
+            O acesso a essa etapa ocorre após a derrota do
+            Wall of Flesh no Underworld.<br>
+
+            Depois disso, novos inimigos, minérios, itens,
+            ambientes e chefes passam a fazer parte da aventura.<br>
+
+            O mundo também sofre alterações, incluindo a
+            expansão de biomas especiais que podem modificar
+            regiões anteriormente exploradas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EXPLORAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Exploração e Segredos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A exploração é constantemente recompensada em
+            Terraria.<br>
+
+            Cavernas podem esconder baús, equipamentos,
+            minérios e estruturas especiais.<br>
+
+            O jogador também pode encontrar casas abandonadas,
+            templos, masmorras, ilhas flutuantes e outras
+            áreas que não aparecem necessariamente de forma
+            evidente na superfície.<br>
+
+            A geração procedural faz com que a localização
+            desses elementos varie entre mundos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Plataformas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_pc.jpg"
+                  alt="Terraria para PC"
+                >
+
+                <figcaption>
+                  Terraria — PC
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_xbox360.jpg"
+                  alt="Terraria para Xbox 360"
+                >
+
+                <figcaption>
+                  Terraria — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_ps3.jpg"
+                  alt="Terraria para PlayStation 3"
+                >
+
+                <figcaption>
+                  Terraria — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_mobile.jpg"
+                  alt="Terraria para dispositivos móveis"
+                >
+
+                <figcaption>
+                  Terraria — Mobile
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria foi lançado em diversas plataformas ao
+            longo de sua história.<br>
+
+            A versão para Xbox 360 faz parte da primeira geração
+            de adaptações para consoles domésticos e possui
+            características próprias de sua época.<br>
+
+            Posteriormente, o jogo também chegou a plataformas
+            mais modernas, além de dispositivos móveis e outros
+            sistemas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÃO FÍSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição e Materiais do Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 foi distribuída principalmente
+            através da Xbox Live Arcade.<br>
+
+            Materiais relacionados à versão podem incluir
+            imagens promocionais, capas, materiais digitais
+            e outros itens associados à distribuição do jogo.<br>
+
+            Para colecionadores, versões físicas relacionadas
+            às diferentes plataformas e regiões podem apresentar
+            interesse histórico.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_cover.jpg"
+                  alt="Capa de Terraria"
+                >
+
+                <figcaption>
+                  Arte promocional — Terraria
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_xbox360_screen.jpg"
+                  alt="Terraria no Xbox 360"
+                >
+
+                <figcaption>
+                  Terraria — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_character.jpg"
+                  alt="Personagem de Terraria"
+                >
+
+                <figcaption>
+                  Personagem — Terraria
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/terraria_world2.jpg"
+                  alt="Mundo de Terraria"
+                >
+
+                <figcaption>
+                  Mundo gerado proceduralmente
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Terraria tornou-se um dos exemplos mais conhecidos
+            de jogos independentes baseados em exploração,
+            construção e geração procedural.<br>
+
+            A combinação de mineração, crafting, combate,
+            construção e exploração criou uma experiência
+            que pode ser jogada de maneiras bastante diferentes.<br>
+
+            O título também recebeu suporte e atualizações
+            durante muitos anos, aumentando significativamente
+            a quantidade de conteúdo disponível em relação
+            às primeiras versões.<br>
+
+            A versão de Xbox 360 representa uma etapa importante
+            da expansão do jogo para consoles domésticos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Terraria foi lançado originalmente em 2011.
+              </li>
+
+              <li>
+                A versão de Xbox 360 chegou em 2013.
+              </li>
+
+              <li>
+                Os mundos são gerados proceduralmente.
+              </li>
+
+              <li>
+                O jogador pode construir suas próprias casas
+                e estruturas.
+              </li>
+
+              <li>
+                Existem diferentes biomas com inimigos e
+                recursos próprios.
+              </li>
+
+              <li>
+                O jogo possui dezenas de chefes e eventos
+                dependendo da versão e atualização.
+              </li>
+
+              <li>
+                A derrota do Wall of Flesh inicia o Hardmode.
+              </li>
+
+              <li>
+                Terraria possui sistemas de crafting,
+                mineração e construção profundamente integrados.
+              </li>
+
+              <li>
+                O multiplayer permite explorar e construir
+                com outros jogadores.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="terraria.html">
+                ○ Games - Terraria
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Player</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem controlado pelo jogador durante
+                  a exploração do mundo.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Construção: Sim</li>
+                  <li>Combate: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guide</summary>
+
+              <div class="component-description">
+
+                <p>
+                  NPC inicial que fornece informações sobre
+                  crafting e funcionamento do mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Merchant</summary>
+
+              <div class="component-description">
+
+                <p>
+                  NPC que vende diversos itens básicos
+                  utilizados durante a aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nurse</summary>
+
+              <div class="component-description">
+
+                <p>
+                  NPC especializado em serviços relacionados
+                  à recuperação de vida.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guide</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos primeiros personagens encontrados
+                  no mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goblin Tinkerer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  NPC associado a melhorias e acessórios
+                  do equipamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dryad</summary>
+
+              <div class="component-description">
+
+                <p>
+                  NPC relacionado a elementos naturais e
+                  determinadas informações sobre o mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>King Slime</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chefe associado a grandes quantidades
+                  de Slimes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Eye of Cthulhu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos primeiros grandes chefes que o
+                  jogador pode enfrentar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Skeletron</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chefe relacionado à Dungeon e uma das
+                  batalhas importantes da progressão inicial.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wall of Flesh</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Chefe localizado no Underworld e responsável
+                  pela transição para o Hardmode.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Zombie</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo comum que aparece principalmente
+                  durante determinadas condições noturnas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Slime</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Família de criaturas encontrada em diversas
+                  regiões do mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Demon Eye</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo voador encontrado principalmente
+                  durante a noite.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Skeleton</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo encontrado em determinadas áreas
+                  subterrâneas e na Dungeon.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Não faz parte de Terraria. Este item pertence
+                  à série Super Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wood</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso básico obtido através do corte
+                  de árvores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Material comum encontrado no subsolo e
+                  utilizado principalmente em construções.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Iron</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minério utilizado na criação de ferramentas,
+                  armas e outros equipamentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Gold</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minério utilizado na fabricação de
+                  equipamentos e outros objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hellstone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minério encontrado no Underworld e utilizado
+                  para fabricar equipamentos avançados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pickaxe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ferramenta utilizada principalmente para
+                  remover blocos e minerar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sword</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de combate corpo a corpo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma utilizada para ataques à distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Magic Weapon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Categoria de armas que utiliza sistemas
+                  mágicos para atacar inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Work Bench</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estação básica de crafting utilizada para
+                  fabricar diversos objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Furnace</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estação utilizada para fundir determinados
+                  minérios em barras.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Anvil</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estação utilizada para fabricar equipamentos
+                  a partir de barras metálicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Forest</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma comum da superfície do mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desert</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma arenoso localizado na superfície.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jungle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma com vegetação densa, cavernas,
+                  recursos e inimigos próprios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Snow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma congelado composto por neve e gelo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ocean</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grandes regiões de água encontradas
+                  nas extremidades do mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Corruption</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma contaminado com inimigos,
+                  estruturas e recursos próprios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Crimson</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bioma alternativo à Corruption em
+                  determinados mundos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dungeon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande estrutura subterrânea que possui
+                  inimigos, armadilhas e itens especiais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Underworld</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região localizada nas profundezas do mundo,
+                  abaixo das áreas subterrâneas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hardmode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Etapa da progressão iniciada após a derrota
+                  do Wall of Flesh.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blood Moon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Evento que altera as condições da noite
+                  e aumenta a atividade de determinados inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goblin Army</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Evento de invasão envolvendo inimigos
+                  Goblin.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Microsoft que recebeu uma versão
+                  de Terraria em 2013.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox Live Arcade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Serviço de distribuição digital do Xbox 360
+                  utilizado para a versão de Terraria.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Andrew Spinks</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Desenvolvedor associado à criação de Terraria
+                  e à Re-Logic.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Re-Logic</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  de Terraria.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - LEGO Harry Potter: Years 1–4</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... LEGO Harry Potter: Years 1–4 reúne os quatro primeiros
+          anos da história de Harry Potter em uma aventura construída
+          com peças LEGO, combinando exploração, quebra-cabeças,
+          humor e ação ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... LEGO Harry Potter: Years 1–4 reúne os quatro primeiros
+          anos da história de Harry Potter em uma aventura construída
+          com peças LEGO, combinando exploração, quebra-cabeças,
+          humor e ação ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            LEGO Harry Potter: Years 1–4 — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/lego_harry_potter_1_4_x360.jpg"
+              alt="LEGO Harry Potter Years 1-4 para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            LEGO Harry Potter: Years 1–4
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            LEGO Harry Potter: Years 1–4 é um jogo eletrônico
+            de ação e aventura desenvolvido pela Traveller's Tales
+            e publicado pela Warner Bros. Interactive Entertainment.<br>
+
+            O jogo adapta os quatro primeiros anos da história
+            de Harry Potter no universo LEGO, abrangendo os eventos
+            de A Pedra Filosofal, A Câmara Secreta, O Prisioneiro
+            de Azkaban e O Cálice de Fogo.<br>
+
+            A versão para Xbox 360 utiliza a fórmula tradicional
+            dos jogos LEGO, combinando exploração, combate,
+            resolução de quebra-cabeças, coleta de peças e
+            construção de objetos.<br>
+
+            O jogador controla diferentes personagens da série,
+            cada um com habilidades próprias utilizadas para
+            avançar pelos cenários e descobrir áreas secretas.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Traveller's Tales
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Warner Bros. Interactive Entertainment
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2010
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura / Plataforma
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador / Cooperativo local
+              </li>
+
+              <li>
+                <strong>Motor:</strong>
+                LEGO game engine da Traveller's Tales
+              </li>
+
+              <li>
+                <strong>Base:</strong>
+                Universo Harry Potter
+              </li>
+
+              <li>
+                <strong>Classificação:</strong>
+                Conteúdo familiar
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            LEGO Harry Potter: Years 1–4 foi desenvolvido pela
+            Traveller's Tales, estúdio conhecido por produzir
+            diversos jogos baseados na marca LEGO.<br>
+
+            O projeto levou a fórmula utilizada em títulos
+            anteriores da série LEGO para o universo criado
+            por J. K. Rowling.<br>
+
+            A equipe combinou personagens, locais, objetos e
+            acontecimentos dos quatro primeiros filmes com
+            o estilo visual característico dos jogos LEGO.<br>
+
+            Uma das características centrais do projeto foi
+            transformar a magia de Harry Potter em diferentes
+            mecânicas de jogo, permitindo que os feitiços fossem
+            utilizados tanto em combate quanto na resolução
+            de quebra-cabeças.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+              <img
+                src="../tgga/harry_potter.jpg"
+                alt="Harry Potter"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox 360 e o universo de Harry Potter ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox 360 recebeu uma grande quantidade de jogos
+            baseados em filmes e franquias populares durante
+            sua geração.<br>
+
+            Ao mesmo tempo, a Traveller's Tales havia estabelecido
+            uma identidade própria para seus jogos LEGO, utilizando
+            humor visual, personagens colecionáveis, exploração
+            e quebra-cabeças cooperativos.<br>
+
+            LEGO Harry Potter: Years 1–4 combinou essas características
+            com elementos específicos do universo de Harry Potter,
+            incluindo Hogwarts, feitiços, poções, criaturas mágicas
+            e personagens conhecidos da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/lego_harry.jpg"
+                alt="Harry Potter LEGO"
+              />
+
+              <img
+                src="../tgga/lego_hogwarts.jpg"
+                alt="Hogwarts LEGO"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Harry Potter e Hogwarts representados no universo LEGO ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A aventura acompanha Harry Potter desde sua chegada
+            ao mundo mágico até os acontecimentos do quarto ano
+            em Hogwarts.<br>
+
+            A narrativa começa com Harry descobrindo que é um
+            bruxo e sendo levado para Hogwarts, onde conhece
+            Ron Weasley e Hermione Granger.<br>
+
+            Durante os quatro anos representados no jogo, o trio
+            enfrenta diversos perigos, descobre segredos e
+            participa de acontecimentos relacionados a Voldemort
+            e seus seguidores.<br>
+
+            A história é apresentada através de cenas recriadas
+            com personagens LEGO, mantendo o tom humorístico
+            característico da franquia.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ANOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Os Quatro Anos
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Ano</th>
+                <th>História</th>
+                <th>Locais / Eventos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Ano 1</td>
+                <td>A Pedra Filosofal</td>
+                <td>Hogwarts / Pedra Filosofal</td>
+              </tr>
+
+              <tr>
+                <td>Ano 2</td>
+                <td>A Câmara Secreta</td>
+                <td>Câmara Secreta / Basilisco</td>
+              </tr>
+
+              <tr>
+                <td>Ano 3</td>
+                <td>O Prisioneiro de Azkaban</td>
+                <td>Hogsmeade / Dementadores</td>
+              </tr>
+
+              <tr>
+                <td>Ano 4</td>
+                <td>O Cálice de Fogo</td>
+                <td>Torneio Tribruxo / Voldemort</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A jogabilidade segue a estrutura tradicional dos jogos
+            LEGO da Traveller's Tales.<br>
+
+            O jogador explora os cenários, destrói objetos
+            construídos com peças LEGO, coleta peças, enfrenta
+            inimigos e resolve quebra-cabeças.<br>
+
+            Diferentes personagens possuem habilidades específicas,
+            fazendo com que determinados obstáculos só possam ser
+            resolvidos utilizando o personagem apropriado.<br>
+
+            A troca de personagens é uma parte importante da
+            exploração, especialmente quando o jogador retorna
+            às fases no modo de jogo livre.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FEITIÇOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Magia e Feitiços
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_wingardium.jpg"
+                  alt="Wingardium Leviosa"
+                />
+
+                <figcaption>
+                  Wingardium Leviosa
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_expelliarmus.jpg"
+                  alt="Expelliarmus"
+                />
+
+                <figcaption>
+                  Expelliarmus
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_lumos.jpg"
+                  alt="Lumos"
+                />
+
+                <figcaption>
+                  Lumos
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_reducto.jpg"
+                  alt="Reducto"
+                />
+
+                <figcaption>
+                  Reducto
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A magia é uma das principais mecânicas de LEGO Harry
+            Potter: Years 1–4.<br>
+
+            Diferentes personagens possuem acesso a feitiços ou
+            habilidades mágicas que podem ser utilizados para
+            interagir com o ambiente.<br>
+
+            Wingardium Leviosa permite manipular determinados
+            objetos e elementos do cenário.<br>
+
+            Lumos pode ser utilizado em situações relacionadas
+            à iluminação e determinados obstáculos mágicos.<br>
+
+            Outros feitiços e habilidades são necessários para
+            destruir objetos, abrir caminhos ou resolver
+            quebra-cabeças específicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Harry Potter:</strong>
+                protagonista e aluno de Hogwarts.
+              </li>
+
+              <li>
+                <strong>Ron Weasley:</strong>
+                melhor amigo de Harry e integrante do trio principal.
+              </li>
+
+              <li>
+                <strong>Hermione Granger:</strong>
+                amiga de Harry e Ron, conhecida por seu conhecimento
+                e habilidades mágicas.
+              </li>
+
+              <li>
+                <strong>Albus Dumbledore:</strong>
+                diretor de Hogwarts.
+              </li>
+
+              <li>
+                <strong>Rubeus Hagrid:</strong>
+                guarda-caça e aliado de Harry.
+              </li>
+
+              <li>
+                <strong>Draco Malfoy:</strong>
+                aluno da Sonserina e rival de Harry.
+              </li>
+
+              <li>
+                <strong>Severus Snape:</strong>
+                professor de Hogwarts e membro da Sonserina.
+              </li>
+
+              <li>
+                <strong>Lord Voldemort:</strong>
+                principal ameaça da história.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HOGWARTS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Hogwarts
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/lego_hogwarts_castle.jpg"
+                alt="Castelo de Hogwarts LEGO"
+              />
+
+              <img
+                src="../tgga/lego_great_hall.jpg"
+                alt="Grande Salão de Hogwarts LEGO"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Hogwarts e o Grande Salão no universo LEGO ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Hogwarts funciona como um dos principais ambientes
+            do jogo.<br>
+
+            O castelo possui corredores, salas de aula, áreas
+            externas e diversos locais utilizados durante as
+            diferentes fases.<br>
+
+            A escola também funciona como uma área de exploração,
+            permitindo encontrar personagens, colecionáveis,
+            objetos interativos e caminhos secretos.<br>
+
+            Conforme novas habilidades são desbloqueadas, áreas
+            anteriormente inacessíveis podem ser exploradas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos e Perigos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo apresenta diversos inimigos inspirados no
+            universo de Harry Potter.<br>
+
+            Os confrontos são adaptados ao estilo LEGO e normalmente
+            envolvem feitiços, objetos do cenário e habilidades
+            específicas dos personagens.<br>
+
+            Além dos inimigos comuns, determinadas fases apresentam
+            criaturas e adversários relacionados diretamente aos
+            acontecimentos dos filmes.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS E CRIATURAS -
+            </h3>
+
+            <ul>
+
+              <li>Aranhas</li>
+              <li>Inferi</li>
+              <li>Dementadores</li>
+              <li>Death Eaters</li>
+              <li>Duendes</li>
+              <li>Basilisco</li>
+              <li>Voldemort</li>
+              <li>Tom Riddle</li>
+              <li>Comensais da Morte</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Poções
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As poções fazem parte das atividades e quebra-cabeças
+            encontrados durante a aventura.<br>
+
+            O jogador pode encontrar ingredientes e utilizar
+            objetos relacionados às aulas de Poções de Hogwarts.<br>
+
+            Esses elementos ajudam a reproduzir situações presentes
+            nos livros e filmes e também funcionam como parte
+            das mecânicas de exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A exploração é incentivada através de uma grande
+            quantidade de colecionáveis espalhados pelos cenários.<br>
+
+            Peças LEGO, moedas, personagens e outros objetos
+            podem ser encontrados durante as fases.<br>
+
+            Muitos itens exigem habilidades que o jogador obtém
+            ao utilizar personagens específicos, incentivando
+            o retorno às fases já concluídas através do modo
+            de jogo livre.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS COLECIONÁVEIS -
+            </h3>
+
+            <ul>
+
+              <li>Studs</li>
+              <li>Gold Bricks</li>
+              <li>Character Tokens</li>
+              <li>Red Bricks</li>
+              <li>Mini-Kits</li>
+              <li>Itens secretos</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FASES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Fases e Capítulos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha é dividida de acordo com os quatro primeiros
+            anos de Harry em Hogwarts.<br>
+
+            Cada ano adapta acontecimentos importantes da respectiva
+            história, utilizando fases lineares combinadas com
+            áreas de exploração.<br>
+
+            Depois de concluir as fases, o jogador pode retornar
+            a elas utilizando personagens adicionais para encontrar
+            segredos e completar os objetivos restantes.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Ano</th>
+                <th>Obra</th>
+                <th>Principais elementos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>1</td>
+                <td>A Pedra Filosofal</td>
+                <td>Hogwarts / Pedra Filosofal</td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>A Câmara Secreta</td>
+                <td>Câmara Secreta / Basilisco</td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>O Prisioneiro de Azkaban</td>
+                <td>Dementadores / Sirius Black</td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>O Cálice de Fogo</td>
+                <td>Torneio Tribruxo / Voldemort</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COOPERATIVO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modo Cooperativo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 oferece suporte ao modo cooperativo
+            local para dois jogadores.<br>
+
+            Dois jogadores podem controlar personagens diferentes
+            enquanto avançam pelas fases e resolvem os quebra-cabeças
+            em conjunto.<br>
+
+            A possibilidade de alternar entre personagens é
+            especialmente importante porque determinadas habilidades
+            são necessárias para superar obstáculos específicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODO LIVRE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Free Play
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Depois de completar determinadas fases, o jogador pode
+            retornar aos cenários utilizando uma seleção maior
+            de personagens.<br>
+
+            O modo Free Play permite acessar áreas que não podiam
+            ser exploradas durante a primeira passagem pela fase.<br>
+
+            Essa estrutura transforma fases já concluídas em
+            ambientes de exploração e coleta, incentivando o
+            jogador a procurar segredos e completar os objetivos
+            restantes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Estilo LEGO
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/lego_harry_characters.jpg"
+                alt="Personagens LEGO Harry Potter"
+              />
+
+              <img
+                src="../tgga/lego_hogwarts.jpg"
+                alt="Hogwarts em LEGO"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Personagens e ambientes do universo LEGO Harry Potter ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A adaptação utiliza o visual tradicional dos jogos LEGO,
+            transformando personagens e ambientes de Harry Potter
+            em construções feitas de peças.<br>
+
+            A narrativa é apresentada com pouco diálogo tradicional
+            e utiliza principalmente animações, expressões,
+            situações cômicas e elementos visuais para reproduzir
+            os acontecimentos da história.<br>
+
+            O resultado combina elementos reconhecíveis dos filmes
+            com o humor físico característico da franquia LEGO.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÃO XBOX 360
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versão para Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 foi lançada durante a sétima
+            geração de consoles e apresenta a adaptação completa
+            dos quatro primeiros anos da história.<br>
+
+            O jogo utiliza o controle do Xbox 360 para movimentação,
+            interação com objetos, utilização de feitiços e troca
+            de personagens.<br>
+
+            A versão também oferece o modo cooperativo local,
+            característica presente em diversos jogos LEGO
+            da mesma geração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            LEGO Harry Potter: Years 1–4 tornou-se uma das
+            adaptações LEGO de uma franquia cinematográfica
+            conhecida por combinar exploração, humor e
+            quebra-cabeças cooperativos.<br>
+
+            O jogo também estabeleceu a estrutura utilizada
+            posteriormente em LEGO Harry Potter: Years 5–7,
+            que adapta a parte final da história de Harry Potter.<br>
+
+            A utilização do universo mágico permitiu que a
+            fórmula dos jogos LEGO incorporasse feitiços,
+            poções, criaturas, personagens e locais específicos
+            da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                O jogo adapta os quatro primeiros anos da
+                história de Harry Potter.
+              </li>
+
+              <li>
+                A campanha cobre A Pedra Filosofal,
+                A Câmara Secreta, O Prisioneiro de Azkaban
+                e O Cálice de Fogo.
+              </li>
+
+              <li>
+                Hogwarts funciona como um dos principais
+                ambientes de exploração.
+              </li>
+
+              <li>
+                Diferentes personagens possuem habilidades
+                necessárias para resolver determinados
+                quebra-cabeças.
+              </li>
+
+              <li>
+                O jogo possui modo cooperativo local para
+                dois jogadores.
+              </li>
+
+              <li>
+                As fases podem ser revisitadas através
+                do modo Free Play.
+              </li>
+
+              <li>
+                Existem diversos personagens desbloqueáveis
+                espalhados pela aventura.
+              </li>
+
+              <li>
+                O jogo utiliza o humor visual característico
+                dos títulos LEGO da Traveller's Tales.
+              </li>
+
+              <li>
+                A versão de Xbox 360 pertence à geração
+                de jogos LEGO lançados para os consoles
+                da sétima geração.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Xbox 360 pode incluir a caixa,
+            disco e materiais impressos associados ao lançamento.<br>
+
+            Para colecionadores, diferentes versões regionais,
+            estado de conservação da caixa, manual, mídia e
+            encartes podem fazer parte do interesse histórico
+            pelo produto.<br>
+
+            A identificação correta da versão também pode ser
+            importante para diferenciar edições destinadas a
+            diferentes mercados.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_hp_x360_box.jpg"
+                  alt="Caixa LEGO Harry Potter Xbox 360"
+                />
+
+                <figcaption>
+                  Caixa — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_hp_x360_disc.jpg"
+                  alt="Disco LEGO Harry Potter Xbox 360"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_hp_x360_manual.jpg"
+                  alt="Manual LEGO Harry Potter Xbox 360"
+                />
+
+                <figcaption>
+                  Manual — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/lego_hp_x360_package.jpg"
+                  alt="Edição física LEGO Harry Potter Xbox 360"
+                />
+
+                <figcaption>
+                  Edição física — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="legoharrypotter1_4.html">
+                ○ Games - LEGO Harry Potter 1–4
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Harry Potter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista da aventura e personagem
+                  controlável durante grande parte da campanha.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Casa: Grifinória</li>
+                  <li>Habilidade: Magia</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ron Weasley</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Melhor amigo de Harry e membro do trio
+                  principal da aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hermione Granger</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Amiga de Harry e Ron e uma das principais
+                  personagens jogáveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Albus Dumbledore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor de Hogwarts e importante personagem
+                  do universo de Harry Potter.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rubeus Hagrid</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Guarda-caça de Hogwarts e aliado de Harry.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Draco Malfoy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estudante da Sonserina e rival de Harry.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Severus Snape</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Professor de Hogwarts associado à Casa
+                  Sonserina.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lord Voldemort</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal ameaça da história e inimigo
+                  de Harry Potter.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wingardium Leviosa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Feitiço utilizado para levitar e manipular
+                  determinados objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Expelliarmus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Feitiço utilizado em determinadas situações
+                  de combate e interação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lumos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Feitiço relacionado à iluminação e utilizado
+                  em determinados obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Reducto</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Feitiço utilizado para destruir determinados
+                  objetos e obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Poções</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elemento utilizado em atividades e quebra-cabeças
+                  relacionados à magia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hogwarts</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal escola de magia e um dos maiores
+                  ambientes de exploração do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Great Hall</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande Salão de Hogwarts, utilizado em
+                  diversos momentos da aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Diagon Alley</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Local do mundo mágico utilizado para
+                  diferentes atividades e compras.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hogsmeade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Vila bruxa visitada durante a aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Azkaban</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Prisão dos bruxos associada aos acontecimentos
+                  do terceiro ano.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Quidditch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Esporte mágico presente no universo de
+                  Harry Potter e representado durante a aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Aranhas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criaturas inimigas encontradas em determinadas
+                  áreas do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dementador</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura associada a Azkaban e aos acontecimentos
+                  do terceiro ano.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Basilisco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande criatura relacionada aos acontecimentos
+                  da Câmara Secreta.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Death Eater</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Seguidor de Voldemort e inimigo presente em
+                  determinados momentos da história.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Studs</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças coletáveis utilizadas como uma das
+                  principais formas de pontuação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Gold Brick</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Colecionável utilizado para representar
+                  o progresso de conclusão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Character Token</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item utilizado para desbloquear personagens
+                  adicionais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Red Brick</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Colecionável associado a recursos e
+                  modificadores especiais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mini-Kit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de peças colecionáveis encontrado
+                  durante determinadas fases.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Free Play</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo que permite revisitar fases utilizando
+                  uma seleção maior de personagens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cooperativo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo para dois jogadores através do
+                  multiplayer local.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>A Pedra Filosofal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primeiro dos quatro anos representados
+                  no jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>A Câmara Secreta</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo ano da aventura, envolvendo a
+                  Câmara Secreta e o Basilisco.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>O Prisioneiro de Azkaban</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Terceiro ano, envolvendo Sirius Black,
+                  Dementadores e a história de Azkaban.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>O Cálice de Fogo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Quarto ano, envolvendo o Torneio Tribruxo
+                  e o retorno de Voldemort.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Traveller's Tales</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Microsoft para o qual esta
+                  versão do jogo foi lançada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

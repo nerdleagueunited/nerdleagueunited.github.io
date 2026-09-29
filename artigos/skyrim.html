@@ -1,0 +1,2474 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>TGGA - The Elder Scrolls V: Skyrim</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES / ELEMENTOS CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   IMAGENS HISTÓRICAS
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   GRID DE ELEMENTOS
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* ==========================================
+   IMAGENS
+   ========================================== */
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   CAIXA DE INFORMAÇÕES
+   ========================================== */
+
+.info-box {
+  margin: 20px 0;
+  padding: 12px;
+  background: #181818;
+  border: 1px solid #444;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 6px;
+}
+
+.info-box ul {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   TABELA
+   ========================================== */
+
+.world-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 13px;
+  color: #ccc;
+  background: #151515;
+}
+
+.world-table th,
+.world-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: center;
+}
+
+.world-table th {
+  background: #292929;
+  color: #fff;
+}
+
+.world-table tr:nth-child(even) {
+  background: #1c1c1c;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .world-table {
+    font-size: 11px;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container">
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="site-header">
+
+  <div class="logo-area">
+
+    <img
+      src="../logo1.png"
+      alt="Logo NLU"
+      class="main-logo"
+    />
+
+    <div class="logo-text-box">
+
+      <h1>
+        The Great Game Archive™
+      </h1>
+
+      <p>
+        Não o maior, mas o NOSSO aglomerado de informação.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="header-right-box">
+
+    <a
+      href="#"
+      class="youtube-btn"
+      target="_blank"
+    >
+      ▶ YouTube Siga-nos!
+    </a>
+
+  </div>
+
+</header>
+
+<!-- ==========================================
+     SUB-NAVEGAÇÃO
+     ========================================== -->
+
+<div class="sub-nav-links">
+
+  <a href="../tgga.html">
+    ← Voltar ao TGGA
+  </a>
+
+  |
+
+  <a href="../index.html">
+    Início
+  </a>
+
+</div>
+
+<!-- ==========================================
+     LETREIRO
+     ========================================== -->
+
+<div class="marquee-zone">
+
+  <div class="marquee-content">
+
+    <span>
+      ... The Elder Scrolls V: Skyrim foi lançado originalmente
+      em 2011 e chegou ao Xbox 360 como uma das grandes experiências
+      de RPG de mundo aberto da geração ...
+      &nbsp;
+    </span>
+
+    <span>
+      ... The Elder Scrolls V: Skyrim foi lançado originalmente
+      em 2011 e chegou ao Xbox 360 como uma das grandes experiências
+      de RPG de mundo aberto da geração ...
+      &nbsp;
+    </span>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+     ========================================== -->
+
+<div class="main-grid">
+
+  <!-- ========================================
+       COLUNA PRINCIPAL
+       ======================================== -->
+
+  <div class="content-column">
+
+    <div class="category-block">
+
+      <!-- ==========================================
+           TÍTULO
+           ========================================== -->
+
+      <h2>
+        The Elder Scrolls V: Skyrim — Xbox 360
+      </h2>
+
+      <div
+        style="
+          text-align: center;
+          margin-bottom: 15px;
+        "
+      >
+
+        <img
+          src="../tgga/skyrim_xbox360.jpg"
+          alt="The Elder Scrolls V Skyrim para Xbox 360"
+          style="
+            max-width: 60%;
+            height: auto;
+            border: 1px solid #444;
+            padding: 4px;
+          "
+        />
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           IDENTIFICAÇÃO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        The Elder Scrolls V: Skyrim
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        The Elder Scrolls V: Skyrim é um RPG de ação desenvolvido
+        pela Bethesda Game Studios e publicado pela Bethesda
+        Softworks.<br>
+
+        O jogo foi lançado originalmente em novembro de 2011,
+        chegando ao Xbox 360, PlayStation 3 e PC.<br>
+
+        Ambientado na província de Skyrim, no continente de
+        Tamriel, o jogador assume o papel de um personagem
+        conhecido como Dragonborn, capaz de utilizar os poderes
+        dos dragões através dos Thu'um, os famosos Gritos.<br>
+
+        O jogo combina exploração de mundo aberto, combate,
+        magia, equipamentos, desenvolvimento de habilidades,
+        missões e interação com diferentes facções e habitantes
+        do mundo.
+
+      </p>
+
+      <!-- ==========================================
+           FICHA TÉCNICA
+           ========================================== -->
+
+      <div class="info-box">
+
+        <h3>
+          - FICHA TÉCNICA -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Desenvolvedora:</strong>
+            Bethesda Game Studios
+          </li>
+
+          <li>
+            <strong>Publicadora:</strong>
+            Bethesda Softworks
+          </li>
+
+          <li>
+            <strong>Diretor:</strong>
+            Todd Howard
+          </li>
+
+          <li>
+            <strong>Compositor:</strong>
+            Jeremy Soule
+          </li>
+
+          <li>
+            <strong>Plataforma desta edição:</strong>
+            Xbox 360
+          </li>
+
+          <li>
+            <strong>Lançamento:</strong>
+            11 de novembro de 2011
+          </li>
+
+          <li>
+            <strong>Gênero:</strong>
+            RPG de ação / mundo aberto
+          </li>
+
+          <li>
+            <strong>Modo:</strong>
+            Um jogador
+          </li>
+
+          <li>
+            <strong>Mídia original:</strong>
+            DVD
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DESENVOLVIMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Desenvolvimento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O desenvolvimento de Skyrim começou após o lançamento
+        de Fallout 3, enquanto a Bethesda Game Studios planejava
+        o próximo capítulo da série The Elder Scrolls.<br>
+
+        A equipe decidiu retornar ao universo de Tamriel,
+        utilizando a experiência adquirida com The Elder Scrolls
+        IV: Oblivion e outros projetos da empresa.<br>
+
+        O objetivo era criar um mundo aberto no qual o jogador
+        pudesse explorar livremente, encontrar missões,
+        desenvolver habilidades e interagir com personagens
+        sem precisar seguir uma única sequência rígida de
+        acontecimentos.<br>
+
+        O sistema de progressão também foi reformulado para
+        permitir que praticamente qualquer ação realizada pelo
+        jogador contribuísse para o desenvolvimento do personagem.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CONTEXTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Contexto Histórico
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/xbox360.jpg"
+            alt="Xbox 360"
+          />
+
+          <img
+            src="../tgga/oblivion.jpg"
+            alt="The Elder Scrolls IV Oblivion"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Xbox 360 e The Elder Scrolls IV: Oblivion — contexto da geração ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim chegou ao mercado durante a sétima geração de
+        consoles, período em que Xbox 360, PlayStation 3 e PC
+        receberam grandes RPGs de mundo aberto.<br>
+
+        O Xbox 360 havia sido lançado em 2005 e possuía uma
+        biblioteca extensa de jogos, além de uma infraestrutura
+        voltada para partidas online, distribuição digital e
+        conteúdo adicional.<br>
+
+        Dentro desse contexto, Skyrim apresentou um mundo aberto
+        de grande escala adaptado ao hardware do console,
+        permitindo ao jogador explorar cidades, montanhas,
+        cavernas, ruínas e regiões selvagens.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LANÇAMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Lançamento no Xbox 360
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        The Elder Scrolls V: Skyrim foi lançado para Xbox 360
+        em 11 de novembro de 2011.<br>
+
+        A versão física utilizava DVD e era compatível com
+        o sistema Xbox 360 da Microsoft.<br>
+
+        A edição recebeu atualizações posteriores e conteúdos
+        adicionais distribuídos pela Xbox Live.<br>
+
+        O lançamento do jogo fez parte de uma estratégia
+        multiplataforma, com versões simultâneas para Xbox 360,
+        PlayStation 3 e computadores pessoais.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           VERSÃO XBOX
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Skyrim no Xbox 360
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/skyrim_xbox360_disc.jpg"
+            alt="Disco de Skyrim para Xbox 360"
+          />
+
+          <img
+            src="../tgga/skyrim_xbox360_case.jpg"
+            alt="Caixa de Skyrim para Xbox 360"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Edição física de The Elder Scrolls V: Skyrim para Xbox 360 ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão para Xbox 360 foi desenvolvida para aproveitar
+        os recursos do console e seu sistema de armazenamento.<br>
+
+        O jogo utiliza o disco para os dados principais e pode
+        utilizar o armazenamento do console para arquivos de
+        salvamento e atualizações.<br>
+
+        A edição também recebeu suporte para conteúdos adicionais
+        através da Xbox Live, incluindo as expansões Dawnguard,
+        Hearthfire e Dragonborn.<br>
+
+        O controle do Xbox 360 foi utilizado para movimentação,
+        combate, seleção de equipamentos, menus e utilização
+        dos Gritos.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           HISTÓRIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        História do Jogo
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/skyrim_dragonborn.jpg"
+            alt="Dragonborn"
+          />
+
+          <img
+            src="../tgga/skyrim_alduin.jpg"
+            alt="Alduin"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Dragonborn e Alduin ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A história começa quando o personagem do jogador é
+        capturado e levado para execução em Helgen.<br>
+
+        Antes que a execução aconteça, um dragão chamado Alduin
+        ataca a cidade, permitindo que o personagem escape.<br>
+
+        Após os acontecimentos de Helgen, o protagonista descobre
+        que possui a capacidade de absorver a alma dos dragões
+        derrotados e utilizar seus poderes.<br>
+
+        Essa habilidade está relacionada à profecia do
+        Dragonborn, uma figura capaz de enfrentar dragões
+        e utilizar os Thu'um.<br>
+
+        A história principal envolve o retorno de Alduin,
+        enquanto Skyrim também enfrenta uma guerra civil entre
+        o Império e os Stormcloaks.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CRIAÇÃO DO PERSONAGEM
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Criação do Personagem
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim permite que o jogador crie seu próprio personagem
+        antes de iniciar a aventura.<br>
+
+        É possível escolher entre diferentes raças de Tamriel,
+        cada uma com características, habilidades e poderes
+        próprios.<br>
+
+        O jogador também pode definir aparência, nome e outros
+        elementos visuais do personagem.<br>
+
+        Diferentemente de sistemas tradicionais baseados em
+        classes fixas, Skyrim permite desenvolver o personagem
+        de acordo com as habilidades que são utilizadas durante
+        o jogo.
+
+      </p>
+
+      <div class="info-box">
+
+        <h3>
+          - RAÇAS JOGÁVEIS -
+        </h3>
+
+        <ul>
+
+          <li>Altmer — Alto Elfo</li>
+          <li>Argonian</li>
+          <li>Breton</li>
+          <li>Bosmer — Elfo da Floresta</li>
+          <li>Dunmer — Elfo Negro</li>
+          <li>Imperial</li>
+          <li>Khajiit</li>
+          <li>Nord</li>
+          <li>Orc</li>
+          <li>Redguard</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MECÂNICAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Mecânicas de Jogo
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim utiliza uma perspectiva em primeira ou terceira
+        pessoa, permitindo que o jogador alterne entre diferentes
+        formas de observar o personagem e o ambiente.<br>
+
+        O combate pode envolver armas de uma ou duas mãos,
+        arcos, escudos, magia e outras ferramentas.<br>
+
+        O jogador também pode utilizar furtividade, roubo,
+        alquimia, encantamentos e diferentes técnicas para
+        enfrentar inimigos.<br>
+
+        As habilidades evoluem conforme são utilizadas, fazendo
+        com que o estilo de jogo escolhido pelo jogador influencie
+        diretamente o desenvolvimento do personagem.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           HABILIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Habilidades
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - PRINCIPAIS HABILIDADES -
+        </h3>
+
+        <ul>
+
+          <li>One-Handed</li>
+          <li>Two-Handed</li>
+          <li>Archery</li>
+          <li>Block</li>
+          <li>Heavy Armor</li>
+          <li>Light Armor</li>
+          <li>Smithing</li>
+          <li>Alchemy</li>
+          <li>Enchanting</li>
+          <li>Alteration</li>
+          <li>Conjuration</li>
+          <li>Destruction</li>
+          <li>Illusion</li>
+          <li>Restoration</li>
+          <li>Conjuration</li>
+          <li>Speech</li>
+          <li>Lockpicking</li>
+          <li>Pickpocket</li>
+          <li>Sneak</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MAGIA E SHOUTS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Magia e Gritos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_magic.jpg"
+              alt="Magia em Skyrim"
+            />
+
+            <figcaption>
+              Magia
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_shout.jpg"
+              alt="Dragon Shout"
+            />
+
+            <figcaption>
+              Thu'um
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_wordwall.jpg"
+              alt="Word Wall"
+            />
+
+            <figcaption>
+              Word Wall
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_dragon.jpg"
+              alt="Dragão"
+            />
+
+            <figcaption>
+              Alma de Dragão
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A magia é dividida em diferentes escolas, incluindo
+        Destruction, Restoration, Alteration, Illusion e
+        Conjuration.<br>
+
+        O Dragonborn também pode aprender palavras de poder
+        encontradas em paredes espalhadas pelo mundo.<br>
+
+        Essas palavras fazem parte dos Thu'um, ou Gritos,
+        que permitem utilizar a língua dos dragões para produzir
+        diferentes efeitos.<br>
+
+        Para desbloquear completamente determinadas palavras,
+        o jogador precisa utilizar almas de dragão obtidas
+        após derrotar dragões.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           EQUIPAMENTOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Armas, Armaduras e Equipamentos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_sword.jpg"
+              alt="Espada de Skyrim"
+            />
+
+            <figcaption>
+              Espadas
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_bow.jpg"
+              alt="Arco de Skyrim"
+            />
+
+            <figcaption>
+              Arcos
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_armor.jpg"
+              alt="Armadura de Skyrim"
+            />
+
+            <figcaption>
+              Armaduras
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_shield.jpg"
+              alt="Escudo de Skyrim"
+            />
+
+            <figcaption>
+              Escudos
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim possui grande variedade de equipamentos,
+        incluindo espadas, machados, maças, arcos, adagas,
+        escudos e armas de duas mãos.<br>
+
+        As armaduras são divididas principalmente entre
+        equipamentos leves e pesados.<br>
+
+        O jogador também pode fabricar e melhorar equipamentos
+        utilizando materiais encontrados ou comprados durante
+        a aventura.<br>
+
+        Encantamentos podem adicionar efeitos mágicos a armas,
+        armaduras, joias e outros equipamentos.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           INIMIGOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Inimigos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/skyrim_dragon.jpg"
+            alt="Dragão de Skyrim"
+          />
+
+          <img
+            src="../tgga/skyrim_draugr.jpg"
+            alt="Draugr de Skyrim"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Dragão e Draugr ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim possui uma grande variedade de inimigos,
+        incluindo humanos, animais, criaturas sobrenaturais
+        e dragões.<br>
+
+        Os Draugr são encontrados principalmente em tumbas
+        nórdicas antigas, enquanto Falmer habitam regiões
+        subterrâneas.<br>
+
+        Gigantes, trolls, lobos, ursos e outras criaturas
+        também podem ser encontrados pelo mundo.<br>
+
+        Os dragões são alguns dos adversários mais importantes
+        do jogo e possuem diferentes tipos e níveis de poder.
+
+      </p>
+
+      <div class="info-box">
+
+        <h3>
+          - ALGUNS INIMIGOS -
+        </h3>
+
+        <ul>
+
+          <li>Dragon</li>
+          <li>Blood Dragon</li>
+          <li>Frost Dragon</li>
+          <li>Elder Dragon</li>
+          <li>Ancient Dragon</li>
+          <li>Draugr</li>
+          <li>Falmer</li>
+          <li>Bandit</li>
+          <li>Forsworn</li>
+          <li>Frost Troll</li>
+          <li>Giant</li>
+          <li>Sabre Cat</li>
+          <li>Spriggan</li>
+          <li>Hagraven</li>
+          <li>Vampire</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           REGIÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Regiões e Locais
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O mundo de Skyrim é dividido em diferentes regiões,
+        cada uma apresentando paisagens, cidades, criaturas,
+        ruínas e missões próprias.<br>
+
+        As cidades funcionam como centros importantes para
+        comércio, missões, hospedagem e interação com
+        personagens.<br>
+
+        Além das áreas urbanas, o jogador pode explorar
+        cavernas, fortalezas, ruínas nórdicas, minas,
+        acampamentos e locais descobertos durante a exploração.
+
+      </p>
+
+      <table class="world-table">
+
+        <thead>
+
+          <tr>
+            <th>Região</th>
+            <th>Capital</th>
+            <th>Características</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Whiterun Hold</td>
+            <td>Whiterun</td>
+            <td>Planícies / Tundra</td>
+          </tr>
+
+          <tr>
+            <td>Haafingar</td>
+            <td>Solitude</td>
+            <td>Costa / Montanhas</td>
+          </tr>
+
+          <tr>
+            <td>Eastmarch</td>
+            <td>Windhelm</td>
+            <td>Neve / Vulcânico</td>
+          </tr>
+
+          <tr>
+            <td>The Pale</td>
+            <td>Dawnstar</td>
+            <td>Neve / Costa</td>
+          </tr>
+
+          <tr>
+            <td>The Rift</td>
+            <td>Riften</td>
+            <td>Florestas / Montanhas</td>
+          </tr>
+
+          <tr>
+            <td>Hjaalmarch</td>
+            <td>Morthal</td>
+            <td>Pântanos</td>
+          </tr>
+
+          <tr>
+            <td>Falkreath Hold</td>
+            <td>Falkreath</td>
+            <td>Florestas</td>
+          </tr>
+
+          <tr>
+            <td>The Reach</td>
+            <td>Markarth</td>
+            <td>Montanhas / Ruínas</td>
+          </tr>
+
+          <tr>
+            <td>Winterhold</td>
+            <td>Winterhold</td>
+            <td>Neve / Costa</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           FACÇÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Facções
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O jogador pode participar de diferentes facções
+        espalhadas por Skyrim.<br>
+
+        Cada organização possui suas próprias missões,
+        personagens, recompensas e objetivos.<br>
+
+        Algumas facções estão relacionadas diretamente
+        à história principal ou à guerra civil, enquanto
+        outras funcionam como linhas de missões independentes.
+
+      </p>
+
+      <div class="info-box">
+
+        <h3>
+          - PRINCIPAIS FACÇÕES -
+        </h3>
+
+        <ul>
+
+          <li>Companions</li>
+          <li>College of Winterhold</li>
+          <li>Thieves Guild</li>
+          <li>Dark Brotherhood</li>
+          <li>Imperial Legion</li>
+          <li>Stormcloaks</li>
+          <li>Bards College</li>
+          <li>Blades</li>
+          <li>Greybeards</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           GUERRA CIVIL
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Guerra Civil de Skyrim
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Uma das principais linhas de conflito do jogo é a Guerra
+        Civil de Skyrim.<br>
+
+        De um lado estão os Stormcloaks, liderados por Ulfric
+        Stormcloak, enquanto do outro está a Legião Imperial,
+        que representa o Império em Skyrim.<br>
+
+        O conflito está relacionado à situação política da
+        província, à independência dos Nords e às consequências
+        da Grande Guerra entre o Império e o Aldmeri Dominion.<br>
+
+        O jogador pode participar dessa linha de missões e
+        tomar partido de uma das facções envolvidas.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DRAGÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Dragões
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/skyrim_dragon.jpg"
+            alt="Dragão em Skyrim"
+          />
+
+          <img
+            src="../tgga/skyrim_alduin.jpg"
+            alt="Alduin"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Dragões e Alduin ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Os dragões são uma das principais características de
+        Skyrim.<br>
+
+        Eles podem aparecer durante a exploração do mundo e
+        atacar cidades, fortalezas e outros locais.<br>
+
+        Depois de derrotar um dragão, o Dragonborn pode
+        absorver sua alma para desbloquear palavras de poder.<br>
+
+        Alduin, conhecido como o Devorador de Mundos, ocupa
+        uma posição central na história principal e está
+        relacionado ao retorno dos dragões.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           SEGREDOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Segredos e Áreas Especiais
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O mundo aberto de Skyrim contém inúmeras áreas que
+        podem ser encontradas durante a exploração.<br>
+
+        Existem ruínas escondidas, cavernas, túmulos,
+        tesouros, personagens secretos, missões secundárias
+        e eventos que não são obrigatórios para completar
+        a história principal.<br>
+
+        O jogo também possui locais relacionados à mitologia
+        de Tamriel e às antigas civilizações que habitaram
+        a região.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Cidades Principais
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - NOVE CAPITAIS -
+        </h3>
+
+        <ul>
+
+          <li>Whiterun</li>
+          <li>Solitude</li>
+          <li>Windhelm</li>
+          <li>Riften</li>
+          <li>Markarth</li>
+          <li>Winterhold</li>
+          <li>Falkreath</li>
+          <li>Dawnstar</li>
+          <li>Morthal</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MÚSICA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Música e Trilha Sonora
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/jeremy_soule.jpg"
+            alt="Jeremy Soule"
+          />
+
+          <img
+            src="../tgga/skyrim_soundtrack.jpg"
+            alt="Trilha sonora de Skyrim"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Jeremy Soule e a trilha sonora de Skyrim ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A trilha sonora de Skyrim foi composta por Jeremy Soule,
+        compositor responsável também por músicas de outros
+        títulos da série The Elder Scrolls.<br>
+
+        A música combina temas orquestrais, corais e ambientes
+        sonoros para acompanhar exploração, combate, cidades
+        e momentos importantes da história.<br>
+
+        O tema relacionado aos dragões utiliza elementos
+        vocais associados à língua dracônica criada para o
+        universo do jogo.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           TECNOLOGIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Tecnologia e Hardware do Xbox 360
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim foi desenvolvido para funcionar em uma geração
+        de hardware muito mais poderosa que os consoles das
+        gerações anteriores da série.<br>
+
+        No Xbox 360, o jogo utiliza o processador PowerPC
+        de três núcleos, o processador gráfico ATI Xenos e
+        a memória compartilhada do sistema.<br>
+
+        A Bethesda utilizou seu motor gráfico para representar
+        grandes áreas abertas, personagens, efeitos climáticos,
+        iluminação, vegetação e diferentes tipos de ambientes.<br>
+
+        O jogo também utiliza carregamentos entre determinadas
+        áreas internas e externas para administrar os recursos
+        disponíveis no console.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DLC
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Conteúdos Adicionais
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_dawnguard.jpg"
+              alt="Skyrim Dawnguard"
+            />
+
+            <figcaption>
+              Dawnguard
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_hearthfire.jpg"
+              alt="Skyrim Hearthfire"
+            />
+
+            <figcaption>
+              Hearthfire
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_dragonborn.jpg"
+              alt="Skyrim Dragonborn"
+            />
+
+            <figcaption>
+              Dragonborn
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_goty.jpg"
+              alt="Skyrim Game of the Year"
+            />
+
+            <figcaption>
+              Game of the Year
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão para Xbox 360 recebeu três grandes expansões.<br>
+
+        Dawnguard adiciona uma história envolvendo vampiros,
+        a Dawnguard e novas habilidades e locais.<br>
+
+        Hearthfire permite construir propriedades e adicionar
+        elementos relacionados à vida doméstica.<br>
+
+        Dragonborn leva o jogador à ilha de Solstheim,
+        apresentada originalmente em The Elder Scrolls III:
+        Morrowind, e adiciona uma nova linha de história
+        envolvendo Miraak.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           REEDIÇÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Versões e Reedições
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_xbox360.jpg"
+              alt="Skyrim Xbox 360"
+            />
+
+            <figcaption>
+              Skyrim — Xbox 360
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_pc.jpg"
+              alt="Skyrim PC"
+            />
+
+            <figcaption>
+              Skyrim — PC
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_ps3.jpg"
+              alt="Skyrim PlayStation 3"
+            />
+
+            <figcaption>
+              Skyrim — PlayStation 3
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_specialedition.jpg"
+              alt="Skyrim Special Edition"
+            />
+
+            <figcaption>
+              Special Edition
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Depois do lançamento original, Skyrim recebeu versões
+        e reedições para diferentes plataformas.<br>
+
+        A Special Edition foi lançada posteriormente com
+        melhorias técnicas, conteúdo adicional integrado
+        e suporte a recursos que não estavam disponíveis
+        na versão original de Xbox 360.<br>
+
+        A edição original de Xbox 360 permanece associada
+        à sétima geração de consoles e ao lançamento inicial
+        do jogo.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LEGADO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Legado
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Skyrim tornou-se um dos títulos mais conhecidos da
+        série The Elder Scrolls e um dos RPGs de mundo aberto
+        mais reconhecíveis da geração Xbox 360, PlayStation 3
+        e PC.<br>
+
+        O jogo ampliou a popularidade da franquia e apresentou
+        Tamriel a uma grande quantidade de novos jogadores.<br>
+
+        Seu sistema de exploração, progressão baseada em
+        habilidades, missões e liberdade de escolha influenciou
+        a maneira como muitos jogadores passaram a experimentar
+        RPGs de mundo aberto.<br>
+
+        O título continuou recebendo versões para diferentes
+        plataformas nos anos seguintes ao lançamento original.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CURIOSIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Curiosidades
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - VOCÊ SABIA? -
+        </h3>
+
+        <ul>
+
+          <li>
+            Skyrim foi lançado originalmente em 11 de novembro
+            de 2011.
+          </li>
+
+          <li>
+            A versão original foi lançada para Xbox 360,
+            PlayStation 3 e PC.
+          </li>
+
+          <li>
+            O jogador assume o papel de um Dragonborn.
+          </li>
+
+          <li>
+            Alduin é o principal dragão relacionado à história
+            principal.
+          </li>
+
+          <li>
+            O jogador pode absorver almas de dragões.
+          </li>
+
+          <li>
+            Os Gritos são formados por palavras da língua
+            dos dragões.
+          </li>
+
+          <li>
+            Skyrim possui nove capitais de Hold.
+          </li>
+
+          <li>
+            O jogador pode participar de diversas facções.
+          </li>
+
+          <li>
+            O jogo recebeu as expansões Dawnguard, Hearthfire
+            e Dragonborn.
+          </li>
+
+          <li>
+            A trilha sonora foi composta por Jeremy Soule.
+          </li>
+
+          <li>
+            O sistema de habilidades permite desenvolver
+            o personagem de acordo com as ações realizadas.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           EDIÇÕES FÍSICAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Edições e Materiais Colecionáveis
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão de Xbox 360 de Skyrim possui diferentes
+        materiais físicos associados ao lançamento original,
+        incluindo caixa, manual, disco e encartes.<br>
+
+        Edições especiais e versões com conteúdos adicionais
+        também podem apresentar diferenças na embalagem e
+        nos materiais incluídos.<br>
+
+        Para colecionadores, versões físicas preservadas da
+        primeira edição podem representar um registro do
+        lançamento do jogo durante a sétima geração.
+
+      </p>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_xbox360_box.jpg"
+              alt="Caixa de Skyrim Xbox 360"
+            />
+
+            <figcaption>
+              Caixa — Skyrim Xbox 360
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_xbox360_manual.jpg"
+              alt="Manual de Skyrim Xbox 360"
+            />
+
+            <figcaption>
+              Manual — Skyrim Xbox 360
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_xbox360_disc.jpg"
+              alt="Disco de Skyrim Xbox 360"
+            />
+
+            <figcaption>
+              Disco — Skyrim Xbox 360
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/skyrim_xbox360_package.jpg"
+              alt="Pacote de Skyrim Xbox 360"
+            />
+
+            <figcaption>
+              Edição física — Xbox 360
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="skyrim.html">
+            ○ Games - Skyrim
+          </a>
+        </li>
+
+        <li>
+          <a href="xbox360.html">
+            ○ Consoles - Xbox 360
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- ==========================================
+         ELEMENTOS DO JOGO
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - ELEMENTOS DO JOGO -
+      </h3>
+
+      <div class="component-list">
+
+        <details class="component-item">
+          <summary>Dragonborn</summary>
+          <div class="component-description">
+            <p>
+              Personagem controlado pelo jogador e indivíduo
+              capaz de utilizar o poder dos dragões.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Alduin</summary>
+          <div class="component-description">
+            <p>
+              Dragão ancestral conhecido como o Devorador
+              de Mundos e figura central da história principal.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Ulfric Stormcloak</summary>
+          <div class="component-description">
+            <p>
+              Líder dos Stormcloaks e Jarl de Windhelm,
+              envolvido diretamente na Guerra Civil.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>General Tullius</summary>
+          <div class="component-description">
+            <p>
+              General da Legião Imperial responsável pelas
+              forças do Império em Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Paarthurnax</summary>
+          <div class="component-description">
+            <p>
+              Dragão associado aos Greybeards e ao treinamento
+              do Dragonborn.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Greybeards</summary>
+          <div class="component-description">
+            <p>
+              Ordem de mestres do Thu'um que reside em
+              High Hrothgar.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Blades</summary>
+          <div class="component-description">
+            <p>
+              Antiga organização ligada à proteção do
+              Dragonborn e aos imperadores de Tamriel.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Companions</summary>
+          <div class="component-description">
+            <p>
+              Organização de guerreiros localizada em Whiterun.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Dark Brotherhood</summary>
+          <div class="component-description">
+            <p>
+              Organização secreta associada a assassinatos
+              contratados.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Thieves Guild</summary>
+          <div class="component-description">
+            <p>
+              Guilda localizada em Riften e dedicada a
+              atividades relacionadas ao roubo e à furtividade.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>College of Winterhold</summary>
+          <div class="component-description">
+            <p>
+              Instituição dedicada ao estudo da magia em Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Imperial Legion</summary>
+          <div class="component-description">
+            <p>
+              Forças militares do Império presentes na
+              Guerra Civil de Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Stormcloaks</summary>
+          <div class="component-description">
+            <p>
+              Movimento liderado por Ulfric Stormcloak
+              durante a Guerra Civil.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Dragon</summary>
+          <div class="component-description">
+            <p>
+              Criatura voadora capaz de utilizar ataques
+              físicos e poderes elementais.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Draugr</summary>
+          <div class="component-description">
+            <p>
+              Mortos-vivos encontrados principalmente
+              em antigas tumbas nórdicas.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Falmer</summary>
+          <div class="component-description">
+            <p>
+              Habitantes subterrâneos encontrados em
+              regiões profundas de Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Bandit</summary>
+          <div class="component-description">
+            <p>
+              Inimigo humano encontrado em acampamentos,
+              fortalezas e estradas.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Giant</summary>
+          <div class="component-description">
+            <p>
+              Criatura enorme normalmente encontrada
+              em acampamentos e regiões abertas.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Frost Troll</summary>
+          <div class="component-description">
+            <p>
+              Troll adaptado às regiões frias e montanhosas
+              de Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Whiterun</summary>
+          <div class="component-description">
+            <p>
+              Uma das principais cidades de Skyrim e sede
+              do Jarl Balgruuf durante boa parte da história.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Solitude</summary>
+          <div class="component-description">
+            <p>
+              Capital de Haafingar e importante centro
+              político ligado ao Império.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Windhelm</summary>
+          <div class="component-description">
+            <p>
+              Cidade de Ulfric Stormcloak e centro do
+              movimento Stormcloak.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Riften</summary>
+          <div class="component-description">
+            <p>
+              Cidade localizada no sudeste de Skyrim e
+              sede da Thieves Guild.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Markarth</summary>
+          <div class="component-description">
+            <p>
+              Cidade construída em antigas estruturas
+              dwemer na região do Reach.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Winterhold</summary>
+          <div class="component-description">
+            <p>
+              Cidade conhecida principalmente pela presença
+              do College of Winterhold.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>High Hrothgar</summary>
+          <div class="component-description">
+            <p>
+              Mosteiro localizado no topo da Garganta do Mundo,
+              lar dos Greybeards.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Throat of the World</summary>
+          <div class="component-description">
+            <p>
+              Montanha mais alta de Skyrim e local importante
+              para a história do Dragonborn.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Sovngarde</summary>
+          <div class="component-description">
+            <p>
+              Reino associado à vida após a morte dos
+              heróis nórdicos.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Solstheim</summary>
+          <div class="component-description">
+            <p>
+              Ilha visitada durante a expansão Dragonborn.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Thu'um</summary>
+          <div class="component-description">
+            <p>
+              Poder conhecido como Voz, utilizado para
+              produzir os Gritos dos dragões.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Unrelenting Force</summary>
+          <div class="component-description">
+            <p>
+              Um dos primeiros Gritos aprendidos pelo
+              Dragonborn.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Dragon Soul</summary>
+          <div class="component-description">
+            <p>
+              Energia obtida após derrotar um dragão,
+              utilizada para desbloquear palavras de poder.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Word Wall</summary>
+          <div class="component-description">
+            <p>
+              Parede antiga que contém palavras de poder
+              utilizadas pelos Gritos.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Daedric Artifact</summary>
+          <div class="component-description">
+            <p>
+              Artefatos especiais associados aos Príncipes
+              Daédricos.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Smithing</summary>
+          <div class="component-description">
+            <p>
+              Habilidade utilizada para fabricar e melhorar
+              armas e armaduras.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Alchemy</summary>
+          <div class="component-description">
+            <p>
+              Sistema utilizado para produzir poções e
+              venenos através de ingredientes.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Enchanting</summary>
+          <div class="component-description">
+            <p>
+              Habilidade utilizada para adicionar efeitos
+              mágicos a equipamentos.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Archery</summary>
+          <div class="component-description">
+            <p>
+              Habilidade dedicada ao uso de arcos e ataques
+              à distância.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Sneak</summary>
+          <div class="component-description">
+            <p>
+              Habilidade relacionada à furtividade e ataques
+              sem ser detectado.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Dawnguard</summary>
+          <div class="component-description">
+            <p>
+              Expansão que adiciona uma história envolvendo
+              vampiros e a organização Dawnguard.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Hearthfire</summary>
+          <div class="component-description">
+            <p>
+              Expansão que adiciona construção de casas,
+              propriedades e elementos familiares.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Dragonborn</summary>
+          <div class="component-description">
+            <p>
+              Expansão ambientada principalmente em Solstheim
+              e envolvendo o personagem Miraak.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Xbox 360</summary>
+          <div class="component-description">
+            <p>
+              Console da Microsoft para o qual Skyrim recebeu
+              sua versão original em 2011.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Jeremy Soule</summary>
+          <div class="component-description">
+            <p>
+              Compositor responsável pela trilha sonora
+              de Skyrim.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Todd Howard</summary>
+          <div class="component-description">
+            <p>
+              Diretor de Skyrim e uma das principais figuras
+              de produção da Bethesda Game Studios.
+            </p>
+          </div>
+        </details>
+
+        <details class="component-item">
+          <summary>Bethesda Game Studios</summary>
+          <div class="component-description">
+            <p>
+              Estúdio responsável pelo desenvolvimento
+              de The Elder Scrolls V: Skyrim.
+            </p>
+          </div>
+        </details>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html>

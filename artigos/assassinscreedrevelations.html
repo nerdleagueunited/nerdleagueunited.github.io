@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Assassin's Creed Revelations</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Assassin's Creed Revelations encerra a trilogia de
+          Ezio Auditore e conecta sua história à jornada de Altaïr
+          Ibn-La'Ahad, enquanto prepara acontecimentos importantes
+          para a história de Desmond Miles ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Assassin's Creed Revelations encerra a trilogia de
+          Ezio Auditore e conecta sua história à jornada de Altaïr
+          Ibn-La'Ahad, enquanto prepara acontecimentos importantes
+          para a história de Desmond Miles ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Assassin's Creed Revelations — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/assassinscreedrevelations.jpg"
+              alt="Assassin's Creed Revelations para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed Revelations
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed Revelations é um jogo eletrônico de
+            ação e aventura desenvolvido pela Ubisoft Montreal
+            e publicado pela Ubisoft.<br>
+
+            O jogo foi lançado originalmente em 2011 para
+            Xbox 360, PlayStation 3 e posteriormente Windows.<br>
+
+            O título acompanha Ezio Auditore em sua jornada até
+            Constantinopla, onde ele procura as chaves necessárias
+            para acessar a biblioteca de Altaïr em Masyaf.<br>
+
+            Ao mesmo tempo, a história apresenta acontecimentos
+            relacionados a Altaïr Ibn-La'Ahad e continua a narrativa
+            de Desmond Miles no presente.<br>
+
+            Revelations combina exploração, combate, furtividade,
+            parkour, missões narrativas e elementos de gerenciamento
+            de território.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Ubisoft Montreal
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Ubisoft
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Alexandre Amancio
+              </li>
+
+              <li>
+                <strong>Roteiro:</strong>
+                Darby McDevitt
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                15 de novembro de 2011
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador / Multijogador
+              </li>
+
+              <li>
+                <strong>Motor:</strong>
+                Anvil
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed Revelations foi desenvolvido pela
+            Ubisoft Montreal como continuação direta dos
+            acontecimentos de Assassin's Creed Brotherhood.<br>
+
+            A equipe decidiu utilizar o novo capítulo para
+            concluir a história de Ezio Auditore e aprofundar
+            a relação entre diferentes períodos da franquia.<br>
+
+            Constantinopla foi escolhida como principal cenário
+            da aventura, permitindo que o jogo apresentasse uma
+            cidade diferente das localizações italianas dos
+            títulos anteriores.<br>
+
+            O desenvolvimento também buscou expandir sistemas
+            introduzidos anteriormente, adicionando novas formas
+            de movimentação, equipamentos e atividades secundárias.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/constantinople.jpg"
+                alt="Constantinopla"
+              />
+
+              <img
+                src="../tgga/massaf.jpg"
+                alt="Masyaf"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Constantinopla e Masyaf — dois locais importantes da narrativa ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história principal se passa em Constantinopla no
+            início do século XVI, durante o período do Império
+            Otomano.<br>
+
+            A cidade é apresentada como um importante centro
+            político, comercial e cultural, dividido em diferentes
+            distritos exploráveis pelo jogador.<br>
+
+            A narrativa também retorna a Masyaf, fortaleza
+            associada à Irmandade dos Assassinos e à história
+            de Altaïr.<br>
+
+            O jogo utiliza acontecimentos e personagens históricos
+            como parte da ambientação, combinando figuras reais
+            com personagens e acontecimentos fictícios.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ezio_revelations.jpg"
+                alt="Ezio Auditore"
+              />
+
+              <img
+                src="../tgga/altaair_revelations.jpg"
+                alt="Altaïr Ibn-La'Ahad"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Ezio Auditore e Altaïr Ibn-La'Ahad ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Depois dos acontecimentos de Assassin's Creed
+            Brotherhood, Ezio Auditore viaja até Masyaf para
+            investigar a antiga fortaleza dos Assassinos.<br>
+
+            Ele descobre que o local guarda informações
+            relacionadas a Altaïr e que cinco chaves são
+            necessárias para abrir uma antiga biblioteca.<br>
+
+            As chaves foram levadas para Constantinopla,
+            onde Ezio inicia uma busca que o coloca no centro
+            de conflitos envolvendo a Ordem dos Assassinos,
+            os Templários e o Império Otomano.<br>
+
+            Durante a aventura, o jogador também acompanha
+            momentos da vida de Altaïr, permitindo conhecer
+            acontecimentos posteriores aos jogos anteriores.<br>
+
+            Paralelamente, Desmond permanece preso dentro do
+            Animus e procura uma forma de recuperar sua
+            consciência e compreender suas memórias.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Ezio Auditore da Firenze:</strong>
+                protagonista principal da aventura.
+              </li>
+
+              <li>
+                <strong>Altaïr Ibn-La'Ahad:</strong>
+                antigo Mentor da Irmandade dos Assassinos.
+              </li>
+
+              <li>
+                <strong>Desmond Miles:</strong>
+                personagem do período contemporâneo ligado
+                ao Animus.
+              </li>
+
+              <li>
+                <strong>Sofia Sartor:</strong>
+                pesquisadora e personagem importante para
+                a história de Ezio em Constantinopla.
+              </li>
+
+              <li>
+                <strong>Yusuf Tazim:</strong>
+                líder dos Assassinos de Constantinopla.
+              </li>
+
+              <li>
+                <strong>Selim I:</strong>
+                sultão do Império Otomano.
+              </li>
+
+              <li>
+                <strong>Manuel Palaiologos:</strong>
+                personagem ligado aos interesses dos Templários.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONSTANTINOPLA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Constantinopla
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Constantinopla é o principal cenário explorável
+            de Assassin's Creed Revelations.<br>
+
+            A cidade possui diferentes bairros, mercados,
+            construções históricas, docas e áreas residenciais.<br>
+
+            Ezio pode utilizar o sistema de parkour para
+            atravessar telhados, torres e ruas da cidade.<br>
+
+            A cidade também funciona como centro das missões
+            principais, atividades secundárias e confrontos
+            entre Assassinos e Templários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GAMEPLAY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Revelations mantém os principais sistemas de
+            exploração e combate apresentados nos jogos
+            anteriores da série.<br>
+
+            Ezio pode correr, escalar edifícios, saltar entre
+            estruturas, utilizar armas e realizar assassinatos
+            furtivos.<br>
+
+            O jogo introduz a Hookblade, uma lâmina com gancho
+            que pode ser utilizada para alcançar locais elevados
+            e ampliar determinadas possibilidades de movimentação.<br>
+
+            O jogador também pode utilizar bombas com diferentes
+            propriedades, permitindo criar estratégias para
+            distração, combate e furtividade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HOOKBLADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Hookblade
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_hookblade.jpg"
+                  alt="Hookblade"
+                />
+
+                <figcaption>
+                  Hookblade
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_hiddenblade.jpg"
+                  alt="Hidden Blade"
+                />
+
+                <figcaption>
+                  Hidden Blade
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_bombs.jpg"
+                  alt="Bombas"
+                />
+
+                <figcaption>
+                  Sistema de Bombas
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_sword.jpg"
+                  alt="Espada"
+                />
+
+                <figcaption>
+                  Espada
+                </figcaption>
+
+              </div>
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A Hookblade é uma das principais novidades de
+            jogabilidade introduzidas em Revelations.<br>
+
+            Além de funcionar como arma, ela pode ser usada
+            durante o parkour para alcançar estruturas e
+            percorrer determinadas distâncias com maior rapidez.<br>
+
+            O equipamento também permite realizar movimentos
+            especiais durante a exploração e facilita a subida
+            de determinadas estruturas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas e Equipamentos
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - EQUIPAMENTOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Hidden Blade:</strong>
+                lâmina retrátil utilizada principalmente
+                para assassinatos furtivos.
+              </li>
+
+              <li>
+                <strong>Espada:</strong>
+                arma utilizada em combates corpo a corpo.
+              </li>
+
+              <li>
+                <strong>Adagas:</strong>
+                armas leves utilizadas em combate e arremessos.
+              </li>
+
+              <li>
+                <strong>Besta:</strong>
+                arma de longo alcance utilizada contra inimigos.
+              </li>
+
+              <li>
+                <strong>Pistola:</strong>
+                arma de fogo utilizada para ataques à distância.
+              </li>
+
+              <li>
+                <strong>Hookblade:</strong>
+                equipamento utilizado para combate e movimentação.
+              </li>
+
+              <li>
+                <strong>Bombas:</strong>
+                dispositivos com diferentes funções e efeitos.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BOMBAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sistema de Bombas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das novidades de Revelations é a possibilidade
+            de fabricar diferentes tipos de bombas.<br>
+
+            O jogador pode combinar diferentes componentes
+            para criar dispositivos destinados a causar dano,
+            distrair inimigos ou produzir outros efeitos.<br>
+
+            O sistema permite adaptar os equipamentos às
+            necessidades de determinadas situações e missões.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DEN DEFENSE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Den Defense
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Revelations apresenta um sistema de defesa de
+            esconderijos dos Assassinos contra ataques
+            dos Templários.<br>
+
+            Nessas situações, o jogador assume uma posição
+            estratégica e utiliza diferentes unidades para
+            impedir que os inimigos avancem pelas ruas.<br>
+
+            O sistema combina elementos de estratégia e
+            defesa de território com a estrutura tradicional
+            de Assassin's Creed.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DEN / TERRITÓRIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controle de Territórios
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Elemento</th>
+                <th>Função</th>
+                <th>Atividade</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Den</td>
+                <td>Esconderijo</td>
+                <td>Controle territorial</td>
+              </tr>
+
+              <tr>
+                <td>Torre Templária</td>
+                <td>Controle inimigo</td>
+                <td>Conquista</td>
+              </tr>
+
+              <tr>
+                <td>Assassino</td>
+                <td>Unidade da Irmandade</td>
+                <td>Treinamento</td>
+              </tr>
+
+              <tr>
+                <td>Mestre Assassino</td>
+                <td>Liderança</td>
+                <td>Defesa do território</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ASSASSINS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Irmandade dos Assassinos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a campanha, Ezio pode recrutar moradores
+            para a Irmandade dos Assassinos.<br>
+
+            Os recrutas podem receber treinamento e ganhar
+            experiência através de missões realizadas em
+            diferentes regiões.<br>
+
+            Alguns membros podem alcançar o posto de Mestre
+            Assassino e assumir responsabilidades relacionadas
+            aos esconderijos da organização.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MEMÓRIAS DE ALTAÏR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Memórias de Altaïr
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/acr_masyaf.jpg"
+                alt="Masyaf em Assassin's Creed Revelations"
+              />
+
+              <img
+                src="../tgga/acr_altaair.jpg"
+                alt="Altaïr em Assassin's Creed Revelations"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Altaïr e Masyaf ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As memórias de Altaïr são apresentadas através das
+            chaves encontradas por Ezio durante sua jornada.<br>
+
+            Essas sequências permitem acompanhar diferentes
+            momentos da vida do antigo Mentor dos Assassinos,
+            incluindo acontecimentos posteriores à campanha
+            do primeiro Assassin's Creed.<br>
+
+            A estrutura dessas memórias conecta diretamente
+            as histórias de Ezio e Altaïr.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESMOND
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desmond e o Animus
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A narrativa contemporânea continua através de
+            Desmond Miles, que se encontra preso dentro do
+            Animus após os acontecimentos de Brotherhood.<br>
+
+            Durante essa parte da história, o jogador pode
+            explorar memórias e fragmentos relacionados à
+            vida de Desmond.<br>
+
+            Essas sequências apresentam informações adicionais
+            sobre seu passado e ajudam a estabelecer a ligação
+            entre os diferentes protagonistas da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Missões e Atividades
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Atividade</th>
+                <th>Descrição</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Missões Principais</td>
+                <td>Avançam a história de Ezio.</td>
+              </tr>
+
+              <tr>
+                <td>Missões de Facção</td>
+                <td>Atividades relacionadas às diferentes organizações da cidade.</td>
+              </tr>
+
+              <tr>
+                <td>Recrutamento</td>
+                <td>Adição de novos membros à Irmandade.</td>
+              </tr>
+
+              <tr>
+                <td>Den Defense</td>
+                <td>Defesa dos esconderijos contra os Templários.</td>
+              </tr>
+
+              <tr>
+                <td>Memórias de Altaïr</td>
+                <td>Sequências históricas relacionadas ao antigo Mentor.</td>
+              </tr>
+
+              <tr>
+                <td>Desmond's Journey</td>
+                <td>Sequências ambientadas na narrativa contemporânea.</td>
+              </tr>
+
+              <tr>
+                <td>Exploração</td>
+                <td>Busca por colecionáveis, equipamentos e locais secretos.</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multijogador
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed Revelations também possui um modo
+            multijogador baseado em confrontos entre jogadores.<br>
+
+            Os participantes controlam personagens pertencentes
+            a diferentes facções e precisam localizar seus alvos
+            enquanto tentam evitar serem identificados por outros
+            jogadores.<br>
+
+            O sistema utiliza furtividade, perseguição, disfarces
+            e diferentes habilidades para criar partidas em que
+            observar o comportamento dos personagens é importante.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Motor Gráfico
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed Revelations utiliza uma evolução
+            do motor Anvil empregado em outros títulos da série.<br>
+
+            O motor permite representar uma cidade extensa,
+            personagens, construções escaláveis, efeitos de
+            iluminação e grandes áreas de exploração.<br>
+
+            A versão de Xbox 360 foi desenvolvida para utilizar
+            os recursos do console e apresentar Constantinopla
+            com uma quantidade significativa de elementos
+            visuais e personagens simultaneamente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX 360
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed Revelations no Xbox 360
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+              <img
+                src="../tgga/acr_xbox360.jpg"
+                alt="Assassin's Creed Revelations Xbox 360"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox 360 e Assassin's Creed Revelations ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão para Xbox 360 foi lançada em novembro
+            de 2011 juntamente com a versão para PlayStation 3.<br>
+
+            O jogo utiliza o controle do Xbox 360 para movimentação,
+            combate, parkour, utilização de armas e navegação
+            pelos menus.<br>
+
+            A edição também possui suporte ao sistema de
+            conquistas do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_xbox360_box.jpg"
+                  alt="Caixa de Assassin's Creed Revelations Xbox 360"
+                />
+
+                <figcaption>
+                  Caixa — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_xbox360_disc.jpg"
+                  alt="Disco de Assassin's Creed Revelations Xbox 360"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_xbox360_manual.jpg"
+                  alt="Manual de Assassin's Creed Revelations"
+                />
+
+                <figcaption>
+                  Manual — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/acr_special_edition.jpg"
+                  alt="Edição especial de Assassin's Creed Revelations"
+                />
+
+                <figcaption>
+                  Edição Especial
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed Revelations ocupa uma posição
+            importante dentro da narrativa da primeira fase
+            da franquia Assassin's Creed.<br>
+
+            O jogo encerra a história principal de Ezio Auditore
+            iniciada em Assassin's Creed II e desenvolvida em
+            Brotherhood.<br>
+
+            Também estabelece uma conexão direta entre Ezio
+            e Altaïr, dois dos protagonistas mais importantes
+            da primeira geração da série.<br>
+
+            A conclusão de suas histórias permite que a franquia
+            avance posteriormente para novos protagonistas,
+            períodos históricos e cenários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Assassin's Creed Revelations foi lançado em 2011.
+              </li>
+
+              <li>
+                O jogo encerra a trilogia principal de Ezio Auditore.
+              </li>
+
+              <li>
+                A aventura se passa principalmente em Constantinopla.
+              </li>
+
+              <li>
+                Altaïr retorna como personagem jogável em determinadas
+                sequências da história.
+              </li>
+
+              <li>
+                Desmond continua sendo parte da narrativa contemporânea.
+              </li>
+
+              <li>
+                A Hookblade é uma das principais novidades de gameplay.
+              </li>
+
+              <li>
+                O jogo apresenta um sistema de fabricação de bombas.
+              </li>
+
+              <li>
+                Os esconderijos dos Assassinos podem ser atacados
+                pelos Templários.
+              </li>
+
+              <li>
+                O jogo possui um modo multijogador.
+              </li>
+
+              <li>
+                Constantinopla possui diversas áreas que podem
+                ser exploradas através do parkour.
+              </li>
+
+              <li>
+                As memórias de Altaïr conectam diretamente
+                Revelations ao primeiro Assassin's Creed.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="assassinscreedrevelations.html">
+                ○ Games - Assassin's Creed Revelations
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Ezio Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista principal de Assassin's Creed
+                  Revelations e Mentor da Irmandade dos Assassinos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Especialidade: Furtividade e combate</li>
+                  <li>Armas: Hidden Blade, espada e outras</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Altaïr Ibn-La'Ahad</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Antigo Mentor da Irmandade dos Assassinos.
+                  Suas memórias são parte fundamental da história.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desmond Miles</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem do período contemporâneo que
+                  permanece ligado ao Animus.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sofia Sartor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pesquisadora que auxilia Ezio durante sua
+                  investigação em Constantinopla.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Yusuf Tazim</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Líder da Irmandade dos Assassinos em
+                  Constantinopla.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Selim I</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sultão do Império Otomano durante o período
+                  em que a história se desenvolve.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Manuel Palaiologos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem associado aos interesses
+                  dos Templários.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Templários</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Organização rival dos Assassinos e uma das
+                  principais forças antagonistas do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Assassinos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmandade à qual Ezio pertence e que atua
+                  em Constantinopla.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hidden Blade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Lâmina retrátil tradicional dos Assassinos,
+                  utilizada principalmente em assassinatos furtivos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hookblade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento que combina uma lâmina com um
+                  gancho e amplia as possibilidades de parkour.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Espada</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma utilizada por Ezio em combates
+                  corpo a corpo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Adagas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Armas leves utilizadas em combate e que
+                  também podem ser arremessadas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Besta</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de longo alcance utilizada para
+                  eliminar inimigos à distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pistola</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de fogo integrada ao equipamento
+                  de Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bombas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamentos fabricáveis que possuem
+                  diferentes efeitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Animus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia utilizada para acessar memórias
+                  genéticas dos antepassados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Constantinopla</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal cidade explorável durante a
+                  campanha de Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Masyaf</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Antiga fortaleza dos Assassinos relacionada
+                  diretamente à história de Altaïr.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Den</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Esconderijo da Irmandade que pode ser
+                  utilizado como ponto de controle territorial.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Templar Den</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área sob controle dos Templários que
+                  pode ser conquistada pelos Assassinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Den Defense</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de defesa estratégica utilizado
+                  para proteger esconderijos dos Assassinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Assassin Recruit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recruta que pode ser treinado e incorporado
+                  à Irmandade dos Assassinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Master Assassin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Assassino de alto nível responsável por
+                  determinadas funções relacionadas aos esconderijos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Parkour</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de movimentação que permite atravessar
+                  ruas, telhados, torres e edifícios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hookblade Parkour</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Utilização da Hookblade para ampliar movimentos
+                  e alcançar determinadas estruturas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Memory Sequence</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura utilizada para organizar os
+                  acontecimentos da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Altaïr Memory</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sequência jogável que apresenta acontecimentos
+                  da vida de Altaïr.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desmond's Journey</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sequências relacionadas à história e às
+                  memórias de Desmond.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Constantinople District</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diferentes áreas da cidade podem ser
+                  exploradas durante a campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Animus Island</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ambiente associado às sequências contemporâneas
+                  de Desmond dentro do Animus.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Templar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo recorrente e membro da organização
+                  rival dos Assassinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Janissary</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Soldado do Império Otomano encontrado
+                  durante determinadas situações da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guard</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Soldados que patrulham as áreas da cidade
+                  e podem detectar Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo de jogo baseado em confrontos e
+                  perseguições entre jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma original da versão para consoles
+                  da sétima geração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ubisoft Montreal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  principal do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alexandre Amancio</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor de Assassin's Creed Revelations.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Darby McDevitt</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Roteirista associado à história de
+                  Assassin's Creed Revelations.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

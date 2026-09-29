@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Gemini X Game</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS / ACESSÓRIOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA TÉCNICA
+       ========================================== */
+
+    .technical-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #151515;
+      border: 1px solid #3d3d3d;
+    }
+
+    .technical-box h3 {
+      margin-top: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 7px;
+    }
+
+    .technical-box ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+
+    /* ==========================================
+       AVISO DE DOCUMENTAÇÃO
+       ========================================== */
+
+    .research-note {
+      margin: 20px 0;
+      padding: 12px;
+      border: 1px dashed #555;
+      background: #171717;
+      color: #aaa;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .research-note strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Gemini X Game é um dos muitos famiclones encontrados no
+          mercado brasileiro, reproduzindo a arquitetura básica do NES/Famicom
+          em um hardware não licenciado, com cartuchos de 60 pinos, jogos
+          internos, dois controles e uma pistola ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Gemini X Game é um dos muitos famiclones encontrados no
+          mercado brasileiro, reproduzindo a arquitetura básica do NES/Famicom
+          em um hardware não licenciado, com cartuchos de 60 pinos, jogos
+          internos, dois controles e uma pistola ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- =====================================
+               TÍTULO
+               ===================================== -->
+
+          <h2>
+            Gemini X Game
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/geminixgame.jpg"
+              alt="Gemini X Game"
+              style="
+                max-width: 70%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <!-- =====================================
+               IDENTIFICAÇÃO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Gemini X Game
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game é um console clone do Nintendo Entertainment
+            System / Family Computer comercializado no Brasil pela Gemini.
+
+            <br><br>
+
+            Diferentemente de um Nintendo oficial, o Gemini X Game pertence
+            à categoria dos chamados <strong>famiclones</strong>: aparelhos
+            produzidos por terceiros que reproduzem a arquitetura e a
+            experiência básica do NES/Famicom sem serem produtos licenciados
+            pela Nintendo.
+
+            <br><br>
+
+            O aparelho chama atenção principalmente pelo desenho pouco
+            convencional de sua carcaça, pelos controles próprios e pelo
+            conjunto de recursos oferecidos para um console desse tipo.
+
+            <br><br>
+
+            De acordo com o VGDB, o Gemini X Game possui <strong>30 jogos
+            integrados</strong>, acompanha <strong>dois cartuchos que somam
+            23 jogos</strong>, utiliza cartuchos de <strong>60 pinos</strong>
+            e era acompanhado por <strong>dois controles e uma pistola</strong>.
+
+          </p>
+
+
+          <!-- =====================================
+               NOTA DE PESQUISA
+               ===================================== -->
+
+          <div class="research-note">
+
+            <strong>
+              Nota documental do TGGA:
+            </strong>
+
+            A documentação pública disponível sobre o Gemini X Game é
+            consideravelmente menor do que a existente para consoles como
+            Atari, NES ou Master System.
+
+            <br><br>
+
+            Por isso, este artigo separa aquilo que foi identificado em
+            fontes públicas daquilo que ainda depende de fotografias de
+            placas, manuais, anúncios ou desmontagens de unidades específicas.
+
+            <br><br>
+
+            O ano exato de lançamento, os títulos completos dos jogos
+            integrados e dos cartuchos e a identificação exata dos chips
+            utilizados não são tratados aqui como fatos confirmados.
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               O QUE É UM FAMICLONE?
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            O Que é um Famiclone?
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O termo <strong>famiclone</strong> é utilizado para descrever
+            consoles de terceiros desenvolvidos para reproduzir jogos e
+            funcionalidades associadas ao Nintendo Famicom ou ao NES.
+
+            <br><br>
+
+            Esses aparelhos surgiram em grande quantidade em diferentes
+            mercados, principalmente onde o acesso ao hardware original da
+            Nintendo era limitado, caro ou dependia de importação.
+
+            <br><br>
+
+            No Brasil, eles possuem uma história particularmente interessante.
+            Ao lado de consoles licenciados e produtos nacionais, surgiram
+            diversos aparelhos compatíveis com o padrão NES.
+
+            <br><br>
+
+            O Gemini X Game está catalogado pelo VGDB justamente dentro dessa
+            categoria de clones do NES/Nintendinho.
+
+            <br><br>
+
+            O objetivo desses aparelhos não era necessariamente reproduzir
+            externamente o console Nintendo. Pelo contrário: muitos fabricantes
+            criavam carcaças completamente diferentes para reduzir custos,
+            diferenciar o produto ou simplesmente criar uma identidade própria.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               O DESIGN
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Um Famiclone em Forma de "Sanduicheira"
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/geminixgame.jpg"
+                alt="Gemini X Game visto por cima"
+              />
+
+              <img
+                src="../tgga/geminixgame-side.jpg"
+                alt="Gemini X Game visto de lado"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ O formato característico do Gemini X Game ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais marcantes do Gemini X Game é seu
+            gabinete.
+
+            <br><br>
+
+            Em vez de tentar imitar diretamente o formato retangular do NES
+            ou do Famicom, o aparelho possui um desenho compacto e arredondado
+            que lembra uma pequena sanduicheira.
+
+            <br><br>
+
+            Essa aparência acabou se tornando parte da identidade do console.
+
+            <br><br>
+
+            Em uma época em que diversos fabricantes de clones utilizavam
+            praticamente os mesmos circuitos internos, mudanças na carcaça,
+            controles, cores, adesivos e acessórios eram uma maneira importante
+            de diferenciar os produtos nas lojas.
+
+            <br><br>
+
+            É justamente essa combinação de hardware compatível com NES e
+            aparência própria que torna o Gemini X Game interessante para
+            colecionadores de hardware brasileiro.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               CARTUCHOS
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Cartuchos de 60 Pinos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/geminixgame-cartucho.jpg"
+                alt="Cartucho do Gemini X Game"
+              />
+
+              <img
+                src="../tgga/geminixgame-slot.jpg"
+                alt="Slot de cartucho do Gemini X Game"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Sistema de cartuchos e conector de 60 pinos ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game utiliza cartuchos de <strong>60 pinos</strong>,
+            padrão associado ao Nintendo Family Computer japonês.
+
+            <br><br>
+
+            Essa característica é importante porque diferencia fisicamente
+            esse tipo de aparelho dos NES ocidentais, que utilizavam o
+            conhecido cartucho de 72 pinos.
+
+            <br><br>
+
+            No Famicom original, o cartucho é inserido diretamente em um
+            conector localizado na parte superior do aparelho.
+
+            <br><br>
+
+            Famiclones de 60 pinos aproveitam essa mesma ideia geral de
+            interface, embora a implementação eletrônica possa variar bastante
+            de um fabricante para outro.
+
+            <br><br>
+
+            O VGDB confirma especificamente a compatibilidade do Gemini X Game
+            com cartuchos de 60 pinos.
+
+          </p>
+
+
+          <div class="technical-box">
+
+            <h3>
+              CARTUCHO
+            </h3>
+
+            <ul>
+
+              <li>
+                Padrão: compatível com Famicom / NES japonês
+              </li>
+
+              <li>
+                Conector: 60 pinos
+              </li>
+
+              <li>
+                Mídia: cartucho
+              </li>
+
+              <li>
+                Compatibilidade registrada: cartuchos de 60 pinos
+              </li>
+
+              <li>
+                Não deve ser confundido com o cartucho de 72 pinos do NES
+                ocidental
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               JOGOS INTERNOS
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos na Memória
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além dos cartuchos removíveis, o Gemini X Game possui uma seleção
+            de jogos integrada ao próprio console.
+
+            <br><br>
+
+            A documentação encontrada pelo VGDB registra <strong>30 jogos na
+            memória</strong>.
+
+            <br><br>
+
+            Isso significa que o aparelho pode iniciar determinados jogos sem
+            que um cartucho externo esteja instalado.
+
+            <br><br>
+
+            Esse tipo de recurso era extremamente comum em famiclones
+            comercializados em diferentes mercados.
+
+            <br><br>
+
+            Em muitos aparelhos, entretanto, a expressão "jogos na memória"
+            não significa necessariamente que o console possui uma memória
+            flash moderna como os videogames atuais.
+
+            <br><br>
+
+            Dependendo da arquitetura utilizada pelo fabricante, os jogos
+            integrados podem estar associados a ROMs, máscaras de ROM ou
+            circuitos equivalentes incorporados ao hardware.
+
+            <br><br>
+
+            No caso específico do Gemini X Game, a fonte encontrada confirma
+            os 30 jogos, mas não fornece documentação suficiente para afirmar
+            qual tecnologia de armazenamento foi utilizada na placa.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               CARTUCHOS INCLUÍDOS
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Os Cartuchos que Acompanham o Console
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/geminixgame-cartucho1.jpg"
+                alt="Cartucho 1 do Gemini X Game"
+              />
+
+              <img
+                src="../tgga/geminixgame-cartucho2.jpg"
+                alt="Cartucho 2 do Gemini X Game"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Os dois cartuchos associados ao conjunto ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Outro detalhe curioso do pacote é a presença de dois cartuchos.
+
+            <br><br>
+
+            De acordo com o VGDB, esses dois cartuchos reúnem
+            <strong>23 jogos ao todo</strong>.
+
+            <br><br>
+
+            Isso significa que o conjunto comercial do aparelho oferecia uma
+            quantidade considerável de software quando somados os 30 jogos
+            internos aos jogos disponíveis nos cartuchos.
+
+            <br><br>
+
+            A quantidade total de jogos não deve, entretanto, ser interpretada
+            automaticamente como 53 jogos completamente diferentes.
+
+            <br><br>
+
+            Famiclones frequentemente apresentavam variações, duplicações ou
+            versões diferentes de um mesmo jogo dentro de seus catálogos.
+
+            <br><br>
+
+            Como os títulos específicos ainda não estão documentados de forma
+            suficiente na fonte encontrada, o TGGA não atribui nomes aos
+            23 jogos sem comprovação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               CONTROLES
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Os Controles
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/geminixgame-controller.jpg"
+                alt="Controle do Gemini X Game"
+              />
+
+              <img
+                src="../tgga/geminixgame-controller-back.jpg"
+                alt="Parte traseira do controle do Gemini X Game"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Controle do Gemini X Game ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game acompanha dois controles.
+
+            <br><br>
+
+            O design dos controles acompanha a filosofia do console: em vez
+            de reproduzir necessariamente o controle original do Famicom,
+            o fabricante utiliza uma solução própria para o conjunto.
+
+            <br><br>
+
+            A configuração possui o tradicional direcional digital e botões
+            de ação associados ao padrão NES/Famicom.
+
+            <br><br>
+
+            O modelo também é particularmente interessante por apresentar
+            controles com funções adicionais, incluindo botões associados a
+            recursos de repetição automática, dependendo da versão observada.
+
+            <br><br>
+
+            Como acontece com outros famiclones, é importante distinguir a
+            aparência externa do controle da eletrônica interna. O simples
+            fato de possuir o mesmo número de botões não garante que a
+            pinagem interna seja idêntica à de um controle Nintendo original.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               SEIS BOTÕES
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            O Controle de Seis Botões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das particularidades que tornam o Gemini X Game especialmente
+            interessante é seu controle de seis botões.
+
+            <br><br>
+
+            A presença desses botões adicionais está relacionada à tentativa
+            de oferecer funções extras além do conjunto básico encontrado
+            no controle tradicional do Famicom.
+
+            <br><br>
+
+            Entretanto, é importante não confundir esse conceito com o
+            controle de seis botões do Mega Drive.
+
+            <br><br>
+
+            O controle do Mega Drive de seis botões possui uma arquitetura
+            completamente diferente e acrescenta X, Y e Z ao conjunto A, B
+            e C.
+
+            <br><br>
+
+            No Gemini X Game, os botões adicionais fazem parte da lógica
+            específica do famiclone e de seus controles.
+
+            <br><br>
+
+            A função exata de cada botão pode depender da revisão do controle
+            e do software utilizado. Por isso, o TGGA evita atribuir uma
+            função elétrica específica sem documentação ou análise da placa
+            da unidade.
+
+          </p>
+
+
+          <div class="technical-box">
+
+            <h3>
+              CONTROLE — ARQUITETURA GERAL
+            </h3>
+
+            <ul>
+
+              <li>
+                Direcional digital
+              </li>
+
+              <li>
+                Botões de ação
+              </li>
+
+              <li>
+                Botões adicionais
+              </li>
+
+              <li>
+                Comunicação através do cabo do controle
+              </li>
+
+              <li>
+                Conjunto destinado ao padrão de hardware do Gemini X Game
+              </li>
+
+              <li>
+                Dois controles incluídos no pacote documentado
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               PISTOLA
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            A Pistola de Luz
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/geminixgame-zapper.jpg"
+                alt="Pistola do Gemini X Game"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Pistola de luz incluída no conjunto ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além dos dois controles, o Gemini X Game também é documentado
+            como acompanhado por uma pistola.
+
+            <br><br>
+
+            Esse acessório segue a tradição dos sistemas compatíveis com NES
+            que ofereciam uma pistola de luz para jogos de tiro.
+
+            <br><br>
+
+            Em sistemas baseados no NES/Famicom, a pistola não funciona como
+            uma arma eletrônica moderna com sensores digitais independentes.
+
+            <br><br>
+
+            O princípio tradicional da pistola de luz depende da leitura da
+            imagem exibida pela televisão e da sincronização do sistema.
+
+            <br><br>
+
+            Por esse motivo, a compatibilidade de pistolas de luz depende
+            também da tecnologia da televisão utilizada.
+
+            <br><br>
+
+            Televisores CRT são especialmente relevantes nesse contexto,
+            enquanto televisores modernos de LCD, LED e tecnologias similares
+            não necessariamente reproduzem o funcionamento original dessas
+            pistolas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               ARQUITETURA ELETRÔNICA
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Arquitetura Eletrônica
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game pertence à enorme família de clones do NES que
+            surgiram utilizando diferentes implementações eletrônicas.
+
+            <br><br>
+
+            Em vez de possuir necessariamente os mesmos chips encontrados
+            em um NES original, um famiclone pode utilizar circuitos integrados
+            que reúnem diversas funções do sistema original.
+
+            <br><br>
+
+            Essa abordagem reduzia a quantidade de componentes e permitia
+            fabricar aparelhos menores e mais baratos.
+
+            <br><br>
+
+            Entre as funções que um clone desse tipo precisa reproduzir estão
+            processamento, geração de vídeo, geração de áudio, acesso ao
+            cartucho e comunicação com os controles.
+
+            <br><br>
+
+            Entretanto, a identificação exata dos componentes empregados no
+            Gemini X Game exige análise da placa de uma unidade específica.
+
+            <br><br>
+
+            Como não foi encontrada uma documentação confiável que identifique
+            os chips da placa desse modelo, este artigo não atribui números de
+            peça ao aparelho.
+
+          </p>
+
+
+          <div class="research-note">
+
+            <strong>
+              Importante:
+            </strong>
+
+            não foi encontrada evidência pública suficiente para afirmar que
+            o Gemini X Game utiliza um determinado NOAC, CPU, PPU ou conjunto
+            específico de chips.
+
+            <br><br>
+
+            Uma fotografia nítida da placa interna permitiria transformar esta
+            seção em uma análise muito mais precisa, incluindo a identificação
+            dos CIs, cristal, regulador, RAM, ROM, circuito de vídeo e
+            interface dos controles.
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               VIDEO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Vídeo e Áudio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Como membro da família de aparelhos compatíveis com NES/Famicom,
+            o Gemini X Game foi desenvolvido para reproduzir a experiência
+            audiovisual básica dos jogos de 8 bits desse sistema.
+
+            <br><br>
+
+            Isso inclui geração de imagem para televisão e áudio compatível
+            com o software desenvolvido para a plataforma NES/Famicom.
+
+            <br><br>
+
+            A implementação concreta, entretanto, pode variar bastante entre
+            diferentes famiclones.
+
+            <br><br>
+
+            Alguns aparelhos utilizam circuitos integrados altamente
+            integrados que reúnem praticamente todo o sistema em um único
+            componente.
+
+            <br><br>
+
+            Outros utilizam vários CIs auxiliares.
+
+            <br><br>
+
+            Portanto, qualquer especificação detalhada sobre resolução,
+            frequência de clock ou circuito de vídeo do Gemini X Game deve ser
+            confirmada através da placa ou documentação específica do aparelho.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               MERCADO BRASILEIRO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            O Gemini X Game no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Gemini X Game faz parte de uma longa história brasileira de
+            consoles compatíveis com NES.
+
+            <br><br>
+
+            O mercado brasileiro recebeu diversos aparelhos desse tipo,
+            fabricados ou comercializados por empresas diferentes.
+
+            <br><br>
+
+            O fenômeno foi especialmente importante porque permitiu que
+            jogadores tivessem acesso a uma grande biblioteca de jogos de
+            8 bits através de aparelhos que não eram Nintendo oficiais.
+
+            <br><br>
+
+            O próprio VGDB mantém o Gemini X Game entre os clones e modelos
+            compatíveis com o NES.
+
+            <br><br>
+
+            Esse contexto coloca o Gemini X Game ao lado de nomes conhecidos
+            da história dos famiclones brasileiros, embora cada aparelho
+            possua sua própria combinação de gabinete, controles, jogos e
+            circuitos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               RELAÇÃO COM NES / FAMICOM
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Gemini X Game × Famicom × NES
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/famicom.jpg"
+                alt="Nintendo Family Computer"
+              />
+
+              <img
+                src="../tgga/nes.jpg"
+                alt="Nintendo Entertainment System"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Famicom e NES: a família de hardware que deu origem aos
+              diversos famiclones ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Family Computer, conhecido como Famicom, foi lançado
+            no Japão em 1983.
+
+            <br><br>
+
+            Posteriormente, o hardware foi adaptado para o mercado internacional
+            e lançado como Nintendo Entertainment System.
+
+            <br><br>
+
+            Os dois sistemas possuem diferenças físicas, especialmente nos
+            cartuchos e em alguns aspectos do hardware.
+
+            <br><br>
+
+            O Gemini X Game segue a família de compatibilidade do Famicom,
+            utilizando cartuchos de 60 pinos.
+
+            <br><br>
+
+            Isso é uma diferença importante em relação ao NES ocidental,
+            cujo sistema de cartucho utiliza 72 pinos.
+
+            <br><br>
+
+            Assim, embora seja comum chamar esses aparelhos simplesmente de
+            "clone de NES", o Gemini X Game possui uma relação física
+            especialmente próxima do padrão Famicom.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               30 + 23
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            30 + 23 Jogos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Um dos aspectos mais curiosos do Gemini X Game é a quantidade de
+            software anunciada para o conjunto.
+
+            <br><br>
+
+            O console possui <strong>30 jogos integrados</strong>.
+
+            <br><br>
+
+            Além disso, o conjunto documentado inclui dois cartuchos que
+            totalizam <strong>23 jogos</strong>.
+
+            <br><br>
+
+            Em termos puramente nominais, isso representa uma oferta de
+            53 entradas de jogos entre memória interna e cartuchos.
+
+            <br><br>
+
+            Entretanto, esse número não significa necessariamente 53 títulos
+            únicos.
+
+            <br><br>
+
+            Sem uma listagem oficial dos jogos, não é possível determinar
+            quantas entradas são duplicatas, variações ou versões diferentes
+            dos mesmos títulos.
+
+            <br><br>
+
+            O TGGA prefere manter essa distinção porque ela é importante para
+            preservar a precisão histórica do acervo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               CONSERVAÇÃO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Conservação e Manutenção
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Como qualquer console antigo, o Gemini X Game merece cuidados
+            especiais quando utilizado ou armazenado atualmente.
+
+            <br><br>
+
+            O principal ponto de atenção é o conector de cartucho.
+
+            <br><br>
+
+            Poeira, oxidação e sujeira nos contatos podem causar falhas de
+            leitura ou fazer o aparelho apresentar tela preta.
+
+            <br><br>
+
+            Os conectores dos controles também devem ser tratados com cuidado.
+            Como são utilizados repetidamente, os contatos internos podem
+            sofrer desgaste mecânico.
+
+            <br><br>
+
+            O cabo dos controles também merece atenção, especialmente na
+            região próxima ao gabinete, onde a flexão repetida pode provocar
+            rompimento dos condutores internos.
+
+            <br><br>
+
+            A fonte de alimentação deve sempre ser substituída por outra que
+            corresponda corretamente às especificações da unidade específica.
+            Não é seguro assumir tensão, polaridade ou corrente apenas pela
+            aparência do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               COLECIONISMO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Valor Histórico
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O interesse histórico do Gemini X Game não está apenas na
+            capacidade de executar jogos compatíveis com NES.
+
+            <br><br>
+
+            O aparelho representa uma parte específica da história dos
+            videogames no Brasil: a existência de um mercado paralelo de
+            consoles compatíveis com sistemas estrangeiros.
+
+            <br><br>
+
+            Seu gabinete incomum, seus controles próprios, a combinação de
+            jogos internos com cartuchos e a presença de uma pistola tornam o
+            conjunto particularmente característico.
+
+            <br><br>
+
+            Para colecionadores, conservar o console completo também significa
+            preservar seus acessórios.
+
+            <br><br>
+
+            Controle, pistola, cartuchos, cabos, fonte, embalagem e manuais
+            ajudam a documentar não apenas o funcionamento do aparelho, mas
+            também a forma como ele era vendido ao consumidor brasileiro.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               MODELOS / CONJUNTO
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            O Conjunto Gemini X Game
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/geminixgame.jpg"
+                  alt="Console Gemini X Game"
+                />
+
+                <figcaption>
+                  Gemini X Game
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/geminixgame-controller.jpg"
+                  alt="Controle Gemini X Game"
+                />
+
+                <figcaption>
+                  Controle Gemini X Game
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/geminixgame-zapper.jpg"
+                  alt="Pistola Gemini X Game"
+                />
+
+                <figcaption>
+                  Pistola de luz
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/geminixgame-cartucho1.jpg"
+                  alt="Cartucho Gemini X Game"
+                />
+
+                <figcaption>
+                  Cartucho incluído
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- =====================================
+               CURIOSIDADES
+               ===================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="technical-box">
+
+            <h3>
+              FATOS DOCUMENTADOS
+            </h3>
+
+            <ul>
+
+              <li>
+                O Gemini X Game é um clone não licenciado do NES/Nintendinho.
+              </li>
+
+              <li>
+                O aparelho foi comercializado no Brasil pela Gemini.
+              </li>
+
+              <li>
+                O console possui 30 jogos integrados.
+              </li>
+
+              <li>
+                O conjunto possui dois cartuchos.
+              </li>
+
+              <li>
+                Os dois cartuchos somam 23 jogos segundo o VGDB.
+              </li>
+
+              <li>
+                O console utiliza cartuchos de 60 pinos.
+              </li>
+
+              <li>
+                O pacote documentado acompanha dois controles.
+              </li>
+
+              <li>
+                O pacote também acompanha uma pistola.
+              </li>
+
+              <li>
+                O design externo é bastante diferente do NES oficial.
+              </li>
+
+              <li>
+                O Gemini X Game está catalogado entre os clones e modelos
+                compatíveis com o NES.
+              </li>
+
+              <li>
+                O ano exato de lançamento ainda não está documentado de forma
+                conclusiva na fonte pesquisada.
+              </li>
+
+              <li>
+                A lista completa dos jogos internos e dos dois cartuchos ainda
+                não está estabelecida de forma confiável na documentação
+                encontrada.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Gemini X Game
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Gemini X Game
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <!-- CONSOLE -->
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior do gabinete plástico do Gemini X Game.
+                  Protege os componentes internos e define grande parte do
+                  visual característico do aparelho.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior do gabinete responsável por acomodar a placa
+                  principal e os elementos mecânicos do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso (PCB)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável por interligar eletricamente os diversos
+                  circuitos do Gemini X Game.
+                </p>
+
+                <p>
+                  A identificação exata da revisão da PCB depende da unidade
+                  analisada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito Integrado Principal do Famiclone
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por implementar parte das funções
+                  necessárias para reproduzir o comportamento do hardware
+                  compatível com NES/Famicom.
+                </p>
+
+                <p>
+                  O número exato do CI utilizado pelo Gemini X Game não foi
+                  confirmado na documentação pública consultada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Memória / ROM dos Jogos Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito associado ao armazenamento dos jogos integrados
+                  ao console.
+                </p>
+
+                <p>
+                  A tecnologia exata utilizada nessa implementação não foi
+                  confirmada publicamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Slot de Cartucho de 60 Pinos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para inserir os cartuchos compatíveis
+                  com o padrão Famicom de 60 pinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector dos Controles
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface elétrica utilizada para conectar os controles ao
+                  console.
+                </p>
+
+                <p>
+                  A pinagem específica deve ser confirmada na PCB da unidade
+                  antes de qualquer tentativa de modificação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Alimentação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto responsável por receber a energia da fonte externa
+                  e distribuí-la aos circuitos internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Regulador de Tensão
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componente utilizado para fornecer uma tensão adequada aos
+                  circuitos eletrônicos internos.
+                </p>
+
+                <p>
+                  O modelo específico deve ser identificado diretamente na
+                  placa da unidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cristal Oscilador
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componente utilizado como referência de frequência para os
+                  circuitos digitais do sistema.
+                </p>
+
+                <p>
+                  A frequência exata do cristal do Gemini X Game não foi
+                  confirmada através da documentação encontrada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores de Filtragem
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes utilizados para filtragem e estabilização das
+                  linhas de alimentação e de determinados circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes passivos utilizados para definir correntes,
+                  tensões e condições de funcionamento dos circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Diodos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes semicondutores utilizados em funções de
+                  proteção, retificação, chaveamento ou sinal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Saída de Vídeo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito e conector responsáveis pelo envio do sinal de
+                  vídeo do console para a televisão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Saída de Áudio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável pelo processamento e encaminhamento do
+                  áudio produzido pelos jogos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <!-- CONTROLE -->
+
+            <details class="component-item">
+
+              <summary>
+                Controle Gemini X Game
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle fornecido com o console para utilização nos jogos.
+                </p>
+
+                <p>
+                  O conjunto documentado acompanha dois controles.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Direcional Digital (D-Pad)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle digital utilizado para movimentar o personagem,
+                  cursor ou veículo nos quatro sentidos principais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botões utilizados pelos jogos para executar ações como
+                  pular, atacar, selecionar objetos ou realizar outras
+                  funções específicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Adicionais
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botões presentes no controle além do conjunto básico,
+                  associados às funções adicionais oferecidas pelo
+                  famiclone.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas / Contatos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos responsáveis por fechar eletricamente os contatos
+                  quando um botão é pressionado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável pela conexão elétrica entre o controle e o
+                  console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector localizado na extremidade do cabo utilizado para
+                  conectar o controle ao console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <!-- PISTOLA -->
+
+            <details class="component-item">
+
+              <summary>
+                Pistola de Luz
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Periférico fornecido com o conjunto Gemini X Game para
+                  utilização em jogos compatíveis com pistola de luz.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sensor Óptico da Pistola
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elemento óptico utilizado para detectar a luz proveniente
+                  da tela durante o funcionamento da pistola.
+                </p>
+
+                <p>
+                  A construção interna exata depende da revisão do acessório.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho da Pistola
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interruptor mecânico acionado pelo jogador para realizar o
+                  disparo nos jogos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo da Pistola
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável pela conexão elétrica entre a pistola e o
+                  console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <!-- CARTUCHOS -->
+
+            <details class="component-item">
+
+              <summary>
+                Cartucho de 60 Pinos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia removível utilizada para armazenar o software dos
+                  jogos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                PCB do Cartucho
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa de circuito presente no interior do cartucho.
+                </p>
+
+                <p>
+                  Ela conecta a memória do jogo ao conector de 60 pinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                ROM do Cartucho
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória responsável por armazenar os dados do jogo.
+                </p>
+
+                <p>
+                  Cartuchos diferentes podem utilizar arquiteturas e
+                  componentes diferentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector Edge de 60 Pinos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de contatos metálicos que estabelece a comunicação
+                  elétrica entre a PCB do cartucho e o slot do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <!-- MECÂNICA -->
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos responsáveis por unir as partes da
+                  carcaça e fixar componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Pés de Borracha
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos instalados na parte inferior do console para
+                  aumentar a aderência sobre a superfície.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Blindagem / Proteção Contra Interferência
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da revisão da placa, podem existir componentes
+                  destinados à redução de interferência eletromagnética.
+                </p>
+
+                <p>
+                  A presença e o formato exatos devem ser confirmados pela
+                  desmontagem da unidade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

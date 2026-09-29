@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Turbo Pad Dynacom DV3</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Turbo Pad da Dynacom é um dos controles mais característicos
+          dos clones brasileiros de NES, trazendo uma combinação de D-Pad,
+          botões de ação e função Turbo para acelerar a jogatina ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Turbo Pad da Dynacom é um dos controles mais característicos
+          dos clones brasileiros de NES, trazendo uma combinação de D-Pad,
+          botões de ação e função Turbo para acelerar a jogatina ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Turbo Pad Dynacom DV3
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/dv3.jpg"
+              alt="Controle Turbo Pad Dynacom DV3"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Turbo Pad Dynacom
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Turbo Pad Dynacom é um controle desenvolvido para os consoles
+            da linha Dynavision, produzidos pela empresa brasileira Dynacom.
+            O modelo DV3 pertence à geração de controles associada aos
+            consoles compatíveis com a plataforma NES/Famicom, oferecendo
+            o tradicional conjunto de controles direcionais e botões de ação
+            encontrado nos controles desse ecossistema.<br><br>
+
+            Seu grande diferencial em relação a controles convencionais é
+            a presença das funções Turbo. Por meio delas, determinados
+            botões podem produzir repetição automática dos comandos,
+            permitindo que o jogador mantenha o botão pressionado em vez
+            de realizar repetidamente vários toques manuais.<br><br>
+
+            Para a história dos videogames no Brasil, controles como o
+            Turbo Pad são particularmente interessantes porque fazem parte
+            da enorme variedade de acessórios produzidos durante a época
+            dos clones de NES, período em que a plataforma se tornou
+            extremamente popular no mercado nacional.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Mercado Nacional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            A história da Dynacom está diretamente relacionada ao mercado
+            brasileiro de videogames domésticos. Durante as décadas de
+            1980 e 1990, a existência de restrições à importação de
+            eletrônicos e a dificuldade de acesso a produtos estrangeiros
+            contribuíram para o crescimento de fabricantes nacionais e
+            de empresas que comercializavam sistemas compatíveis com
+            plataformas estrangeiras.<br><br>
+
+            A Dynacom ficou conhecida principalmente por sua família
+            Dynavision, iniciada com aparelhos relacionados ao Atari 2600
+            e posteriormente expandida para consoles compatíveis com
+            Nintendo Entertainment System e Famicom.<br><br>
+
+            Com a popularização desses aparelhos, surgiu também uma grande
+            variedade de controles e acessórios. O Turbo Pad se encaixa
+            nesse cenário como um periférico pensado para acompanhar a
+            experiência dos Dynavision posteriores, oferecendo comandos
+            semelhantes aos encontrados nos controles de NES, mas com
+            recursos adicionais de Turbo.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dynavision.jpg"
+                alt="Dynavision da Dynacom"
+              />
+
+              <img
+                src="../tgga/nes.jpg"
+                alt="Nintendo Entertainment System"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Dynavision e Nintendo Entertainment System ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O controle do NES estabeleceu um formato que acabou se tornando
+            extremamente reconhecível: uma cruz direcional no lado esquerdo,
+            dois botões principais de ação no lado direito e botões menores
+            de seleção e início próximos ao centro.<br><br>
+
+            Esse formato foi reproduzido por inúmeros fabricantes de
+            consoles compatíveis e acessórios. No Brasil, os chamados
+            "famiclones" apresentavam uma variedade enorme de designs,
+            cores, formatos de carcaça e controles.<br><br>
+
+            A Dynacom foi uma das empresas que ajudaram a popularizar essa
+            categoria no mercado nacional. Seus produtos podem ser
+            encontrados atualmente em coleções de videogames antigos,
+            principalmente entre pessoas interessadas na história dos
+            consoles brasileiros e dos clones de plataformas estrangeiras.<br><br>
+
+            Os controles Turbo também representam uma característica
+            importante dessa época. A função não modificava o jogo
+            internamente: ela alterava a maneira como o sinal do botão
+            era enviado ao console, produzindo uma sequência rápida de
+            comandos enquanto a tecla permanecesse pressionada.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Funcionamento do Turbo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            A função Turbo é um dos elementos mais interessantes do
+            controle. Em um controle tradicional, pressionar um botão
+            gera um comando correspondente ao botão pressionado. No
+            Turbo Pad, entretanto, o circuito eletrônico pode alternar
+            rapidamente entre estados elétricos, fazendo o console
+            interpretar a ação como uma sequência de pressionamentos.<br><br>
+
+            Na prática, isso significa que o jogador pode manter um botão
+            pressionado e obter uma repetição automática da ação. Em jogos
+            de tiro, por exemplo, isso pode fazer com que um único botão
+            produza diversos disparos sucessivos.<br><br>
+
+            A implementação exata varia de acordo com o projeto eletrônico
+            e a revisão do controle. Por isso, controles visualmente
+            semelhantes podem apresentar circuitos internos diferentes,
+            especialmente entre fabricantes e revisões produzidas durante
+            a longa existência dos consoles compatíveis com NES.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Botões e Funções
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dv3-buttons.jpg"
+                alt="Botões do Turbo Pad Dynacom"
+              />
+
+              <img
+                src="../tgga/dv3-back.jpg"
+                alt="Parte traseira do Turbo Pad Dynacom"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Elementos externos e construção do Turbo Pad ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O conjunto de controles segue o padrão encontrado nos
+            consoles compatíveis com NES. O direcional é utilizado para
+            movimentar personagens e navegar pelos menus, enquanto os
+            botões de ação realizam as funções determinadas por cada jogo.<br><br>
+
+            Os botões START e SELECT são utilizados para iniciar partidas,
+            pausar determinados jogos e selecionar opções. Já as chaves
+            relacionadas ao Turbo permitem ativar a repetição automática
+            dos botões compatíveis.<br><br>
+
+            Dependendo da revisão do Turbo Pad, a disposição exata dos
+            interruptores e a identificação das funções podem variar.
+            Essa é uma característica importante para colecionadores,
+            pois nem todo controle Dynacom encontrado atualmente possui
+            exatamente a mesma placa ou a mesma combinação de componentes.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Construção e Eletrônica
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            Internamente, o Turbo Pad é relativamente simples quando
+            comparado aos controles modernos. Não existe processamento
+            gráfico, memória significativa ou comunicação digital
+            sofisticada como encontramos em controles contemporâneos.<br><br>
+
+            O dispositivo basicamente transforma ações mecânicas
+            realizadas pelo jogador em estados elétricos que são
+            interpretados pelo console. Cada botão atua sobre a matriz
+            ou circuito de entrada responsável por informar ao aparelho
+            qual comando foi realizado.<br><br>
+
+            A função Turbo adiciona circuitos responsáveis por gerar
+            a repetição automática do sinal. A implementação pode utilizar
+            componentes lógicos, transistores, circuitos integrados ou
+            combinações desses elementos, dependendo da revisão da placa.<br><br>
+
+            A simplicidade desse projeto também contribui para a
+            facilidade de manutenção de muitos controles antigos.
+            Problemas como sujeira nos contatos, desgaste das borrachas
+            condutivas, fios rompidos e oxidação dos terminais são
+            ocorrências comuns em periféricos dessa época.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Conexão
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            O Turbo Pad utiliza uma conexão física com o console,
+            seguindo o padrão empregado por muitos aparelhos compatíveis
+            com NES e Famicom. O cabo transporta os sinais elétricos
+            correspondentes às diferentes entradas do controle.<br><br>
+
+            Diferentemente de controles modernos, não existe comunicação
+            sem fio, bateria interna ou conexão USB. Toda a alimentação
+            necessária ao circuito do controle é fornecida pelo próprio
+            console através do cabo.<br><br>
+
+            O conector e a pinagem devem ser tratados com atenção,
+            especialmente durante manutenção ou adaptação para outros
+            aparelhos, pois controles visualmente semelhantes podem
+            utilizar pinagens diferentes dependendo do fabricante.
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+            A Dynacom produziu diferentes consoles e acessórios ao longo
+            de sua história. A família Dynavision passou por diversas
+            revisões, e seus controles acompanharam parte dessas mudanças.<br><br>
+
+            O Turbo Pad associado ao DV3 é particularmente interessante
+            por representar uma fase em que os fabricantes brasileiros
+            já ofereciam controles com funções adicionais em relação
+            aos modelos mais básicos.<br><br>
+
+            Também existem controles visualmente semelhantes produzidos
+            por outros fabricantes de clones. Para identificação correta
+            de uma unidade, é recomendável observar o logotipo, inscrições,
+            formato da carcaça, disposição das chaves, conector, cabo
+            e principalmente a placa eletrônica interna.
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dv3.jpg"
+                  alt="Turbo Pad Dynacom DV3"
+                />
+
+                <figcaption>
+                  Turbo Pad Dynacom — DV3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dv3-white.jpg"
+                  alt="Variação de controle Dynacom"
+                />
+
+                <figcaption>
+                  Variação de acabamento do Turbo Pad
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dynavision-controller.jpg"
+                  alt="Controle Dynavision"
+                />
+
+                <figcaption>
+                  Controle Dynavision
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/nes-controller.jpg"
+                  alt="Controle Nintendo NES"
+                />
+
+                <figcaption>
+                  Controle Nintendo Entertainment System
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Dynavision DV3
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Turbo Pad
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso (PCB)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  A placa de circuito impresso é a estrutura responsável
+                  por interligar eletricamente os diversos componentes
+                  existentes dentro do Turbo Pad.
+                </p>
+
+                <p>
+                  As trilhas de cobre presentes na placa transportam
+                  os sinais provenientes dos botões, do direcional e
+                  dos circuitos responsáveis pelo funcionamento do Turbo.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: PCB</li>
+                  <li>Função: Interligação elétrica</li>
+                  <li>Material: Fibra / material isolante com cobre</li>
+                  <li>Aplicação: Circuito do controle</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Controle do Turbo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável pela geração da repetição
+                  automática dos comandos quando uma função Turbo
+                  está habilitada.
+                </p>
+
+                <p>
+                  A implementação específica depende da revisão da
+                  placa e pode utilizar diferentes componentes
+                  eletrônicos para produzir a sequência de pulsos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Repetição automática</li>
+                  <li>Aplicação: Botões Turbo</li>
+                  <li>Tipo: Circuito eletrônico</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Direcional D-Pad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto mecânico responsável pelas quatro direções
+                  principais do controle: cima, baixo, esquerda e direita.
+                </p>
+
+                <p>
+                  Ao pressionar uma direção, a peça movimenta o mecanismo
+                  interno correspondente e fecha o contato elétrico
+                  associado à entrada.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Direcional digital</li>
+                  <li>Direções: 4</li>
+                  <li>Função: Movimento</li>
+                  <li>Acionamento: Mecânico</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas / Borrachas Condutivas
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenas peças flexíveis localizadas entre os botões
+                  e a placa de circuito.
+                </p>
+
+                <p>
+                  Quando pressionadas, as áreas condutivas presentes
+                  na borracha entram em contato com as regiões
+                  correspondentes da placa.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Material: Borracha elastomérica</li>
+                  <li>Função: Acionamento elétrico</li>
+                  <li>Tipo: Contato condutivo</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão A
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos principais botões de ação do controle,
+                  utilizado pelos jogos para executar comandos
+                  determinados pelo software.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão B
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo botão principal de ação. Sua função depende
+                  do jogo utilizado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão START
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado normalmente para iniciar uma partida,
+                  pausar ou confirmar determinadas ações dependendo
+                  do software.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão SELECT
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para selecionar opções, alternar
+                  modos de jogo ou executar outras funções determinadas
+                  pelo software.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Chave Turbo A
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interruptor associado à função de repetição automática
+                  do botão correspondente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Chave Turbo B
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interruptor responsável por habilitar ou desabilitar
+                  a repetição automática do outro botão de ação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LED Indicador de Turbo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Algumas revisões de controles Turbo podem utilizar
+                  indicadores luminosos associados ao circuito de
+                  repetição.
+                </p>
+
+                <p>
+                  A presença e a quantidade de LEDs dependem da revisão
+                  específica do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes responsáveis por limitar corrente,
+                  estabelecer níveis elétricos e auxiliar no funcionamento
+                  dos circuitos eletrônicos.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Resistor</li>
+                  <li>Funções: Limitação e polarização</li>
+                  <li>Aplicação: Circuito eletrônico</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores Cerâmicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenos capacitores utilizados para filtragem,
+                  desacoplamento e redução de ruídos elétricos
+                  presentes no circuito.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Transistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da revisão da placa, transistores podem
+                  participar dos circuitos responsáveis pelo processamento
+                  dos sinais ou pela geração da função Turbo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuitos Integrados
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Algumas versões podem utilizar circuitos integrados
+                  para implementar funções lógicas ou temporização
+                  necessárias ao funcionamento do Turbo.
+                </p>
+
+                <p>
+                  A identificação exata deve ser feita diretamente
+                  na placa da unidade analisada, pois diferentes revisões
+                  podem utilizar componentes distintos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Trilhas de Cobre
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  As trilhas são caminhos condutores gravados na placa
+                  que conectam eletricamente os diferentes componentes.
+                </p>
+
+                <p>
+                  Oxidação, riscos profundos ou rompimentos podem
+                  interromper essas conexões e provocar falhas no controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável por transportar alimentação e sinais
+                  elétricos entre o controle e o console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector localizado na extremidade do cabo, responsável
+                  pela ligação física e elétrica com a porta do console.
+                </p>
+
+                <p>
+                  A pinagem deve ser confirmada de acordo com o modelo
+                  específico antes de qualquer adaptação ou modificação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Fios Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Condutores utilizados para realizar ligações entre
+                  a placa, o cabo e outros elementos internos quando
+                  necessário.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior da estrutura plástica do controle.
+                  Contém as aberturas utilizadas pelos botões e pelo
+                  direcional.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior da estrutura responsável por acomodar
+                  a placa, os mecanismos e os demais componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos utilizados para unir as duas partes da
+                  carcaça e manter os componentes internos posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Suportes Plásticos Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estruturas moldadas na carcaça que auxiliam no
+                  posicionamento da placa, membranas, botões e demais
+                  componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Guias Mecânicas do D-Pad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estruturas internas que limitam e orientam o movimento
+                  do direcional, permitindo que cada direção acione
+                  corretamente seu respectivo contato.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Plásticos de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças plásticas visíveis externamente que transferem
+                  a força aplicada pelo jogador para as membranas
+                  condutivas internas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas / Elementos de Retorno
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da construção da unidade, determinados
+                  elementos mecânicos auxiliam no retorno das peças
+                  para sua posição original após o acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Pontos de Solda
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  As soldas estabelecem conexões elétricas e mecânicas
+                  entre os componentes e as trilhas da placa.
+                </p>
+
+                <p>
+                  Soldas quebradas ou oxidadas podem provocar comandos
+                  intermitentes ou ausência total de determinada função.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contatos Elétricos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Regiões condutivas responsáveis por detectar o
+                  acionamento dos botões e do direcional.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Isoladores Plásticos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças utilizadas para impedir contatos elétricos
+                  indesejados e manter determinados componentes
+                  corretamente posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Etiquetas e Identificação Dynacom
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos externos utilizados para identificação
+                  do fabricante, modelo ou características do controle.
+                </p>
+
+                <p>
+                  Para colecionadores, essas marcações podem ser
+                  importantes para diferenciar versões e revisões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

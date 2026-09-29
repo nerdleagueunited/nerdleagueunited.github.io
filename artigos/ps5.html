@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - PlayStation 5</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O PlayStation 5 representa a nona geração dos consoles
+          da Sony, trazendo SSD de alta velocidade, Ray Tracing,
+          gráficos em alta resolução e o controle DualSense ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O PlayStation 5 representa a nona geração dos consoles
+          da Sony, trazendo SSD de alta velocidade, Ray Tracing,
+          gráficos em alta resolução e o controle DualSense ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Sony PlayStation 5 (Posse de Théo Oliveira)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/ps5.jpeg"
+              alt="Sony PlayStation 5"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PLAYSTATION 5
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            PlayStation 5
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 5, também conhecido como PS5, é um console
+            doméstico desenvolvido pela Sony Interactive Entertainment.
+            Ele foi lançado em novembro de 2020 e pertence à nona
+            geração dos videogames.<br>
+
+            O console sucedeu o PlayStation 4 e apresentou uma
+            arquitetura baseada em processadores AMD, combinando
+            CPU Zen 2, GPU baseada na arquitetura RDNA e uma unidade
+            de armazenamento SSD de alta velocidade.<br>
+
+            Uma das principais mudanças em relação às gerações anteriores
+            foi justamente a utilização de um SSD como armazenamento
+            interno principal, permitindo tempos de carregamento
+            consideravelmente menores em jogos compatíveis.<br>
+
+            Outro grande destaque foi o controle DualSense, que substituiu
+            o DualShock 4 e introduziu gatilhos adaptáveis e feedback
+            háptico mais avançado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado e Popularização
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 5 chegou ao mercado em um período de forte
+            crescimento da distribuição digital de jogos e dos
+            serviços de assinatura.<br>
+
+            Além dos jogos vendidos em mídia física, a plataforma
+            utiliza a PlayStation Store como uma das principais formas
+            de aquisição de jogos digitais.<br>
+
+            O PS5 também mantém compatibilidade com grande parte da
+            biblioteca do PlayStation 4, permitindo que jogadores
+            utilizem muitos títulos da geração anterior.<br>
+
+            A Sony também ampliou o ecossistema ao redor do console
+            através de acessórios, serviços online e diferentes
+            versões de hardware.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado Brasileiro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation possui uma presença histórica muito forte
+            no mercado brasileiro, e o PS5 continuou essa trajetória
+            durante a nona geração.<br>
+
+            O console foi comercializado oficialmente no Brasil,
+            incluindo tanto a versão equipada com unidade de disco
+            quanto a versão Digital Edition.<br>
+
+            A plataforma também possui suporte à PlayStation Store
+            brasileira, permitindo a compra digital de jogos,
+            expansões e outros conteúdos.<br>
+
+            Assim como em outros mercados, o preço do hardware,
+            dos jogos e dos acessórios pode variar ao longo do tempo
+            devido a impostos, câmbio, promoções e disponibilidade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/equisboquis.webp"
+                alt="Xbox Series X"
+              />
+
+              <img
+                src="../tgga/equisboquiss.jpeg"
+                alt="Xbox Series S"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox Series X e Xbox Series S (2020) ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 5 faz parte da nona geração dos consoles,
+            juntamente com os consoles Xbox Series X e Xbox Series S
+            da Microsoft.<br>
+
+            A geração trouxe como uma de suas principais características
+            a adoção de armazenamento SSD de alta velocidade, permitindo
+            reduzir significativamente os tempos de carregamento em
+            relação às plataformas baseadas em discos rígidos mecânicos.<br>
+
+            Outra característica importante foi a utilização de
+            tecnologias de renderização mais avançadas, incluindo
+            Ray Tracing em hardware compatível e suporte a resoluções
+            elevadas e taxas de atualização maiores.<br>
+
+            A geração também ocorreu durante um período de grande
+            expansão dos serviços digitais, jogos por assinatura,
+            atualizações constantes e distribuição digital.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS E ACESSÓRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/spiderman2.webp"
+                alt="Marvel's Spider-Man 2"
+              />
+
+              <img
+                src="../tgga/eldenring.webp"
+                alt="Elden Ring"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Marvel's Spider-Man 2 e Elden Ring ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 5 recebeu jogos desenvolvidos especificamente
+            para a nova geração e também versões de títulos originalmente
+            lançados no PlayStation 4.<br>
+
+            Entre os jogos associados à plataforma estão Demon's Souls,
+            Ratchet & Clank: Rift Apart, Returnal, Marvel's Spider-Man 2,
+            Astro's Playroom, Horizon Forbidden West, God of War Ragnarök
+            e Gran Turismo 7.<br>
+
+            O console também recebeu grandes produções multiplataforma,
+            incluindo Elden Ring, Resident Evil 4, Final Fantasy VII
+            Rebirth e diversos outros títulos.<br>
+
+            Entre os principais acessórios estão o controle DualSense,
+            headset Pulse 3D, HD Camera, Media Remote, estação de
+            carregamento e PlayStation VR2.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 5 possui diferentes revisões de hardware
+            lançadas ao longo de sua vida comercial.<br>
+
+            O modelo original foi disponibilizado em duas versões:
+            uma com unidade de disco Blu-ray Ultra HD e outra
+            conhecida como Digital Edition, sem unidade óptica.<br>
+
+            Posteriormente, a Sony apresentou uma revisão menor,
+            popularmente conhecida como PS5 Slim, que reduziu o
+            tamanho físico do aparelho e introduziu mudanças no
+            sistema de armazenamento e na unidade óptica removível
+            em determinadas versões.<br>
+
+            Também existe o PlayStation 5 Pro, uma versão de hardware
+            mais potente voltada para melhorias gráficas e de
+            desempenho em jogos compatíveis.<br>
+
+            Além dessas versões, o console recebeu diferentes
+            acabamentos, edições especiais e cores de tampas laterais.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/play5base.jpg"
+                  alt="PlayStation 5 Standard"
+                />
+
+                <figcaption>
+                  PlayStation 5 Standard
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/digitanal.jpg"
+                  alt="PlayStation 5 Digital Edition"
+                />
+
+                <figcaption>
+                  PlayStation 5 Digital Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5slim.jpeg"
+                  alt="PlayStation 5 Slim"
+                />
+
+                <figcaption>
+                  PlayStation 5 Slim
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5slimdigital.webp"
+                  alt="PlayStation 5 Slim Digital Edition"
+                />
+
+                <figcaption>
+                  PlayStation 5 Slim Digital Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5pro.webp"
+                  alt="PlayStation 5 Pro"
+                />
+
+                <figcaption>
+                  PlayStation 5 Pro
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5spidermanedition.webp"
+                  alt="PlayStation 5 Spider-Man Edition"
+                />
+
+                <figcaption>
+                  PlayStation 5 — Spider-Man Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5anniversary.jpg"
+                  alt="PlayStation 5 30th Anniversary Edition"
+                />
+
+                <figcaption>
+                  PlayStation 5 — 30th Anniversary Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps5devkit.jpg"
+                  alt="PlayStation 5 Development Kit"
+                />
+
+                <figcaption>
+                  PlayStation 5 Development Kit
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="ps5.html">
+                ○ Games - PlayStation 5
+              </a>
+            </li>
+
+            <li>
+              <a href="ps5.html">
+                ○ Periféricos - PlayStation 5
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>AMD Zen 2 CPU</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processador principal utilizado pelo PlayStation 5.
+                  A CPU é baseada na arquitetura Zen 2 da AMD.
+                </p>
+
+                <p>
+                  É responsável pela execução dos sistemas,
+                  jogos e cálculos gerais realizados pelo console.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: CPU</li>
+                  <li>Arquitetura: AMD Zen 2</li>
+                  <li>Núcleos: 8</li>
+                  <li>Threads: 16</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>AMD RDNA 2 GPU</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade responsável pelo processamento gráfico
+                  do PlayStation 5.
+                </p>
+
+                <p>
+                  A GPU utiliza uma arquitetura personalizada
+                  baseada na família RDNA 2 da AMD e possui
+                  suporte a Ray Tracing por hardware.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GPU</li>
+                  <li>Fabricante: AMD</li>
+                  <li>Arquitetura: RDNA 2</li>
+                  <li>Função: Renderização gráfica</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>GDDR6 RAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória principal utilizada pelo sistema para
+                  armazenar temporariamente dados de jogos,
+                  gráficos e aplicações.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GDDR6</li>
+                  <li>Capacidade: 16 GB</li>
+                  <li>Interface: 256-bit</li>
+                  <li>Função: Memória principal</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>SSD NVMe Personalizado</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade de armazenamento interno de alta velocidade
+                  utilizada pelo PlayStation 5.
+                </p>
+
+                <p>
+                  O armazenamento SSD é uma das principais diferenças
+                  arquitetônicas entre o PS5 e consoles anteriores
+                  baseados em discos rígidos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: SSD</li>
+                  <li>Interface: NVMe personalizada</li>
+                  <li>Função: Armazenamento</li>
+                  <li>Alta velocidade de transferência</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Custom I/O Unit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade personalizada de entrada e saída responsável
+                  por auxiliar na movimentação de dados entre o
+                  armazenamento, memória e demais componentes.
+                </p>
+
+                <p>
+                  O sistema de I/O foi projetado para reduzir gargalos
+                  durante o carregamento de dados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hardware Decompression</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Hardware dedicado utilizado para acelerar a
+                  descompressão de dados armazenados no SSD.
+                </p>
+
+                <p>
+                  Esse sistema contribui para a utilização eficiente
+                  da alta velocidade do armazenamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tempest 3D AudioTech</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia de áudio desenvolvida para permitir
+                  posicionamento espacial mais preciso dos sons
+                  em jogos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ultra HD Blu-ray Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade óptica presente nas versões do PS5
+                  equipadas com leitor de discos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Unidade óptica</li>
+                  <li>Mídia: Ultra HD Blu-ray</li>
+                  <li>Função: Jogos e filmes</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laser Óptico</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema responsável pela leitura das informações
+                  presentes nos discos ópticos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de comunicação sem fio utilizado para
+                  conexão do console à internet e redes domésticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bluetooth</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia utilizada para comunicação sem fio
+                  com controles e outros acessórios compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ethernet</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface de rede cabeada utilizada para conectar
+                  o PlayStation 5 diretamente a uma rede local.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDMI 2.1</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface utilizada para transmissão de áudio
+                  e vídeo digital entre o console e a televisão
+                  ou monitor compatível.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Interface digital</li>
+                  <li>Função: Áudio e vídeo</li>
+                  <li>Suporte: Alta resolução e alta taxa de atualização</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB-A</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Portas USB utilizadas para acessórios,
+                  armazenamento externo e outros dispositivos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB-C</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector USB utilizado principalmente para
+                  carregamento e conexão de determinados acessórios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DualSense</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle oficial do PlayStation 5.
+                </p>
+
+                <p>
+                  O DualSense introduziu feedback háptico avançado
+                  e gatilhos adaptáveis, permitindo que determinados
+                  jogos simulem diferentes sensações durante a utilização.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Gamepad</li>
+                  <li>Conexão: Bluetooth / USB</li>
+                  <li>Feedback háptico: Sim</li>
+                  <li>Gatilhos adaptáveis: Sim</li>
+                  <li>Microfone integrado: Sim</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Adaptive Triggers</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Gatilhos do DualSense capazes de alterar
+                  dinamicamente a resistência aplicada aos botões.
+                </p>
+
+                <p>
+                  Jogos compatíveis podem utilizar o recurso para
+                  representar diferentes tipos de resistência,
+                  como armas, veículos e outras ações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Haptic Feedback</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de vibração avançado presente no DualSense.
+                  Diferentemente dos motores tradicionais, utiliza
+                  atuadores capazes de produzir diferentes padrões
+                  de resposta tátil.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Microfone Integrado</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O DualSense possui um microfone integrado que pode
+                  ser utilizado para comunicação por voz em jogos
+                  e aplicativos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alto-falante do DualSense</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequeno alto-falante integrado ao controle,
+                  utilizado para produzir efeitos sonoros
+                  diretamente no DualSense.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HD Camera</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Câmera oficial desenvolvida para o PlayStation 5,
+                  utilizada principalmente em transmissões e
+                  aplicações compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PlayStation VR2</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de realidade virtual desenvolvido para
+                  utilização com o PlayStation 5.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Realidade virtual</li>
+                  <li>Compatibilidade: PlayStation 5</li>
+                  <li>Função: Jogos e experiências VR</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PS VR2 Sense Controllers</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controles utilizados pelo PlayStation VR2.
+                  Possuem sensores de movimento, feedback háptico
+                  e gatilhos adaptáveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pulse 3D Wireless Headset</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Headset sem fio desenvolvido para utilização
+                  com o PlayStation 5 e compatível com recursos
+                  de áudio da plataforma.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Media Remote</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle remoto desenvolvido para facilitar
+                  a navegação por aplicativos de entretenimento
+                  e reprodução de mídia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cooling Fan</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ventoinha de grandes dimensões responsável por
+                  movimentar o ar através do sistema de refrigeração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dissipador de Calor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura metálica utilizada para transferir
+                  o calor produzido pelo processador e pela GPU.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Metal Liquid / Interface Térmica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Material de interface térmica utilizado entre
+                  determinados componentes e o sistema de dissipação
+                  para melhorar a transferência de calor.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte de Alimentação Interna</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por converter a energia
+                  elétrica da tomada nas tensões utilizadas
+                  pelo hardware do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>VRM — Voltage Regulator Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pela regulação e
+                  fornecimento de energia aos diferentes
+                  componentes do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CMOS / RTC</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos utilizados para funções relacionadas
+                  ao relógio interno e determinadas configurações
+                  de baixo nível do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motherboard</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa principal responsável pela interligação
+                  elétrica dos componentes do PlayStation 5.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi / Bluetooth Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Módulo responsável pela comunicação sem fio
+                  do console com redes e acessórios compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>LED Indicator</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de iluminação utilizado para indicar
+                  diferentes estados de funcionamento do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Button</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para ligar, desligar ou colocar
+                  o console em determinados estados de energia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB / Front I/O Board</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável pelas conexões frontais
+                  do console e pela comunicação com determinados
+                  acessórios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Externa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura plástica externa que protege os
+                  componentes internos do PlayStation 5.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Base / Suporte</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Suporte utilizado para posicionar o console
+                  vertical ou horizontalmente conforme o modelo
+                  e configuração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>SSD Expansion M.2</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Compartimento destinado à instalação de SSDs
+                  M.2 compatíveis para expansão do armazenamento
+                  interno.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>SSD M.2 Expansion Cover</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tampa utilizada para proteger o compartimento
+                  destinado ao SSD M.2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Disco Blu-ray do Jogo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para armazenar jogos
+                  distribuídos em formato físico para o PlayStation 5.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

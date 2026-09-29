@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Xbox One</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Xbox One foi o terceiro console doméstico da Microsoft,
+          trazendo uma forte integração com serviços online, Blu-ray,
+          aplicativos multimídia e o ecossistema Xbox ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O Xbox One foi o terceiro console doméstico da Microsoft,
+          trazendo uma forte integração com serviços online, Blu-ray,
+          aplicativos multimídia e o ecossistema Xbox ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Microsoft Xbox One (Posse de Rafael Lovizetto)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/xone.jpeg"
+              alt="Microsoft Xbox One"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX ONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Xbox One
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox One é um console doméstico desenvolvido pela
+            Microsoft e lançado em 2013. Ele é o sucessor do
+            Xbox 360 e faz parte da oitava geração de videogames.<br>
+
+            O console foi desenvolvido como uma plataforma de
+            entretenimento além dos jogos, integrando aplicativos,
+            reprodução de mídia, serviços online e televisão em
+            sua proposta inicial.<br>
+
+            O Xbox One utiliza uma arquitetura baseada em componentes
+            da AMD, combinando uma CPU x86-64 com uma GPU integrada
+            e memória DDR3 compartilhada pelo sistema.<br>
+
+            Uma das principais características da plataforma foi
+            sua integração com o Xbox Live, permitindo partidas
+            online, comunicação entre jogadores, distribuição
+            digital e outros serviços conectados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO E HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento e História
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox One foi apresentado oficialmente pela Microsoft
+            em maio de 2013, meses antes de seu lançamento comercial.<br>
+
+            A apresentação inicial deu grande destaque aos recursos
+            de entretenimento e integração com televisão, além dos
+            jogos e serviços do Xbox Live.<br>
+
+            A proposta inicial acabou gerando diversas mudanças
+            posteriormente anunciadas pela Microsoft, especialmente
+            relacionadas à conexão obrigatória à internet e ao uso
+            de jogos em mídia física.<br>
+
+            Durante sua vida comercial, a família Xbox One recebeu
+            diferentes revisões de hardware, com alterações de
+            tamanho, consumo de energia, armazenamento e desempenho.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado Brasileiro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox possui presença oficial no mercado brasileiro
+            desde a geração do Xbox original e o Xbox One continuou
+            essa trajetória.<br>
+
+            O console foi comercializado oficialmente no Brasil
+            em diferentes versões e recebeu localização de diversos
+            serviços e jogos para o público brasileiro.<br>
+
+            O Xbox Live também possuía suporte ao mercado brasileiro,
+            permitindo acesso a partidas online, conteúdos digitais,
+            aplicativos e outros recursos da plataforma.<br>
+
+            Durante a geração, o Brasil também recebeu diferentes
+            versões do console, incluindo o Xbox One S e o Xbox One X.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/play4.jpeg"
+                alt="PlayStation 4"
+              />
+
+              <img
+                src="../tgga/wiiu.webp"
+                alt="Nintendo Wii U"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ PlayStation 4 e Nintendo Wii U — consoles da oitava geração ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox One pertence à oitava geração de consoles,
+            geração que também contou com PlayStation 4,
+            Nintendo Wii U e posteriormente Nintendo Switch.<br>
+
+            A geração foi marcada pelo crescimento dos serviços
+            digitais, jogos distribuídos por download, atualizações
+            constantes e maior integração dos consoles com a internet.<br>
+
+            No caso da Microsoft, o Xbox One também representou
+            uma mudança na estratégia do ecossistema Xbox, com
+            maior integração entre console, serviços digitais e,
+            posteriormente, computadores com Windows 10 e Windows 11.<br>
+
+            Durante os anos seguintes, a Microsoft passou a enfatizar
+            cada vez mais a ideia de um ecossistema Xbox que não
+            dependesse exclusivamente da compra de um console específico.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS E ACESSÓRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/h5.jpeg"
+                alt="Halo 5 Guardians"
+              />
+
+              <img
+                src="../tgga/forza4.webp"
+                alt="Forza Horizon 4"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Halo 5: Guardians e Forza Horizon 4 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox One recebeu uma grande biblioteca de jogos
+            desenvolvidos pela Microsoft e por outras empresas.<br>
+
+            Entre os títulos associados à plataforma estão
+            Halo 5: Guardians, Forza Horizon 4, Forza Motorsport 7,
+            Gears 5, Sunset Overdrive, Sea of Thieves,
+            Ori and the Blind Forest e Ori and the Will of the Wisps.<br>
+
+            O console também recebeu grandes lançamentos
+            multiplataforma como Grand Theft Auto V, Red Dead
+            Redemption 2, Minecraft, Resident Evil 7 e
+            The Witcher 3: Wild Hunt.<br>
+
+            Entre os acessórios mais conhecidos estão o Kinect,
+            controles Xbox Wireless Controller, Xbox Adaptive Controller,
+            Headset, Play & Charge Kit e diferentes versões de
+            volantes e periféricos compatíveis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               KINECT
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Kinect para Xbox One
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/kinectone.jpeg"
+                alt="Kinect para Xbox One"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Kinect para Xbox One ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Kinect para Xbox One foi uma evolução do sistema
+            de câmera e reconhecimento de movimentos introduzido
+            na geração anterior.<br>
+
+            O periférico utilizava câmeras e sensores para
+            reconhecer movimentos corporais e comandos de voz.<br>
+
+            Diferentemente do Xbox 360, o Kinect não permaneceu
+            obrigatório no funcionamento do Xbox One após as
+            mudanças realizadas pela Microsoft na estratégia
+            do console antes do lançamento.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox One recebeu diferentes modelos oficiais ao longo
+            de sua vida comercial.<br>
+
+            O modelo original possui um design grande e utilizava
+            uma fonte de alimentação externa.<br>
+
+            Em 2016, a Microsoft apresentou o Xbox One S, uma
+            revisão menor e mais eficiente que também introduziu
+            suporte a HDR e uma unidade Blu-ray Ultra HD.<br>
+
+            Em 2017, foi lançado o Xbox One X, uma versão de maior
+            desempenho destinada a oferecer resolução e qualidade
+            gráfica superiores em jogos compatíveis.<br>
+
+            Também foi lançado o Xbox One S All-Digital Edition,
+            modelo sem unidade de discos físicos.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xone.jpeg"
+                  alt="Xbox One Original"
+                />
+
+                <figcaption>
+                  Xbox One Original
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xoness.webp"
+                  alt="Xbox One S"
+                />
+
+                <figcaption>
+                  Xbox One S
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xones.webp"
+                  alt="Xbox One S White"
+                />
+
+                <figcaption>
+                  Xbox One S — White
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/alldigital.jpeg"
+                  alt="Xbox One S All-Digital Edition"
+                />
+
+                <figcaption>
+                  Xbox One S All-Digital Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xonex.webp"
+                  alt="Xbox One X"
+                />
+
+                <figcaption>
+                  Xbox One X
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/scorpio.webp"
+                  alt="Xbox One X Project Scorpio Edition"
+                />
+
+                <figcaption>
+                  Xbox One X — Project Scorpio Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xonescraft.jpeg"
+                  alt="Xbox One S Minecraft Edition"
+                />
+
+                <figcaption>
+                  Xbox One S — Minecraft Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/xboxofwar.webp"
+                  alt="Xbox One S Gears of War Edition"
+                />
+
+                <figcaption>
+                  Xbox One S — Gears of War Edition
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="xboxone.html">
+                ○ Games - Xbox One
+              </a>
+            </li>
+
+            <li>
+              <a href="xboxone.html">
+                ○ Periféricos - Xbox One
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>AMD Jaguar CPU</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade Central de Processamento utilizada
+                  pelo Xbox One.
+                </p>
+
+                <p>
+                  O processador utiliza uma arquitetura x86-64
+                  baseada na família Jaguar da AMD.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: CPU</li>
+                  <li>Fabricante: AMD</li>
+                  <li>Arquitetura: Jaguar</li>
+                  <li>Núcleos: 8</li>
+                  <li>Arquitetura: x86-64</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>AMD GPU</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade responsável pelo processamento gráfico
+                  do Xbox One.
+                </p>
+
+                <p>
+                  A GPU é integrada ao SoC desenvolvido para o
+                  console e possui arquitetura derivada da
+                  família AMD Radeon.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GPU</li>
+                  <li>Fabricante: AMD</li>
+                  <li>Função: Processamento gráfico</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>ESRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória SRAM integrada ao sistema utilizada
+                  principalmente para auxiliar o processamento
+                  gráfico.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: SRAM</li>
+                  <li>Capacidade: 32 MB</li>
+                  <li>Função: Memória de alta velocidade</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DDR3 RAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória principal utilizada pelo Xbox One
+                  para armazenamento temporário de dados
+                  utilizados pelo sistema e pelos jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: DDR3</li>
+                  <li>Capacidade: 8 GB</li>
+                  <li>Função: Memória principal</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>eSRAM Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável pela comunicação com
+                  a memória eSRAM integrada ao SoC.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Southbridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componente responsável por diversas funções
+                  de entrada e saída do sistema.
+                </p>
+
+                <p>
+                  É utilizado para conectar diferentes interfaces
+                  e periféricos ao sistema principal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hard Disk Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade de armazenamento utilizada nos modelos
+                  Xbox One e Xbox One S.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: HDD</li>
+                  <li>Interface: SATA</li>
+                  <li>Função: Armazenamento</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Unidade Blu-ray</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade óptica responsável pela leitura dos
+                  discos utilizados pelo Xbox One.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Blu-ray</li>
+                  <li>Mídia: Blu-ray / DVD</li>
+                  <li>Função: Jogos e mídia</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ultra HD Blu-ray Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade óptica presente principalmente no
+                  Xbox One S e Xbox One X.
+                </p>
+
+                <p>
+                  Permite a reprodução de mídias Ultra HD Blu-ray
+                  compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laser Óptico</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema responsável pela leitura das informações
+                  gravadas nos discos ópticos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDMI Input</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Entrada HDMI presente no Xbox One original,
+                  utilizada na proposta inicial de integração
+                  com dispositivos de televisão e outros aparelhos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDMI Output</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Saída HDMI utilizada para transmitir imagem
+                  e áudio digital para uma televisão ou monitor.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB 3.0</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Portas USB utilizadas para armazenamento externo,
+                  acessórios, controles e outros dispositivos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ethernet</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface de rede cabeada utilizada para
+                  conexão do console à rede local e à internet.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de comunicação sem fio utilizado
+                  para conexão com redes domésticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bluetooth</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia utilizada para comunicação sem fio
+                  com determinados acessórios e dispositivos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox Wireless Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle oficial utilizado pelo Xbox One.
+                  O design mantém a identidade do controle Xbox 360,
+                  mas apresenta diversas modificações ergonômicas.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Gamepad</li>
+                  <li>Conexão: Wireless / USB</li>
+                  <li>Analógicos: 2</li>
+                  <li>Gatilhos: 2</li>
+                  <li>Botões: ABXY</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Sensor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de câmera e sensores desenvolvido
+                  para reconhecimento de movimentos e comandos
+                  de voz.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Sensor de movimento</li>
+                  <li>Câmera: Sim</li>
+                  <li>Microfones: Sim</li>
+                  <li>Reconhecimento de voz: Sim</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect IR Emitter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema infravermelho utilizado pelo Kinect
+                  para auxiliar no reconhecimento do ambiente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kinect Depth Sensor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor responsável por obter informações
+                  de profundidade do ambiente diante da câmera.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte de Alimentação</summary>
+
+              <div class="component-description">
+
+                <p>
+                  O Xbox One original utiliza uma fonte de alimentação
+                  externa responsável pela conversão da energia
+                  elétrica para as tensões utilizadas pelo console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fonte de Alimentação Interna</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Revisões posteriores, como Xbox One S e Xbox One X,
+                  possuem a fonte de alimentação integrada ao próprio
+                  console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>VRM — Voltage Regulator Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis por regular as tensões
+                  utilizadas pelos diferentes componentes do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ventoinha de Refrigeração</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ventoinha responsável pela circulação de ar
+                  dentro do sistema de refrigeração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dissipador de Calor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura metálica responsável por transferir
+                  o calor produzido pelo SoC e demais componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pasta Térmica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Material utilizado para melhorar a transferência
+                  de calor entre o processador e o dissipador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motherboard</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa principal responsável por conectar
+                  eletricamente os componentes do Xbox One.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Módulo responsável pela comunicação sem fio
+                  com redes compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>RF Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis por determinadas funções
+                  relacionadas à comunicação sem fio e radiofrequência.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>LED Indicator</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Indicadores luminosos utilizados para informar
+                  o estado de funcionamento do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Button</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para ligar e desligar o console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pair Button</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para iniciar o processo de
+                  sincronização de controles e acessórios sem fio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Expansion Port</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface utilizada pelo Kinect e por determinados
+                  acessórios desenvolvidos para o ecossistema Xbox One.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>IR Blaster</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema infravermelho utilizado para comunicação
+                  com determinados equipamentos de entretenimento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motherboard Shielding</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Blindagens metálicas utilizadas em determinadas
+                  regiões da placa para proteção e redução de
+                  interferências eletromagnéticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Plástica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura externa responsável por proteger
+                  os componentes internos do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Drive Caddy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura utilizada para acomodar e fixar
+                  a unidade de armazenamento dentro do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDD SATA</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade de armazenamento conectada através
+                  da interface SATA.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cabo SATA</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo utilizado para comunicação entre o
+                  armazenamento e a placa principal em modelos
+                  que utilizam essa conexão interna.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox One Game Disc</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para distribuição
+                  de jogos do Xbox One.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1889 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>TGGA - Chaves Kart</title> <link rel="stylesheet" href="../style.css"> <style> /* ========================================== COMPONENTES / ELEMENTOS CLICÁVEIS ========================================== */ .components-block { margin-top: 25px; padding: 10px; background: #222; border: 1px solid #444; } .components-block h3 { font-size: 14px; color: #fff; margin-bottom: 10px; text-align: center; border-bottom: 1px dashed #555; padding-bottom: 5px; } .component-list { display: flex; flex-direction: column; gap: 5px; } .component-item { border: 1px solid #3d3d3d; background: #181818; } .component-item summary { cursor: pointer; padding: 9px 10px; color: #ddd; font-size: 13px; font-weight: bold; list-style: none; transition: all 0.2s ease; } .component-item summary::-webkit-details-marker { display: none; } .component-item summary::before { content: "▶"; display: inline-block; margin-right: 8px; color: #888; font-size: 9px; transition: transform 0.2s ease; } .component-item summary:hover { background: #2a2a2a; color: #fff; } .component-item[open] summary { color: #fff; background: #2b2b2b; border-bottom: 1px dashed #555; } .component-item[open] summary::before { transform: rotate(90deg); color: #fff; } .component-description { padding: 12px; background: #111; color: #bbb; font-size: 13px; line-height: 1.6; } .component-description p { margin: 0 0 10px 0; } .component-description p:last-child { margin-bottom: 0; } .component-specs { margin: 10px 0 0 18px; padding: 0; color: #aaa; } .component-specs li { margin-bottom: 4px; } .component-description strong { color: #ddd; } /* ========================================== IMAGENS ========================================== */ .historical-consoles { margin: 20px 0; text-align: center; } .console-images { display: flex; justify-content: center; align-items: center; gap: 15px; width: 100%; } .console-images img { width: 45%; max-width: 300px; height: auto; border: 1px solid #444; padding: 4px; box-sizing: border-box; background: #111; } .historical-consoles figcaption { margin-top: 10px; color: #aaa; font-size: 13px; text-align: center; } /* ========================================== GRID ========================================== */ .models-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px 15px; width: 100%; margin-top: 20px; } .model-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; } .model-item img { width: 100%; max-width: 300px; height: auto; object-fit: contain; border: 1px solid #444; background: #111; display: block; } .model-item figcaption { margin-top: 8px; color: #aaa; font-size: 13px; line-height: 1.4; } /* ========================================== CAIXAS ========================================== */ .info-box { margin: 20px 0; padding: 12px; background: #181818; border: 1px solid #444; color: #ccc; font-size: 13px; line-height: 1.6; } .info-box h3 { margin-top: 0; color: #fff; text-align: center; font-size: 14px; border-bottom: 1px dashed #555; padding-bottom: 6px; } .info-box ul { margin-bottom: 0; } /* ========================================== TABELA ========================================== */ .kart-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; color: #ccc; background: #151515; } .kart-table th, .kart-table td { border: 1px solid #444; padding: 8px; text-align: center; } .kart-table th { background: #292929; color: #fff; } .kart-table tr:nth-child(even) { background: #1c1c1c; } /* ========================================== RESPONSIVIDADE ========================================== */ @media (max-width: 600px) { .console-images { flex-direction: column; gap: 10px; } .console-images img { width: 80%; max-width: 300px; } .models-grid { grid-template-columns: 1fr; gap: 20px; } .model-item img { width: 100%; max-width: 300px; height: 180px; object-fit: cover; object-position: center; } .kart-table { font-size: 11px; } } </style> </head> <body> <div class="site-container">
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="site-header">
+
+  <div class="logo-area">
+
+    <img
+      src="../logo1.png"
+      alt="Logo NLU"
+      class="main-logo"
+    >
+
+    <div class="logo-text-box">
+
+      <h1>
+        The Great Game Archive™
+      </h1>
+
+      <p>
+        Não o maior, mas o NOSSO aglomerado de informação.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="header-right-box">
+
+    <a
+      href="#"
+      class="youtube-btn"
+      target="_blank"
+    >
+      ▶ YouTube Siga-nos!
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- ==========================================
+     SUB-NAVEGAÇÃO
+     ========================================== -->
+
+<div class="sub-nav-links">
+
+  <a href="../tgga.html">
+    ← Voltar ao TGGA
+  </a>
+
+  |
+
+  <a href="../index.html">
+    Início
+  </a>
+
+</div>
+
+
+<!-- ==========================================
+     LETREIRO
+     ========================================== -->
+
+<div class="marquee-zone">
+
+  <div class="marquee-content">
+
+    <span>
+      ... Chaves Kart é um jogo de corrida baseado em Chaves
+      Animado, lançado para Xbox 360 e PlayStation 3 em 2014,
+      apresentando personagens da série, karts personalizados,
+      pistas temáticas e dublagem em português ...
+      &nbsp;
+    </span>
+
+    <span>
+      ... Chaves Kart é um jogo de corrida baseado em Chaves
+      Animado, lançado para Xbox 360 e PlayStation 3 em 2014,
+      apresentando personagens da série, karts personalizados,
+      pistas temáticas e dublagem em português ...
+      &nbsp;
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+     ========================================== -->
+
+<div class="main-grid">
+
+
+  <!-- ========================================
+       COLUNA PRINCIPAL
+       ======================================== -->
+
+  <div class="content-column">
+
+    <div class="category-block">
+
+
+      <!-- ==========================================
+           TÍTULO
+           ========================================== -->
+
+      <h2>
+        Chaves Kart — Xbox 360
+      </h2>
+
+
+      <div
+        style="
+          text-align: center;
+          margin-bottom: 15px;
+        "
+      >
+
+        <img
+          src="../tgga/chaveskart_xbox360.jpg"
+          alt="Chaves Kart para Xbox 360"
+          style="
+            max-width: 60%;
+            height: auto;
+            border: 1px solid #444;
+            padding: 4px;
+          "
+        >
+
+      </div>
+
+
+      <h2 style="text-align: center;">
+        Chaves Kart
+      </h2>
+
+
+      <!-- ==========================================
+           IDENTIFICAÇÃO
+           ========================================== -->
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart, conhecido internacionalmente como
+        <em>El Chavo Kart</em>, é um jogo eletrônico de corrida
+        desenvolvido pela Efecto Studios e pela Slang,
+        lançado em 2014 para Xbox 360 e PlayStation 3.<br>
+
+        No Brasil, o jogo recebeu o nome de Chaves Kart e
+        foi localizado para o mercado brasileiro, incluindo
+        menus em português e vozes em português.<br>
+
+        O jogo utiliza personagens de Chaves Animado em
+        corridas de kart, com veículos personalizados,
+        itens espalhados pelas pistas e diferentes modos
+        de competição.<br>
+
+        A versão de Xbox 360 possui suporte para partidas
+        multiplayer local com até quatro jogadores.
+
+      </p>
+
+
+      <!-- ==========================================
+           FICHA TÉCNICA
+           ========================================== -->
+
+      <div class="info-box">
+
+        <h3>
+          - FICHA TÉCNICA -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Desenvolvedora:</strong>
+            Efecto Studios
+          </li>
+
+          <li>
+            <strong>Desenvolvimento:</strong>
+            Efecto Studios / Slang
+          </li>
+
+          <li>
+            <strong>Publicadora:</strong>
+            Slang
+          </li>
+
+          <li>
+            <strong>Engine:</strong>
+            Unreal Engine 3
+          </li>
+
+          <li>
+            <strong>Plataforma:</strong>
+            Xbox 360
+          </li>
+
+          <li>
+            <strong>Lançamento:</strong>
+            21 de fevereiro de 2014
+          </li>
+
+          <li>
+            <strong>Gênero:</strong>
+            Corrida / Kart
+          </li>
+
+          <li>
+            <strong>Personagens jogáveis:</strong>
+            12
+          </li>
+
+          <li>
+            <strong>Pistas:</strong>
+            10
+          </li>
+
+          <li>
+            <strong>Copas:</strong>
+            8
+          </li>
+
+          <li>
+            <strong>Modos de jogo:</strong>
+            7
+          </li>
+
+          <li>
+            <strong>Multiplayer local:</strong>
+            Até 4 jogadores
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           DESENVOLVIMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Desenvolvimento
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O desenvolvimento de Chaves Kart envolveu a produtora
+        mexicana Slang e o estúdio colombiano Efecto Studios.<br>
+
+        O projeto começou durante a década de 2010 com a
+        intenção de transformar os personagens de Chaves
+        Animado em um jogo de corrida inspirado no estilo
+        dos chamados kart racers.<br>
+
+        A produção utilizou a Unreal Engine 3 para criar
+        os personagens, veículos, cenários e efeitos visuais
+        tridimensionais.<br>
+
+        A equipe procurou reproduzir visualmente elementos
+        da série animada, utilizando personagens conhecidos
+        e pistas inspiradas em diferentes locais associados
+        ao universo de Chaves.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           CONTEXTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Contexto e Origem
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/chaves_animado.jpg"
+            alt="Chaves Animado"
+          >
+
+          <img
+            src="../tgga/xbox360.jpg"
+            alt="Xbox 360"
+          >
+
+        </div>
+
+        <figcaption>
+          ~ Chaves Animado e Xbox 360 ~
+        </figcaption>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart foi desenvolvido a partir dos personagens
+        e do universo de Chaves Animado, série derivada da
+        produção original de Roberto Gómez Bolaños.<br>
+
+        Em vez de reproduzir diretamente a estrutura dos
+        episódios televisivos, o jogo transforma os personagens
+        em competidores de corridas de kart.<br>
+
+        A proposta combina elementos reconhecíveis de Chaves
+        com uma estrutura tradicional de jogos de corrida,
+        incluindo pistas, itens, veículos e torneios.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           LANÇAMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Lançamento no Xbox 360
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart foi lançado em 21 de fevereiro de 2014
+        para Xbox 360 e PlayStation 3 em diferentes mercados.<br>
+
+        A versão brasileira recebeu o nome Chaves Kart e
+        chegou às lojas brasileiras em junho de 2014.<br>
+
+        A edição brasileira foi localizada para português,
+        incluindo menus e diálogos com participação das
+        vozes associadas à versão brasileira de Chaves
+        Animado.<br>
+
+        No Xbox 360, o jogo também teve distribuição física
+        no mercado brasileiro.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           VERSÃO BRASILEIRA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Chaves Kart no Brasil
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/chaveskart_br.jpg"
+            alt="Chaves Kart versão brasileira"
+          >
+
+          <img
+            src="../tgga/chaveskart_xbox360_disc.jpg"
+            alt="Chaves Kart Xbox 360"
+          >
+
+        </div>
+
+        <figcaption>
+          ~ Chaves Kart — versão brasileira para Xbox 360 ~
+        </figcaption>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A edição brasileira possui características específicas
+        de localização que diferenciam a experiência do público
+        brasileiro.<br>
+
+        Os menus foram traduzidos para português e o jogo
+        apresenta diálogos dublados em português.<br>
+
+        A versão comercializada no Brasil também utiliza o
+        nome Chaves Kart, enquanto em outros mercados o título
+        é conhecido como El Chavo Kart.<br>
+
+        A presença de conteúdo relacionado ao Brasil também
+        aparece em algumas pistas do jogo.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           JOGABILIDADE
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Jogabilidade
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart apresenta corridas em circuitos
+        tridimensionais utilizando karts personalizados.<br>
+
+        O jogador controla diferentes personagens da série,
+        cada um associado a um veículo e características
+        próprias.<br>
+
+        Durante as corridas, itens podem ser coletados e
+        utilizados para atrapalhar os adversários ou alterar
+        o andamento da competição.<br>
+
+        A estrutura segue a tradição dos jogos de kart,
+        combinando direção, derrapagens, atalhos, obstáculos
+        e utilização estratégica de itens.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           PERSONAGENS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Personagens
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_chaves.jpg"
+              alt="Chaves"
+            >
+
+            <figcaption>
+              Chaves
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_quico.jpg"
+              alt="Quico"
+            >
+
+            <figcaption>
+              Quico
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_seumadruga.jpg"
+              alt="Seu Madruga"
+            >
+
+            <figcaption>
+              Seu Madruga
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_barriga.jpg"
+              alt="Sr. Barriga"
+            >
+
+            <figcaption>
+              Sr. Barriga
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart possui 12 personagens jogáveis,
+        reunindo diversos integrantes do universo de
+        Chaves Animado.<br>
+
+        Entre os personagens encontrados estão Chaves,
+        Quico, Seu Madruga e Sr. Barriga, além de outros
+        personagens conhecidos da série.<br>
+
+        Cada personagem possui animações próprias durante
+        as corridas e utiliza um kart associado à sua
+        personalidade.
+
+      </p>
+
+
+      <div class="info-box">
+
+        <h3>
+          - PERSONAGENS -
+        </h3>
+
+        <ul>
+
+          <li>Chaves</li>
+          <li>Quico</li>
+          <li>Seu Madruga</li>
+          <li>Sr. Barriga</li>
+          <li>Dona Florinda</li>
+          <li>Chiquinha</li>
+          <li>Professor Girafales</li>
+          <li>Dona Clotilde</li>
+          <li>Paty</li>
+          <li>Godinez</li>
+          <li>Ñoño</li>
+          <li>Popis</li>
+
+        </ul>
+
+      </div>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           KARTS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Karts
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Cada personagem utiliza um kart inspirado em sua
+        personalidade e no visual apresentado no universo
+        de Chaves.<br>
+
+        Os veículos foram criados dentro do estilo visual
+        cartunesco do jogo e participam das animações
+        durante as corridas.<br>
+
+        A combinação entre personagem e veículo é uma das
+        características visuais do jogo.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           PISTAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Pistas
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_vila.jpg"
+              alt="Pista Vila do Chaves"
+            >
+
+            <figcaption>
+              Vila
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_acapulco.jpg"
+              alt="Pista Acapulco"
+            >
+
+            <figcaption>
+              Acapulco
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_maracana.jpg"
+              alt="Pista Maracanã"
+            >
+
+            <figcaption>
+              Maracanã
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_brasil.jpg"
+              alt="Pista O Céu do Brasil"
+            >
+
+            <figcaption>
+              O Céu do Brasil
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O jogo possui 10 pistas baseadas em diferentes
+        locais associados ao universo de Chaves e em
+        ambientes criados especificamente para o jogo.<br>
+
+        Entre os cenários estão a Vila, Acapulco,
+        Tangamandápio, Chapultepec e locais relacionados
+        ao Brasil.<br>
+
+        Duas pistas possuem referências particularmente
+        brasileiras: Maracanã e O Céu do Brasil.
+
+      </p>
+
+
+      <table class="kart-table">
+
+        <thead>
+
+          <tr>
+            <th>Pista</th>
+            <th>Tipo</th>
+            <th>Referência</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Vila</td>
+            <td>Urbana</td>
+            <td>Vila do Chaves</td>
+          </tr>
+
+          <tr>
+            <td>Acapulco</td>
+            <td>Praia</td>
+            <td>Viagem de Acapulco</td>
+          </tr>
+
+          <tr>
+            <td>Tangamandápio</td>
+            <td>Cidade</td>
+            <td>Universo de Chaves</td>
+          </tr>
+
+          <tr>
+            <td>Chapultepec</td>
+            <td>Parque</td>
+            <td>México</td>
+          </tr>
+
+          <tr>
+            <td>Casa da Bruxa</td>
+            <td>Fantasia</td>
+            <td>Dona Clotilde</td>
+          </tr>
+
+          <tr>
+            <td>Maracanã</td>
+            <td>Estádio</td>
+            <td>Brasil</td>
+          </tr>
+
+          <tr>
+            <td>O Céu do Brasil</td>
+            <td>Aérea</td>
+            <td>Brasil</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           MODOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Modos de Jogo
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart possui sete modos de jogo, permitindo
+        diferentes formas de disputar as corridas.<br>
+
+        A estrutura inclui corridas individuais, campeonatos
+        e modalidades voltadas para partidas entre jogadores.<br>
+
+        O multiplayer local permite até quatro jogadores
+        simultaneamente através de tela dividida.
+
+      </p>
+
+
+      <div class="info-box">
+
+        <h3>
+          - MODOS E CONTEÚDOS -
+        </h3>
+
+        <ul>
+
+          <li>Corrida individual</li>
+          <li>Torneios</li>
+          <li>Copas</li>
+          <li>Multiplayer local</li>
+          <li>Corridas contra adversários controlados pelo jogo</li>
+          <li>Desafios</li>
+          <li>Modos especiais de competição</li>
+
+        </ul>
+
+      </div>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           COPAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Copas
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A estrutura competitiva possui oito copas,
+        reunindo diferentes combinações de pistas.<br>
+
+        O jogador participa de uma sequência de corridas
+        e acumula resultados para determinar sua posição
+        na classificação da copa.<br>
+
+        As copas funcionam como uma das principais formas
+        de progressão dentro dos modos de competição.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           ITENS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Itens e Power-Ups
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Durante as corridas, os jogadores podem encontrar
+        itens espalhados pelas pistas.<br>
+
+        Esses itens podem ser utilizados para interferir
+        no desempenho dos adversários ou criar oportunidades
+        para mudar a posição durante a corrida.<br>
+
+        O sistema de itens faz parte da estrutura tradicional
+        dos jogos de kart e adiciona elementos de imprevisibilidade
+        às corridas.
+
+      </p>
+
+
+      <div class="info-box">
+
+        <h3>
+          - ELEMENTOS DAS CORRIDAS -
+        </h3>
+
+        <ul>
+
+          <li>Itens de ataque</li>
+          <li>Itens defensivos</li>
+          <li>Obstáculos</li>
+          <li>Atalhos</li>
+          <li>Rampas</li>
+          <li>Derrapagens</li>
+          <li>Saltos</li>
+          <li>Itens coletáveis</li>
+
+        </ul>
+
+      </div>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           MULTIPLAYER
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Multiplayer
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/chaveskart_multiplayer.jpg"
+            alt="Multiplayer de Chaves Kart"
+          >
+
+          <img
+            src="../tgga/chaveskart_xbox360.jpg"
+            alt="Chaves Kart no Xbox 360"
+          >
+
+        </div>
+
+        <figcaption>
+          ~ Chaves Kart — multiplayer local no Xbox 360 ~
+        </figcaption>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão de Xbox 360 permite multiplayer local para
+        até quatro jogadores.<br>
+
+        As partidas utilizam tela dividida, permitindo que
+        vários jogadores disputem a mesma corrida no console.<br>
+
+        Esse recurso permite utilizar Chaves Kart como uma
+        experiência multiplayer local, além da campanha
+        individual.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           DUBLAGEM
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Dublagem e Localização
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/chaveskart_dublagem.jpg"
+            alt="Dublagem de Chaves Kart"
+          >
+
+          <img
+            src="../tgga/chaveskart_br.jpg"
+            alt="Chaves Kart Brasil"
+          >
+
+        </div>
+
+        <figcaption>
+          ~ Localização brasileira de Chaves Kart ~
+        </figcaption>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Um dos elementos importantes da versão brasileira
+        é a localização para português.<br>
+
+        O jogo possui menus em português e diálogos com
+        dublagem brasileira, utilizando vozes associadas
+        aos personagens de Chaves Animado.<br>
+
+        A localização ajudou a adaptar a experiência
+        especificamente para o público brasileiro.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           TRILHA SONORA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Música e Áudio
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart possui uma trilha sonora própria
+        composta para acompanhar as corridas e os menus.<br>
+
+        A parte sonora também inclui efeitos relacionados
+        aos karts, colisões, itens, saltos e acontecimentos
+        durante as provas.<br>
+
+        Na versão brasileira, os diálogos são apresentados
+        em português, contribuindo para a identidade
+        localizada do jogo.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           TECNOLOGIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Tecnologia e Visual
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão de Xbox 360 utiliza a Unreal Engine 3,
+        tecnologia empregada para criar os ambientes,
+        personagens, veículos e efeitos tridimensionais.<br>
+
+        O visual procura reproduzir a aparência de
+        Chaves Animado, utilizando modelos estilizados,
+        cores fortes e animações cartunescas.<br>
+
+        Os personagens também apresentam animações
+        específicas durante as corridas, colisões,
+        saltos e comemorações.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           BRASIL
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Referências ao Brasil
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves possui uma relação particularmente forte
+        com o público brasileiro, e Chaves Kart inclui
+        referências específicas ao Brasil.<br>
+
+        Entre os conteúdos estão pistas relacionadas
+        ao Maracanã e uma pista chamada O Céu do Brasil,
+        que apresenta paisagens brasileiras.<br>
+
+        A presença dessas pistas foi utilizada como uma
+        forma de incluir referências reconhecíveis pelo
+        público brasileiro.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           VERSÕES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Versões e Plataformas
+      </h2>
+
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_xbox360.jpg"
+              alt="Chaves Kart Xbox 360"
+            >
+
+            <figcaption>
+              Chaves Kart — Xbox 360
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_ps3.jpg"
+              alt="El Chavo Kart PlayStation 3"
+            >
+
+            <figcaption>
+              El Chavo Kart — PlayStation 3
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_android.jpg"
+              alt="El Chavo Kart Android"
+            >
+
+            <figcaption>
+              El Chavo Kart — Android
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_ios.jpg"
+              alt="El Chavo Kart iOS"
+            >
+
+            <figcaption>
+              El Chavo Kart — versão mobile
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A versão original de Chaves Kart foi lançada para
+        Xbox 360 e PlayStation 3.<br>
+
+        Posteriormente, o jogo também recebeu versões para
+        dispositivos móveis.<br>
+
+        A versão de Xbox 360 é especialmente relevante para
+        o acervo brasileiro devido à distribuição física de
+        Chaves Kart no país.
+
+      </p>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           COLECIONISMO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Edição Física e Colecionismo
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A edição física de Chaves Kart para Xbox 360 faz
+        parte do catálogo de jogos licenciados relacionados
+        ao personagem no mercado brasileiro.<br>
+
+        Para colecionadores, podem ser relevantes elementos
+        como caixa, disco, manual, encartes, estado da mídia
+        e conservação da embalagem.<br>
+
+        A edição brasileira pode ser identificada pelo título
+        Chaves Kart e pelos elementos de localização destinados
+        ao mercado nacional.
+
+      </p>
+
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_box.jpg"
+              alt="Caixa de Chaves Kart"
+            >
+
+            <figcaption>
+              Caixa — Chaves Kart
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_manual.jpg"
+              alt="Manual de Chaves Kart"
+            >
+
+            <figcaption>
+              Manual — Chaves Kart
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_disc.jpg"
+              alt="Disco de Chaves Kart Xbox 360"
+            >
+
+            <figcaption>
+              Disco — Xbox 360
+            </figcaption>
+
+          </div>
+
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/chaveskart_package.jpg"
+              alt="Edição brasileira de Chaves Kart"
+            >
+
+            <figcaption>
+              Edição brasileira
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           CURIOSIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Curiosidades
+      </h2>
+
+
+      <div class="info-box">
+
+        <h3>
+          - VOCÊ SABIA? -
+        </h3>
+
+        <ul>
+
+          <li>
+            O título internacional do jogo é
+            <em>El Chavo Kart</em>.
+          </li>
+
+          <li>
+            No Brasil, o jogo recebeu o nome
+            Chaves Kart.
+          </li>
+
+          <li>
+            O jogo foi lançado em 2014.
+          </li>
+
+          <li>
+            A versão de Xbox 360 possui 12 personagens
+            jogáveis.
+          </li>
+
+          <li>
+            O jogo possui 10 pistas.
+          </li>
+
+          <li>
+            Existem 8 copas e 7 modos de jogo.
+          </li>
+
+          <li>
+            O multiplayer local permite até quatro jogadores.
+          </li>
+
+          <li>
+            A versão brasileira possui localização em
+            português e dublagem.
+          </li>
+
+          <li>
+            Entre as pistas existem referências ao Brasil,
+            incluindo o Maracanã e O Céu do Brasil.
+          </li>
+
+          <li>
+            O jogo foi desenvolvido utilizando
+            Unreal Engine 3.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <h2></h2>
+
+
+      <!-- ==========================================
+           LEGADO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Legado
+      </h2>
+
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Chaves Kart ocupa um espaço particular entre os
+        jogos baseados em personagens de televisão lançados
+        durante a geração do Xbox 360 e PlayStation 3.<br>
+
+        O jogo combinou uma das franquias de televisão mais
+        reconhecidas na América Latina com o formato dos
+        jogos de corrida de kart.<br>
+
+        Para o público brasileiro, a localização completa,
+        a dublagem em português e as referências ao Brasil
+        fizeram parte da identidade da edição nacional.<br>
+
+        A versão para Xbox 360 também permanece como uma
+        peça relacionada à presença da marca Chaves no
+        mercado brasileiro de videogames.
+
+      </p>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="chaveskart.html">
+            ○ Games - Chaves Kart
+          </a>
+        </li>
+
+        <li>
+          <a href="xbox360.html">
+            ○ Consoles - Xbox 360
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <!-- ==========================================
+         ELEMENTOS DO JOGO
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - ELEMENTOS DO JOGO -
+      </h3>
+
+
+      <div class="component-list">
+
+
+        <details class="component-item">
+          <summary>Chaves</summary>
+          <div class="component-description">
+            <p>
+              Personagem principal de Chaves e um dos
+              competidores de Chaves Kart.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Quico</summary>
+          <div class="component-description">
+            <p>
+              Personagem da série e piloto jogável.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Seu Madruga</summary>
+          <div class="component-description">
+            <p>
+              Personagem da vila que participa das
+              corridas de kart.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Sr. Barriga</summary>
+          <div class="component-description">
+            <p>
+              Dono da vila e personagem jogável.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Dona Florinda</summary>
+          <div class="component-description">
+            <p>
+              Personagem jogável do universo de Chaves.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Chiquinha</summary>
+          <div class="component-description">
+            <p>
+              Personagem jogável e integrante da turma.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Professor Girafales</summary>
+          <div class="component-description">
+            <p>
+              Professor da vila e um dos personagens
+              disponíveis no jogo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Dona Clotilde</summary>
+          <div class="component-description">
+            <p>
+              A Bruxa do 71 participa das corridas.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Paty</summary>
+          <div class="component-description">
+            <p>
+              Personagem do universo de Chaves presente
+              entre os competidores.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Godinez</summary>
+          <div class="component-description">
+            <p>
+              Personagem associado à escola de Chaves.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Ñoño</summary>
+          <div class="component-description">
+            <p>
+              Personagem da escola presente entre os pilotos.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Popis</summary>
+          <div class="component-description">
+            <p>
+              Personagem de Chaves incluído no elenco
+              jogável.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Vila</summary>
+          <div class="component-description">
+            <p>
+              Um dos principais ambientes associados
+              ao universo de Chaves.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Acapulco</summary>
+          <div class="component-description">
+            <p>
+              Cenário inspirado nas viagens de Chaves
+              e seus amigos.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Tangamandápio</summary>
+          <div class="component-description">
+            <p>
+              Cidade associada ao universo da série.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Chapultepec</summary>
+          <div class="component-description">
+            <p>
+              Cenário baseado em uma região do México.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Maracanã</summary>
+          <div class="component-description">
+            <p>
+              Pista com referência direta ao famoso
+              estádio brasileiro.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>O Céu do Brasil</summary>
+          <div class="component-description">
+            <p>
+              Pista que apresenta referências e paisagens
+              relacionadas ao Brasil.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Kart</summary>
+          <div class="component-description">
+            <p>
+              Veículo utilizado pelos personagens durante
+              as corridas.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Itens</summary>
+          <div class="component-description">
+            <p>
+              Objetos coletados durante as corridas para
+              interferir na competição.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Copas</summary>
+          <div class="component-description">
+            <p>
+              Competições formadas por sequências de
+              corridas. O jogo possui oito copas.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Multiplayer</summary>
+          <div class="component-description">
+            <p>
+              Modo multiplayer local para até quatro
+              jogadores em tela dividida.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Xbox 360</summary>
+          <div class="component-description">
+            <p>
+              Plataforma original da edição abordada
+              neste artigo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Unreal Engine 3</summary>
+          <div class="component-description">
+            <p>
+              Tecnologia utilizada para desenvolver a
+              versão original do jogo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Chaves Animado</summary>
+          <div class="component-description">
+            <p>
+              Série animada que serve como base visual
+              e temática para o jogo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Versão Brasileira</summary>
+          <div class="component-description">
+            <p>
+              Edição localizada com menus e diálogos
+              em português.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Chaves Kart</summary>
+          <div class="component-description">
+            <p>
+              Nome utilizado para o jogo no mercado
+              brasileiro.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>El Chavo Kart</summary>
+          <div class="component-description">
+            <p>
+              Nome internacional do jogo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>2014</summary>
+          <div class="component-description">
+            <p>
+              Ano de lançamento original do jogo.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Efecto Studios</summary>
+          <div class="component-description">
+            <p>
+              Estúdio colombiano envolvido no desenvolvimento
+              de Chaves Kart.
+            </p>
+          </div>
+        </details>
+
+
+        <details class="component-item">
+          <summary>Slang</summary>
+          <div class="component-description">
+            <p>
+              Empresa mexicana envolvida no desenvolvimento
+              e publicação do jogo.
+            </p>
+          </div>
+        </details>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html>

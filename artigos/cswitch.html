@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Nintendo Switch Joy-Con</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... Os Joy-Con são os controles modulares do Nintendo Switch,
+          podendo funcionar presos ao console, juntos como um controle
+          tradicional ou separadamente como dois controles individuais ...
+          &nbsp;
+
+        </span>
+
+        <span>
+
+          ... Os Joy-Con são os controles modulares do Nintendo Switch,
+          podendo funcionar presos ao console, juntos como um controle
+          tradicional ou separadamente como dois controles individuais ...
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Nintendo Switch Joy-Con
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/joycon.jpg"
+              alt="Nintendo Switch Joy-Con"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Joy-Con
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Joy-Con são os controles modulares desenvolvidos pela
+            Nintendo para o Nintendo Switch, lançado em 2017.
+
+            <br><br>
+
+            Diferentemente de um controle tradicional, o sistema é
+            dividido em duas unidades independentes: Joy-Con esquerdo
+            e Joy-Con direito.
+
+            <br><br>
+
+            Quando encaixados nas laterais do console, os dois controles
+            formam a interface física principal do Nintendo Switch no
+            modo portátil. Quando removidos, podem ser utilizados
+            individualmente, juntos em um suporte Joy-Con ou em outras
+            configurações compatíveis.
+
+            <br><br>
+
+            A Nintendo projetou os Joy-Con para combinar controles
+            tradicionais com sensores de movimento, vibração HD,
+            comunicação sem fio e, no Joy-Con direito, leitura NFC e
+            câmera de movimento infravermelha. 
+
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONCEITO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Um Controle em Duas Partes
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/joycon-left.jpg"
+                alt="Joy-Con esquerdo"
+              />
+
+              <img
+                src="../tgga/joycon-right.jpg"
+                alt="Joy-Con direito"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Joy-Con esquerdo e Joy-Con direito ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A ideia central dos Joy-Con é permitir que o controle seja
+            adaptado à situação do jogador.
+
+            <br><br>
+
+            No modo portátil, cada Joy-Con permanece encaixado em um
+            lado do console. No modo TV, os dois podem ser utilizados
+            juntos no suporte apropriado ou segurados separadamente.
+
+            <br><br>
+
+            Um único Joy-Con também pode ser usado horizontalmente
+            em jogos compatíveis. Nesse formato, os botões SL e SR,
+            localizados na lateral do controle, tornam-se importantes
+            para disponibilizar comandos adicionais.
+
+            <br><br>
+
+            A própria Nintendo documenta diferentes formas de uso,
+            incluindo os dois Joy-Con como um único controle e cada
+            unidade horizontalmente como controle independente.
+
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Nintendo Switch
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/switch.jpg"
+                alt="Nintendo Switch"
+              />
+
+              <img
+                src="../tgga/switch-docked.jpg"
+                alt="Nintendo Switch no modo TV"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Nintendo Switch em suas diferentes formas de utilização ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Switch foi concebido para alternar entre diferentes
+            formas de utilização.
+
+            <br><br>
+
+            No modo TV, o console permanece conectado à base e os
+            Joy-Con podem ser utilizados separadamente ou montados
+            em um suporte.
+
+            <br><br>
+
+            No modo portátil, os controles são encaixados diretamente
+            nas laterais do console.
+
+            <br><br>
+
+            Existe ainda o modo semiportátil, no qual o console permanece
+            apoiado e os Joy-Con são removidos para permitir que mais
+            de uma pessoa participe da partida.
+
+            <br><br>
+
+            Essa filosofia de hardware tornou o Joy-Con mais do que
+            simplesmente um controle: ele passou a funcionar como uma
+            extensão do próprio conceito modular do Nintendo Switch.
+            
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           SENSORES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Sensores de Movimento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Cada Joy-Con possui acelerômetro e giroscópio.
+
+        <br><br>
+
+        Esses sensores permitem detectar movimentos e rotações do
+        controle, possibilitando que determinados jogos utilizem
+        gestos físicos como parte da jogabilidade.
+
+        <br><br>
+
+        Isso permite que os Joy-Con sejam movimentados no espaço
+        em vez de depender exclusivamente dos botões tradicionais.
+
+        <br><br>
+
+        A combinação entre sensores de movimento, vibração HD e
+        comunicação sem fio permite experiências que seriam difíceis
+        de reproduzir com um controle convencional. 
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           HD RUMBLE
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        HD Rumble
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/hd-rumble.jpg"
+            alt="Sistema de vibração HD Rumble"
+          />
+
+          <img
+            src="../tgga/joycon-rumble.jpg"
+            alt="Joy-Con"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Sistema de vibração HD dos Joy-Con ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O HD Rumble é o sistema de vibração dos Joy-Con.
+
+        <br><br>
+
+        Diferentemente de simplesmente produzir uma vibração única
+        e contínua, o sistema permite que o jogo controle diferentes
+        padrões de resposta física.
+
+        <br><br>
+
+        A tecnologia foi utilizada pela Nintendo como uma forma
+        de transmitir informações ao jogador através das mãos,
+        adicionando uma camada física às experiências digitais.
+
+        <br><br>
+
+        A Nintendo identifica oficialmente os Joy-Con como controles
+        equipados com HD Rumble. 
+N
+Nintendo
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           JOY-CON DIREITO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Joy-Con Direito
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O Joy-Con direito possui algumas funções que não estão
+        presentes no modelo esquerdo.
+
+        <br><br>
+
+        Além dos controles A, B, X e Y, botão HOME e analógico,
+        ele possui um leitor NFC localizado na região do analógico
+        direito.
+
+        <br><br>
+
+        Essa área pode ser utilizada para comunicação com acessórios
+        e produtos compatíveis com NFC.
+
+        <br><br>
+
+        O Joy-Con direito também possui uma câmera de movimento
+        infravermelha localizada na extremidade inferior.
+
+        <br><br>
+
+        Essa câmera permite detectar objetos e movimentos utilizando
+        infravermelho em softwares compatíveis. 
+N
+Nintendo
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CÂMERA IR
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Câmera de Movimento IR
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/joycon-ir.jpg"
+            alt="Câmera infravermelha do Joy-Con"
+          />
+
+          <img
+            src="../tgga/joycon-right-bottom.jpg"
+            alt="Parte inferior do Joy-Con direito"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Câmera de movimento infravermelha do Joy-Con direito ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A câmera de movimento IR é um dos componentes mais incomuns
+        presentes em um controle convencional.
+
+        <br><br>
+
+        Localizada na parte inferior do Joy-Con direito, ela utiliza
+        luz infravermelha para detectar objetos e características
+        diante do sensor.
+
+        <br><br>
+
+        Um exemplo documentado pela Nintendo mostra a câmera
+        reconhecendo o contorno da mão do jogador em softwares
+        compatíveis.
+
+        <br><br>
+
+        A funcionalidade é específica do Joy-Con direito. 
+N
+Nintendo Suporte
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           NFC
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        NFC
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O Joy-Con direito possui comunicação NFC integrada.
+
+        <br><br>
+
+        A área de leitura fica associada à região do analógico
+        direito e permite que o controle se comunique com
+        dispositivos compatíveis.
+
+        <br><br>
+
+        Essa tecnologia foi utilizada, entre outras aplicações,
+        para a integração com acessórios e produtos baseados em
+        NFC.
+
+        <br><br>
+
+        A Nintendo lista oficialmente NFC como recurso do
+        Joy-Con direito. 
+N
+Nintendo
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           BATERIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Bateria
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Cada Joy-Con possui uma bateria interna recarregável.
+
+        <br><br>
+
+        A Nintendo informa uma duração estimada de aproximadamente
+        20 horas por carga, embora a duração real possa variar
+        conforme o uso.
+
+        <br><br>
+
+        O tempo de recarga informado oficialmente é de
+        aproximadamente 3 horas e 30 minutos.
+
+        <br><br>
+
+        Os Joy-Con podem ser carregados quando encaixados no
+        console ou utilizando um suporte de carregamento compatível
+        conectado a uma fonte de energia. 
+N
+Nintendo
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MERCADO / COLEÇÃO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Mercado e Colecionismo
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Desde o lançamento do Nintendo Switch, a Nintendo produziu
+        Joy-Con em diversas combinações de cores.
+
+        <br><br>
+
+        Entre as versões oficiais estão combinações como
+        cinza, azul neon, vermelho neon, verde neon, rosa neon,
+        roxo neon e laranja neon, entre outras.
+
+        <br><br>
+
+        Isso transformou os Joy-Con em acessórios interessantes
+        também para colecionadores, já que as diferentes cores
+        permitem montar combinações específicas.
+
+        <br><br>
+
+        Além das cores, existem edições especiais associadas a
+        determinados jogos e produtos, tornando possível encontrar
+        diferenças visuais entre conjuntos de Joy-Con sem que
+        necessariamente exista uma diferença fundamental na
+        arquitetura básica do controle.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MODELOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Modelos e Variações
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/joycon-gray.jpg"
+              alt="Joy-Con cinza"
+            />
+
+            <figcaption>
+              Joy-Con — Cinza
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/joycon-neon-red-blue.jpg"
+              alt="Joy-Con azul e vermelho neon"
+            />
+
+            <figcaption>
+              Joy-Con — Azul Neon / Vermelho Neon
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/joycon-neon-green-pink.jpg"
+              alt="Joy-Con verde e rosa neon"
+            />
+
+            <figcaption>
+              Joy-Con — Verde Neon / Rosa Neon
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/joycon-purple-orange.jpg"
+              alt="Joy-Con roxo e laranja"
+            />
+
+            <figcaption>
+              Joy-Con — Roxo Neon / Laranja Neon
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="tgga.html">
+            ○ Games - Nintendo Switch
+          </a>
+        </li>
+
+        <li>
+          <a href="tgga.html">
+            ○ Periféricos - Joy-Con
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- ==========================================
+         COMPONENTES
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - COMPONENTES DO ITEM -
+      </h3>
+
+      <div class="component-list">
+
+        <!-- ANALÓGICOS -->
+
+        <details class="component-item">
+
+          <summary>
+            Analógico Esquerdo
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              O analógico esquerdo é utilizado principalmente
+              para movimentação do personagem, navegação e outras
+              funções determinadas pelo jogo.
+            </p>
+
+            <p>
+              O módulo transforma o movimento físico da alavanca
+              em sinais elétricos interpretados pelo sistema.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Controle analógico</li>
+              <li>Posição: Joy-Con esquerdo</li>
+              <li>Função: Entrada direcional analógica</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Analógico Direito
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              O analógico direito desempenha funções equivalentes
+              às de uma segunda entrada analógica, sendo normalmente
+              utilizado para câmera, mira ou outras ações.
+            </p>
+
+            <p>
+              No Joy-Con direito, a região do analógico também
+              está associada à área de leitura NFC.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Controle analógico</li>
+              <li>Posição: Joy-Con direito</li>
+              <li>Função: Entrada direcional analógica</li>
+              <li>Área próxima: NFC</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- D-PAD -->
+
+        <details class="component-item">
+
+          <summary>
+            Botões Direcionais do Joy-Con L
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              O Joy-Con esquerdo utiliza quatro botões direcionais
+              separados em vez de uma única cruz direcional.
+            </p>
+
+            <p>
+              Eles correspondem às direções cima, baixo, esquerda
+              e direita.
+            </p>
+
+            <ul class="component-specs">
+              <li>Direções: 4</li>
+              <li>Tipo: Entrada digital</li>
+              <li>Posição: Joy-Con esquerdo</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- A B X Y -->
+
+        <details class="component-item">
+
+          <summary>
+            Botões A / B / X / Y
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conjunto principal de botões de ação do Joy-Con direito.
+            </p>
+
+            <p>
+              Cada botão possui um mecanismo individual de acionamento
+              conectado à placa eletrônica.
+            </p>
+
+            <ul class="component-specs">
+              <li>Quantidade: 4</li>
+              <li>Tipo: Entrada digital</li>
+              <li>Posição: Joy-Con direito</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- L/R -->
+
+        <details class="component-item">
+
+          <summary>
+            Botão L
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão de ombro localizado na parte superior do
+              Joy-Con esquerdo.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão R
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão de ombro localizado na parte superior do
+              Joy-Con direito.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- ZL/ZR -->
+
+        <details class="component-item">
+
+          <summary>
+            Botão ZL
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Gatilho digital localizado no Joy-Con esquerdo.
+              É utilizado por jogos para funções como defesa,
+              mira, aceleração ou outras ações.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão ZR
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Gatilho digital localizado no Joy-Con direito.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- START / SELECT -->
+
+        <details class="component-item">
+
+          <summary>
+            Botão -
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão localizado no Joy-Con esquerdo, utilizado
+              para funções de sistema ou comandos definidos
+              pelo software.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão +
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão localizado no Joy-Con direito, utilizado
+              para funções de sistema ou comandos definidos
+              pelo software.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão HOME
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão dedicado ao acesso à interface HOME do
+              Nintendo Switch.
+            </p>
+
+            <ul class="component-specs">
+              <li>Posição: Joy-Con direito</li>
+              <li>Tipo: Entrada digital</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão CAPTURE
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão localizado no Joy-Con esquerdo utilizado
+              para funções de captura de tela e vídeo compatíveis
+              com o sistema.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- SL / SR -->
+
+        <details class="component-item">
+
+          <summary>
+            Botão SL
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequeno botão localizado na lateral interna de
+              cada Joy-Con.
+            </p>
+
+            <p>
+              Torna-se especialmente importante quando o Joy-Con
+              é utilizado horizontalmente como controle individual.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão SR
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão lateral utilizado em conjunto com SL quando
+              o Joy-Con é utilizado individualmente na posição
+              horizontal.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- RAIL -->
+
+        <details class="component-item">
+
+          <summary>
+            Trilho de Encaixe
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Estrutura mecânica lateral utilizada para conectar
+              o Joy-Con ao trilho correspondente do Nintendo Switch.
+            </p>
+
+            <p>
+              O trilho permite tanto a conexão física quanto a
+              comunicação elétrica entre o controle e o console
+              quando encaixado.
+            </p>
+
+            <ul class="component-specs">
+              <li>Função: Fixação e conexão</li>
+              <li>Tipo: Interface mecânica / elétrica</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão de Desencaixe
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão localizado na parte traseira do Joy-Con.
+              Quando pressionado, libera o mecanismo de travamento
+              utilizado pelo trilho.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- LED -->
+
+        <details class="component-item">
+
+          <summary>
+            LEDs de Jogador
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conjunto de LEDs utilizados para indicar informações
+              relacionadas à conexão e ao número atribuído ao
+              controle.
+            </p>
+
+            <p>
+              A Nintendo identifica esses LEDs como Player LEDs.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            LED / Indicador de Sincronização
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Indicadores luminosos associados ao processo de
+              sincronização e identificação do Joy-Con.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- SYNC -->
+
+        <details class="component-item">
+
+          <summary>
+            Botão SYNC
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequeno botão utilizado para iniciar procedimentos
+              de sincronização sem fio do Joy-Con com o console.
+            </p>
+
+            <p>
+              A Nintendo orienta pressionar o botão SYNC por pelo
+              menos um segundo durante determinados procedimentos
+              de pareamento. 
+N
+Nintendo Support
+
+
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- MOTION -->
+
+        <details class="component-item">
+
+          <summary>
+            Acelerômetro
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sensor responsável por detectar aceleração e mudanças
+              de movimento do controle.
+            </p>
+
+            <p>
+              É um dos componentes utilizados pelos jogos para
+              reconhecer movimentos físicos realizados com o Joy-Con.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Sensor de movimento</li>
+              <li>Presente: Joy-Con L e R</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Giroscópio
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sensor utilizado para detectar rotação e orientação
+              do controle.
+            </p>
+
+            <p>
+              Em conjunto com o acelerômetro, permite determinar
+              diferentes aspectos do movimento realizado pelo jogador.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Sensor de movimento</li>
+              <li>Presente: Joy-Con L e R</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- IR -->
+
+        <details class="component-item">
+
+          <summary>
+            Câmera de Movimento Infravermelha
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sensor óptico localizado na parte inferior do Joy-Con
+              direito.
+            </p>
+
+            <p>
+              Utiliza luz infravermelha para detectar objetos e
+              características diante da câmera em softwares compatíveis.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Câmera IR</li>
+              <li>Presente: Joy-Con direito</li>
+              <li>Posição: Extremidade inferior</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- NFC -->
+
+        <details class="component-item">
+
+          <summary>
+            Leitor NFC
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema de comunicação por proximidade localizado
+              no Joy-Con direito.
+            </p>
+
+            <p>
+              Permite a leitura de dispositivos e acessórios
+              compatíveis com NFC.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: NFC</li>
+              <li>Presente: Joy-Con direito</li>
+              <li>Região: Próxima ao analógico direito</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- RUMBLE -->
+
+        <details class="component-item">
+
+          <summary>
+            Atuador de HD Rumble
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema responsável pela vibração do Joy-Con.
+            </p>
+
+            <p>
+              O HD Rumble permite produzir diferentes padrões de
+              vibração controlados pelo software.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Atuador de vibração</li>
+              <li>Função: Feedback tátil</li>
+              <li>Presente: Joy-Con L e R</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- WIRELESS -->
+
+        <details class="component-item">
+
+          <summary>
+            Módulo de Comunicação Sem Fio
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Circuito responsável pela comunicação sem fio
+              entre o Joy-Con e o Nintendo Switch.
+            </p>
+
+            <p>
+              A especificação oficial identifica comunicação
+              Bluetooth nos Joy-Con.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Comunicação sem fio</li>
+              <li>Tecnologia: Bluetooth</li>
+              <li>Presente: Joy-Con L e R</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- BATTERY -->
+
+        <details class="component-item">
+
+          <summary>
+            Bateria Interna
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Bateria recarregável responsável por alimentar
+              o Joy-Con durante a utilização sem fio.
+            </p>
+
+            <p>
+              A autonomia oficial estimada é de aproximadamente
+              20 horas.
+            </p>
+
+            <p>
+              A Nintendo informa tempo de recarga de aproximadamente
+              3 horas e 30 minutos.
+            </p>
+
+            <ul class="component-specs">
+              <li>Tipo: Bateria recarregável</li>
+              <li>Autonomia estimada: aproximadamente 20 horas</li>
+              <li>Recarga: aproximadamente 3h30</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- CHARGING -->
+
+        <details class="component-item">
+
+          <summary>
+            Contatos de Carregamento
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Contatos elétricos utilizados para transferir energia
+              quando o Joy-Con está conectado ao console ou a
+              acessórios de carregamento compatíveis.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- PCB -->
+
+        <details class="component-item">
+
+          <summary>
+            Placa Principal (PCB)
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              A placa de circuito impresso concentra grande parte
+              da eletrônica do Joy-Con.
+            </p>
+
+            <p>
+              Ela interliga processadores, sensores, controles,
+              alimentação, comunicação sem fio e outros circuitos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Placa / Circuito dos Botões
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequenas placas e circuitos auxiliares podem ser
+              utilizados para organizar as entradas dos botões
+              e suas conexões com a eletrônica principal.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- MEMBRANAS -->
+
+        <details class="component-item">
+
+          <summary>
+            Membranas Condutivas
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Elementos flexíveis utilizados em determinados
+              conjuntos de botões para realizar o contato elétrico
+              quando pressionados.
+            </p>
+
+            <p>
+              O desgaste desses componentes pode resultar em
+              comandos inconsistentes.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- BUTTON MECHANISMS -->
+
+        <details class="component-item">
+
+          <summary>
+            Microchaves / Domes de Acionamento
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequenos elementos eletromecânicos responsáveis por
+              registrar fisicamente determinados pressionamentos.
+            </p>
+
+            <p>
+              O tipo de mecanismo utilizado varia de acordo com
+              o conjunto de botões e a construção específica.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- HOUSING -->
+
+        <details class="component-item">
+
+          <summary>
+            Carcaça Superior
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Parte externa superior responsável por formar a
+              estrutura física do Joy-Con e acomodar diversos
+              botões e componentes.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Carcaça Inferior
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Parte traseira da carcaça que protege a eletrônica,
+              bateria e mecanismos internos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- SCREWS -->
+
+        <details class="component-item">
+
+          <summary>
+            Parafusos de Fixação
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Elementos mecânicos utilizados para unir as partes
+              da carcaça e fixar componentes internos.
+            </p>
+
+            <p>
+              Existem diferentes revisões de hardware. A própria
+              Nintendo documenta diferenças entre determinados
+              modelos de Joy-Con, inclusive relacionadas ao tipo
+              de parafuso utilizado na carcaça. 
+N
+Nintendo
+
+
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- SPRINGS -->
+
+        <details class="component-item">
+
+          <summary>
+            Molas de Retorno
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequenos elementos mecânicos utilizados para devolver
+              determinados botões ou mecanismos à posição original
+              depois do acionamento.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- BUTTON CAPS -->
+
+        <details class="component-item">
+
+          <summary>
+            Tampas Plásticas dos Botões
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Peças plásticas que entram em contato diretamente
+              com os dedos do jogador e transferem a força do
+              pressionamento para o mecanismo interno.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- ANALOG CAP -->
+
+        <details class="component-item">
+
+          <summary>
+            Capa do Analógico
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Parte superior em contato com o polegar do jogador.
+              Possui textura e formato destinados a facilitar
+              o controle preciso do movimento.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- RAIL CONTACTS -->
+
+        <details class="component-item">
+
+          <summary>
+            Contatos do Trilho
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conjunto de contatos elétricos localizado na região
+              do trilho de encaixe.
+            </p>
+
+            <p>
+              Permite comunicação e alimentação quando o Joy-Con
+              está conectado fisicamente ao Nintendo Switch.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- INTERNAL CABLES -->
+
+        <details class="component-item">
+
+          <summary>
+            Cabos Flexíveis (FPC)
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Cabos flexíveis utilizados internamente para conectar
+              diferentes placas, sensores e conjuntos de componentes.
+            </p>
+
+            <p>
+              Por serem finos e dobráveis, esses componentes exigem
+              cuidado durante desmontagem e manutenção.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- ANTENNA -->
+
+        <details class="component-item">
+
+          <summary>
+            Antena de Comunicação
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Elemento responsável pela transmissão e recepção
+              dos sinais de comunicação sem fio.
+            </p>
+
+            <p>
+              Trabalha em conjunto com o circuito de comunicação
+              sem fio do controle.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- EMI -->
+
+        <details class="component-item">
+
+          <summary>
+            Componentes de Filtragem e Proteção EMI
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequenos componentes eletrônicos são utilizados
+              para filtragem, desacoplamento e redução de
+              interferências eletromagnéticas.
+            </p>
+
+            <ul class="component-specs">
+              <li>Função: Filtragem</li>
+              <li>Função: Desacoplamento</li>
+              <li>Função: Compatibilidade eletromagnética</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <!-- CONNECTORS -->
+
+        <details class="component-item">
+
+          <summary>
+            Conectores Internos
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conectores internos estabelecem ligações entre
+              placas, cabos flexíveis, bateria e diferentes
+              módulos do Joy-Con.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- BATTERY CONNECTOR -->
+
+        <details class="component-item">
+
+          <summary>
+            Conector da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conector responsável por ligar eletricamente a
+              bateria à placa eletrônica do Joy-Con.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- VIBRATION -->
+
+        <details class="component-item">
+
+          <summary>
+            Suporte do Atuador de Vibração
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Estrutura interna responsável por manter o atuador
+              de vibração corretamente posicionado dentro da carcaça.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- IR FILTER -->
+
+        <details class="component-item">
+
+          <summary>
+            Janela Óptica da Câmera IR
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Região externa transparente ou translúcida que
+              protege a câmera infravermelha e permite a passagem
+              da radiação utilizada pelo sensor.
+            </p>
+
+            <p>
+              Está presente especificamente no Joy-Con direito.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- NFC AREA -->
+
+        <details class="component-item">
+
+          <summary>
+            Área de Acoplamento NFC
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Região física associada ao sistema NFC do Joy-Con
+              direito, utilizada para aproximar objetos compatíveis
+              do leitor.
+            </p>
+
+          </div>
+
+        </details>
+
+        <!-- MODEL -->
+
+        <details class="component-item">
+
+          <summary>
+            Identificação do Modelo
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Os Joy-Con possuem identificações de modelo que
+              permitem distinguir o lado esquerdo do lado direito
+              e diferentes revisões de hardware.
+            </p>
+
+            <ul class="component-specs">
+              <li>Joy-Con L: HAC-015</li>
+              <li>Joy-Con R: HAC-016</li>
+              <li>Revisões específicas podem utilizar sufixos adicionais</li>
+            </ul>
+
+            <p>
+              A Nintendo também documenta diferenças entre
+              revisões relacionadas à bateria e à construção física.
+
+
+N
+Nintendo
+            </p>
+
+          </div>
+
+        </details>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html> 

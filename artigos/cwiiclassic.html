@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Wii Classic Controller Pro</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... O Wii Classic Controller Pro foi criado para jogadores
+          que preferiam uma experiência mais próxima dos controles
+          tradicionais, trazendo dois analógicos, quatro botões frontais,
+          dois gatilhos e os botões ZL e ZR para o ecossistema do Wii ...
+          &nbsp;
+
+        </span>
+
+        <span>
+
+          ... O Wii Classic Controller Pro foi criado para jogadores
+          que preferiam uma experiência mais próxima dos controles
+          tradicionais, trazendo dois analógicos, quatro botões frontais,
+          dois gatilhos e os botões ZL e ZR para o ecossistema do Wii ...
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Nintendo Wii Classic Controller Pro
+            (RVL-005)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/wii_classic_pro.jpg"
+              alt="Nintendo Wii Classic Controller Pro"
+              style="
+                max-width: 70%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Wii Classic Controller Pro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Wii Classic Controller Pro é um controle desenvolvido pela
+            Nintendo para o Wii, pertencente à família de acessórios
+            Classic Controller.
+
+            <br><br>
+
+            Seu modelo é identificado pelo código
+            <strong>RVL-005</strong> e sua principal característica é oferecer
+            uma disposição de controles mais tradicional do que o Wii Remote,
+            sendo especialmente adequado para jogos que não dependem dos
+            sensores de movimento do console.
+
+            <br><br>
+
+            O controle possui dois direcionais analógicos, um D-Pad digital,
+            quatro botões frontais identificados como A, B, X e Y, os botões
+            Start/+, Select/- e Home, além dos gatilhos ZL e ZR e dos botões
+            L e R.
+
+            <br><br>
+
+            Diferentemente de um controle sem fio convencional, o Classic
+            Controller Pro não possui uma bateria própria nem transmite seus
+            comandos diretamente para o Wii.
+
+            Ele é conectado ao
+            <strong>Wii Remote</strong> através do conector localizado na
+            parte inferior do Wii Remote, utilizando o próprio Wii Remote
+            como intermediário para a comunicação com o console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO DO WII
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiimote.jpg"
+                alt="Nintendo Wii Remote"
+              />
+
+              <img
+                src="../tgga/wii_classic.jpg"
+                alt="Wii Classic Controller"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Wii Remote e Wii Classic Controller ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii foi lançado originalmente em 2006 e apresentou
+            uma proposta bastante diferente daquela encontrada nos consoles
+            tradicionais da época.
+
+            <br><br>
+
+            Enquanto aparelhos como PlayStation 3 e Xbox 360 utilizavam
+            controles convencionais como principal método de interação,
+            o Wii colocou o Wii Remote e seus sensores de movimento no
+            centro da experiência.
+
+            <br><br>
+
+            Essa escolha permitiu que jogos fossem controlados através de
+            movimentos físicos, apontamento e gestos.
+
+            Entretanto, nem todos os jogos se beneficiavam desse formato.
+
+            <br><br>
+
+            Para títulos tradicionais, especialmente jogos originalmente
+            desenvolvidos para outras plataformas ou jogos clássicos
+            distribuídos pelo Virtual Console, um controle convencional
+            continuava sendo bastante útil.
+
+            <br><br>
+
+            Foi nesse cenário que a família
+            <strong>Classic Controller</strong> ganhou importância dentro
+            do ecossistema do Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CLASSIC CONTROLLER VS PRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Classic Controller e Classic Controller Pro
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wii_classic.jpg"
+                alt="Nintendo Wii Classic Controller"
+              />
+
+              <img
+                src="../tgga/wii_classic_pro.jpg"
+                alt="Nintendo Wii Classic Controller Pro"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Wii Classic Controller e Wii Classic Controller Pro ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Classic Controller original e o Classic Controller Pro possuem
+            praticamente a mesma filosofia de funcionamento e utilizam o
+            Wii Remote como interface de conexão.
+
+            <br><br>
+
+            A principal diferença está no desenho físico.
+
+            <br><br>
+
+            O Classic Controller original possui um formato mais compacto,
+            enquanto o Classic Controller Pro apresenta uma carcaça maior,
+            com pegadores laterais mais pronunciados.
+
+            <br><br>
+
+            O modelo Pro também reorganiza fisicamente alguns controles,
+            aproximando sua ergonomia daquilo que era encontrado em
+            controles tradicionais de consoles domésticos.
+
+            <br><br>
+
+            A mudança não representa simplesmente uma alteração estética:
+            o formato maior permite que o controle seja segurado de maneira
+            mais confortável durante sessões prolongadas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONEXÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conexão com o Wii Remote
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais curiosas do Classic Controller Pro
+            é a maneira como ele se comunica com o Wii.
+
+            <br><br>
+
+            O controle não possui um transmissor Bluetooth próprio para
+            conversar diretamente com o console.
+
+            <br><br>
+
+            Em vez disso, o cabo do Classic Controller Pro é conectado à
+            porta de expansão existente na parte inferior do Wii Remote.
+
+            <br><br>
+
+            Os comandos pressionados no Classic Controller Pro são
+            transmitidos através dessa conexão para o Wii Remote, que
+            permanece responsável pela comunicação sem fio com o console.
+
+            <br><br>
+
+            Isso significa que o Wii Remote continua sendo necessário
+            durante a utilização normal do controle.
+
+            <br><br>
+
+            Esse sistema também explica por que o Classic Controller Pro
+            possui um cabo relativamente curto: ele foi projetado para ser
+            utilizado junto ao Wii Remote, e não como um controle
+            independente conectado diretamente ao Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTROLES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Disposição dos Controles
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Classic Controller Pro possui uma disposição de controles
+            bastante completa para um acessório do Wii.
+
+            <br><br>
+
+            Na região esquerda encontra-se o
+            <strong>Digital Pad</strong>, tradicional cruzeta digital
+            utilizada principalmente para movimentação e navegação em
+            menus.
+
+            <br><br>
+
+            Ao lado do D-Pad encontra-se o primeiro
+            <strong>Stick Analógico</strong>.
+
+            No lado direito existe um segundo analógico, acompanhado
+            pelos quatro botões frontais.
+
+            <br><br>
+
+            Os botões frontais são:
+
+          </p>
+
+
+          <ul class="component-specs">
+
+            <li><strong>A</strong> — botão frontal principal.</li>
+
+            <li><strong>B</strong> — botão traseiro de ação.</li>
+
+            <li><strong>X</strong> — botão superior esquerdo do conjunto frontal.</li>
+
+            <li><strong>Y</strong> — botão superior direito do conjunto frontal.</li>
+
+          </ul>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Na parte superior estão os botões
+            <strong>L</strong>,
+            <strong>R</strong>,
+            <strong>ZL</strong> e
+            <strong>ZR</strong>.
+
+            <br><br>
+
+            Também existem os botões centrais
+            <strong>+</strong>,
+            <strong>-</strong> e
+            <strong>HOME</strong>.
+
+            <br><br>
+
+            Essa quantidade de entradas permitia que o controle fosse usado
+            não somente em jogos desenvolvidos especificamente para o Wii,
+            mas também em uma grande quantidade de jogos clássicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VIRTUAL CONSOLE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Virtual Console
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/virtualconsole.jpg"
+                alt="Nintendo Wii Virtual Console"
+              />
+
+              <img
+                src="../tgga/wii_controller_games.jpg"
+                alt="Jogos clássicos no Wii"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Virtual Console e jogos clássicos no Nintendo Wii ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Um dos principais motivos para a existência de controles
+            tradicionais no Wii foi o Virtual Console.
+
+            <br><br>
+
+            O serviço permitia adquirir e executar versões digitais de jogos
+            originalmente lançados para diversos consoles antigos.
+
+            <br><br>
+
+            Como muitos desses jogos haviam sido projetados para controles
+            convencionais, o Wii Remote sozinho nem sempre era a solução
+            mais apropriada.
+
+            <br><br>
+
+            O Classic Controller e posteriormente o Classic Controller Pro
+            ofereciam uma quantidade de botões e uma disposição muito mais
+            próxima dos controles utilizados pelos consoles clássicos.
+
+            <br><br>
+
+            Dessa maneira, o acessório acabou se tornando uma peça importante
+            para jogadores interessados na biblioteca retro do Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS COMPATÍVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Compatibilidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Classic Controller Pro não funciona simplesmente como um
+            controle universal para todos os jogos do Wii.
+
+            <br><br>
+
+            O suporte precisa ser implementado pelo próprio jogo.
+
+            <br><br>
+
+            Muitos títulos do Virtual Console foram desenvolvidos para
+            utilizar o Classic Controller, enquanto determinados jogos
+            do Wii utilizavam exclusivamente o Wii Remote, Nunchuk,
+            Wii Balance Board ou outros acessórios.
+
+            <br><br>
+
+            Em jogos compatíveis, entretanto, o Classic Controller Pro
+            poderia substituir o uso de controles baseados em movimento
+            e oferecer uma experiência muito mais tradicional.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESIGN
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Design e Ergonomia
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Classic Controller Pro possui uma carcaça predominantemente
+            plástica e um formato simétrico.
+
+            <br><br>
+
+            Os dois sticks analógicos ficam posicionados na região inferior
+            do conjunto de controles, enquanto o D-Pad permanece no lado
+            esquerdo.
+
+            <br><br>
+
+            O conjunto de botões A, B, X e Y fica localizado à direita,
+            seguindo uma disposição tradicional da Nintendo.
+
+            <br><br>
+
+            A principal diferença ergonômica em relação ao Classic Controller
+            original está nos pegadores maiores e mais pronunciados.
+
+            <br><br>
+
+            O formato foi pensado para que o usuário pudesse segurar o
+            controle com as duas mãos sem depender do Wii Remote como
+            elemento estrutural da pegada.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E VARIAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a vida do Wii, a Nintendo comercializou diferentes
+            versões e cores de seus controles Classic Controller.
+
+            <br><br>
+
+            O Classic Controller Pro foi disponibilizado em diferentes
+            acabamentos e também apareceu associado a determinados
+            produtos e edições especiais.
+
+            <br><br>
+
+            Além dos produtos oficiais da Nintendo, o sucesso do Wii também
+            gerou uma grande quantidade de controles licenciados e
+            não-oficiais produzidos por outras empresas.
+
+            <br><br>
+
+            É importante diferenciar o modelo oficial
+            <strong>RVL-005</strong> de controles de terceiros que utilizam
+            formatos semelhantes ou compatibilidade com a mesma interface.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_pro_black.jpg"
+                  alt="Wii Classic Controller Pro preto"
+                />
+
+                <figcaption>
+                  Wii Classic Controller Pro — Preto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_pro_white.jpg"
+                  alt="Wii Classic Controller Pro branco"
+                />
+
+                <figcaption>
+                  Wii Classic Controller Pro — Branco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_white.jpg"
+                  alt="Wii Classic Controller branco"
+                />
+
+                <figcaption>
+                  Wii Classic Controller — Branco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_black.jpg"
+                  alt="Wii Classic Controller preto"
+                />
+
+                <figcaption>
+                  Wii Classic Controller — Preto
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_gold.jpg"
+                  alt="Wii Classic Controller dourado"
+                />
+
+                <figcaption>
+                  Classic Controller — Edição Especial
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_pro_edition.jpg"
+                  alt="Classic Controller Pro edição especial"
+                />
+
+                <figcaption>
+                  Classic Controller Pro — Edição Especial
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_thirdparty.jpg"
+                  alt="Controle compatível de terceiros"
+                />
+
+                <figcaption>
+                  Controle compatível — Terceiros
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wii_classic_pro_limited.jpg"
+                  alt="Classic Controller Pro edição limitada"
+                />
+
+                <figcaption>
+                  Classic Controller Pro — Variante Especial
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONSTRUÇÃO INTERNA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Construção Interna
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Internamente, o Classic Controller Pro é consideravelmente mais
+            simples do que um controle moderno sem fio.
+
+            <br><br>
+
+            Não existe uma bateria recarregável responsável pela alimentação
+            do dispositivo, nem um rádio Bluetooth independente destinado
+            à comunicação com o Wii.
+
+            <br><br>
+
+            A alimentação elétrica e a comunicação são realizadas através
+            do cabo conectado ao Wii Remote.
+
+            <br><br>
+
+            A placa de circuito impresso contém os circuitos responsáveis
+            por interpretar o estado dos botões, dos direcionais analógicos,
+            dos gatilhos e demais entradas.
+
+            <br><br>
+
+            Os sticks analógicos utilizam mecanismos eletromecânicos
+            capazes de transformar o deslocamento físico em sinais
+            elétricos interpretados pelo circuito do controle.
+
+            <br><br>
+
+            Os botões, por sua vez, utilizam contatos elétricos associados
+            a membranas e elementos condutivos, dependendo da região e da
+            revisão interna.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMPONENTES FÍSICOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Componentes e Elementos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Classic Controller Pro é composto por uma quantidade
+            relativamente grande de peças individuais.
+
+            <br><br>
+
+            Algumas possuem função eletrônica direta, enquanto outras
+            existem exclusivamente para oferecer suporte mecânico,
+            ergonomia ou proteção aos circuitos.
+
+            <br><br>
+
+            Abaixo estão os principais elementos encontrados no controle
+            e em seu sistema de conexão.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - Wii Classic Controller Pro
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - Wii
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso (PCB)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa responsável por interligar eletricamente os
+                  diferentes componentes do Classic Controller Pro.
+                </p>
+
+                <p>
+                  Nela ficam os circuitos responsáveis por interpretar
+                  os comandos enviados pelo jogador e transmitir essas
+                  informações através do cabo conectado ao Wii Remote.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: PCB</li>
+                  <li>Função: Interligação elétrica</li>
+                  <li>Aplicação: Controle de entradas</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Controle / Microcontrolador
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito eletrônico responsável por interpretar o estado
+                  dos comandos do controle e organizar as informações
+                  destinadas à comunicação com o Wii Remote.
+                </p>
+
+                <p>
+                  O componente exato pode variar conforme a revisão da
+                  placa e a implementação utilizada pela Nintendo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                D-Pad Digital
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Direcional digital de quatro direções utilizado para
+                  movimentação, seleção de opções e comandos em jogos.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Direções: Cima / Baixo / Esquerda / Direita</li>
+                  <li>Tipo: Digital</li>
+                  <li>Localização: Lado esquerdo</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Stick Analógico Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle analógico utilizado para movimentação e
+                  outras funções dependentes da posição do jogador.
+                </p>
+
+                <p>
+                  O mecanismo transforma o deslocamento físico do stick
+                  em sinais elétricos interpretados pelo circuito.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Analógico</li>
+                  <li>Quantidade: 1</li>
+                  <li>Função: Entrada direcional variável</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Stick Analógico Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo controle analógico do Classic Controller Pro,
+                  utilizado principalmente para câmera e comandos
+                  direcionais secundários em jogos compatíveis.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Analógico</li>
+                  <li>Quantidade: 1</li>
+                  <li>Função: Entrada direcional variável</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Potenciômetros dos Sticks Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos eletromecânicos associados aos mecanismos
+                  dos sticks analógicos.
+                </p>
+
+                <p>
+                  A posição física do stick altera os valores elétricos
+                  utilizados pelo circuito para determinar a direção e
+                  intensidade do movimento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão A
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal botão de ação do conjunto frontal.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Identificação: A</li>
+                  <li>Tipo: Botão digital</li>
+                  <li>Função: Ação / Confirmação</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão B
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão de ação localizado na região traseira do
+                  conjunto frontal.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Identificação: B</li>
+                  <li>Tipo: Botão digital</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão X
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão digital localizado na parte superior esquerda
+                  do conjunto A/B/X/Y.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Y
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão digital localizado na parte superior direita
+                  do conjunto frontal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão L
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão localizado na região superior esquerda do
+                  controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão R
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão localizado na região superior direita do
+                  controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão ZL
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão traseiro localizado próximo ao conjunto
+                  esquerdo de controles superiores.
+                </p>
+
+                <p>
+                  É utilizado por jogos compatíveis como um comando
+                  independente dos botões L e R.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão ZR
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão traseiro correspondente ao ZL no lado direito
+                  do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão +
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão central utilizado por jogos para funções como
+                  pausa, confirmação ou abertura de determinados menus,
+                  dependendo do software.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão -
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão central utilizado para funções específicas
+                  determinadas pelo jogo ou software.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão HOME
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado para acessar a interface HOME do
+                  Wii durante aplicações compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas / Contatos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos responsáveis pelo contato elétrico quando
+                  os botões são pressionados.
+                </p>
+
+                <p>
+                  A pressão mecânica altera o estado elétrico detectado
+                  pelo circuito do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Mecanismos dos Sticks Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjuntos mecânicos que permitem movimento nos eixos
+                  horizontal e vertical dos analógicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas de Centralização dos Sticks
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para retornar os
+                  analógicos à posição central quando o usuário deixa
+                  de aplicar força.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Tampas / Hats dos Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Superfícies plásticas superiores utilizadas para
+                  contato direto com os polegares.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo de Comunicação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável por transportar alimentação elétrica
+                  e dados entre o Classic Controller Pro e o Wii Remote.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Função: Alimentação e comunicação</li>
+                  <li>Conexão: Wii Remote</li>
+                  <li>Tipo: Cabo integrado</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector de Expansão do Wii Remote
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector localizado na extremidade do cabo utilizado
+                  para conectar o Classic Controller Pro ao Wii Remote.
+                </p>
+
+                <p>
+                  A interface permite que acessórios compatíveis sejam
+                  utilizados através do Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Alívio de Tensão do Cabo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peça responsável por reduzir a tensão mecânica
+                  transmitida ao cabo e à região de entrada da carcaça.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior da estrutura plástica do controle.
+                  Contém as aberturas e suportes utilizados pelos
+                  botões e sticks.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior da estrutura externa responsável por
+                  fechar e proteger o conjunto interno.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Moldura do D-Pad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura plástica utilizada para posicionar e
+                  limitar o movimento do direcional digital.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Plásticos Frontais
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças físicas responsáveis por transmitir a pressão
+                  dos dedos aos mecanismos elétricos correspondentes.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>A</li>
+                  <li>B</li>
+                  <li>X</li>
+                  <li>Y</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Superiores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto físico utilizado pelos comandos L, R, ZL e ZR.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão HOME
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peça plástica central associada ao contato elétrico
+                  correspondente ao comando HOME.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LED / Indicadores de Estado
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da revisão e da função do circuito, podem
+                  existir elementos indicadores associados ao estado
+                  eletrônico do acessório.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes passivos utilizados em diferentes pontos
+                  do circuito eletrônico para controle e condicionamento
+                  dos sinais elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes utilizados para filtragem, estabilização
+                  e desacoplamento da alimentação e dos sinais elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Trilhas de Cobre
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Condutores presentes na placa de circuito impresso que
+                  conectam eletricamente os diversos componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Soldas dos Componentes
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pontos metálicos utilizados para fixar e conectar
+                  eletricamente os componentes à placa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para unir as duas
+                  partes da carcaça e manter os componentes internos
+                  posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Suportes Plásticos Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estruturas moldadas na própria carcaça utilizadas
+                  para posicionar botões, placa, mecanismos e outros
+                  componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Pinos e Guias Mecânicas
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenos elementos plásticos responsáveis por manter
+                  peças móveis alinhadas durante o acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Etiqueta de Identificação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Etiqueta utilizada para identificação do produto,
+                  incluindo informações de modelo e fabricação.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Modelo associado: RVL-005</li>
+                  <li>Fabricante: Nintendo</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Manual e Embalagem Original
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Embora não façam parte do circuito eletrônico, manual,
+                  embalagem e documentação original fazem parte do
+                  conjunto histórico e colecionável do acessório.
+                </p>
+
+                <p>
+                  Em exemplares preservados, esses elementos podem possuir
+                  importância semelhante à do próprio controle para fins
+                  de documentação e coleção.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

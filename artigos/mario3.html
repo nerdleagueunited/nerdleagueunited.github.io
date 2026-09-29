@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Super Mario Bros. 3</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA DE MUNDOS
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Super Mario Bros. 3 foi lançado originalmente para o
+          Family Computer no Japão e posteriormente para o Nintendo
+          Entertainment System no Ocidente, tornando-se um dos títulos
+          mais conhecidos da biblioteca do NES ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Super Mario Bros. 3 foi lançado originalmente para o
+          Family Computer no Japão e posteriormente para o Nintendo
+          Entertainment System no Ocidente, tornando-se um dos títulos
+          mais conhecidos da biblioteca do NES ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Super Mario Bros. 3 — NES
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/supermariobros3_nes.jpg"
+              alt="Super Mario Bros. 3 para NES"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Bros. 3
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 é um jogo eletrônico de plataforma
+            desenvolvido pela Nintendo e lançado originalmente para
+            o Family Computer no Japão em 1988.<br>
+
+            O jogo foi desenvolvido por uma equipe liderada por
+            Shigeru Miyamoto e Takashi Tezuka, com música composta
+            por Koji Kondo.<br>
+
+            No jogo, Mario e Luigi precisam impedir os planos de
+            Bowser e dos Koopalings, que conquistaram os reinos
+            vizinhos do Reino dos Cogumelos.<br>
+
+            Super Mario Bros. 3 expandiu significativamente a fórmula
+            dos jogos anteriores, introduzindo novos power-ups,
+            mapas do mundo, itens armazenáveis, diferentes tipos de
+            fases e uma maior variedade de movimentos e ambientes.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo R&D4
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Shigeru Miyamoto
+              </li>
+
+              <li>
+                <strong>Design:</strong>
+                Takashi Tezuka
+              </li>
+
+              <li>
+                <strong>Música:</strong>
+                Koji Kondo
+              </li>
+
+              <li>
+                <strong>Plataforma original:</strong>
+                Family Computer
+              </li>
+
+              <li>
+                <strong>Lançamento japonês:</strong>
+                23 de outubro de 1988
+              </li>
+
+              <li>
+                <strong>Lançamento norte-americano:</strong>
+                12 de fevereiro de 1990
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Plataforma
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1–2 jogadores alternados
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                Cartucho
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Super Mario Bros. 3 ocorreu
+            durante a segunda metade da década de 1980, quando
+            a Nintendo já possuía grande experiência com o Famicom
+            e com a série Super Mario.<br>
+
+            A equipe procurou ampliar as possibilidades introduzidas
+            em Super Mario Bros. e Super Mario Bros. 2, criando
+            uma aventura com maior variedade de cenários e
+            possibilidades de exploração.<br>
+
+            Uma das principais novidades foi a utilização de mapas
+            para representar cada mundo. Em vez de simplesmente
+            avançar de uma fase para outra, o jogador podia observar
+            diferentes caminhos e pontos de interesse no mapa.<br>
+
+            O desenvolvimento também introduziu roupas e power-ups
+            capazes de alterar as habilidades de Mario, como a
+            Super Leaf, que permite utilizar a forma Raccoon Mario,
+            e a Tanooki Suit.<br>
+
+            O jogo foi projetado para oferecer mais liberdade,
+            segredos e estratégias do que os títulos anteriores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/famicom.jpg"
+                alt="Nintendo Family Computer"
+              />
+
+              <img
+                src="../tgga/smb3_famicom.jpg"
+                alt="Super Mario Bros. 3 para Famicom"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Family Computer e Super Mario Bros. 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Quando Super Mario Bros. 3 foi lançado no Japão,
+            o Famicom já possuía uma biblioteca extensa e uma
+            grande base de jogadores.<br>
+
+            O jogo foi desenvolvido como uma evolução da fórmula
+            estabelecida por Super Mario Bros., mas apresentou
+            mudanças consideráveis na estrutura da aventura.<br>
+
+            O sistema de mapas, os itens armazenáveis, os diferentes
+            trajes e a variedade de fases ajudaram a criar uma
+            experiência mais ampla dentro das limitações do hardware
+            do Famicom.<br>
+
+            No Ocidente, o lançamento de Super Mario Bros. 3 para
+            NES ocorreu em 1990 e o título passou a ser associado
+            diretamente à biblioteca mais conhecida do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Famicom e NES
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 foi lançado no Japão em
+            23 de outubro de 1988 para o Family Computer.<br>
+
+            A versão ocidental chegou ao Nintendo Entertainment
+            System na América do Norte em 12 de fevereiro de 1990.<br>
+
+            O lançamento norte-americano ocorreu depois de uma
+            forte divulgação do jogo, incluindo sua utilização
+            no filme The Wizard, de 1989.<br>
+
+            A versão para NES tornou-se uma das principais
+            demonstrações das capacidades técnicas e gráficas
+            do console.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FAMICOM X NES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Famicom x NES
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smb3_famicom_cart.jpg"
+                alt="Cartucho japonês de Super Mario Bros. 3"
+              />
+
+              <img
+                src="../tgga/smb3_nes_cart.jpg"
+                alt="Cartucho americano de Super Mario Bros. 3"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Cartuchos de Super Mario Bros. 3 para Famicom e NES ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As versões de Super Mario Bros. 3 para Famicom e NES
+            pertencem à mesma geração de hardware, mas possuem
+            diferenças físicas e regionais.<br>
+
+            O cartucho japonês utiliza o formato próprio dos
+            cartuchos de Family Computer, enquanto a versão
+            ocidental utiliza o formato de cartucho do NES.<br>
+
+            A versão norte-americana também recebeu localização
+            e alterações relacionadas à apresentação do jogo.<br>
+
+            A estrutura fundamental da aventura e seus principais
+            elementos de jogabilidade permanecem presentes nas
+            duas versões.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mario3.jpg"
+                alt="Mario em Super Mario Bros. 3"
+              />
+
+              <img
+                src="../tgga/koopalings.jpg"
+                alt="Koopalings"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Mario e os Koopalings ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história de Super Mario Bros. 3 começa quando
+            Bowser e seus filhos, os Koopalings, invadem os
+            reinos vizinhos do Reino dos Cogumelos.<br>
+
+            Cada Koopaling assume o controle de um reino e
+            utiliza um cetro mágico para transformar o rei
+            daquele território em uma criatura diferente.<br>
+
+            Mario e Luigi precisam atravessar os diferentes
+            mundos, derrotar os Koopalings e recuperar os
+            cetros mágicos.<br>
+
+            Depois de libertar os reinos, os irmãos precisam
+            enfrentar Bowser novamente para salvar a Princesa
+            Peach, que é capturada durante a aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 mantém os controles básicos de
+            corrida e salto dos jogos anteriores, mas adiciona
+            novas possibilidades de movimentação.<br>
+
+            Mario pode correr, saltar, nadar e utilizar diferentes
+            power-ups para alterar suas habilidades.<br>
+
+            A Super Leaf permite que Mario utilize a cauda de
+            Raccoon Mario para atacar inimigos, realizar um
+            movimento de queda lenta e voar temporariamente.<br>
+
+            A Tanooki Suit possui habilidades semelhantes e
+            também permite transformar Mario em uma estátua
+            por alguns instantes.<br>
+
+            O jogador também pode utilizar itens armazenados
+            no menu de inventário antes de entrar em determinadas
+            fases.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER UPS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Power-Ups e Trajes
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_mushroom.jpg"
+                  alt="Super Mushroom"
+                />
+
+                <figcaption>
+                  Super Mushroom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_fireflower.jpg"
+                  alt="Fire Flower"
+                />
+
+                <figcaption>
+                  Fire Flower
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_superleaf.jpg"
+                  alt="Super Leaf"
+                />
+
+                <figcaption>
+                  Super Leaf
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_tanooki.jpg"
+                  alt="Tanooki Suit"
+                />
+
+                <figcaption>
+                  Tanooki Suit
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_frogsuit.jpg"
+                  alt="Frog Suit"
+                />
+
+                <figcaption>
+                  Frog Suit
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_hammersuit.jpg"
+                  alt="Hammer Suit"
+                />
+
+                <figcaption>
+                  Hammer Suit
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 possui uma grande variedade de
+            power-ups e trajes.<br>
+
+            O Super Mushroom transforma Mario em Super Mario,
+            permitindo que ele suporte um golpe adicional antes
+            de retornar à forma pequena.<br>
+
+            A Fire Flower concede a capacidade de lançar bolas
+            de fogo.<br>
+
+            A Super Leaf transforma Mario em Raccoon Mario,
+            permitindo utilizar a cauda, flutuar e voar por
+            curtos períodos.<br>
+
+            A Tanooki Suit possui as habilidades de Raccoon Mario
+            e acrescenta a capacidade de transformar Mario em
+            estátua temporariamente.<br>
+
+            O Frog Suit melhora significativamente a movimentação
+            de Mario na água.<br>
+
+            A Hammer Suit permite lançar martelos e fornece
+            proteção contra determinados ataques.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Mario:</strong>
+                protagonista da aventura.
+              </li>
+
+              <li>
+                <strong>Luigi:</strong>
+                segundo personagem jogável no modo para dois jogadores.
+              </li>
+
+              <li>
+                <strong>Princesa Peach:</strong>
+                princesa do Reino dos Cogumelos, capturada por Bowser.
+              </li>
+
+              <li>
+                <strong>Bowser:</strong>
+                principal antagonista da aventura.
+              </li>
+
+              <li>
+                <strong>Koopalings:</strong>
+                grupo de sete chefes que governam os diferentes reinos.
+              </li>
+
+              <li>
+                <strong>Reis:</strong>
+                governantes dos reinos transformados pelos Koopalings.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smb3_goomba.jpg"
+                alt="Goomba em Super Mario Bros. 3"
+              />
+
+              <img
+                src="../tgga/smb3_boomerangbro.jpg"
+                alt="Boomerang Bro."
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Inimigos de Super Mario Bros. 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 apresenta inimigos conhecidos
+            dos jogos anteriores e também introduz diversos
+            novos adversários.<br>
+
+            Goombas e Koopas continuam presentes, enquanto
+            inimigos como Boomerang Bros., Dry Bones, Chain Chomp,
+            Thwomp e outros ampliam a variedade dos desafios.<br>
+
+            Cada ambiente possui combinações diferentes de
+            inimigos e obstáculos, exigindo que o jogador adapte
+            suas estratégias.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS -
+            </h3>
+
+            <ul>
+
+              <li>Goomba</li>
+              <li>Koopa Troopa</li>
+              <li>Paratroopa</li>
+              <li>Boomerang Bro.</li>
+              <li>Hammer Bro.</li>
+              <li>Fire Bro.</li>
+              <li>Dry Bones</li>
+              <li>Chain Chomp</li>
+              <li>Thwomp</li>
+              <li>Thwimp</li>
+              <li>Boo</li>
+              <li>Piranha Plant</li>
+              <li>Podoboo</li>
+              <li>Bullet Bill</li>
+              <li>Bob-omb</li>
+              <li>Cheep-Cheep</li>
+              <li>Blooper</li>
+              <li>Lakitu</li>
+              <li>Bowser</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MUNDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mundos e Fases
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A aventura principal de Super Mario Bros. 3 é
+            dividida em oito mundos.<br>
+
+            Cada mundo possui um mapa próprio e combina
+            diferentes fases, obstáculos, fortalezas,
+            casas de Toad, casas de cartas e outros pontos
+            especiais.<br>
+
+            A estrutura é mais aberta que a de Super Mario Bros.,
+            permitindo ao jogador escolher diferentes caminhos
+            em determinados momentos da aventura.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Mundo</th>
+                <th>Nome</th>
+                <th>Características</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>World 1</td>
+                <td>Grass Land</td>
+                <td>Campos e fases introdutórias</td>
+              </tr>
+
+              <tr>
+                <td>World 2</td>
+                <td>Desert Land</td>
+                <td>Deserto e tempestades de areia</td>
+              </tr>
+
+              <tr>
+                <td>World 3</td>
+                <td>Water Land</td>
+                <td>Água e áreas costeiras</td>
+              </tr>
+
+              <tr>
+                <td>World 4</td>
+                <td>Giant Land</td>
+                <td>Inimigos e objetos gigantes</td>
+              </tr>
+
+              <tr>
+                <td>World 5</td>
+                <td>Sky Land</td>
+                <td>Céu e áreas elevadas</td>
+              </tr>
+
+              <tr>
+                <td>World 6</td>
+                <td>Ice Land</td>
+                <td>Neve e superfícies escorregadias</td>
+              </tr>
+
+              <tr>
+                <td>World 7</td>
+                <td>Pipe Land</td>
+                <td>Grande quantidade de canos e labirintos</td>
+              </tr>
+
+              <tr>
+                <td>World 8</td>
+                <td>Dark Land</td>
+                <td>Região final e território de Bowser</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MAPAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mapas dos Mundos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais novidades de Super Mario Bros. 3
+            foi a utilização de mapas do mundo.<br>
+
+            O mapa permite visualizar os caminhos disponíveis
+            e selecionar determinadas fases, fortalezas e áreas
+            especiais.<br>
+
+            Alguns mapas também possuem caminhos alternativos,
+            permitindo que o jogador escolha diferentes rotas
+            para chegar ao final do mundo.<br>
+
+            Essa estrutura tornou a progressão menos linear e
+            acrescentou uma camada de exploração à aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ITENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Itens e Inventário
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_pwing.jpg"
+                  alt="P-Wing"
+                />
+
+                <figcaption>
+                  P-Wing
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_hammer.jpg"
+                  alt="Hammer"
+                />
+
+                <figcaption>
+                  Hammer
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_cloud.jpg"
+                  alt="Jugem's Cloud"
+                />
+
+                <figcaption>
+                  Jugem's Cloud
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_flute.jpg"
+                  alt="Warp Whistle"
+                />
+
+                <figcaption>
+                  Warp Whistle
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 introduziu um sistema de inventário
+            no qual determinados itens podem ser armazenados e
+            utilizados antes de entrar em uma fase.<br>
+
+            Entre esses itens estão o Hammer, que permite alterar
+            determinados caminhos no mapa, a Jugem's Cloud, que
+            permite passar por uma fase sem completá-la, e o
+            Warp Whistle, utilizado para acessar áreas de
+            transporte entre mundos.<br>
+
+            O P-Wing permite que Raccoon Mario mantenha a capacidade
+            de voar durante grande parte de uma fase.<br>
+
+            Esses itens acrescentam novas possibilidades estratégicas
+            à progressão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SEGREDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Segredos e Áreas Especiais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 possui uma grande quantidade
+            de áreas secretas e caminhos alternativos.<br>
+
+            Alguns níveis escondem passagens, moedas e salas
+            especiais, enquanto os mapas possuem caminhos que
+            podem ser desbloqueados através de determinados itens.<br>
+
+            As casas de Toad oferecem power-ups e itens, enquanto
+            as casas de cartas permitem obter recompensas através
+            de um pequeno desafio de combinação.<br>
+
+            Também existem áreas especiais, como as casas de
+            cogumelo, fortalezas e navios dos Koopalings.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               WARP WHISTLES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Warp Whistles
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Warp Whistles são itens especiais que permitem
+            transportar Mario para a Warp Zone.<br>
+
+            A Warp Zone funciona como uma área de transporte
+            entre diferentes mundos e permite avançar rapidamente
+            pela aventura.<br>
+
+            O sistema de Warp Whistles tornou-se um dos elementos
+            secretos mais conhecidos de Super Mario Bros. 3.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               NAVIOS DOS KOOPALINGS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Navios dos Koopalings
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No final de cada mundo, Mario precisa enfrentar
+            um dos Koopalings em um navio voador.<br>
+
+            Essas fases possuem plataformas móveis, obstáculos,
+            inimigos e perigos que dificultam o caminho até o
+            chefe.<br>
+
+            Após atravessar o navio, Mario enfrenta o Koopaling
+            responsável pelo mundo e recupera o cetro mágico
+            utilizado para transformar o rei daquele reino.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GLITCHES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Glitches e Exploits
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como outros jogos do NES, Super Mario Bros. 3
+            possui comportamentos inesperados e falhas que foram
+            descobertos pelos jogadores ao longo dos anos.<br>
+
+            Alguns glitches estão relacionados a colisões,
+            animações, movimentação e interação entre diferentes
+            objetos do cenário.<br>
+
+            Técnicas de movimentação e exploração também passaram
+            a fazer parte da comunidade de speedrunning, que utiliza
+            conhecimento detalhado da física e do funcionamento
+            interno do jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILHA SONORA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Efeitos Sonoros
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/koji_kondo.jpg"
+                alt="Koji Kondo"
+              />
+
+              <img
+                src="../tgga/nes_sound.jpg"
+                alt="Sistema de áudio do NES"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Koji Kondo e o sistema de áudio do NES ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora de Super Mario Bros. 3 foi composta
+            por Koji Kondo.<br>
+
+            O jogo utiliza diferentes músicas para representar
+            ambientes, mapas e situações específicas da aventura.<br>
+
+            Existem temas para os mapas dos mundos, fases
+            subterrâneas, fases aquáticas, castelos, navios,
+            casas de Toad e batalhas contra chefes.<br>
+
+            Os efeitos sonoros também são utilizados para
+            comunicar ações como coleta de moedas, obtenção
+            de power-ups, saltos e ataques.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do NES
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 foi desenvolvido para utilizar
+            de maneira eficiente os recursos do hardware do
+            Family Computer e do Nintendo Entertainment System.<br>
+
+            O console utiliza um processador baseado na arquitetura
+            MOS 6502, além de circuitos dedicados à geração de
+            gráficos e áudio.<br>
+
+            O jogo apresenta grande quantidade de sprites,
+            animações, objetos e diferentes cenários dentro das
+            limitações de memória e processamento do sistema.<br>
+
+            O design técnico permitiu criar mapas, fases,
+            inimigos variados, power-ups e efeitos visuais
+            relativamente complexos para a época.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Bros. 3 no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 tornou-se conhecido entre os
+            jogadores brasileiros principalmente através da
+            presença do NES, de consoles compatíveis e de
+            diferentes formas de distribuição do jogo.<br>
+
+            Durante as décadas de 1980 e 1990, o mercado brasileiro
+            possuía diversos consoles compatíveis com Famicom e NES,
+            além de uma ampla circulação de jogos importados e
+            produzidos para sistemas compatíveis.<br>
+
+            O personagem Mario e a série Super Mario já eram
+            amplamente conhecidos no país, e Super Mario Bros. 3
+            passou a fazer parte dessa popularização.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES E REEDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões, Ports e Reedições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_famicom.jpg"
+                  alt="Super Mario Bros. 3 Famicom"
+                />
+
+                <figcaption>
+                  Super Mario Bros. 3 — Famicom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_nes.jpg"
+                  alt="Super Mario Bros. 3 NES"
+                />
+
+                <figcaption>
+                  Super Mario Bros. 3 — NES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_allstars.jpg"
+                  alt="Super Mario Bros. 3 em Super Mario All-Stars"
+                />
+
+                <figcaption>
+                  Super Mario All-Stars — SNES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_gba.jpg"
+                  alt="Super Mario Advance 4"
+                />
+
+                <figcaption>
+                  Super Mario Advance 4 — GBA
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 recebeu diversas reedições e
+            versões ao longo dos anos.<br>
+
+            Uma das versões mais conhecidas está presente em
+            Super Mario All-Stars para Super Nintendo, que
+            apresenta gráficos e áudio reformulados.<br>
+
+            O jogo também recebeu uma versão para Game Boy Advance
+            chamada Super Mario Advance 4: Super Mario Bros. 3,
+            que apresenta melhorias e conteúdos adicionais.<br>
+
+            Posteriormente, o título foi disponibilizado em
+            diferentes serviços e plataformas da Nintendo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 tornou-se uma das principais
+            referências da série Super Mario e do gênero
+            plataforma em geral.<br>
+
+            O sistema de mapas, os trajes, o inventário e a
+            variedade de fases influenciaram diversos jogos
+            posteriores da franquia.<br>
+
+            Elementos introduzidos no jogo, como Raccoon Mario,
+            Tanooki Mario, os Koopalings e diferentes tipos de
+            power-ups, continuaram presentes em outros títulos
+            da série.<br>
+
+            Décadas depois de seu lançamento, Super Mario Bros. 3
+            permanece associado à geração clássica do NES e ao
+            desenvolvimento da série Super Mario.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Super Mario Bros. 3 foi lançado no Japão em 1988
+                para o Family Computer.
+              </li>
+
+              <li>
+                A versão norte-americana chegou ao NES em 1990.
+              </li>
+
+              <li>
+                O jogo possui oito mundos principais.
+              </li>
+
+              <li>
+                Os mapas dos mundos permitem diferentes caminhos
+                e pontos de interesse.
+              </li>
+
+              <li>
+                Raccoon Mario pode voar temporariamente utilizando
+                sua cauda.
+              </li>
+
+              <li>
+                A Tanooki Suit permite que Mario se transforme
+                temporariamente em estátua.
+              </li>
+
+              <li>
+                O Frog Suit melhora a movimentação de Mario
+                em ambientes aquáticos.
+              </li>
+
+              <li>
+                O Hammer Suit permite que Mario lance martelos.
+              </li>
+
+              <li>
+                Os Warp Whistles permitem acessar a Warp Zone.
+              </li>
+
+              <li>
+                Os Koopalings aparecem como chefes dos diferentes
+                mundos.
+              </li>
+
+              <li>
+                Super Mario Bros. 3 foi apresentado no filme
+                The Wizard antes de seu lançamento comercial
+                norte-americano.
+              </li>
+
+              <li>
+                A música do jogo foi composta por Koji Kondo.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS / EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. 3 possui diferentes materiais físicos
+            associados às versões para Famicom e NES.<br>
+
+            Cartuchos, caixas, manuais, etiquetas e materiais
+            promocionais podem apresentar diferenças entre regiões
+            e reedições.<br>
+
+            Para colecionadores, detalhes como estado de conservação,
+            região, versão do cartucho e presença de materiais
+            originais podem ser importantes para identificar uma
+            edição específica.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_box.jpg"
+                  alt="Caixa de Super Mario Bros. 3"
+                />
+
+                <figcaption>
+                  Caixa — Super Mario Bros. 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_manual.jpg"
+                  alt="Manual de Super Mario Bros. 3"
+                />
+
+                <figcaption>
+                  Manual — Super Mario Bros. 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_cart.jpg"
+                  alt="Cartucho de Super Mario Bros. 3"
+                />
+
+                <figcaption>
+                  Cartucho — Super Mario Bros. 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb3_famicom_package.jpg"
+                  alt="Pacote japonês de Super Mario Bros. 3"
+                />
+
+                <figcaption>
+                  Edição japonesa — Famicom
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros.html">
+                ○ Games - Super Mario Bros.
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros3.html">
+                ○ Games - Super Mario Bros. 3
+              </a>
+            </li>
+
+            <li>
+              <a href="famicom.html">
+                ○ Consoles - Famicom
+              </a>
+            </li>
+
+            <li>
+              <a href="nes.html">
+                ○ Consoles - NES
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Mario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista principal de Super Mario Bros. 3.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Habilidade: Salto e corrida</li>
+                  <li>Power-ups: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Luigi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Mario e segundo personagem jogável
+                  no modo para dois jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Princesa Peach</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Princesa do Reino dos Cogumelos e personagem
+                  capturada por Bowser durante a aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bowser</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal antagonista e líder dos Koopas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koopalings</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grupo de sete chefes que controlam os
+                  diferentes mundos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goomba</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo terrestre clássico da série.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koopa Troopa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo equipado com uma carapaça.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Paratroopa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante voadora do Koopa Troopa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boomerang Bro.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que utiliza bumerangues como ataque.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hammer Bro.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que lança martelos contra Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fire Bro.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante do Bro. que utiliza bolas de fogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dry Bones</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo esquelético encontrado principalmente
+                  em fortalezas e fases específicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chain Chomp</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo acorrentado que tenta atingir Mario
+                  quando ele se aproxima.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Thwomp</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco inimigo que cai sobre Mario quando
+                  ele se aproxima.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fantasma que se comporta de maneira diferente
+                  dependendo da direção de Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Piranha Plant</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Planta inimiga encontrada em determinados canos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lakitu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo voador que lança objetos contra Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bullet Bill</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Projétil disparado por canhões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Power-up que transforma Mario em Super Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fire Flower</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Permite lançar bolas de fogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Leaf</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Transforma Mario em Raccoon Mario e permite
+                  utilizar a cauda e voar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tanooki Suit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Traje que concede habilidades semelhantes
+                  às de Raccoon Mario e permite virar estátua.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Frog Suit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Traje especializado em movimentação aquática.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hammer Suit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Traje que permite lançar martelos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Star</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que concede invencibilidade temporária.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Moeda coletável encontrada nas fases.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Question Block</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco que pode conter moedas, power-ups
+                  ou outros itens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pipe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elemento do cenário utilizado em diferentes
+                  fases e caminhos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Warp Whistle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item especial utilizado para acessar
+                  a Warp Zone.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>P-Wing</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que permite a Raccoon Mario voar
+                  continuamente durante uma fase.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hammer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item utilizado no mapa para remover
+                  determinadas pedras e abrir caminhos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jugem's Cloud</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que permite passar por uma fase
+                  sem precisar completá-la.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Toad House</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Casa onde Mario pode receber itens e
+                  power-ups.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Card Matching</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo encontrado nos mapas que oferece
+                  recompensas ao jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fortress</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fase especial encontrada nos mapas dos mundos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Airship</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Navio voador onde Mario enfrenta um dos
+                  Koopalings.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Grass Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primeiro mundo da aventura, com ambientes
+                  predominantemente campestres.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desert Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo mundo, caracterizado pelo ambiente
+                  desértico.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Water Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo com grande presença de água e
+                  ambientes costeiros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Giant Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo onde diversos elementos do cenário
+                  aparecem em tamanho gigantesco.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sky Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo composto por áreas elevadas e
+                  ambientes celestes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ice Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo caracterizado por neve e gelo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pipe Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo com grande quantidade de canos,
+                  caminhos alternativos e áreas complexas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dark Land</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo final da aventura, território de Bowser.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koji Kondo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Compositor responsável pela trilha sonora
+                  de Super Mario Bros. 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shigeru Miyamoto</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Designer e diretor associado ao desenvolvimento
+                  do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Takashi Tezuka</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Designer que trabalhou no desenvolvimento
+                  de Super Mario Bros. 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

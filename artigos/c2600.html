@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TGGA - Atari CX40</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-images {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .image-row img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-images figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS / VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       DIAGRAMA / DETALHES
+       ========================================== */
+
+    .technical-image {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .technical-image img {
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      background: #111;
+    }
+
+    .technical-image figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .image-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .image-row img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .technical-image img {
+        width: 100%;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O CX40 é um dos controles mais icônicos da história dos
+          videogames, sendo praticamente inseparável da imagem do Atari 2600
+          e de toda uma geração de jogos domésticos ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O CX40 é um dos controles mais icônicos da história dos
+          videogames, sendo praticamente inseparável da imagem do Atari 2600
+          e de toda uma geração de jogos domésticos ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Atari CX40 Joystick (Posse de Vitória Maria)
+          </h2>
+
+
+          <!-- ==========================================
+               IMAGEM PRINCIPAL
+               ========================================== -->
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/cx40.jpg"
+              alt="Joystick Atari CX40"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CX40
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Atari CX40
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Atari CX40 é o joystick que se tornou um dos maiores símbolos
+            associados ao Atari 2600. Lançado originalmente junto à família
+            Atari VCS, o controle apresenta uma construção extremamente
+            simples, baseada em uma alavanca direcional e um único botão
+            de ação.<br>
+
+            Apesar de sua simplicidade, o CX40 foi projetado para oferecer
+            uma solução universal para os jogos do Atari, utilizando uma
+            conexão de nove pinos que permitia que diferentes controles e
+            periféricos fossem conectados ao console.<br>
+
+            Seu formato vertical, a alavanca preta e o grande botão vermelho
+            localizado no canto superior esquerdo acabaram se tornando
+            elementos visuais extremamente reconhecíveis da primeira geração
+            de consoles domésticos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-images">
+
+            <div class="image-row">
+
+              <img
+                src="../tgga/atari2600.jpg"
+                alt="Atari 2600"
+              />
+
+              <img
+                src="../tgga/cx40-old.jpg"
+                alt="Joystick Atari CX40"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Atari 2600 e seu clássico joystick CX40 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 surgiu durante um período em que os controles dos consoles
+            domésticos ainda estavam longe de possuir o formato padronizado
+            que se tornaria comum nas décadas seguintes.<br>
+
+            Antes da popularização dos direcionais digitais em formato de
+            cruzeta, fabricantes experimentavam diferentes soluções para
+            permitir que o jogador controlasse os objetos na tela.<br>
+
+            A Atari adotou uma abordagem extremamente direta: uma haste
+            mecânica capaz de detectar quatro direções e um botão independente
+            para a ação principal do jogo.<br>
+
+            Essa simplicidade combinava perfeitamente com a filosofia do Atari
+            2600. O console possuía hardware relativamente limitado e muitos
+            jogos precisavam utilizar controles igualmente simples para
+            transformar os movimentos físicos do jogador em comandos
+            eletrônicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONSTRUÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Construção e Design
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 possui uma construção baseada em uma carcaça plástica
+            vertical. A parte superior concentra os elementos utilizados
+            diretamente pelo jogador, enquanto a parte inferior serve como
+            base para a mão durante a utilização.<br>
+
+            No topo encontra-se a haste direcional, geralmente conhecida
+            simplesmente como joystick. A haste pode ser movimentada para
+            cima, baixo, esquerda e direita, acionando os contatos mecânicos
+            existentes no interior do controle.<br>
+
+            Ao lado da haste encontra-se o botão de disparo, conhecido como
+            Fire. Nos modelos clássicos ele possui a característica cor
+            vermelha que ajudou a tornar o controle visualmente reconhecível.<br>
+
+            Internamente, o CX40 é ainda mais simples. Grande parte de seu
+            funcionamento depende de contatos elétricos mecânicos, dispensando
+            microprocessadores, firmware ou circuitos eletrônicos complexos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               FUNCIONAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Funcionamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Diferentemente dos controles modernos, o CX40 não precisa
+            interpretar digitalmente os comandos utilizando um processador
+            próprio.<br>
+
+            Quando a alavanca é movimentada, mecanismos internos pressionam
+            contatos correspondentes às quatro direções. Esses contatos
+            alteram eletricamente o estado dos sinais enviados ao console.<br>
+
+            O botão Fire funciona de maneira semelhante. Ao ser pressionado,
+            seu contato elétrico é fechado e o Atari 2600 detecta a mudança
+            no sinal proveniente da porta do controle.<br>
+
+            Dessa maneira, o console consegue determinar se o jogador está
+            pressionando esquerda, direita, cima, baixo ou o botão de ação
+            sem que o próprio joystick precise possuir um processador.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONEXÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conexão DB9
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características mais importantes do CX40 é seu conector
+            de nove pinos, conhecido popularmente como DB9.<br>
+
+            O conector permite transportar individualmente os sinais
+            correspondentes às diferentes direções, ao botão de ação e aos
+            circuitos elétricos necessários para o funcionamento do controle.<br>
+
+            Essa arquitetura acabou sendo extremamente importante para a
+            história dos videogames porque diversos computadores e consoles
+            posteriores utilizaram conectores compatíveis ou semelhantes.<br>
+
+            Por isso, controles inspirados no padrão do Atari podem ser
+            encontrados em diversos computadores domésticos e equipamentos
+            produzidos durante as décadas de 1980 e 1990.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Compatibilidade
+          </h2>
+
+
+          <figure class="historical-images">
+
+            <div class="image-row">
+
+              <img
+                src="../tgga/spaceinvaders.jpg"
+                alt="Space Invaders Atari 2600"
+              />
+
+              <img
+                src="../tgga/pitfall.webp"
+                alt="Pitfall Atari 2600"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Jogos do Atari 2600 utilizando o joystick clássico ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 podia ser utilizado em uma grande quantidade de jogos
+            desenvolvidos para o Atari 2600. Títulos como Space Invaders,
+            Asteroids, Missile Command, Pitfall!, River Raid e muitos outros
+            utilizavam comandos compatíveis com o joystick convencional.<br>
+
+            Entretanto, nem todos os jogos do Atari utilizavam exatamente
+            o mesmo tipo de controle. Alguns títulos foram desenvolvidos
+            especificamente para paddles, enquanto outros utilizaram
+            periféricos diferentes.<br>
+
+            Isso fazia parte da filosofia do Atari 2600: o console poderia
+            receber diferentes periféricos através de suas portas de controle,
+            permitindo que um mesmo sistema tivesse experiências de jogo
+            bastante diferentes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CX40 E PADDLES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            CX40 vs. Paddles
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 não deve ser confundido com os Atari Paddles, como o CX30.
+            Enquanto o joystick trabalha principalmente com comandos
+            direcionais discretos, os paddles utilizam controles rotativos
+            capazes de fornecer uma posição contínua.<br>
+
+            Jogos como Pong e Breakout foram desenvolvidos para aproveitar
+            esse tipo de controle, permitindo que o jogador movimentasse
+            objetos horizontalmente através da rotação do paddle.<br>
+
+            Assim, apesar de ambos serem conectados às mesmas portas gerais
+            do console, seus princípios de funcionamento e suas experiências
+            de jogo são bastante diferentes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 se tornou um dos controles mais reconhecíveis da história
+            dos videogames.<br>
+
+            Seu formato simples ajudou a estabelecer uma ideia que seria
+            repetida inúmeras vezes posteriormente: um controle dedicado
+            poderia ser conectado ao console e substituído quando necessário,
+            sem que o jogador precisasse adquirir um novo sistema inteiro.<br>
+
+            A simplicidade do projeto também contribuiu para sua longevidade.
+            Mesmo décadas após o lançamento do Atari 2600, controles baseados
+            no mesmo princípio continuam sendo utilizados por colecionadores,
+            projetos de restauração e reproduções modernas de consoles
+            clássicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a vida comercial do Atari 2600 existiram diferentes
+            versões, revisões e reproduções do joystick clássico.<br>
+
+            Algumas alterações estavam relacionadas à construção da carcaça,
+            enquanto outras modificavam detalhes internos, materiais utilizados
+            e métodos de montagem.<br>
+
+            Também surgiram inúmeros controles de terceiros compatíveis com
+            o Atari 2600, alguns tentando reproduzir fielmente o CX40 e outros
+            oferecendo formatos ou características diferentes.
+
+          </p>
+
+
+          <figure class="historical-images">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/cx40.jpg"
+                  alt="Atari CX40 original"
+                />
+
+                <figcaption>
+                  Atari CX40 — Modelo clássico
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/cx40-revision.jpg"
+                  alt="Revisão do Atari CX40"
+                />
+
+                <figcaption>
+                  CX40 — Revisões posteriores
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/cx10.jpg"
+                  alt="Atari CX10"
+                />
+
+                <figcaption>
+                  Atari CX10 — Primeira geração
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/joystick-clone.jpg"
+                  alt="Joystick compatível com Atari"
+                />
+
+                <figcaption>
+                  Joysticks compatíveis / clones
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O CX40 é frequentemente lembrado não apenas como um acessório,
+            mas como parte da própria identidade visual do Atari 2600.<br>
+
+            A combinação entre a base preta, a haste vertical e o botão
+            vermelho se tornou tão associada ao console que uma imagem do
+            joystick isolado pode ser suficiente para remeter imediatamente
+            ao Atari.<br>
+
+            Outra característica interessante é que seu funcionamento
+            essencialmente mecânico torna o controle relativamente fácil de
+            compreender e reparar quando comparado aos controles modernos,
+            embora o estado dos contatos, da borracha e dos mecanismos internos
+            possa variar conforme idade e uso.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="atari2600.html">
+                ○ Games - Atari 2600
+              </a>
+            </li>
+
+            <li>
+              <a href="cx40.html">
+                ○ Periféricos - CX40
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Alavanca / Haste Direcional
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  É a peça principal utilizada pelo jogador para fornecer
+                  os comandos direcionais ao Atari 2600.
+                </p>
+
+                <p>
+                  A haste possui movimento mecânico limitado e transmite
+                  a força aplicada pelo jogador para os mecanismos de
+                  contato existentes na parte interna.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Controle mecânico</li>
+                  <li>Direções: 4</li>
+                  <li>Movimentos: Cima / baixo / esquerda / direita</li>
+                  <li>Função: Entrada direcional</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Fire
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão responsável pelo comando de ação principal do
+                  joystick.
+                </p>
+
+                <p>
+                  Dependendo do jogo, o botão pode representar disparo,
+                  salto, seleção ou outra ação específica.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Interruptor momentâneo</li>
+                  <li>Função: Ação / Fire</li>
+                  <li>Acionamento: Mecânico</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contatos Direcionais
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de contatos elétricos responsáveis por detectar
+                  as quatro posições da alavanca.
+                </p>
+
+                <p>
+                  Quando a haste é movimentada, os mecanismos internos
+                  pressionam os contatos correspondentes.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Quantidade: 4 circuitos direcionais</li>
+                  <li>Tipo: Contato elétrico</li>
+                  <li>Função: Detecção de direção</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contato do Botão Fire
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Contato elétrico acionado quando o botão vermelho do
+                  joystick é pressionado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Mecanismo de Retorno da Alavanca
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema mecânico responsável por ajudar a alavanca a
+                  retornar à posição central depois que o jogador deixa
+                  de pressioná-la.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Base Interna da Alavanca
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura interna que recebe os movimentos da haste e
+                  os transmite para os contatos direcionais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior da estrutura plástica do CX40.
+                </p>
+
+                <p>
+                  Possui aberturas para a alavanca e para o botão de ação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior responsável por proteger os componentes
+                  internos e fornecer a base estrutural do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos responsáveis por unir as partes da carcaça
+                  e manter o conjunto mecânico interno no lugar.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabo responsável por transportar os sinais elétricos
+                  entre o joystick e o console.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Cabo multicondutor</li>
+                  <li>Função: Comunicação com o console</li>
+                  <li>Conexão: DB9</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector DB9
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector de nove posições utilizado para conectar o
+                  joystick à porta de controle do Atari 2600.
+                </p>
+
+                <p>
+                  Apesar de ser conhecido popularmente como DB9, o formato
+                  físico utilizado é frequentemente descrito tecnicamente
+                  como DE-9.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: D-subminiatura</li>
+                  <li>Posições: 9</li>
+                  <li>Função: Interface com o console</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Condutores Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fios responsáveis por conectar eletricamente os contatos
+                  direcionais, o botão e as conexões necessárias ao conector.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa / Conjunto de Contatos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dependendo da revisão do controle, os elementos elétricos
+                  podem utilizar diferentes construções mecânicas e conjuntos
+                  de contatos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Terminais Metálicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequenos elementos condutores responsáveis por estabelecer
+                  contato elétrico entre os mecanismos internos e os fios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Isoladores Plásticos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos plásticos utilizados para manter os contatos
+                  elétricos separados e posicionados corretamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Plástico Vermelho
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peça externa pressionada pelo jogador para acionar o
+                  contato do botão Fire.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Mola / Elemento Elástico
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos elásticos podem ser utilizados no mecanismo
+                  interno para proporcionar resistência e retorno das peças
+                  móveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Etiqueta / Identificação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Algumas versões apresentam identificações e etiquetas
+                  relacionadas ao fabricante e ao modelo do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Apoio Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  A parte inferior da carcaça proporciona estabilidade
+                  durante a utilização do joystick sobre uma superfície.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo de Alívio de Tensão
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região próxima à saída do cabo destinada a reduzir a
+                  concentração de esforços mecânicos sobre os condutores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conjunto Mecânico do Joystick
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto formado pela haste, mecanismos de acionamento
+                  e contatos direcionais.
+                </p>
+
+                <p>
+                  É o coração mecânico do CX40 e transforma os movimentos
+                  realizados pelo jogador em sinais elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Interface de Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O conjunto completo de contatos, condutores e conector
+                  forma a interface elétrica entre o jogador e o Atari 2600.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

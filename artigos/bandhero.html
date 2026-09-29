@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Band Hero</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Band Hero levou a experiência musical da série Hero
+          para o Nintendo DS, adaptando a jogabilidade para os
+          recursos do portátil e apresentando uma seleção de
+          músicas voltada ao público mais amplo ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Band Hero levou a experiência musical da série Hero
+          para o Nintendo DS, adaptando a jogabilidade para os
+          recursos do portátil e apresentando uma seleção de
+          músicas voltada ao público mais amplo ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Band Hero — Nintendo DS
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/bandhero_ds.jpg"
+              alt="Band Hero para Nintendo DS"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Band Hero
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Band Hero é um jogo musical desenvolvido pela
+            Vicarious Visions e publicado pela Activision.
+            A versão para Nintendo DS foi lançada em 2009,
+            adaptando a fórmula dos jogos da série Guitar Hero
+            para o portátil da Nintendo.<br>
+
+            Em vez de utilizar uma guitarra dedicada como as
+            versões de consoles domésticos, a edição de DS
+            utiliza principalmente a tela sensível ao toque,
+            os botões do portátil e acessórios específicos
+            compatíveis com o sistema.<br>
+
+            O jogo apresenta uma seleção de músicas licenciadas
+            e permite ao jogador assumir diferentes funções
+            musicais dentro de uma banda, incluindo guitarra,
+            baixo, bateria e vocais em determinadas modalidades.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Vicarious Visions
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Activision
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo DS
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2009
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Música / Ritmo
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Single-player e multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Nintendo DS Game Card
+              </li>
+
+              <li>
+                <strong>Série:</strong>
+                Hero
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Band Hero para Nintendo DS foi desenvolvida
+            pela Vicarious Visions, estúdio que já possuía experiência
+            com adaptações da série Guitar Hero para plataformas
+            portáteis.<br>
+
+            O principal desafio era transportar uma experiência
+            baseada em instrumentos e apresentações musicais para
+            um sistema com duas telas, tela sensível ao toque,
+            botões físicos e recursos de hardware bastante menores
+            que os consoles domésticos.<br>
+
+            A equipe criou uma interface específica para o DS,
+            utilizando a tela inferior como parte importante da
+            interação durante as músicas.<br>
+
+            Dessa forma, Band Hero DS não é simplesmente uma versão
+            reduzida das edições para Wii, PlayStation 2, PlayStation
+            3, Xbox 360 e outros sistemas, mas uma adaptação construída
+            ao redor das características próprias do Nintendo DS.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/nintendo_ds.jpg"
+                alt="Nintendo DS"
+              />
+
+              <img
+                src="../tgga/guitarhero_ds.jpg"
+                alt="Guitar Hero no Nintendo DS"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo DS e a série Guitar Hero no portátil ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo DS tornou-se uma das principais plataformas
+            portáteis da sua geração e recebeu diversos jogos
+            musicais e adaptações de franquias populares.<br>
+
+            A série Guitar Hero também chegou ao sistema através
+            de versões que utilizavam acessórios e mecânicas
+            adaptadas ao formato portátil.<br>
+
+            Band Hero surgiu nesse contexto como uma proposta
+            voltada para um repertório musical mais abrangente,
+            mantendo a estrutura de apresentações e pontuação
+            característica da família Hero.<br>
+
+            A edição de Nintendo DS aproveitou a tela dupla
+            e a interface por toque para criar uma experiência
+            diferente das versões domésticas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Band Hero foi lançado em 2009 para diversas plataformas,
+            incluindo o Nintendo DS.<br>
+
+            A edição portátil chegou ao mercado utilizando um
+            Game Card próprio do sistema e recebeu uma interface
+            adaptada às características do DS.<br>
+
+            Enquanto as versões de consoles domésticos utilizavam
+            instrumentos periféricos específicos, a versão de DS
+            foi construída para funcionar com os controles e
+            acessórios compatíveis com o portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGABILIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogabilidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A jogabilidade de Band Hero DS gira em torno da
+            execução de notas musicais sincronizadas com as
+            músicas apresentadas na tela.<br>
+
+            O jogador precisa executar as ações no momento correto
+            para manter o multiplicador de pontuação e evitar
+            perder a apresentação.<br>
+
+            A versão portátil utiliza a tela sensível ao toque
+            como um dos principais elementos de controle.
+            Dependendo do instrumento ou modo escolhido, o jogador
+            precisa tocar, deslizar ou utilizar os controles
+            físicos do DS para acompanhar a música.<br>
+
+            O objetivo é manter a sequência de notas e alcançar
+            uma boa pontuação durante toda a apresentação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INSTRUMENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Instrumentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_guitar.jpg"
+                  alt="Guitarra em Band Hero"
+                />
+
+                <figcaption>
+                  Guitarra
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_bass.jpg"
+                  alt="Baixo em Band Hero"
+                />
+
+                <figcaption>
+                  Baixo
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_drums.jpg"
+                  alt="Bateria em Band Hero"
+                />
+
+                <figcaption>
+                  Bateria
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_mic.jpg"
+                  alt="Microfone em Band Hero"
+                />
+
+                <figcaption>
+                  Vocais
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Band Hero apresenta diferentes funções musicais que
+            permitem ao jogador participar de uma banda virtual.<br>
+
+            Guitarra e baixo utilizam mecânicas baseadas em notas
+            musicais, enquanto a bateria e os vocais possuem
+            sistemas próprios de interação.<br>
+
+            Na versão de Nintendo DS, essas funções precisaram
+            ser adaptadas para os controles e recursos do portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TELA DE TOQUE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tela Sensível ao Toque
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/bandhero_touch.jpg"
+                alt="Tela de toque de Band Hero DS"
+              />
+
+              <img
+                src="../tgga/ds_bandhero_interface.jpg"
+                alt="Interface de Band Hero no Nintendo DS"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Interface e utilização da tela sensível ao toque ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A tela sensível ao toque é um dos principais elementos
+            que diferenciam Band Hero DS das versões domésticas.<br>
+
+            O jogador utiliza a stylus para realizar determinadas
+            ações durante as músicas, acompanhando os elementos
+            apresentados na tela inferior.<br>
+
+            O sistema permite utilizar toques e movimentos de
+            deslize, transformando a tela do DS em uma espécie
+            de instrumento musical virtual.<br>
+
+            A combinação entre a tela sensível ao toque e os
+            botões físicos cria uma jogabilidade específica para
+            o portátil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS E AVATARES -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Avatar do jogador:</strong>
+                personagem utilizado durante as apresentações.
+              </li>
+
+              <li>
+                <strong>Banda:</strong>
+                grupo de músicos que acompanha as performances.
+              </li>
+
+              <li>
+                <strong>Artistas convidados:</strong>
+                personagens e artistas associados às músicas
+                disponíveis no jogo.
+
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Trilha Sonora
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais características de Band Hero é
+            sua seleção de músicas licenciadas.<br>
+
+            Diferentemente de títulos focados exclusivamente
+            no rock pesado, Band Hero procurou apresentar um
+            repertório mais abrangente, incluindo músicas de
+            diferentes estilos e artistas.<br>
+
+            A seleção foi pensada para alcançar jogadores que
+            talvez não acompanhassem exclusivamente a proposta
+            tradicional de Guitar Hero.<br>
+
+            Na versão de Nintendo DS, as músicas foram adaptadas
+            para funcionar dentro das limitações técnicas do
+            portátil.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - EXEMPLOS DE ARTISTAS REPRESENTADOS -
+            </h3>
+
+            <ul>
+
+              <li>Maroon 5</li>
+              <li>No Doubt</li>
+              <li>Coldplay</li>
+              <li>Fall Out Boy</li>
+              <li>The Killers</li>
+              <li>Foo Fighters</li>
+              <li>David Bowie</li>
+              <li>The Rolling Stones</li>
+              <li>Paramore</li>
+              <li>Avril Lavigne</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modos de Jogo
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Modo</th>
+                <th>Descrição</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Career</td>
+                <td>Progressão através de apresentações musicais.</td>
+              </tr>
+
+              <tr>
+                <td>Quickplay</td>
+                <td>Execução rápida de músicas disponíveis.</td>
+              </tr>
+
+              <tr>
+                <td>Practice</td>
+                <td>Prática de músicas e partes específicas.</td>
+              </tr>
+
+              <tr>
+                <td>Multiplayer</td>
+                <td>Modos competitivos ou cooperativos compatíveis.</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERFORMANCE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Performance e Pontuação
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante uma música, o jogador precisa acertar as notas
+            no momento correto para aumentar sua pontuação.<br>
+
+            Sequências consecutivas de acertos aumentam o
+            multiplicador e permitem obter resultados melhores.<br>
+
+            Erros interrompem a sequência e podem reduzir o
+            desempenho da apresentação.<br>
+
+            O jogo também utiliza elementos visuais e sonoros
+            para indicar os acertos, erros e mudanças na performance.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER / HABILIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Star Power
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/bandhero_starpower.jpg"
+                alt="Star Power em Band Hero"
+              />
+
+              <img
+                src="../tgga/bandhero_stage.jpg"
+                alt="Palco de Band Hero"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Star Power e apresentação musical ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como outros jogos da família Hero, Band Hero
+            possui um sistema de poder especial utilizado durante
+            as apresentações.<br>
+
+            Quando ativado no momento adequado, o recurso pode
+            aumentar temporariamente os ganhos de pontuação
+            durante a música.<br>
+
+            O jogador precisa acumular o recurso através de
+            determinadas sequências e decidir quando utilizá-lo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo DS possui recursos de comunicação sem fio
+            que permitiram à versão portátil oferecer experiências
+            multiplayer compatíveis com o sistema.<br>
+
+            Dependendo do modo utilizado e dos recursos disponíveis,
+            jogadores podem participar de desafios musicais ou
+            comparar seu desempenho.<br>
+
+            A conectividade do DS também ajudava a transformar
+            Band Hero em uma experiência social além do modo
+            individual.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Nintendo DS
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo DS possui duas telas, sendo uma delas
+            sensível ao toque, além de microfone, botões físicos
+            e conectividade sem fio.<br>
+
+            Band Hero aproveita principalmente a tela de toque
+            para adaptar a interação musical ao formato portátil.<br>
+
+            A equipe de desenvolvimento precisou também trabalhar
+            com as limitações de processamento, memória e áudio
+            do Nintendo DS para reproduzir músicas e apresentar
+            elementos visuais sincronizados com elas.<br>
+
+            O resultado é uma versão que utiliza recursos próprios
+            do DS em vez de simplesmente reproduzir a estrutura
+            das versões de consoles domésticos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ACESSÓRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_guitar.jpg"
+                  alt="Acessório de guitarra para Nintendo DS"
+                />
+
+                <figcaption>
+                  Acessório musical
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_drum.jpg"
+                  alt="Acessório de bateria"
+                />
+
+                <figcaption>
+                  Controle de bateria
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_stylus.jpg"
+                  alt="Stylus do Nintendo DS"
+                />
+
+                <figcaption>
+                  Stylus
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_gamecard.jpg"
+                  alt="Game Card de Band Hero"
+                />
+
+                <figcaption>
+                  Game Card
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Band Hero para Nintendo DS foi desenvolvido para
+            utilizar os controles próprios do portátil, embora
+            determinados modos e experiências possam estar
+            relacionados a acessórios específicos da família
+            de jogos musicais.<br>
+
+            O formato compacto do DS permitiu transformar
+            elementos normalmente associados a instrumentos
+            físicos em comandos realizados através da tela,
+            botões e stylus.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DIFERENÇAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            DS x Consoles Domésticos
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Característica</th>
+                <th>Nintendo DS</th>
+                <th>Consoles domésticos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Controle</td>
+                <td>Tela de toque e botões</td>
+                <td>Instrumentos e controles dedicados</td>
+              </tr>
+
+              <tr>
+                <td>Telas</td>
+                <td>Duas telas</td>
+                <td>Uma tela principal</td>
+              </tr>
+
+              <tr>
+                <td>Formato</td>
+                <td>Portátil</td>
+                <td>Console doméstico</td>
+              </tr>
+
+              <tr>
+                <td>Áudio</td>
+                <td>Adaptado ao hardware do DS</td>
+                <td>Maior capacidade sonora</td>
+              </tr>
+
+              <tr>
+                <td>Jogabilidade</td>
+                <td>Adaptada ao touchscreen</td>
+                <td>Baseada em periféricos musicais</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_box.jpg"
+                  alt="Caixa de Band Hero para Nintendo DS"
+                />
+
+                <figcaption>
+                  Caixa — Band Hero DS
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_manual.jpg"
+                  alt="Manual de Band Hero para Nintendo DS"
+                />
+
+                <figcaption>
+                  Manual — Band Hero DS
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_cart.jpg"
+                  alt="Game Card de Band Hero"
+                />
+
+                <figcaption>
+                  Game Card — Band Hero
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/bandhero_ds_package.jpg"
+                  alt="Pacote de Band Hero para Nintendo DS"
+                />
+
+                <figcaption>
+                  Edição — Nintendo DS
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Band Hero para Nintendo DS pode
+            incluir o Game Card, manual e embalagem específicos
+            da versão portátil.<br>
+
+            Para colecionadores, diferenças regionais de capa,
+            classificação etária, manuais e materiais promocionais
+            podem ser relevantes na identificação de cada edição.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Band Hero faz parte da expansão da série Hero para
+            diferentes públicos e plataformas durante o final
+            da década de 2000.<br>
+
+            A versão de Nintendo DS demonstra como a fórmula
+            musical da franquia poderia ser adaptada para um
+            sistema portátil com características completamente
+            diferentes das encontradas nos consoles domésticos.<br>
+
+            O jogo também representa um período em que títulos
+            musicais estavam presentes em diferentes plataformas
+            e utilizavam periféricos, telas sensíveis ao toque
+            e outras formas de interação para simular instrumentos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Band Hero foi lançado em 2009.
+              </li>
+
+              <li>
+                A versão de Nintendo DS foi desenvolvida
+                pela Vicarious Visions.
+              </li>
+
+              <li>
+                O jogo utiliza a tela sensível ao toque
+                como parte importante da jogabilidade.
+              </li>
+
+              <li>
+                Band Hero pertence à mesma família de jogos
+                musicais que Guitar Hero.
+              </li>
+
+              <li>
+                A proposta musical de Band Hero procurou
+                alcançar um público mais amplo.
+              </li>
+
+              <li>
+                A versão de DS possui diferenças significativas
+                em relação às versões para consoles domésticos.
+              </li>
+
+              <li>
+                O Nintendo DS permitiu adaptar comandos de
+                instrumentos para a stylus e a tela de toque.
+              </li>
+
+              <li>
+                O jogo utiliza músicas licenciadas de diversos
+                artistas.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="bandhero.html">
+                ○ Games - Band Hero
+              </a>
+            </li>
+
+            <li>
+              <a href="nintendods.html">
+                ○ Consoles - Nintendo DS
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Band Hero</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Jogo musical desenvolvido para diferentes
+                  plataformas e lançado em 2009.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Gênero: Música</li>
+                  <li>Ano: 2009</li>
+                  <li>Desenvolvedora: Vicarious Visions</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo DS</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma portátil da Nintendo utilizada
+                  pela versão portátil de Band Hero.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stylus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Caneta utilizada para interagir com a tela
+                  sensível ao toque do Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Touchscreen</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tela sensível ao toque utilizada para
+                  determinadas ações musicais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guitarra</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Instrumento representado na jogabilidade
+                  musical de Band Hero.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Baixo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Função musical disponível em determinadas
+                  apresentações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bateria</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Instrumento representado através de uma
+                  mecânica específica de ritmo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Vocais</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Função relacionada à execução vocal
+                  das músicas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Notas Musicais</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos apresentados durante as músicas
+                  que precisam ser executados no momento correto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplicador</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema que aumenta a pontuação quando o
+                  jogador mantém uma sequência de acertos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Star Power</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso especial que pode aumentar a
+                  pontuação durante parte da música.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Career</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo de progressão através de apresentações.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Quickplay</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo para selecionar rapidamente uma música
+                  disponível.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Practice</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo utilizado para praticar músicas
+                  e melhorar a execução.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recursos multiplayer disponíveis de acordo
+                  com as características da versão portátil.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Palco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ambiente virtual utilizado durante as
+                  apresentações musicais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Banda</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grupo de músicos que participa das
+                  apresentações do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Game Card</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cartucho utilizado para distribuir a versão
+                  de Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Vicarious Visions</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  da versão de Nintendo DS.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Activision</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Publicadora de Band Hero.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guitar Hero</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Série de jogos musicais da mesma família
+                  de Band Hero.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo DS</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console portátil de duas telas utilizado
+                  como plataforma do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Maroon 5</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Artista representado na seleção musical
+                  associada ao jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>No Doubt</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Banda representada na seleção musical.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coldplay</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Banda representada na seleção musical.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Paramore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Banda representada na seleção musical.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Aliens: Colonial Marines</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Aliens: Colonial Marines foi desenvolvido como um
+          jogo de tiro em primeira pessoa baseado no universo
+          cinematográfico de Alien e lançado para Xbox 360 em 2013 ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Aliens: Colonial Marines foi desenvolvido como um
+          jogo de tiro em primeira pessoa baseado no universo
+          cinematográfico de Alien e lançado para Xbox 360 em 2013 ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Aliens: Colonial Marines — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/aliens_colonial_marines.jpg"
+              alt="Aliens Colonial Marines para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Aliens: Colonial Marines
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Aliens: Colonial Marines é um jogo eletrônico de tiro
+            em primeira pessoa desenvolvido principalmente pela
+            Gearbox Software e lançado pela Sega em 2013.<br>
+
+            O jogo é baseado na franquia cinematográfica Alien,
+            especialmente na estética e nos elementos apresentados
+            em Aliens, de 1986.<br>
+
+            A história acompanha o cabo Christopher Winter e outros
+            integrantes dos Colonial Marines enviados para investigar
+            o desaparecimento da nave USS Sulaco.<br>
+
+            A campanha coloca o jogador em instalações abandonadas,
+            colônias espaciais e ambientes infestados por
+            Xenomorfos, além de apresentar confrontos com forças
+            humanas hostis.<br>
+
+            A versão para Xbox 360 inclui campanha para um jogador
+            e diferentes modos multiplayer.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Gearbox Software
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Sega
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Randy Pitchford / equipe de desenvolvimento
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                12 de fevereiro de 2013
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Tiro em primeira pessoa
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1 jogador / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                DVD
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Aliens: Colonial Marines começou
+            anos antes de seu lançamento e passou por diferentes
+            equipes e etapas de produção.<br>
+
+            A Gearbox Software assumiu um papel central no projeto,
+            utilizando a franquia Alien como base para criar um
+            jogo de tiro focado na experiência dos Colonial Marines.<br>
+
+            O projeto buscava reproduzir elementos visuais e
+            conceituais associados aos filmes, incluindo armas,
+            equipamentos, arquitetura industrial e o comportamento
+            dos Xenomorfos.<br>
+
+            Durante o desenvolvimento, o jogo passou por mudanças
+            significativas em relação às primeiras apresentações
+            públicas e demorou vários anos para chegar ao mercado.<br>
+
+            A versão final foi construída utilizando a Unreal Engine
+            e foi lançada para Xbox 360, PlayStation 3 e PC.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto da Franquia Alien
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/aliens_movie.jpg"
+                alt="Aliens filme"
+              />
+
+              <img
+                src="../tgga/uss_sulaco.jpg"
+                alt="USS Sulaco"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ A estética militar e espacial associada à franquia Alien ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A franquia Alien começou no cinema em 1979 com o filme
+            Alien, dirigido por Ridley Scott.<br>
+
+            Em 1986, Aliens, dirigido por James Cameron, apresentou
+            uma abordagem mais voltada para ação militar e introduziu
+            os Colonial Marines como parte importante do universo.<br>
+
+            Aliens: Colonial Marines utiliza principalmente essa
+            identidade visual e militar, colocando o jogador no
+            papel de um Marine equipado com armas e dispositivos
+            destinados a enfrentar os Xenomorfos.<br>
+
+            O jogo também procura expandir acontecimentos
+            relacionados à nave USS Sulaco e às instalações
+            associadas à franquia.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Aliens: Colonial Marines foi lançado para Xbox 360
+            em fevereiro de 2013.<br>
+
+            O lançamento ocorreu simultaneamente com versões
+            destinadas ao PlayStation 3 e aos computadores
+            compatíveis.<br>
+
+            A edição de Xbox 360 utiliza mídia em DVD e apresenta
+            campanha individual, além de modos multiplayer
+            competitivos e cooperativos.<br>
+
+            O jogo recebeu posteriormente conteúdos adicionais
+            relacionados à campanha e ao multiplayer através
+            de conteúdo para download.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/aliens_marine.jpg"
+                alt="Colonial Marine"
+              />
+
+              <img
+                src="../tgga/aliens_xenomorph.jpg"
+                alt="Xenomorfo"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Colonial Marine e Xenomorfo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha começa após acontecimentos relacionados
+            à nave USS Sulaco.<br>
+
+            O cabo Christopher Winter integra uma equipe de
+            Colonial Marines enviada para investigar a situação
+            e descobrir o destino de outros soldados.<br>
+
+            Durante a missão, a equipe encontra sinais de
+            experimentos, conflitos militares e uma grande
+            infestação de Xenomorfos.<br>
+
+            A investigação leva os Marines por diferentes
+            instalações e regiões do universo de Alien, enquanto
+            eles tentam sobreviver aos ataques das criaturas
+            e descobrir o que aconteceu com a tripulação.<br>
+
+            A campanha também apresenta personagens aliados
+            e antagonistas humanos envolvidos nos acontecimentos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGABILIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogabilidade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A jogabilidade combina tiro em primeira pessoa,
+            exploração e combate contra inimigos humanos e
+            Xenomorfos.<br>
+
+            O jogador utiliza diferentes armas de fogo, equipamentos
+            militares e dispositivos de detecção para avançar
+            pelas fases.<br>
+
+            Os confrontos com os Xenomorfos utilizam principalmente
+            armas de fogo, enquanto o jogador precisa prestar atenção
+            aos ambientes e aos movimentos das criaturas.<br>
+
+            O rifle de pulso, associado aos Colonial Marines,
+            é uma das armas mais características do jogo.<br>
+
+            O jogador também pode utilizar o Motion Tracker para
+            detectar movimentos próximos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas e Equipamentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_pulse_rifle.jpg"
+                  alt="M41A Pulse Rifle"
+                />
+
+                <figcaption>
+                  M41A Pulse Rifle
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_shotgun.jpg"
+                  alt="Shotgun"
+                />
+
+                <figcaption>
+                  Shotgun
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_smartgun.jpg"
+                  alt="Smart Gun"
+                />
+
+                <figcaption>
+                  M56 Smart Gun
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_motion_tracker.jpg"
+                  alt="Motion Tracker"
+                />
+
+                <figcaption>
+                  Motion Tracker
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O arsenal combina armas inspiradas diretamente na
+            estética militar de Aliens com equipamentos adicionais
+            utilizados durante a campanha.<br>
+
+            O M41A Pulse Rifle é uma das principais armas disponíveis
+            e utiliza o característico sistema de contagem de munição
+            associado à franquia.<br>
+
+            A shotgun oferece grande poder de fogo em curta distância,
+            enquanto a Smart Gun é uma arma pesada destinada a
+            confrontos contra grupos de inimigos.<br>
+
+            O Motion Tracker possui uma função especialmente importante
+            para localizar movimentos próximos, criando momentos
+            de tensão durante a exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XENOMORFOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Xenomorfos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/aliens_drone.jpg"
+                alt="Xenomorph Drone"
+              />
+
+              <img
+                src="../tgga/aliens_spitter.jpg"
+                alt="Spitter"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Diferentes tipos de Xenomorfos encontrados durante a campanha ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Xenomorfos são os principais inimigos da campanha.<br>
+
+            Eles possuem grande mobilidade e podem aparecer de
+            diferentes direções, utilizando paredes, tetos,
+            corredores e áreas escuras para atacar os Marines.<br>
+
+            O jogo apresenta diferentes variantes da criatura,
+            com características e comportamentos próprios.<br>
+
+            Alguns Xenomorfos são rápidos e especializados em
+            ataques próximos, enquanto outros possuem características
+            que permitem atacar à distância ou suportar mais dano.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS -
+            </h3>
+
+            <ul>
+
+              <li>Drone</li>
+              <li>Warrior</li>
+              <li>Spitter</li>
+              <li>Crusher</li>
+              <li>Runner</li>
+              <li>Praetorian</li>
+              <li>Facehugger</li>
+              <li>Chestburster</li>
+              <li>Soldados humanos</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MARINES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colonial Marines
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Colonial Marines são soldados especializados em
+            operações militares realizadas em colônias e
+            instalações espaciais.<br>
+
+            No universo de Aliens, eles utilizam armaduras,
+            armas automáticas, equipamentos de comunicação e
+            dispositivos especializados.<br>
+
+            Durante a campanha, Christopher Winter trabalha
+            juntamente com outros Marines para investigar a
+            ameaça e sobreviver aos confrontos.<br>
+
+            A presença de companheiros de esquadrão reforça
+            a temática militar inspirada no filme Aliens.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Christopher Winter:</strong>
+                protagonista e Colonial Marine controlado pelo jogador.
+              </li>
+
+              <li>
+                <strong>Jennifer Redding:</strong>
+                integrante importante da equipe de Marines.
+              </li>
+
+              <li>
+                <strong>O'Neal:</strong>
+                Marine que participa de operações durante a campanha.
+              </li>
+
+              <li>
+                <strong>Ricardo:</strong>
+                integrante da equipe envolvida na investigação.
+              </li>
+
+              <li>
+                <strong>Michael Weyland:</strong>
+                personagem relacionado à Weyland-Yutani.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CAMPANHA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Campanha
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha é estruturada em diferentes missões
+            que levam os Marines por instalações militares,
+            colônias, corredores industriais, laboratórios
+            e áreas infestadas.<br>
+
+            As missões alternam momentos de combate intenso
+            com trechos de exploração e investigação.<br>
+
+            O ambiente possui grande importância na experiência,
+            especialmente nas áreas escuras onde os Xenomorfos
+            podem surgir inesperadamente.<br>
+
+            O jogador também encontra registros e elementos
+            narrativos utilizados para apresentar acontecimentos
+            anteriores e explicar a situação encontrada pela equipe.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Área</th>
+                <th>Característica</th>
+                <th>Principais ameaças</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>USS Sulaco</td>
+                <td>Nave espacial</td>
+                <td>Xenomorfos / Humanos</td>
+              </tr>
+
+              <tr>
+                <td>Colônia</td>
+                <td>Instalações habitacionais e industriais</td>
+                <td>Xenomorfos</td>
+              </tr>
+
+              <tr>
+                <td>Laboratórios</td>
+                <td>Instalações científicas</td>
+                <td>Xenomorfos / Humanos</td>
+              </tr>
+
+              <tr>
+                <td>Instalações militares</td>
+                <td>Áreas fortificadas</td>
+                <td>Fuzileiros / Xenomorfos</td>
+              </tr>
+
+              <tr>
+                <td>Áreas externas</td>
+                <td>Superfícies e estruturas abertas</td>
+                <td>Xenomorfos / Humanos</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além da campanha, Aliens: Colonial Marines possui
+            modos multiplayer competitivos.<br>
+
+            Os jogadores podem assumir o papel de Colonial Marines
+            ou de Xenomorfos, dependendo do modo selecionado.<br>
+
+            Os Marines utilizam armas de fogo e equipamentos,
+            enquanto os Xenomorfos possuem habilidades de
+            movimentação e combate diferentes.<br>
+
+            Essa diferença cria uma experiência assimétrica,
+            com estilos de jogo distintos para cada lado.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - MODOS MULTIPLAYER -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Team Deathmatch:</strong>
+                combate entre equipes.
+              </li>
+
+              <li>
+                <strong>Extermination:</strong>
+                confronto entre Marines e Xenomorfos.
+              </li>
+
+              <li>
+                <strong>Escape:</strong>
+                Marines precisam completar objetivos
+                enquanto enfrentam Xenomorfos.
+              </li>
+
+              <li>
+                <strong>Survivor:</strong>
+                equipes enfrentam ondas de Xenomorfos.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               AMBIENTES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ambientes
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_sulaco.jpg"
+                  alt="USS Sulaco"
+                />
+
+                <figcaption>
+                  USS Sulaco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_colony.jpg"
+                  alt="Colônia"
+                />
+
+                <figcaption>
+                  Colônia
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_lab.jpg"
+                  alt="Laboratório"
+                />
+
+                <figcaption>
+                  Laboratório
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_facility.jpg"
+                  alt="Instalação militar"
+                />
+
+                <figcaption>
+                  Instalações militares
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os cenários foram projetados para reproduzir a
+            atmosfera industrial e militar associada ao universo
+            Alien.<br>
+
+            Corredores metálicos, salas técnicas, laboratórios,
+            áreas de manutenção e estruturas espaciais formam
+            grande parte dos ambientes encontrados durante a
+            campanha.<br>
+
+            A iluminação é frequentemente utilizada para criar
+            áreas de baixa visibilidade, fazendo com que o
+            Motion Tracker tenha importância durante a exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 foi desenvolvida para o hardware
+            da sétima geração de consoles da Microsoft.<br>
+
+            O jogo utiliza a Unreal Engine para renderizar
+            ambientes tridimensionais, personagens, efeitos de
+            iluminação e diferentes tipos de inimigos.<br>
+
+            A versão física utiliza DVD e pode ser instalada
+            parcialmente no armazenamento do console para reduzir
+            a necessidade de leitura constante do disco,
+            dependendo da configuração utilizada pelo jogador.<br>
+
+            O Xbox 360 também permite o acesso aos recursos
+            multiplayer da plataforma e aos conteúdos adicionais
+            disponibilizados para o jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DLC
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conteúdos Adicionais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Aliens: Colonial Marines recebeu conteúdos adicionais
+            após o lançamento.<br>
+
+            Entre eles estão pacotes que adicionam missões,
+            mapas multiplayer, personagens e outras opções
+            relacionadas ao universo do jogo.<br>
+
+            Um dos conteúdos mais conhecidos é Stasis Interrupted,
+            expansão que apresenta acontecimentos relacionados
+            a outros personagens e complementa a história.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - CONTEÚDOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                Stasis Interrupted
+              </li>
+
+              <li>
+                Bug Hunt
+              </li>
+
+              <li>
+                Reconnaissance Pack
+              </li>
+
+              <li>
+                Movie Map Pack
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Materiais e Edição Física
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física para Xbox 360 foi distribuída em
+            embalagem padrão da plataforma, acompanhada pelo
+            disco do jogo e materiais impressos dependendo da
+            região e da edição.<br>
+
+            Para colecionadores, podem existir diferenças entre
+            versões regionais, capas, manuais, encartes e
+            códigos promocionais.<br>
+
+            A embalagem apresenta a identidade visual da franquia
+            Alien e destaca os Colonial Marines e os Xenomorfos.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_box.jpg"
+                  alt="Caixa de Aliens Colonial Marines"
+                />
+
+                <figcaption>
+                  Caixa — Aliens: Colonial Marines
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_disc.jpg"
+                  alt="Disco de Aliens Colonial Marines"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_manual.jpg"
+                  alt="Manual de Aliens Colonial Marines"
+                />
+
+                <figcaption>
+                  Manual — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/aliens_xbox360.jpg"
+                  alt="Aliens Colonial Marines Xbox 360"
+                />
+
+                <figcaption>
+                  Edição Xbox 360
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RECEPÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Recepção e Controvérsias
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O lançamento de Aliens: Colonial Marines foi acompanhado
+            por críticas relacionadas a diferentes aspectos da
+            versão final do jogo.<br>
+
+            Entre os pontos discutidos estavam gráficos,
+            inteligência artificial dos inimigos, desempenho,
+            qualidade técnica e diferenças entre algumas
+            apresentações realizadas durante o desenvolvimento
+            e o produto lançado.<br>
+
+            A recepção crítica variou entre as plataformas e
+            veículos, enquanto atualizações posteriores corrigiram
+            determinados problemas técnicos.<br>
+
+            O jogo também permaneceu como um título associado
+            à tentativa de adaptar a experiência de Aliens para
+            um jogo de tiro moderno.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Aliens: Colonial Marines ocupa um lugar particular
+            na história dos jogos baseados na franquia Alien.<br>
+
+            O título buscou reproduzir a identidade militar de
+            Aliens e colocou o jogador diretamente no papel de
+            um Colonial Marine.<br>
+
+            Elementos como o Pulse Rifle, o Smart Gun, o Motion
+            Tracker, os Xenomorfos e a arquitetura industrial
+            reforçam a ligação com a identidade visual dos filmes.<br>
+
+            A campanha e os conteúdos adicionais também ampliaram
+            acontecimentos relacionados ao universo apresentado
+            nos filmes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                O jogo foi lançado para Xbox 360, PlayStation 3
+                e PC em 2013.
+              </li>
+
+              <li>
+                A história utiliza elementos diretamente
+                associados ao universo de Aliens.
+              </li>
+
+              <li>
+                A USS Sulaco possui papel importante na campanha.
+              </li>
+
+              <li>
+                O M41A Pulse Rifle é uma das principais armas
+                utilizadas pelos Marines.
+              </li>
+
+              <li>
+                O Motion Tracker é inspirado no equipamento
+                apresentado nos filmes.
+              </li>
+
+              <li>
+                O multiplayer permite controlar tanto Marines
+                quanto Xenomorfos em determinados modos.
+              </li>
+
+              <li>
+                O jogo recebeu conteúdo adicional depois do
+                lançamento.
+              </li>
+
+              <li>
+                Stasis Interrupted funciona como uma expansão
+                narrativa relacionada aos acontecimentos do jogo.
+              </li>
+
+              <li>
+                O projeto passou por vários anos de desenvolvimento
+                antes de seu lançamento.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="alienscolonialmarines.html">
+                ○ Games - Aliens: Colonial Marines
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Christopher Winter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista da campanha e Colonial Marine
+                  controlado pelo jogador.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Classe: Colonial Marine</li>
+                  <li>Armas: Diversas</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jennifer Redding</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Marine que participa da equipe e auxilia
+                  Winter durante diferentes momentos da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>O'Neal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Colonial Marine que participa das operações
+                  realizadas durante a campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Michael Weyland</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem associado à Weyland-Yutani e aos
+                  acontecimentos envolvendo os experimentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xenomorph Drone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das formas básicas dos Xenomorfos,
+                  especializada em ataques rápidos e combate
+                  próximo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Warrior</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante mais agressiva do Xenomorfo,
+                  especializada em combate direto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Spitter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante de Xenomorfo capaz de realizar
+                  ataques à distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Crusher</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Xenomorfo de grande porte capaz de realizar
+                  ataques de investida.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Praetorian</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante extremamente resistente utilizada
+                  como adversário de maior porte.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Facehugger</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura responsável por atacar hospedeiros
+                  e iniciar o processo de reprodução dos Xenomorfos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chestburster</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Forma jovem do Xenomorfo associada ao estágio
+                  inicial de desenvolvimento da criatura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>M41A Pulse Rifle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Rifle de pulso utilizado pelos Colonial Marines
+                  e uma das armas mais reconhecíveis da franquia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>M56 Smart Gun</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma pesada associada aos Colonial Marines
+                  e projetada para combater múltiplos inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shotgun</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de curto alcance com grande poder de fogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motion Tracker</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento utilizado para detectar movimentos
+                  próximos ao jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USS Sulaco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Nave espacial central para os acontecimentos
+                  da história.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Colonial Marines</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade militar especializada em operações
+                  realizadas em colônias e instalações espaciais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Weyland-Yutani</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Corporação fictícia do universo Alien,
+                  associada a interesses comerciais e científicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alien Queen</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Forma reprodutiva de grande porte da espécie
+                  Xenomorfo, associada ao universo da franquia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Colony</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ambiente habitacional e industrial onde
+                  ocorrem diferentes acontecimentos da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laboratory</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Instalação científica associada aos experimentos
+                  envolvendo os Xenomorfos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modos competitivos nos quais jogadores podem
+                  controlar Marines ou Xenomorfos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stasis Interrupted</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conteúdo adicional que expande a história
+                  relacionada aos acontecimentos do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bug Hunt</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conteúdo adicional focado em combate contra
+                  ondas de inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Escape</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo multiplayer baseado na realização de
+                  objetivos enquanto os jogadores enfrentam
+                  Xenomorfos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Extermination</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo multiplayer que coloca Marines e
+                  Xenomorfos em confronto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma da Microsoft para a qual
+                  Aliens: Colonial Marines foi lançado em 2013.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Unreal Engine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tecnologia utilizada como base para a criação
+                  dos ambientes e sistemas tridimensionais do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Aliens</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Filme de 1986 dirigido por James Cameron que
+                  serve como uma das principais referências
+                  estéticas e conceituais do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ridley Scott</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor de Alien, filme de 1979 que iniciou
+                  a franquia cinematográfica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>James Cameron</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diretor de Aliens, filme de 1986 que introduziu
+                  a representação militar dos Colonial Marines
+                  utilizada como referência pelo jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,2494 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>TGGA - Kinect para Xbox 360</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   IMAGENS HISTÓRICAS
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   MODELOS / VARIAÇÕES
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   FLUXO DE FUNCIONAMENTO
+   ========================================== */
+
+.tech-flow {
+  margin: 20px 0;
+  padding: 15px;
+  background: #151515;
+  border: 1px solid #3d3d3d;
+  color: #bbb;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.tech-flow strong {
+  color: #fff;
+}
+
+.flow-arrow {
+  color: #777;
+  margin: 0 5px;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container"> <!-- ========================================== CABEÇALHO ========================================== --> <header class="site-header">
+<div class="logo-area">
+
+  <img
+    src="../logo1.png"
+    alt="Logo NLU"
+    class="main-logo"
+  >
+
+  <div class="logo-text-box">
+
+    <h1>
+      The Great Game Archive™
+    </h1>
+
+    <p>
+      Não o maior, mas o NOSSO aglomerado de informação.
+    </p>
+
+  </div>
+
+</div>
+
+<div class="header-right-box">
+
+  <a
+    href="#"
+    class="youtube-btn"
+    target="_blank"
+  >
+    ▶ YouTube Siga-nos!
+  </a>
+
+</div>
+
+</header> <!-- ========================================== SUB-NAVEGAÇÃO ========================================== --> <div class="sub-nav-links">
+<a href="../tgga.html">
+  ← Voltar ao TGGA
+</a>
+
+|
+
+<a href="../index.html">
+  Início
+</a>
+
+</div> <!-- ========================================== ESTEIRA DE LETREIRO ========================================== --> <div class="marquee-zone">
+<div class="marquee-content">
+
+  <span>
+    ... Kinect é o sistema de câmera, profundidade, áudio e captura de
+    movimento desenvolvido pela Microsoft para o Xbox 360, transformando
+    o jogador no próprio controle ...
+    &nbsp;
+  </span>
+
+  <span>
+    ... Kinect é o sistema de câmera, profundidade, áudio e captura de
+    movimento desenvolvido pela Microsoft para o Xbox 360, transformando
+    o jogador no próprio controle ...
+    &nbsp;
+  </span>
+
+</div>
+
+</div> <!-- ========================================== CONTEÚDO PRINCIPAL ========================================== --> <div class="main-grid">
+<!-- ========================================
+     COLUNA DE CONTEÚDO
+     ======================================== -->
+
+<div class="content-column">
+
+  <div class="category-block">
+
+    <h2>
+      Kinect para Xbox 360
+    </h2>
+
+    <div
+      style="
+        text-align: center;
+        margin-bottom: 15px;
+      "
+    >
+
+      <img
+        src="../tgga/kinect360.jpg"
+        alt="Kinect para Xbox 360"
+        style="
+          max-width: 80%;
+          height: auto;
+          border: 1px solid #444;
+          padding: 4px;
+        "
+      >
+
+    </div>
+
+    <h2 style="text-align: center;">
+      Kinect
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect é um periférico desenvolvido pela Microsoft para o
+      Xbox 360 e lançado comercialmente em novembro de 2010.
+
+      <br><br>
+
+      Diferentemente de um controle convencional, o Kinect foi
+      projetado para interpretar movimentos corporais, comandos
+      de voz e informações do ambiente sem exigir que o jogador
+      segurasse um controle tradicional.
+
+      <br><br>
+
+      Seu hardware combina uma câmera RGB, uma câmera
+      infravermelha para profundidade, um projetor infravermelho,
+      quatro microfones, sensores de orientação e um mecanismo
+      motorizado de inclinação.
+
+      <br><br>
+
+      A parte mais importante do sistema de visão utiliza tecnologia
+      da PrimeSense. O chip
+      <strong>PrimeSense PS1080</strong>
+      realiza o processamento relacionado aos sensores 3D antes que
+      os dados sejam enviados ao Xbox 360.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      O Diferencial
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O grande diferencial do Kinect estava na tentativa de eliminar
+      a necessidade de um controle físico para determinadas experiências
+      de jogo.
+
+      <br><br>
+
+      O conjunto óptico observa o jogador através de dois sistemas
+      principais: imagem em espectro visível e profundidade baseada
+      em infravermelho.
+
+      <br><br>
+
+      O projetor IR ilumina o ambiente com luz infravermelha.
+      A câmera infravermelha observa essa iluminação e o processador
+      especializado utiliza as informações obtidas para construir
+      um mapa de profundidade.
+
+      <br><br>
+
+      Ao mesmo tempo, a câmera RGB registra a imagem colorida.
+      O sistema pode então combinar informações de cor e profundidade
+      para produzir uma representação tridimensional da cena.
+
+    </p>
+
+    <div class="tech-flow">
+
+      <strong>Projetor IR</strong>
+
+      <span class="flow-arrow">→</span>
+
+      Iluminação infravermelha
+
+      <span class="flow-arrow">→</span>
+
+      <strong>Câmera IR</strong>
+
+      <span class="flow-arrow">→</span>
+
+      Dados de profundidade
+
+      <span class="flow-arrow">→</span>
+
+      <strong>PrimeSense PS1080</strong>
+
+      <span class="flow-arrow">→</span>
+
+      Processamento
+
+      <span class="flow-arrow">→</span>
+
+      <strong>Xbox 360</strong>
+
+    </div>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Câmeras e Sistema de Profundidade
+    </h2>
+
+    <figure class="historical-consoles">
+
+      <div class="console-images">
+
+        <img
+          src="../tgga/kinect_cameras.jpg"
+          alt="Câmeras e projetor infravermelho do Kinect"
+        >
+
+        <img
+          src="../tgga/kinect_inside.jpg"
+          alt="Interior do Kinect"
+        >
+
+      </div>
+
+      <figcaption>
+        ~ Conjunto óptico e interior do Kinect para Xbox 360 ~
+      </figcaption>
+
+    </figure>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Na parte frontal do Kinect estão os elementos responsáveis pela
+      captura visual.
+
+      <br><br>
+
+      Há uma câmera RGB destinada à imagem em espectro visível,
+      uma câmera CMOS especializada em infravermelho e um projetor
+      infravermelho.
+
+      <br><br>
+
+      Em desmontagens, os sensores foram identificados como
+      módulos separados, conectados à eletrônica principal através
+      de cabos flexíveis.
+
+      <br><br>
+
+      A câmera infravermelha é utilizada juntamente com o projetor
+      IR para a percepção de profundidade. A câmera colorida fornece
+      a imagem RGB utilizada pelo sistema.
+
+      <br><br>
+
+      A documentação técnica de desmontagem registra valores de
+      referência de 320 × 240 para o fluxo de profundidade e
+      640 × 480 para o fluxo RGB utilizado pelo Kinect original,
+      embora os sensores físicos tenham resoluções maiores em algumas
+      análises de seus componentes.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Microfones
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect possui quatro microfones distribuídos na parte frontal
+      do aparelho.
+
+      <br><br>
+
+      Eles não foram colocados simplesmente para gravar áudio.
+      A disposição do conjunto permite que o sistema utilize diferenças
+      entre os sinais captados para estimar a direção de onde o som
+      está vindo.
+
+      <br><br>
+
+      Esse sistema era utilizado para comandos de voz e para auxiliar
+      na identificação espacial da origem do áudio.
+
+      <br><br>
+
+      Os quatro microfones são conectados à eletrônica interna através
+      de um conjunto de conexão comum. A placa também possui circuitos
+      específicos para condicionamento e conversão dos sinais de áudio.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Motor de Inclinação
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Uma das características mais curiosas do Kinect é sua base
+      motorizada.
+
+      <br><br>
+
+      O conjunto óptico não fica simplesmente preso em uma posição
+      fixa. Um pequeno motor permite alterar mecanicamente o ângulo
+      vertical do sensor.
+
+      <br><br>
+
+      Dessa forma, o Kinect consegue ajustar a posição do conjunto
+      de sensores para enquadrar melhor o ambiente observado.
+
+      <br><br>
+
+      O motor é controlado eletronicamente por um driver dedicado.
+      Uma das peças identificadas em desmontagens é o
+      <strong>Allegro Microsystems A3906</strong>,
+      utilizado como controlador do motor.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Acelerômetro
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect também possui um acelerômetro MEMS de três eixos.
+
+      <br><br>
+
+      Uma das peças identificadas em análises da placa é o
+      <strong>Kionix KXSD9</strong>.
+
+      <br><br>
+
+      O sensor fornece informações relacionadas à orientação e
+      movimentação do equipamento.
+
+      <br><br>
+
+      Isso é particularmente útil em um dispositivo que possui
+      uma plataforma óptica motorizada, pois o sistema precisa
+      conhecer a posição física do próprio sensor.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Processamento
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect não simplesmente envia todas as imagens brutas para
+      o Xbox 360.
+
+      <br><br>
+
+      Parte considerável do processamento acontece dentro do próprio
+      periférico.
+
+      <br><br>
+
+      O principal componente relacionado ao sistema de visão 3D é o
+      <strong>PrimeSense PS1080-A2</strong>.
+
+      <br><br>
+
+      O PS1080 atua como processador especializado dos sensores,
+      trabalhando com o sistema de câmera infravermelha e o projetor
+      IR para produzir informações de profundidade.
+
+      <br><br>
+
+      Um processador Marvell também está presente no sistema.
+      Desmontagens identificaram o componente como
+      <strong>Marvell AP102</strong>, associado ao processamento e
+      interface das câmeras.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Placas de Circuito
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Para caber toda essa eletrônica dentro da pequena barra do
+      Kinect, a Microsoft utilizou uma arquitetura incomum.
+
+      <br><br>
+
+      Em vez de uma única placa ocupando toda a área interna,
+      a eletrônica foi dividida em três placas de circuito impresso
+      empilhadas verticalmente.
+
+      <br><br>
+
+      Essa disposição permite aproveitar melhor o espaço interno
+      disponível.
+
+      <br><br>
+
+      As placas possuem conectores e cabos separados para sensores,
+      microfones, alimentação, motor e demais circuitos.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Memória
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O processamento do Kinect também depende de memória dedicada.
+
+      <br><br>
+
+      Uma das memórias identificadas na placa é a
+      <strong>Hynix H5PS5162FF</strong>,
+      um componente DDR2 SDRAM de 512 Mbit, equivalente a
+      64 MB.
+
+      <br><br>
+
+      Essa memória fornece espaço temporário para o processamento
+      realizado pelo sistema interno.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Áudio
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      A parte de áudio também possui sua própria cadeia eletrônica.
+
+      <br><br>
+
+      Um dos componentes identificados é o
+      <strong>Wolfson WM8737G</strong>,
+      que funciona como conversor analógico-digital estéreo e possui
+      pré-amplificação para microfones.
+
+      <br><br>
+
+      Outro componente identificado é o
+      <strong>Texas Instruments TAS1020B</strong>,
+      associado à interface USB de áudio.
+
+      <br><br>
+
+      Assim, os sinais captados pelos quatro microfones passam por
+      circuitos de condicionamento e conversão antes de serem
+      processados e enviados ao sistema.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Comunicação USB
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect utiliza uma conexão baseada em USB para comunicação
+      de dados com o Xbox 360.
+
+      <br><br>
+
+      Internamente, um dos componentes identificados é o
+      <strong>NEC uPD720114</strong>,
+      utilizado como controlador/hub USB 2.0.
+
+      <br><br>
+
+      A conexão transporta os dados produzidos pelo sistema de
+      sensores e também participa da comunicação necessária para
+      operação do periférico.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Memória Flash
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect também possui memória não volátil.
+
+      <br><br>
+
+      Uma das peças identificadas em desmontagens é a
+      <strong>STMicroelectronics M29W800DB</strong>,
+      uma memória Flash de 8 Mbit.
+
+      <br><br>
+
+      Memórias desse tipo podem armazenar firmware e dados que
+      precisam permanecer disponíveis mesmo quando o equipamento
+      está desligado.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Conversores e Amplificadores
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Além dos grandes chips de processamento, a placa possui
+      diversos circuitos auxiliares.
+
+      <br><br>
+
+      Entre eles está o
+      <strong>Analog Devices AD8694</strong>,
+      um amplificador operacional quádruplo CMOS de baixo ruído.
+
+      <br><br>
+
+      Também foi identificado o
+      <strong>Texas Instruments ADS7830I</strong>,
+      um conversor analógico-digital de 8 bits e oito canais com
+      interface I²C.
+
+      <br><br>
+
+      Esses componentes fazem parte da eletrônica auxiliar necessária
+      para transformar sinais analógicos de sensores e circuitos
+      em informações que podem ser utilizadas pelo processamento
+      digital.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Alimentação
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect possui uma alimentação própria para seus circuitos,
+      sensores, motor e sistema de refrigeração.
+
+      <br><br>
+
+      A energia precisa ser distribuída em diferentes tensões para
+      atender aos processadores, memórias, sensores e circuitos
+      analógicos.
+
+      <br><br>
+
+      A placa utiliza MOSFETs, reguladores e outros componentes
+      de gerenciamento de energia.
+
+      <br><br>
+
+      Um dos componentes identificados em desmontagens é o
+      <strong>Fairchild FDS8984</strong>,
+      um MOSFET utilizado no circuito de alimentação.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Refrigeração
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      Apesar de ser um periférico, o Kinect possui processamento
+      eletrônico suficiente para exigir refrigeração ativa.
+
+      <br><br>
+
+      Um pequeno ventilador fica instalado na extremidade do aparelho.
+
+      <br><br>
+
+      O fluxo de ar é direcionado através do interior da carcaça,
+      ajudando a retirar calor dos componentes eletrônicos.
+
+      <br><br>
+
+      Também existe um dissipador de calor associado aos componentes
+      que necessitam de transferência térmica.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Projetor Infravermelho
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O projetor infravermelho é fundamental para o funcionamento
+      do sistema de profundidade.
+
+      <br><br>
+
+      Diferentemente da câmera RGB, ele não registra imagens coloridas.
+
+      <br><br>
+
+      Sua função é emitir luz infravermelha para o ambiente.
+      A câmera IR observa o resultado dessa iluminação e o sistema
+      de processamento utiliza essas informações para estimar
+      distâncias.
+
+      <br><br>
+
+      O sistema PrimeSense utilizado pelo Kinect emprega essa
+      abordagem de iluminação infravermelha estruturada para obter
+      informações tridimensionais.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Captura de Movimento
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      A partir da combinação entre imagem RGB, profundidade e áudio,
+      o Kinect consegue interpretar informações sobre a presença
+      e posição das pessoas diante do sensor.
+
+      <br><br>
+
+      O sistema foi desenvolvido para reconhecer partes do corpo
+      e acompanhar seus movimentos em tempo real.
+
+      <br><br>
+
+      Essa característica permitiu jogos nos quais ações físicas
+      do jogador eram utilizadas como entrada.
+
+      <br><br>
+
+      A combinação de sensores também permitia que o Kinect fosse
+      utilizado para interação por voz e para experiências de
+      reconhecimento corporal.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Modelos e Variações
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect passou por algumas revisões durante sua existência.
+
+      <br><br>
+
+      O primeiro modelo é conhecido como
+      <strong>Kinect for Xbox 360</strong>
+      e possui o número de modelo
+      <strong>1414</strong>.
+
+      <br><br>
+
+      Posteriormente surgiu o modelo
+      <strong>1473</strong>,
+      associado à compatibilidade com o ecossistema Kinect para
+      Windows.
+
+      <br><br>
+
+      Mais tarde, o Kinect para Windows recebeu o modelo
+      <strong>1517</strong>.
+
+      <br><br>
+
+      É importante não confundir esses modelos com o
+      <strong>Kinect 2.0</strong>,
+      lançado posteriormente para o Xbox One e baseado em uma
+      arquitetura de hardware diferente.
+
+    </p>
+
+    <figure class="historical-consoles">
+
+      <div class="models-grid">
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/kinect360.jpg"
+            alt="Kinect Xbox 360 Modelo 1414"
+          >
+
+          <figcaption>
+            Kinect para Xbox 360 — Modelo 1414
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/kinect1473.jpg"
+            alt="Kinect Modelo 1473"
+          >
+
+          <figcaption>
+            Kinect — Modelo 1473
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/kinect1517.jpg"
+            alt="Kinect para Windows Modelo 1517"
+          >
+
+          <figcaption>
+            Kinect para Windows — Modelo 1517
+          </figcaption>
+
+        </div>
+
+        <div class="model-item">
+
+          <img
+            src="../tgga/kinectone.jpg"
+            alt="Kinect Xbox One"
+          >
+
+          <figcaption>
+            Kinect 2.0 — Xbox One
+          </figcaption>
+
+        </div>
+
+      </div>
+
+    </figure>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Acessórios e Instalação
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect foi projetado para ficar próximo ao televisor,
+      geralmente sobre ou abaixo da tela.
+
+      <br><br>
+
+      Sua base permite posicionar o sensor enquanto o mecanismo
+      interno realiza ajustes verticais.
+
+      <br><br>
+
+      A versão destinada ao Xbox 360 possui cabo longo para permitir
+      que o sensor fique afastado do console e próximo ao jogador.
+
+      <br><br>
+
+      Dependendo da configuração do Xbox 360, pode ser necessário
+      utilizar o adaptador de energia apropriado para fornecer
+      alimentação ao Kinect.
+
+    </p>
+
+    <h2></h2>
+
+    <h2 style="text-align: center;">
+      Componentes Internos Identificados
+    </h2>
+
+    <p
+      style="
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      "
+    >
+
+      O Kinect é um aparelho relativamente compacto, mas seu interior
+      contém uma quantidade considerável de eletrônica.
+
+      <br><br>
+
+      A lista ao lado reúne os principais componentes e conjuntos
+      identificados em desmontagens técnicas. Ela inclui tanto
+      componentes eletrônicos individuais quanto módulos mecânicos
+      e estruturais.
+
+      <br><br>
+
+      Pequenos componentes passivos, como resistores, capacitores,
+      diodos e indutores, podem variar conforme revisão da placa e
+      fornecedor, portanto não devem ser tratados como uma lista
+      absolutamente idêntica para todas as unidades fabricadas.
+
+    </p>
+
+  </div>
+
+</div>
+
+<!-- ========================================
+     COLUNA LATERAL
+     ======================================== -->
+
+<div class="sidebar-column">
+
+  <nav class="side-nav-menu">
+
+    <h3>
+      - MENU DE ARTIGOS -
+    </h3>
+
+    <ul>
+
+      <li>
+        <a href="../tgga.html">
+          ○ Início - TGGA
+        </a>
+      </li>
+
+      <li>
+        <a href="../index.html">
+          ○ Início - NLU
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Games - Kinect Xbox 360
+        </a>
+      </li>
+
+      <li>
+        <a href="tgga.html">
+          ○ Periféricos - Kinect Xbox 360
+        </a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <!-- ==========================================
+       COMPONENTES DO ITEM
+       ========================================== -->
+
+  <div class="components-block">
+
+    <h3>
+      - COMPONENTES DO ITEM -
+    </h3>
+
+    <div class="component-list">
+
+      <details class="component-item">
+
+        <summary>
+          PrimeSense PS1080-A2
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Um dos principais chips do Kinect original.
+            É o processador especializado associado ao sistema
+            de percepção tridimensional.
+          </p>
+
+          <p>
+            O PS1080 recebe informações relacionadas ao sistema
+            de câmera infravermelha e projetor IR e participa da
+            geração dos dados de profundidade.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: SoC de processamento de sensores</li>
+            <li>Fabricante: PrimeSense</li>
+            <li>Modelo: PS1080-A2</li>
+            <li>Função: Processamento 3D</li>
+            <li>Aplicação: Profundidade / imagem / interface</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Marvell AP102 / PXA168
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Processador utilizado no sistema eletrônico do Kinect.
+            Análises de hardware associam o AP102 ao Marvell PXA168.
+          </p>
+
+          <p>
+            Trabalha com a interface das câmeras e com o restante
+            da eletrônica de processamento.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Marvell</li>
+            <li>Família: PXA</li>
+            <li>Identificação: AP102</li>
+            <li>Função: Processamento e interface</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Câmera RGB / Color CMOS
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor óptico responsável pela captura da imagem
+            em espectro visível.
+          </p>
+
+          <p>
+            É utilizada para obter informações de cor da cena
+            observada pelo Kinect.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: Sensor CMOS</li>
+            <li>Espectro: Luz visível</li>
+            <li>Função: Imagem RGB</li>
+            <li>Fluxo documentado: 640 × 480</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Câmera Infravermelha
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Sensor CMOS especializado na captura da iluminação
+            infravermelha utilizada pelo sistema de profundidade.
+          </p>
+
+          <p>
+            Trabalha em conjunto com o projetor IR e o PrimeSense
+            para produzir informações de distância.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: CMOS IR</li>
+            <li>Função: Profundidade</li>
+            <li>Fluxo documentado: 320 × 240</li>
+            <li>Fabricante do sensor identificado em análises: Aptina</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Projetor / Emissor Infravermelho
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Emissor óptico responsável por iluminar o ambiente com
+            luz infravermelha.
+          </p>
+
+          <p>
+            É um dos elementos fundamentais do sistema de
+            percepção de profundidade.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: Emissor IR</li>
+            <li>Função: Iluminação infravermelha</li>
+            <li>Aplicação: Sistema de profundidade</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Quatro Microfones
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O Kinect possui quatro microfones distribuídos na parte
+            frontal do sensor.
+          </p>
+
+          <p>
+            O arranjo permite trabalhar com informações espaciais
+            do áudio e com reconhecimento de comandos de voz.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Quantidade: 4</li>
+            <li>Tipo: Microfones MEMS / eletret conforme revisão</li>
+            <li>Função: Captura de áudio</li>
+            <li>Aplicação: Voz e localização sonora</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Wolfson WM8737G
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuito integrado utilizado na cadeia de áudio.
+          </p>
+
+          <p>
+            Atua como conversor analógico-digital estéreo e possui
+            pré-amplificação para microfones.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Wolfson Microelectronics</li>
+            <li>Modelo: WM8737G</li>
+            <li>Função: ADC / pré-amplificador</li>
+            <li>Aplicação: Áudio</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Texas Instruments TAS1020B
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Controlador relacionado à interface USB de áudio.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Texas Instruments</li>
+            <li>Modelo: TAS1020B</li>
+            <li>Função: Interface de áudio USB</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Hynix H5PS5162FF DDR2 SDRAM
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Memória RAM utilizada para armazenamento temporário
+            dos dados processados pelo Kinect.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Hynix</li>
+            <li>Modelo: H5PS5162FF</li>
+            <li>Tipo: DDR2 SDRAM</li>
+            <li>Capacidade identificada: 512 Mbit</li>
+            <li>Equivalente: 64 MB</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          STMicroelectronics M29W800DB
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Memória Flash não volátil utilizada pelo sistema.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: STMicroelectronics</li>
+            <li>Modelo: M29W800DB</li>
+            <li>Tipo: NOR Flash</li>
+            <li>Capacidade: 8 Mbit</li>
+            <li>Função: Armazenamento de firmware / dados</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          NEC uPD720114 USB 2.0
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Controlador/hub USB 2.0 identificado na placa principal.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: NEC</li>
+            <li>Modelo: uPD720114</li>
+            <li>Interface: USB 2.0</li>
+            <li>Função: Comunicação USB</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Kionix KXSD9
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Acelerômetro MEMS utilizado para detectar aceleração
+            e orientação do aparelho.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Kionix</li>
+            <li>Modelo: KXSD9</li>
+            <li>Tipo: MEMS</li>
+            <li>Eixos: 3</li>
+            <li>Função: Orientação / movimento</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Allegro A3906
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Driver utilizado no controle do mecanismo motorizado
+            de inclinação do Kinect.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Allegro Microsystems</li>
+            <li>Modelo: A3906</li>
+            <li>Tipo: Driver de motor</li>
+            <li>Função: Controle do tilt</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Motor de Inclinação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno motor elétrico responsável por movimentar
+            verticalmente o conjunto óptico.
+          </p>
+
+          <p>
+            O motor permite alterar o ângulo do Kinect para melhorar
+            o enquadramento do ambiente.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: Motor DC / mecanismo de redução</li>
+            <li>Função: Inclinação vertical</li>
+            <li>Controle: Driver A3906</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Engrenagens do Mecanismo Tilt
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto mecânico responsável por transmitir o movimento
+            do pequeno motor para o eixo de inclinação.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: Trem de engrenagens</li>
+            <li>Função: Redução / transmissão</li>
+            <li>Aplicação: Inclinação do sensor</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Eixo de Inclinação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Elemento mecânico sobre o qual o conjunto superior
+            do Kinect realiza o movimento vertical.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Analog Devices AD8694
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Amplificador operacional quádruplo utilizado em
+            circuitos analógicos do aparelho.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Analog Devices</li>
+            <li>Modelo: AD8694</li>
+            <li>Tipo: Quad Op-Amp</li>
+            <li>Aplicação: Condicionamento de sinais</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Texas Instruments ADS7830I
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conversor analógico-digital utilizado para converter
+            sinais analógicos em dados digitais.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Texas Instruments</li>
+            <li>Modelo: ADS7830I</li>
+            <li>Resolução: 8 bits</li>
+            <li>Canais: 8</li>
+            <li>Interface: I²C</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Fairchild FDS8984
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            MOSFET de potência identificado no circuito eletrônico
+            do Kinect.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Fabricante: Fairchild Semiconductor</li>
+            <li>Modelo: FDS8984</li>
+            <li>Tipo: MOSFET</li>
+            <li>Função: Controle de potência</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Reguladores de Tensão
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O Kinect necessita de várias tensões internas para
+            alimentar processadores, memória, sensores, áudio
+            e circuitos analógicos.
+          </p>
+
+          <p>
+            Reguladores e conversores DC-DC fazem a adaptação
+            da alimentação fornecida ao aparelho para os diferentes
+            níveis utilizados pelos circuitos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Ventilador Interno
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequeno ventilador responsável por movimentar ar
+            através da carcaça.
+          </p>
+
+          <p>
+            O fluxo de ar ajuda a remover o calor produzido pelos
+            componentes eletrônicos durante a operação.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Tipo: Ventoinha DC</li>
+            <li>Função: Refrigeração ativa</li>
+            <li>Localização: Extremidade do Kinect</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Dissipador de Calor
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Peça metálica utilizada para transferir calor de
+            componentes eletrônicos para o fluxo de ar interno.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Dissipação Térmica do Projetor IR
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O conjunto responsável pela emissão infravermelha
+            também necessita de controle térmico.
+          </p>
+
+          <p>
+            O projeto utiliza elementos de transferência térmica
+            próximos ao sistema óptico e eletrônico.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Três Placas de Circuito Impresso
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            A eletrônica principal é dividida em três PCBs
+            posicionadas verticalmente dentro do aparelho.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Quantidade: 3 placas</li>
+            <li>Tipo: PCB multicamada / dupla face conforme seção</li>
+            <li>Função: Processamento, sensores, áudio e alimentação</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Cabos Flexíveis das Câmeras
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Cabos flexíveis conectam os módulos ópticos às placas
+            eletrônicas.
+          </p>
+
+          <p>
+            Existem conexões separadas para os sensores e para
+            o projetor infravermelho.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Conectores das Placas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Diversos conectores internos interligam as placas,
+            câmeras, microfones, motor, ventilador e alimentação.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Conjunto de Microfones e Cabo
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Os quatro microfones são montados em posições
+            específicas na estrutura frontal e conectados
+            à placa através de um cabo.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Conector USB
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Interface externa responsável pela comunicação de
+            dados entre o Kinect e o equipamento hospedeiro.
+          </p>
+
+          <ul class="component-specs">
+
+            <li>Interface: USB</li>
+            <li>Padrão associado: USB 2.0</li>
+            <li>Função: Dados e comunicação</li>
+
+          </ul>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Cabo de Dados e Alimentação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O cabo externo fornece a conexão necessária para
+            comunicação e alimentação conforme a configuração
+            utilizada.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Fonte / Adaptador de Alimentação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Algumas configurações do Kinect para Xbox 360 utilizam
+            alimentação externa para fornecer energia suficiente
+            ao conjunto de sensores, motor e eletrônica.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Lentes das Câmeras
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjuntos ópticos posicionados sobre os sensores CMOS.
+          </p>
+
+          <p>
+            As lentes direcionam e focalizam a luz sobre os sensores
+            de imagem.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Filtros Ópticos Infravermelhos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos ópticos associados ao sistema IR ajudam a
+            controlar quais comprimentos de onda chegam ao sensor.
+          </p>
+
+          <p>
+            São fundamentais para separar a função da câmera
+            infravermelha da câmera RGB.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Blindagem Metálica
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Partes metálicas podem atuar como blindagem e também
+            como suporte mecânico e térmico para componentes
+            eletrônicos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Resistores
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Diversos resistores fixos estão presentes nas placas.
+            Eles são utilizados para polarização, divisão de tensão,
+            terminação, limitação de corrente e configuração
+            de circuitos.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Capacitores Cerâmicos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Capacitores cerâmicos são utilizados principalmente
+            para desacoplamento de alimentação, filtragem e
+            redução de ruídos de alta frequência.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Capacitores Eletrolíticos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Capacitores eletrolíticos são utilizados em partes
+            da alimentação e filtragem onde são necessárias
+            capacitâncias maiores.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Diodos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Diodos são utilizados em circuitos de alimentação,
+            proteção, sinal e outras funções eletrônicas.
+          </p>
+
+          <p>
+            A identificação exata pode variar conforme a revisão
+            da placa.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Indutores e Bobinas
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Componentes indutivos são utilizados em filtragem,
+            conversão de energia e redução de interferências
+            eletromagnéticas.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Cristais e Osciladores
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Circuitos digitais precisam de referências de frequência
+            para sincronizar seus processos.
+          </p>
+
+          <p>
+            Osciladores e componentes associados fornecem sinais
+            de clock para diferentes partes da eletrônica.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Conectores de Serviço e Teste
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            As placas eletrônicas possuem pontos e conectores
+            utilizados durante fabricação, teste e diagnóstico
+            do hardware.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Placa / Módulo dos Sensores Ópticos
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O conjunto frontal mantém os sensores ópticos
+            alinhados mecanicamente.
+          </p>
+
+          <p>
+            O posicionamento preciso das câmeras e do projetor
+            é essencial para o funcionamento do sistema de
+            profundidade.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Estrutura Mecânica Interna
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Suportes internos mantêm placas, sensores, motor,
+            ventilador e demais módulos na posição correta.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Carcaça Plástica Superior
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Parte externa que protege os componentes internos
+            e forma a barra principal do Kinect.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Carcaça / Base Inferior
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Estrutura inferior responsável por apoiar o aparelho
+            e abrigar o mecanismo de inclinação.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Base Motorizada
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto mecânico que permite ao corpo superior do
+            Kinect alterar seu ângulo vertical.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Pés e Apoios de Borracha
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Elementos utilizados para aumentar a estabilidade
+            e reduzir contato direto da estrutura com a superfície.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Parafusos de Fixação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            O Kinect utiliza diversos parafusos para fixar placas,
+            carcaça, suportes, ventilador e mecanismos internos.
+          </p>
+
+          <p>
+            Desmontagens registram o uso de diferentes padrões,
+            incluindo parafusos Torx e versões de segurança.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Suportes e Standoffs
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Pequenos espaçadores mecânicos mantêm as placas
+            afastadas umas das outras e fixadas na posição correta.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Controle de Potência
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto formado por MOSFETs, reguladores, capacitores,
+            indutores e outros componentes responsável por distribuir
+            energia às diferentes partes do aparelho.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Processamento de Imagem
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto formado principalmente pelo PrimeSense PS1080,
+            processador Marvell, memória e interfaces das câmeras.
+          </p>
+
+          <p>
+            Sua função é transformar os sinais dos sensores em
+            dados utilizáveis pelo sistema Xbox.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Captura de Profundidade
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Combinação do projetor IR, câmera IR e processamento
+            PrimeSense responsável pela percepção tridimensional.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Captura RGB
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto formado pela câmera colorida, lente,
+            processamento e interface de dados responsável
+            pela imagem em cores.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Captura de Áudio
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Conjunto formado pelos quatro microfones,
+            pré-amplificação, conversão analógico-digital
+            e processamento de áudio.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Inclinação
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Combinação de motor, engrenagens, eixo, driver
+            A3906 e sensores de orientação.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Sistema de Refrigeração
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Combinação de dissipadores, caminhos de ar,
+            ventilador e elementos de transferência térmica.
+          </p>
+
+        </div>
+
+      </details>
+
+      <details class="component-item">
+
+        <summary>
+          Firmware
+        </summary>
+
+        <div class="component-description">
+
+          <p>
+            Software embarcado responsável por controlar e
+            coordenar diversas funções internas do hardware.
+          </p>
+
+          <p>
+            O firmware é armazenado em memória não volátil
+            presente no sistema eletrônico.
+          </p>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div> <!-- ========================================== RODAPÉ ========================================== --> <footer class="site-footer">
+<p>
+  &copy; 2026 Nerd League United.
+  Todos os direitos reservados.
+</p>
+
+</footer> </div> </body> </html>

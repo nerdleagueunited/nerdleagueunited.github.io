@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Xbox 360 Play & Charge</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS / VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES TÉCNICAS
+       ========================================== */
+
+    .technical-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #151515;
+      border: 1px solid #3d3d3d;
+    }
+
+    .technical-box h3 {
+      margin-top: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 7px;
+    }
+
+    .technical-box ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O Play & Charge do Xbox 360 foi criado para permitir que o
+          jogador continue utilizando o controle sem fio enquanto a bateria
+          recarregável é carregada, eliminando a necessidade de trocar pilhas
+          AA constantemente ... &nbsp;
+        </span>
+
+        <span>
+          ... O Play & Charge do Xbox 360 foi criado para permitir que o
+          jogador continue utilizando o controle sem fio enquanto a bateria
+          recarregável é carregada, eliminando a necessidade de trocar pilhas
+          AA constantemente ... &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Xbox 360 Play & Charge Kit
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/xbox360/playcharge.jpg"
+              alt="Xbox 360 Play & Charge Kit"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            Play & Charge
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Xbox 360 Play & Charge Kit é um acessório desenvolvido pela
+            Microsoft para o controle sem fio do Xbox 360.
+
+            <br><br>
+
+            Diferentemente de um simples cabo USB, o conjunto foi projetado
+            especificamente para trabalhar em conjunto com uma bateria
+            recarregável própria do controle. A bateria substitui o
+            compartimento convencional de duas pilhas AA e permite que o
+            jogador continue utilizando o controle enquanto ele permanece
+            conectado ao cabo.
+
+            <br><br>
+
+            O sistema combina três elementos principais: o cabo de
+            carregamento, a bateria recarregável e o circuito de controle
+            presente no conjunto. O cabo possui ainda um indicador luminoso
+            utilizado para informar o estado do carregamento.
+
+            <br><br>
+
+            Segundo a documentação da Microsoft, a bateria oficial utiliza
+            tecnologia NiMH (níquel-hidreto metálico) e foi especificada para
+            oferecer até aproximadamente 35 horas de jogo por carga,
+            dependendo das condições de utilização. <span data-assistant-content-reference="" class="xeh6zmm xt0psk2 x1ghz6dp" data-assistant-grouped-webpages="" data-content-reference-type="grouped_webpages"><span aria-label="Fontes" class="xt0psk2 xxhswux x11njtxf" data-assistant-grouped-webpages-list="" role="group"><span class="x1lziwak x13q3soa" data-assistant-grouped-webpages-item=""><button aria-controls="assistant-sources-dialog" aria-haspopup="dialog" aria-label="Centro de Download Microsoft" class="x1qviprw xjtw7fp xomzcpc x1cpjm7i xt81g8a xm4btww x7qwmre xrd0f8c x1hmns74 xy5mcqj x6s0dn4 xjyslct xjbqb8w xrt0l5h xu82sp8 x13yhu5o x4kf0vy xe6aan1 x1ypdohk x3nfvp2 xjb2p0i x1ivwg07 x1gqwrcx x13vifvy xc8icb0 xtu1cor x1scn00m x1lvh1i4 xsnit4v xk2swo9 xt970qd x1cg44al x1005jv x1n2onr6 xkrqix3 xxymvpz" data-assistant-sources-trigger="" data-assistant-sources-payload="[{&quot;attribution&quot;:&quot;Centro de Download Microsoft&quot;,&quot;publishedAt&quot;:1322557087,&quot;sourceIndex&quot;:0,&quot;title&quot;:&quot;Xbox 360 PLAY & CHARGE KIT&quot;,&quot;url&quot;:&quot;https://download.microsoft.com/download/0/9/5/095DA6E0-D069-4440-BF6D-DF5AEAF29FA5/x166952604BRO.pdf?utm_source=chatgpt.com&quot;}]" data-assistant-grouped-webpages-trigger="" type="button"><span aria-hidden="true" class="x1d5dutw x4aliy7 x1r7ld26 x16rqkct x1y0btm7 xmkeg23 x12116fd x13yhu5o xe6aan1 xwz0xwf xdl72j9 x1c4vz4f x2lah0s x6phcfz x7amdea x1poez60 xo5v014 xfi1dq xb3r6kr x1ku5rj1 x1n2onr6" data-assistant-source-icon="">C<img alt="" class="x-default-marker x5yr21d xh8yej3 x10a8y8t xl1xv1r x10l6tqk" data-assistant-source-icon-image="" src="https://www.google.com/s2/favicons?domain=https%3A%2F%2Fdownload.microsoft.com&sz=128" ></span><span class="x1heor9g x1qlqyl8 x1pd3egz xeuugli x101abm8 xryxfnj x1b2iylo xwgcxoh xlyipyv xuxw1ft" data-assistant-reference-title="">Centro de Download Microsoft</span></button></span></span></span>
+
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            O Problema das Pilhas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle sem fio original do Xbox 360 utiliza um compartimento
+            traseiro destinado a duas pilhas AA.
+
+            <br><br>
+
+            Para quem utilizava o controle frequentemente, isso significava
+            remover as pilhas descarregadas e substituí-las por outras
+            carregadas ou descartáveis.
+
+            <br><br>
+
+            O Play & Charge surgiu como uma solução oficial para esse
+            inconveniente. Em vez de depender de duas pilhas AA removíveis,
+            o usuário instala a bateria recarregável específica do Xbox 360
+            e conecta o cabo à parte frontal do controle.
+
+            <br><br>
+
+            A proposta é particularmente interessante porque o jogador não
+            precisa interromper a utilização do controle para realizar a
+            recarga. O controle continua funcionando sem fio enquanto a
+            bateria recebe carga. <span data-assistant-content-reference="" class="xeh6zmm xt0psk2 x1ghz6dp" data-assistant-grouped-webpages="" data-content-reference-type="grouped_webpages"><span aria-label="Fontes" class="xt0psk2 xxhswux x11njtxf" data-assistant-grouped-webpages-list="" role="group"><span class="x1lziwak x13q3soa" data-assistant-grouped-webpages-item=""><button aria-controls="assistant-sources-dialog" aria-haspopup="dialog" aria-label="Centro de Download Microsoft, 2 fontes" class="x1qviprw xjtw7fp xomzcpc x1cpjm7i xt81g8a xm4btww x7qwmre xrd0f8c x1hmns74 xy5mcqj x6s0dn4 xjyslct xjbqb8w xrt0l5h xu82sp8 x13yhu5o x4kf0vy xe6aan1 x1ypdohk x3nfvp2 xjb2p0i x1ivwg07 x1gqwrcx x13vifvy xc8icb0 xtu1cor x1scn00m x1lvh1i4 xsnit4v xk2swo9 xt970qd x1cg44al x1005jv x1n2onr6 xkrqix3 xxymvpz" data-assistant-sources-trigger="" data-assistant-sources-payload="[{&quot;attribution&quot;:&quot;Centro de Download Microsoft&quot;,&quot;publishedAt&quot;:1322557087,&quot;sourceIndex&quot;:0,&quot;title&quot;:&quot;Xbox 360 PLAY & CHARGE KIT&quot;,&quot;url&quot;:&quot;https://download.microsoft.com/download/0/9/5/095DA6E0-D069-4440-BF6D-DF5AEAF29FA5/x166952604BRO.pdf?utm_source=chatgpt.com&quot;},{&quot;attribution&quot;:&quot;Centro de Download Microsoft&quot;,&quot;isSupporting&quot;:true,&quot;sourceIndex&quot;:1,&quot;title&quot;:&quot;Xbox 360 Play & Charge Kit&quot;,&quot;url&quot;:&quot;https://download.microsoft.com/download/8/4/4/84423F99-7A70-4517-B241-58B442CAC766/x166950902BRO.pdf?utm_source=chatgpt.com&quot;}]" data-assistant-grouped-webpages-trigger="" type="button"><span aria-hidden="true" class="x1d5dutw x4aliy7 x1r7ld26 x16rqkct x1y0btm7 xmkeg23 x12116fd x13yhu5o xe6aan1 xwz0xwf xdl72j9 x1c4vz4f x2lah0s x6phcfz x7amdea x1poez60 xo5v014 xfi1dq xb3r6kr x1ku5rj1 x1n2onr6" data-assistant-source-icon="">C<img alt="" class="x-default-marker x5yr21d xh8yej3 x10a8y8t xl1xv1r x10l6tqk" data-assistant-source-icon-image="" src="https://www.google.com/s2/favicons?domain=https%3A%2F%2Fdownload.microsoft.com&sz=128" ></span><span class="x1heor9g x1qlqyl8 x1pd3egz xeuugli x101abm8 xryxfnj x1b2iylo xwgcxoh xlyipyv xuxw1ft" data-assistant-reference-title="">Centro de Download Microsoft</span><span class="x1ir3puv xe6aan1 xdl72j9 x1c4vz4f x2lah0s xxhswux x101abm8 xryxfnj x1b2iylo xwgcxoh" data-assistant-supporting-count="">+1</span></button></span></span></span>
+
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            Como o Sistema Funciona
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/xbox360/xbox360-controller.jpg"
+                alt="Controle sem fio do Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360/playcharge-battery.jpg"
+                alt="Bateria recarregável do Xbox 360"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Controle sem fio Xbox 360 e bateria recarregável oficial ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O funcionamento do Play & Charge é relativamente simples.
+
+            <br><br>
+
+            Primeiro, o compartimento convencional de pilhas AA localizado na
+            parte traseira do controle é removido. Em seu lugar é instalada a
+            bateria recarregável própria do Xbox 360.
+
+            <br><br>
+
+            Depois, o conector localizado na extremidade do cabo é inserido
+            na porta de carregamento localizada na parte frontal do controle.
+
+            <br><br>
+
+            A outra extremidade do cabo é conectada a uma porta USB do Xbox
+            360. Com o console ligado, o circuito de carregamento entra em
+            funcionamento.
+
+            <br><br>
+
+            O LED localizado no cabo indica o estado da carga. Durante o
+            carregamento, a luz fica vermelha. Quando a bateria termina de
+            carregar, a indicação muda para verde. <span data-assistant-content-reference="" class="xeh6zmm xt0psk2 x1ghz6dp" data-assistant-grouped-webpages="" data-content-reference-type="grouped_webpages"><span aria-label="Fontes" class="xt0psk2 xxhswux x11njtxf" data-assistant-grouped-webpages-list="" role="group"><span class="x1lziwak x13q3soa" data-assistant-grouped-webpages-item=""><button aria-controls="assistant-sources-dialog" aria-haspopup="dialog" aria-label="Centro de Download Microsoft" class="x1qviprw xjtw7fp xomzcpc x1cpjm7i xt81g8a xm4btww x7qwmre xrd0f8c x1hmns74 xy5mcqj x6s0dn4 xjyslct xjbqb8w xrt0l5h xu82sp8 x13yhu5o x4kf0vy xe6aan1 x1ypdohk x3nfvp2 xjb2p0i x1ivwg07 x1gqwrcx x13vifvy xc8icb0 xtu1cor x1scn00m x1lvh1i4 xsnit4v xk2swo9 xt970qd x1cg44al x1005jv x1n2onr6 xkrqix3 xxymvpz" data-assistant-sources-trigger="" data-assistant-sources-payload="[{&quot;attribution&quot;:&quot;Centro de Download Microsoft&quot;,&quot;publishedAt&quot;:1322557087,&quot;sourceIndex&quot;:0,&quot;title&quot;:&quot;Xbox 360 PLAY & CHARGE KIT&quot;,&quot;url&quot;:&quot;https://download.microsoft.com/download/0/9/5/095DA6E0-D069-4440-BF6D-DF5AEAF29FA5/x166952604BRO.pdf?utm_source=chatgpt.com&quot;}]" data-assistant-grouped-webpages-trigger="" type="button"><span aria-hidden="true" class="x1d5dutw x4aliy7 x1r7ld26 x16rqkct x1y0btm7 xmkeg23 x12116fd x13yhu5o xe6aan1 xwz0xwf xdl72j9 x1c4vz4f x2lah0s x6phcfz x7amdea x1poez60 xo5v014 xfi1dq xb3r6kr x1ku5rj1 x1n2onr6" data-assistant-source-icon="">C<img alt="" class="x-default-marker x5yr21d xh8yej3 x10a8y8t xl1xv1r x10l6tqk" data-assistant-source-icon-image="" src="https://www.google.com/s2/favicons?domain=https%3A%2F%2Fdownload.microsoft.com&sz=128" ></span><span class="x1heor9g x1qlqyl8 x1pd3egz xeuugli x101abm8 xryxfnj x1b2iylo xwgcxoh xlyipyv xuxw1ft" data-assistant-reference-title="">Centro de Download Microsoft</span></button></span></span></span>
+
+
+            <br><br>
+
+            O sistema foi projetado para que o controle continue utilizando
+            sua comunicação sem fio com o console durante esse processo.
+            Portanto, conectar o Play & Charge não transforma o controle sem
+            fio em um controle USB convencional. <span data-assistant-content-reference="" class="xeh6zmm xt0psk2 x1ghz6dp" data-assistant-grouped-webpages="" data-content-reference-type="grouped_webpages"><span aria-label="Fontes" class="xt0psk2 xxhswux x11njtxf" data-assistant-grouped-webpages-list="" role="group"><span class="x1lziwak x13q3soa" data-assistant-grouped-webpages-item=""><button aria-controls="assistant-sources-dialog" aria-haspopup="dialog" aria-label="Microsoft Learn, 2 fontes" class="x1qviprw xjtw7fp xomzcpc x1cpjm7i xt81g8a xm4btww x7qwmre xrd0f8c x1hmns74 xy5mcqj x6s0dn4 xjyslct xjbqb8w xrt0l5h xu82sp8 x13yhu5o x4kf0vy xe6aan1 x1ypdohk x3nfvp2 xjb2p0i x1ivwg07 x1gqwrcx x13vifvy xc8icb0 xtu1cor x1scn00m x1lvh1i4 xsnit4v xk2swo9 xt970qd x1cg44al x1005jv x1n2onr6 xkrqix3 xxymvpz" data-assistant-sources-trigger="" data-assistant-sources-payload="[{&quot;attribution&quot;:&quot;Microsoft Learn&quot;,&quot;publishedAt&quot;:1292716800,&quot;sourceIndex&quot;:0,&quot;title&quot;:&quot;XBox 360 controller recognized as an \&quot;unspecified\&quot; device - Microsoft Q&A&quot;,&quot;url&quot;:&quot;https://learn.microsoft.com/en-us/answers/questions/2483880/xbox-360-controller-recognized-as-an-unspecified-d?utm_source=chatgpt.com&quot;},{&quot;attribution&quot;:&quot;Microsoft Learn&quot;,&quot;isSupporting&quot;:true,&quot;sourceIndex&quot;:1,&quot;title&quot;:&quot;Xbox 360 controller keeps flashings its lights - Microsoft Q&A&quot;,&quot;url&quot;:&quot;https://learn.microsoft.com/en-gb/answers/questions/2725053/xbox-360-controller-keeps-flashings-its-lights?utm_source=chatgpt.com&quot;}]" data-assistant-grouped-webpages-trigger="" type="button"><span aria-hidden="true" class="x1d5dutw x4aliy7 x1r7ld26 x16rqkct x1y0btm7 xmkeg23 x12116fd x13yhu5o xe6aan1 xwz0xwf xdl72j9 x1c4vz4f x2lah0s x6phcfz x7amdea x1poez60 xo5v014 xfi1dq xb3r6kr x1ku5rj1 x1n2onr6" data-assistant-source-icon="">M<img alt="" class="x-default-marker x5yr21d xh8yej3 x10a8y8t xl1xv1r x10l6tqk" data-assistant-source-icon-image="" src="https://www.google.com/s2/favicons?domain=https%3A%2F%2Flearn.microsoft.com&sz=128" ></span><span class="x1heor9g x1qlqyl8 x1pd3egz xeuugli x101abm8 xryxfnj x1b2iylo xwgcxoh xlyipyv xuxw1ft" data-assistant-reference-title="">Microsoft Learn</span><span class="x1ir3puv xe6aan1 xdl72j9 x1c4vz4f x2lah0s xxhswux x101abm8 xryxfnj x1b2iylo xwgcxoh" data-assistant-supporting-count="">+1</span></button></span></span></span>
+
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <h2 style="text-align: center;">
+            O Cabo Não é um "Controle com Fio"
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das maiores confusões envolvendo o Play & Charge está
+            justamente no funcionamento do cabo.
+
+            <br><br>
+
+            Apesar de possuir um conector USB em uma das extremidades e estar
+            fisicamente conectado ao controle, o cabo do Play & Charge não
+            transforma o controle sem fio do Xbox 360 em um controle USB
+            tradicional.
+
+            <br><br>
+
+            O objetivo principal do cabo é fornecer energia para o sistema de
+            recarga da bateria.
+
+            <br><br>
+
+            O controle continua utilizando sua comunicação sem fio com o Xbox
+            360 para transmitir os comandos.
+
+            <br><br>
+
+            Isso também significa que simplesmente conectar um controle
+            wireless do Xbox 360 ao computador utilizando o cabo Play &
+            Charge não equivale a possuir um controle Xbox 360 USB.
+
+            <br><br>
+
+            A própria documentação e o histórico de suporte da Microsoft
+            diferenciam o dispositivo "Xbox 360 Wireless Controller via Play
+            & Charge Kit" do funcionamento de um controle USB convencional.
+            
+
+
+C
+Catálogo do Microsoft Update
++1
+      </p>
+
+      <div class="technical-box">
+
+        <h3>
+          RESUMO DO FUNCIONAMENTO
+        </h3>
+
+        <ul>
+
+          <li>
+            O cabo fornece energia para o carregamento.
+          </li>
+
+          <li>
+            A bateria recarregável fica instalada no controle.
+          </li>
+
+          <li>
+            O controle continua sendo um dispositivo sem fio.
+          </li>
+
+          <li>
+            A comunicação dos comandos continua sendo feita pelo sistema
+            wireless do Xbox 360.
+          </li>
+
+          <li>
+            O LED do cabo indica o estado do carregamento.
+          </li>
+
+          <li>
+            O conjunto foi desenvolvido especificamente para o Xbox 360
+            Wireless Controller.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        A Bateria Recarregável
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/xbox360/rechargeable-battery.jpg"
+            alt="Bateria recarregável oficial Xbox 360"
+          />
+
+          <img
+            src="../tgga/xbox360/aa-pack.jpg"
+            alt="Compartimento de duas pilhas AA do controle Xbox 360"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Bateria recarregável e compartimento convencional de pilhas AA ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A bateria é uma das partes mais importantes do conjunto.
+
+        <br><br>
+
+        Ela possui o mesmo formato geral necessário para encaixar no
+        compartimento traseiro do controle sem fio, substituindo
+        diretamente o suporte utilizado pelas duas pilhas AA.
+
+        <br><br>
+
+        A bateria oficial utiliza células NiMH, uma tecnologia bastante
+        comum em baterias recarregáveis da época.
+
+        <br><br>
+
+        A documentação oficial da Microsoft especificava até 35 horas de
+        utilização por carga para o Play & Charge Kit, embora a duração
+        real possa variar de acordo com o uso, idade da bateria, vibração
+        e outras condições. 
+C
+Centro de Download Microsoft
+
+
+
+        <br><br>
+
+        Como acontece com outras baterias recarregáveis, a capacidade não
+        permanece necessariamente igual durante toda a vida útil.
+        A Microsoft informa que o tempo de utilização diminui conforme a
+        bateria envelhece e passa por muitos ciclos de recarga. 
+C
+Centro de Download Microsoft
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        LED de Carregamento
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/xbox360/playcharge-led.jpg"
+            alt="LED do cabo Play & Charge"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Indicador luminoso presente no cabo Play & Charge ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O pequeno LED localizado no cabo é uma das características mais
+        facilmente reconhecíveis do Play & Charge.
+
+        <br><br>
+
+        Quando a bateria está sendo carregada, o indicador fica vermelho.
+
+        <br><br>
+
+        Quando a carga é concluída, o indicador muda para verde.
+
+        <br><br>
+
+        Esse sistema fornece ao jogador uma maneira simples de saber se a
+        bateria ainda está recebendo carga sem precisar abrir qualquer
+        menu ou desmontar o controle.
+
+        <br><br>
+
+        Caso a luz não acenda, uma das primeiras verificações recomendadas
+        pela documentação da Microsoft é conferir se a bateria está
+        corretamente encaixada e travada no compartimento do controle.
+
+
+C
+Centro de Download Microsoft
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Tempo de Carregamento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O tempo necessário para completar uma carga pode variar conforme
+        a versão da bateria, seu estado de conservação e as condições de
+        utilização.
+
+        <br><br>
+
+        Nos manuais do Play & Charge, a Microsoft informa tempos de carga
+        que chegam a várias horas. Uma das versões da documentação indica
+        até oito horas para uma carga completa utilizando o Play & Charge
+        Kit, enquanto documentação anterior registra até seis horas.
+        Portanto, não é recomendável tratar um único valor como universal
+        para todas as revisões do acessório. 
+C
+Centro de Download Microsoft
++1
+
+
+
+        <br><br>
+
+        Uma bateria completamente descarregada também pode precisar de
+        algum tempo antes de fornecer energia suficiente para permitir que
+        o controle seja utilizado durante o processo de carregamento.
+
+        <br><br>
+
+        A Microsoft informa que uma bateria muito descarregada pode levar
+        até aproximadamente 20 minutos para acumular carga suficiente para
+        alimentar o controle em uso. 
+C
+Centro de Download Microsoft
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Jogar Enquanto Carrega
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Essa é provavelmente a principal característica do acessório.
+
+        <br><br>
+
+        O jogador pode conectar o cabo ao controle e continuar jogando
+        enquanto a bateria recebe carga.
+
+        <br><br>
+
+        O Xbox 360 continua recebendo os comandos do controle através da
+        comunicação sem fio. O cabo permanece responsável pelo processo
+        de alimentação e recarga.
+
+        <br><br>
+
+        Dessa forma, uma bateria que esteja ficando sem carga não precisa
+        necessariamente interromper uma partida.
+
+        <br><br>
+
+        A Microsoft, entretanto, recomenda organizar o cabo de maneira que
+        ele não fique em uma posição onde pessoas ou animais possam
+        tropeçar ou puxá-lo acidentalmente. 
+C
+Centro de Download Microsoft
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Um Detalhe Interessante: Vibração
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O sistema de vibração do controle também pode influenciar o tempo
+        necessário para carregar a bateria.
+
+        <br><br>
+
+        A própria documentação da Microsoft observa que jogos que utilizam
+        feedback de vibração podem aumentar o tempo de carregamento quando
+        o jogador continua utilizando o controle durante a recarga.
+
+
+C
+Centro de Download Microsoft
+        <br><br>
+
+        Isso acontece porque o controle permanece consumindo energia
+        enquanto simultaneamente recebe energia do cabo.
+
+        <br><br>
+
+        Assim, durante uma partida intensa com vibração constante, parte
+        da energia fornecida é utilizada imediatamente pelo próprio
+        controle.
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Histórico e Importância
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/xbox360/xbox360-console.jpg"
+            alt="Console Xbox 360"
+          />
+
+          <img
+            src="../tgga/xbox360/xbox360-controller.jpg"
+            alt="Controle sem fio Xbox 360"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Xbox 360 e seu controle sem fio ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O Xbox 360 chegou ao mercado em 2005 e consolidou uma geração na
+        qual acessórios sem fio passaram a fazer parte importante da
+        experiência dos consoles domésticos.
+
+        <br><br>
+
+        O controle wireless eliminava o cabo de comunicação entre jogador
+        e console, mas criava uma nova necessidade: alimentação.
+
+        <br><br>
+
+        A solução mais simples era utilizar duas pilhas AA. A alternativa
+        oficial da Microsoft era utilizar uma bateria recarregável e um
+        sistema de carregamento.
+
+        <br><br>
+
+        O Play & Charge representa justamente essa transição entre o
+        controle tradicional alimentado por pilhas substituíveis e o
+        conceito moderno de controles com baterias internas ou conjuntos
+        recarregáveis dedicados.
+
+        <br><br>
+
+        Por isso, apesar de ser um acessório relativamente simples, o
+        conjunto possui valor histórico dentro da evolução dos periféricos
+        de consoles.
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Play & Charge x Controle Com Fio
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        É importante separar dois produtos que visualmente podem parecer
+        semelhantes.
+
+        <br><br>
+
+        O controle Xbox 360 Wired Controller foi desenvolvido desde o
+        início para transmitir comandos através do cabo.
+
+        <br><br>
+
+        Já o Xbox 360 Wireless Controller utiliza comunicação sem fio e
+        recebe energia através das pilhas ou da bateria recarregável.
+
+        <br><br>
+
+        O Play & Charge pertence à segunda categoria.
+
+        <br><br>
+
+        Portanto:
+
+        <br><br>
+
+        <strong>
+          Play & Charge ≠ Controle Xbox 360 com fio.
+        </strong>
+
+        <br><br>
+
+        O cabo do Play & Charge é essencialmente parte do sistema de
+        alimentação e recarga da bateria. Ele não deve ser confundido com
+        um cabo USB de dados convencional.
+
+        <br><br>
+
+        Essa diferença também explica por que conectar o Play & Charge a
+        um computador não transforma automaticamente o controle wireless
+        em um gamepad USB. A documentação e os registros de suporte da
+        Microsoft identificam o dispositivo como "Xbox 360 Wireless
+        Controller via Play & Charge Kit". 
+C
+Catálogo do Microsoft Update
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Modelos, Revisões e Variações
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Durante a vida comercial do Xbox 360 existiram diferentes
+        apresentações do Play & Charge Kit, incluindo revisões de
+        embalagem, documentação e versões destinadas a diferentes
+        mercados.
+
+        <br><br>
+
+        O princípio de funcionamento, entretanto, permaneceu praticamente
+        o mesmo: uma bateria recarregável própria para o controle wireless
+        acompanhada por um cabo destinado à recarga.
+
+        <br><br>
+
+        Também existiu o Xbox 360 Quick Charge Kit, que utilizava uma
+        estação de carregamento dedicada e possuía uma proposta diferente
+        do cabo Play & Charge.
+
+        <br><br>
+
+        A documentação da Microsoft trata o Play & Charge e o Quick Charge
+        como métodos distintos para recarregar a bateria. 
+C
+Centro de Download Microsoft
+
+
+
+      </p>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/xbox360/playcharge-original.jpg"
+              alt="Xbox 360 Play & Charge Kit original"
+            />
+
+            <figcaption>
+              Xbox 360 Play & Charge Kit — versão original
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/xbox360/playcharge-revision.jpg"
+              alt="Xbox 360 Play & Charge Kit revisão"
+            />
+
+            <figcaption>
+              Xbox 360 Play & Charge Kit — revisão
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/xbox360/rechargeable-battery.jpg"
+              alt="Bateria recarregável Xbox 360"
+            />
+
+            <figcaption>
+              Xbox 360 Rechargeable Battery Pack
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/xbox360/quick-charge.jpg"
+              alt="Xbox 360 Quick Charge Kit"
+            />
+
+            <figcaption>
+              Xbox 360 Quick Charge Kit
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Conservação da Bateria
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Como toda bateria recarregável, a bateria do Play & Charge possui
+        vida útil limitada.
+
+        <br><br>
+
+        Com o passar do tempo e a realização de muitos ciclos de carga e
+        descarga, sua capacidade pode diminuir.
+
+        <br><br>
+
+        Uma bateria antiga pode apresentar sintomas como duração muito
+        curta, descarregamento rápido ou dificuldade para manter a carga.
+
+        <br><br>
+
+        A Microsoft também recomenda remover e armazenar a bateria caso o
+        controle fique sem utilização por períodos prolongados. 
+C
+Centro de Download Microsoft
+
+
+
+        <br><br>
+
+        Em caso de necessidade de limpeza dos contatos, a recomendação
+        oficial é utilizar somente um pano seco, evitando água e produtos
+        químicos nos contatos elétricos. 
+C
+Centro de Download Microsoft
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Segurança
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A bateria utilizada pelo Play & Charge é um componente químico e
+        deve ser tratada como tal.
+
+        <br><br>
+
+        A documentação oficial alerta para não aquecer, abrir, perfurar,
+        esmagar ou tentar modificar a bateria.
+
+        <br><br>
+
+        Também não se deve permitir que objetos metálicos entrem em contato
+        diretamente com os terminais, pois isso pode causar aquecimento e
+        outros riscos.
+
+        <br><br>
+
+        Baterias danificadas por impacto, líquidos ou calor intenso podem
+        não ser mais adequadas para utilização.
+
+        <br><br>
+
+        O descarte de baterias deve seguir as regras locais aplicáveis à
+        reciclagem e aos resíduos eletrônicos. 
+C
+Centro de Download Microsoft
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <h2 style="text-align: center;">
+        Curiosidades
+      </h2>
+
+      <div class="technical-box">
+
+        <h3>
+          FATOS E DETALHES
+        </h3>
+
+        <ul>
+
+          <li>
+            O Play & Charge foi desenvolvido especificamente para o
+            Xbox 360 Wireless Controller.
+          </li>
+
+          <li>
+            A bateria oficial utiliza tecnologia NiMH.
+          </li>
+
+          <li>
+            A documentação da Microsoft especificava até aproximadamente
+            35 horas de jogo por carga em determinadas versões do kit.
+          </li>
+
+          <li>
+            O LED vermelho indica carregamento.
+          </li>
+
+          <li>
+            O LED verde indica que a bateria está carregada.
+          </li>
+
+          <li>
+            O controle pode continuar sendo utilizado enquanto carrega.
+          </li>
+
+          <li>
+            Mesmo conectado ao Play & Charge, o controle wireless continua
+            utilizando comunicação sem fio para os comandos.
+          </li>
+
+          <li>
+            O cabo não deve ser confundido com o cabo de dados de um
+            controle Xbox 360 com fio.
+          </li>
+
+          <li>
+            Uma bateria muito descarregada pode precisar de até cerca de
+            20 minutos antes de acumular carga suficiente para permitir
+            utilização do controle durante a recarga.
+          </li>
+
+          <li>
+            A vibração pode aumentar o tempo necessário para recarregar
+            quando o controle está sendo utilizado durante o carregamento.
+          </li>
+
+          <li>
+            A bateria perde capacidade naturalmente conforme envelhece e
+            passa por ciclos de recarga.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="tgga.html">
+            ○ Games - Xbox 360
+          </a>
+        </li>
+
+        <li>
+          <a href="tgga.html">
+            ○ Periféricos - Xbox 360
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- ==========================================
+         COMPONENTES DO ITEM
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - COMPONENTES DO ITEM -
+      </h3>
+
+      <div class="component-list">
+
+        <details class="component-item">
+
+          <summary>
+            Cabo Play & Charge
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Cabo desenvolvido pela Microsoft para realizar a conexão
+              entre o Xbox 360 e a bateria recarregável instalada no
+              controle wireless.
+            </p>
+
+            <p>
+              Sua principal função é transportar energia elétrica para o
+              circuito de carregamento da bateria.
+            </p>
+
+            <ul class="component-specs">
+
+              <li>
+                Tipo: Cabo de carregamento
+              </li>
+
+              <li>
+                Aplicação: Xbox 360 Wireless Controller
+              </li>
+
+              <li>
+                Função: Alimentação e recarga
+              </li>
+
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Conector USB
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conector localizado na extremidade destinada à conexão com
+              uma porta USB do console.
+            </p>
+
+            <p>
+              É através dessa conexão que a energia necessária para o
+              carregamento é fornecida ao sistema.
+            </p>
+
+            <ul class="component-specs">
+
+              <li>
+                Tipo: USB
+              </li>
+
+              <li>
+                Função: Entrada de alimentação
+              </li>
+
+              <li>
+                Conexão: Xbox 360 / fonte USB compatível
+              </li>
+
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Conector Proprietário do Controle
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conector localizado na extremidade que entra na porta de
+              carregamento do controle Xbox 360.
+            </p>
+
+            <p>
+              O formato foi desenvolvido especificamente para a interface
+              do controle wireless.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            LED Indicador de Carregamento
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequeno indicador luminoso localizado no cabo.
+            </p>
+
+            <p>
+              Durante o carregamento, a indicação é vermelha. Quando a
+              bateria está completamente carregada, a indicação muda para
+              verde.
+            </p>
+
+            <ul class="component-specs">
+
+              <li>
+                Função: Indicação de estado
+              </li>
+
+              <li>
+                Vermelho: Carregando
+              </li>
+
+              <li>
+                Verde: Carga completa
+              </li>
+
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Circuito de Indicação
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Circuito eletrônico responsável pelo controle da indicação
+              luminosa do estado de carregamento.
+            </p>
+
+            <p>
+              Ele permite ao usuário identificar visualmente a condição
+              atual do processo de carga.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Condutores Internos
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Fios metálicos internos utilizados para transportar a
+              corrente elétrica através do cabo.
+            </p>
+
+            <ul class="component-specs">
+
+              <li>
+                Função: Transporte de energia
+              </li>
+
+              <li>
+                Material condutor: Metal
+              </li>
+
+              <li>
+                Proteção: Isolamento plástico
+              </li>
+
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Isolamento dos Condutores
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Material isolante que envolve os condutores internos,
+              impedindo contatos elétricos acidentais e protegendo os fios
+              contra o ambiente externo.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Revestimento Externo do Cabo
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Camada externa responsável por proteger os condutores
+              internos contra atrito, flexão e danos mecânicos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Alívio de Tensão
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Região reforçada próxima aos conectores que reduz a
+              concentração de esforços mecânicos nos fios.
+            </p>
+
+            <p>
+              Essa peça é particularmente importante em cabos que sofrem
+              flexões frequentes próximos às extremidades.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Bateria Recarregável Xbox 360
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Bateria destinada a substituir o compartimento convencional
+              de duas pilhas AA do controle wireless.
+            </p>
+
+            <p>
+              A bateria oficial utiliza tecnologia NiMH.
+            </p>
+
+            <ul class="component-specs">
+
+              <li>
+                Tipo: Bateria recarregável
+              </li>
+
+              <li>
+                Tecnologia: NiMH
+              </li>
+
+              <li>
+                Aplicação: Xbox 360 Wireless Controller
+              </li>
+
+              <li>
+                Autonomia anunciada: até aproximadamente 35 horas,
+                dependendo da versão e das condições de uso
+              </li>
+
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Terminais Positivos da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Contatos metálicos utilizados para estabelecer conexão
+              elétrica entre a bateria e o controle.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Terminais Negativos da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Contatos elétricos responsáveis pelo retorno da corrente
+              dentro do circuito de alimentação.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Carcaça da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Estrutura plástica responsável por acomodar e proteger as
+              células internas da bateria.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Células NiMH
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Elementos eletroquímicos internos responsáveis por armazenar
+              a energia elétrica que será utilizada pelo controle.
+            </p>
+
+            <p>
+              A tecnologia utilizada pela bateria oficial é o níquel-hidreto
+              metálico (NiMH).
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Controle de Proteção e Carregamento
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conjunto de circuitos associados ao controle do processo de
+              carregamento e à operação segura da bateria.
+            </p>
+
+            <p>
+              A arquitetura exata pode variar conforme a revisão da bateria.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Compartimento de Bateria do Controle
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Espaço localizado na parte traseira do controle wireless.
+            </p>
+
+            <p>
+              É originalmente destinado ao suporte de duas pilhas AA e
+              também recebe a bateria recarregável oficial.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Lingueta de Travamento
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Pequena peça mecânica utilizada para prender o conjunto da
+              bateria no compartimento traseiro do controle.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Porta de Carregamento do Controle
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Conector localizado na parte frontal do Xbox 360 Wireless
+              Controller.
+            </p>
+
+            <p>
+              É nele que o cabo Play & Charge é conectado durante a
+              recarga.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Circuito de Gerenciamento de Energia
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Parte eletrônica do sistema responsável pelo gerenciamento
+              da energia recebida pelo controle e pela bateria.
+            </p>
+
+            <p>
+              O circuito participa do processo de alimentação e recarga
+              quando o Play & Charge está conectado.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Sistema Wireless do Controle
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema de comunicação sem fio responsável pela transmissão
+              dos comandos entre o controle e o Xbox 360.
+            </p>
+
+            <p>
+              Ele continua sendo utilizado mesmo quando o cabo Play &
+              Charge está conectado.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Motor de Vibração
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Motores internos responsáveis pelo feedback de vibração do
+              controle.
+            </p>
+
+            <p>
+              O uso de vibração durante o carregamento aumenta o consumo
+              de energia e pode prolongar o tempo necessário para completar
+              a carga. 
+C
+Centro de Download Microsoft
+
+
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Botão Xbox Guide
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Botão central utilizado para acessar as funções do sistema
+              Xbox 360 e identificar o estado do controle.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Controle de Carga da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema eletrônico que regula o processo de recarga e evita
+              que a bateria seja simplesmente conectada diretamente à fonte
+              sem controle apropriado.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Indicador de Estado da Bateria
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Informações relacionadas ao nível de carga podem ser
+              consultadas através do sistema do Xbox 360.
+            </p>
+
+            <p>
+              O manual do Play & Charge também descreve um indicador de
+              carga acessível através do Xbox Guide. 
+C
+Centro de Download Microsoft
+
+
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Porta USB do Xbox 360
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Porta USB utilizada como fonte de alimentação para o cabo
+              Play & Charge quando conectado ao console.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Fonte de Alimentação do Xbox 360
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema de alimentação do console responsável por fornecer a
+              energia elétrica necessária para suas diversas funções,
+              incluindo as portas USB utilizadas pelos acessórios.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Blindagem e Proteção dos Conectores
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Elementos mecânicos presentes nos conectores ajudam a
+              proteger os contatos elétricos e manter a conexão estável.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Terminais de Contato do Cabo
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Contatos metálicos localizados nos conectores responsáveis
+              por estabelecer a ligação elétrica entre o cabo e os
+              equipamentos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Embalagem Original
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              A embalagem comercial do Play & Charge faz parte do conjunto
+              histórico do produto e apresenta informações de compatibilidade,
+              instruções e identificação do acessório.
+            </p>
+
+            <p>
+              Para colecionadores, caixas e manuais originais podem possuir
+              interesse documental além do próprio acessório.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>
+            Manual de Instruções
+          </summary>
+
+          <div class="component-description">
+
+            <p>
+              Documento que acompanha o produto e explica instalação,
+              carregamento, segurança, limpeza e solução de problemas.
+            </p>
+
+            <p>
+              A Microsoft disponibilizou diferentes revisões do manual
+              oficial ao longo da vida do produto. 
+C
+Centro de Download Microsoft
++1
+
+
+            </p>
+
+          </div>
+
+        </details>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html> 

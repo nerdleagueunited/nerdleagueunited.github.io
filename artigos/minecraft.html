@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Minecraft Xbox 360</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Minecraft chegou ao Xbox 360 em 2012, levando a
+          experiência de construção, exploração e sobrevivência
+          do jogo para os consoles da sétima geração ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Minecraft chegou ao Xbox 360 em 2012, levando a
+          experiência de construção, exploração e sobrevivência
+          do jogo para os consoles da sétima geração ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Minecraft — Xbox 360 Edition
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/minecraft_xbox360.jpg"
+              alt="Minecraft Xbox 360 Edition"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Minecraft: Xbox 360 Edition
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft: Xbox 360 Edition é a versão de Minecraft
+            desenvolvida para o Xbox 360 e lançada pela Mojang
+            em parceria com a 4J Studios e a Microsoft.<br>
+
+            A edição chegou ao Xbox 360 em 2012 e adaptou a
+            experiência de Minecraft para controles e recursos
+            específicos do console.<br>
+
+            O jogador pode explorar mundos gerados proceduralmente,
+            coletar recursos, construir estruturas, fabricar
+            ferramentas e enfrentar criaturas em diferentes
+            ambientes.<br>
+
+            A versão também possui modos de jogo como Survival
+            e Creative, além de multiplayer local e online
+            dependendo dos recursos disponíveis na plataforma.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora original:</strong>
+                Mojang
+              </li>
+
+              <li>
+                <strong>Desenvolvedora da versão Xbox 360:</strong>
+                4J Studios
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Microsoft Studios
+              </li>
+
+              <li>
+                <strong>Designer / criador original:</strong>
+                Markus Persson
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                9 de maio de 2012
+              </li>
+
+              <li>
+                <strong>Gêneros:</strong>
+                Sandbox / Sobrevivência
+              </li>
+
+              <li>
+                <strong>Modos:</strong>
+                Single-player / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Xbox Live / Disco físico
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft foi criado originalmente por Markus Persson,
+            conhecido como Notch, e começou seu desenvolvimento
+            em 2009.<br>
+
+            O projeto cresceu rapidamente através de versões
+            disponibilizadas para computador e posteriormente
+            recebeu adaptações para diferentes plataformas.<br>
+
+            Para levar Minecraft aos consoles, a Mojang trabalhou
+            com a 4J Studios, que ficou responsável por adaptar
+            o jogo para sistemas como Xbox 360, PlayStation 3
+            e posteriormente outras plataformas.<br>
+
+            A versão de Xbox 360 foi desenvolvida levando em
+            consideração o controle do console, a interface de
+            usuário e as limitações técnicas do hardware.<br>
+
+            A edição recebeu diversas atualizações durante sua
+            existência, adicionando novos blocos, itens, criaturas,
+            biomas e funcionalidades.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/minecraft_pc.jpg"
+                alt="Minecraft no computador"
+              />
+
+              <img
+                src="../tgga/xbox360.jpg"
+                alt="Xbox 360"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Minecraft e Xbox 360 — duas plataformas importantes para a história da edição ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O lançamento de Minecraft no Xbox 360 ocorreu durante
+            a geração de consoles que também incluía PlayStation 3
+            e Wii.<br>
+
+            Até então, Minecraft havia se tornado especialmente
+            conhecido entre jogadores de computador, mas a versão
+            para Xbox 360 ajudou a ampliar a presença do jogo
+            entre jogadores de consoles.<br>
+
+            A edição utilizava uma interface adaptada ao controle
+            e oferecia uma experiência mais padronizada em relação
+            às diferentes configurações de hardware dos computadores.<br>
+
+            Minecraft também passou a fazer parte da biblioteca
+            digital do Xbox Live Arcade, ficando associado a uma
+            das plataformas digitais mais importantes do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft: Xbox 360 Edition foi lançado em 9 de maio
+            de 2012 através do Xbox Live Arcade.<br>
+
+            A versão posteriormente recebeu atualizações que
+            expandiram significativamente o conteúdo disponível
+            no lançamento inicial.<br>
+
+            Entre as atualizações foram adicionados novos blocos,
+            receitas, criaturas, biomas, estruturas e sistemas
+            presentes em versões mais recentes do jogo.<br>
+
+            O jogo também recebeu uma edição física em disco,
+            permitindo que Minecraft fosse distribuído em lojas
+            junto a outros jogos do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MUNDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mundo e Geração Procedural
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/minecraft_overworld.jpg"
+                alt="Overworld de Minecraft"
+              />
+
+              <img
+                src="../tgga/minecraft_landscape.jpg"
+                alt="Paisagem de Minecraft"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ O mundo de Minecraft é formado por blocos e gerado proceduralmente ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais características de Minecraft é a
+            geração procedural dos mundos.<br>
+
+            O cenário é formado por blocos que representam
+            diferentes materiais e elementos do ambiente.<br>
+
+            Dependendo da geração do mundo, o jogador pode
+            encontrar florestas, planícies, desertos, montanhas,
+            oceanos, rios, cavernas e outros ambientes.<br>
+
+            A versão Xbox 360 possuía limitações de tamanho
+            de mundo quando comparada a versões modernas, mas
+            ainda oferecia uma grande área para exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODOS DE JOGO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modos de Jogo
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS MODOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Survival:</strong>
+                o jogador precisa coletar recursos, criar
+                ferramentas, construir abrigo e administrar
+                sua sobrevivência.
+              </li>
+
+              <li>
+                <strong>Creative:</strong>
+                permite construir livremente utilizando
+                uma grande quantidade de blocos e itens.
+              </li>
+
+              <li>
+                <strong>Tutorial:</strong>
+                modo criado para ensinar os fundamentos
+                de Minecraft aos novos jogadores.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SOBREVIVÊNCIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modo Survival
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No modo Survival, o jogador começa com poucos recursos
+            e precisa explorar o ambiente para obter materiais.<br>
+
+            Madeira, pedra, carvão, ferro, ouro, diamante e outros
+            recursos podem ser encontrados e utilizados na criação
+            de ferramentas, armas, armaduras e construções.<br>
+
+            Durante a noite, criaturas hostis podem aparecer,
+            tornando importante construir um abrigo ou utilizar
+            outras estratégias para permanecer seguro.<br>
+
+            O jogador também possui uma barra de fome, que precisa
+            ser administrada através da obtenção e preparação
+            de alimentos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CREATIVE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modo Creative
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O modo Creative permite que o jogador construa sem
+            precisar coletar manualmente os materiais.<br>
+
+            O jogador possui acesso a uma grande quantidade de
+            blocos e itens e pode voar pelo mundo.<br>
+
+            Nesse modo, o foco está principalmente na construção,
+            experimentação e criação de estruturas.<br>
+
+            Muitos jogadores utilizam o Creative para construir
+            casas, cidades, castelos, máquinas, mapas e outras
+            criações de grande escala.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CRAFTING
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Crafting
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O sistema de crafting é uma das principais mecânicas
+            de Minecraft.<br>
+
+            Materiais coletados no mundo podem ser combinados
+            para produzir novos objetos.<br>
+
+            Madeira pode ser transformada em tábuas, gravetos
+            e ferramentas, enquanto minerais podem ser utilizados
+            para criar equipamentos mais resistentes.<br>
+
+            A Crafting Table amplia as possibilidades de criação
+            e permite produzir ferramentas, armas, blocos,
+            mecanismos e diversos outros objetos.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_crafting.jpg"
+                  alt="Sistema de crafting"
+                />
+
+                <figcaption>
+                  Crafting
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_crafting_table.jpg"
+                  alt="Crafting Table"
+                />
+
+                <figcaption>
+                  Crafting Table
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BIOMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Biomas
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os biomas determinam diferentes tipos de ambiente
+            encontrados no mundo de Minecraft.<br>
+
+            Cada região pode apresentar diferentes blocos,
+            vegetação, animais e características de terreno.<br>
+
+            Entre os ambientes encontrados na versão Xbox 360
+            estão florestas, planícies, desertos, selvas,
+            pântanos, montanhas, oceanos e áreas nevadas.<br>
+
+            A exploração dos biomas é importante para encontrar
+            recursos específicos e diferentes tipos de materiais.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Bioma</th>
+                <th>Características</th>
+                <th>Recursos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Planície</td>
+                <td>Terreno aberto e relativamente plano</td>
+                <td>Grama / Flores / Animais</td>
+              </tr>
+
+              <tr>
+                <td>Floresta</td>
+                <td>Grande quantidade de árvores</td>
+                <td>Madeira / Animais</td>
+              </tr>
+
+              <tr>
+                <td>Deserto</td>
+                <td>Grandes áreas de areia</td>
+                <td>Areia / Cactos</td>
+              </tr>
+
+              <tr>
+                <td>Selva</td>
+                <td>Vegetação densa e árvores altas</td>
+                <td>Madeira / Frutas</td>
+              </tr>
+
+              <tr>
+                <td>Pântano</td>
+                <td>Áreas alagadas e vegetação específica</td>
+                <td>Argila / Vegetação</td>
+              </tr>
+
+              <tr>
+                <td>Neve</td>
+                <td>Regiões frias e cobertas de neve</td>
+                <td>Neve / Gelo</td>
+              </tr>
+
+              <tr>
+                <td>Oceano</td>
+                <td>Grandes áreas de água</td>
+                <td>Peixes / Areia / Recursos marítimos</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MOBS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Criaturas e Mobs
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/minecraft_creeper.jpg"
+                alt="Creeper"
+              />
+
+              <img
+                src="../tgga/minecraft_zombie.jpg"
+                alt="Zombie"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Creeper e Zombie ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft possui diversas criaturas, conhecidas
+            como mobs, que habitam o mundo.<br>
+
+            Algumas são pacíficas e podem fornecer alimentos,
+            materiais ou outros recursos.<br>
+
+            Outras são hostis e atacam o jogador, principalmente
+            em condições de pouca iluminação ou durante a noite.<br>
+
+            Os mobs possuem comportamentos diferentes e fazem
+            parte da dinâmica de exploração e sobrevivência
+            do jogo.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS MOBS -
+            </h3>
+
+            <ul>
+
+              <li>Creeper</li>
+              <li>Zombie</li>
+              <li>Skeleton</li>
+              <li>Spider</li>
+              <li>Enderman</li>
+              <li>Slime</li>
+              <li>Witch</li>
+              <li>Ghast</li>
+              <li>Blaze</li>
+              <li>Zombie Pigman</li>
+              <li>Chicken</li>
+              <li>Cow</li>
+              <li>Pig</li>
+              <li>Sheep</li>
+              <li>Wolf</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DIMENSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Dimensões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft apresenta diferentes dimensões que podem
+            ser acessadas através de estruturas específicas.<br>
+
+            A dimensão principal é o Overworld, onde o jogador
+            inicia sua aventura e encontra a maior parte dos
+            ambientes e recursos básicos.<br>
+
+            O Nether é uma dimensão perigosa composta por
+            grandes áreas de Netherrack, lava e criaturas
+            exclusivas.<br>
+
+            O The End é uma dimensão especial relacionada
+            ao Ender Dragon e ao encerramento da progressão
+            tradicional de Survival.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - DIMENSÕES -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Overworld:</strong>
+                mundo principal.
+              </li>
+
+              <li>
+                <strong>Nether:</strong>
+                dimensão subterrânea e perigosa.
+              </li>
+
+              <li>
+                <strong>The End:</strong>
+                dimensão associada ao Ender Dragon.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               REDSTONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Redstone
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A Redstone permite criar mecanismos e circuitos
+            dentro do mundo de Minecraft.<br>
+
+            Ela pode transmitir sinais e ser utilizada em
+            mecanismos como portas automáticas, pistões,
+            trilhos, armadilhas e sistemas de iluminação.<br>
+
+            Combinando diferentes componentes, os jogadores
+            podem construir máquinas cada vez mais complexas.<br>
+
+            A Redstone também contribuiu para transformar
+            Minecraft em uma plataforma de criação e
+            experimentação além da simples construção.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESTRUTURAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Estruturas e Exploração
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além dos ambientes naturais, o mundo pode conter
+            estruturas geradas automaticamente.<br>
+
+            Aldeias, masmorras, fortalezas e outras construções
+            podem ser encontradas durante a exploração.<br>
+
+            Algumas estruturas possuem inimigos, baús ou
+            recursos que incentivam o jogador a explorar
+            regiões diferentes do mapa.<br>
+
+            A exploração também permite encontrar cavernas
+            e áreas subterrâneas contendo minerais e outros
+            materiais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BOSS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ender Dragon
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/minecraft_end.jpg"
+                alt="The End"
+              />
+
+              <img
+                src="../tgga/minecraft_enderdragon.jpg"
+                alt="Ender Dragon"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ The End e Ender Dragon ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Ender Dragon é o principal chefe associado à
+            progressão de Minecraft em Survival.<br>
+
+            Para chegar até ele, o jogador precisa encontrar
+            uma Stronghold e ativar o portal para The End.<br>
+
+            A dimensão possui grandes ilhas de End Stone e
+            estruturas relacionadas aos Endermen.<br>
+
+            O combate contra o Ender Dragon envolve destruir
+            os cristais presentes nas torres e depois atacar
+            o próprio dragão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer no Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das características importantes da edição Xbox 360
+            era a possibilidade de jogar Minecraft acompanhado
+            de outras pessoas.<br>
+
+            O jogo oferecia multiplayer em tela dividida no
+            mesmo console e também suporte a partidas online
+            através do Xbox Live.<br>
+
+            A experiência cooperativa permitia que jogadores
+            explorassem o mesmo mundo, coletassem recursos e
+            construíssem estruturas juntos.<br>
+
+            O multiplayer contribuiu para tornar a edição de
+            Xbox 360 especialmente associada a sessões de
+            construção e exploração entre amigos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TUTORIAL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tutorial World
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição de Xbox 360 recebeu um mundo tutorial
+            desenvolvido especificamente para ensinar os
+            fundamentos de Minecraft aos jogadores.<br>
+
+            O ambiente apresentava exemplos de construções,
+            instruções sobre coleta de materiais, crafting,
+            mineração e outras mecânicas.<br>
+
+            Ao longo das atualizações, o mundo tutorial foi
+            modificado e expandido para apresentar recursos
+            adicionados ao jogo.<br>
+
+            Para muitos jogadores de Xbox 360, o Tutorial World
+            acabou se tornando uma das características mais
+            marcantes da edição.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ATUALIZAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Atualizações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft: Xbox 360 Edition recebeu uma grande
+            quantidade de atualizações durante seu ciclo de vida.<br>
+
+            Essas atualizações adicionaram novos materiais,
+            criaturas, biomas, estruturas, receitas e sistemas
+            de jogo.<br>
+
+            A edição começou com um conteúdo mais limitado
+            em comparação às versões de computador e recebeu
+            expansões progressivas até alcançar uma quantidade
+            muito maior de recursos.<br>
+
+            Entre os conteúdos adicionados ao longo do tempo
+            estavam sistemas relacionados a cavalos, aldeias,
+            novos biomas, The End e diversas novas construções.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Período</th>
+                <th>Tipo de conteúdo</th>
+                <th>Exemplos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Lançamento</td>
+                <td>Conteúdo básico</td>
+                <td>Survival / Creative / Crafting</td>
+              </tr>
+
+              <tr>
+                <td>Atualizações iniciais</td>
+                <td>Novos blocos e sistemas</td>
+                <td>Itens / Mobs / Construções</td>
+              </tr>
+
+              <tr>
+                <td>Atualizações intermediárias</td>
+                <td>Expansão do mundo</td>
+                <td>Biomas / Estruturas / Animais</td>
+              </tr>
+
+              <tr>
+                <td>Atualizações posteriores</td>
+                <td>Conteúdo avançado</td>
+                <td>The End / Novos recursos / Sistemas</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SKINS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Skins e Conteúdo Adicional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição Xbox 360 também recebeu diferentes pacotes
+            de skins disponibilizados através da Xbox Live.<br>
+
+            Esses pacotes permitiam alterar a aparência do
+            personagem controlado pelo jogador sem modificar
+            as mecânicas fundamentais do jogo.<br>
+
+            Alguns conjuntos utilizavam personagens relacionados
+            a outras propriedades da cultura pop, enquanto
+            outros apresentavam variações de personagens e
+            temas próprios de Minecraft.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PACOTE FÍSICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edição Física
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_xbox360_box.jpg"
+                  alt="Caixa de Minecraft Xbox 360"
+                />
+
+                <figcaption>
+                  Caixa — Minecraft Xbox 360 Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_xbox360_disc.jpg"
+                  alt="Disco de Minecraft Xbox 360"
+                />
+
+                <figcaption>
+                  Disco — Minecraft Xbox 360 Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_xbox360_manual.jpg"
+                  alt="Manual de Minecraft Xbox 360"
+                />
+
+                <figcaption>
+                  Manual / materiais físicos
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_xbox360_cover.jpg"
+                  alt="Capa de Minecraft Xbox 360"
+                />
+
+                <figcaption>
+                  Capa — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado da Edição Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Minecraft: Xbox 360 Edition foi uma das primeiras
+            versões de console de Minecraft e teve papel importante
+            na expansão do jogo para o público dos consoles.<br>
+
+            A edição apresentou uma interface própria, suporte
+            a controles físicos, multiplayer em tela dividida
+            e um sistema de atualizações adaptado ao Xbox 360.<br>
+
+            Durante sua existência, recebeu uma quantidade
+            significativa de conteúdo e formou uma comunidade
+            própria de jogadores.<br>
+
+            A versão também marcou uma geração de jogadores que
+            teve contato com Minecraft principalmente através
+            do Xbox 360.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Minecraft: Xbox 360 Edition foi lançado em
+                9 de maio de 2012.
+              </li>
+
+              <li>
+                A versão foi desenvolvida para o Xbox 360
+                pela 4J Studios.
+              </li>
+
+              <li>
+                O jogo foi disponibilizado inicialmente
+                através do Xbox Live Arcade.
+              </li>
+
+              <li>
+                A edição possuía suporte a multiplayer
+                em tela dividida.
+              </li>
+
+              <li>
+                O Xbox 360 recebeu um mundo tutorial
+                próprio de Minecraft.
+              </li>
+
+              <li>
+                A edição recebeu diversas atualizações
+                durante seu ciclo de vida.
+              </li>
+
+              <li>
+                O tamanho dos mundos era limitado em
+                comparação com versões posteriores.
+              </li>
+
+              <li>
+                Minecraft utiliza blocos como base para
+                construção, exploração e coleta de recursos.
+              </li>
+
+              <li>
+                O Ender Dragon funciona como um dos principais
+                objetivos da progressão tradicional de Survival.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ELEMENTOS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Materiais e Itens
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_diamond.jpg"
+                  alt="Diamante Minecraft"
+                />
+
+                <figcaption>
+                  Diamante
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_iron.jpg"
+                  alt="Ferro Minecraft"
+                />
+
+                <figcaption>
+                  Ferro
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_redstone.jpg"
+                  alt="Redstone Minecraft"
+                />
+
+                <figcaption>
+                  Redstone
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/minecraft_gold.jpg"
+                  alt="Ouro Minecraft"
+                />
+
+                <figcaption>
+                  Ouro
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="minecraftxbox360.html">
+                ○ Games - Minecraft Xbox 360
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Steve</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos personagens padrão de Minecraft.
+                  Pode ser controlado pelo jogador.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Personagem jogável</li>
+                  <li>Equipamentos: Sim</li>
+                  <li>Construção: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alex</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem jogável disponibilizado como
+                  uma das aparências padrão de Minecraft.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Creeper</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura hostil conhecida por se aproximar
+                  silenciosamente do jogador e explodir.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Zombie</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura hostil que persegue o jogador
+                  principalmente durante a noite.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Skeleton</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que utiliza arco e flechas para
+                  atacar o jogador à distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Spider</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura capaz de escalar determinadas
+                  superfícies e atacar o jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Enderman</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura alta que pode se teletransportar
+                  e transportar determinados blocos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ender Dragon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande criatura encontrada em The End
+                  e associada ao principal combate de chefe
+                  do modo Survival.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chicken</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal passivo que pode fornecer alimentos
+                  e outros materiais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal que fornece carne e couro.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pig</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal que pode ser utilizado como fonte
+                  de alimento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sheep</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal que fornece lã e pode ser utilizado
+                  como fonte de alimento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wolf</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal que pode ser domesticado pelo jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Diamond</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso raro utilizado na fabricação
+                  de ferramentas, armas e armaduras.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Iron</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso utilizado para criar diversas
+                  ferramentas, armas, armaduras e objetos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Gold</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Material utilizado em diferentes receitas
+                  e mecanismos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Redstone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso utilizado para criar circuitos,
+                  mecanismos e sistemas automatizados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Recurso utilizado principalmente como
+                  combustível e para criar tochas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Crafting Table</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco utilizado para fabricar diversos
+                  itens e ferramentas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Furnace</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco utilizado para fundir materiais
+                  e cozinhar alimentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Chest</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco utilizado para armazenar itens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bed</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Objeto utilizado para dormir e estabelecer
+                  o ponto de surgimento do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Torch</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fonte de iluminação utilizada principalmente
+                  em cavernas e construções.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pickaxe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ferramenta utilizada principalmente para
+                  minerar pedra e minérios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sword</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma utilizada para combater criaturas
+                  e outros inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de longo alcance que utiliza flechas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Overworld</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dimensão principal onde o jogador inicia
+                  a maioria das aventuras.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nether</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dimensão perigosa acessada através de
+                  um portal específico.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>The End</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dimensão onde o jogador pode enfrentar
+                  o Ender Dragon.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Village</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura gerada no mundo que contém
+                  casas, plantações e aldeões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Stronghold</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura subterrânea relacionada ao
+                  acesso para The End.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Dungeon</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura subterrânea que pode conter
+                  um spawner e baús.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tutorial World</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mundo especial criado para ensinar os
+                  fundamentos de Minecraft no Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Survival</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo em que o jogador precisa coletar
+                  recursos e sobreviver.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Creative</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo focado em construção e liberdade
+                  para utilizar blocos e itens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox Live</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Serviço utilizado para recursos online
+                  da edição Xbox 360.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>4J Studios</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  das versões de Minecraft para consoles
+                  da época.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Markus Persson</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Desenvolvedor conhecido como Notch e
+                  criador original de Minecraft.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

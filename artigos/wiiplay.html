@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Wii Play</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA DE MODOS
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Wii Play foi lançado para o Nintendo Wii como uma
+          coleção de minijogos desenvolvidos para demonstrar as
+          possibilidades do Wii Remote, reunindo nove experiências
+          diferentes para um ou mais jogadores ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Wii Play foi lançado para o Nintendo Wii como uma
+          coleção de minijogos desenvolvidos para demonstrar as
+          possibilidades do Wii Remote, reunindo nove experiências
+          diferentes para um ou mais jogadores ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Wii Play — Nintendo Wii
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/wiiplay.jpg"
+              alt="Wii Play para Nintendo Wii"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Wii Play
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play é uma coletânea de minijogos desenvolvida
+            pela Nintendo para o Nintendo Wii.<br>
+
+            O título foi concebido como uma demonstração das
+            possibilidades de controle do Wii Remote, reunindo
+            diferentes experiências que utilizam movimentos,
+            apontamento e orientação do controle.<br>
+
+            O jogo apresenta nove minijogos, cada um baseado
+            em uma mecânica diferente e projetado para ser
+            acessível a jogadores de diferentes níveis de
+            experiência.<br>
+
+            Wii Play também ficou conhecido por sua distribuição
+            em conjunto com um Wii Remote em determinados mercados,
+            tornando-se uma das formas pelas quais muitos jogadores
+            tiveram contato com o controle do Wii.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Nintendo
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Nintendo Wii
+              </li>
+
+              <li>
+                <strong>Lançamento original:</strong>
+                2006
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Minijogos / Party
+              </li>
+
+              <li>
+                <strong>Jogadores:</strong>
+                1–4 jogadores
+              </li>
+
+              <li>
+                <strong>Controle principal:</strong>
+                Wii Remote
+              </li>
+
+              <li>
+                <strong>Mídia:</strong>
+                Wii Optical Disc
+              </li>
+
+              <li>
+                <strong>Quantidade de minijogos:</strong>
+                9
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play foi desenvolvido durante os primeiros anos
+            de vida do Nintendo Wii, período em que a Nintendo
+            buscava apresentar o novo sistema de controle para
+            um público amplo.<br>
+
+            O projeto utilizou ideias semelhantes às encontradas
+            em Wii Sports, criando experiências curtas que
+            permitissem ao jogador compreender diferentes formas
+            de utilização do Wii Remote.<br>
+
+            Em vez de concentrar-se em uma única experiência,
+            o jogo apresenta diversos minijogos, cada um explorando
+            uma característica diferente do controle.<br>
+
+            Essa abordagem permitiu que Wii Play funcionasse tanto
+            como uma coletânea casual quanto como uma demonstração
+            das possibilidades de interação oferecidas pelo Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/nintendo_wii.jpg"
+                alt="Nintendo Wii"
+              />
+
+              <img
+                src="../tgga/wii_remote.jpg"
+                alt="Wii Remote"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Wii e Wii Remote ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Nintendo Wii foi lançado em 2006 e apresentou uma
+            proposta de controle diferente daquela utilizada
+            tradicionalmente pelos consoles domésticos.<br>
+
+            O Wii Remote utilizava sensores de movimento e
+            apontamento para permitir interações mais diretas
+            com os jogos.<br>
+
+            Durante o lançamento do console, a Nintendo produziu
+            diversos títulos destinados a demonstrar essas
+            características para jogadores que poderiam não estar
+            familiarizados com videogames tradicionais.<br>
+
+            Wii Play fazia parte desse contexto e apresentava
+            uma série de experiências simples baseadas no
+            funcionamento do Wii Remote.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play foi lançado originalmente para o Nintendo Wii
+            em 2006.<br>
+
+            O título recebeu lançamentos em diferentes regiões
+            ao longo do mesmo período, acompanhando a expansão
+            internacional do console.<br>
+
+            Em determinados mercados, o jogo foi comercializado
+            juntamente com um Wii Remote, formando um pacote
+            voltado especialmente para quem desejava adquirir
+            um controle adicional.<br>
+
+            Essa distribuição contribuiu para que o jogo estivesse
+            presente em muitos sistemas Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               WII REMOTE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Wii Remote
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wii_remote.jpg"
+                alt="Nintendo Wii Remote"
+              />
+
+              <img
+                src="../tgga/wii_nunchuk.jpg"
+                alt="Wii Nunchuk"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Wii Remote e Nunchuk ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A principal característica de Wii Play é sua utilização
+            do Wii Remote.<br>
+
+            O controle possui sensores capazes de detectar
+            movimentos e orientação, além de um sistema de
+            apontamento utilizado por determinados minijogos.<br>
+
+            As experiências presentes no jogo utilizam essas
+            características de diferentes maneiras, permitindo
+            apontar para a tela, movimentar o controle, girá-lo
+            ou incliná-lo.<br>
+
+            Alguns dos minijogos utilizam principalmente o
+            Wii Remote, sem necessidade do Nunchuk.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MINIJOGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Minijogos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play possui nove minijogos diferentes.<br>
+
+            Cada experiência apresenta regras simples e uma
+            mecânica própria, permitindo que o jogador alterne
+            rapidamente entre diferentes estilos de jogo.<br>
+
+            Os minijogos incluem atividades de tiro, sinuca,
+            pesca, corrida, tanques, aviões e outras propostas
+            baseadas no controle por movimento.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Minijogo</th>
+                <th>Mecânica</th>
+                <th>Jogadores</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Tiro ao Alvo</td>
+                <td>Apontamento</td>
+                <td>1–2</td>
+              </tr>
+
+              <tr>
+                <td>Encontre Mii</td>
+                <td>Observação / Memória</td>
+                <td>1</td>
+              </tr>
+
+              <tr>
+                <td>Pingue-Pongue</td>
+                <td>Movimento</td>
+                <td>1–2</td>
+              </tr>
+
+              <tr>
+                <td>Pose Mii</td>
+                <td>Movimento</td>
+                <td>1</td>
+              </tr>
+
+              <tr>
+                <td>Sinuca</td>
+                <td>Apontamento / Movimento</td>
+                <td>1–2</td>
+              </tr>
+
+              <tr>
+                <td>Pesca</td>
+                <td>Movimento</td>
+                <td>1</td>
+              </tr>
+
+              <tr>
+                <td>Boliche</td>
+                <td>Movimento</td>
+                <td>1–4</td>
+              </tr>
+
+              <tr>
+                <td>Corrida</td>
+                <td>Inclinação / Movimento</td>
+                <td>1</td>
+              </tr>
+
+              <tr>
+                <td>Tanques!</td>
+                <td>Movimento / Estratégia</td>
+                <td>1–2</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TIRO AO ALVO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tiro ao Alvo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiiplay_shooting.jpg"
+                alt="Wii Play Tiro ao Alvo"
+              />
+
+              <img
+                src="../tgga/wiiplay_target.jpg"
+                alt="Alvos de Wii Play"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Tiro ao Alvo — Wii Play ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tiro ao Alvo utiliza o sistema de apontamento do
+            Wii Remote.<br>
+
+            O jogador deve mirar na tela e acertar diferentes
+            tipos de alvos que aparecem durante as rodadas.<br>
+
+            O minijogo apresenta diferentes padrões de alvos
+            e exige precisão e rapidez para obter pontuações
+            maiores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ENCONTRE MII
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Encontre Mii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Encontre Mii é um minijogo baseado na identificação
+            de personagens Mii.<br>
+
+            O jogador deve observar grupos de personagens e
+            encontrar aqueles que correspondem às características
+            apresentadas pelo jogo.<br>
+
+            O desafio aumenta conforme novas condições e grupos
+            maiores são apresentados.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PINGUE-PONGUE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Pingue-Pongue
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Pingue-Pongue utiliza movimentos do Wii Remote para
+            controlar a raquete.<br>
+
+            O jogador deve devolver a bola e manter a troca
+            durante a partida.<br>
+
+            O minijogo demonstra como movimentos simples do
+            controle podem ser utilizados para representar
+            ações esportivas na tela.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POSE MII
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Pose Mii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Pose Mii é uma experiência baseada em movimentos
+            e posicionamento do Wii Remote.<br>
+
+            O jogador precisa combinar a posição apresentada
+            pelo personagem com o formato correspondente
+            mostrado na tela.<br>
+
+            O minijogo utiliza tempo de reação e coordenação
+            para completar as diferentes sequências.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SINUCA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sinuca
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiiplay_billiards.jpg"
+                alt="Wii Play Sinuca"
+              />
+
+              <img
+                src="../tgga/wiiplay_mii.jpg"
+                alt="Personagens Mii em Wii Play"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Sinuca e personagens Mii — Wii Play ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O minijogo de Sinuca utiliza o Wii Remote para
+            representar o controle do taco.<br>
+
+            O jogador deve mirar, ajustar a direção e controlar
+            a força da tacada para atingir as bolas presentes
+            na mesa.<br>
+
+            A física simplificada permite que a experiência
+            seja jogada individualmente ou em partidas entre
+            jogadores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PESCA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Pesca
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            No minijogo de Pesca, o Wii Remote é utilizado
+            como uma vara de pesca virtual.<br>
+
+            O jogador deve movimentar o controle e posicionar
+            a linha para capturar os peixes presentes no lago.<br>
+
+            Cada peixe apresenta características e valores
+            diferentes, fazendo com que o jogador procure
+            determinadas espécies durante a partida.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BOLICHE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Boliche
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O minijogo de Boliche utiliza o movimento do
+            Wii Remote para simular o lançamento da bola.<br>
+
+            O jogador pode controlar a direção e realizar
+            o movimento de arremesso para tentar derrubar
+            os pinos.<br>
+
+            O modo permite partidas com vários jogadores,
+            tornando-se uma das experiências multiplayer
+            da coletânea.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CORRIDA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Corrida
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O minijogo de Corrida utiliza a inclinação e os
+            movimentos do Wii Remote para controlar o veículo.<br>
+
+            O jogador deve percorrer o circuito desviando
+            dos obstáculos e tentando completar o percurso
+            no menor tempo possível.<br>
+
+            A proposta utiliza o controle como uma espécie
+            de volante virtual.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TANQUES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tanques!
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wiiplay_tanks.jpg"
+                alt="Tanques de Wii Play"
+              />
+
+              <img
+                src="../tgga/wiiplay_tanks_gameplay.jpg"
+                alt="Gameplay de Tanques em Wii Play"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Tanques! — Wii Play ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Tanques! é um dos minijogos mais focados em ação
+            e estratégia de Wii Play.<br>
+
+            O jogador controla um pequeno tanque em arenas
+            compostas por paredes e obstáculos.<br>
+
+            É possível movimentar o tanque, disparar projéteis
+            e utilizar o cenário para criar diferentes
+            estratégias de combate.<br>
+
+            O modo também possui partidas para dois jogadores
+            e diversas fases com layouts diferentes.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS MII
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens Mii
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/wii_mii.jpg"
+                alt="Personagens Mii"
+              />
+
+              <img
+                src="../tgga/wiiplay_mii_characters.jpg"
+                alt="Mii em Wii Play"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Personagens Mii utilizados em Wii Play ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play utiliza personagens Mii em diversos de
+            seus minijogos.<br>
+
+            Os Mii são avatares personalizáveis criados pelo
+            jogador no próprio Nintendo Wii.<br>
+
+            A utilização desses personagens ajudava a conectar
+            os diferentes minijogos ao sistema de personalização
+            do console.<br>
+
+            Os personagens criados pelo usuário podiam aparecer
+            em determinadas experiências da coletânea.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play possui diferentes experiências para mais
+            de um jogador.<br>
+
+            Dependendo do minijogo, os participantes podem
+            competir entre si ou compartilhar uma mesma
+            experiência utilizando controles separados.<br>
+
+            A possibilidade de reunir vários jogadores em
+            experiências rápidas foi uma das características
+            importantes da coletânea.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - MODOS MULTIPLAYER -
+            </h3>
+
+            <ul>
+
+              <li>
+                Tiro ao Alvo — até 2 jogadores.
+              </li>
+
+              <li>
+                Pingue-Pongue — até 2 jogadores.
+              </li>
+
+              <li>
+                Sinuca — até 2 jogadores.
+              </li>
+
+              <li>
+                Boliche — até 4 jogadores.
+              </li>
+
+              <li>
+                Tanques! — até 2 jogadores.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               WII PLAY E WII REMOTE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Wii Play e o Wii Remote
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O conceito de Wii Play está diretamente relacionado
+            ao Wii Remote.<br>
+
+            Cada minijogo procura utilizar o controle de uma
+            maneira relativamente simples, permitindo que o
+            jogador compreenda a interação rapidamente.<br>
+
+            Apontar, balançar, inclinar e girar o controle são
+            algumas das ações utilizadas pela coletânea.<br>
+
+            Essa variedade demonstra como o mesmo dispositivo
+            pode assumir funções diferentes dependendo do
+            software utilizado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA E ÁUDIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Efeitos Sonoros
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play utiliza músicas e efeitos sonoros simples
+            para acompanhar os diferentes minijogos.<br>
+
+            Os efeitos sonoros são utilizados principalmente
+            para comunicar acertos, erros, colisões, pontuação
+            e outras ações realizadas durante as partidas.<br>
+
+            O áudio contribui para manter a apresentação
+            descontraída e acessível característica da série
+            de jogos Wii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia do Nintendo Wii
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play foi desenvolvido para aproveitar recursos
+            específicos do Nintendo Wii.<br>
+
+            O console utiliza um processador IBM PowerPC,
+            uma unidade gráfica desenvolvida em conjunto pela
+            ATI e pela Nintendo e um sistema de controle baseado
+            no Wii Remote.<br>
+
+            O Wii Remote utiliza acelerômetros e um sistema
+            de apontamento baseado na barra de sensores para
+            determinar diferentes tipos de interação.<br>
+
+            Wii Play utiliza esses recursos em minijogos
+            desenvolvidos especificamente para demonstrar
+            diferentes possibilidades de controle.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Wii Play no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play esteve presente no mercado brasileiro
+            durante a geração do Nintendo Wii.<br>
+
+            O jogo chamou atenção principalmente por sua
+            associação com o Wii Remote e por reunir diversas
+            experiências em um único disco.<br>
+
+            Como outros títulos do Wii, Wii Play também ficou
+            conhecido entre jogadores brasileiros pelo uso
+            de controles por movimento e pelos personagens Mii.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Pacotes
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_disc.jpg"
+                  alt="Disco de Wii Play"
+                />
+
+                <figcaption>
+                  Disco — Wii Play
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_box.jpg"
+                  alt="Caixa de Wii Play"
+                />
+
+                <figcaption>
+                  Caixa — Wii Play
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_wiimote.jpg"
+                  alt="Wii Play com Wii Remote"
+                />
+
+                <figcaption>
+                  Wii Play + Wii Remote
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_manual.jpg"
+                  alt="Manual de Wii Play"
+                />
+
+                <figcaption>
+                  Manual — Wii Play
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play foi comercializado em diferentes formatos
+            dependendo da região e do período.<br>
+
+            Uma das apresentações mais conhecidas incluía
+            o jogo acompanhado de um Wii Remote adicional.<br>
+
+            As versões físicas podem apresentar diferenças
+            nas capas, manuais, idiomas e materiais promocionais
+            de acordo com o mercado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Wii Play fez parte da estratégia da Nintendo de
+            apresentar os controles por movimento do Wii a
+            diferentes públicos.<br>
+
+            Sua estrutura baseada em pequenos minijogos permitiu
+            que jogadores experimentassem diversas formas de
+            interação utilizando o mesmo controle.<br>
+
+            O título também se tornou associado à popularização
+            do Wii Remote como um controle adicional para
+            partidas multiplayer.<br>
+
+            A coletânea posteriormente recebeu uma continuação,
+            Wii Play: Motion, lançada para Nintendo Wii em 2011.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Wii Play possui nove minijogos diferentes.
+              </li>
+
+              <li>
+                O jogo foi desenvolvido para Nintendo Wii.
+              </li>
+
+              <li>
+                O Wii Remote é o principal dispositivo utilizado
+                pelos minijogos.
+              </li>
+
+              <li>
+                Diversos minijogos utilizam personagens Mii.
+              </li>
+
+              <li>
+                Boliche permite partidas com até quatro jogadores.
+              </li>
+
+              <li>
+                Tanques! utiliza elementos de ação e estratégia.
+              </li>
+
+              <li>
+                O jogo foi comercializado em determinados mercados
+                junto com um Wii Remote.
+              </li>
+
+              <li>
+                Wii Play recebeu uma continuação chamada
+                Wii Play: Motion.
+              </li>
+
+              <li>
+                Os minijogos foram projetados para demonstrar
+                diferentes formas de utilização do Wii Remote.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MATERIAIS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão física de Wii Play pode ser encontrada
+            acompanhada de diferentes materiais dependendo
+            da edição e do mercado.<br>
+
+            Caixas, discos, manuais e versões promocionais
+            associadas ao Wii Remote fazem parte do material
+            de interesse de colecionadores.<br>
+
+            Exemplares preservados podem apresentar diferenças
+            de capa, classificação indicativa, idioma e
+            conteúdo da embalagem.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_box.jpg"
+                  alt="Caixa de Wii Play"
+                />
+
+                <figcaption>
+                  Caixa — Wii Play
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_disc.jpg"
+                  alt="Disco de Wii Play"
+                />
+
+                <figcaption>
+                  Disco — Wii Play
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_manual.jpg"
+                  alt="Manual de Wii Play"
+                />
+
+                <figcaption>
+                  Manual — Wii Play
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/wiiplay_wiimote.jpg"
+                  alt="Wii Play acompanhado de Wii Remote"
+                />
+
+                <figcaption>
+                  Wii Play + Wii Remote
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="wiiplay.html">
+                ○ Games - Wii Play
+              </a>
+            </li>
+
+            <li>
+              <a href="wii.html">
+                ○ Consoles - Nintendo Wii
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Wii Play</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Coletânea de nove minijogos desenvolvida
+                  para Nintendo Wii.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Plataforma: Nintendo Wii</li>
+                  <li>Gênero: Minijogos</li>
+                  <li>Jogadores: 1–4</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Remote</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle principal utilizado pelos minijogos
+                  de Wii Play.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Avatar personalizável do Nintendo Wii utilizado
+                  em diferentes experiências do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tiro ao Alvo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo baseado no apontamento do Wii Remote
+                  para acertar diferentes alvos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Encontre Mii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo de observação no qual o jogador
+                  deve identificar personagens Mii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pingue-Pongue</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo esportivo controlado através dos
+                  movimentos do Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pose Mii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo baseado em movimentos e posições
+                  realizadas com o Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sinuca</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo que utiliza o Wii Remote para
+                  controlar a direção e força das tacadas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pesca</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Experiência de pesca que utiliza movimentos
+                  do Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boliche</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo de boliche que utiliza movimentos
+                  do Wii Remote para realizar os arremessos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Corrida</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo de corrida que utiliza movimentos
+                  e inclinação do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tanques!</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Minijogo de combate com tanques em arenas
+                  repletas de obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Alvos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos utilizados no minijogo Tiro ao
+                  Alvo para determinar a pontuação do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tanque</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Veículo controlado pelo jogador durante
+                  o minijogo Tanques!.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Projétil</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Disparo utilizado pelos tanques para atingir
+                  inimigos e determinados elementos do cenário.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Boliche</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modalidade multiplayer na qual os jogadores
+                  tentam derrubar os pinos com a bola.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Remote Plus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Evolução posterior do Wii Remote que integrou
+                  internamente a tecnologia Wii MotionPlus.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii MotionPlus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acessório desenvolvido para aumentar a precisão
+                  de detecção de movimentos do Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Sensor Bar</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Barra utilizada pelo sistema de apontamento
+                  do Wii Remote.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo Wii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console doméstico da Nintendo lançado em
+                  2006 e plataforma de Wii Play.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Multiplayer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Diferentes minijogos permitem partidas
+                  entre dois ou mais jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Play + Wii Remote</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pacote comercial que combinava o jogo com
+                  um Wii Remote adicional em determinados mercados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wii Play: Motion</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Continuação de Wii Play lançada posteriormente
+                  para Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Disco de Wii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para distribuir
+                  Wii Play no Nintendo Wii.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Nintendo Wii</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console que utiliza controles por movimento
+                  e no qual Wii Play foi lançado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

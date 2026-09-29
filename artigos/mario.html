@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Super Mario Bros.</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA DE FASES
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Super Mario Bros. foi lançado originalmente para o
+          Nintendo Entertainment System no Ocidente e para o
+          Family Computer no Japão, tornando-se um dos jogos mais
+          importantes da história dos videogames ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Super Mario Bros. foi lançado originalmente para o
+          Nintendo Entertainment System no Ocidente e para o
+          Family Computer no Japão, tornando-se um dos jogos mais
+          importantes da história dos videogames ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Super Mario Bros. — Famicom
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/supermariobros_famicom.jpg"
+              alt="Super Mario Bros. para Famicom"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Bros.
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. é um jogo eletrônico de plataforma
+            desenvolvido pela Nintendo e lançado originalmente para
+            o Family Computer, o Famicom, no Japão em 1985.<br>
+
+            O jogo foi desenvolvido por uma equipe liderada por
+            Shigeru Miyamoto e Takashi Tezuka, com música composta
+            por Koji Kondo.<br>
+
+            O jogador controla Mario, podendo utilizar Luigi em
+            determinadas condições, atravessando o Reino dos Cogumelos
+            para resgatar a Princesa Peach das mãos de Bowser.<br>
+
+            O título utiliza uma combinação de corrida, salto,
+            inimigos, plataformas, power-ups, segredos e exploração
+            que se tornou uma das bases do gênero plataforma.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Nintendo R&D4
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Shigeru Miyamoto
+              </li>
+
+              <li>
+                <strong>Design:</strong>
+                Takashi Tezuka
+              </li>
+
+              <li>
+                <strong>Música:</strong>
+                Koji Kondo
+              </li>
+
+              <li>
+                <strong>Plataforma original:</strong>
+                Famicom
+              </li>
+
+              <li>
+                <strong>Lançamento japonês:</strong>
+                13 de setembro de 1985
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Plataforma
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                1–2 jogadores alternados
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                Famicom Cartridge
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Super Mario Bros. ocorreu dentro
+            da Nintendo durante a primeira metade da década de 1980.<br>
+
+            A equipe já possuía experiência com jogos de plataforma
+            através de títulos como Donkey Kong e Mario Bros., mas
+            o novo projeto buscava utilizar o hardware do Famicom
+            para criar um mundo maior e mais elaborado.<br>
+
+            Shigeru Miyamoto e Takashi Tezuka trabalharam na criação
+            das fases, enquanto a equipe procurava equilibrar
+            velocidade, dificuldade, exploração e descoberta.<br>
+
+            Uma das ideias centrais era fazer com que o jogador
+            aprendesse as regras do jogo através da própria fase,
+            sem depender de longos textos explicativos.<br>
+
+            O primeiro nível, World 1-1, é um dos exemplos mais
+            conhecidos desse conceito: os primeiros obstáculos,
+            inimigos e power-ups são apresentados progressivamente
+            para ensinar ao jogador como o jogo funciona.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/famicom.jpg"
+                alt="Nintendo Family Computer"
+              />
+
+              <img
+                src="../tgga/mariobros_arcade.jpg"
+                alt="Mario Bros. Arcade"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nintendo Family Computer e Mario Bros. — antecedentes de Super Mario Bros. ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Famicom havia sido lançado no Japão em 1983 e
+            rapidamente se tornou uma plataforma importante para
+            a Nintendo.<br>
+
+            Antes de Super Mario Bros., o personagem Mario já havia
+            aparecido em jogos como Donkey Kong, Mario Bros. e
+            outras produções da Nintendo.<br>
+
+            Entretanto, Super Mario Bros. transformou o personagem
+            em protagonista de uma aventura de plataforma de
+            grande escala, estabelecendo diversos elementos que
+            seriam repetidos em jogos posteriores.<br>
+
+            O título também ajudou a consolidar a ideia de que
+            um console doméstico poderia oferecer uma experiência
+            de plataforma extensa, com múltiplas fases, segredos,
+            inimigos variados e progressão de dificuldade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento no Famicom
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. chegou ao Japão em 13 de setembro
+            de 1985 para o Family Computer.<br>
+
+            A versão japonesa utilizava um cartucho de Famicom
+            e posteriormente recebeu diferentes reedições e
+            distribuições.<br>
+
+            O jogo também foi incluído em diferentes produtos
+            e pacotes relacionados ao Famicom e, posteriormente,
+            ao Nintendo Entertainment System no Ocidente.<br>
+
+            A versão ocidental foi lançada para NES na América
+            do Norte em 1985 e posteriormente em outras regiões.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÃO OCIDENTAL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Famicom x NES
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smb_famicom_cart.jpg"
+                alt="Cartucho japonês de Super Mario Bros."
+              />
+
+              <img
+                src="../tgga/smb_nes_cart.jpg"
+                alt="Cartucho americano de Super Mario Bros."
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Cartuchos de Super Mario Bros. para Famicom e NES ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Embora Famicom e NES sejam essencialmente integrantes
+            da mesma família de hardware, as versões de Super Mario
+            Bros. receberam diferenças relacionadas ao mercado.<br>
+
+            O Famicom japonês utilizava cartuchos menores e um
+            formato físico diferente do cartucho utilizado pelo NES
+            ocidental.<br>
+
+            A versão ocidental também passou por adaptações de
+            localização, incluindo alterações nos textos e
+            apresentações do jogo.<br>
+
+            Apesar dessas diferenças, a experiência fundamental
+            de Super Mario Bros. permaneceu a mesma.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/mario.jpg"
+                alt="Mario"
+              />
+
+              <img
+                src="../tgga/princess_peach.jpg"
+                alt="Princesa Peach"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Mario e Princesa Peach ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história apresenta o Reino dos Cogumelos sendo
+            invadido pelas forças de Bowser, o Rei dos Koopas.<br>
+
+            A Princesa Peach é capturada, e Mario parte para
+            atravessar diferentes regiões do reino em busca dela.<br>
+
+            Ao longo da aventura, Mario passa por oito mundos,
+            cada um dividido em quatro áreas.<br>
+
+            No final de determinados mundos, o jogador encontra
+            uma fortaleza ou castelo e enfrenta uma criatura
+            apresentada como Bowser.<br>
+
+            Entretanto, em algumas dessas batalhas, o inimigo
+            encontrado é na realidade um dos Koopalings ou
+            personagens disfarçados, até que Mario finalmente
+            alcance o verdadeiro Bowser no final da aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. utiliza controles simples, mas exige
+            precisão para dominar seus movimentos.<br>
+
+            Mario pode caminhar, correr e saltar. O jogador utiliza
+            o botão direcional para controlar o personagem e os
+            botões do controle para realizar ações.<br>
+
+            Segurar o botão de corrida permite aumentar a velocidade
+            e também influencia determinados saltos.<br>
+
+            A física do personagem faz com que velocidade, impulso
+            e tempo de salto sejam importantes para atravessar
+            plataformas e evitar inimigos.<br>
+
+            O jogo também permite derrotar determinados inimigos
+            pulando sobre eles ou utilizando power-ups.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               POWER UPS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Power-Ups
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_mushroom.jpg"
+                  alt="Super Mushroom"
+                />
+
+                <figcaption>
+                  Super Mushroom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_fireflower.jpg"
+                  alt="Fire Flower"
+                />
+
+                <figcaption>
+                  Fire Flower
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_starman.jpg"
+                  alt="Starman"
+                />
+
+                <figcaption>
+                  Starman
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_1up.jpg"
+                  alt="1-Up Mushroom"
+                />
+
+                <figcaption>
+                  1-Up Mushroom
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os power-ups são itens que modificam as habilidades
+            ou a resistência de Mario.<br>
+
+            O Super Mushroom transforma o pequeno Mario em
+            Super Mario, permitindo que ele sobreviva a um
+            primeiro contato com determinados inimigos.<br>
+
+            A Fire Flower transforma Super Mario em Fire Mario,
+            permitindo lançar bolas de fogo contra inimigos
+            específicos.<br>
+
+            O Starman concede invencibilidade temporária,
+            permitindo derrotar diversos inimigos por contato.<br>
+
+            O 1-Up Mushroom concede uma vida extra.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Mario:</strong>
+                protagonista da aventura.
+              </li>
+
+              <li>
+                <strong>Luigi:</strong>
+                segundo personagem jogável no modo para dois jogadores.
+              </li>
+
+              <li>
+                <strong>Princesa Peach:</strong>
+                governante do Reino dos Cogumelos e personagem
+                que Mario precisa resgatar.
+              </li>
+
+              <li>
+                <strong>Bowser:</strong>
+                principal antagonista e líder das forças invasoras.
+              </li>
+
+              <li>
+                <strong>Toad:</strong>
+                personagem encontrado no final de determinados mundos.
+              </li>
+
+              <li>
+                <strong>Bill:</strong>
+                personagem associado à mensagem final falsa
+                encontrada em determinados castelos.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/smb_goomba.jpg"
+                alt="Goomba"
+              />
+
+              <img
+                src="../tgga/smb_koopa.jpg"
+                alt="Koopa Troopa"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Goomba e Koopa Troopa ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo possui diversos inimigos com comportamentos
+            diferentes.<br>
+
+            O Goomba é um dos primeiros inimigos encontrados
+            e pode ser derrotado através de um salto.<br>
+
+            O Koopa Troopa pode ser pisoteado, fazendo com que
+            sua concha permaneça no cenário e possa ser utilizada
+            pelo jogador como objeto.<br>
+
+            Existem também inimigos voadores, criaturas aquáticas,
+            plantas carnívoras, projéteis e adversários presentes
+            principalmente em fases subterrâneas e castelos.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS INIMIGOS -
+            </h3>
+
+            <ul>
+
+              <li>Goomba</li>
+              <li>Koopa Troopa</li>
+              <li>Paratroopa</li>
+              <li>Hammer Bro.</li>
+              <li>Blooper</li>
+              <li>Cheep-Cheep</li>
+              <li>Bullet Bill</li>
+              <li>Spiny</li>
+              <li>Lakitu</li>
+              <li>Podoboo</li>
+              <li>Hammer</li>
+              <li>Piranha Plant</li>
+              <li>Bowser</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MUNDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mundos e Fases
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A aventura principal de Super Mario Bros. é dividida
+            em oito mundos.<br>
+
+            Cada mundo contém quatro fases, totalizando 32 fases
+            na campanha principal.<br>
+
+            As fases utilizam diferentes ambientes e mecânicas,
+            incluindo áreas externas, subterrâneas, aquáticas,
+            fortalezas e castelos.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Mundo</th>
+                <th>Fases</th>
+                <th>Ambientes</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>World 1</td>
+                <td>1-1 a 1-4</td>
+                <td>Campo / Subterrâneo / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 2</td>
+                <td>2-1 a 2-4</td>
+                <td>Campo / Água / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 3</td>
+                <td>3-1 a 3-4</td>
+                <td>Noite / Plataformas / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 4</td>
+                <td>4-1 a 4-4</td>
+                <td>Campo / Subterrâneo / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 5</td>
+                <td>5-1 a 5-4</td>
+                <td>Campo / Céu / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 6</td>
+                <td>6-1 a 6-4</td>
+                <td>Campo / Água / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 7</td>
+                <td>7-1 a 7-4</td>
+                <td>Campo / Subterrâneo / Castelo</td>
+              </tr>
+
+              <tr>
+                <td>World 8</td>
+                <td>8-1 a 8-4</td>
+                <td>Campo / Céu / Castelo</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SEGREDOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Segredos e Áreas Especiais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. possui diversas áreas secretas
+            espalhadas pelas fases.<br>
+
+            Algumas delas são encontradas quebrando blocos,
+            entrando em canos específicos ou explorando partes
+            aparentemente inacessíveis do cenário.<br>
+
+            Entre os segredos mais conhecidos estão as Warp Zones,
+            que permitem transportar Mario para mundos diferentes,
+            além de salas contendo moedas e áreas bônus.<br>
+
+            O jogo também possui blocos invisíveis e caminhos
+            alternativos que recompensam jogadores que exploram
+            cuidadosamente os cenários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               WARP ZONES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Warp Zones
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As Warp Zones são áreas especiais que permitem
+            avançar rapidamente para outros mundos.<br>
+
+            Elas se tornaram um dos elementos mais conhecidos
+            de Super Mario Bros. e fazem parte da cultura de
+            exploração e descoberta associada ao jogo.<br>
+
+            O jogador pode encontrar rotas que levam diretamente
+            a mundos posteriores, permitindo terminar a aventura
+            sem necessariamente jogar todas as 32 fases da
+            campanha principal.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GLITCHES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Glitches e Exploits
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão original possui diversos comportamentos
+            inesperados que posteriormente foram descobertos
+            pelos jogadores.<br>
+
+            Alguns desses comportamentos são resultado da forma
+            como o jogo controla colisões, movimento, sprites,
+            estados do personagem e transições entre fases.<br>
+
+            Entre os fenômenos mais conhecidos está o chamado
+            Minus World, uma área secreta associada ao World 1-2
+            que pode levar o jogador a uma fase com comportamento
+            diferente do restante da aventura.<br>
+
+            Existem também técnicas envolvendo saltos, blocos,
+            tubos e manipulação de movimento que se tornaram
+            relevantes na comunidade de speedrunning.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILHA SONORA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Efeitos Sonoros
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/koji_kondo.jpg"
+                alt="Koji Kondo"
+              />
+
+              <img
+                src="../tgga/famicom_sound.jpg"
+                alt="Famicom"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Koji Kondo e o sistema de áudio do Famicom ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora de Super Mario Bros. foi composta por
+            Koji Kondo e se tornou uma das músicas mais reconhecidas
+            da história dos videogames.<br>
+
+            A música principal utiliza os recursos sonoros do
+            Famicom para criar uma composição curta, repetitiva
+            e adequada ao ritmo contínuo das fases.<br>
+
+            Além da música principal, o jogo possui temas específicos
+            para ambientes subterrâneos, aquáticos e castelos,
+            além de efeitos sonoros para saltos, moedas, power-ups,
+            inimigos e outros eventos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Hardware do Famicom
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. foi desenvolvido especificamente
+            para aproveitar as características do hardware do
+            Family Computer.<br>
+
+            O console possuía um processador Ricoh 2A03 baseado
+            na arquitetura MOS 6502, além de circuitos responsáveis
+            pela geração de vídeo e áudio.<br>
+
+            A equipe utilizou técnicas de programação e organização
+            de memória para criar um jogo relativamente grande
+            dentro das limitações do hardware da época.<br>
+
+            O resultado foi um título capaz de apresentar
+            múltiplas fases, inimigos, animações, música e
+            diferentes ambientes utilizando recursos bastante
+            limitados quando comparados aos sistemas modernos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Super Mario Bros. no Brasil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O jogo teve enorme presença no mercado brasileiro,
+            principalmente através de consoles compatíveis com
+            Famicom e NES produzidos ou comercializados por
+            diferentes empresas durante as décadas de 1980 e 1990.<br>
+
+            O mercado brasileiro possuía uma grande quantidade
+            de consoles compatíveis, conhecidos popularmente como
+            clones ou "compatíveis com Nintendo".<br>
+
+            Super Mario Bros. tornou-se uma das referências mais
+            reconhecíveis desse período e ajudou a popularizar
+            Mario entre jogadores brasileiros.<br>
+
+            Posteriormente, o personagem e seus jogos passaram
+            a ser distribuídos oficialmente pela Nintendo no país.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES E REEDIÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões, Ports e Reedições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_famicom.jpg"
+                  alt="Super Mario Bros. Famicom"
+                />
+
+                <figcaption>
+                  Super Mario Bros. — Famicom
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_nes.jpg"
+                  alt="Super Mario Bros. NES"
+                />
+
+                <figcaption>
+                  Super Mario Bros. — NES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_allstars.jpg"
+                  alt="Super Mario All-Stars"
+                />
+
+                <figcaption>
+                  Super Mario All-Stars — SNES
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_gba.jpg"
+                  alt="Super Mario Bros. Deluxe"
+                />
+
+                <figcaption>
+                  Super Mario Bros. Deluxe — Game Boy Color
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. recebeu diversas reedições ao longo
+            dos anos.<br>
+
+            Uma das versões mais conhecidas é a inclusão do jogo
+            em Super Mario All-Stars para Super Nintendo, que
+            apresenta gráficos e áudio reformulados.<br>
+
+            Outra versão importante é Super Mario Bros. Deluxe,
+            lançado para Game Boy Color, que apresenta diversas
+            alterações e conteúdos adicionais.<br>
+
+            O jogo também foi relançado em diferentes plataformas
+            e serviços da Nintendo, permitindo que novas gerações
+            tivessem acesso ao título original.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Super Mario Bros. tornou-se uma das obras mais
+            importantes da história dos videogames e estabeleceu
+            uma série de conceitos que seriam utilizados em
+            inúmeras produções posteriores.<br>
+
+            A estrutura de fases, power-ups, inimigos, plataformas,
+            segredos e progressão de dificuldade passou a ser
+            referência para outros jogos do gênero.<br>
+
+            O sucesso do jogo também consolidou Mario como um dos
+            principais personagens da Nintendo e deu origem a uma
+            enorme quantidade de continuações, spin-offs,
+            adaptações e produtos relacionados.<br>
+
+            Décadas depois de seu lançamento, elementos introduzidos
+            no título original continuam aparecendo em novos jogos
+            da série Super Mario.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                O jogo foi lançado originalmente para o Famicom
+                no Japão em 1985.
+              </li>
+
+              <li>
+                Mario não começou sua história como protagonista
+                de Super Mario Bros.; o personagem já havia
+                aparecido em Donkey Kong.
+              </li>
+
+              <li>
+                World 1-1 foi projetado para ensinar progressivamente
+                as mecânicas ao jogador.
+              </li>
+
+              <li>
+                O jogo possui Warp Zones que permitem pular mundos.
+              </li>
+
+              <li>
+                O famoso Minus World é um dos glitches mais
+                conhecidos do jogo.
+              </li>
+
+              <li>
+                A trilha sonora principal foi composta por Koji Kondo.
+              </li>
+
+              <li>
+                Luigi possui diferenças de controle em algumas
+                versões e jogos posteriores.
+              </li>
+
+              <li>
+                O jogo utiliza uma série de animações e efeitos
+                sonoros para comunicar ao jogador o resultado
+                de suas ações.
+              </li>
+
+              <li>
+                A estrutura de oito mundos e quatro fases por mundo
+                se tornou uma característica marcante da aventura.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS / EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como outros jogos do Famicom, Super Mario Bros.
+            possui diferentes materiais físicos associados ao
+            lançamento e às suas reedições.<br>
+
+            Cartuchos, caixas, manuais, etiquetas, encartes e
+            diferentes versões regionais podem apresentar
+            diferenças importantes para colecionadores.<br>
+
+            Exemplares preservados de versões antigas podem possuir
+            interesse histórico devido à idade e à importância
+            do título para a indústria dos videogames.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_box.jpg"
+                  alt="Caixa de Super Mario Bros."
+                />
+
+                <figcaption>
+                  Caixa — Super Mario Bros.
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_manual.jpg"
+                  alt="Manual de Super Mario Bros."
+                />
+
+                <figcaption>
+                  Manual — Super Mario Bros.
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_cart.jpg"
+                  alt="Cartucho de Super Mario Bros."
+                />
+
+                <figcaption>
+                  Cartucho — Super Mario Bros.
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/smb_famicom_package.jpg"
+                  alt="Pacote japonês de Super Mario Bros."
+                />
+
+                <figcaption>
+                  Edição japonesa — Famicom
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="supermariobros.html">
+                ○ Games - Super Mario Bros.
+              </a>
+            </li>
+
+            <li>
+              <a href="famicom.html">
+                ○ Consoles - Famicom
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Mario</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista principal de Super Mario Bros.
+                  O jogador controla Mario durante a aventura.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Habilidade: Salto</li>
+                  <li>Power-ups: Sim</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Luigi</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmão de Mario e segundo personagem jogável
+                  no modo para dois jogadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Princesa Peach</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Princesa do Reino dos Cogumelos que foi
+                  capturada por Bowser.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bowser</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal antagonista de Super Mario Bros.
+                  e líder das forças Koopa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goomba</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos inimigos básicos do jogo.
+                  Pode ser derrotado pulando sobre ele.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koopa Troopa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo equipado com uma carapaça que pode
+                  permanecer no cenário depois de ser atingido.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Paratroopa</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Variante voadora do Koopa Troopa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Goomba</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo terrestre encontrado em várias
+                  fases da aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Piranha Plant</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Planta inimiga que emerge de determinados
+                  canos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hammer Bro.</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo que lança martelos contra Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lakitu</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo voador que acompanha Mario e lança
+                  Spinies durante determinadas fases.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Spiny</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Criatura com espinhos que normalmente é
+                  lançada por Lakitu.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Blooper</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inimigo encontrado principalmente em fases
+                  aquáticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cheep-Cheep</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peixe inimigo presente em fases aquáticas
+                  e determinadas áreas externas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bullet Bill</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Projétil disparado por canhões,
+                  atravessando horizontalmente a fase.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Super Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Power-up que transforma Mario em Super Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fire Flower</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Power-up que concede a Mario a habilidade
+                  de lançar bolas de fogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Starman</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item que concede invencibilidade temporária.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>1-Up Mushroom</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cogumelo que concede uma vida extra.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Coin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Moeda coletável encontrada por toda a aventura.
+                  Coletar 100 moedas normalmente concede uma
+                  vida extra.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Question Block</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco marcado com um ponto de interrogação.
+                  Pode conter moedas ou itens.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Brick Block</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Bloco de tijolos que pode ser utilizado
+                  e destruído por Mario em determinadas condições.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pipe</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Canos utilizados como elementos do cenário,
+                  obstáculos e entradas para áreas secretas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Flagpole</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mastro encontrado no final de determinadas
+                  fases, utilizado para concluir a área.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Warp Zone</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área secreta que permite viajar para
+                  mundos diferentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Castle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fases especiais encontradas no final
+                  de cada mundo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Underwater Stage</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fase aquática que altera significativamente
+                  a movimentação de Mario.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Underground Stage</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fases subterrâneas caracterizadas por
+                  diferentes cenários e distribuição de obstáculos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>World 1-1</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Primeira fase do jogo e um dos exemplos
+                  mais conhecidos de design de níveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>World 1-2</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fase subterrânea que também possui uma
+                  das Warp Zones mais conhecidas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>World 4-2</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das fases mais conhecidas por conter
+                  caminhos secretos e acesso a Warp Zones.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Minus World</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área conhecida por seu comportamento
+                  incomum e por ser acessada através de
+                  uma falha relacionada a uma Warp Zone.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Famicom Cartridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cartucho físico utilizado para distribuir
+                  o jogo no Family Computer.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Koji Kondo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Compositor responsável pela música de
+                  Super Mario Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Shigeru Miyamoto</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Designer e diretor associado ao desenvolvimento
+                  de Super Mario Bros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Takashi Tezuka</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Designer que trabalhou no desenvolvimento
+                  do jogo junto à equipe de Miyamoto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

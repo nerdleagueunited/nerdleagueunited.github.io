@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Rise of the Tomb Raider</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS ELEMENTOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Rise of the Tomb Raider acompanha Lara Croft em uma
+          expedição à Sibéria em busca da lendária cidade de Kitezh,
+          enquanto enfrenta a organização Trinity e descobre novos
+          segredos relacionados à sua família ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Rise of the Tomb Raider acompanha Lara Croft em uma
+          expedição à Sibéria em busca da lendária cidade de Kitezh,
+          enquanto enfrenta a organização Trinity e descobre novos
+          segredos relacionados à sua família ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Rise of the Tomb Raider — Xbox One
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/riseofthetombraider_xboxone.jpg"
+              alt="Rise of the Tomb Raider para Xbox One"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Rise of the Tomb Raider
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Rise of the Tomb Raider é um jogo eletrônico de ação e
+            aventura desenvolvido pela Crystal Dynamics e publicado
+            pela Square Enix.<br>
+
+            O jogo é uma continuação de Tomb Raider, lançado em 2013,
+            e acompanha novamente Lara Croft em uma aventura
+            arqueológica repleta de exploração, combate e tumbas.<br>
+
+            Na história, Lara viaja para regiões da Sibéria em busca
+            da lendária cidade de Kitezh e de um artefato conhecido
+            como a Fonte Divina.<br>
+
+            Ao mesmo tempo, a organização Trinity também procura o
+            artefato, colocando Lara em conflito direto com seus
+            integrantes.<br>
+
+            A versão para Xbox One apresenta ambientes amplos,
+            sistema de progressão de habilidades, criação de
+            equipamentos, exploração e diversas tumbas opcionais.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Crystal Dynamics
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Square Enix
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Brian Horton
+              </li>
+
+              <li>
+                <strong>Roteiro:</strong>
+                Rhianna Pratchett
+              </li>
+
+              <li>
+                <strong>Protagonista:</strong>
+                Lara Croft
+              </li>
+
+              <li>
+                <strong>Plataforma:</strong>
+                Xbox One
+              </li>
+
+              <li>
+                <strong>Lançamento no Xbox One:</strong>
+                10 de novembro de 2015
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador
+              </li>
+
+              <li>
+                <strong>Motor:</strong>
+                Foundation Engine
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenvolvimento de Rise of the Tomb Raider foi realizado
+            pela Crystal Dynamics como continuação direta do
+            Tomb Raider de 2013.<br>
+
+            A equipe procurou ampliar os elementos apresentados no
+            jogo anterior, aumentando a exploração, a variedade dos
+            ambientes e as possibilidades de progressão da personagem.<br>
+
+            Uma das principais mudanças foi a criação de áreas
+            significativamente maiores, permitindo que o jogador
+            explorasse regiões fora do caminho principal da história.<br>
+
+            O sistema de criação também recebeu maior importância,
+            permitindo que Lara produzisse diferentes tipos de
+            equipamentos e munições utilizando recursos encontrados
+            pelo cenário.<br>
+
+            O jogo foi desenvolvido utilizando uma versão aprimorada
+            do motor gráfico utilizado pela Crystal Dynamics.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto da História
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/rise_lara.jpg"
+                alt="Lara Croft em Rise of the Tomb Raider"
+              />
+
+              <img
+                src="../tgga/rise_siberia.jpg"
+                alt="Sibéria em Rise of the Tomb Raider"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Lara Croft e os ambientes da Sibéria ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Depois dos acontecimentos de Tomb Raider, Lara Croft
+            continua investigando fenômenos históricos e
+            arqueológicos relacionados ao pai, Lord Richard Croft.<br>
+
+            Richard havia pesquisado a existência de uma relíquia
+            conhecida como a Fonte Divina e a cidade perdida de
+            Kitezh.<br>
+
+            Lara acredita que a descoberta da Fonte pode explicar
+            algumas das pesquisas realizadas por seu pai e decide
+            continuar seu trabalho.<br>
+
+            A investigação conduz Lara até a Sibéria, onde ela
+            encontra vestígios de uma antiga expedição e entra em
+            conflito com Trinity, uma organização que também procura
+            o artefato.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/rise_lara_jacob.jpg"
+                alt="Lara Croft e Jacob"
+              />
+
+              <img
+                src="../tgga/rise_trinity.jpg"
+                alt="Trinity em Rise of the Tomb Raider"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Lara Croft, Jacob e a organização Trinity ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A aventura começa quando Lara e seu parceiro Jonah Maiava
+            viajam em busca de evidências relacionadas à cidade
+            perdida de Kitezh.<br>
+
+            A expedição rapidamente entra em conflito com Trinity,
+            organização que pretende encontrar a Fonte Divina antes
+            de Lara.<br>
+
+            Durante a exploração, Lara conhece um homem chamado
+            Jacob, que possui uma ligação importante com a história
+            da região e com a cidade de Kitezh.<br>
+
+            Conforme Lara avança pela Sibéria, descobre que os
+            acontecimentos envolvendo Kitezh são muito mais
+            complexos do que imaginava.<br>
+
+            A narrativa combina a investigação arqueológica de Lara
+            com conflitos entre diferentes grupos interessados na
+            Fonte Divina.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Rise of the Tomb Raider combina exploração em terceira
+            pessoa, plataformas, resolução de enigmas e combate.<br>
+
+            Lara pode escalar paredes, utilizar machados de escalada,
+            atravessar grandes distâncias com cordas e explorar
+            diferentes áreas do cenário.<br>
+
+            O jogador pode utilizar elementos do ambiente para
+            esconder Lara dos inimigos e realizar ataques furtivos.<br>
+
+            A exploração também permite encontrar recursos, documentos,
+            relíquias, moedas antigas e outros objetos colecionáveis.<br>
+
+            O jogo possui um sistema de habilidades dividido em
+            categorias que permitem desenvolver diferentes estilos
+            de jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HABILIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Habilidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - CATEGORIAS DE HABILIDADES -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Brawler:</strong>
+                habilidades relacionadas ao combate corpo a corpo,
+                resistência e sobrevivência.
+              </li>
+
+              <li>
+                <strong>Hunter:</strong>
+                habilidades relacionadas a armas, precisão e caça.
+              </li>
+
+              <li>
+                <strong>Survivor:</strong>
+                habilidades relacionadas à exploração, recursos e
+                fabricação de equipamentos.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_bow.jpg"
+                  alt="Arco de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Arco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_pistol.jpg"
+                  alt="Pistola de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Pistola
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_rifle.jpg"
+                  alt="Rifle de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Rifle
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_shotgun.jpg"
+                  alt="Espingarda de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Espingarda
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Lara possui diferentes categorias de armas que podem
+            ser encontradas, adquiridas e aprimoradas durante a
+            aventura.<br>
+
+            O arco possui diferentes tipos de flechas e pode ser
+            utilizado tanto em combate quanto para solucionar
+            determinados obstáculos do cenário.<br>
+
+            Pistolas, rifles e espingardas permitem enfrentar
+            inimigos diretamente e podem receber melhorias.<br>
+
+            O jogador também pode produzir munições especiais
+            utilizando os recursos encontrados durante a exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CRIAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Criação e Recursos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A coleta de recursos é uma parte importante da
+            exploração de Rise of the Tomb Raider.<br>
+
+            Lara pode encontrar plantas, animais, minerais,
+            madeira e outros materiais espalhados pelos ambientes.<br>
+
+            Esses recursos podem ser utilizados para criar
+            munições, equipamentos e diferentes tipos de itens.<br>
+
+            A caça também permite obter materiais utilizados
+            para melhorar equipamentos e aumentar as capacidades
+            de sobrevivência da personagem.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LOCAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Locais e Regiões
+          </h2>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Local</th>
+                <th>Características</th>
+                <th>Elementos</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Sibéria</td>
+                <td>Região montanhosa e congelada</td>
+                <td>Neve / Florestas / Ruínas</td>
+              </tr>
+
+              <tr>
+                <td>Vale Geotérmico</td>
+                <td>Região habitada e extensa</td>
+                <td>Exploração / Fauna / Tumbas</td>
+              </tr>
+
+              <tr>
+                <td>Instalações Soviéticas</td>
+                <td>Complexos abandonados</td>
+                <td>Ruínas / Combate / Documentos</td>
+              </tr>
+
+              <tr>
+                <td>Acropolis</td>
+                <td>Área controlada por Trinity</td>
+                <td>Combate / Estruturas antigas</td>
+              </tr>
+
+              <tr>
+                <td>Geleira</td>
+                <td>Área congelada e perigosa</td>
+                <td>Exploração / Escalada</td>
+              </tr>
+
+              <tr>
+                <td>Kitezh</td>
+                <td>Cidade perdida</td>
+                <td>Ruínas / História / Confronto final</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TUMBAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tumbas de Desafio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As Tumbas de Desafio são áreas opcionais dedicadas
+            principalmente à resolução de enigmas.<br>
+
+            Cada tumba apresenta um desafio ambiental diferente,
+            utilizando água, mecanismos, plataformas, objetos
+            móveis ou outros elementos do cenário.<br>
+
+            Completar essas áreas recompensa o jogador com
+            conhecimentos e melhorias relacionados às habilidades
+            de Lara.<br>
+
+            As tumbas também incentivam a exploração de regiões
+            que podem ser ignoradas durante o caminho principal
+            da história.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/rise_trinity_soldier.jpg"
+                alt="Soldado Trinity"
+              />
+
+              <img
+                src="../tgga/rise_bear.jpg"
+                alt="Urso em Rise of the Tomb Raider"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Soldados de Trinity e fauna selvagem ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Lara enfrenta diversos tipos de adversários durante
+            a aventura.<br>
+
+            Os integrantes de Trinity utilizam armas de fogo,
+            equipamentos de proteção e diferentes estratégias
+            de combate.<br>
+
+            Alguns inimigos podem ser enfrentados diretamente,
+            enquanto outros podem ser eliminados através de
+            furtividade e do uso do ambiente.<br>
+
+            A fauna também representa uma ameaça em determinadas
+            regiões, incluindo lobos, ursos e outros animais.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS ADVERSÁRIOS -
+            </h3>
+
+            <ul>
+
+              <li>Soldados de Trinity</li>
+              <li>Mercenários</li>
+              <li>Guarda Pesada</li>
+              <li>Arqueiros</li>
+              <li>Atiradores</li>
+              <li>Lobos</li>
+              <li>Ursos</li>
+              <li>Javalis</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As áreas exploráveis possuem diversos objetos
+            colecionáveis que ajudam a revelar informações
+            sobre o mundo e seus habitantes.<br>
+
+            Lara pode encontrar documentos, murais, relíquias,
+            moedas antigas, mapas e outros objetos históricos.<br>
+
+            Alguns colecionáveis também ajudam a completar
+            informações relacionadas às regiões visitadas e
+            aos acontecimentos anteriores à chegada de Lara.<br>
+
+            A exploração completa das áreas é necessária para
+            encontrar todos esses objetos.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS COLECIONÁVEIS -
+            </h3>
+
+            <ul>
+
+              <li>Documentos</li>
+              <li>Relíquias</li>
+              <li>Murais</li>
+              <li>Moedas antigas</li>
+              <li>Desafios</li>
+              <li>Baús de sobrevivência</li>
+              <li>Acampamentos</li>
+              <li>Tumbas de desafio</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ACAMPAMENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Acampamentos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Acampamentos funcionam como pontos de apoio
+            espalhados pelas regiões do jogo.<br>
+
+            Neles, Lara pode utilizar os pontos de habilidade
+            obtidos durante a aventura para desbloquear novas
+            habilidades e melhorar seu equipamento.<br>
+
+            Os acampamentos também permitem acessar diferentes
+            regiões do mapa e reorganizar determinados equipamentos.<br>
+
+            Conforme o jogador explora uma região, encontrar
+            acampamentos facilita o retorno a áreas anteriormente
+            visitadas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRINITY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Trinity
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Trinity é uma organização secreta que procura
+            artefatos históricos e religiosos ao redor do mundo.<br>
+
+            Em Rise of the Tomb Raider, seus integrantes estão
+            interessados na Fonte Divina e em informações
+            relacionadas a Kitezh.<br>
+
+            A organização possui recursos militares e uma
+            grande quantidade de agentes espalhados pelas
+            regiões visitadas por Lara.<br>
+
+            O conflito com Trinity forma uma das principais
+            linhas narrativas da aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Lara Croft:</strong>
+                protagonista e arqueóloga responsável pela
+                investigação de Kitezh.
+              </li>
+
+              <li>
+                <strong>Jonah Maiava:</strong>
+                amigo e companheiro de Lara durante a expedição.
+              </li>
+
+              <li>
+                <strong>Jacob:</strong>
+                personagem misterioso que Lara encontra durante
+                sua investigação.
+              </li>
+
+              <li>
+                <strong>Ana:</strong>
+                personagem ligada ao passado de Lara e à
+                investigação de Trinity.
+              </li>
+
+              <li>
+                <strong>Konstantin:</strong>
+                líder militar associado às operações de Trinity.
+              </li>
+
+              <li>
+                <strong>Sofia:</strong>
+                integrante importante dos habitantes do Vale
+                Geotérmico.
+              </li>
+
+              <li>
+                <strong>Richard Croft:</strong>
+                pai de Lara, cuja pesquisa influencia diretamente
+                a jornada da protagonista.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Visual
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox One utiliza uma versão aprimorada
+            do motor gráfico da Crystal Dynamics para representar
+            ambientes extensos e detalhados.<br>
+
+            O jogo apresenta neve, água, vegetação, iluminação
+            dinâmica e diferentes condições climáticas.<br>
+
+            Os ambientes foram construídos para permitir que
+            Lara utilize diferentes superfícies e elementos
+            naturais durante a exploração.<br>
+
+            A tecnologia também foi utilizada para criar
+            sequências cinematográficas e animações detalhadas
+            para os personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX ONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versão para Xbox One
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_xboxone.jpg"
+                  alt="Rise of the Tomb Raider Xbox One"
+                />
+
+                <figcaption>
+                  Rise of the Tomb Raider — Xbox One
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_xbox360.jpg"
+                  alt="Rise of the Tomb Raider Xbox 360"
+                />
+
+                <figcaption>
+                  Rise of the Tomb Raider — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_ps4.jpg"
+                  alt="Rise of the Tomb Raider PS4"
+                />
+
+                <figcaption>
+                  Rise of the Tomb Raider — PlayStation 4
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_pc.jpg"
+                  alt="Rise of the Tomb Raider PC"
+                />
+
+                <figcaption>
+                  Rise of the Tomb Raider — PC
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão para Xbox One foi lançada em novembro de
+            2015 e apresenta melhorias gráficas em relação à
+            versão para Xbox 360.<br>
+
+            O jogo utiliza o hardware do Xbox One para apresentar
+            ambientes maiores, efeitos visuais aprimorados,
+            iluminação mais detalhada e maior quantidade de
+            elementos simultâneos na tela.<br>
+
+            A versão também recebeu posteriormente conteúdos
+            adicionais através das edições e expansões do jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DLCs
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Expansões e Conteúdos Adicionais
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Rise of the Tomb Raider recebeu diferentes conteúdos
+            adicionais após o lançamento.<br>
+
+            Entre eles estão expansões de história, novos desafios,
+            equipamentos e modos de jogo.<br>
+
+            Baba Yaga: The Temple of the Witch adiciona uma
+            aventura relacionada a uma lenda presente na região.<br>
+
+            Cold Darkness Awakened apresenta Lara enfrentando
+            uma ameaça diferente em uma instalação isolada.<br>
+
+            A edição de aniversário também reúne conteúdos
+            adicionais lançados para o jogo.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PRINCIPAIS CONTEÚDOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                Baba Yaga: The Temple of the Witch
+              </li>
+
+              <li>
+                Cold Darkness Awakened
+              </li>
+
+              <li>
+                Endurance Mode
+              </li>
+
+              <li>
+                Endurance Co-Op
+              </li>
+
+              <li>
+                Croft Manor: Blood Ties
+              </li>
+
+              <li>
+                Lara's Nightmare
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Rise of the Tomb Raider continuou a abordagem apresentada
+            pelo reboot de 2013, ampliando a exploração e os elementos
+            de sobrevivência da série.<br>
+
+            O jogo aprofundou a caracterização de Lara Croft e
+            expandiu a estrutura de áreas abertas introduzida no
+            título anterior.<br>
+
+            A combinação de exploração, combate, criação de
+            equipamentos, tumbas opcionais e colecionáveis passou
+            a ocupar um papel importante na fórmula moderna de
+            Tomb Raider.<br>
+
+            A aventura também estabeleceu elementos narrativos
+            que seriam posteriormente desenvolvidos em
+            Shadow of the Tomb Raider.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Rise of the Tomb Raider é uma continuação direta
+                do reboot de Tomb Raider lançado em 2013.
+              </li>
+
+              <li>
+                A aventura leva Lara até a Sibéria em busca
+                da cidade perdida de Kitezh.
+              </li>
+
+              <li>
+                Jonah Maiava retorna como companheiro de Lara.
+              </li>
+
+              <li>
+                O jogo possui diversas tumbas opcionais focadas
+                em resolução de enigmas.
+              </li>
+
+              <li>
+                Lara pode fabricar diferentes tipos de munição
+                utilizando recursos encontrados pelo cenário.
+              </li>
+
+              <li>
+                A caça de animais pode fornecer materiais
+                utilizados para melhorias.
+              </li>
+
+              <li>
+                O jogo possui diferentes categorias de habilidades.
+              </li>
+
+              <li>
+                A versão de Xbox One foi lançada em novembro
+                de 2015.
+              </li>
+
+              <li>
+                O jogo recebeu expansões como Baba Yaga:
+                The Temple of the Witch e Cold Darkness Awakened.
+              </li>
+
+              <li>
+                A cidade perdida de Kitezh é um dos elementos
+                centrais da narrativa.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão física de Rise of the Tomb Raider para Xbox One
+            possui diferentes materiais associados à distribuição
+            comercial do jogo.<br>
+
+            Caixas, discos, manuais e edições especiais podem
+            apresentar diferenças de embalagem e conteúdo.<br>
+
+            As diferentes edições também podem incluir códigos
+            para conteúdos adicionais, expansões e itens
+            relacionados ao jogo.<br>
+
+            Para colecionadores, versões físicas originais do
+            lançamento representam parte da história comercial
+            do título no Xbox One.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_box.jpg"
+                  alt="Caixa de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Caixa — Rise of the Tomb Raider
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_disc.jpg"
+                  alt="Disco de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Disco — Xbox One
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_art.jpg"
+                  alt="Arte de Rise of the Tomb Raider"
+                />
+
+                <figcaption>
+                  Arte promocional
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/rise_20year.jpg"
+                  alt="Rise of the Tomb Raider 20 Year Celebration"
+                />
+
+                <figcaption>
+                  20 Year Celebration
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="riseofthetombraider.html">
+                ○ Games - Rise of the Tomb Raider
+              </a>
+            </li>
+
+            <li>
+              <a href="xboxone.html">
+                ○ Consoles - Xbox One
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Lara Croft</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de Rise of the Tomb Raider.
+                  Lara é uma arqueóloga que investiga a cidade
+                  perdida de Kitezh.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Arma principal: Arco</li>
+                  <li>Especialidade: Exploração</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jonah Maiava</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Companheiro de Lara e integrante da expedição
+                  em busca de Kitezh.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jacob</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Homem misterioso encontrado por Lara durante
+                  sua investigação na Sibéria.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ana</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem ligada ao passado de Lara e aos
+                  acontecimentos envolvendo Trinity.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Konstantin</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Líder militar associado às operações de Trinity.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sofia</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem importante entre os habitantes
+                  do Vale Geotérmico.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Trinity</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Organização que procura a Fonte Divina
+                  e entra em conflito com Lara.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Arco</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das principais armas de Lara e também
+                  uma ferramenta importante para exploração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pistola</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de fogo utilizada em diferentes situações
+                  de combate.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rifle</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de fogo utilizada principalmente em
+                  confrontos de média e longa distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Espingarda</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de curto alcance utilizada contra
+                  inimigos próximos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Machado de Escalada</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento utilizado por Lara para escalar
+                  determinadas superfícies.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Picareta</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ferramenta utilizada durante a exploração
+                  e em determinadas interações ambientais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Fire Arrow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tipo especial de flecha capaz de incendiar
+                  determinados objetos e inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Poison Arrow</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Flecha especial utilizada para causar
+                  efeitos debilitantes nos inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Survivor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Categoria de habilidades focada em exploração,
+                  recursos e sobrevivência.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hunter</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Categoria de habilidades relacionada ao combate,
+                  armas e caça.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Brawler</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Categoria de habilidades voltada para combate
+                  corpo a corpo e resistência.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sibéria</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das principais regiões exploradas por Lara,
+                  marcada por neve, montanhas e ruínas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Vale Geotérmico</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região extensa habitada por sobreviventes
+                  e repleta de áreas exploráveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Instalações Soviéticas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Complexos abandonados construídos durante
+                  o período soviético.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Acropolis</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região fortificada associada às forças de
+                  Trinity.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Kitezh</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cidade perdida procurada por Lara e Trinity
+                  durante a aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Tomb of the Unworthy</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das tumbas opcionais encontradas durante
+                  a exploração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Challenge Tomb</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Área opcional dedicada principalmente à
+                  resolução de enigmas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Document</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Colecionável que fornece informações adicionais
+                  sobre personagens, locais e acontecimentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Relic</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Objeto histórico colecionável encontrado
+                  durante a exploração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Survival Cache</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Baú ou depósito escondido contendo recursos
+                  para Lara.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Base Camp</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Acampamento utilizado para melhorar habilidades,
+                  equipamentos e acessar regiões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Lobo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal selvagem que pode atacar Lara durante
+                  a exploração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Urso</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos animais mais perigosos encontrados
+                  em determinadas regiões.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Javali</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Animal encontrado em áreas selvagens e que
+                  pode fornecer recursos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Baba Yaga</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conteúdo adicional baseado em uma figura
+                  lendária associada à expansão Baba Yaga.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cold Darkness</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Expansão que apresenta uma nova ameaça
+                  em uma instalação isolada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Endurance Mode</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Modo baseado em sobrevivência, exploração
+                  e gerenciamento de recursos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox One</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Plataforma para a qual Rise of the Tomb Raider
+                  recebeu uma versão em 2015.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Crystal Dynamics</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  de Rise of the Tomb Raider.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Square Enix</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Empresa responsável pela publicação do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rhianna Pratchett</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Roteirista associada à narrativa de
+                  Rise of the Tomb Raider.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

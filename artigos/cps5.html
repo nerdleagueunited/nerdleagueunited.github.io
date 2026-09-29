@@ -1,0 +1,2823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - PlayStation 5 DualSense</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... O DualSense é o controle oficial do PlayStation 5,
+          sucessor do DualShock 4. Além de abandonar o tradicional
+          nome DualShock, ele introduziu resposta háptica avançada,
+          gatilhos adaptáveis, microfone integrado e um novo desenho
+          para a família de controles PlayStation ...
+
+          &nbsp;
+
+        </span>
+
+        <span>
+
+          ... O DualSense é o controle oficial do PlayStation 5,
+          sucessor do DualShock 4. Além de abandonar o tradicional
+          nome DualShock, ele introduziu resposta háptica avançada,
+          gatilhos adaptáveis, microfone integrado e um novo desenho
+          para a família de controles PlayStation ...
+
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Sony PlayStation 5 DualSense
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/dualsense.jpg"
+              alt="Sony PlayStation 5 DualSense"
+              style="
+                max-width: 70%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            DualSense
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense é o controle oficial desenvolvido pela
+            <strong>Sony Interactive Entertainment</strong> para o
+            PlayStation 5.
+
+            <br><br>
+
+            Ele foi apresentado junto ao novo console como sucessor
+            direto do DualShock 4, abandonando a nomenclatura
+            tradicional utilizada pela Sony desde o primeiro
+            PlayStation.
+
+            <br><br>
+
+            Apesar de manter elementos históricos da família PlayStation,
+            como o D-Pad, os quatro botões frontais com os símbolos
+            característicos, os dois analógicos e o touchpad central,
+            o DualSense introduziu uma série de tecnologias destinadas
+            a aumentar a sensação física produzida pelo controle.
+
+            <br><br>
+
+            Entre suas principais características estão a
+            <strong>resposta háptica</strong>, os
+            <strong>gatilhos adaptáveis</strong>, o
+            <strong>microfone integrado</strong>, alto-falante,
+            sensor de movimento, bateria interna recarregável e
+            comunicação sem fio.
+
+            <br><br>
+
+            O objetivo da Sony foi transformar determinadas ações
+            realizadas dentro dos jogos em sensações físicas que
+            pudessem ser percebidas diretamente pelas mãos do jogador.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ORIGEM
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Origem e Evolução
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dualshock3.jpg"
+                alt="Sony DualShock 3"
+              />
+
+              <img
+                src="../tgga/dualshock4.jpg"
+                alt="Sony DualShock 4"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ DualShock 3 e DualShock 4 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A família de controles do PlayStation passou por diversas
+            mudanças desde o primeiro console da Sony.
+
+            <br><br>
+
+            O primeiro PlayStation utilizava inicialmente o
+            PlayStation Controller, posteriormente substituído pelo
+            Dual Analog Controller e pelo DualShock.
+
+            <br><br>
+
+            O nome DualShock tornou-se uma das marcas mais reconhecíveis
+            dos controles PlayStation, permanecendo associado às
+            gerações PlayStation 2, PlayStation 3 e PlayStation 4.
+
+            <br><br>
+
+            Com o PlayStation 5, entretanto, a Sony decidiu utilizar
+            um novo nome.
+
+            <br><br>
+
+            O DualSense manteve a estrutura básica de dois analógicos,
+            D-Pad e quatro botões frontais, mas recebeu uma nova
+            construção externa e novas tecnologias de resposta física.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESIGN
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Design
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dualsense_white.jpg"
+                alt="DualSense branco"
+              />
+
+              <img
+                src="../tgga/dualsense_black.jpg"
+                alt="DualSense preto"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ DualSense nas cores branca e preta ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O desenho do DualSense representa uma das maiores alterações
+            visuais realizadas pela Sony em um controle principal
+            desde a criação da linha PlayStation.
+
+            <br><br>
+
+            Enquanto o DualShock 4 utilizava uma estrutura relativamente
+            compacta e centralizada, o DualSense possui um corpo maior,
+            com pegadores mais longos e uma aparência mais próxima do
+            formato utilizado por controles modernos de outras
+            plataformas.
+
+            <br><br>
+
+            O controle também possui uma construção predominantemente
+            dividida em duas regiões de acabamento.
+
+            <br><br>
+
+            A parte central abriga o touchpad e os elementos principais
+            de interação, enquanto as laterais se estendem formando
+            os pegadores.
+
+            <br><br>
+
+            Os botões frontais continuam utilizando os tradicionais
+            símbolos geométricos do PlayStation:
+
+            <strong>triângulo, círculo, X e quadrado</strong>.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BOTÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controles e Botões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense possui uma quantidade elevada de entradas
+            físicas e sensores.
+
+            <br><br>
+
+            No lado esquerdo estão o D-Pad e o analógico esquerdo.
+
+            <br><br>
+
+            No lado direito encontram-se os quatro botões frontais
+            e o analógico direito.
+
+            <br><br>
+
+            Na parte superior existem os gatilhos
+            <strong>L1</strong>,
+            <strong>L2</strong>,
+            <strong>R1</strong> e
+            <strong>R2</strong>.
+
+            <br><br>
+
+            No centro do controle encontram-se o
+            <strong>touchpad</strong>,
+            o botão
+            <strong>Create</strong>,
+            o botão
+            <strong>Options</strong> e o botão
+            <strong>PS</strong>.
+
+            <br><br>
+
+            Existe ainda um botão dedicado para desligar ou silenciar
+            o microfone integrado.
+
+          </p>
+
+
+          <ul class="component-specs">
+
+            <li><strong>D-Pad</strong> — controle direcional digital.</li>
+
+            <li><strong>Analógico esquerdo</strong> — movimentação.</li>
+
+            <li><strong>Analógico direito</strong> — câmera e comandos direcionais.</li>
+
+            <li><strong>△</strong> — botão triangular.</li>
+
+            <li><strong>○</strong> — botão circular.</li>
+
+            <li><strong>×</strong> — botão X.</li>
+
+            <li><strong>□</strong> — botão quadrado.</li>
+
+            <li><strong>L1 / R1</strong> — botões superiores.</li>
+
+            <li><strong>L2 / R2</strong> — gatilhos adaptáveis.</li>
+
+            <li><strong>Create</strong> — captura e funções sociais.</li>
+
+            <li><strong>Options</strong> — menus e funções de jogo.</li>
+
+            <li><strong>PS</strong> — funções principais do sistema.</li>
+
+          </ul>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RESPOSTA HÁPTICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Resposta Háptica
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dualsense_haptic.jpg"
+                alt="Sistema de resposta háptica do DualSense"
+              />
+
+              <img
+                src="../tgga/dualsense_motor.jpg"
+                alt="Atuadores do DualSense"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Sistema de resposta háptica do DualSense ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais novidades do DualSense é o sistema de
+            resposta háptica.
+
+            <br><br>
+
+            Em controles tradicionais, a vibração normalmente é produzida
+            por motores com massas excêntricas giratórias.
+
+            <br><br>
+
+            O DualSense utiliza atuadores capazes de produzir diferentes
+            padrões de vibração e resposta física.
+
+            <br><br>
+
+            Isso permite que jogos compatíveis produzam sensações
+            diferentes dependendo da situação.
+
+            <br><br>
+
+            Uma superfície metálica, uma explosão, uma colisão ou
+            diferentes tipos de terreno podem ser representados através
+            de padrões distintos de resposta.
+
+            <br><br>
+
+            O sistema também pode trabalhar em conjunto com os
+            gatilhos adaptáveis, criando uma resposta física mais
+            complexa.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GATILHOS ADAPTÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Gatilhos Adaptáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os gatilhos L2 e R2 são uma das características mais
+            particulares do DualSense.
+
+            <br><br>
+
+            Diferentemente de gatilhos convencionais, eles possuem
+            mecanismos internos capazes de alterar a resistência
+            encontrada pelo jogador durante o pressionamento.
+
+            <br><br>
+
+            Em um jogo compatível, o gatilho pode ficar mais difícil
+            de pressionar, apresentar diferentes níveis de resistência
+            ou simular determinadas ações.
+
+            <br><br>
+
+            Um exemplo comum é a utilização de armas.
+
+            O gatilho pode oferecer resistência em determinado ponto
+            do curso para representar a tensão mecânica associada
+            à ação.
+
+            <br><br>
+
+            O sistema depende do jogo e pode ser ajustado ou desativado
+            pelo software.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TOUCHPAD
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Touchpad
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dualsense_touchpad.jpg"
+                alt="Touchpad do DualSense"
+              />
+
+              <img
+                src="../tgga/dualsense_touchpad_game.jpg"
+                alt="Touchpad do DualSense em jogo"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Touchpad central do DualSense ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O touchpad localizado no centro do DualSense é uma
+            superfície sensível ao toque.
+
+            <br><br>
+
+            Ele ocupa uma região consideravelmente maior do que os
+            botões tradicionais do controle.
+
+            <br><br>
+
+            Além de detectar toques, o touchpad possui um mecanismo
+            de clique que permite utilizá-lo como um botão.
+
+            <br><br>
+
+            Jogos podem utilizar a superfície para diferentes funções,
+            incluindo navegação, seleção, controle de determinados
+            elementos ou comandos específicos.
+
+            <br><br>
+
+            O touchpad também possui iluminação associada ao sistema
+            luminoso do controle.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MICROFONE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Microfone Integrado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Outra novidade importante do DualSense é a presença de
+            microfone integrado.
+
+            <br><br>
+
+            O conjunto de microfones permite comunicação por voz
+            sem que o jogador necessariamente precise conectar um
+            headset.
+
+            <br><br>
+
+            O controle possui um botão dedicado para silenciar o
+            microfone.
+
+            <br><br>
+
+            Um indicador luminoso associado ao botão permite que
+            o usuário visualize o estado do microfone.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ÁUDIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Alto-Falante e Áudio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como gerações anteriores de controles PlayStation,
+            o DualSense possui um pequeno alto-falante integrado.
+
+            <br><br>
+
+            O alto-falante pode ser utilizado pelo software para
+            produzir efeitos sonoros específicos.
+
+            <br><br>
+
+            O controle também possui uma entrada para headset,
+            permitindo conectar fones de ouvido diretamente ao
+            dispositivo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BATERIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Bateria e Alimentação
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense possui uma bateria interna recarregável de
+            íons de lítio.
+
+            <br><br>
+
+            A bateria permite utilizar o controle sem conexão física
+            com o console.
+
+            <br><br>
+
+            Para recarregar o controle, é utilizada sua porta
+            <strong>USB-C</strong>.
+
+            <br><br>
+
+            O consumo de energia varia conforme os recursos utilizados.
+            Funções como resposta háptica, gatilhos adaptáveis,
+            iluminação, comunicação sem fio, alto-falante e microfone
+            podem influenciar o consumo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONECTIVIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Comunicação Sem Fio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense pode se comunicar com o PlayStation 5
+            sem a necessidade de um cabo.
+
+            <br><br>
+
+            A comunicação sem fio permite que o jogador utilize
+            o controle mantendo distância do console.
+
+            <br><br>
+
+            O controle também pode funcionar conectado através
+            de USB, dependendo da configuração e do dispositivo
+            utilizado.
+
+            <br><br>
+
+            Além do PS5, o DualSense pode ser utilizado em outras
+            plataformas e dispositivos compatíveis, embora a
+            disponibilidade de recursos possa variar.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               USB-C
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            USB-C
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense utiliza um conector USB Type-C localizado
+            na parte superior do controle.
+
+            <br><br>
+
+            A conexão é utilizada principalmente para carregar
+            a bateria interna e também pode ser utilizada para
+            comunicação com dispositivos compatíveis.
+
+            <br><br>
+
+            A adoção do USB-C representa uma mudança em relação
+            ao conector Micro-USB utilizado pelo DualShock 4.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PS5
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            DualSense e o PlayStation 5
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ps5.jpg"
+                alt="PlayStation 5"
+              />
+
+              <img
+                src="../tgga/ps5_dualsense.jpg"
+                alt="PlayStation 5 e DualSense"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ PlayStation 5 e seu controle DualSense ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense foi projetado especificamente para acompanhar
+            a nova geração representada pelo PlayStation 5.
+
+            <br><br>
+
+            O console foi desenvolvido com hardware capaz de produzir
+            gráficos mais detalhados, carregamentos mais rápidos e
+            sistemas de áudio mais avançados.
+
+            <br><br>
+
+            O controle segue essa mesma filosofia ao tentar acrescentar
+            uma dimensão física aos jogos através de seus atuadores,
+            gatilhos e sensores.
+
+            <br><br>
+
+            Um dos primeiros jogos utilizados pela Sony para demonstrar
+            essas características foi
+            <strong>Astro's Playroom</strong>, incluído no próprio
+            PlayStation 5.
+
+            <br><br>
+
+            O jogo funciona também como uma demonstração das funções
+            do controle, apresentando diferentes aplicações para a
+            resposta háptica, touchpad e gatilhos adaptáveis.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PC E OUTROS DISPOSITIVOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Uso em PC e Outros Dispositivos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense também pode ser utilizado fora do PlayStation 5.
+
+            <br><br>
+
+            Em computadores compatíveis, o controle pode ser conectado
+            através de USB ou comunicação sem fio, dependendo do
+            sistema e do jogo.
+
+            <br><br>
+
+            Entretanto, nem todos os recursos especiais estão disponíveis
+            universalmente.
+
+            <br><br>
+
+            A resposta háptica e os gatilhos adaptáveis dependem de
+            suporte específico do software e, em determinados casos,
+            podem exigir conexão USB.
+
+            <br><br>
+
+            Dessa forma, existe uma diferença entre simplesmente
+            reconhecer o DualSense como um controle de entrada e
+            utilizar todas as funções avançadas oferecidas pelo
+            hardware.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EVOLUÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Revisões e Evolução
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Durante a vida do PlayStation 5, a Sony produziu diferentes
+            revisões internas do DualSense.
+
+            <br><br>
+
+            Algumas alterações estão relacionadas à placa de circuito,
+            componentes internos, mecanismos dos gatilhos e capacidade
+            da bateria.
+
+            <br><br>
+
+            Externamente, muitos desses modelos podem parecer praticamente
+            idênticos.
+
+            <br><br>
+
+            Isso significa que dois DualSense visualmente iguais podem
+            possuir diferenças internas dependendo da revisão de
+            fabricação.
+
+            <br><br>
+
+            Para colecionadores e técnicos, números de modelo,
+            revisões de placa e códigos internos podem ser importantes
+            para identificar corretamente uma unidade.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DUALSENSE EDGE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            DualSense Edge
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/dualsense.jpg"
+                alt="DualSense padrão"
+              />
+
+              <img
+                src="../tgga/dualsense_edge.jpg"
+                alt="DualSense Edge"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ DualSense e DualSense Edge ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A família DualSense posteriormente recebeu o
+            <strong>DualSense Edge</strong>, uma versão voltada para
+            jogadores que desejam maior possibilidade de personalização.
+
+            <br><br>
+
+            Embora compartilhe a mesma filosofia básica do DualSense,
+            o Edge possui recursos adicionais relacionados à
+            personalização dos controles e componentes substituíveis.
+
+            <br><br>
+
+            Entre suas características estão perfis configuráveis,
+            controles traseiros e componentes de stick que podem ser
+            substituídos.
+
+            <br><br>
+
+            O DualSense Edge, portanto, não deve ser confundido com
+            uma simples revisão do DualSense convencional.
+
+            Trata-se de um produto diferente dentro da mesma família.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS E CORES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos, Cores e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Desde o lançamento do PlayStation 5, a Sony disponibilizou
+            o DualSense em diferentes cores e edições.
+
+            <br><br>
+
+            O modelo original possuía acabamento predominantemente
+            branco com detalhes pretos.
+
+            <br><br>
+
+            Posteriormente foram lançadas diferentes variantes de cor,
+            incluindo versões pretas, vermelhas, azuis, roxas e outras
+            combinações.
+
+            <br><br>
+
+            Também existem edições associadas a determinados jogos,
+            franquias e produtos especiais.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_white.jpg"
+                  alt="DualSense branco"
+                />
+
+                <figcaption>
+                  DualSense — Branco original
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_midnight_black.jpg"
+                  alt="DualSense Midnight Black"
+                />
+
+                <figcaption>
+                  DualSense — Midnight Black
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_cosmic_red.jpg"
+                  alt="DualSense Cosmic Red"
+                />
+
+                <figcaption>
+                  DualSense — Cosmic Red
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_starlight_blue.jpg"
+                  alt="DualSense Starlight Blue"
+                />
+
+                <figcaption>
+                  DualSense — Starlight Blue
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_galactic_purple.jpg"
+                  alt="DualSense Galactic Purple"
+                />
+
+                <figcaption>
+                  DualSense — Galactic Purple
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_nova_pink.jpg"
+                  alt="DualSense Nova Pink"
+                />
+
+                <figcaption>
+                  DualSense — Nova Pink
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_camouflage.jpg"
+                  alt="DualSense Camouflage"
+                />
+
+                <figcaption>
+                  DualSense — Camouflage
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/dualsense_edge.jpg"
+                  alt="DualSense Edge"
+                />
+
+                <figcaption>
+                  DualSense Edge
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONSTRUÇÃO INTERNA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Construção Interna
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Internamente, o DualSense é muito mais complexo do que
+            os controles analógicos tradicionais.
+
+            <br><br>
+
+            Além da placa principal, existem mecanismos independentes
+            para os analógicos, gatilhos adaptáveis, motores hápticos,
+            touchpad, microfones, alto-falante, bateria e comunicação
+            sem fio.
+
+            <br><br>
+
+            A disposição interna é organizada em torno de uma placa
+            eletrônica principal, enquanto os componentes mecânicos
+            ficam posicionados na carcaça.
+
+            <br><br>
+
+            Os gatilhos adaptáveis possuem mecanismos próprios para
+            produzir resistência variável.
+
+            <br><br>
+
+            Os sticks utilizam módulos eletromecânicos responsáveis
+            pela leitura dos eixos.
+
+            <br><br>
+
+            A bateria ocupa uma região interna central e é conectada
+            à placa através de um conjunto próprio de contatos e
+            cabos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMPONENTES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Componentes e Elementos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O DualSense possui dezenas de componentes eletrônicos,
+            mecânicos e estruturais.
+
+            <br><br>
+
+            Alguns são facilmente identificáveis externamente,
+            enquanto outros somente podem ser encontrados após
+            a desmontagem do controle.
+
+            <br><br>
+
+            Abaixo estão os principais componentes e conjuntos
+            encontrados no DualSense.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - PlayStation 5
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - DualSense
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa Principal (Main PCB)
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principal placa eletrônica do DualSense.
+                  É responsável por interligar os diferentes
+                  circuitos e componentes do controle.
+                </p>
+
+                <p>
+                  Nela estão presentes circuitos responsáveis por
+                  processamento, comunicação, alimentação, leitura
+                  dos comandos e gerenciamento dos recursos do
+                  controle.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: PCB</li>
+                  <li>Função: Controle eletrônico</li>
+                  <li>Aplicação: DualSense</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Microcontrolador Principal
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito integrado responsável pelo processamento
+                  dos comandos e pelo gerenciamento de diversas
+                  funções eletrônicas do controle.
+                </p>
+
+                <p>
+                  O componente exato e sua identificação podem variar
+                  conforme a revisão da placa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Comunicação Sem Fio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pela comunicação sem fio
+                  entre o DualSense e dispositivos compatíveis.
+                </p>
+
+                <p>
+                  A comunicação sem fio é fundamental para permitir
+                  a utilização do controle sem cabo conectado ao
+                  console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Antena Sem Fio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elemento responsável pela transmissão e recepção
+                  dos sinais de rádio utilizados pela comunicação
+                  sem fio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Módulo do Analógico Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecanismo eletromecânico responsável pela leitura
+                  dos movimentos do analógico esquerdo.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Eixos: X / Y</li>
+                  <li>Tipo: Analógico</li>
+                  <li>Função: Controle direcional</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Módulo do Analógico Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo módulo analógico utilizado para detectar
+                  movimentos nos eixos horizontal e vertical.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Potenciômetros dos Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes eletromecânicos utilizados para medir
+                  a posição dos eixos dos analógicos.
+                </p>
+
+                <p>
+                  O desgaste desses elementos é uma das possíveis
+                  fontes de alterações na leitura dos sticks.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas de Centralização dos Analógicos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Molas responsáveis por retornar os analógicos
+                  à posição central quando o usuário deixa de
+                  aplicar força.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                D-Pad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Direcional digital localizado no lado esquerdo
+                  do controle.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Cima</li>
+                  <li>Baixo</li>
+                  <li>Esquerda</li>
+                  <li>Direita</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Triângulo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão frontal identificado pelo símbolo de
+                  triângulo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Círculo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão frontal identificado pelo símbolo circular.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão X
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão frontal identificado pelo símbolo X.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Quadrado
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão frontal identificado pelo símbolo quadrado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas dos Botões Frontais
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos flexíveis responsáveis por transmitir
+                  mecanicamente o pressionamento dos botões para
+                  os contatos elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão PS
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão central utilizado para funções relacionadas
+                  ao sistema PlayStation.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Create
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão localizado à esquerda do touchpad.
+                </p>
+
+                <p>
+                  É utilizado para funções relacionadas a captura
+                  de tela, gravação e compartilhamento de conteúdo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Options
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão utilizado principalmente para menus e
+                  funções específicas dentro dos jogos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Touchpad Capacitivo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande superfície sensível ao toque localizada
+                  no centro do DualSense.
+                </p>
+
+                <p>
+                  O touchpad detecta interações realizadas pelo
+                  jogador e também pode ser pressionado como botão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Clique Mecânico do Touchpad
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecanismo que permite pressionar o touchpad
+                  fisicamente para gerar uma entrada adicional.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Barra de Luz
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de iluminação utilizado para fornecer
+                  informações visuais e complementar determinadas
+                  funções do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LEDs de Iluminação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  LEDs utilizados para produzir a iluminação
+                  característica do DualSense.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho L2 Adaptável
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Gatilho equipado com mecanismo capaz de produzir
+                  resistência variável durante seu acionamento.
+                </p>
+
+                <p>
+                  A resistência é controlada eletronicamente de
+                  acordo com os comandos recebidos pelo controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho R2 Adaptável
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecanismo equivalente ao L2 localizado no lado
+                  direito do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Motor dos Gatilhos Adaptáveis
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atuador responsável por modificar mecanicamente
+                  a resistência encontrada durante o movimento
+                  dos gatilhos L2 e R2.
+                </p>
+
+                <p>
+                  Esse sistema permite simular diferentes níveis
+                  de tensão no gatilho.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Engrenagens dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto mecânico utilizado pelo sistema de
+                  resistência adaptativa dos gatilhos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Molas responsáveis pelo retorno mecânico dos
+                  gatilhos após o acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Atuador Háptico Esquerdo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Atuador responsável por produzir parte das
+                  vibrações e sensações hápticas do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Atuador Háptico Direito
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Segundo atuador responsável pela produção de
+                  resposta háptica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sistema de Vibração Háptica
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto eletrônico e mecânico responsável por
+                  transformar comandos digitais em sensações físicas.
+                </p>
+
+                <p>
+                  Diferentes padrões podem ser produzidos dependendo
+                  do software utilizado.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Alto-Falante
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequeno alto-falante interno utilizado para
+                  reprodução de efeitos sonoros.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Microfones Integrados
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto responsável pela captação de voz
+                  diretamente pelo controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão de Silenciamento do Microfone
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão dedicado ao controle do estado de
+                  silenciamento do microfone.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Motor / Sistema de Vibração do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto responsável pela produção de vibrações
+                  físicas percebidas pelo jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Bateria Recarregável de Íons de Lítio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fonte de energia interna utilizada para alimentar
+                  o controle durante o uso sem fio.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Li-ion</li>
+                  <li>Recarregável</li>
+                  <li>Instalada internamente</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Gerenciamento de Energia
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável pelo gerenciamento da energia
+                  fornecida pela bateria e pela entrada USB.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Recarga
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema responsável por controlar o processo de
+                  carregamento da bateria interna.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Porta USB Type-C
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado para carregamento e comunicação
+                  com dispositivos compatíveis.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: USB Type-C</li>
+                  <li>Localização: Parte superior</li>
+                  <li>Função: Dados e alimentação</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conector de Headset
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector de áudio utilizado para conectar fones
+                  de ouvido e headsets compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sensor de Movimento
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de sensores utilizado para detectar
+                  movimentos e rotações do controle.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Detecção de movimento</li>
+                  <li>Detecção de rotação</li>
+                  <li>Uso em jogos compatíveis</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Giroscópio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor utilizado para detectar mudanças de
+                  orientação e rotação do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Acelerômetro
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor utilizado para detectar aceleração e
+                  movimentação do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes passivos utilizados em diferentes
+                  circuitos para limitar corrente, estabelecer
+                  níveis de tensão e condicionar sinais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes utilizados principalmente para
+                  filtragem, desacoplamento e estabilização dos
+                  circuitos eletrônicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Indutores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes utilizados em circuitos de filtragem
+                  e gerenciamento de energia.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuitos Integrados
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O DualSense utiliza diversos circuitos integrados
+                  destinados a processamento, comunicação, energia,
+                  áudio, sensores e gerenciamento dos comandos.
+                </p>
+
+                <p>
+                  A identificação exata varia conforme a revisão
+                  da placa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Trilhas de Cobre
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Trilhas condutoras presentes na placa responsáveis
+                  pela conexão elétrica entre os diferentes circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Pontos de Solda
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pontos metálicos responsáveis por estabelecer
+                  conexões elétricas e fixação dos componentes
+                  eletrônicos na placa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Superior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte superior da estrutura plástica do DualSense.
+                  Possui as aberturas destinadas aos botões,
+                  touchpad e demais controles.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Inferior
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte inferior da carcaça responsável por fechar
+                  e proteger os componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Pegadores Laterais
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Extensões da carcaça responsáveis por oferecer
+                  suporte para as mãos do jogador.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões Plásticos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Peças físicas responsáveis por transferir a força
+                  aplicada pelos dedos para os mecanismos internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para unir as partes
+                  da carcaça e manter componentes internos posicionados.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Suportes Plásticos Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estruturas moldadas na carcaça utilizadas para
+                  posicionar placa, botões, mecanismos e demais
+                  componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabo Flexível / Flat Cable
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabos flexíveis utilizados em diferentes regiões
+                  internas para conectar módulos eletrônicos e
+                  placas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conectores Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conectores utilizados para interligar placas,
+                  módulos, bateria, touchpad e outros conjuntos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Blindagem e Proteção Eletromagnética
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos de proteção utilizados para reduzir
+                  interferências eletromagnéticas em circuitos
+                  sensíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Etiqueta de Identificação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Etiqueta localizada na parte inferior do controle
+                  contendo informações relacionadas ao produto,
+                  identificação e fabricação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Embalagem Original
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  A embalagem original não faz parte do hardware,
+                  mas constitui um elemento importante para colecionismo
+                  e documentação histórica do produto.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

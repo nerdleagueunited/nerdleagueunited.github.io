@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - PlayStation 3</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       CONTEXTO HISTÓRICO
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS E VARIAÇÕES
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS DOS MODELOS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+
+        object-fit: cover;
+        object-position: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA DE LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... O PlayStation 3 foi o terceiro console doméstico da Sony,
+          marcado pelo processador Cell, pelo Blu-ray, pela PlayStation
+          Network e por uma das bibliotecas mais importantes da sétima
+          geração ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... O PlayStation 3 foi o terceiro console doméstico da Sony,
+          marcado pelo processador Cell, pelo Blu-ray, pela PlayStation
+          Network e por uma das bibliotecas mais importantes da sétima
+          geração ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA DE CONTEÚDO
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            Sony PlayStation 3 (Posse de Emanuel ferreira)
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/ps3.jpeg"
+              alt="Sony PlayStation 3"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PLAYSTATION 3
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            PlayStation 3
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3, também conhecido pela abreviação PS3,
+            é um console doméstico desenvolvido pela Sony Computer
+            Entertainment e lançado originalmente em 2006.<br>
+
+            Ele é o sucessor do PlayStation 2 e faz parte da
+            sétima geração de consoles, concorrendo principalmente
+            com o Xbox 360 da Microsoft e o Nintendo Wii.<br>
+
+            O PS3 ficou conhecido por sua arquitetura diferenciada,
+            especialmente pelo processador Cell Broadband Engine,
+            desenvolvido em uma parceria envolvendo Sony, IBM
+            e Toshiba.<br>
+
+            Outra característica importante foi a utilização do
+            Blu-ray como mídia física para jogos, aproveitando a
+            grande capacidade de armazenamento do formato.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LANÇAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Lançamento e História
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 foi apresentado pela Sony em 2005
+            e lançado comercialmente em novembro de 2006 no Japão
+            e na América do Norte, chegando posteriormente a
+            outros mercados.<br>
+
+            O console foi concebido como uma máquina de entretenimento
+            digital, oferecendo jogos, reprodução de filmes em Blu-ray,
+            conexão à internet e diversos serviços multimídia.<br>
+
+            Sua arquitetura utilizava um processador Cell extremamente
+            diferente dos processadores convencionais utilizados
+            em computadores pessoais e outros consoles da época.<br>
+
+            Ao longo de sua vida comercial, a Sony lançou diversas
+            revisões do aparelho, reduzindo tamanho, consumo de energia
+            e custo de fabricação.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MERCADO BRASILEIRO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mercado Brasileiro
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 teve uma presença bastante significativa
+            no mercado brasileiro durante a sétima geração.<br>
+
+            O console foi posteriormente produzido e comercializado
+            oficialmente no Brasil pela Sony, com versões destinadas
+            ao mercado nacional.<br>
+
+            A PlayStation Network também passou a ter presença oficial
+            no país, permitindo acesso a conteúdos digitais, jogos,
+            demonstrações e outros serviços.<br>
+
+            A chegada oficial do aparelho ajudou a consolidar a marca
+            PlayStation no mercado brasileiro durante uma época de
+            forte crescimento da distribuição digital.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/3602.jpeg"
+                alt="Xbox 360"
+              />
+
+              <img
+                src="../tgga/nw.jpeg"
+                alt="Nintendo Wii"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Xbox 360 e Nintendo Wii — concorrentes da sétima geração ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 fazia parte de uma geração marcada por
+            três estratégias bastante diferentes.<br>
+
+            A Microsoft apostou no Xbox 360 e em uma forte estrutura
+            online através do Xbox Live, enquanto a Nintendo utilizou
+            controles por movimento e uma proposta mais acessível
+            com o Wii.<br>
+
+            A Sony, por sua vez, apostou em recursos tecnológicos
+            avançados, no Blu-ray, na PlayStation Network e em uma
+            arquitetura de hardware bastante particular.<br>
+
+            A geração também foi marcada pela popularização dos
+            jogos em alta definição, serviços online, atualizações
+            de software e distribuição digital de conteúdos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PROCESSADOR CELL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            O Cell Broadband Engine
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Um dos componentes mais famosos do PlayStation 3 é o
+            Cell Broadband Engine, também conhecido simplesmente
+            como Cell.<br>
+
+            O processador foi desenvolvido através de uma parceria
+            entre Sony, IBM e Toshiba e utiliza uma arquitetura
+            formada por um Power Processing Element e oito
+            Synergistic Processing Elements, sendo um dos SPEs
+            desativado em configurações comerciais para aumentar
+            o rendimento da fabricação.<br>
+
+            A arquitetura oferecia grande capacidade de processamento
+            paralelo, mas exigia técnicas de programação diferentes
+            das utilizadas em arquiteturas convencionais.<br>
+
+            Essa característica tornou o desenvolvimento de jogos
+            para o PS3 particularmente distinto em comparação com
+            outras plataformas da época.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               JOGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Jogos e Acessórios
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/gow3.webp"
+                alt="God of War III"
+              />
+
+              <img
+                src="../tgga/thelastofus.jpg"
+                alt="The Last of Us"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ God of War III e The Last of Us — PlayStation 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 recebeu uma grande quantidade de jogos
+            durante sua vida comercial, incluindo títulos exclusivos,
+            jogos multiplataforma e produções independentes.<br>
+
+            Entre os jogos associados à plataforma estão
+            Uncharted 2: Among Thieves, Uncharted 3: Drake's Deception,
+            God of War III, Metal Gear Solid 4: Guns of the Patriots,
+            LittleBigPlanet, Killzone 2, Demon's Souls,
+            Gran Turismo 5 e The Last of Us.<br>
+
+            O console também recebeu grandes títulos multiplataforma
+            como Grand Theft Auto IV, Red Dead Redemption,
+            Batman: Arkham City, Portal 2 e vários títulos das
+            séries Call of Duty, FIFA e Assassin's Creed.<br>
+
+            Entre os acessórios estavam o controle DualShock 3,
+            PlayStation Eye, PlayStation Move, Headset Bluetooth
+            e diferentes dispositivos compatíveis com a PlayStation
+            Network.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BLU-RAY
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Blu-ray
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ps3_bluray.png"
+                alt="Disco Blu-ray de PlayStation 3"
+              />
+
+              <img
+                src="../tgga/ps3_drive.jpg"
+                alt="Unidade Blu-ray do PlayStation 3"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Blu-ray e unidade óptica do PlayStation 3 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Blu-ray foi uma das características mais importantes
+            do PlayStation 3.<br>
+
+            Enquanto gerações anteriores utilizavam principalmente
+            CDs ou DVDs, o PS3 adotou o Blu-ray como mídia física
+            para seus jogos.<br>
+
+            A capacidade muito maior do Blu-ray permitia armazenar
+            grandes quantidades de dados, sendo especialmente útil
+            para jogos com texturas, vídeos e outros arquivos de
+            grande tamanho.<br>
+
+            A unidade também permitia utilizar o console como
+            reprodutor de filmes em Blu-ray, ajudando o formato
+            a se estabelecer durante a transição para a mídia
+            de alta definição.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PLAYSTATION NETWORK
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            PlayStation Network
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 também foi importante para a expansão
+            da infraestrutura online da Sony.<br>
+
+            A PlayStation Network permitia criar contas, comprar
+            jogos e conteúdos digitais, baixar demonstrações,
+            atualizar jogos e utilizar recursos multiplayer.<br>
+
+            Diferentemente do Xbox Live Gold, o multiplayer online
+            básico do PS3 não exigia uma assinatura paga específica.<br>
+
+            A plataforma também recebeu serviços adicionais,
+            aplicativos e recursos multimídia durante sua vida útil.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Modelos e Variações
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation 3 recebeu diversas revisões durante sua
+            fabricação.<br>
+
+            O modelo original ficou conhecido como Fat e apresentava
+            um acabamento predominantemente brilhante e um tamanho
+            considerável.<br>
+
+            Posteriormente, a Sony lançou o PlayStation 3 Slim,
+            uma revisão menor, mais leve e com menor consumo de energia.<br>
+
+            O último modelo principal foi o PlayStation 3 Super Slim,
+            que apresentou uma carcaça ainda menor e uma tampa
+            deslizante para a unidade de discos.<br>
+
+            Também existiram diversas versões de armazenamento,
+            cores e edições especiais.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_fat_60gb.jpg"
+                  alt="PlayStation 3 Fat 60GB"
+                />
+
+                <figcaption>
+                  PlayStation 3 Fat — 60 GB
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_fat_80gb.webp"
+                  alt="PlayStation 3 Fat 80GB"
+                />
+
+                <figcaption>
+                  PlayStation 3 Fat — 80 GB
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3.jpeg"
+                  alt="PlayStation 3 Slim"
+                />
+
+                <figcaption>
+                  PlayStation 3 Slim
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_slim_branco.webp"
+                  alt="PlayStation 3 Slim Branco"
+                />
+
+                <figcaption>
+                  PlayStation 3 Slim — White
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_super_slim.webp"
+                  alt="PlayStation 3 Super Slim"
+                />
+
+                <figcaption>
+                  PlayStation 3 Super Slim
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_super_slim_blue.jpg"
+                  alt="PlayStation 3 Super Slim Azul"
+                />
+
+                <figcaption>
+                  PlayStation 3 Super Slim — Blue
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_gow_edition.webp"
+                  alt="PlayStation 3 God of War Edition"
+                />
+
+                <figcaption>
+                  PlayStation 3 — God of War Edition
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ps3_gran_turismo.webp"
+                  alt="PlayStation 3 Gran Turismo Edition"
+                />
+
+                <figcaption>
+                  PlayStation 3 — Gran Turismo Edition
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="ps3.html">
+                ○ Games - PlayStation 3
+              </a>
+            </li>
+
+            <li>
+              <a href="ps3.html">
+                ○ Periféricos - PlayStation 3
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Cell Broadband Engine</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processador principal utilizado pelo PlayStation 3.
+                  Foi desenvolvido pela Sony, IBM e Toshiba.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: CPU</li>
+                  <li>Arquitetura: PowerPC / Cell</li>
+                  <li>Fabricantes: Sony / IBM / Toshiba</li>
+                  <li>Clock: 3,2 GHz</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Processing Element (PPE)</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade principal de processamento do Cell
+                  Broadband Engine.
+                </p>
+
+                <p>
+                  É responsável pela execução de instruções
+                  gerais e pelo gerenciamento das unidades
+                  de processamento especializadas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Synergistic Processing Elements (SPE)</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidades de processamento especializadas
+                  presentes na arquitetura Cell.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Processamento paralelo</li>
+                  <li>Arquitetura: SPE</li>
+                  <li>Função: Cálculos especializados</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>RSX Reality Synthesizer</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Processador gráfico desenvolvido pela NVIDIA
+                  em parceria com a Sony para o PlayStation 3.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GPU</li>
+                  <li>Fabricante: NVIDIA</li>
+                  <li>Nome: RSX</li>
+                  <li>Função: Processamento gráfico</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>XDR DRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória principal utilizada pelo Cell.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: XDR DRAM</li>
+                  <li>Capacidade: 256 MB</li>
+                  <li>Função: Memória principal</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>GDDR3 VRAM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Memória dedicada ao processador gráfico RSX.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: GDDR3</li>
+                  <li>Capacidade: 256 MB</li>
+                  <li>Função: Memória gráfica</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>FlexIO Interface</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Interface de alta velocidade utilizada
+                  para comunicação entre componentes do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>South Bridge</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável por diversas interfaces
+                  e funções de entrada e saída do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>BD-ROM Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade óptica responsável pela leitura
+                  de discos Blu-ray utilizados pelo PS3.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Blu-ray</li>
+                  <li>Mídias: BD / DVD / CD</li>
+                  <li>Função: Jogos e mídia</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Laser Blu-ray</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema óptico utilizado para ler informações
+                  gravadas nos discos Blu-ray.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hard Disk Drive</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Unidade de armazenamento interna utilizada
+                  para jogos, atualizações, dados salvos e
+                  conteúdos digitais.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: HDD</li>
+                  <li>Interface: SATA</li>
+                  <li>Capacidades: diversas</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>2.5" SATA HDD</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Formato físico utilizado pela unidade de
+                  armazenamento interna do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ethernet Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controlador responsável pela conexão
+                  de rede cabeada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Wi-Fi Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Módulo responsável pela conexão sem fio
+                  com redes compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Bluetooth Module</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema Bluetooth utilizado principalmente
+                  para comunicação com controles e acessórios.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>HDMI Port</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Saída digital utilizada para transmissão
+                  de áudio e vídeo de alta definição.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>AV Multi Out</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector proprietário utilizado para
+                  diferentes tipos de saída de áudio e vídeo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>USB Ports</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Portas utilizadas para controles, acessórios,
+                  armazenamento e outros dispositivos compatíveis.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>DualShock 3</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle oficial do PlayStation 3 que combina
+                  o formato tradicional do DualShock com conexão
+                  sem fio e sensores de movimento.
+                </p>
+
+                <ul class="component-specs">
+
+                  <li>Tipo: Gamepad</li>
+                  <li>Conexão: Bluetooth / USB</li>
+                  <li>Analógicos: 2</li>
+                  <li>Vibração: Sim</li>
+                  <li>Sensor de movimento: Sim</li>
+
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Sixaxis Motion Sensor</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de sensores de movimento integrado
+                  ao controle do PlayStation 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PlayStation Eye</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Câmera USB utilizada para comunicação,
+                  jogos e posteriormente para o sistema
+                  PlayStation Move.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>PlayStation Move Controller</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle baseado em movimento desenvolvido
+                  para o PlayStation 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Supply Unit</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fonte interna responsável por converter
+                  a energia elétrica para as tensões utilizadas
+                  pelo console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>VRM</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuitos responsáveis pela regulação
+                  das tensões utilizadas pelos componentes
+                  eletrônicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cooling Fan</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Ventoinha utilizada para movimentar o ar
+                  dentro do console e auxiliar na refrigeração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Heat Sink</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Dissipador metálico utilizado para remover
+                  o calor produzido pelo processador e pela GPU.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Pasta Térmica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Material utilizado para melhorar a transferência
+                  térmica entre chips e dissipadores.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Motherboard</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Placa principal responsável pela conexão
+                  dos componentes internos do PlayStation 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>CMOS Battery</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pequena bateria utilizada para manter
+                  determinadas informações do sistema.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>EMI Shielding</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Blindagens metálicas utilizadas para reduzir
+                  interferências eletromagnéticas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Power Button</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema utilizado para iniciar ou desligar
+                  o console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Eject Button</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controle responsável por comandar a ejeção
+                  do disco da unidade óptica.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>LED Indicators</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Indicadores luminosos utilizados para informar
+                  diferentes estados do console.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Carcaça Plástica</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura externa responsável por proteger
+                  os componentes internos do aparelho.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Disco Blu-ray de Jogo</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mídia física utilizada para distribuição
+                  dos jogos do PlayStation 3.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

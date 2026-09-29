@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Assassin's Creed III</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Assassin's Creed III coloca o jogador no período da
+          Revolução Americana, acompanhando Connor Kenway em uma
+          aventura de ação, exploração, combate e furtividade ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Assassin's Creed III coloca o jogador no período da
+          Revolução Americana, acompanhando Connor Kenway em uma
+          aventura de ação, exploração, combate e furtividade ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Assassin's Creed III — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/assassinscreed3_xbox360.jpg"
+              alt="Assassin's Creed III para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed III
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III é um jogo eletrônico de ação e
+            aventura desenvolvido pela Ubisoft Montreal e publicado
+            pela Ubisoft.<br>
+
+            O jogo foi lançado originalmente em 2012 e utiliza como
+            cenário principal as Treze Colônias durante o período
+            da Revolução Americana.<br>
+
+            O jogador acompanha Connor Kenway, também conhecido
+            como Ratonhnhaké:ton, um membro da Irmandade dos
+            Assassinos que entra em conflito com os Templários
+            durante um período de grandes mudanças políticas
+            e militares.<br>
+
+            O jogo combina exploração em mundo aberto, combate,
+            furtividade, escalada, missões históricas e elementos
+            de progressão.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Ubisoft Montreal
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Ubisoft
+              </li>
+
+              <li>
+                <strong>Diretor:</strong>
+                Alex Hutchinson
+              </li>
+
+              <li>
+                <strong>Protagonista:</strong>
+                Connor Kenway
+              </li>
+
+              <li>
+                <strong>Plataforma desta edição:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2012
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador / Multiplayer
+              </li>
+
+              <li>
+                <strong>Mídia original:</strong>
+                DVD
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III foi desenvolvido pela Ubisoft
+            Montreal com o objetivo de apresentar um novo período
+            histórico e um novo protagonista para a série.<br>
+
+            Depois de três jogos principais acompanhando Ezio
+            Auditore durante o Renascimento italiano, a equipe
+            decidiu transportar a série para a América do século
+            XVIII.<br>
+
+            O desenvolvimento procurou criar ambientes naturais
+            maiores e mais variados, incluindo florestas, cidades,
+            fronteiras e áreas costeiras.<br>
+
+            O jogo também introduziu alterações no sistema de
+            movimentação, permitindo que Connor percorresse
+            árvores e terrenos naturais com maior liberdade.<br>
+
+            O combate foi desenvolvido para utilizar armas
+            características do período, como machadinhas,
+            espadas, pistolas e o famoso arco.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac3_revolution.jpg"
+                alt="Revolução Americana em Assassin's Creed III"
+              />
+
+              <img
+                src="../tgga/ac3_boston.jpg"
+                alt="Boston em Assassin's Creed III"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ A Revolução Americana e as cidades retratadas no jogo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história de Assassin's Creed III ocorre principalmente
+            entre as décadas de 1750 e 1780, período marcado por
+            conflitos entre as Treze Colônias e o Império Britânico.<br>
+
+            O jogo apresenta acontecimentos históricos como a
+            Revolução Americana, utilizando personagens reais e
+            eventos documentados como parte de sua narrativa.<br>
+
+            Boston, Nova York e regiões de fronteira aparecem como
+            áreas exploráveis, cada uma apresentando características
+            próprias.<br>
+
+            A narrativa mistura personagens históricos e fictícios,
+            utilizando a guerra como cenário para o conflito entre
+            Assassinos e Templários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac3_connor.jpg"
+                alt="Connor Kenway"
+              />
+
+              <img
+                src="../tgga/ac3_haytham.jpg"
+                alt="Haytham Kenway"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Connor Kenway e Haytham Kenway ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história começa acompanhando Haytham Kenway,
+            personagem que posteriormente revela possuir uma
+            ligação importante com a trama principal.<br>
+
+            A narrativa então apresenta Ratonhnhaké:ton, um jovem
+            pertencente ao povo Kanien'kehá:ka que posteriormente
+            passa a utilizar o nome Connor Kenway.<br>
+
+            Depois de acontecimentos que afetam sua comunidade,
+            Connor procura treinamento com Achilles Davenport,
+            um antigo membro da Irmandade dos Assassinos.<br>
+
+            Connor passa a atuar contra os Templários enquanto
+            acontecimentos relacionados à Revolução Americana
+            transformam a região.<br>
+
+            Durante a campanha, o jogador encontra personagens
+            históricos como George Washington, Benjamin Franklin,
+            Samuel Adams e Charles Lee.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONNOR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Connor Kenway
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Connor Kenway é o protagonista principal de
+            Assassin's Creed III.<br>
+
+            Seu nome de nascimento é Ratonhnhaké:ton, e ele
+            pertence ao povo Kanien'kehá:ka.<br>
+
+            Connor é treinado por Achilles Davenport para se
+            tornar um Assassino e combater a influência dos
+            Templários nas colônias americanas.<br>
+
+            Seu estilo de combate utiliza diferentes armas,
+            incluindo a lâmina oculta, machadinha, arco,
+            pistolas e armas de fogo encontradas durante as
+            missões.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III utiliza uma estrutura de mundo
+            aberto com diferentes regiões que podem ser exploradas
+            pelo jogador.<br>
+
+            Connor pode correr, escalar edifícios, atravessar
+            florestas, utilizar árvores como caminhos e navegar
+            por determinadas áreas do mapa.<br>
+
+            O combate é baseado em ataques rápidos, contra-ataques
+            e utilização de diferentes armas.<br>
+
+            A furtividade também possui papel importante, permitindo
+            que o jogador utilize vegetação, ambientes urbanos
+            e outros elementos do cenário para evitar inimigos.<br>
+
+            Além da campanha principal, existem atividades
+            secundárias, colecionáveis, missões opcionais e
+            diferentes desafios espalhados pelo mapa.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_hiddenblade.jpg"
+                  alt="Lâmina Oculta"
+                />
+
+                <figcaption>
+                  Lâmina Oculta
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_tomahawk.jpg"
+                  alt="Machadinha de Connor"
+                />
+
+                <figcaption>
+                  Machadinha
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_bow.jpg"
+                  alt="Arco"
+                />
+
+                <figcaption>
+                  Arco
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_pistol.jpg"
+                  alt="Pistola"
+                />
+
+                <figcaption>
+                  Pistola
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Connor possui acesso a diferentes armas durante
+            a campanha.<br>
+
+            A Lâmina Oculta continua sendo um dos principais
+            equipamentos da Irmandade dos Assassinos.<br>
+
+            A machadinha funciona como uma das armas características
+            de Connor e também está relacionada à identidade visual
+            do personagem.<br>
+
+            O arco permite ataques à distância e pode ser utilizado
+            durante situações de caça e furtividade.<br>
+
+            Pistolas e outras armas de fogo também podem ser
+            utilizadas durante os combates.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ASSASSIN'S GUILD
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Irmandade dos Assassinos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Connor recebe treinamento de Achilles Davenport,
+            antigo membro da Irmandade dos Assassinos.<br>
+
+            A propriedade de Achilles funciona como uma base
+            para Connor e também como um local importante para
+            o desenvolvimento da campanha.<br>
+
+            Conforme a história avança, Connor reconstrói
+            gradualmente a presença da Irmandade na região.<br>
+
+            Diversos personagens podem ser recrutados para
+            auxiliar nas atividades da organização e participar
+            de missões específicas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Boston, Nova York e a Fronteira
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac3_newyork.jpg"
+                alt="Nova York em Assassin's Creed III"
+              />
+
+              <img
+                src="../tgga/ac3_frontier.jpg"
+                alt="Fronteira em Assassin's Creed III"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Nova York e a região de fronteira ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O mapa de Assassin's Creed III é dividido em diferentes
+            regiões com características próprias.<br>
+
+            Boston apresenta uma área urbana com ruas, edifícios,
+            comerciantes e soldados britânicos.<br>
+
+            Nova York possui uma estrutura urbana semelhante,
+            mas apresenta diferentes locais e missões.<br>
+
+            A Fronteira é uma região muito mais aberta, contendo
+            florestas, rios, animais selvagens e pequenos
+            assentamentos.<br>
+
+            A existência dessas áreas permite alternar entre
+            exploração urbana e exploração natural.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CAÇA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Caça e Vida Selvagem
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das novidades de Assassin's Creed III é a
+            importância dada à vida selvagem.<br>
+
+            A Fronteira possui diferentes animais que podem ser
+            encontrados durante a exploração.<br>
+
+            Connor pode caçar animais utilizando armas diferentes
+            e posteriormente vender ou utilizar os materiais
+            obtidos.<br>
+
+            O sistema de caça também está relacionado a algumas
+            atividades secundárias e aos recursos disponíveis
+            para o jogador.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSÕES NAVAIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Batalhas Navais
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac3_achilles.jpg"
+                alt="Navio Aquila"
+              />
+
+              <img
+                src="../tgga/ac3_naval.jpg"
+                alt="Batalha naval"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ O Aquila e as batalhas navais de Assassin's Creed III ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III introduziu missões navais
+            envolvendo o navio Aquila.<br>
+
+            Connor pode comandar a embarcação durante determinadas
+            missões e participar de batalhas contra outros navios.<br>
+
+            O jogador precisa controlar velocidade, posicionamento
+            e utilização dos canhões para enfrentar as embarcações
+            inimigas.<br>
+
+            As missões navais posteriormente se tornariam uma
+            parte importante da evolução da série Assassin's Creed.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Connor Kenway:</strong>
+                protagonista principal.
+              </li>
+
+              <li>
+                <strong>Haytham Kenway:</strong>
+                personagem central da primeira parte da narrativa.
+              </li>
+
+              <li>
+                <strong>Achilles Davenport:</strong>
+                mentor de Connor e antigo Assassino.
+              </li>
+
+              <li>
+                <strong>Desmond Miles:</strong>
+                personagem da narrativa contemporânea.
+              </li>
+
+              <li>
+                <strong>George Washington:</strong>
+                personagem histórico envolvido nos acontecimentos
+                da Revolução Americana.
+              </li>
+
+              <li>
+                <strong>Charles Lee:</strong>
+                importante personagem associado aos Templários.
+              </li>
+
+              <li>
+                <strong>Benjamin Franklin:</strong>
+                personagem histórico presente em diferentes
+                momentos da campanha.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos e Facções
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os principais adversários de Connor estão ligados
+            à Ordem dos Templários e às forças militares
+            presentes nas colônias.<br>
+
+            Soldados britânicos aparecem frequentemente nas
+            cidades e durante determinadas missões.<br>
+
+            Templários ocupam posições importantes dentro da
+            narrativa e atuam em oposição direta à Irmandade
+            dos Assassinos.<br>
+
+            O jogo também apresenta diferentes tipos de
+            soldados, incluindo tropas com armas de fogo,
+            unidades especializadas e combatentes preparados
+            para enfrentar Connor.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS ADVERSÁRIOS -
+            </h3>
+
+            <ul>
+
+              <li>Soldado Britânico</li>
+              <li>Soldado de Infantaria</li>
+              <li>Granadeiro</li>
+              <li>Oficial</li>
+              <li>Atirador</li>
+              <li>Templário</li>
+              <li>Guardas Coloniais</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Missões e Atividades
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além das missões principais, Assassin's Creed III
+            possui diversas atividades opcionais.<br>
+
+            O jogador pode realizar missões de libertação,
+            contratos, atividades de caça, desafios da
+            Irmandade e objetivos relacionados à propriedade
+            de Achilles.<br>
+
+            Existem também colecionáveis espalhados pelo mapa,
+            incluindo penas, baús e páginas de almanaque.<br>
+
+            A conclusão dessas atividades pode desbloquear
+            recompensas e ampliar o conteúdo disponível no jogo.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Área</th>
+                <th>Atividades</th>
+                <th>Características</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Boston</td>
+                <td>Missões / Colecionáveis</td>
+                <td>Área urbana</td>
+              </tr>
+
+              <tr>
+                <td>Nova York</td>
+                <td>Missões / Exploração</td>
+                <td>Área urbana</td>
+              </tr>
+
+              <tr>
+                <td>Fronteira</td>
+                <td>Caça / Exploração</td>
+                <td>Florestas e natureza</td>
+              </tr>
+
+              <tr>
+                <td>Homestead</td>
+                <td>Missões secundárias</td>
+                <td>Propriedade de Achilles</td>
+              </tr>
+
+              <tr>
+                <td>Oceano</td>
+                <td>Batalhas navais</td>
+                <td>Exploração marítima</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESMOND
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desmond Miles
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como nos jogos anteriores da série, Assassin's
+            Creed III apresenta uma narrativa contemporânea
+            envolvendo Desmond Miles.<br>
+
+            Desmond utiliza o Animus para reviver as memórias
+            de seus antepassados e obter informações relacionadas
+            ao conflito entre Assassinos e Templários.<br>
+
+            A história contemporânea continua os acontecimentos
+            dos jogos anteriores e possui uma participação
+            significativa na conclusão do arco de Desmond.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ANIMUS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Animus
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Animus é a tecnologia utilizada pela série para
+            acessar memórias genéticas de antepassados.<br>
+
+            Em Assassin's Creed III, Desmond utiliza o sistema
+            para acessar as memórias de Connor e outros
+            personagens relacionados à linhagem Kenway.<br>
+
+            O dispositivo funciona como ligação entre a narrativa
+            histórica e a história contemporânea da franquia.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colecionáveis
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS COLECIONÁVEIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                Penas
+              </li>
+
+              <li>
+                Baús
+              </li>
+
+              <li>
+                Páginas de Almanaque
+              </li>
+
+              <li>
+                Bugigangas
+              </li>
+
+              <li>
+                Itens de exploração
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILHA SONORA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Trilha Sonora
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac3_music.jpg"
+                alt="Trilha sonora de Assassin's Creed III"
+              />
+
+              <img
+                src="../tgga/ac3_game.jpg"
+                alt="Assassin's Creed III"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Música e ambientação de Assassin's Creed III ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora foi composta principalmente por
+            Lorne Balfe, trabalhando dentro da identidade musical
+            estabelecida pela série.<br>
+
+            As músicas acompanham os diferentes ambientes da
+            aventura e procuram reforçar momentos de exploração,
+            combate e narrativa.<br>
+
+            A ambientação sonora também utiliza sons de cidades,
+            florestas, animais, armas e batalhas para representar
+            o período histórico retratado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 utiliza a capacidade do console
+            para apresentar um mundo aberto com grandes áreas
+            urbanas e naturais.<br>
+
+            O jogo utiliza o motor AnvilNext, desenvolvido pela
+            Ubisoft para a geração de consoles do período.<br>
+
+            O motor permitiu trabalhar com ambientes maiores,
+            animações de personagens, efeitos climáticos,
+            multidões e sistemas de iluminação mais elaborados
+            em comparação com os jogos anteriores da série.<br>
+
+            O Xbox 360 recebeu Assassin's Creed III em mídia
+            física através de DVD.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MULTIPLAYER
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Multiplayer
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III também possui um modo
+            multiplayer separado da campanha principal.<br>
+
+            O multiplayer utiliza partidas de caça e perseguição
+            entre jogadores, mantendo elementos de furtividade,
+            identificação de alvos e movimentação presentes
+            na série.<br>
+
+            Diferentes personagens e habilidades podem ser
+            utilizados durante as partidas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Edições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_xbox360.jpg"
+                  alt="Assassin's Creed III Xbox 360"
+                />
+
+                <figcaption>
+                  Assassin's Creed III — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_ps3.jpg"
+                  alt="Assassin's Creed III PlayStation 3"
+                />
+
+                <figcaption>
+                  Assassin's Creed III — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_wiiu.jpg"
+                  alt="Assassin's Creed III Wii U"
+                />
+
+                <figcaption>
+                  Assassin's Creed III — Wii U
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_remastered.jpg"
+                  alt="Assassin's Creed III Remastered"
+                />
+
+                <figcaption>
+                  Assassin's Creed III Remastered
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III foi lançado originalmente para
+            Xbox 360, PlayStation 3 e Wii U, recebendo posteriormente
+            versões para outras plataformas.<br>
+
+            Uma versão remasterizada foi lançada anos depois,
+            apresentando melhorias visuais e técnicas para
+            plataformas mais recentes.<br>
+
+            A edição original de Xbox 360 permanece associada
+            à geração de consoles em que Assassin's Creed III
+            foi originalmente lançado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed III marcou uma mudança importante
+            na série ao abandonar o cenário do Renascimento
+            europeu e apresentar uma nova região histórica.<br>
+
+            O jogo introduziu Connor Kenway como protagonista,
+            ampliou a utilização de ambientes naturais e
+            apresentou as batalhas navais como uma nova
+            mecânica da franquia.<br>
+
+            Elementos introduzidos no título, especialmente
+            as atividades navais, seriam posteriormente
+            desenvolvidos em outros jogos da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Connor nasceu com o nome Ratonhnhaké:ton.
+              </li>
+
+              <li>
+                Haytham Kenway é uma figura central na primeira
+                parte da campanha.
+              </li>
+
+              <li>
+                Achilles Davenport funciona como mentor de Connor.
+              </li>
+
+              <li>
+                O jogo apresenta Boston e Nova York como
+                importantes áreas urbanas.
+              </li>
+
+              <li>
+                A Fronteira permite exploração de ambientes
+                naturais e caça.
+              </li>
+
+              <li>
+                O navio Aquila é utilizado durante as missões
+                navais.
+              </li>
+
+              <li>
+                Benjamin Franklin aparece durante a aventura
+                e está relacionado a missões envolvendo suas
+                invenções e publicações.
+              </li>
+
+              <li>
+                A campanha apresenta diversos acontecimentos
+                históricos da Revolução Americana.
+              </li>
+
+              <li>
+                Assassin's Creed III foi um dos primeiros jogos
+                da série a utilizar o motor AnvilNext.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EDIÇÕES FÍSICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Assassin's Creed III para Xbox 360
+            foi distribuída em embalagem própria para a plataforma,
+            contendo o disco do jogo e materiais impressos.<br>
+
+            Dependendo da edição e da região, podem existir
+            diferenças na capa, manuais, encartes e conteúdos
+            promocionais.<br>
+
+            Também foram produzidas edições especiais contendo
+            conteúdos adicionais relacionados ao universo do jogo.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_box.jpg"
+                  alt="Caixa de Assassin's Creed III Xbox 360"
+                />
+
+                <figcaption>
+                  Caixa — Assassin's Creed III
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_disc.jpg"
+                  alt="Disco de Assassin's Creed III"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_manual.jpg"
+                  alt="Manual de Assassin's Creed III"
+                />
+
+                <figcaption>
+                  Manual / Encarte
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac3_special.jpg"
+                  alt="Edição especial de Assassin's Creed III"
+                />
+
+                <figcaption>
+                  Edição especial
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="assassinscreed3.html">
+                ○ Games - Assassin's Creed III
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+              <summary>Connor Kenway</summary>
+              <div class="component-description">
+                <p>
+                  Protagonista principal de Assassin's Creed III.
+                  Seu nome de nascimento é Ratonhnhaké:ton.
+                </p>
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Facção: Assassinos</li>
+                  <li>Armas: Diversas</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Haytham Kenway</summary>
+              <div class="component-description">
+                <p>
+                  Personagem central da primeira parte da
+                  narrativa e membro dos Templários.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Achilles Davenport</summary>
+              <div class="component-description">
+                <p>
+                  Mentor de Connor e antigo membro da
+                  Irmandade dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Desmond Miles</summary>
+              <div class="component-description">
+                <p>
+                  Personagem da narrativa contemporânea que
+                  utiliza o Animus.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>George Washington</summary>
+              <div class="component-description">
+                <p>
+                  Personagem histórico presente na narrativa
+                  durante a Revolução Americana.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Charles Lee</summary>
+              <div class="component-description">
+                <p>
+                  Importante personagem associado aos
+                  Templários.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Benjamin Franklin</summary>
+              <div class="component-description">
+                <p>
+                  Personagem histórico encontrado durante
+                  diferentes momentos da campanha.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Templários</summary>
+              <div class="component-description">
+                <p>
+                  Organização que atua como uma das principais
+                  forças adversárias da Irmandade dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Assassinos</summary>
+              <div class="component-description">
+                <p>
+                  Organização à qual Connor se junta e que
+                  combate os Templários.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Lâmina Oculta</summary>
+              <div class="component-description">
+                <p>
+                  Uma das armas tradicionais da Irmandade
+                  dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Machadinha</summary>
+              <div class="component-description">
+                <p>
+                  Uma das principais armas utilizadas por Connor.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Arco</summary>
+              <div class="component-description">
+                <p>
+                  Arma de longo alcance utilizada principalmente
+                  em caça e situações de furtividade.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Pistola</summary>
+              <div class="component-description">
+                <p>
+                  Arma de fogo utilizada durante combates
+                  e determinadas missões.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Aquila</summary>
+              <div class="component-description">
+                <p>
+                  Navio utilizado por Connor nas missões
+                  navais.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Boston</summary>
+              <div class="component-description">
+                <p>
+                  Uma das principais cidades exploráveis
+                  durante a campanha.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Nova York</summary>
+              <div class="component-description">
+                <p>
+                  Outra importante área urbana presente
+                  no jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Fronteira</summary>
+              <div class="component-description">
+                <p>
+                  Grande região natural contendo florestas,
+                  animais, rios e assentamentos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Homestead</summary>
+              <div class="component-description">
+                <p>
+                  Propriedade associada a Achilles e utilizada
+                  como uma das bases de Connor.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Caça</summary>
+              <div class="component-description">
+                <p>
+                  Atividade secundária realizada principalmente
+                  na região de fronteira.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Animus</summary>
+              <div class="component-description">
+                <p>
+                  Tecnologia utilizada por Desmond para acessar
+                  memórias genéticas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Revolução Americana</summary>
+              <div class="component-description">
+                <p>
+                  Período histórico no qual se desenvolve
+                  grande parte da narrativa.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Boston Tea Party</summary>
+              <div class="component-description">
+                <p>
+                  Evento histórico representado durante
+                  uma missão da campanha.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Almanaque</summary>
+              <div class="component-description">
+                <p>
+                  Colecionável encontrado em diferentes
+                  regiões do mapa.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Penas</summary>
+              <div class="component-description">
+                <p>
+                  Colecionáveis espalhados principalmente
+                  pela região de fronteira.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Baús</summary>
+              <div class="component-description">
+                <p>
+                  Baús espalhados pelas áreas do jogo,
+                  contendo diferentes recompensas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Soldado Britânico</summary>
+              <div class="component-description">
+                <p>
+                  Um dos tipos de inimigos encontrados
+                  durante a campanha.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Granadeiro</summary>
+              <div class="component-description">
+                <p>
+                  Soldado especializado encontrado em
+                  determinadas situações de combate.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Oficial</summary>
+              <div class="component-description">
+                <p>
+                  Unidade militar que pode comandar outros
+                  soldados durante determinadas situações.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Navio de Guerra</summary>
+              <div class="component-description">
+                <p>
+                  Embarcação inimiga encontrada durante
+                  as batalhas navais.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Xbox 360</summary>
+              <div class="component-description">
+                <p>
+                  Console da Microsoft para o qual Assassin's
+                  Creed III foi lançado originalmente em 2012.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>AnvilNext</summary>
+              <div class="component-description">
+                <p>
+                  Motor utilizado pela Ubisoft para desenvolver
+                  Assassin's Creed III.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Ubisoft Montreal</summary>
+              <div class="component-description">
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  principal do jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Revolução Americana</summary>
+              <div class="component-description">
+                <p>
+                  Conflito histórico que serve como um dos
+                  principais contextos da aventura.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Multiplayer</summary>
+              <div class="component-description">
+                <p>
+                  Modo separado da campanha principal baseado
+                  em perseguição, caça e furtividade entre jogadores.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

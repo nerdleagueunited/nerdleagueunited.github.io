@@ -1,0 +1,2639 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <link rel="icon" type="image/x-icon" href="../logonlu.png"> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>TGGA - Halo 5: Guardians</title> <link rel="stylesheet" href="../style.css"> <style>
+/* ==========================================
+   COMPONENTES / ELEMENTOS CLICÁVEIS
+   ========================================== */
+
+.components-block {
+  margin-top: 25px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+}
+
+.components-block h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 5px;
+}
+
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.component-item {
+  border: 1px solid #3d3d3d;
+  background: #181818;
+}
+
+.component-item summary {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: bold;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.component-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.component-item summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 8px;
+  color: #888;
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.component-item summary:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.component-item[open] summary {
+  color: #fff;
+  background: #2b2b2b;
+  border-bottom: 1px dashed #555;
+}
+
+.component-item[open] summary::before {
+  transform: rotate(90deg);
+  color: #fff;
+}
+
+.component-description {
+  padding: 12px;
+  background: #111;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.component-description p {
+  margin: 0 0 10px 0;
+}
+
+.component-description p:last-child {
+  margin-bottom: 0;
+}
+
+.component-specs {
+  margin: 10px 0 0 18px;
+  padding: 0;
+  color: #aaa;
+}
+
+.component-specs li {
+  margin-bottom: 4px;
+}
+
+.component-description strong {
+  color: #ddd;
+}
+
+/* ==========================================
+   IMAGENS HISTÓRICAS
+   ========================================== */
+
+.historical-consoles {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.console-images img {
+  width: 45%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #444;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.historical-consoles figcaption {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   GRID DE ELEMENTOS
+   ========================================== */
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* ==========================================
+   IMAGENS
+   ========================================== */
+
+.model-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+
+  border: 1px solid #444;
+  padding: 0;
+  box-sizing: border-box;
+  background: #111;
+
+  display: block;
+}
+
+.model-item figcaption {
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   CAIXA DE INFORMAÇÕES
+   ========================================== */
+
+.info-box {
+  margin: 20px 0;
+  padding: 12px;
+  background: #181818;
+  border: 1px solid #444;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 6px;
+}
+
+.info-box ul {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   TABELA
+   ========================================== */
+
+.world-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 13px;
+  color: #ccc;
+  background: #151515;
+}
+
+.world-table th,
+.world-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: center;
+}
+
+.world-table th {
+  background: #292929;
+  color: #fff;
+}
+
+.world-table tr:nth-child(even) {
+  background: #1c1c1c;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .console-images {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .console-images img {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .model-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .world-table {
+    font-size: 11px;
+  }
+
+}
+
+</style> </head> <body> <div class="site-container">
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="site-header">
+
+  <div class="logo-area">
+
+    <img
+      src="../logo1.png"
+      alt="Logo NLU"
+      class="main-logo"
+    />
+
+    <div class="logo-text-box">
+
+      <h1>
+        The Great Game Archive™
+      </h1>
+
+      <p>
+        Não o maior, mas o NOSSO aglomerado de informação.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="header-right-box">
+
+    <a
+      href="#"
+      class="youtube-btn"
+      target="_blank"
+    >
+      ▶ YouTube Siga-nos!
+    </a>
+
+  </div>
+
+</header>
+
+<!-- ==========================================
+     SUB-NAVEGAÇÃO
+     ========================================== -->
+
+<div class="sub-nav-links">
+
+  <a href="../tgga.html">
+    ← Voltar ao TGGA
+  </a>
+
+  |
+
+  <a href="../index.html">
+    Início
+  </a>
+
+</div>
+
+<!-- ==========================================
+     LETREIRO
+     ========================================== -->
+
+<div class="marquee-zone">
+
+  <div class="marquee-content">
+
+    <span>
+      ... Halo 5: Guardians foi desenvolvido pela 343 Industries
+      especificamente para o Xbox One, trazendo uma nova campanha
+      com Master Chief e Fireteam Osiris, além do multiplayer
+      Arena e do enorme modo Warzone ...
+      &nbsp;
+    </span>
+
+    <span>
+      ... Halo 5: Guardians foi desenvolvido pela 343 Industries
+      especificamente para o Xbox One, trazendo uma nova campanha
+      com Master Chief e Fireteam Osiris, além do multiplayer
+      Arena e do enorme modo Warzone ...
+      &nbsp;
+    </span>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+     ========================================== -->
+
+<div class="main-grid">
+
+  <!-- ========================================
+       COLUNA PRINCIPAL
+       ======================================== -->
+
+  <div class="content-column">
+
+    <div class="category-block">
+
+      <!-- ==========================================
+           TÍTULO
+           ========================================== -->
+
+      <h2>
+        Halo 5: Guardians — Xbox One
+      </h2>
+
+      <div
+        style="
+          text-align: center;
+          margin-bottom: 15px;
+        "
+      >
+
+        <img
+          src="../tgga/halo5_guardians_xboxone.jpg"
+          alt="Halo 5 Guardians para Xbox One"
+          style="
+            max-width: 60%;
+            height: auto;
+            border: 1px solid #444;
+            padding: 4px;
+          "
+        />
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           IDENTIFICAÇÃO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Halo 5: Guardians
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5: Guardians é um jogo eletrônico de tiro em
+        primeira pessoa desenvolvido pela 343 Industries e
+        publicado pela Microsoft Studios para Xbox One.<br>
+
+        O jogo foi lançado mundialmente em 27 de outubro de
+        2015 e foi desenvolvido desde o início para aproveitar
+        o hardware e os recursos online do Xbox One.<br>
+
+        A campanha acompanha dois grupos de Spartans:
+        Blue Team, liderado pelo Master Chief, e Fireteam
+        Osiris, liderado pelo Spartan Jameson Locke.<br>
+
+        Além da campanha, Halo 5 apresenta diferentes modos
+        multiplayer, incluindo Arena, voltado para confrontos
+        competitivos de 4 contra 4, e Warzone, que amplia a
+        escala das batalhas para até 24 jogadores.
+
+      </p>
+
+      <!-- ==========================================
+           FICHA TÉCNICA
+           ========================================== -->
+
+      <div class="info-box">
+
+        <h3>
+          - FICHA TÉCNICA -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Desenvolvedora:</strong>
+            343 Industries
+          </li>
+
+          <li>
+            <strong>Publicadora:</strong>
+            Microsoft Studios
+          </li>
+
+          <li>
+            <strong>Direção:</strong>
+            Tim Longo
+          </li>
+
+          <li>
+            <strong>Compositor:</strong>
+            Kazuma Jinnouchi
+          </li>
+
+          <li>
+            <strong>Plataforma:</strong>
+            Xbox One
+          </li>
+
+          <li>
+            <strong>Lançamento:</strong>
+            27 de outubro de 2015
+          </li>
+
+          <li>
+            <strong>Gênero:</strong>
+            Tiro em primeira pessoa
+          </li>
+
+          <li>
+            <strong>Campanha:</strong>
+            Solo e cooperação online para até 4 jogadores
+          </li>
+
+          <li>
+            <strong>Multiplayer:</strong>
+            Online
+          </li>
+
+          <li>
+            <strong>Warzone:</strong>
+            Até 24 jogadores
+          </li>
+
+          <li>
+            <strong>Classificação:</strong>
+            T — Teen
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           DESENVOLVIMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Desenvolvimento
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O desenvolvimento de Halo 5: Guardians foi realizado
+        pela 343 Industries após o trabalho do estúdio em
+        Halo 4.<br>
+
+        A equipe buscou construir um jogo pensado desde o
+        início para o Xbox One, ampliando a escala tanto da
+        campanha quanto das experiências multiplayer.<br>
+
+        Entre as mudanças de jogabilidade estavam novas
+        habilidades dos Spartans, maior mobilidade durante
+        os combates e a possibilidade de trabalhar em equipe
+        através da inteligência artificial dos companheiros.<br>
+
+        O jogo também foi projetado para funcionar a
+        60 quadros por segundo, utilizando servidores
+        dedicados em suas experiências online.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CONTEXTO HISTÓRICO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Contexto Histórico
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo4.jpg"
+            alt="Halo 4"
+          />
+
+          <img
+            src="../tgga/halo5_guardians.jpg"
+            alt="Halo 5 Guardians"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Halo 4 e Halo 5: Guardians ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 continua os acontecimentos iniciados em
+        Halo 4 e faz parte da fase da franquia desenvolvida
+        pela 343 Industries.<br>
+
+        O jogo foi concebido durante a transição da Microsoft
+        para a geração Xbox One e representou uma das principais
+        produções da plataforma em 2015.<br>
+
+        O título também marcou uma expansão significativa
+        das possibilidades multiplayer da série, principalmente
+        através do modo Warzone.<br>
+
+        A Microsoft descreveu o jogo como uma produção construída
+        especificamente para aproveitar o Xbox One e o Xbox Live.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LANÇAMENTO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Lançamento no Xbox One
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5: Guardians foi lançado mundialmente em
+        27 de outubro de 2015 exclusivamente para Xbox One.
+
+
+X
+XBOX Wire
++1
+<br>
+        O lançamento recebeu uma forte integração com
+        o Xbox Live, principalmente devido aos modos
+        multiplayer e à campanha cooperativa online.<br>
+
+        O jogo também recebeu atualizações de conteúdo
+        multiplayer posteriormente, incluindo novos mapas,
+        armas, veículos, personalizações e melhorias para
+        diferentes sistemas do jogo. 
+X
+XBOX Wire
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CAMPANHA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Campanha
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_masterchief.jpg"
+            alt="Master Chief em Halo 5"
+          />
+
+          <img
+            src="../tgga/halo5_locke.jpg"
+            alt="Spartan Locke em Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Master Chief e Spartan Locke ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A campanha de Halo 5 acompanha duas equipes de
+        Spartans durante diferentes partes da história.<br>
+
+        O Master Chief lidera a Blue Team, enquanto Spartan
+        Locke lidera o Fireteam Osiris, grupo enviado para
+        localizar e recuperar o Master Chief.<br>
+
+        A campanha apresenta diferentes mundos e situações
+        de combate, combinando tiroteios, veículos,
+        exploração e confrontos contra forças inimigas.<br>
+
+        A campanha pode ser jogada individualmente ou em
+        cooperação online para até quatro jogadores. 
+X
+xbox.com
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           BLUE TEAM
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Blue Team
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - BLUE TEAM -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Master Chief:</strong>
+            líder da equipe e protagonista central da série.
+          </li>
+
+          <li>
+            <strong>Kelly-087:</strong>
+            Spartan conhecida por sua velocidade e experiência.
+          </li>
+
+          <li>
+            <strong>Linda-058:</strong>
+            especialista em operações de combate e precisão.
+          </li>
+
+          <li>
+            <strong>Fred-104:</strong>
+            membro veterano da Blue Team.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           FIRETEAM OSIRIS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Fireteam Osiris
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - FIRETEAM OSIRIS -
+        </h3>
+
+        <ul>
+
+          <li>
+            <strong>Jameson Locke:</strong>
+            líder do Fireteam Osiris.
+          </li>
+
+          <li>
+            <strong>Edward Buck:</strong>
+            veterano das forças da UNSC.
+          </li>
+
+          <li>
+            <strong>Holly Tanaka:</strong>
+            especialista em engenharia e operações.
+          </li>
+
+          <li>
+            <strong>Olympia Vale:</strong>
+            especialista em linguística e conhecimento
+            relacionado aos Sangheili.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           SPARTAN ABILITIES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Spartan Abilities
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_thruster.jpg"
+              alt="Thruster Pack"
+            />
+
+            <figcaption>
+              Thruster
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_groundpound.jpg"
+              alt="Ground Pound"
+            />
+
+            <figcaption>
+              Ground Pound
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_smartscope.jpg"
+              alt="Smart Scope"
+            />
+
+            <figcaption>
+              Smart Scope
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_clamber.jpg"
+              alt="Clamber"
+            />
+
+            <figcaption>
+              Clamber
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 introduziu um conjunto de habilidades de
+        movimento chamadas Spartan Abilities.<br>
+
+        O Thruster permite realizar movimentos rápidos
+        utilizando o impulso da armadura.<br>
+
+        O Ground Pound permite atacar a partir do ar,
+        atingindo o chão com força.<br>
+
+        O Clamber permite que o Spartan agarre determinadas
+        superfícies para alcançar áreas mais altas.<br>
+
+        O Smart Scope permite utilizar diferentes armas
+        com sistemas de mira específicos.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           ARMAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Armas
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_assault_rifle.jpg"
+              alt="Assault Rifle"
+            />
+
+            <figcaption>
+              Assault Rifle
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_battle_rifle.jpg"
+              alt="Battle Rifle"
+            />
+
+            <figcaption>
+              Battle Rifle
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_dmr.jpg"
+              alt="DMR"
+            />
+
+            <figcaption>
+              DMR
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_needler.jpg"
+              alt="Needler"
+            />
+
+            <figcaption>
+              Needler
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 possui um grande arsenal dividido entre
+        armas humanas, Covenant, Promethean e outras
+        categorias presentes no universo Halo.<br>
+
+        Entre as armas humanas estão o Assault Rifle,
+        Battle Rifle, DMR, Magnum e diversas armas
+        especializadas.<br>
+
+        O arsenal Covenant inclui armas como Needler,
+        Plasma Pistol e diversas armas de energia.<br>
+
+        Os Prometheans também possuem armamentos próprios,
+        incluindo armas baseadas em tecnologia Forerunner.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           VEÍCULOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Veículos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_warthog.jpg"
+            alt="Warthog em Halo 5"
+          />
+
+          <img
+            src="../tgga/halo5_scorpion.jpg"
+            alt="Scorpion em Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Warthog e Scorpion ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Veículos são parte importante da experiência de Halo 5,
+        especialmente nas áreas de maior escala.<br>
+
+        O Warthog permite transportar Spartans rapidamente
+        e pode ser equipado com diferentes armamentos.<br>
+
+        O Scorpion é um tanque de combate pesado utilizado
+        para enfrentar forças terrestres e veículos inimigos.<br>
+
+        O jogo também apresenta veículos Covenant e
+        Promethean em diferentes situações de combate.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           INIMIGOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Inimigos
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_covenant.jpg"
+            alt="Covenant em Halo 5"
+          />
+
+          <img
+            src="../tgga/halo5_prometheans.jpg"
+            alt="Prometheans em Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Covenant e Prometheans ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 apresenta diferentes grupos inimigos durante
+        a campanha e os modos multiplayer.<br>
+
+        Os Covenant continuam sendo uma das principais forças
+        presentes no universo de Halo, enquanto os Prometheans
+        representam uma ameaça tecnológica associada aos
+        Forerunners.<br>
+
+        Os inimigos possuem diferentes armas, comportamentos,
+        resistências e funções dentro do campo de batalha.
+
+      </p>
+
+      <div class="info-box">
+
+        <h3>
+          - ALGUNS INIMIGOS -
+        </h3>
+
+        <ul>
+
+          <li>Grunt</li>
+          <li>Jackal</li>
+          <li>Elite</li>
+          <li>Hunter</li>
+          <li>Drone</li>
+          <li>Promethean Soldier</li>
+          <li>Promethean Knight</li>
+          <li>Promethean Watcher</li>
+          <li>Guardian</li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           PROMETHEANS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Prometheans
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Os Prometheans são máquinas de combate associadas
+        à tecnologia Forerunner.<br>
+
+        Eles possuem diferentes funções no campo de batalha,
+        desde unidades menores até inimigos mais pesados
+        equipados com escudos e armamentos avançados.<br>
+
+        Knights podem utilizar diferentes armas e
+        equipamentos, enquanto Watchers desempenham
+        funções de suporte.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           FORERUNNERS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Forerunners
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A tecnologia Forerunner possui papel central na
+        história de Halo 5.<br>
+
+        Os Forerunners foram uma antiga civilização que deixou
+        estruturas, armas e sistemas espalhados pela galáxia.<br>
+
+        Durante a campanha, os Spartans entram em contato
+        com estruturas Forerunner e com os Guardians,
+        enormes máquinas relacionadas à história da série.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           GUARDIANS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Guardians
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_guardian.jpg"
+            alt="Guardian de Halo 5"
+          />
+
+          <img
+            src="../tgga/halo5_guardians.jpg"
+            alt="Guardians de Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Guardian Forerunner ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Os Guardians são enormes construções Forerunner
+        capazes de produzir efeitos de grande escala.<br>
+
+        Sua presença está diretamente relacionada aos
+        acontecimentos centrais de Halo 5 e à ameaça
+        enfrentada pelas forças humanas.<br>
+
+        Os Guardians também representam uma mudança na
+        escala dos conflitos apresentados durante a
+        campanha.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MULTIPLAYER
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Multiplayer
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O multiplayer é uma das principais características
+        de Halo 5.<br>
+
+        O jogo apresenta diferentes experiências, incluindo
+        o modo Arena, focado em confrontos competitivos de
+        quatro contra quatro, e o Warzone, que amplia
+        consideravelmente a escala das partidas.<br>
+
+        O multiplayer utiliza servidores dedicados e foi
+        projetado para partidas online.<br>
+
+        A Xbox descreve o jogo como oferecendo multiplayer
+        online de 2 a 24 jogadores, dependendo do modo. 
+X
+xbox.com
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           ARENA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Arena
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_arena.jpg"
+            alt="Halo 5 Arena"
+          />
+
+          <img
+            src="../tgga/halo5_coliseum.jpg"
+            alt="Mapa Coliseum de Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Arena Multiplayer ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Arena é o modo multiplayer tradicional de Halo 5,
+        estruturado principalmente em partidas de quatro
+        contra quatro jogadores.<br>
+
+        O modo enfatiza combate baseado em armas, controle
+        de mapa, movimentação e trabalho em equipe.<br>
+
+        Diferentemente do Warzone, Arena possui mapas e
+        regras voltados para confrontos menores e mais
+        focados.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           WARZONE
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Warzone
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_warzone.jpg"
+            alt="Halo 5 Warzone"
+          />
+
+          <img
+            src="../tgga/halo5_warzone_battle.jpg"
+            alt="Batalha Warzone"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Warzone Multiplayer ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Warzone é um modo multiplayer de grande escala
+        introduzido em Halo 5.<br>
+
+        As partidas podem envolver até 24 jogadores e
+        também incluem inimigos controlados pela inteligência
+        artificial.<br>
+
+        Os mapas de Warzone são significativamente maiores
+        que os mapas tradicionais de Arena e possuem
+        múltiplos objetivos.<br>
+
+        A combinação de jogadores humanos, inimigos de IA,
+        veículos e objetivos transforma o modo em uma
+        experiência de combate em larga escala. 
+X
+XBOX Wire
++1
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           REQ SYSTEM
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Sistema REQ
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        O sistema REQ foi introduzido em Halo 5 como uma
+        forma de disponibilizar conteúdo adicional para
+        determinadas experiências multiplayer.<br>
+
+        Os REQ Packs podem fornecer cartas relacionadas
+        a armas, veículos, armaduras, personalizações
+        e outros conteúdos utilizados nos modos compatíveis.<br>
+
+        O sistema possui papel especialmente importante
+        no Warzone, onde determinados equipamentos podem
+        ser utilizados conforme a progressão da partida.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           FORGE
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Forge
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/halo5_forge.jpg"
+            alt="Forge em Halo 5"
+          />
+
+          <img
+            src="../tgga/halo5_forge_map.jpg"
+            alt="Mapa criado no Forge"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Ferramentas Forge ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 também possui o Forge, sistema de criação
+        associado à série Halo.<br>
+
+        A ferramenta permite modificar elementos de mapas
+        e criar diferentes experiências multiplayer.<br>
+
+        O Forge recebeu atualizações ao longo da vida do jogo,
+        adicionando ferramentas e possibilidades adicionais
+        para criação de conteúdo.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MODOS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Modos de Jogo
+      </h2>
+
+      <table class="world-table">
+
+        <thead>
+
+          <tr>
+            <th>Modo</th>
+            <th>Jogadores</th>
+            <th>Características</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Campaign</td>
+            <td>1–4</td>
+            <td>Campanha solo ou cooperação online</td>
+          </tr>
+
+          <tr>
+            <td>Arena</td>
+            <td>Até 8</td>
+            <td>Combate competitivo 4v4</td>
+          </tr>
+
+          <tr>
+            <td>Warzone</td>
+            <td>Até 24</td>
+            <td>Combate em larga escala + IA</td>
+          </tr>
+
+          <tr>
+            <td>Warzone Assault</td>
+            <td>Até 24</td>
+            <td>Ataque e defesa de objetivos</td>
+          </tr>
+
+          <tr>
+            <td>Warzone Firefight</td>
+            <td>Até 8</td>
+            <td>Cooperação contra ondas de inimigos</td>
+          </tr>
+
+          <tr>
+            <td>Forge</td>
+            <td>Variável</td>
+            <td>Criação e edição de mapas</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           WARZONE FIREFIGHT
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Warzone Firefight
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Warzone Firefight é uma experiência cooperativa
+        baseada em objetivos e ondas de inimigos.<br>
+
+        Até oito jogadores podem trabalhar juntos para
+        completar objetivos progressivamente mais difíceis
+        dentro de um limite de tempo.<br>
+
+        O modo combina elementos de combate cooperativo,
+        veículos, armas e inimigos controlados pela IA.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           MÚSICA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Música e Efeitos Sonoros
+      </h2>
+
+      <figure class="historical-consoles">
+
+        <div class="console-images">
+
+          <img
+            src="../tgga/kazuma_jinnouchi.jpg"
+            alt="Kazuma Jinnouchi"
+          />
+
+          <img
+            src="../tgga/halo5_music.jpg"
+            alt="Trilha sonora de Halo 5"
+          />
+
+        </div>
+
+        <figcaption>
+          ~ Kazuma Jinnouchi e a trilha sonora de Halo 5 ~
+        </figcaption>
+
+      </figure>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        A trilha sonora de Halo 5: Guardians foi composta
+        por Kazuma Jinnouchi.<br>
+
+        A música combina elementos orquestrais e eletrônicos
+        para acompanhar os combates, ambientes e momentos
+        narrativos da campanha.<br>
+
+        Efeitos sonoros também possuem papel importante,
+        especialmente durante os confrontos envolvendo
+        diferentes armas, veículos e equipamentos.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           TECNOLOGIA
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Tecnologia e Xbox One
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5 foi desenvolvido para aproveitar as
+        características do Xbox One.<br>
+
+        A equipe utilizou o hardware do console para
+        apresentar ambientes maiores, batalhas com vários
+        elementos simultâneos e experiências multiplayer
+        baseadas em servidores dedicados.<br>
+
+        O jogo foi projetado para manter uma experiência
+        de 60 quadros por segundo, uma característica
+        destacada pela Microsoft durante sua apresentação
+        do título. 
+X
+XBOX Wire
++1
+
+<br>
+
+        A versão Xbox One X posteriormente recebeu melhorias
+        visuais, incluindo suporte a resolução de até 4K e
+        maior fidelidade gráfica. 
+X
+xbox.com
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           AUSÊNCIA DE SPLIT SCREEN
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Multiplayer Local
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Diferentemente de vários jogos anteriores da série,
+        Halo 5 não possui multiplayer em tela dividida
+        no mesmo console.<br>
+
+        A campanha cooperativa e os modos multiplayer foram
+        estruturados para utilização online, com servidores
+        dedicados. A decisão foi associada pela equipe ao
+        objetivo de ampliar a escala e a qualidade visual
+        da experiência no Xbox One. 
+A
+Ars Technica
+
+
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           LEGADO
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Legado
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5: Guardians ocupa uma posição importante na
+        história do Xbox One e da franquia Halo.<br>
+
+        O jogo expandiu consideravelmente o multiplayer
+        através do Warzone, mantendo também o tradicional
+        formato competitivo do Arena.<br>
+
+        A campanha apresentou uma estrutura baseada em
+        duas equipes de Spartans e ampliou o papel de
+        personagens como Spartan Locke, Blue Team e
+        Fireteam Osiris.<br>
+
+        O jogo também estabeleceu diversas características
+        técnicas e de jogabilidade que seriam relevantes
+        para a evolução posterior da franquia.
+
+      </p>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           CURIOSIDADES
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Curiosidades
+      </h2>
+
+      <div class="info-box">
+
+        <h3>
+          - VOCÊ SABIA? -
+        </h3>
+
+        <ul>
+
+          <li>
+            Halo 5: Guardians foi lançado em 27 de outubro
+            de 2015.
+          </li>
+
+          <li>
+            O jogo foi desenvolvido pela 343 Industries.
+          </li>
+
+          <li>
+            Foi construído especificamente para o Xbox One.
+          </li>
+
+          <li>
+            A campanha permite cooperação online para
+            até quatro jogadores.
+          </li>
+
+          <li>
+            Warzone permite partidas de até 24 jogadores.
+          </li>
+
+          <li>
+            Warzone também utiliza inimigos controlados
+            pela inteligência artificial.
+          </li>
+
+          <li>
+            Arena utiliza partidas competitivas de quatro
+            contra quatro.
+          </li>
+
+          <li>
+            O jogo introduziu as Spartan Abilities.
+          </li>
+
+          <li>
+            Halo 5 não possui multiplayer em tela dividida.
+          </li>
+
+          <li>
+            O jogo recebeu conteúdo multiplayer adicional
+            após o lançamento.
+          </li>
+
+          <li>
+            A versão Xbox One X possui melhorias visuais
+            e suporte a resolução de até 4K.
+          </li>
+
+          <li>
+            O jogo possui ferramentas de criação através
+            do Forge.
+          </li>
+
+        </ul>
+
+      </div>
+
+      <h2></h2>
+
+      <!-- ==========================================
+           EDIÇÕES FÍSICAS
+           ========================================== -->
+
+      <h2 style="text-align: center;">
+        Edições e Materiais Colecionáveis
+      </h2>
+
+      <p
+        style="
+          font-size: 14px;
+          color: #ddd;
+          line-height: 1.5;
+        "
+      >
+
+        Halo 5: Guardians recebeu diferentes materiais físicos
+        associados ao lançamento do Xbox One.<br>
+
+        Caixas, discos, manuais, encartes, edições especiais
+        e diferentes versões promocionais podem apresentar
+        diferenças de embalagem e conteúdo.<br>
+
+        Para colecionadores, esses materiais representam
+        uma parte da história do Xbox One e da franquia Halo
+        durante a geração do console.
+
+      </p>
+
+      <figure class="historical-consoles">
+
+        <div class="models-grid">
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_box.jpg"
+              alt="Caixa de Halo 5 Guardians"
+            />
+
+            <figcaption>
+              Caixa — Halo 5: Guardians
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_disc.jpg"
+              alt="Disco de Halo 5 Guardians"
+            />
+
+            <figcaption>
+              Disco — Xbox One
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_cover.jpg"
+              alt="Capa de Halo 5 Guardians"
+            />
+
+            <figcaption>
+              Capa — Halo 5: Guardians
+            </figcaption>
+
+          </div>
+
+          <div class="model-item">
+
+            <img
+              src="../tgga/halo5_limited.jpg"
+              alt="Edição especial de Halo 5 Guardians"
+            />
+
+            <figcaption>
+              Edição especial
+            </figcaption>
+
+          </div>
+
+        </div>
+
+      </figure>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       COLUNA LATERAL
+       ======================================== -->
+
+  <div class="sidebar-column">
+
+    <nav class="side-nav-menu">
+
+      <h3>
+        - MENU DE ARTIGOS -
+      </h3>
+
+      <ul>
+
+        <li>
+          <a href="../tgga.html">
+            ○ Início - TGGA
+          </a>
+        </li>
+
+        <li>
+          <a href="../index.html">
+            ○ Início - NLU
+          </a>
+        </li>
+
+        <li>
+          <a href="halo5-guardians.html">
+            ○ Games - Halo 5: Guardians
+          </a>
+        </li>
+
+        <li>
+          <a href="xboxone.html">
+            ○ Consoles - Xbox One
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- ==========================================
+         ELEMENTOS DO JOGO
+         ========================================== -->
+
+    <div class="components-block">
+
+      <h3>
+        - ELEMENTOS DO JOGO -
+      </h3>
+
+      <div class="component-list">
+
+        <details class="component-item">
+
+          <summary>Master Chief</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan protagonista da série Halo e líder
+              da Blue Team em Halo 5.
+            </p>
+
+            <ul class="component-specs">
+              <li>Função: Spartan</li>
+              <li>Equipe: Blue Team</li>
+              <li>Armadura: MJOLNIR</li>
+            </ul>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Spartan Locke</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan responsável por liderar o Fireteam
+              Osiris durante a campanha.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Blue Team</summary>
+
+          <div class="component-description">
+
+            <p>
+              Equipe formada por Master Chief, Kelly,
+              Linda e Fred.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Fireteam Osiris</summary>
+
+          <div class="component-description">
+
+            <p>
+              Equipe de Spartans liderada por Spartan Locke.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Kelly-087</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan membro da Blue Team e especialista
+              em velocidade e combate.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Linda-058</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan da Blue Team conhecida por sua
+              especialização em precisão.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Fred-104</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan e membro da Blue Team.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Edward Buck</summary>
+
+          <div class="component-description">
+
+            <p>
+              Veterano das forças humanas e integrante
+              do Fireteam Osiris.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Olympia Vale</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan do Fireteam Osiris especializada
+              em linguística e cultura Sangheili.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Holly Tanaka</summary>
+
+          <div class="component-description">
+
+            <p>
+              Spartan integrante do Fireteam Osiris.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Cortana</summary>
+
+          <div class="component-description">
+
+            <p>
+              Inteligência artificial intimamente ligada
+              à história de Master Chief.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Guardian</summary>
+
+          <div class="component-description">
+
+            <p>
+              Estrutura Forerunner gigantesca relacionada
+              aos principais acontecimentos da campanha.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Promethean</summary>
+
+          <div class="component-description">
+
+            <p>
+              Força de combate baseada em tecnologia
+              Forerunner.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Promethean Knight</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade Promethean pesada equipada com
+              armas e sistemas avançados.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Promethean Soldier</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade de combate Promethean utilizada
+              em diferentes situações.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Promethean Watcher</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade aérea utilizada para suporte
+              durante combates.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Elite</summary>
+
+          <div class="component-description">
+
+            <p>
+              Guerreiro Sangheili encontrado entre
+              as forças Covenant.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Grunt</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade de infantaria Unggoy presente
+              entre as forças Covenant.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Jackal</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade Covenant conhecida pelo uso
+              de escudos de energia.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Hunter</summary>
+
+          <div class="component-description">
+
+            <p>
+              Unidade pesada Covenant equipada com
+              armadura e armamentos de grande poder.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Assault Rifle</summary>
+
+          <div class="component-description">
+
+            <p>
+              Rifle automático humano utilizado em
+              combate de curta e média distância.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Battle Rifle</summary>
+
+          <div class="component-description">
+
+            <p>
+              Rifle de combate utilizado em confrontos
+              de média distância.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>DMR</summary>
+
+          <div class="component-description">
+
+            <p>
+              Rifle de precisão utilizado para combates
+              de média e longa distância.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Needler</summary>
+
+          <div class="component-description">
+
+            <p>
+              Arma Covenant que dispara projéteis
+              cristalinos capazes de perseguir alvos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Magnum</summary>
+
+          <div class="component-description">
+
+            <p>
+              Pistola humana utilizada em diversas
+              situações de combate.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Energy Sword</summary>
+
+          <div class="component-description">
+
+            <p>
+              Arma de energia Covenant utilizada
+              principalmente em combate corpo a corpo.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Gravity Hammer</summary>
+
+          <div class="component-description">
+
+            <p>
+              Arma pesada de combate corpo a corpo.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Warthog</summary>
+
+          <div class="component-description">
+
+            <p>
+              Veículo terrestre multifuncional utilizado
+              pelas forças humanas.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Scorpion</summary>
+
+          <div class="component-description">
+
+            <p>
+              Tanque de combate pesado da UNSC.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Ghost</summary>
+
+          <div class="component-description">
+
+            <p>
+              Veículo Covenant rápido utilizado para
+              reconhecimento e combate.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Wraith</summary>
+
+          <div class="component-description">
+
+            <p>
+              Veículo blindado Covenant equipado
+              com armamento pesado.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Thruster</summary>
+
+          <div class="component-description">
+
+            <p>
+              Habilidade Spartan que permite realizar
+              movimentos rápidos utilizando impulso.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Ground Pound</summary>
+
+          <div class="component-description">
+
+            <p>
+              Ataque aéreo que permite atingir
+              o chão com força.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Clamber</summary>
+
+          <div class="component-description">
+
+            <p>
+              Habilidade que permite ao Spartan
+              agarrar bordas e alcançar superfícies.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Smart Scope</summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema de mira utilizado por diversas
+              armas de Halo 5.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Arena</summary>
+
+          <div class="component-description">
+
+            <p>
+              Modo multiplayer competitivo baseado
+              principalmente em confrontos 4 contra 4.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Warzone</summary>
+
+          <div class="component-description">
+
+            <p>
+              Modo multiplayer de grande escala com
+              até 24 jogadores e inimigos controlados
+              pela IA.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Warzone Assault</summary>
+
+          <div class="component-description">
+
+            <p>
+              Variante de Warzone baseada em ataque
+              e defesa de objetivos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Warzone Firefight</summary>
+
+          <div class="component-description">
+
+            <p>
+              Modo cooperativo baseado em objetivos
+              e ondas de inimigos.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Forge</summary>
+
+          <div class="component-description">
+
+            <p>
+              Ferramenta de criação e edição de mapas
+              e experiências multiplayer.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>REQ System</summary>
+
+          <div class="component-description">
+
+            <p>
+              Sistema utilizado para disponibilizar
+              cartas e conteúdos em determinados
+              modos multiplayer.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Xbox One</summary>
+
+          <div class="component-description">
+
+            <p>
+              Console para o qual Halo 5: Guardians
+              foi desenvolvido e lançado originalmente.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>343 Industries</summary>
+
+          <div class="component-description">
+
+            <p>
+              Estúdio responsável pelo desenvolvimento
+              de Halo 5: Guardians.
+            </p>
+
+          </div>
+
+        </details>
+
+        <details class="component-item">
+
+          <summary>Kazuma Jinnouchi</summary>
+
+          <div class="component-description">
+
+            <p>
+              Compositor responsável pela trilha sonora
+              de Halo 5: Guardians.
+            </p>
+
+          </div>
+
+        </details>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="site-footer">
+
+  <p>
+    &copy; 2026 Nerd League United.
+    Todos os direitos reservados.
+  </p>
+
+</footer>
+
+</div> </body> </html>

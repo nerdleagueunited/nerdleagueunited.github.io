@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Assassin's Creed II</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Assassin's Creed II leva o jogador à Itália
+          renascentista, acompanhando Ezio Auditore em uma
+          jornada de vingança, descoberta e transformação ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Assassin's Creed II leva o jogador à Itália
+          renascentista, acompanhando Ezio Auditore em uma
+          jornada de vingança, descoberta e transformação ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Assassin's Creed II — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/assassinscreed2_x360.jpg"
+              alt="Assassin's Creed II para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed II
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II é um jogo eletrônico de ação e
+            aventura desenvolvido pela Ubisoft Montreal e publicado
+            pela Ubisoft.<br>
+
+            O jogo foi lançado originalmente em 2009 para
+            Xbox 360 e PlayStation 3, chegando posteriormente
+            a outras plataformas.<br>
+
+            A história acompanha Ezio Auditore da Firenze,
+            um jovem nobre florentino que se envolve em uma
+            conspiração envolvendo sua família e a antiga
+            guerra entre Assassinos e Templários.<br>
+
+            A aventura combina exploração de cidades históricas,
+            parkour, combate, furtividade, investigação,
+            assassinatos e elementos de progressão de personagem.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Ubisoft Montreal
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Ubisoft
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Patrice Désilets
+              </li>
+
+              <li>
+                <strong>Roteiro:</strong>
+                Corey May
+              </li>
+
+              <li>
+                <strong>Protagonista:</strong>
+                Ezio Auditore da Firenze
+              </li>
+
+              <li>
+                <strong>Plataforma desta página:</strong>
+                Xbox 360
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                17 de novembro de 2009
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador
+              </li>
+
+              <li>
+                <strong>Engine:</strong>
+                Anvil
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II foi desenvolvido após o primeiro
+            Assassin's Creed, com a equipe buscando expandir
+            significativamente a estrutura do jogo original.<br>
+
+            O projeto introduziu um novo protagonista, uma nova
+            época histórica e cidades maiores e mais detalhadas.<br>
+
+            A equipe da Ubisoft Montreal trabalhou para ampliar
+            as possibilidades de exploração, combate, furtividade
+            e interação com o ambiente.<br>
+
+            A ambientação foi transferida das Cruzadas para a
+            Itália do Renascimento, permitindo utilizar cidades,
+            personagens e acontecimentos históricos como parte
+            do cenário da aventura.<br>
+
+            O jogo também passou a oferecer um sistema mais amplo
+            de progressão, equipamentos, dinheiro, melhorias e
+            atividades secundárias.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_florence.jpg"
+                alt="Florença em Assassin's Creed II"
+              />
+
+              <img
+                src="../tgga/ac2_venice.jpg"
+                alt="Veneza em Assassin's Creed II"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Florença e Veneza durante a ambientação de Assassin's Creed II ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II se passa principalmente na Itália
+            durante o final do século XV e início do século XVI.<br>
+
+            O período retratado corresponde ao Renascimento Italiano,
+            época marcada por transformações culturais, políticas,
+            científicas e artísticas.<br>
+
+            Florença, Veneza, Forlì, Monteriggioni e outras regiões
+            aparecem como ambientes exploráveis durante a aventura.<br>
+
+            Figuras históricas como Leonardo da Vinci, Lorenzo de
+            Medici e Rodrigo Borgia são incorporadas à narrativa,
+            misturando acontecimentos históricos com a ficção
+            da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_ezio.jpg"
+                alt="Ezio Auditore"
+              />
+
+              <img
+                src="../tgga/ac2_auditore.jpg"
+                alt="Família Auditore"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Ezio Auditore e a família Auditore ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história começa em Florença, onde Ezio Auditore
+            vive como um jovem membro de uma família nobre.<br>
+
+            Após acontecimentos envolvendo seu pai Giovanni e
+            seus irmãos, Ezio descobre que sua família estava
+            ligada a uma conspiração política maior.<br>
+
+            A execução de seus familiares faz com que Ezio
+            procure respostas e vingança.<br>
+
+            Durante sua jornada, ele conhece pessoas que o
+            ajudam a compreender a existência da Ordem dos
+            Assassinos e sua antiga rivalidade com os Templários.<br>
+
+            Ezio passa a utilizar as habilidades de um Assassino
+            e começa a perseguir os responsáveis pelos acontecimentos
+            que destruíram sua família.<br>
+
+            A narrativa acompanha sua transformação ao longo
+            de vários anos, levando-o por diferentes cidades
+            italianas e colocando-o em contato com importantes
+            figuras históricas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ANIMUS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Animus e a História no Presente
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assim como no primeiro jogo da série, Assassin's Creed II
+            possui uma narrativa ambientada tanto no passado quanto
+            no presente.<br>
+
+            Desmond Miles utiliza o Animus, uma máquina capaz de
+            acessar memórias ancestrais armazenadas geneticamente,
+            para reviver as experiências de seus antepassados.<br>
+
+            As memórias de Ezio são utilizadas por uma organização
+            moderna para investigar acontecimentos relacionados
+            aos Assassinos e aos Templários.<br>
+
+            Essa estrutura permite que a história alterne entre
+            acontecimentos da Renascença Italiana e a narrativa
+            contemporânea.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II utiliza uma perspectiva em terceira
+            pessoa e permite explorar grandes áreas urbanas.<br>
+
+            Ezio pode caminhar, correr, escalar edifícios,
+            saltar entre estruturas e utilizar diferentes
+            rotas para atravessar as cidades.<br>
+
+            O sistema de parkour permite subir paredes e
+            alcançar telhados, criando diferentes possibilidades
+            para exploração e perseguição.<br>
+
+            O combate utiliza armas brancas, armas de longo alcance,
+            contra-ataques e diferentes movimentos defensivos.<br>
+
+            A furtividade também possui papel importante,
+            permitindo que Ezio se misture à população,
+            utilize esconderijos e ataque inimigos sem ser
+            detectado.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ASSASSINATO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassinatos e Contratos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A campanha apresenta diversos alvos ligados à
+            conspiração que Ezio procura investigar.<br>
+
+            Antes de determinados assassinatos, o jogador pode
+            explorar a região, observar o alvo e procurar
+            maneiras de chegar até ele.<br>
+
+            O jogador pode utilizar rotas pelos telhados,
+            multidões, esconderijos e diferentes tipos de
+            aproximação para alcançar os objetivos.<br>
+
+            A Hidden Blade é uma das principais armas associadas
+            ao personagem e pode ser utilizada para realizar
+            ataques furtivos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Ezio Auditore:</strong>
+                protagonista da aventura.
+              </li>
+
+              <li>
+                <strong>Desmond Miles:</strong>
+                personagem do período contemporâneo.
+              </li>
+
+              <li>
+                <strong>Leonardo da Vinci:</strong>
+                inventor e aliado de Ezio.
+              </li>
+
+              <li>
+                <strong>Claudia Auditore:</strong>
+                irmã de Ezio.
+              </li>
+
+              <li>
+                <strong>Federico Auditore:</strong>
+                irmão de Ezio.
+              </li>
+
+              <li>
+                <strong>Giovanni Auditore:</strong>
+                pai de Ezio e membro da Ordem dos Assassinos.
+              </li>
+
+              <li>
+                <strong>Mario Auditore:</strong>
+                tio de Ezio e importante aliado.
+              </li>
+
+              <li>
+                <strong>Rodrigo Borgia:</strong>
+                um dos principais adversários da narrativa.
+              </li>
+
+              <li>
+                <strong>Caterina Sforza:</strong>
+                personagem histórica que participa da narrativa.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ALIADOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Aliados
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_leonardo.jpg"
+                  alt="Leonardo da Vinci"
+                />
+
+                <figcaption>
+                  Leonardo da Vinci
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_mario.jpg"
+                  alt="Mario Auditore"
+                />
+
+                <figcaption>
+                  Mario Auditore
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_claudia.jpg"
+                  alt="Claudia Auditore"
+                />
+
+                <figcaption>
+                  Claudia Auditore
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_paola.jpg"
+                  alt="Paola"
+                />
+
+                <figcaption>
+                  Paola
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ezio encontra diversos aliados durante sua jornada.<br>
+
+            Leonardo da Vinci desenvolve equipamentos e auxilia
+            Ezio com suas invenções.<br>
+
+            Mario Auditore ajuda Ezio a compreender sua ligação
+            com a Ordem dos Assassinos.<br>
+
+            Claudia Auditore participa da administração das
+            propriedades da família e posteriormente assume
+            responsabilidades importantes em Monteriggioni.<br>
+
+            Outros personagens auxiliam Ezio oferecendo abrigo,
+            informações, treinamento e diferentes serviços.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Cidades e Regiões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Uma das principais características de Assassin's Creed II
+            é a quantidade de ambientes históricos exploráveis.<br>
+
+            Cada cidade possui arquitetura, ruas, edifícios,
+            habitantes e estruturas próprias.<br>
+
+            O jogador pode utilizar telhados, ruas, canais,
+            torres e monumentos para se deslocar pelos mapas.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Local</th>
+                <th>Região</th>
+                <th>Características</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Florença</td>
+                <td>Toscana</td>
+                <td>Arquitetura renascentista e início da jornada</td>
+              </tr>
+
+              <tr>
+                <td>Monteriggioni</td>
+                <td>Toscana</td>
+                <td>Villa Auditore e centro de administração</td>
+              </tr>
+
+              <tr>
+                <td>San Gimignano</td>
+                <td>Toscana</td>
+                <td>Cidade fortificada</td>
+              </tr>
+
+              <tr>
+                <td>Veneza</td>
+                <td>Vêneto</td>
+                <td>Canais, telhados e arquitetura veneziana</td>
+              </tr>
+
+              <tr>
+                <td>Forlì</td>
+                <td>Emília-Romanha</td>
+                <td>Região ligada a missões e conflitos</td>
+              </tr>
+
+              <tr>
+                <td>Apennines</td>
+                <td>Itália</td>
+                <td>Região montanhosa e passagem entre áreas</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VILLA AUDITORE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Villa Auditore
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_monteriggioni.jpg"
+                alt="Monteriggioni"
+              />
+
+              <img
+                src="../tgga/ac2_villa.jpg"
+                alt="Villa Auditore"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Monteriggioni e Villa Auditore ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Monteriggioni funciona como uma espécie de base
+            para Ezio durante parte da aventura.<br>
+
+            A Villa Auditore pode ser restaurada e aprimorada
+            através de investimentos realizados pelo jogador.<br>
+
+            Melhorias na cidade aumentam a quantidade de dinheiro
+            gerada pela propriedade e liberam diferentes serviços.<br>
+
+            A Villa também funciona como local de armazenamento
+            de armas, armaduras e outros itens coletados durante
+            a aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ARMAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Armas e Equipamentos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_hiddenblade.jpg"
+                  alt="Hidden Blade"
+                />
+
+                <figcaption>
+                  Hidden Blade
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_sword.jpg"
+                  alt="Espada"
+                />
+
+                <figcaption>
+                  Espada
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_dagger.jpg"
+                  alt="Adaga"
+                />
+
+                <figcaption>
+                  Adaga
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_pistol.jpg"
+                  alt="Pistola"
+                />
+
+                <figcaption>
+                  Hidden Gun
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Ezio possui acesso a diferentes armas durante a aventura.<br>
+
+            A Hidden Blade é utilizada principalmente em ataques
+            furtivos e assassinatos.<br>
+
+            Espadas, adagas e outras armas podem ser utilizadas
+            diretamente no combate.<br>
+
+            Conforme a história avança, Leonardo da Vinci ajuda
+            Ezio a desenvolver equipamentos adicionais, incluindo
+            mecanismos relacionados à Hidden Blade e outras
+            ferramentas.<br>
+
+            O jogador também pode adquirir diferentes armaduras
+            e melhorar os equipamentos de Ezio.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               EQUIPAMENTOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Equipamentos Especiais
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - EQUIPAMENTOS DE EZIO -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Hidden Blade:</strong>
+                principal ferramenta de assassinato.
+              </li>
+
+              <li>
+                <strong>Double Hidden Blade:</strong>
+                permite utilizar duas lâminas ocultas.
+              </li>
+
+              <li>
+                <strong>Hidden Gun:</strong>
+                arma de fogo integrada ao equipamento.
+              </li>
+
+              <li>
+                <strong>Poison Blade:</strong>
+                utilizada para envenenar determinados alvos.
+              </li>
+
+              <li>
+                <strong>Throwing Knives:</strong>
+                facas utilizadas contra inimigos à distância.
+              </li>
+
+              <li>
+                <strong>Smoke Bomb:</strong>
+                utilizada para criar uma oportunidade
+                de fuga ou aproximação.
+              </li>
+
+              <li>
+                <strong>Armor:</strong>
+                equipamentos que aumentam a resistência de Ezio.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               INIMIGOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Inimigos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_guards.jpg"
+                alt="Guardas de Assassin's Creed II"
+              />
+
+              <img
+                src="../tgga/ac2_templars.jpg"
+                alt="Templários de Assassin's Creed II"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Guardas e forças adversárias ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As forças inimigas possuem diferentes níveis de
+            treinamento e equipamentos.<br>
+
+            Guardas comuns podem ser enfrentados diretamente,
+            enquanto inimigos mais especializados podem
+            apresentar maior resistência ou utilizar armas
+            diferentes.<br>
+
+            O jogador também pode evitar confrontos utilizando
+            furtividade, distrações, esconderijos e rotas
+            alternativas.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALGUNS ADVERSÁRIOS -
+            </h3>
+
+            <ul>
+
+              <li>Guardas leves</li>
+              <li>Guardas médios</li>
+              <li>Guardas pesados</li>
+              <li>Agile Guards</li>
+              <li>Brutes</li>
+              <li>Seekers</li>
+              <li>Archer Guards</li>
+              <li>Soldados Templários</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               SISTEMA DE FURTIVIDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Furtividade
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A furtividade é uma das principais formas de abordagem
+            disponíveis ao jogador.<br>
+
+            Ezio pode utilizar grupos de pessoas para reduzir
+            a atenção dos guardas, esconder-se em determinados
+            locais e deslocar-se pelos telhados.<br>
+
+            Mercenários, cortesãs e ladrões também podem ser
+            utilizados para distrair ou afastar guardas em
+            determinadas situações.<br>
+
+            A notoriedade de Ezio influencia a reação dos guardas,
+            podendo ser reduzida através de diferentes atividades.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ATIVIDADES SECUNDÁRIAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Atividades Secundárias
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Além das missões principais, o jogo apresenta diversas
+            atividades opcionais espalhadas pelas cidades.<br>
+
+            O jogador pode realizar missões de entrega,
+            corridas, assassinatos, desafios de combate,
+            missões relacionadas a grupos aliados e outras
+            atividades de exploração.<br>
+
+            Também é possível procurar colecionáveis e explorar
+            monumentos e áreas escondidas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Colecionáveis e Segredos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II possui diversos objetos e locais
+            opcionais para serem encontrados durante a exploração.<br>
+
+            As penas são um dos principais colecionáveis do jogo
+            e estão espalhadas pelas diferentes regiões.<br>
+
+            O jogador também pode procurar glifos, selos de
+            Assassinos, tesouros e outros elementos escondidos
+            pelo mundo.<br>
+
+            A exploração dos mapas é incentivada pela possibilidade
+            de encontrar recompensas e informações adicionais
+            sobre o universo da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GLIFOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Glifos e a Verdade
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_glyph.jpg"
+                alt="Glifo de Assassin's Creed II"
+              />
+
+              <img
+                src="../tgga/ac2_truth.jpg"
+                alt="A Verdade em Assassin's Creed II"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Glifos e as investigações da Verdade ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os glifos são símbolos escondidos em diferentes
+            edifícios das cidades.<br>
+
+            Ao encontrar um glifo, Desmond pode acessar uma
+            sequência de desafios e quebra-cabeças relacionados
+            à história do mundo de Assassin's Creed.<br>
+
+            A resolução dos diferentes desafios revela partes
+            de um conjunto de informações conhecido como
+            "A Verdade".<br>
+
+            Esse conteúdo conecta acontecimentos históricos
+            com elementos centrais da mitologia da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BATALHAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Sistema de Combate
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O combate de Assassin's Creed II é baseado em defesa,
+            esquiva, contra-ataques e ataques diretos.<br>
+
+            Ezio pode bloquear ataques e responder no momento
+            adequado, além de utilizar diferentes armas.<br>
+
+            Cada categoria de inimigo pode exigir uma abordagem
+            diferente, especialmente quando o jogador enfrenta
+            grupos numerosos.<br>
+
+            O ambiente também pode ser utilizado durante os
+            confrontos, permitindo que Ezio escape e retorne
+            ao combate em outras condições.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ECONOMIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Economia e Melhorias
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O dinheiro possui uma função importante na progressão
+            de Ezio.<br>
+
+            Florins podem ser obtidos durante missões, encontrados
+            em baús ou recebidos através das atividades do jogo.<br>
+
+            O jogador pode utilizar o dinheiro para comprar armas,
+            armaduras, bolsas, itens médicos e outras melhorias.<br>
+
+            A restauração da Villa Auditore também aumenta a
+            quantidade de recursos gerados periodicamente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Xbox 360
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão de Xbox 360 utiliza a tecnologia da geração
+            de consoles iniciada em 2005.<br>
+
+            O jogo apresenta ambientes urbanos extensos,
+            personagens numerosos, sistemas de iluminação,
+            animações de parkour e diferentes elementos
+            interativos.<br>
+
+            A engine Anvil foi utilizada para criar os ambientes
+            e sistemas fundamentais da série Assassin's Creed.<br>
+
+            O hardware do Xbox 360 permitiu que a equipe
+            apresentasse cidades detalhadas e áreas relativamente
+            amplas para exploração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX 360
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed II no Xbox 360
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_xbox360.jpg"
+                alt="Assassin's Creed II Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360_ac2.jpg"
+                alt="Xbox 360 e Assassin's Creed II"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Assassin's Creed II para Xbox 360 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão para Xbox 360 foi lançada em novembro de 2009
+            juntamente com a versão para PlayStation 3.<br>
+
+            O jogo foi distribuído em mídia física e posteriormente
+            passou a fazer parte de diferentes coleções e relançamentos
+            da franquia.<br>
+
+            O título também recebeu conteúdo adicional que,
+            posteriormente, foi incorporado a outras versões e
+            edições da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DLC
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Conteúdo Adicional
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II recebeu conteúdos adicionais
+            relacionados à campanha principal.<br>
+
+            Entre eles estão as sequências "Battle of Forli" e
+            "Bonfire of the Vanities", que expandem determinados
+            acontecimentos da história de Ezio.<br>
+
+            Esses conteúdos posteriormente passaram a integrar
+            versões e coleções que reúnem materiais adicionais
+            da aventura.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Reedições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_x360_cover.jpg"
+                  alt="Assassin's Creed II Xbox 360"
+                />
+
+                <figcaption>
+                  Assassin's Creed II — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_ps3.jpg"
+                  alt="Assassin's Creed II PlayStation 3"
+                />
+
+                <figcaption>
+                  Assassin's Creed II — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_pc.jpg"
+                  alt="Assassin's Creed II PC"
+                />
+
+                <figcaption>
+                  Assassin's Creed II — PC
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_collection.jpg"
+                  alt="Assassin's Creed The Ezio Collection"
+                />
+
+                <figcaption>
+                  The Ezio Collection
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II foi lançado originalmente para
+            Xbox 360 e PlayStation 3, seguido por uma versão
+            para Windows.<br>
+
+            O jogo posteriormente foi incluído em coleções
+            relacionadas à trilogia de Ezio.<br>
+
+            The Ezio Collection reuniu versões remasterizadas
+            de Assassin's Creed II, Assassin's Creed Brotherhood
+            e Assassin's Creed Revelations para consoles
+            posteriores.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TRILOGIA DE EZIO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Trilogia de Ezio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II é o primeiro jogo de uma trilogia
+            centrada em Ezio Auditore.<br>
+
+            A história continua diretamente em Assassin's Creed
+            Brotherhood e posteriormente em Assassin's Creed
+            Revelations.<br>
+
+            Os três jogos acompanham diferentes períodos da vida
+            de Ezio e ampliam sua participação na guerra entre
+            Assassinos e Templários.<br>
+
+            A trilogia também acompanha a evolução de Ezio de
+            jovem membro de uma família florentina até uma das
+            figuras centrais da Ordem dos Assassinos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Trilha Sonora
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac2_jesper_kydd.jpg"
+                alt="Jesper Kyd"
+              />
+
+              <img
+                src="../tgga/ac2_soundtrack.jpg"
+                alt="Trilha sonora de Assassin's Creed II"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Jesper Kyd e a trilha sonora de Assassin's Creed II ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A trilha sonora de Assassin's Creed II foi composta
+            principalmente por Jesper Kyd.<br>
+
+            A música utiliza diferentes estilos para acompanhar
+            a ambientação renascentista e as situações de jogo,
+            incluindo exploração, perseguições, combate e
+            momentos narrativos.<br>
+
+            A trilha também utiliza elementos eletrônicos
+            combinados com instrumentos tradicionais e vocais
+            para criar uma identidade sonora própria para
+            a aventura de Ezio.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed II ampliou diversos conceitos
+            introduzidos no primeiro jogo da franquia.<br>
+
+            A exploração de cidades, o parkour, o sistema de
+            combate, a progressão do personagem e a quantidade
+            de atividades secundárias foram expandidos.<br>
+
+            Ezio Auditore tornou-se um personagem central da
+            franquia, protagonizando dois outros jogos principais
+            e aparecendo posteriormente em diferentes materiais
+            relacionados à série.<br>
+
+            O período do Renascimento Italiano também se tornou
+            uma das ambientações mais reconhecidas da franquia.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Assassin's Creed II foi lançado em 2009.
+              </li>
+
+              <li>
+                Ezio Auditore é o protagonista principal do jogo.
+              </li>
+
+              <li>
+                A aventura se passa principalmente na Itália
+                durante o Renascimento.
+              </li>
+
+              <li>
+                Leonardo da Vinci aparece como aliado de Ezio.
+              </li>
+
+              <li>
+                A Villa Auditore pode ser restaurada e aprimorada.
+              </li>
+
+              <li>
+                O jogo possui centenas de itens e atividades
+                opcionais para exploração.
+              </li>
+
+              <li>
+                Os glifos escondidos iniciam uma série de
+                quebra-cabeças relacionados à chamada Verdade.
+              </li>
+
+              <li>
+                A história de Ezio continua em Assassin's Creed
+                Brotherhood e Assassin's Creed Revelations.
+              </li>
+
+              <li>
+                A trilha sonora foi composta principalmente
+                por Jesper Kyd.
+              </li>
+
+              <li>
+                O jogo utiliza a engine Anvil.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MATERIAIS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão física de Xbox 360 possui diferentes
+            materiais associados à distribuição do jogo,
+            incluindo caixa, disco, manual e encartes.<br>
+
+            Edições especiais e colecionáveis relacionados
+            a Assassin's Creed II também foram produzidos,
+            incluindo versões contendo materiais adicionais
+            e itens relacionados à franquia.<br>
+
+            Para colecionadores, diferenças regionais de capa,
+            classificação etária, idioma, encartes e versões
+            de distribuição podem ser relevantes.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_box.jpg"
+                  alt="Caixa de Assassin's Creed II"
+                />
+
+                <figcaption>
+                  Caixa — Assassin's Creed II
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_disc.jpg"
+                  alt="Disco de Assassin's Creed II Xbox 360"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_manual.jpg"
+                  alt="Manual de Assassin's Creed II"
+                />
+
+                <figcaption>
+                  Manual — Assassin's Creed II
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac2_special.jpg"
+                  alt="Edição especial de Assassin's Creed II"
+                />
+
+                <figcaption>
+                  Edição especial
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="assassinscreed2.html">
+                ○ Games - Assassin's Creed II
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>Ezio Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Protagonista de Assassin's Creed II.
+                  Ezio inicia a história como um jovem florentino
+                  e posteriormente se torna um Assassino.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Função: Protagonista</li>
+                  <li>Período: Renascimento Italiano</li>
+                  <li>Armas: Diversas</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Desmond Miles</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Personagem contemporâneo que utiliza o Animus
+                  para acessar as memórias de Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Leonardo da Vinci</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Inventor e aliado de Ezio responsável por
+                  desenvolver e modificar diversos equipamentos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Claudia Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Irmã de Ezio que participa da reconstrução
+                  da família Auditore.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mario Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Tio de Ezio e importante membro da família
+                  Auditore.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Giovanni Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Pai de Ezio e membro da Ordem dos Assassinos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Rodrigo Borgia</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Um dos principais adversários da história
+                  e figura ligada à conspiração enfrentada por Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hidden Blade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Lâmina oculta utilizada principalmente
+                  para assassinatos furtivos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Double Hidden Blade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Versão que permite utilizar duas lâminas
+                  ocultas simultaneamente.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Hidden Gun</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Arma de fogo integrada ao equipamento de Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Poison Blade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Equipamento utilizado para envenenar
+                  determinados inimigos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Smoke Bomb</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Item utilizado para criar uma nuvem de fumaça
+                  e auxiliar na fuga ou aproximação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Throwing Knives</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Facas utilizadas para atingir inimigos
+                  à distância.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Florins</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Moeda utilizada para adquirir equipamentos,
+                  serviços e melhorias.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Villa Auditore</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Propriedade da família Auditore que pode
+                  ser restaurada e aprimorada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Monteriggioni</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cidade fortificada onde está localizada
+                  a Villa Auditore.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Florença</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Uma das principais cidades da aventura
+                  e local de origem de Ezio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Veneza</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grande cidade explorável caracterizada
+                  por seus canais e arquitetura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Forlì</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Região italiana que participa de diferentes
+                  acontecimentos da campanha.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>San Gimignano</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cidade fortificada da Toscana presente
+                  na aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Parkour</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema de movimentação utilizado para
+                  escalar edifícios e atravessar os ambientes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Furtividade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de mecânicas utilizadas para
+                  evitar detecção e realizar ataques surpresa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Guardas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Principais forças de segurança encontradas
+                  nas cidades.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Mercenários</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grupo que pode ser contratado para enfrentar
+                  ou distrair guardas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Cortesãs</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grupo que pode auxiliar Ezio a passar
+                  despercebido entre os guardas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ladrões</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Grupo que pode ajudar Ezio em determinadas
+                  situações de movimentação e distração.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Penas</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Colecionáveis espalhados pelo mundo do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Glifos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Símbolos escondidos que iniciam desafios
+                  relacionados à história da Verdade.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>A Verdade</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de informações revelado através
+                  dos desafios associados aos glifos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Animus</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Máquina utilizada por Desmond para acessar
+                  memórias ancestrais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Assassinos</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Organização à qual Ezio passa a pertencer
+                  durante sua jornada.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Templários</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Organização rival dos Assassinos e uma das
+                  forças centrais da narrativa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Xbox 360</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Console da Microsoft para o qual Assassin's
+                  Creed II foi originalmente lançado em 2009.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Ubisoft Montreal</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estúdio responsável pelo desenvolvimento
+                  de Assassin's Creed II.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Jesper Kyd</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Compositor responsável pela trilha sonora
+                  de Assassin's Creed II.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>Renascimento Italiano</summary>
+
+              <div class="component-description">
+
+                <p>
+                  Período histórico utilizado como principal
+                  ambientação da aventura.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

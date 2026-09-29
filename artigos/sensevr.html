@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - PlayStation VR2 Sense Controller</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       MODELOS / CONJUNTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       ESPECIFICAÇÕES
+       ========================================== */
+
+    .technical-specs {
+      margin: 20px 0;
+      padding: 12px;
+      background: #151515;
+      border: 1px solid #444;
+      overflow-x: auto;
+    }
+
+    .technical-specs table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #ccc;
+      font-size: 13px;
+    }
+
+    .technical-specs th,
+    .technical-specs td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .technical-specs th {
+      color: #fff;
+      background: #242424;
+    }
+
+    .technical-specs td {
+      background: #111;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .technical-specs table {
+        min-width: 500px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         ESTEIRA
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+
+          ... O PlayStation VR2 Sense Controller é o conjunto de
+          controles desenvolvido pela Sony para o PlayStation VR2,
+          combinando rastreamento por LEDs infravermelhos, sensores
+          de movimento, gatilhos adaptativos, resposta tátil,
+          detecção capacitiva dos dedos e comunicação sem fio ...
+
+          &nbsp;
+
+        </span>
+
+        <span>
+
+          ... O PlayStation VR2 Sense Controller é o conjunto de
+          controles desenvolvido pela Sony para o PlayStation VR2,
+          combinando rastreamento por LEDs infravermelhos, sensores
+          de movimento, gatilhos adaptativos, resposta tátil,
+          detecção capacitiva dos dedos e comunicação sem fio ...
+
+          &nbsp;
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <h2>
+            PlayStation VR2 Sense Controller
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/psvrsense.jpg"
+              alt="PlayStation VR2 Sense Controller"
+              style="
+                max-width: 70%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2 style="text-align: center;">
+            PlayStation VR2 Sense Controller
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation VR2 Sense Controller é o controle desenvolvido
+            pela Sony Interactive Entertainment especificamente para o
+            PlayStation VR2.
+
+            <br><br>
+
+            Diferentemente de um gamepad convencional, o Sense Controller
+            foi projetado para funcionar como uma extensão das mãos do
+            jogador dentro de ambientes de realidade virtual.
+
+            <br><br>
+
+            O conjunto é formado por dois controles independentes:
+            o Sense Controller esquerdo e o Sense Controller direito.
+
+            <br><br>
+
+            Cada controle possui sensores de movimento, botões físicos,
+            stick analógico, gatilho adaptativo, resposta tátil e um
+            conjunto de LEDs utilizado pelo sistema de rastreamento
+            do PlayStation VR2.
+
+            <br><br>
+
+            O projeto também introduziu no ecossistema PlayStation VR
+            recursos encontrados no DualSense, como gatilhos adaptativos
+            e resposta tátil.
+
+            <br><br>
+
+            Porém, a arquitetura do Sense é profundamente diferente
+            de um DualSense tradicional, principalmente por causa do
+            sistema de rastreamento óptico necessário para determinar
+            a posição das mãos dentro do espaço virtual.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ESPECIFICAÇÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Especificações Técnicas
+          </h2>
+
+
+          <div class="technical-specs">
+
+            <table>
+
+              <tr>
+                <th>Característica</th>
+                <th>Informação</th>
+              </tr>
+
+              <tr>
+                <td>Fabricante</td>
+                <td>Sony Interactive Entertainment</td>
+              </tr>
+
+              <tr>
+                <td>Produto</td>
+                <td>PlayStation VR2 Sense Controller</td>
+              </tr>
+
+              <tr>
+                <td>Plataforma</td>
+                <td>PlayStation VR2 / PlayStation 5</td>
+              </tr>
+
+              <tr>
+                <td>Quantidade</td>
+                <td>2 controles — esquerdo e direito</td>
+              </tr>
+
+              <tr>
+                <td>Comunicação</td>
+                <td>Bluetooth / comunicação sem fio</td>
+              </tr>
+
+              <tr>
+                <td>Carregamento</td>
+                <td>USB Type-C</td>
+              </tr>
+
+              <tr>
+                <td>Detecção de movimento</td>
+                <td>IMU com acelerômetro e giroscópio</td>
+              </tr>
+
+              <tr>
+                <td>Rastreamento</td>
+                <td>LEDs infravermelhos + câmeras do headset</td>
+              </tr>
+
+              <tr>
+                <td>Resposta tátil</td>
+                <td>Sim</td>
+              </tr>
+
+              <tr>
+                <td>Gatilhos adaptativos</td>
+                <td>Sim</td>
+              </tr>
+
+              <tr>
+                <td>Stick analógico</td>
+                <td>1 por controle</td>
+              </tr>
+
+              <tr>
+                <td>Botões capacitivos</td>
+                <td>Detecção de contato dos dedos</td>
+              </tr>
+
+              <tr>
+                <td>Alimentação</td>
+                <td>Bateria interna recarregável</td>
+              </tr>
+
+              <tr>
+                <td>Conector</td>
+                <td>USB Type-C</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/psmove.jpg"
+                alt="PlayStation Move"
+              />
+
+              <img
+                src="../tgga/psvrsense.jpg"
+                alt="PlayStation VR2 Sense Controller"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ PlayStation Move e PlayStation VR2 Sense Controller ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Sense Controller representa uma evolução direta da
+            experiência da Sony com controles para realidade virtual.
+
+            <br><br>
+
+            Durante a geração do PlayStation 3, a Sony introduziu o
+            PlayStation Move, utilizando uma esfera luminosa para permitir
+            que câmeras detectassem a posição do controle.
+
+            <br><br>
+
+            O PlayStation VR, lançado posteriormente para PlayStation 4,
+            continuou utilizando o Move como uma das principais formas
+            de interação em realidade virtual.
+
+            <br><br>
+
+            Para o PlayStation VR2, a Sony abandonou a esfera luminosa
+            característica do Move e adotou um sistema baseado em
+            rastreamento realizado pelas câmeras do próprio headset.
+
+            <br><br>
+
+            O Sense Controller possui uma estrutura circular ao redor
+            da mão. Dentro dessa estrutura ficam vários emissores
+            infravermelhos utilizados pelo sistema de rastreamento.
+
+            <br><br>
+
+            Dessa forma, o headset consegue observar a posição e a
+            orientação do controle no ambiente sem precisar de uma
+            câmera externa dedicada ao controle.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RASTREAMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Rastreamento da Mão
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/psvr2tracking.jpg"
+                alt="Rastreamento dos controles PlayStation VR2 Sense"
+              />
+
+              <img
+                src="../tgga/psvr2camera.jpg"
+                alt="Câmeras do PlayStation VR2"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Sistema de rastreamento do PlayStation VR2 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O rastreamento do Sense Controller é uma das características
+            que mais diferencia o acessório de um controle convencional.
+
+            <br><br>
+
+            O PlayStation VR2 possui câmeras voltadas para o ambiente
+            externo. Essas câmeras observam os elementos utilizados
+            para rastrear os controles.
+
+            <br><br>
+
+            Os Sense Controllers possuem vários LEDs infravermelhos
+            instalados em posições específicas da estrutura circular.
+
+            <br><br>
+
+            Como os emissores ficam distribuídos ao redor da mão,
+            o headset consegue obter informações visuais sobre a
+            posição e orientação do controle.
+
+            <br><br>
+
+            O sistema combina essas informações ópticas com os dados
+            provenientes dos sensores internos de movimento.
+
+            <br><br>
+
+            Essa combinação é conhecida como fusão de sensores:
+            diferentes fontes de informação são utilizadas em conjunto
+            para determinar o movimento do dispositivo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IMU
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Acelerômetro e Giroscópio
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Internamente, cada Sense Controller possui uma unidade de
+            medição inercial, normalmente chamada de IMU
+            (Inertial Measurement Unit).
+
+            <br><br>
+
+            A IMU reúne sensores capazes de detectar movimentos e
+            rotações do controle.
+
+            <br><br>
+
+            O acelerômetro mede acelerações nos diferentes eixos,
+            enquanto o giroscópio mede a velocidade angular.
+
+            <br><br>
+
+            Os dados desses sensores são combinados com o rastreamento
+            óptico produzido pelas câmeras do headset.
+
+            <br><br>
+
+            Isso permite detectar movimentos rápidos da mão, rotações
+            e mudanças de orientação.
+
+            <br><br>
+
+            Em um ambiente de realidade virtual, essas informações são
+            fundamentais porque o sistema precisa atualizar rapidamente
+            a posição virtual das mãos conforme o jogador movimenta
+            os controles físicos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ERGONOMIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Ergonomia e Formato
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/psvrsenseleft.jpg"
+                alt="Sense Controller esquerdo"
+              />
+
+              <img
+                src="../tgga/psvrsenseright.jpg"
+                alt="Sense Controller direito"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Controle esquerdo e controle direito ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O formato do Sense Controller foi desenvolvido para ser
+            segurado de maneira semelhante a um objeto presente na
+            mão do usuário.
+
+            <br><br>
+
+            A estrutura circular ao redor da mão não funciona apenas
+            como elemento visual. Ela também serve como estrutura para
+            posicionar os emissores infravermelhos usados pelo
+            rastreamento.
+
+            <br><br>
+
+            Os controles esquerdo e direito possuem comandos diferentes,
+            permitindo que o sistema distribua as ações entre as duas mãos.
+
+            <br><br>
+
+            Os botões principais ficam próximos aos dedos e polegares,
+            enquanto os gatilhos ficam posicionados para serem alcançados
+            pelos dedos indicadores.
+
+            <br><br>
+
+            A separação entre os dois controles também permite que
+            experiências de realidade virtual tratem cada mão como
+            uma entidade independente.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BOTÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Botões e Comandos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O controle direito possui os botões de ação tradicionais
+            do PlayStation: triângulo, círculo, cruz e quadrado.
+
+            <br><br>
+
+            O controle esquerdo possui o conjunto correspondente de
+            comandos utilizado para navegação e interação.
+
+            <br><br>
+
+            Os dois controles também possuem um botão de sistema,
+            além dos gatilhos e botões superiores.
+
+            <br><br>
+
+            Uma característica importante é que vários comandos possuem
+            sensores capacitivos.
+
+            <br><br>
+
+            Isso permite que o sistema saiba quando determinados dedos
+            estão apoiados sobre uma superfície do controle mesmo que
+            o botão correspondente não tenha sido pressionado.
+
+            <br><br>
+
+            Em realidade virtual, essa informação pode ser utilizada
+            para representar gestos mais naturais, como apontar,
+            levantar um dedo ou abrir parcialmente a mão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               GATILHOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Gatilhos Adaptativos
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/psvrsensetrigger.jpg"
+                alt="Gatilho adaptativo do PS VR2 Sense"
+              />
+
+              <img
+                src="../tgga/dualsenseadaptive.jpg"
+                alt="Tecnologia de gatilho adaptativo DualSense"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Sistema de gatilhos adaptativos utilizado pela Sony ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os gatilhos adaptativos são uma das tecnologias herdadas
+            do DualSense do PlayStation 5.
+
+            <br><br>
+
+            Diferentemente de um gatilho convencional, o mecanismo
+            consegue modificar a resistência percebida pelo jogador.
+
+            <br><br>
+
+            Um jogo pode fazer o gatilho parecer mais pesado em
+            determinada situação ou criar pontos de resistência
+            durante o percurso do botão.
+
+            <br><br>
+
+            Isso é realizado por um sistema eletromecânico localizado
+            no mecanismo do gatilho.
+
+            <br><br>
+
+            Em realidade virtual, essa tecnologia pode representar
+            situações como puxar um arco, pressionar um mecanismo,
+            utilizar uma ferramenta ou apertar um gatilho virtual.
+
+            <br><br>
+
+            A sensação física é produzida diretamente no controle,
+            não sendo simplesmente uma vibração.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               RESPOSTA TÁTIL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Resposta Tátil
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O Sense Controller possui tecnologia de resposta tátil
+            projetada para produzir diferentes padrões de vibração.
+
+            <br><br>
+
+            Em vez de simplesmente gerar uma vibração única e uniforme,
+            o sistema consegue produzir sensações diferentes dependendo
+            do comando recebido pelo jogo.
+
+            <br><br>
+
+            Isso permite representar impactos, colisões, disparos,
+            movimentos e outras interações.
+
+            <br><br>
+
+            Como existem dois controles separados, o jogo pode fornecer
+            feedback individual para cada mão.
+
+            <br><br>
+
+            Dessa maneira, uma ação realizada com a mão esquerda pode
+            produzir uma resposta diferente daquela realizada com a
+            mão direita.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               BATERIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Bateria e Carregamento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Diferentemente de controles que utilizam pilhas AA, o
+            PlayStation VR2 Sense Controller possui bateria interna
+            recarregável.
+
+            <br><br>
+
+            O carregamento é realizado através de uma porta USB Type-C.
+
+            <br><br>
+
+            A bateria fica instalada no interior da carcaça e é conectada
+            à placa através de fios ou contatos apropriados, dependendo
+            da construção interna da unidade.
+
+            <br><br>
+
+            O circuito de gerenciamento de energia controla a alimentação
+            da eletrônica e o processo de carregamento.
+
+            <br><br>
+
+            O uso de uma bateria interna contribui para manter o peso
+            e o formato do controle dentro do projeto definido pela Sony,
+            sem a necessidade de um compartimento externo para pilhas.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               USB
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            USB Type-C
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A porta USB Type-C localizada no controle possui função
+            principalmente relacionada ao carregamento da bateria.
+
+            <br><br>
+
+            O conector também pode ser utilizado em determinadas
+            situações para estabelecer comunicação física com o
+            sistema durante procedimentos de configuração ou atualização.
+
+            <br><br>
+
+            A utilização do padrão USB Type-C também facilita a
+            integração do controle ao ecossistema moderno do
+            PlayStation 5.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MODELOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Controles Esquerdo e Direito
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/psvrsenseleft.jpg"
+                  alt="PlayStation VR2 Sense Controller esquerdo"
+                />
+
+                <figcaption>
+                  PlayStation VR2 Sense Controller — Esquerdo
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/psvrsenseright.jpg"
+                  alt="PlayStation VR2 Sense Controller direito"
+                />
+
+                <figcaption>
+                  PlayStation VR2 Sense Controller — Direito
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/psvr2bundle.jpg"
+                  alt="Conjunto PlayStation VR2"
+                />
+
+                <figcaption>
+                  PlayStation VR2 + Sense Controllers
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/psvr2charging.jpg"
+                  alt="Base de carregamento PlayStation VR2 Sense"
+                />
+
+                <figcaption>
+                  Charging Station — Acessório de carregamento
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DIFERENÇA PARA CONTROLE CONVENCIONAL
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mais que um Gamepad
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Um dos aspectos mais interessantes do Sense Controller
+            é que ele não foi concebido simplesmente como uma versão
+            sem fio de um controle tradicional.
+
+            <br><br>
+
+            Um gamepad convencional normalmente precisa apenas informar
+            ao console quais botões foram pressionados e a posição
+            dos sticks.
+
+            <br><br>
+
+            O Sense precisa fornecer muito mais informações.
+
+            <br><br>
+
+            O sistema precisa saber onde está a mão do jogador,
+            para onde ela está apontando, como está girando, quais
+            dedos estão encostados nos controles e quais comandos
+            estão sendo acionados.
+
+            <br><br>
+
+            Ao mesmo tempo, o controle precisa produzir respostas
+            físicas correspondentes às ações virtuais.
+
+            <br><br>
+
+            Por isso, o Sense Controller reúne em um único dispositivo
+            sistemas que normalmente seriam encontrados separados:
+            sensores inerciais, rastreamento óptico, atuadores hápticos,
+            motores eletromecânicos, sensores capacitivos, bateria,
+            comunicação sem fio e controles tradicionais.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IMPORTÂNCIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Importância Tecnológica
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation VR2 Sense Controller representa uma evolução
+            significativa da abordagem da Sony para interação em
+            realidade virtual.
+
+            <br><br>
+
+            O PlayStation Move dependia de uma esfera luminosa que
+            precisava ser observada por uma câmera externa.
+
+            <br><br>
+
+            O Sense Controller substitui essa abordagem por um sistema
+            integrado ao headset, utilizando LEDs infravermelhos e as
+            câmeras do próprio PlayStation VR2.
+
+            <br><br>
+
+            Ao mesmo tempo, incorpora tecnologias presentes no
+            DualSense, especialmente os gatilhos adaptativos e a
+            resposta tátil.
+
+            <br><br>
+
+            O resultado é um dispositivo que combina rastreamento,
+            controle tradicional e feedback físico em uma única
+            plataforma.
+
+            <br><br>
+
+            Essa combinação permite que jogos de realidade virtual
+            tratem as duas mãos do jogador como objetos independentes
+            dentro do ambiente virtual.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMPONENTES INTERNOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Arquitetura Interna
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/senseinterno.jpg"
+                alt="Interior do PlayStation VR2 Sense Controller"
+              />
+
+              <img
+                src="../tgga/sensepcb.jpg"
+                alt="Placa do PlayStation VR2 Sense Controller"
+              />
+
+            </div>
+
+            <figcaption>
+              ~ Estrutura interna e placa eletrônica do Sense Controller ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Internamente, o Sense Controller pode ser dividido em
+            vários grandes sistemas.
+
+            <br><br>
+
+            A placa principal concentra os circuitos responsáveis
+            pelo processamento dos comandos, comunicação sem fio,
+            gerenciamento de energia e interpretação dos sensores.
+
+            <br><br>
+
+            A IMU fornece dados relacionados à aceleração e rotação.
+
+            <br><br>
+
+            Os sensores dos sticks e gatilhos transformam movimentos
+            mecânicos em sinais elétricos.
+
+            <br><br>
+
+            Os LEDs infravermelhos formam a assinatura óptica que
+            permite ao headset localizar o controle.
+
+            <br><br>
+
+            Os motores e atuadores produzem a resposta física enviada
+            ao jogador.
+
+            <br><br>
+
+            A bateria fornece energia para todos esses sistemas,
+            enquanto o circuito de gerenciamento regula a distribuição
+            e o carregamento.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONCLUSÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Um Controle Feito para Realidade Virtual
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O PlayStation VR2 Sense Controller é, essencialmente,
+            uma tentativa de transformar um controle eletrônico em
+            uma representação das mãos do jogador.
+
+            <br><br>
+
+            Seus componentes não existem apenas para registrar botões.
+            Eles trabalham juntos para determinar posição, movimento,
+            orientação, contato dos dedos e intensidade das ações.
+
+            <br><br>
+
+            Ao mesmo tempo, os atuadores devolvem informações ao jogador
+            através de vibração e resistência mecânica.
+
+            <br><br>
+
+            O resultado é um dispositivo bastante mais complexo do que
+            um gamepad tradicional.
+
+            <br><br>
+
+            Para o TGGA, ele representa uma etapa importante na evolução
+            dos periféricos de videogame: da simples entrada de comandos
+            para dispositivos capazes de observar o movimento do usuário
+            e responder fisicamente às ações realizadas dentro do jogo.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Games - PlayStation VR2
+              </a>
+            </li>
+
+            <li>
+              <a href="tgga.html">
+                ○ Periféricos - PS VR2 Sense
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             COMPONENTES DO ITEM
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - COMPONENTES DO ITEM -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+
+              <summary>
+                Unidade de Processamento Principal
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Circuito responsável pelo processamento das informações
+                  provenientes dos sensores, comandos, comunicação sem fio
+                  e demais sistemas eletrônicos do controle.
+                </p>
+
+                <p>
+                  A identificação exata do circuito integrado pode variar
+                  conforme a revisão da placa.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: Circuito integrado</li>
+                  <li>Função: Processamento</li>
+                  <li>Localização: PCB principal</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                IMU — Unidade de Medição Inercial
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de sensores responsável por detectar
+                  aceleração e rotação do controle.
+                </p>
+
+                <p>
+                  Os dados da IMU são combinados com o rastreamento
+                  óptico realizado pelo PlayStation VR2.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: IMU</li>
+                  <li>Inclui: Acelerômetro</li>
+                  <li>Inclui: Giroscópio</li>
+                  <li>Função: Detecção de movimento</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Acelerômetro
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor que mede acelerações do controle em diferentes
+                  eixos.
+                </p>
+
+                <p>
+                  É utilizado para determinar mudanças de movimento
+                  durante a utilização do dispositivo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Giroscópio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor utilizado para medir velocidade angular e
+                  mudanças de orientação do controle.
+                </p>
+
+                <p>
+                  É especialmente importante para determinar rotações
+                  rápidas da mão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LEDs Infravermelhos de Rastreamento
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de emissores infravermelhos instalados
+                  ao redor da estrutura do Sense Controller.
+                </p>
+
+                <p>
+                  O headset utiliza esses pontos luminosos para
+                  identificar a posição do controle no espaço.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: LED infravermelho</li>
+                  <li>Função: Rastreamento óptico</li>
+                  <li>Localização: Anel de rastreamento</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Anel de Rastreamento
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura circular característica do Sense Controller.
+                </p>
+
+                <p>
+                  Além de funcionar como estrutura mecânica, abriga
+                  os emissores utilizados para o rastreamento óptico.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Stick Analógico
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cada Sense Controller possui um stick analógico.
+                </p>
+
+                <p>
+                  O mecanismo detecta movimentos nos eixos horizontal
+                  e vertical e possui retorno automático para a posição
+                  central.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Quantidade: 1 por controle</li>
+                  <li>Tipo: Analógico</li>
+                  <li>Eixos: X / Y</li>
+                  <li>Função: Movimento</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Potenciômetros do Stick
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos responsáveis por transformar a posição
+                  física do stick em sinais elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão de Clique do Stick
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  O stick pode ser pressionado verticalmente,
+                  funcionando como um botão adicional.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões de Ação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de botões físicos utilizado para executar
+                  comandos dentro dos jogos.
+                </p>
+
+                <p>
+                  No controle direito estão os símbolos tradicionais
+                  do PlayStation.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Triângulo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão de ação localizado no controle direito.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Círculo
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão de ação localizado no controle direito.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Cruz
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão de ação localizado no controle direito.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botão Quadrado
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botão de ação localizado no controle direito.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Botões de Sistema
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Botões destinados às funções relacionadas ao sistema
+                  do PlayStation 5 e à navegação.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho Adaptativo L2
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Gatilho esquerdo com mecanismo capaz de alterar
+                  dinamicamente a resistência oferecida ao jogador.
+                </p>
+
+                <p>
+                  O sistema utiliza um atuador eletromecânico para
+                  modificar a sensação durante o pressionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Gatilho Adaptativo R2
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Gatilho direito com resistência variável controlada
+                  eletronicamente.
+                </p>
+
+                <p>
+                  Permite que os jogos criem diferentes sensações
+                  mecânicas durante o acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Atuador dos Gatilhos Adaptativos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Mecanismo eletromecânico responsável por alterar
+                  a resistência percebida nos gatilhos.
+                </p>
+
+                <p>
+                  Ele transforma comandos eletrônicos em resistência
+                  mecânica aplicada ao movimento do gatilho.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sensor de Posição dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensor utilizado para determinar o deslocamento
+                  dos gatilhos L2 e R2.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sensores Capacitivos dos Dedos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sensores que detectam a presença ou contato dos
+                  dedos em determinadas superfícies do controle.
+                </p>
+
+                <p>
+                  Essa tecnologia permite representar gestos sem
+                  exigir que o jogador pressione completamente um botão.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Sistema de Resposta Tátil
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de atuadores responsável pela produção
+                  de feedback físico.
+                </p>
+
+                <p>
+                  O sistema pode produzir diferentes padrões de
+                  vibração de acordo com os eventos do jogo.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Atuadores Hápticos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos eletromecânicos responsáveis por transformar
+                  sinais elétricos em movimento físico percebido pelas mãos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Bateria Interna Recarregável
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Fonte de energia interna utilizada para alimentar
+                  os circuitos do controle.
+                </p>
+
+                <p>
+                  A bateria é recarregável e não utiliza o sistema
+                  convencional de duas pilhas AA.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Gerenciamento da Bateria
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Controla a alimentação da bateria, o carregamento
+                  e a distribuição de energia para os demais circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Porta USB Type-C
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conector utilizado principalmente para carregar
+                  a bateria interna do controle.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: USB Type-C</li>
+                  <li>Função principal: Carregamento</li>
+                  <li>Localização: Parte inferior</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Circuito de Comunicação Sem Fio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Sistema responsável pela comunicação sem fio entre
+                  o Sense Controller e o PlayStation 5.
+                </p>
+
+                <p>
+                  A comunicação permite transmitir comandos e receber
+                  informações relacionadas à resposta tátil e aos
+                  gatilhos adaptativos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Antena Sem Fio
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Estrutura condutora utilizada para transmissão e
+                  recepção dos sinais de rádio.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Capacitores de Filtragem
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes responsáveis por auxiliar na estabilização
+                  das linhas de alimentação e reduzir ruídos elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Resistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes utilizados para controle de corrente,
+                  polarização e condicionamento dos sinais eletrônicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Diodos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Semicondutores empregados em diferentes circuitos
+                  de alimentação, proteção e processamento de sinais.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Transistores
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Componentes semicondutores utilizados para chaveamento,
+                  amplificação ou controle de cargas elétricas.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Placa de Circuito Impresso
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  A PCB é a estrutura responsável por interligar
+                  eletricamente os diversos componentes do controle.
+                </p>
+
+                <ul class="component-specs">
+                  <li>Tipo: PCB</li>
+                  <li>Material: Substrato de circuito impresso</li>
+                  <li>Função: Interconexão elétrica</li>
+                </ul>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Contatos Elétricos dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Áreas condutoras da placa responsáveis por detectar
+                  o acionamento dos botões físicos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Membranas de Borracha dos Botões
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos flexíveis responsáveis por transmitir a
+                  pressão dos botões para os contatos elétricos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas dos Sticks
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Molas internas responsáveis pelo retorno automático
+                  dos sticks para a posição central.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Molas dos Gatilhos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos responsáveis pelo retorno mecânico dos
+                  gatilhos após o acionamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Frontal
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte externa frontal que sustenta os comandos
+                  e protege os componentes internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Carcaça Traseira
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte posterior da estrutura que protege a placa,
+                  bateria e mecanismos internos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Estrutura Interna do Controle
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conjunto de suportes plásticos e estruturas internas
+                  utilizados para posicionar corretamente os componentes.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Anel Plástico de Proteção
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Parte estrutural localizada ao redor da mão que
+                  protege e sustenta os componentes de rastreamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Parafusos de Fixação
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos mecânicos utilizados para unir as diferentes
+                  partes da estrutura do controle.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Cabos Flexíveis / Flat Cables
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Cabos flexíveis podem ser utilizados internamente
+                  para conectar diferentes partes eletrônicas e módulos.
+                </p>
+
+                <p>
+                  A quantidade e disposição exata variam conforme a
+                  arquitetura e revisão da placa.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Conectores Internos
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Conectores responsáveis por unir módulos eletrônicos,
+                  bateria, sensores e outros elementos à placa principal.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                Blindagem / Proteção Eletromagnética
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Elementos de proteção eletromagnética podem ser
+                  utilizados em regiões específicas da eletrônica para
+                  reduzir interferências entre circuitos.
+                </p>
+
+              </div>
+
+            </details>
+
+
+            <details class="component-item">
+
+              <summary>
+                LED Indicador
+              </summary>
+
+              <div class="component-description">
+
+                <p>
+                  Indicadores luminosos utilizados para comunicar
+                  estados de funcionamento ou carregamento.
+                </p>
+
+              </div>
+
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>

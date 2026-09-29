@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <link rel="icon" type="image/x-icon" href="../logonlu.png">
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>TGGA - Assassin's Creed</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+
+  <style>
+
+    /* ==========================================
+       COMPONENTES / ELEMENTOS CLICÁVEIS
+       ========================================== */
+
+    .components-block {
+      margin-top: 25px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+    }
+
+    .components-block h3 {
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 10px;
+      text-align: center;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 5px;
+    }
+
+    .component-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .component-item {
+      border: 1px solid #3d3d3d;
+      background: #181818;
+    }
+
+    .component-item summary {
+      cursor: pointer;
+      padding: 9px 10px;
+      color: #ddd;
+      font-size: 13px;
+      font-weight: bold;
+      list-style: none;
+      transition: all 0.2s ease;
+    }
+
+    .component-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .component-item summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      color: #888;
+      font-size: 9px;
+      transition: transform 0.2s ease;
+    }
+
+    .component-item summary:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .component-item[open] summary {
+      color: #fff;
+      background: #2b2b2b;
+      border-bottom: 1px dashed #555;
+    }
+
+    .component-item[open] summary::before {
+      transform: rotate(90deg);
+      color: #fff;
+    }
+
+    .component-description {
+      padding: 12px;
+      background: #111;
+      color: #bbb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-description p {
+      margin: 0 0 10px 0;
+    }
+
+    .component-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .component-specs {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .component-specs li {
+      margin-bottom: 4px;
+    }
+
+    .component-description strong {
+      color: #ddd;
+    }
+
+
+    /* ==========================================
+       IMAGENS HISTÓRICAS
+       ========================================== */
+
+    .historical-consoles {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .console-images {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .console-images img {
+      width: 45%;
+      max-width: 300px;
+      height: auto;
+      border: 1px solid #444;
+      padding: 4px;
+      box-sizing: border-box;
+      background: #111;
+    }
+
+    .historical-consoles figcaption {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+    }
+
+
+    /* ==========================================
+       GRID DE ELEMENTOS
+       ========================================== */
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .model-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+
+    /* ==========================================
+       IMAGENS
+       ========================================== */
+
+    .model-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain;
+
+      border: 1px solid #444;
+      padding: 0;
+      box-sizing: border-box;
+      background: #111;
+
+      display: block;
+    }
+
+    .model-item figcaption {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+
+    /* ==========================================
+       CAIXA DE INFORMAÇÕES
+       ========================================== */
+
+    .info-box {
+      margin: 20px 0;
+      padding: 12px;
+      background: #181818;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px dashed #555;
+      padding-bottom: 6px;
+    }
+
+    .info-box ul {
+      margin-bottom: 0;
+    }
+
+
+    /* ==========================================
+       TABELA
+       ========================================== */
+
+    .world-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #ccc;
+      background: #151515;
+    }
+
+    .world-table th,
+    .world-table td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .world-table th {
+      background: #292929;
+      color: #fff;
+    }
+
+    .world-table tr:nth-child(even) {
+      background: #1c1c1c;
+    }
+
+
+    /* ==========================================
+       RESPONSIVIDADE
+       ========================================== */
+
+    @media (max-width: 600px) {
+
+      .console-images {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .console-images img {
+        width: 80%;
+        max-width: 300px;
+      }
+
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .model-item img {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .world-table {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="site-container">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+         ========================================== -->
+
+    <header class="site-header">
+
+      <div class="logo-area">
+
+        <img
+          src="../logo1.png"
+          alt="Logo NLU"
+          class="main-logo"
+        />
+
+        <div class="logo-text-box">
+
+          <h1>
+            The Great Game Archive™
+          </h1>
+
+          <p>
+            Não o maior, mas o NOSSO aglomerado de informação.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-right-box">
+
+        <a
+          href="#"
+          class="youtube-btn"
+          target="_blank"
+        >
+          ▶ YouTube Siga-nos!
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         SUB-NAVEGAÇÃO
+         ========================================== -->
+
+    <div class="sub-nav-links">
+
+      <a href="../tgga.html">
+        ← Voltar ao TGGA
+      </a>
+
+      |
+
+      <a href="../index.html">
+        Início
+      </a>
+
+    </div>
+
+
+    <!-- ==========================================
+         LETREIRO
+         ========================================== -->
+
+    <div class="marquee-zone">
+
+      <div class="marquee-content">
+
+        <span>
+          ... Assassin's Creed foi lançado originalmente em 2007
+          e apresentou aos jogadores uma aventura de ação e
+          exploração ambientada durante a Terceira Cruzada ...
+          &nbsp;
+        </span>
+
+        <span>
+          ... Assassin's Creed foi lançado originalmente em 2007
+          e apresentou aos jogadores uma aventura de ação e
+          exploração ambientada durante a Terceira Cruzada ...
+          &nbsp;
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+         ========================================== -->
+
+    <div class="main-grid">
+
+
+      <!-- ========================================
+           COLUNA PRINCIPAL
+           ======================================== -->
+
+      <div class="content-column">
+
+        <div class="category-block">
+
+
+          <!-- ==========================================
+               TÍTULO
+               ========================================== -->
+
+          <h2>
+            Assassin's Creed — Xbox 360
+          </h2>
+
+
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 15px;
+            "
+          >
+
+            <img
+              src="../tgga/assassinscreed_360.jpg"
+              alt="Assassin's Creed para Xbox 360"
+              style="
+                max-width: 60%;
+                height: auto;
+                border: 1px solid #444;
+                padding: 4px;
+              "
+            />
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IDENTIFICAÇÃO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed é um jogo eletrônico de ação e
+            aventura desenvolvido pela Ubisoft Montreal e
+            publicado pela Ubisoft.<br>
+
+            O jogo foi lançado originalmente em 2007 e chegou
+            ao Xbox 360, PlayStation 3 e posteriormente ao PC.<br>
+
+            O jogador controla Altaïr Ibn-La'Ahad, um assassino
+            pertencente à Irmandade dos Assassinos durante o
+            período da Terceira Cruzada.<br>
+
+            A aventura combina exploração de cidades históricas,
+            combate, furtividade, escalada, assassinatos e
+            investigação.<br>
+
+            O jogo também apresenta uma segunda camada narrativa
+            ambientada no mundo moderno, na qual Desmond Miles
+            participa de um experimento envolvendo uma máquina
+            chamada Animus.
+
+          </p>
+
+
+          <!-- ==========================================
+               FICHA TÉCNICA
+               ========================================== -->
+
+          <div class="info-box">
+
+            <h3>
+              - FICHA TÉCNICA -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Desenvolvedora:</strong>
+                Ubisoft Montreal
+              </li>
+
+              <li>
+                <strong>Publicadora:</strong>
+                Ubisoft
+              </li>
+
+              <li>
+                <strong>Direção:</strong>
+                Patrice Désilets
+              </li>
+
+              <li>
+                <strong>Roteiro:</strong>
+                Corey May
+              </li>
+
+              <li>
+                <strong>Plataformas originais:</strong>
+                Xbox 360 e PlayStation 3
+              </li>
+
+              <li>
+                <strong>Lançamento:</strong>
+                2007
+              </li>
+
+              <li>
+                <strong>Gênero:</strong>
+                Ação e aventura
+              </li>
+
+              <li>
+                <strong>Modo:</strong>
+                Um jogador
+              </li>
+
+              <li>
+                <strong>Mídia no Xbox 360:</strong>
+                DVD-ROM
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESENVOLVIMENTO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desenvolvimento
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed foi desenvolvido pela Ubisoft Montreal
+            como um projeto que procurava combinar exploração
+            de grandes ambientes com movimentos acrobáticos,
+            furtividade e combate.<br>
+
+            O projeto teve origem em conceitos relacionados à
+            série Prince of Persia e gradualmente se transformou
+            em uma nova franquia.<br>
+
+            A equipe criou cidades abertas inspiradas em locais
+            históricos do Oriente Médio durante o período das
+            Cruzadas.<br>
+
+            O sistema de movimentação foi desenvolvido para
+            permitir que Altaïr escalasse edifícios, atravessasse
+            telhados e utilizasse diferentes rotas durante a
+            exploração.<br>
+
+            O jogo também procurou utilizar elementos históricos
+            como base para sua ambientação, combinando personagens
+            e acontecimentos reais com ficção.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CONTEXTO HISTÓRICO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Contexto Histórico
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac_jerusalem.jpg"
+                alt="Jerusalém em Assassin's Creed"
+              />
+
+              <img
+                src="../tgga/ac_kingdom.jpg"
+                alt="Região do Reino em Assassin's Creed"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ As cidades e regiões do Oriente Médio representadas no jogo ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A maior parte da história de Assassin's Creed ocorre
+            durante a Terceira Cruzada, no final do século XII.<br>
+
+            O jogador visita cidades como Jerusalém, Acre e
+            Damasco, além de atravessar uma região aberta
+            conhecida como Kingdom.<br>
+
+            O jogo utiliza personagens históricos como Ricardo I,
+            Roberto de Sablé e Al Mualim, misturando figuras
+            históricas com personagens fictícios.<br>
+
+            Apesar da utilização de elementos históricos, a
+            narrativa apresenta acontecimentos e organizações
+            fictícias, principalmente relacionados aos Assassinos,
+            aos Templários e às peças do Éden.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               HISTÓRIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            História do Jogo
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/altair.jpg"
+                alt="Altaïr Ibn-La'Ahad"
+              />
+
+              <img
+                src="../tgga/desmond.jpg"
+                alt="Desmond Miles"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Altaïr Ibn-La'Ahad e Desmond Miles ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A história começa no período moderno com Desmond Miles,
+            um homem sequestrado pela empresa Abstergo Industries.<br>
+
+            Desmond é colocado dentro do Animus, uma máquina capaz
+            de acessar memórias genéticas de seus antepassados.<br>
+
+            Através da máquina, ele revive as experiências de
+            Altaïr Ibn-La'Ahad, um membro da Irmandade dos
+            Assassinos durante a Terceira Cruzada.<br>
+
+            Depois de cometer um erro durante uma missão, Altaïr
+            é rebaixado dentro da organização e precisa recuperar
+            sua posição completando uma série de assassinatos.<br>
+
+            As missões levam Altaïr a diferentes cidades e colocam
+            o personagem em contato com figuras importantes dos
+            dois lados do conflito entre Assassinos e Templários.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ALTAÏR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Altaïr Ibn-La'Ahad
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Altaïr é o protagonista principal da parte histórica
+            da aventura.<br>
+
+            No início do jogo, ele é apresentado como um Assassino
+            experiente, mas também como alguém que age de maneira
+            imprudente e desrespeita determinadas regras da
+            Irmandade.<br>
+
+            Depois de fracassar em uma missão importante, Altaïr
+            perde seus privilégios e precisa reconstruir sua
+            reputação através de novas missões.<br>
+
+            Durante a aventura, suas habilidades evoluem e ele
+            passa a compreender melhor os objetivos e conflitos
+            existentes dentro da própria organização.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               DESMOND
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Desmond Miles e o Animus
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/desmond_animus.jpg"
+                alt="Desmond Miles no Animus"
+              />
+
+              <img
+                src="../tgga/abstergo.jpg"
+                alt="Abstergo Industries"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Desmond Miles e o Animus ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Desmond Miles é o personagem central da narrativa
+            moderna de Assassin's Creed.<br>
+
+            Ele é descendente de Altaïr e possui uma ligação
+            genética que permite à Abstergo utilizar o Animus
+            para acessar as memórias de seu antepassado.<br>
+
+            Entre as sessões no Animus, Desmond pode explorar
+            determinadas áreas das instalações da Abstergo e
+            conversar com outros personagens.<br>
+
+            Essa estrutura narrativa estabelece a ligação entre
+            o período medieval apresentado no jogo e o conflito
+            moderno que continuaria sendo desenvolvido nas
+            sequências da série.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Cidades e Regiões
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O mundo de Assassin's Creed é dividido entre grandes
+            cidades e uma região que conecta os diferentes locais.<br>
+
+            Cada cidade possui arquitetura, população, guardas,
+            mercados e estruturas próprias.<br>
+
+            A exploração vertical permite que Altaïr suba em
+            edifícios e utilize torres altas para obter uma
+            visão mais ampla do ambiente.<br>
+
+            Entre as principais localidades estão Jerusalém,
+            Damasco e Acre.
+
+          </p>
+
+
+          <table class="world-table">
+
+            <thead>
+
+              <tr>
+                <th>Local</th>
+                <th>Características</th>
+                <th>Região</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Jerusalém</td>
+                <td>Cidade histórica e centro religioso</td>
+                <td>Terra Santa</td>
+              </tr>
+
+              <tr>
+                <td>Damasco</td>
+                <td>Grande cidade comercial</td>
+                <td>Levante</td>
+              </tr>
+
+              <tr>
+                <td>Acre</td>
+                <td>Cidade fortificada e porto</td>
+                <td>Terra Santa</td>
+              </tr>
+
+              <tr>
+                <td>Kingdom</td>
+                <td>Região aberta entre as cidades</td>
+                <td>Terra Santa</td>
+              </tr>
+
+              <tr>
+                <td>Masyaf</td>
+                <td>Base da Irmandade dos Assassinos</td>
+                <td>Montanhas</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MECÂNICAS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Mecânicas de Jogo
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed combina exploração, combate,
+            furtividade e movimentação acrobática.<br>
+
+            Altaïr pode correr pelas ruas, escalar edifícios,
+            saltar entre estruturas e utilizar telhados para
+            evitar determinados obstáculos.<br>
+
+            O jogador também pode interagir com a população,
+            contratar grupos de apoio e utilizar diferentes
+            métodos para alcançar seus objetivos.<br>
+
+            O combate utiliza espada, espada curta, lâmina
+            escondida e outros equipamentos disponíveis ao
+            protagonista.<br>
+
+            A investigação antes de cada assassinato permite
+            descobrir informações sobre o alvo e preparar a
+            missão.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PARKOUR
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Exploração e Parkour
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac_parkour.jpg"
+                alt="Altaïr escalando edifícios"
+              />
+
+              <img
+                src="../tgga/ac_viewpoint.jpg"
+                alt="Torre de observação em Assassin's Creed"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Escalada e sincronização de pontos de observação ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A movimentação vertical é um dos elementos centrais
+            de Assassin's Creed.<br>
+
+            Altaïr consegue escalar determinadas paredes,
+            estruturas e torres utilizando o sistema de
+            movimentação contextual do jogo.<br>
+
+            As torres de observação permitem sincronizar novas
+            partes do mapa, revelando atividades e locais
+            próximos.<br>
+
+            O sistema de parkour também permite utilizar telhados
+            e estruturas elevadas como caminhos alternativos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               COMBATE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Combate
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            O sistema de combate utiliza ataques, bloqueios,
+            esquivas e contra-ataques.<br>
+
+            Altaïr pode utilizar sua espada para enfrentar
+            soldados e guardas, além de uma espada curta
+            e sua lâmina escondida.<br>
+
+            Os contra-ataques permitem responder aos ataques
+            adversários no momento apropriado.<br>
+
+            O jogador também pode tentar evitar confrontos
+            utilizando furtividade e misturando-se à população.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - EQUIPAMENTOS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Lâmina Oculta:</strong>
+                principal arma associada aos Assassinos.
+              </li>
+
+              <li>
+                <strong>Espada:</strong>
+                utilizada em combates diretos.
+              </li>
+
+              <li>
+                <strong>Espada Curta:</strong>
+                arma de combate rápido.
+              </li>
+
+              <li>
+                <strong>Facas de Arremesso:</strong>
+                utilizadas contra inimigos à distância.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ASSASSINATOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassinatos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A estrutura principal das missões envolve localizar
+            e eliminar alvos importantes.<br>
+
+            Antes de cada assassinato, Altaïr realiza diferentes
+            investigações para descobrir informações sobre o
+            alvo e sua rotina.<br>
+
+            Essas investigações incluem ouvir conversas,
+            interrogar personagens, roubar informações e
+            localizar pontos estratégicos.<br>
+
+            Depois de reunir informações suficientes, o jogador
+            recebe a oportunidade de realizar o assassinato
+            e escapar da área.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               IRMANDADE
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            A Irmandade dos Assassinos
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A Irmandade dos Assassinos é uma organização secreta
+            presente na narrativa do jogo.<br>
+
+            Seu principal centro apresentado na aventura é
+            Masyaf, onde Altaïr recebe suas missões.<br>
+
+            A organização segue princípios próprios e mantém
+            um conflito histórico com os Templários.<br>
+
+            Ao longo da história, Altaïr começa a questionar
+            informações que recebe e passa a compreender melhor
+            os objetivos de diferentes personagens.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TEMPLÁRIOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Templários
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac_templars.jpg"
+                alt="Templários em Assassin's Creed"
+              />
+
+              <img
+                src="../tgga/ac_knights.jpg"
+                alt="Cavaleiros em Assassin's Creed"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ O conflito entre Assassinos e Templários ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Os Templários representam uma das principais forças
+            adversárias dos Assassinos.<br>
+
+            O conflito entre as duas organizações envolve
+            diferentes ideias sobre ordem, liberdade e controle.<br>
+
+            Durante a campanha, Altaïr recebe a missão de eliminar
+            membros importantes ligados à organização.<br>
+
+            Conforme a história avança, o jogador descobre que
+            os acontecimentos são parte de uma disputa maior
+            envolvendo artefatos conhecidos como Peças do Éden.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PEÇAS DO ÉDEN
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Peças do Éden
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            As Peças do Éden são artefatos antigos presentes
+            na mitologia da série Assassin's Creed.<br>
+
+            No primeiro jogo, o principal artefato apresentado
+            é a Maçã do Éden.<br>
+
+            O objeto possui propriedades extraordinárias e
+            está relacionado ao conflito entre Assassinos e
+            Templários.<br>
+
+            A busca pela Maçã também conecta a história medieval
+            com os acontecimentos envolvendo Desmond no período
+            moderno.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               PERSONAGENS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Personagens
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - PERSONAGENS PRINCIPAIS -
+            </h3>
+
+            <ul>
+
+              <li>
+                <strong>Altaïr Ibn-La'Ahad:</strong>
+                protagonista da história medieval.
+              </li>
+
+              <li>
+                <strong>Desmond Miles:</strong>
+                protagonista da história moderna.
+              </li>
+
+              <li>
+                <strong>Al Mualim:</strong>
+                líder da Irmandade dos Assassinos em Masyaf.
+              </li>
+
+              <li>
+                <strong>Malik Al-Sayf:</strong>
+                membro da Irmandade e antigo companheiro de Altaïr.
+              </li>
+
+              <li>
+                <strong>Maria Thorpe:</strong>
+                personagem associada aos Templários.
+              </li>
+
+              <li>
+                <strong>Richard the Lionheart:</strong>
+                rei inglês presente durante a Terceira Cruzada.
+              </li>
+
+              <li>
+                <strong>Robert de Sablé:</strong>
+                importante líder templário.
+              </li>
+
+              <li>
+                <strong>Lucy Stillman:</strong>
+                funcionária da Abstergo envolvida no projeto Animus.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               ALVOS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Alvos Principais
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - ALVOS DAS MISSÕES -
+            </h3>
+
+            <ul>
+
+              <li>Tamir</li>
+              <li>Garnier de Naplouse</li>
+              <li>Talal</li>
+              <li>Abu'l Nuqoud</li>
+              <li>William de Montferrat</li>
+              <li>Majd Addin</li>
+              <li>Jubair al Hakim</li>
+              <li>Sibrand</li>
+              <li>Robert de Sablé</li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               XBOX 360
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Assassin's Creed no Xbox 360
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/assassinscreed_xbox360.jpg"
+                alt="Assassin's Creed Xbox 360"
+              />
+
+              <img
+                src="../tgga/xbox360_assassinscreed.jpg"
+                alt="Xbox 360 com Assassin's Creed"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Assassin's Creed para Xbox 360 ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A versão para Xbox 360 foi uma das versões originais
+            de Assassin's Creed e utilizou os recursos do console
+            para apresentar grandes ambientes tridimensionais,
+            personagens numerosos e cidades detalhadas.<br>
+
+            O jogo foi distribuído em DVD e recebeu suporte aos
+            recursos de salvamento e conquistas do Xbox 360.<br>
+
+            A versão de Xbox 360 também fez parte da primeira
+            geração de jogos da franquia Assassin's Creed,
+            antes da chegada de suas sequências.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               TECNOLOGIA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tecnologia e Motor Gráfico
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed foi construído utilizando tecnologia
+            desenvolvida pela Ubisoft Montreal para representar
+            grandes ambientes tridimensionais.<br>
+
+            O jogo precisava manter cidades relativamente grandes,
+            populações, edifícios escaláveis, sistemas de combate
+            e movimentação em funcionamento simultaneamente.<br>
+
+            A arquitetura das cidades foi planejada para permitir
+            que o jogador explorasse tanto as ruas quanto os
+            telhados e estruturas elevadas.<br>
+
+            Essa abordagem ajudou a estabelecer a identidade
+            visual e mecânica que seria utilizada nas sequências
+            da franquia.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MÚSICA
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Música e Áudio
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="console-images">
+
+              <img
+                src="../tgga/ac_music.jpg"
+                alt="Trilha sonora de Assassin's Creed"
+              />
+
+              <img
+                src="../tgga/ac_soundtrack.jpg"
+                alt="Assassin's Creed trilha sonora"
+              />
+
+            </div>
+
+
+            <figcaption>
+              ~ Música e ambientação sonora de Assassin's Creed ~
+            </figcaption>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A música de Assassin's Creed foi composta por Jesper Kyd,
+            que também trabalharia em outros títulos da franquia.<br>
+
+            A trilha combina elementos orquestrais, ambientes
+            sonoros e música eletrônica para diferenciar os
+            momentos de exploração, combate e perseguição.<br>
+
+            Os sons das cidades também desempenham papel importante,
+            incluindo vozes de habitantes, mercados, animais,
+            guardas e diferentes ambientes urbanos.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MISSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Tipos de Investigação
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Antes de realizar os assassinatos principais,
+            Altaïr precisa reunir informações sobre seus alvos.<br>
+
+            O jogo apresenta diferentes tipos de atividades
+            investigativas que podem ser realizadas nas cidades.<br>
+
+            Essas atividades incluem ouvir conversas,
+            roubar documentos, interrogar personagens e
+            auxiliar membros da Irmandade.<br>
+
+            A conclusão dessas tarefas fornece informações
+            adicionais para a missão de assassinato.
+
+          </p>
+
+
+          <div class="info-box">
+
+            <h3>
+              - INVESTIGAÇÕES -
+            </h3>
+
+            <ul>
+
+              <li>
+                Escutar conversas
+              </li>
+
+              <li>
+                Interrogar personagens
+              </li>
+
+              <li>
+                Roubar informações
+              </li>
+
+              <li>
+                Salvar cidadãos
+              </li>
+
+              <li>
+                Escalar pontos de observação
+              </li>
+
+              <li>
+                Localizar informações sobre os alvos
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               LEGADO
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Legado
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed estabeleceu uma nova franquia para
+            a Ubisoft e apresentou elementos que seriam ampliados
+            nas sequências.<br>
+
+            A combinação de cidades abertas, exploração vertical,
+            furtividade, combate e personagens históricos tornou-se
+            uma das principais características da série.<br>
+
+            O jogo também estabeleceu a estrutura narrativa que
+            alternava entre diferentes períodos históricos e
+            o mundo moderno através do Animus.<br>
+
+            Posteriormente, a franquia receberia diversos novos
+            protagonistas, períodos históricos e sistemas de jogo.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               VERSÕES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Versões e Edições
+          </h2>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_xbox360.jpg"
+                  alt="Assassin's Creed Xbox 360"
+                />
+
+                <figcaption>
+                  Assassin's Creed — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_ps3.jpg"
+                  alt="Assassin's Creed PlayStation 3"
+                />
+
+                <figcaption>
+                  Assassin's Creed — PlayStation 3
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_pc.jpg"
+                  alt="Assassin's Creed PC"
+                />
+
+                <figcaption>
+                  Assassin's Creed — PC
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_directors_cut.jpg"
+                  alt="Assassin's Creed Director's Cut"
+                />
+
+                <figcaption>
+                  Assassin's Creed — Director's Cut Edition
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            Assassin's Creed foi lançado originalmente para
+            Xbox 360 e PlayStation 3 em 2007.<br>
+
+            A versão para PC foi lançada posteriormente e recebeu
+            conteúdo adicional em relação às versões de console,
+            reunido na chamada Director's Cut Edition.<br>
+
+            O jogo também foi posteriormente incluído em
+            diferentes coleções e relançamentos relacionados
+            à franquia Assassin's Creed.
+
+          </p>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               CURIOSIDADES
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Curiosidades
+          </h2>
+
+
+          <div class="info-box">
+
+            <h3>
+              - VOCÊ SABIA? -
+            </h3>
+
+            <ul>
+
+              <li>
+                Assassin's Creed foi lançado originalmente em 2007.
+              </li>
+
+              <li>
+                Altaïr é o protagonista da parte histórica do primeiro jogo.
+              </li>
+
+              <li>
+                Desmond Miles é o protagonista da narrativa moderna.
+              </li>
+
+              <li>
+                O jogo utiliza o Animus para conectar os períodos históricos
+                e moderno.
+              </li>
+
+              <li>
+                Jerusalém, Damasco e Acre são algumas das principais
+                cidades visitadas durante a aventura.
+              </li>
+
+              <li>
+                O jogador pode escalar diversos edifícios e torres.
+              </li>
+
+              <li>
+                As torres de observação revelam partes do mapa.
+              </li>
+
+              <li>
+                A lâmina escondida tornou-se um dos símbolos mais
+                conhecidos da franquia.
+              </li>
+
+              <li>
+                A trilha sonora foi composta por Jesper Kyd.
+              </li>
+
+              <li>
+                O jogo deu origem a uma longa série de continuações
+                e spin-offs.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <h2></h2>
+
+
+          <!-- ==========================================
+               MATERIAIS COLECIONÁVEIS
+               ========================================== -->
+
+          <h2 style="text-align: center;">
+            Edições e Materiais Colecionáveis
+          </h2>
+
+
+          <p
+            style="
+              font-size: 14px;
+              color: #ddd;
+              line-height: 1.5;
+            "
+          >
+
+            A edição física de Assassin's Creed para Xbox 360
+            pode ser encontrada com diferentes materiais
+            relacionados ao lançamento.<br>
+
+            Caixas, manuais, discos, encartes e versões promocionais
+            podem apresentar pequenas diferenças de acordo com
+            a região e a edição.<br>
+
+            Para colecionadores, exemplares completos e bem
+            preservados podem apresentar interesse histórico
+            por representarem o início de uma das principais
+            franquias da Ubisoft.
+
+          </p>
+
+
+          <figure class="historical-consoles">
+
+            <div class="models-grid">
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_box.jpg"
+                  alt="Caixa de Assassin's Creed"
+                />
+
+                <figcaption>
+                  Caixa — Assassin's Creed
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_manual.jpg"
+                  alt="Manual de Assassin's Creed"
+                />
+
+                <figcaption>
+                  Manual — Assassin's Creed
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_disc.jpg"
+                  alt="Disco de Assassin's Creed Xbox 360"
+                />
+
+                <figcaption>
+                  Disco — Xbox 360
+                </figcaption>
+
+              </div>
+
+
+              <div class="model-item">
+
+                <img
+                  src="../tgga/ac_collectors.jpg"
+                  alt="Edição especial de Assassin's Creed"
+                />
+
+                <figcaption>
+                  Edição especial — Assassin's Creed
+                </figcaption>
+
+              </div>
+
+
+            </div>
+
+          </figure>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           COLUNA LATERAL
+           ======================================== -->
+
+      <div class="sidebar-column">
+
+
+        <nav class="side-nav-menu">
+
+          <h3>
+            - MENU DE ARTIGOS -
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="../tgga.html">
+                ○ Início - TGGA
+              </a>
+            </li>
+
+            <li>
+              <a href="../index.html">
+                ○ Início - NLU
+              </a>
+            </li>
+
+            <li>
+              <a href="assassinscreed.html">
+                ○ Games - Assassin's Creed
+              </a>
+            </li>
+
+            <li>
+              <a href="xbox360.html">
+                ○ Consoles - Xbox 360
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+
+        <!-- ==========================================
+             ELEMENTOS DO JOGO
+             ========================================== -->
+
+        <div class="components-block">
+
+          <h3>
+            - ELEMENTOS DO JOGO -
+          </h3>
+
+
+          <div class="component-list">
+
+
+            <details class="component-item">
+              <summary>Altaïr Ibn-La'Ahad</summary>
+              <div class="component-description">
+                <p>
+                  Protagonista da parte histórica de Assassin's Creed.
+                </p>
+                <ul class="component-specs">
+                  <li>Função: Assassino</li>
+                  <li>Período: Terceira Cruzada</li>
+                  <li>Armas: Espada, lâmina oculta e facas</li>
+                </ul>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Desmond Miles</summary>
+              <div class="component-description">
+                <p>
+                  Personagem da narrativa moderna que revive as
+                  memórias de Altaïr através do Animus.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Al Mualim</summary>
+              <div class="component-description">
+                <p>
+                  Líder da Irmandade dos Assassinos em Masyaf.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Malik Al-Sayf</summary>
+              <div class="component-description">
+                <p>
+                  Assassino e antigo companheiro de Altaïr.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Lucy Stillman</summary>
+              <div class="component-description">
+                <p>
+                  Funcionária da Abstergo envolvida com o projeto Animus.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Robert de Sablé</summary>
+              <div class="component-description">
+                <p>
+                  Importante líder dos Templários e um dos principais
+                  alvos da história.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Richard I</summary>
+              <div class="component-description">
+                <p>
+                  Rei inglês conhecido como Ricardo Coração de Leão,
+                  presente no contexto da Terceira Cruzada.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Jerusalém</summary>
+              <div class="component-description">
+                <p>
+                  Uma das principais cidades exploradas por Altaïr.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Damasco</summary>
+              <div class="component-description">
+                <p>
+                  Grande cidade comercial representada no jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Acre</summary>
+              <div class="component-description">
+                <p>
+                  Cidade fortificada visitada durante a aventura.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Masyaf</summary>
+              <div class="component-description">
+                <p>
+                  Base da Irmandade dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Kingdom</summary>
+              <div class="component-description">
+                <p>
+                  Grande região que conecta as principais cidades.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Hidden Blade</summary>
+              <div class="component-description">
+                <p>
+                  Lâmina escondida utilizada para assassinatos discretos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Sword</summary>
+              <div class="component-description">
+                <p>
+                  Principal arma utilizada em combates diretos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Short Blade</summary>
+              <div class="component-description">
+                <p>
+                  Arma menor utilizada em combates rápidos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Throwing Knives</summary>
+              <div class="component-description">
+                <p>
+                  Facas utilizadas para ataques à distância.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Animus</summary>
+              <div class="component-description">
+                <p>
+                  Máquina utilizada para acessar as memórias genéticas
+                  de antepassados.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Abstergo Industries</summary>
+              <div class="component-description">
+                <p>
+                  Empresa moderna que conduz os experimentos envolvendo
+                  Desmond e o Animus.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Assassins</summary>
+              <div class="component-description">
+                <p>
+                  Organização à qual Altaïr pertence.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Templars</summary>
+              <div class="component-description">
+                <p>
+                  Organização rival dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Apple of Eden</summary>
+              <div class="component-description">
+                <p>
+                  Artefato conhecido como Maçã do Éden e uma das
+                  principais Peças do Éden apresentadas no jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Viewpoint</summary>
+              <div class="component-description">
+                <p>
+                  Ponto elevado utilizado para sincronizar e revelar
+                  informações da região.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Synchronization</summary>
+              <div class="component-description">
+                <p>
+                  Sistema que representa a conexão de Desmond com
+                  as memórias de Altaïr.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Parkour</summary>
+              <div class="component-description">
+                <p>
+                  Sistema de movimentação que permite correr,
+                  escalar e atravessar estruturas.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Counter Attack</summary>
+              <div class="component-description">
+                <p>
+                  Técnica de combate utilizada para responder
+                  aos ataques dos adversários.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Investigation</summary>
+              <div class="component-description">
+                <p>
+                  Conjunto de atividades realizadas antes dos
+                  assassinatos principais.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Assassination</summary>
+              <div class="component-description">
+                <p>
+                  Objetivo central das principais missões de Altaïr.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Citizen Rescue</summary>
+              <div class="component-description">
+                <p>
+                  Atividade opcional que pode auxiliar Altaïr
+                  durante sua exploração das cidades.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Informant</summary>
+              <div class="component-description">
+                <p>
+                  Personagens que fornecem informações relacionadas
+                  às investigações.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Templar</summary>
+              <div class="component-description">
+                <p>
+                  Inimigos associados à organização rival dos Assassinos.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Guard</summary>
+              <div class="component-description">
+                <p>
+                  Soldados que patrulham as cidades e podem entrar
+                  em combate com Altaïr.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Jesper Kyd</summary>
+              <div class="component-description">
+                <p>
+                  Compositor responsável pela trilha sonora de
+                  Assassin's Creed.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Patrice Désilets</summary>
+              <div class="component-description">
+                <p>
+                  Diretor associado ao desenvolvimento do primeiro
+                  Assassin's Creed.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>Xbox 360</summary>
+              <div class="component-description">
+                <p>
+                  Console da Microsoft que recebeu uma das versões
+                  originais do jogo.
+                </p>
+              </div>
+            </details>
+
+
+            <details class="component-item">
+              <summary>DVD-ROM</summary>
+              <div class="component-description">
+                <p>
+                  Formato de mídia utilizado para a versão física
+                  de Xbox 360.
+                </p>
+              </div>
+            </details>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="site-footer">
+
+      <p>
+        &copy; 2026 Nerd League United.
+        Todos os direitos reservados.
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+
+</html>
