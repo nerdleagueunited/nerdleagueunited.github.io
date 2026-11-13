@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+
+<!-- LISTA DE VÍDEOS -->
+<!-- 1. Mini TV Sunkyong | N.A.D.A. (Análise) = 99nUM8-A7nk -->
+<!-- 2. Rádio Relógio Studi! | N.A.D.A. (Análise) = PFr1C8Hab5E -->
+<!-- 3. Super Contra (NES) | N.A.D.A. (Análise) = UZ60brMRPWc -->
+<!-- 4. EU ODEIO CLICKERS!!! = 1pM9xMxxAoU -->
+<!-- 5. Living With Wario YTP = cBIxeshzbec -->
+<!-- 6. O CANAL VAI MUDAR PARA SEMPRE... (1 de Abril) = JvS8PbVuDac -->
+<!-- 7. AVGN YTP = Z0i6qu6rATw -->
+<!-- 8. Dell Vostro 1320 | N.A.D.A. (Análise) = mNq6qmBYTAM -->
+<!-- 9. Crash: The Wrath Of Cortex (PS2) | N.A.D.A. (Análise) = RSUBK7soI7Y -->
+<!-- 10. TF2 YTP = hh9NtJBBIFM?si=vD1jigWbpmGcPIc- -->
+<!-- 11. Macross (FC) | N.A.D.A. (Análise) = Uc8zmR7QkcU -->
+<!-- 12. Fantasmagorie (1908) | N.A.D.A. (Análise) = 2UuB1SgBoIw -->
+<!-- 13. [Bastidores] N.A.D.A. | Fantasmagorie = FqOgjxH5z7k -->
+<!-- 14. Papaco YTP = V1kVX-F6epY -->
+<!-- 15. Spectreman vs. Ultraman (Parte 1) | N.A.D.A. (Análise) = Q6egCktPKa0 -->
+<!-- 16. [Bastidores] N.A.D.A. | Spectreman = yNEyaXugCEc -->
+<!-- 17. Spectreman vs. Ultraman (Parte 2) | N.A.D.A. (Análise) = uO1NaXeo3dE -->
+<!-- 18. [Bastidores] N.A.D.A. | Ultraman = 2eW5wSEeY-Y -->
+<!-- 19. Ultraman Bemular Sound Origin (Origem do Som do Bemular de Ultraman) = ElGsYOFPaFA -->
+<!-- 20. [DevLogs #1] O Site da NLU! Tá Bugado = 7UNaM5sEGAU -->
+<!-- 21. ShrekMan Explode Aleatoriamente | ShrekMan #1 = IXSdLn-I2ME -->
+<!-- 22. Violação Básica 101 | Théo's Guitar = 0u2oG5ehzqs -->
+<!-- 23. TV CCE 14" | N.A.D.A. (Análise) = -->
+
+
+<html lang="pt-BR">
+
+<head>
+
+    <link rel="icon" type="image/x-icon" href="logos/logonlu.png">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NLU - QG Principal</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           CORREÇÃO DO BUG: IMPEDE A COLUNA DE SE EXPANDIR
+        ===================================================== */
+
+        .content-column {
+            min-width: 0;
+            width: 100%;
+        }
+
+        /* =====================================================
+           CONTAINER INTERATIVO
+        ===================================================== */
+
+        .category-block-interactive {
+            position: relative;
+            width: 100%;
+        }
+
+        /* =====================================================
+           JANELA DO CARROSSEL
+        ===================================================== */
+
+       
+.carousel-view-window {
+    width: 100%;
+    overflow: hidden;
+    padding: 6px 0 5px;
+    box-sizing: border-box;
+}
+
+
+        /* =====================================================
+           TRILHA DO CARROSSEL
+        ===================================================== */
+
+        .carousel-horizontal-track {
+            display: flex;
+            transition:
+                transform 0.4s cubic-bezier(
+                    0.25,
+                    0.46,
+                    0.45,
+                    0.94
+                );
+            width: max-content;
+        }
+
+        /* =====================================================
+           TAMANHO DOS CARDS
+        ===================================================== */
+
+        .carousel-horizontal-track .item-card,
+        .carousel-horizontal-track .item-card-placeholder {
+            width: 298px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* =====================================================
+           LINKS DOS CARDS
+        ===================================================== */
+
+        .item-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            width: 298px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .item-card-link .item-card {
+            width: 100%;
+            margin-right: 0;
+            cursor: pointer;
+        }
+
+        .item-card-link:hover .item-card {
+            transform: translateY(-3px);
+        }
+
+        /* =====================================================
+           CARDS VAZIOS
+        ===================================================== */
+
+        .item-card-placeholder {
+            background-color: #0a0a0a;
+            border: 1px dashed #444444;
+            padding: 6px;
+        }
+
+        .thumb-box-empty {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #1a1a1a;
+            border: 1px dashed #2b2b2b;
+        }
+
+        /* =====================================================
+           SETAS DO CARROSSEL
+        ===================================================== */
+
+        .carousel-arrow-btn {
+            position: absolute;
+            top: 55%;
+            transform: translateY(-50%);
+
+            background-color: #ffcc00;
+            color: #000000;
+
+            border: 2px outset #ffee55;
+
+            font-weight: bold;
+            font-size: 14px;
+
+            width: 30px;
+            height: 30px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease-in-out,
+                background-color 0.2s;
+
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* =====================================================
+           MOSTRA AS SETAS AO PASSAR O MOUSE
+        ===================================================== */
+
+        .category-block-interactive:hover .carousel-arrow-btn {
+            opacity: 1;
+        }
+
+        .carousel-arrow-btn:hover {
+            background-color: #ffee55;
+        }
+
+        /* =====================================================
+           DESABILITA SETA NO LIMITE
+        ===================================================== */
+
+        .carousel-arrow-btn:disabled {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        .arrow-left-position {
+            left: -12px;
+        }
+
+        .arrow-right-position {
+            right: -12px;
+        }
+
+        /* =====================================================
+           EASTER EGG
+        ===================================================== */
+
+        .baby-egg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100vw;
+            height: 100vh;
+
+            background-color: rgba(0, 0, 0, 0.85);
+
+            z-index: 99999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .baby-egg-overlay img {
+            max-width: 80%;
+            max-height: 80%;
+
+            border: 4px dashed #ffcc00;
+
+            box-shadow: 0 0 30px #ffcc00;
+        }
+
+        .baby-egg-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+/* =====================================================
+   🎄 NLU - NATAL
+===================================================== */
+
+:root {
+    --christmas-red: #a31320;
+    --christmas-green: #07552d;
+    --christmas-dark: #061b12;
+    --christmas-gold: #ffcc55;
+}
+
+/* FUNDO */
+
+body {
+    background-color: #06150e;
+    background-image: radial-gradient(
+        circle at 50% 0%,
+        #174b2c 0%,
+        #081b11 55%,
+        #030905 100%
+    );
+}
+
+/* CABEÇALHO */
+
+.site-header {
+    border-bottom: 3px solid var(--christmas-gold);
+    background: linear-gradient(
+        90deg,
+        #07552d,
+        #092c1b,
+        #8c101b
+    );
+    position: relative;
+}
+
+.site-header h1 {
+    color: #ffdc70;
+    text-shadow:
+        2px 2px #6d1010,
+        0 0 10px #ffcc55;
+}
+
+.site-header p {
+    color: #fff8e8;
+}
+
+.site-header::after {
+    content: "🎄 ✦ ❄ ✦ 🎅 ✦ ❄ ✦ 🎄";
+    display: block;
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffdc70;
+    padding: 5px 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.site-header {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+/* NAVEGAÇÃO SUPERIOR */
+
+.sub-nav-links {
+    background: #092c1b;
+    border-bottom: 2px solid #a31320;
+}
+
+.sub-nav-links a {
+    color: #ffdc70;
+}
+
+/* ESTEIRA */
+
+.marquee-zone {
+    border-top: 2px solid #a31320;
+    border-bottom: 2px solid #ffcc55;
+    background: #07552d;
+}
+
+/* CAIXAS LATERAIS */
+
+.sidebar-box,
+.tgga-box,
+.side-nav-menu {
+    border-color: #b18b32;
+}
+
+/* NAVEGAÇÃO LATERAL */
+
+.side-nav-menu {
+    background: linear-gradient(
+        180deg,
+        #103c24,
+        #07170e
+    );
+}
+
+.side-nav-menu a {
+    color: #ffdc70;
+}
+
+.side-nav-menu a:hover {
+    color: #ffffff;
+}
+
+/* BOTÕES GERAIS */
+
+.retro-btn,
+.youtube-btn {
+    border-color: #ffcc55;
+}
+
+.retro-btn:hover,
+.youtube-btn:hover {
+    filter: brightness(1.2);
+}
+
+/* RODAPÉ */
+
+.site-footer {
+    background: linear-gradient(
+        90deg,
+        #07552d,
+        #8c101b
+    );
+    border-top: 3px solid #ffcc55;
+    color: #fff8e8;
+}
+
+.site-footer::before {
+    content: "🎄 FELIZ NATAL, LIGA! 🎄";
+    display: block;
+    color: #ffdc70;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 0 0 8px #ffcc55;
+}
+
+/* NEVE AO FUNDO */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+
+    background-image:
+        radial-gradient(3px 3px at 20px 30px,
+            white 98%, transparent),
+        radial-gradient(2px 2px at 100px 150px,
+            white 98%, transparent),
+        radial-gradient(3px 3px at 200px 80px,
+            white 98%, transparent),
+        radial-gradient(2px 2px at 300px 250px,
+            white 98%, transparent),
+        radial-gradient(3px 3px at 400px 120px,
+            white 98%, transparent);
+
+    background-size: 450px 350px;
+    animation: christmas-snow 12s linear infinite;
+    opacity: 0.45;
+}
+
+@keyframes christmas-snow {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 80px 350px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
+    }
+}
+
+		
+		
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="site-container">
+
+    <!-- =====================================================
+         CABEÇALHO PRINCIPAL
+    ===================================================== -->
+
+    <header class="site-header">
+
+        <div class="logo-area">
+
+            <a href="asdf/secret.html">
+            <img
+                src="logos/logo1.png"
+                alt="Logo NLU"
+                class="main-logo"
+            >
+        </a>
+
+            <div class="logo-text-box">
+
+                <h1>
+                    Nerd League United™
+                </h1>
+
+                <p>
+                    O H̶o̶s̶p̶í̶c̶i̶o Grupo mais nerd da internet...ou melhor, InterNerd™
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="header-right-box">
+
+            <a
+                href="https://www.youtube.com/@NerdLeagueUnited"
+                
+                class="youtube-btn"
+
+                target="_blank"
+            >
+                ▶ YouTube Siga-nos!
+            </a>
+
+            <div class="counter-box">
+                Inscritos: 87
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- =====================================================
+         MENU
+    ===================================================== -->
+
+    <div class="sub-nav-links">
+
+        <a href="qs.html">
+            Quem Somos
+        </a>
+
+        |
+
+        <a href="ajuda.html">
+            Suporte/FAQ
+        </a>
+
+    </div>
+
+    <!-- =====================================================
+         ESTEIRA
+    ===================================================== -->
+
+    <div class="marquee-zone">
+
+        <div class="marquee-content">
+
+            <span>
+                ... O Site da Nerd League United está de pé!!! ...
+                Cheque: TV Sunkyong | N.A.D.A. - N.A.D.A. 1 |...
+                A luta do século: Spectreman VS. Ultraman, quem irá ganhar?...
+                &nbsp;
+            </span>
+
+            <span>
+                ... O Site da Nerd League United está de pé!!! ...
+                Cheque: TV Sunkyong | N.A.D.A. - N.A.D.A. 1 |...
+                A luta do século: Spectreman VS. Ultraman, quem irá ganhar?...
+                &nbsp;
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+         GRADE PRINCIPAL
+    ===================================================== -->
+
+    <div class="main-grid">
+
+        <!-- =================================================
+             COLUNA ESQUERDA
+        ================================================= -->
+
+        <div class="content-column">
+
+            <!-- =================================================
+                 NOVIDADES + TGGA
+            ================================================= -->
+
+            <div class="items-grid">
+
+                <div class="sidebar-box">
+
+                    <h3>
+                        ~ NOVIDADES ~
+                    </h3>
+
+                    <ul>
+                         <li>
+                            Bosta Intalada: O Jogo, agora disponível em Games
+                        </li>
+
+                        <li>
+                            Novas Notícias em Plantão NLU (Cheque!)
+                        </li>
+
+                        <li>
+                            TGGA Indisponível ... aguardem, é algo bom!
+                        </li>
+
+                        <li>
+                            Novos conteúdos em geral, Imagens, Vídeos, procure!
+                        </li>
+
+                        <li>
+                            Correções de Bugs, Glitches e na Semântica (DevLogs)
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- THE GREAT GAME ARCHIVE -->
+
+                <div class="tgga-box">
+
+                    <h3>
+                        The Great Game Archive
+                    </h3>
+
+                    <p>
+                        O arquivo definitivo de hardwares,
+                        consoles e universos eletrônicos da NLU.
+                    </p>
+                                <!--colocar link do site do TGGA-->
+                    <a
+                        href=""
+                        class="retro-btn"
+                    >
+                        VISITE!
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 PRIMEIRO CARROSSEL - NAIS RECENTES
+            ================================================= -->
+
+            <div class="category-block category-block-interactive">
+
+                <h2>
+                    NLU Production - Mais Recentes
+                </h2>
+
+                <button
+                    class="carousel-arrow-btn arrow-left-position"
+                    id="btn-slide-left"
+                    onclick="rolarCarrossel('esquerda')"
+                    disabled
+                >
+                    ◀
+                </button>
+
+                <button
+                    class="carousel-arrow-btn arrow-right-position"
+                    id="btn-slide-right"
+                    onclick="rolarCarrossel('direita')"
+                >
+                    ▶
+                </button>
+
+                <div class="carousel-view-window">
+
+                    <div
+                        class="carousel-horizontal-track"
+                        id="track-nada-videos"
+                    >
+					
+      <!-- =========================================================================================
+      É AQUI ONDE FICAM OS VÍDEOS DO PRIMEIRO CARROSSEL
+	  ===========================================================================================-->
+					
+
+                               <!-- VÍDEO 22 -->
+            <a href="assistir.html?id=0u2oG5ehzqs" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/tg1.jpeg" alt="Wario poop">
+                    </div>
+                    <h3>Violação Básica 101 | Théo's Guitar</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 21 -->
+            <a href="assistir.html?id=IXSdLn-I2ME" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/sm1.jpeg" alt="ShrekMan">
+                    </div>
+                    <h3>ShrekMan Explode Aleatoriamente | ShrekMan #1</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 20 -->
+            <a href="assistir.html?id=7UNaM5sEGAU" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/dl1.jpeg" alt="DevLogs">
+                    </div>
+                    <h3>[DevLogs #1] O Site da NLU! Tá Bugado</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 19 -->
+            <a href="assistir.html?id=ElGsYOFPaFA" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/bemular.jpeg" alt="Bemular">
+                    </div>
+                    <h3>Ultraman Bemular Sound Origin (Origem do Som do Bemular de Ultraman)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 18 -->
+            <a href="assistir.html?id=2eW5wSEeY-Y" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/bloopers3.jpeg" alt="Ultraman">
+                    </div>
+                    <h3>[Bastidores] N.A.D.A. | Ultraman</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 17 -->
+            <a href="assistir.html?id=uO1NaXeo3dE" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep9.jpeg" alt="Ultraman">
+                    </div>
+                    <h3>Spectreman vs. Ultraman (Parte 2) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 16 -->
+            <a href="assistir.html?id=yNEyaXugCEc" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/bloopers2.jpeg" alt="Bastidores Spectreman">
+                    </div>
+                    <h3>[Bastidores] N.A.D.A. | Spectreman</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 15 -->
+            <a href="assistir.html?id=Q6egCktPKa0" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep8.jpeg" alt="Spectreman">
+                    </div>
+                    <h3>Spectreman vs. Ultraman (Parte 1) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 14 -->
+            <a href="assistir.html?id=V1kVX-F6epY" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp6.jpeg" alt="Papaco YTP">
+                    </div>
+                    <h3>Um Pacoleiro Chamado PaPisto - YTP</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 13 -->
+            <a href="assistir.html?id=FqOgjxH5z7k" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/bloopers1.jpeg" alt="Fantasmagorie - Bloopers">
+                    </div>
+                    <h3>[Bastidores] N.A.D.A. | Fantasmagorie</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 12 -->
+            <a href="assistir.html?id=2UuB1SgBoIw" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep7.jpeg" alt="Fantasmagorie">
+                    </div>
+                    <h3>Fantasmagorie (1908) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 11 -->
+            <a href="assistir.html?id=Uc8zmR7QkcU" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep6.jpeg" alt="Macross">
+                    </div>
+                    <h3>Macross (FC) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 10 -->
+            <a href="assistir.html?id=hh9NtJBBIFM" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp3.jpeg" alt="TF2 YTP">
+                    </div>
+                    <h3>Heavy's Mental Retardation Starts To Attack As His Heart Explodes - A TF2 YTP</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 9 -->
+            <a href="assistir.html?id=RSUBK7soI7Y" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep5.jpg" alt="Crash">
+                    </div>
+                    <h3>Crash: The Wrath Of Cortex (PS2) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 8 -->
+            <a href="assistir.html?id=mNq6qmBYTAM" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep4.jpg" alt="Dell Vostro 1320">
+                    </div>
+                    <h3>Dell Vostro 1320 | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 7 -->
+            <a href="assistir.html?id=Z0i6qu6rATw" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp2.jpeg" alt="AVGN YTP">
+                    </div>
+                    <h3>Ancient Vulture Gurgling Nitrogen's Mental Introduction Theme Song - An AVGN YTP</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 6 -->
+            <a href="assistir.html?id=JvS8PbVuDac" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp5.jpeg" alt="Vídeo 6">
+                    </div>
+                    <h3>O CANAL VAI MUDAR PARA SEMPRE... (1 de Abril)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 5 -->
+            <a href="assistir.html?id=cBIxeshzbec" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp1.jpeg" alt="Living With Wario YTP">
+                    </div>
+                    <h3>Wario's Gastric Torture leads To Fartomic Explosion - A Living With Wario YTP</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 4 -->
+            <a href="assistir.html?id=1pM9xMxxAoU" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ytp4.jpeg" alt="Vídeo 4">
+                    </div>
+                    <h3>EU ODEIO CLICKERS!!!</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 3 -->
+            <a href="assistir.html?id=UZ60brMRPWc" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep3.jpg" alt="Super Contra">
+                    </div>
+                    <h3>Super Contra (NES) | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 2 -->
+            <a href="assistir.html?id=PFr1C8Hab5E" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep2.jpg" alt="Rádio Relógio Studi!">
+                    </div>
+                    <h3>Rádio Relógio Studi! | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- VÍDEO 1 -->
+            <a href="assistir.html?id=99nUM8-A7nk" class="item-card-link">
+                <div class="item-card">
+                    <div class="thumb-box">
+                        <img src="thumbs/ep1.jpg" alt="Mini TV Sunkyong">
+                    </div>
+                    <h3>Mini TV Sunkyong | N.A.D.A. (Análise)</h3>
+                </div>
+            </a>
+
+            <!-- =============================================
+						AQUI ACABAM OS VÍDEOS
+			===============================================-->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 SEGUNDO CARROSSEL - MAIS VISTOS
+            ================================================= -->
+
+            <div class="category-block category-block-interactive">
+
+                <h2>
+                    NLU Production - Mais Vistos
+                </h2>
+
+                <button
+                    class="carousel-arrow-btn arrow-left-position"
+                    id="btn-outro-left"
+                    onclick="rolarOutroCarrossel('esquerda')"
+                    disabled
+                >
+                    ◀
+                </button>
+
+                <button
+                    class="carousel-arrow-btn arrow-right-position"
+                    id="btn-outro-right"
+                    onclick="rolarOutroCarrossel('direita')"
+                >
+                    ▶
+                </button>
+
+                <div class="carousel-view-window">
+
+                    <div
+                        class="carousel-horizontal-track"
+                        id="track-outro-videos"
+                    >
+
+                    <!-- ====================================================
+                        AQUI COMEÇAM OS VÍDEOS MAIS VISTOS DO MOMENTO
+                    =======================================================-->
+
+                    <!-- MAIS VISTO 1 -->
+                    <a href="assistir.html?id=Q6egCktPKa0&si=zOQLqce3GllZ_e1S" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep8.jpeg" alt=" Spectreman">
+                            </div>
+                            <h3>
+                                Spectreman vs. Ultraman (Parte 1) | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 2 -->
+                    <a href="assistir.html?id=V1kVX-F6epY&si=uhpkJlxPhN8ewwU4" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp6.jpeg" alt="TF2 poop">
+                            </div>
+                            <h3>
+                                Um Pacoleiro Chamado PaPisto - YTP
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 3 -->
+                    <a href="assistir.html?id=99nUM8-A7nk&si=hdRb1FChHkrL1s3V" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep1.jpg" alt="EP 1">
+                            </div>
+                            <h3>
+                                Mini TV Sunkyong | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 4 -->
+                    <a href="assistir.html?id=PFr1C8Hab5E&si=R1eL6Bn6HmZpDPMc" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep2.jpg" alt="EP 2">
+                            </div>
+                            <h3>
+                                Rádio Relógio Studi! | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 5 -->
+                    <a href="assistir.html?id=UZ60brMRPWc&si=f5lmNuFJB1QMq7tG" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep3.jpg" alt="EP 3">
+                            </div>
+                            <h3>
+                                Super Contra (NES) | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 6 -->
+                    <a href="assistir.html?id=cBIxeshzbec&si=rr8tozdZJikU8hto" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp1.jpeg" alt="Wario poop">
+                            </div>
+                            <h3>
+                                Wario's Gastric Torture leads To Fartomic Explosion - A Living With Wario YTP
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 7 -->
+                    <a href="assistir.html?id=JvS8PbVuDac&si=rPJ1wTv7mK1uqWJX" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp5.jpeg" alt="Vídeo 5">
+                            </div>
+                            <h3>
+                                O CANAL VAI MUDAR PARA SEMPRE...(1 de Abril)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 8 -->
+                    <a href="assistir.html?id=Z0i6qu6rATw&si=JzxaGIWbjOLUtHFv" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp2.jpeg" alt="AVGN poop">
+                            </div>
+                            <h3>
+                                Ancient Vulture Gurgling Nitrogen's Mental Introduction Theme Song - An AVGN YTP
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 9 -->
+                    <a href="assistir.html?id=2UuB1SgBoIw&si=NHfd_ZPtsB-mrMpd" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep7.jpeg" alt="EP 6">
+                            </div>
+                            <h3>
+                                Fantasmagorie (1908) | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 10 -->
+                    <a href="assistir.html?id=mNq6qmBYTAM&si=L_QeZFTPmCjwWdGC" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep4.jpg" alt="EP 4">
+                            </div>
+                            <h3>
+                                Dell Vostro 1320 | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 11 -->
+                    <a href="assistir.html?id=RSUBK7soI7Y&si=V6vHlcteXjlkp52b" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep5.jpg" alt="EP 5">
+                            </div>
+                            <h3>
+                                Crash: The Wrath of Cortex (PS2) | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 12 -->
+                    <a href="assistir.html?id=FqOgjxH5z7k&si=QaXtRcPqSCE799GU" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/bloopers1.jpeg" alt="N.A.D.A. EP 6">
+                            </div>
+                            <h3>
+                                Fantasmagorie - Bloopers
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 13 -->
+                    <a href="assistir.html?id=1pM9xMxxAoU&si=8osE5lIZtDhaPSdi" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp4.jpeg" alt="Vídeo 4">
+                            </div>
+                            <h3>
+                                EU ODEIO CLICKERS!!!
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 14 -->
+                    <a href="assistir.html?id=Uc8zmR7QkcU&si=COnsexptwWKEaoSR" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ep6.jpeg" alt="EP 6">
+                            </div>
+                            <h3>
+                                Macross (FC) | N.A.D.A. (Análise)
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 15 -->
+                    <a href="assistir.html?id=hh9NtJBBIFM&si=AmlItemZ2_Q01a-f" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/ytp3.jpeg" alt="TF2 poop">
+                            </div>
+                            <h3>
+                                Heavy's Mental Retardation Starts To Attack As His Heart Explodes - A TF2 YTP
+                            </h3>
+                        </div>
+                    </a>
+
+                    <!-- MAIS VISTO 16 -->
+                    <a href="assistir.html?id=yNEyaXugCEc&si=bv55y37MSnSX8SeP" class="item-card-link">
+                        <div class="item-card">
+                            <div class="thumb-box">
+                                <img src="thumbs/bloopers2.jpeg" alt="Bloopers Spectreman">
+                            </div>
+                            <h3>
+                                Spectreman - Bloopers
+                            </h3>
+                        </div>
+                    </a>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================================
+             COLUNA DIREITA
+        ===================================================== -->
+
+        <div class="sidebar-column">
+
+            <!-- NAVEGAÇÃO -->
+
+            <nav class="side-nav-menu">
+
+                <h3>
+                    - NAVEGAÇÃO -
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            ○ Início
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="series.html">
+                            ○ Séries
+                        </a>
+                    </li>
+					
+                    <li>
+                        <a href="filmes.html">
+                            ○ Filmes
+                        </a>
+                    </li>
+					
+                   
+					
+                    <li>
+                        <a href="games.html">
+                            ○ Games
+                        </a>
+                    </li>
+					
+					 <li>
+                        <a href="hqs.html">
+                            ○ HQs / Livros
+                        </a>
+                    </li>
+					
+					<!--
+                    <li>
+                        <a href="bazar.html">
+                            ○ Bazar da Liga
+                        </a>
+                    </li>
+					-->
+					 <li>
+                        <a href="fotos.html">
+                            ○ Mural Das Memórias
+                        </a>
+                    </li>
+					
+                    <li>
+                        <a href="out.html">
+                            ○ Bastidores & DevLogs
+                        </a>
+                    </li>
+					
+
+                    <li>
+                        <a href="asdf/404.html">
+                            ○ Ajuda-nos
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <!-- =================================================
+                 PLANTÃO NLU
+            ================================================= -->
+
+            <div
+                class="tgga-box"
+                style="
+                    background:
+                        linear-gradient(
+                            rgba(0, 0, 0, 0.65),
+                            rgba(0, 0, 0, 0.9)
+                        ),
+                        url('news/city.jpg')
+                        no-repeat center center;
+
+                    background-size: cover;
+
+                    border: 2px solid #ffcc00;
+
+                    aspect-ratio: 1 / 1;
+
+                    display: flex;
+                    flex-direction: column;
+
+                    justify-content: center;
+                    align-items: center;
+
+                    padding: 15px;
+                "
+            >
+
+                <h3
+                    style="
+                        color: #ffcc00;
+                        text-shadow: 1px 1px 4px #000;
+                        font-size: 15px;
+                        margin-bottom: 6px;
+                    "
+                >
+                    Plantão NLU
+                </h3>
+
+                <p
+                    style="
+                        color: #ffffff;
+                        text-shadow: 1px 1px 3px #000;
+                        font-size: 11px;
+                        margin-bottom: 10px;
+                        line-height: 1.3;
+                    "
+                >
+                    25 horas por dia.<br>
+                    8 dias por semana.
+                </p>
+
+                <a
+                    href="news.html"
+                    class="retro-btn"
+                    style="
+                        background-color: #ffcc00;
+                        color: #000;
+                        border: 2px outset #ffee55;
+                    "
+                >
+                    LER NEWS!
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<!-- barrinha pra separar, igual do footer-->
+   <!-- <footer class="site-footer">
+
+        <p>
+         
+        </p>
+
+    </footer>
+
+   
+
+     =====================================================
+         RODAPÉ
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <p>
+            &copy; 2026 Nerd League United.
+            Todos os direitos reservados.
+        </p>
+
+        <p>
+            Versão Beta 1.17.0 13/11/2026.
+        </p>
+
+    </footer>
+
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT DOS CARROSSÉIS
+===================================================== -->
+
+<script>
+
+    function gerenciarCarrossel(
+        idTrilha,
+        idSetaEsquerda,
+        idSetaDireita,
+        direcao
+    ) {
+
+        const trilha =
+            document.getElementById(idTrilha);
+
+        const setaEsquerda =
+            document.getElementById(idSetaEsquerda);
+
+        const setaDireita =
+            document.getElementById(idSetaDireita);
+
+        let indexAtual =
+            parseInt(
+                trilha.getAttribute('data-index')
+            ) || 0;
+
+        const totalItens =
+            trilha.children.length;
+
+        const visiveisNaTela = 2;
+
+        const fimDaLinha =
+            totalItens - visiveisNaTela;
+
+        const larguraExataCard =
+            trilha.children[0]
+                .getBoundingClientRect()
+                .width;
+
+        const deslocamentoPerfeito =
+            larguraExataCard + 10;
+
+        if (
+            direcao === 'direita' &&
+            indexAtual < fimDaLinha
+        ) {
+
+            indexAtual++;
+
+        }
+
+        else if (
+            direcao === 'esquerda' &&
+            indexAtual > 0
+        ) {
+
+            indexAtual--;
+
+        }
+
+        trilha.style.transform =
+            `translateX(-${indexAtual * deslocamentoPerfeito}px)`;
+
+        trilha.setAttribute(
+            'data-index',
+            indexAtual
+        );
+
+        setaEsquerda.disabled =
+            (indexAtual === 0);
+
+        setaDireita.disabled =
+            (indexAtual >= fimDaLinha);
+
+    }
+
+    /* =====================================================
+       CARROSSEL N.A.D.A.
+    ===================================================== */
+
+    function rolarCarrossel(direcao) {
+
+        gerenciarCarrossel(
+            'track-nada-videos',
+            'btn-slide-left',
+            'btn-slide-right',
+            direcao
+        );
+
+    }
+
+    /* =====================================================
+       CARROSSEL BLOOPERS
+    ===================================================== */
+
+    function rolarOutroCarrossel(direcao) {
+
+        gerenciarCarrossel(
+            'track-outro-videos',
+            'btn-outro-left',
+            'btn-outro-right',
+            direcao
+        );
+
+    }
+
+</script>
+
+<!-- =====================================================
+     EASTER EGG
+===================================================== -->
+
+<div
+    id="baby-overlay"
+    class="baby-egg-overlay"
+    onclick="fecharBete()"
+>
+
+    <img
+        src="baby-dancing.gif"
+        alt="Bebê Dançando NLU"
+    >
+
+</div>
+
+<script>
+
+    /* =====================================================
+       KONAMI CODE
+    ===================================================== */
+
+    const codigoSecreto = [
+
+        'ArrowUp',
+        'ArrowUp',
+        'ArrowDown',
+        'ArrowDown',
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowLeft',
+        'ArrowRight',
+        'b',
+        'a',
+        'Enter'
+
+    ];
+
+    let progressoCodigo = 0;
+
+    document.addEventListener(
+        'keydown',
+        function(evento) {
+
+            const teclaPressionada =
+                evento.key.toLowerCase() === 'b' ||
+                evento.key.toLowerCase() === 'a'
+                    ? evento.key.toLowerCase()
+                    : evento.key;
+
+            if (
+                teclaPressionada ===
+                codigoSecreto[progressoCodigo]
+            ) {
+
+                progressoCodigo++;
+
+                if (
+                    progressoCodigo ===
+                    codigoSecreto.length
+                ) {
+
+                    ativarBebe();
+
+                    progressoCodigo = 0;
+
+                }
+
+            }
+
+            else {
+
+                progressoCodigo = 0;
+
+            }
+
+        }
+    );
+
+    function ativarBebe() {
+
+        const overlay =
+            document.getElementById('baby-overlay');
+
+        overlay.classList.add(
+            'baby-egg-active'
+        );
+
+    }
+
+    function fecharBete() {
+
+        const overlay =
+            document.getElementById('baby-overlay');
+
+        overlay.classList.remove(
+            'baby-egg-active'
+        );
+
+    }
+
+</script>
+
+</body>
+
+</html>
+
+
+ 
