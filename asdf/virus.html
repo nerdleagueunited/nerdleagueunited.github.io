@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Alerta do Sistema</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: "Courier New", Courier, monospace;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .alerta {
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            padding: 20px;
+            width: 60%;
+            margin: 0 auto;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #barra-container {
+            width: 60%;
+            background-color: #333;
+            margin: 30px auto;
+            height: 30px;
+            border: 1px solid #00ff00;
+        }
+        #barra {
+            width: 0%;
+            height: 100%;
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alerta">
+        ⚠️ ERRO CRÍTICO: VÍRUS DETECTADO ⚠️<br>
+        Iniciando transferência de arquivos...
+    </div>
+
+    <div id="barra-container">
+        <div id="barra"></div>
+    </div>
+
+    <p id="status">Analisando sistema: 0%</p>
+
+    <script>
+        let progresso = 0;
+        const barra = document.getElementById("barra");
+        const status = document.getElementById("status");
+
+        const intervalo = setInterval(() => {
+            if (progresso >= 100) {
+                clearInterval(intervalo);
+                status.innerText = "Te zoei! Crianças, não clickem em links duvidosos.";
+                status.style.color = "#ffffff";
+            } else {
+                progresso++;
+                barra.style.width = progresso + "%";
+                status.innerText = "Copiando dados do sistema: " + progresso + "%";
+            }
+        }, 100);
+    </script>
+
+</body>
+</html>
